@@ -58,11 +58,7 @@ def salvar_dataset_bruto(df: pd.DataFrame) -> None:
 
 
 def executar_analises(df: pd.DataFrame) -> dict:
-    """Roda a análise de cada RQ e grava um JSON individual em data/rq/.
 
-    Um arquivo por RQ (ex.: rq01_idade.json, rq02_prs.json, ...) para
-    facilitar commits/PRs separados por issue.
-    """
     DATA_RQ_DIR.mkdir(parents=True, exist_ok=True)
     resultados = {}
     for nome_modulo, modulo in MODULOS_RQ.items():
@@ -149,12 +145,6 @@ else:
         st.metric("Idade mediana", f"{r['idade_mediana_anos']:.1f} anos")
         st.bar_chart(df["Idade (anos)"].value_counts(bins=10).sort_index())
 
-    with rq02:
-        r = resultados_rq["rq02_prs"]
-        st.subheader("RQ02 — Sistemas populares recebem muita contribuição externa?")
-        st.write("**Métrica:** número de pull requests aceitas (merged).")
-        st.metric("PRs aceitas (mediana)", int(r["prs_aceitas_mediana"]))
-        st.bar_chart(df["PRs aceitas"].value_counts(bins=10).sort_index())
 
     with rq03:
         r = resultados_rq["rq03_releases"]
@@ -162,13 +152,6 @@ else:
         st.write("**Métrica:** total de releases do repositório.")
         st.metric("Releases (mediana)", int(r["releases_mediana"]))
         st.bar_chart(df["Total de releases"].value_counts(bins=10).sort_index())
-
-    with rq04:
-        r = resultados_rq["rq04_atualizacao"]
-        st.subheader("RQ04 — Sistemas populares são atualizados com frequência?")
-        st.write("**Métrica:** dias desde o último push até hoje.")
-        st.metric("Dias desde atualização (mediana)", int(r["dias_desde_atualizacao_mediana"]))
-        st.bar_chart(df["Dias desde última atualização"].value_counts(bins=10).sort_index())
 
     with rq05:
         r = resultados_rq["rq05_linguagem"]
@@ -181,14 +164,6 @@ else:
         st.bar_chart(df["Linguagem"].value_counts())
         st.metric("% de repositórios em linguagens do Top 10 Octoverse", f"{r['percentual_no_top10_octoverse']:.1f}%")
         st.caption("Top 10 Octoverse considerado: " + ", ".join(r["ranking_referencia_octoverse"]))
-
-    with rq06:
-        r = resultados_rq["rq06_issues"]
-        st.subheader("RQ06 — Sistemas populares possuem um alto percentual de issues fechadas?")
-        st.write("**Métrica:** percentual de issues fechadas em relação ao total de issues.")
-        if r["percentual_fechadas_mediana"] is not None:
-            st.metric("% issues fechadas (mediana)", f"{r['percentual_fechadas_mediana']:.1f}%")
-        st.bar_chart(df["% issues fechadas"].dropna().value_counts(bins=10).sort_index())
 
     with rq07:
         r = resultados_rq["rq07_cruzamento"]
