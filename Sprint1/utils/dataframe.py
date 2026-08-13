@@ -11,7 +11,7 @@ def montar_dataframe(registros: list) -> pd.DataFrame:
     linhas = []
     for node in registros:
         criado_em = datetime.fromisoformat(node["createdAt"].replace("Z", "+00:00"))
-        atualizado_em = (
+        ultimo_push_em = (
             datetime.fromisoformat(node["pushedAt"].replace("Z", "+00:00"))
             if node["pushedAt"] else criado_em
         )
@@ -27,7 +27,10 @@ def montar_dataframe(registros: list) -> pd.DataFrame:
             "Idade (anos)": round((agora - criado_em).days / 365.25, 2),
             "PRs aceitas": node["pullRequests"]["totalCount"],
             "Total de releases": node["releases"]["totalCount"],
-            "Dias desde última atualização": (agora - atualizado_em).days,
+            "Dias desde última atualização": round(
+                max(0.0, (agora - ultimo_push_em).total_seconds() / 86_400),
+                4,
+            ),
             "Issues abertas": issues_abertas,
             "Issues fechadas": issues_fechadas,
             "% issues fechadas": round(100 * issues_fechadas / total_issues, 1) if total_issues > 0 else None,
