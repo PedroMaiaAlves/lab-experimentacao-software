@@ -15,7 +15,7 @@ query($queryString: String!, $first: Int!, $after: String) {
           pushedAt
           primaryLanguage { name }
           pullRequests(states: MERGED) { totalCount }
-          releases { totalCount }
+          releases(first: 1, orderBy: {field: CREATED_AT, direction: DESC}) { totalCount }
           openIssues: issues(states: OPEN) { totalCount }
           closedIssues: issues(states: CLOSED) { totalCount }
         }

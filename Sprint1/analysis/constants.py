@@ -1,10 +1,23 @@
 """Constantes de referência compartilhadas entre as questões de pesquisa."""
 
-# Ranking de referência para a RQ05: GitHub Octoverse (relatório anual do
-# próprio GitHub sobre as linguagens mais usadas em repositórios públicos).
-# Mantido fixo e citado como fonte de "linguagens mais populares".
-# Fonte: https://octoverse.github.com/
+# Ranking de referência fixo para a RQ05: GitHub Octoverse 2025, medido pelo
+# número de contribuidores mensais em agosto de 2025.
+FONTE_OCTOVERSE_2025 = (
+    "https://github.blog/news-insights/octoverse/"
+    "octoverse-a-new-developer-joins-github-every-second-as-ai-leads-"
+    "typescript-to-1/#the-top-programming-languages-of-2025-typescript-"
+    "jumps-to-1-while-python-takes-2"
+)
+
 LINGUAGENS_POPULARES_OCTOVERSE = [
-    "JavaScript", "Python", "Java", "TypeScript", "C#",
-    "PHP", "C++", "C", "Shell", "Ruby",
+    "TypeScript",
+    "Python",
+    "JavaScript",
+    "Java",
+    "C#",
+    "PHP",
+    "Shell",
+    "C++",
+    "HCL",
+    "Go",
 ]

@@ -1,0 +1,166 @@
+{
+  "questao": "RQ07",
+  "descricao": "Sistemas escritos em linguagens mais populares recebem mais contribuição externa, lançam mais releases e são atualizados com mais frequência?",
+  "metrica": "Medianas das RQs 02, 03 e 04 por linguagem primária",
+  "fonte_linguagens_populares": "https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/#the-top-programming-languages-of-2025-typescript-jumps-to-1-while-python-takes-2",
+  "ranking_referencia_octoverse": [
+    "TypeScript",
+    "Python",
+    "JavaScript",
+    "Java",
+    "C#",
+    "PHP",
+    "Shell",
+    "C++",
+    "HCL",
+    "Go"
+  ],
+  "resumo_por_linguagem": [
+    {
+      "Linguagem": "Python",
+      "Quantidade_repositorios": 24,
+      "PRs_aceitas_mediana": 1881.5,
+      "Releases_mediana": 54.0,
+      "Dias_desde_atualizacao_mediana": 1.45,
+      "No_top10_octoverse": true
+    },
+    {
+      "Linguagem": "TypeScript",
+      "Quantidade_repositorios": 17,
+      "PRs_aceitas_mediana": 6981.0,
+      "Releases_mediana": 116.0,
+      "Dias_desde_atualizacao_mediana": 0.05,
+      "No_top10_octoverse": true
+    },
+    {
+      "Linguagem": "Não definida",
+      "Quantidade_repositorios": 13,
+      "PRs_aceitas_mediana": 317.0,
+      "Releases_mediana": 0.0,
+      "Dias_desde_atualizacao_mediana": 114.65,
+      "No_top10_octoverse": false
+    },
+    {
+      "Linguagem": "JavaScript",
+      "Quantidade_repositorios": 10,
+      "PRs_aceitas_mediana": 1373.5,
+      "Releases_mediana": 69.0,
+      "Dias_desde_atualizacao_mediana": 0.32,
+      "No_top10_octoverse": true
+    },
+    {
+      "Linguagem": "C++",
+      "Quantidade_repositorios": 5,
+      "PRs_aceitas_mediana": 26492.0,
+      "Releases_mediana": 471.0,
+      "Dias_desde_atualizacao_mediana": 0.06,
+      "No_top10_octoverse": true
+    },
+    {
+      "Linguagem": "Rust",
+      "Quantidade_repositorios": 5,
+      "PRs_aceitas_mediana": 4197.0,
+      "Releases_mediana": 50.0,
+      "Dias_desde_atualizacao_mediana": 0.06,
+      "No_top10_octoverse": false
+    },
+    {
+      "Linguagem": "Shell",
+      "Quantidade_repositorios": 5,
+      "PRs_aceitas_mediana": 222.0,
+      "Releases_mediana": 7.0,
+      "Dias_desde_atualizacao_mediana": 5.41,
+      "No_top10_octoverse": true
+    },
+    {
+      "Linguagem": "Go",
+      "Quantidade_repositorios": 4,
+      "PRs_aceitas_mediana": 3687.0,
+      "Releases_mediana": 120.5,
+      "Dias_desde_atualizacao_mediana": 0.32,
+      "No_top10_octoverse": true
+    },
+    {
+      "Linguagem": "C",
+      "Quantidade_repositorios": 3,
+      "PRs_aceitas_mediana": 153.0,
+      "Releases_mediana": 52.0,
+      "Dias_desde_atualizacao_mediana": 0.43,
+      "No_top10_octoverse": false
+    },
+    {
+      "Linguagem": "HTML",
+      "Quantidade_repositorios": 3,
+      "PRs_aceitas_mediana": 315.0,
+      "Releases_mediana": 0.0,
+      "Dias_desde_atualizacao_mediana": 0.92,
+      "No_top10_octoverse": false
+    },
+    {
+      "Linguagem": "Markdown",
+      "Quantidade_repositorios": 3,
+      "PRs_aceitas_mediana": 157.0,
+      "Releases_mediana": 0.0,
+      "Dias_desde_atualizacao_mediana": 29.26,
+      "No_top10_octoverse": false
+    },
+    {
+      "Linguagem": "Jupyter Notebook",
+      "Quantidade_repositorios": 2,
+      "PRs_aceitas_mediana": 307.0,
+      "Releases_mediana": 0.0,
+      "Dias_desde_atualizacao_mediana": 10.68,
+      "No_top10_octoverse": false
+    },
+    {
+      "Linguagem": "Batchfile",
+      "Quantidade_repositorios": 1,
+      "PRs_aceitas_mediana": 7.0,
+      "Releases_mediana": 31.0,
+      "Dias_desde_atualizacao_mediana": 39.37,
+      "No_top10_octoverse": false
+    },
+    {
+      "Linguagem": "C#",
+      "Quantidade_repositorios": 1,
+      "PRs_aceitas_mediana": 593.0,
+      "Releases_mediana": 332.0,
+      "Dias_desde_atualizacao_mediana": 2.78,
+      "No_top10_octoverse": true
+    },
+    {
+      "Linguagem": "Dart",
+      "Quantidade_repositorios": 1,
+      "PRs_aceitas_mediana": 49519.0,
+      "Releases_mediana": 7.0,
+      "Dias_desde_atualizacao_mediana": 0.05,
+      "No_top10_octoverse": false
+    },
+    {
+      "Linguagem": "Java",
+      "Quantidade_repositorios": 1,
+      "PRs_aceitas_mediana": 994.0,
+      "Releases_mediana": 10.0,
+      "Dias_desde_atualizacao_mediana": 19.76,
+      "No_top10_octoverse": true
+    },
+    {
+      "Linguagem": "MDX",
+      "Quantidade_repositorios": 1,
+      "PRs_aceitas_mediana": 9481.0,
+      "Releases_mediana": 94.0,
+      "Dias_desde_atualizacao_mediana": 0.12,
+      "No_top10_octoverse": false
+    },
+    {
+      "Linguagem": "Swift",
+      "Quantidade_repositorios": 1,
+      "PRs_aceitas_mediana": 1239.0,
+      "Releases_mediana": 15.0,
+      "Dias_desde_atualizacao_mediana": 1.33,
+      "No_top10_octoverse": false
+    }
+  ],
+  "total_linguagens": 18,
+  "total_repositorios": 100
+}
