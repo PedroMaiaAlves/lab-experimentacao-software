@@ -1,0 +1,41 @@
+{
+  "questao": "RQ05",
+  "descricao": "Sistemas populares são escritos nas linguagens mais populares?",
+  "metrica": "Linguagem primária de cada repositório, comparada ao ranking de linguagens mais populares do GitHub Octoverse 2025",
+  "fonte_ranking": "https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/#the-top-programming-languages-of-2025-typescript-jumps-to-1-while-python-takes-2",
+  "criterio_ranking": "Número de contribuidores mensais em agosto de 2025",
+  "ranking_referencia_octoverse": [
+    "TypeScript",
+    "Python",
+    "JavaScript",
+    "Java",
+    "C#",
+    "PHP",
+    "Shell",
+    "C++",
+    "HCL",
+    "Go"
+  ],
+  "distribuicao_linguagens": {
+    "Python": 24,
+    "TypeScript": 17,
+    "Não definida": 13,
+    "JavaScript": 10,
+    "Shell": 5,
+    "C++": 5,
+    "Rust": 5,
+    "Go": 4,
+    "Markdown": 3,
+    "C": 3,
+    "HTML": 3,
+    "Jupyter Notebook": 2,
+    "Batchfile": 1,
+    "Dart": 1,
+    "MDX": 1,
+    "Java": 1,
+    "C#": 1,
+    "Swift": 1
+  },
+  "percentual_no_top10_octoverse": 67.0,
+  "total_repositorios": 100
+}
