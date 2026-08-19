@@ -58,7 +58,6 @@ def salvar_dataset_bruto(df: pd.DataFrame) -> None:
 
 
 def executar_analises(df: pd.DataFrame) -> dict:
-
     DATA_RQ_DIR.mkdir(parents=True, exist_ok=True)
     resultados = {}
     for nome_modulo, modulo in MODULOS_RQ.items():
@@ -67,6 +66,42 @@ def executar_analises(df: pd.DataFrame) -> dict:
         modulo.salvar_json(resultado, str(caminho))
         resultados[nome_modulo] = resultado
     return resultados
+
+
+def construir_csv_completo(df: pd.DataFrame, resultados_rq: dict) -> pd.DataFrame:
+    """Monta uma tabela única: cada linha é um repositório com suas métricas
+    individuais (RQ01–RQ04, RQ06) MAIS as métricas agregadas de cada RQ
+    (RQ05 e RQ07), anexadas como colunas de referência/comparação."""
+    df_completo = df.copy()
+
+    # RQ05 — marca se a linguagem do repositório está no Top 10 Octoverse
+    rq05 = resultados_rq.get("rq05_linguagem", {})
+    top10 = set(rq05.get("ranking_referencia_octoverse", []))
+    if top10:
+        df_completo["Linguagem no Top 10 Octoverse"] = df_completo["Linguagem"].isin(top10)
+
+    # RQ07 — anexa as métricas agregadas por linguagem em cada linha correspondente
+    rq07 = resultados_rq.get("rq07_cruzamento", {})
+    resumo_linguagem = pd.DataFrame(rq07.get("resumo_por_linguagem", []))
+    if not resumo_linguagem.empty:
+        resumo_linguagem = resumo_linguagem.rename(columns={
+            "PRs_aceitas_mediana": "PRs aceitas (mediana da linguagem)",
+            "Releases_mediana": "Releases (mediana da linguagem)",
+            "Dias_desde_atualizacao_mediana": "Dias desde atualização (mediana da linguagem)",
+        })
+        df_completo = df_completo.merge(resumo_linguagem, on="Linguagem", how="left")
+
+    # Métricas gerais das RQs (mesmo valor em todas as linhas, útil como referência)
+    rq01 = resultados_rq.get("rq01_idade", {})
+    rq03 = resultados_rq.get("rq03_releases", {})
+    if "idade_mediana_anos" in rq01:
+        df_completo["Idade mediana geral (anos)"] = rq01["idade_mediana_anos"]
+    if "releases_mediana" in rq03:
+        df_completo["Releases mediana geral"] = rq03["releases_mediana"]
+    if "percentual_no_top10_octoverse" in rq05:
+        df_completo["% no Top 10 Octoverse (geral)"] = rq05["percentual_no_top10_octoverse"]
+
+    return df_completo
 
 
 # ---------- Barra lateral ----------
@@ -94,7 +129,7 @@ with st.sidebar:
     qtd_repos = st.number_input("Número de repositórios (top-N por estrelas)", min_value=1, max_value=1000, value=100, step=1)
     buscar = st.button("Buscar 🚀", type="primary", use_container_width=True)
     st.caption("Critério fixo: sempre os repositórios com mais estrelas (sort:stars-desc).")
-    st.caption(f"JSON por RQ salvo em `data/rq/`. Dataset completo salvo em `data/raw/`.")
+    st.caption("JSON por RQ salvo em `data/rq/`. Dataset completo salvo em `data/raw/`.")
 
 if buscar:
     if not token.strip():
@@ -124,14 +159,20 @@ resultados_rq = st.session_state.get("resultados_rq", {})
 if df is None or df.empty:
     st.info("Defina os parâmetros na barra lateral e clique em **Buscar 🚀** para começar.")
 else:
-    st.success(f"{len(df)} repositório(s) coletado(s). JSONs de cada RQ salvos em `data/rq/`.")
+    st.success(f"{len(df)} repositório(s) carregado(s). JSONs de cada RQ salvos em `data/rq/`.")
     col1, col2, col3 = st.columns(3)
     col1.metric("Total de repositórios", len(df))
     col2.metric("Total de estrelas", f"{int(df['Estrelas'].sum()):,}".replace(",", "."))
     col3.metric("Linguagens distintas", df["Linguagem"].nunique())
 
-    csv = df.to_csv(index=False).encode("utf-8")
-    st.download_button("Baixar dataset completo em CSV", csv, "repositorios_populares.csv", "text/csv")
+    df_export = construir_csv_completo(df, resultados_rq)
+    csv = df_export.to_csv(index=False).encode("utf-8")
+    st.download_button(
+        "Baixar CSV com todas as métricas",
+        csv,
+        "repositorios_populares_completo.csv",
+        "text/csv",
+    )
 
     (rq01, rq02, rq03, rq04, rq05, rq06, rq07, tabela) = st.tabs(
         ["RQ01 Idade", "RQ02 PRs", "RQ03 Releases", "RQ04 Atualização",
@@ -144,7 +185,6 @@ else:
         st.write("**Métrica:** idade do repositório, em anos, a partir da data de criação.")
         st.metric("Idade mediana", f"{r['idade_mediana_anos']:.1f} anos")
         st.bar_chart(df["Idade (anos)"].value_counts(bins=10).sort_index())
-
 
     with rq03:
         r = resultados_rq["rq03_releases"]
