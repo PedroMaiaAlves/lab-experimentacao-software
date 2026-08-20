@@ -1,5 +1,6 @@
-"""Coleta os 100 repositórios e gera os resultados das RQ01 a RQ07."""
+"""Coleta os 1.000 repositórios e gera os resultados das RQ01 a RQ07."""
 
+import argparse
 import json
 import os
 from pathlib import Path
@@ -13,10 +14,11 @@ from github_collector.schema import GRAPHQL_QUERY
 from utils import montar_dataframe
 
 
-TOTAL_REPOSITORIOS = 100
-TAMANHO_PAGINA = 10
+TOTAL_REPOSITORIOS = 1_000
+TAMANHO_PAGINA = 50
 BASE_DIR = Path(__file__).resolve().parent
 ARQUIVO_SAIDA = BASE_DIR / "data" / "raw" / "repositorios_graphql.json"
+ARQUIVO_CSV = BASE_DIR / "data" / "raw" / "repositorios_populares.csv"
 DIRETORIO_RQS = BASE_DIR / "data" / "rq"
 
 
@@ -32,9 +34,11 @@ def carregar_token() -> str:
 
 
 def coletar_repositorios(token: str) -> list[dict]:
-    """Consulta páginas de dez itens até completar os 100 repositórios."""
+    """Consulta páginas via cursor até completar 1.000 repositórios únicos."""
 
     repositorios = []
+    nomes_coletados = set()
+    cursores_vistos = set()
     cursor = None
 
     with requests.Session() as sessao:
@@ -61,11 +65,24 @@ def coletar_repositorios(token: str) -> list[dict]:
                 raise RuntimeError(payload["errors"][0]["message"])
 
             busca = payload["data"]["search"]
-            pagina = [edge["node"] for edge in busca["edges"]]
+            pagina = [
+                edge["node"]
+                for edge in busca["edges"]
+                if edge.get("node") is not None
+            ]
             if not pagina:
-                raise RuntimeError("O GitHub não retornou repositórios.")
+                raise RuntimeError(
+                    "O GitHub retornou uma página vazia antes de completar "
+                    f"os {TOTAL_REPOSITORIOS} repositórios."
+                )
 
-            repositorios.extend(pagina)
+            for repositorio in pagina:
+                nome = repositorio["nameWithOwner"]
+                if nome in nomes_coletados:
+                    continue
+                nomes_coletados.add(nome)
+                repositorios.append(repositorio)
+
             print(f"Coletados: {len(repositorios)}/{TOTAL_REPOSITORIOS}")
 
             if len(repositorios) >= TOTAL_REPOSITORIOS:
@@ -73,8 +90,20 @@ def coletar_repositorios(token: str) -> list[dict]:
 
             page_info = busca["pageInfo"]
             if not page_info["hasNextPage"]:
-                raise RuntimeError("A busca terminou antes de completar 100 itens.")
-            cursor = page_info["endCursor"]
+                raise RuntimeError(
+                    "A busca terminou antes de completar "
+                    f"{TOTAL_REPOSITORIOS} repositórios únicos; "
+                    f"foram coletados {len(repositorios)}."
+                )
+
+            proximo_cursor = page_info["endCursor"]
+            if not proximo_cursor or proximo_cursor in cursores_vistos:
+                raise RuntimeError(
+                    "A paginação não avançou: o GitHub retornou um cursor "
+                    "ausente ou repetido."
+                )
+            cursores_vistos.add(proximo_cursor)
+            cursor = proximo_cursor
 
     return repositorios
 
@@ -104,10 +133,17 @@ def salvar_json(repositorios: list[dict]) -> None:
     print(f"\nJSON salvo em: {ARQUIVO_SAIDA}")
 
 
-def salvar_resultados_rqs(repositorios: list[dict]) -> None:
+def salvar_csv(dataframe) -> None:
+    """Exporta o dataset normalizado para CSV quando solicitado."""
+
+    ARQUIVO_CSV.parent.mkdir(parents=True, exist_ok=True)
+    dataframe.to_csv(ARQUIVO_CSV, index=False, encoding="utf-8")
+    print(f"CSV salvo em: {ARQUIVO_CSV}")
+
+
+def salvar_resultados_rqs(dataframe) -> None:
     """Executa cada análise e salva um JSON por questão de pesquisa."""
 
-    dataframe = montar_dataframe(repositorios)
     DIRETORIO_RQS.mkdir(parents=True, exist_ok=True)
 
     for nome, modulo in MODULOS_RQ.items():
@@ -117,15 +153,37 @@ def salvar_resultados_rqs(repositorios: list[dict]) -> None:
         print(f"Resultado salvo: {caminho.name}")
 
 
-def main() -> None:
+def criar_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Coleta os 1.000 repositórios públicos com mais estrelas do GitHub "
+            "e gera os resultados das RQ01 a RQ07."
+        )
+    )
+    parser.add_argument(
+        "--csv",
+        action="store_true",
+        help=(
+            "também exporta o dataset normalizado para "
+            "data/raw/repositorios_populares.csv"
+        ),
+    )
+    return parser
+
+
+def main(exportar_csv: bool = False) -> None:
     try:
         repositorios = coletar_repositorios(carregar_token())
         exibir_repositorios(repositorios)
         salvar_json(repositorios)
-        salvar_resultados_rqs(repositorios)
+        dataframe = montar_dataframe(repositorios)
+        if exportar_csv:
+            salvar_csv(dataframe)
+        salvar_resultados_rqs(dataframe)
     except (requests.RequestException, RuntimeError, KeyError) as erro:
         raise SystemExit(f"Erro: {erro}") from erro
 
 
 if __name__ == "__main__":
-    main()
+    argumentos = criar_parser().parse_args()
+    main(exportar_csv=argumentos.csv)
