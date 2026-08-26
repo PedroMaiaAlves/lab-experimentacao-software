@@ -45,7 +45,7 @@ st.markdown("""
 st.markdown("""
 <div class="hero">
     <h1>🐙 Repositórios Populares do GitHub — Laboratório de Experimentação</h1>
-    <p>Coleta via GraphQL dos repositórios com mais estrelas e análise das RQ01–RQ07.</p>
+    <p>Coleta via GraphQL dos repositórios com mais estrelas e análise das RQ01–RQ10.</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -66,6 +66,18 @@ def executar_analises(df: pd.DataFrame) -> dict:
         caminho = DATA_RQ_DIR / f"{nome_modulo}.json"
         modulo.salvar_json(resultado, str(caminho))
         resultados[nome_modulo] = resultado
+    return resultados
+
+def executar_analises_memoria(df: pd.DataFrame) -> dict:
+    """
+    Executa as análises apenas em memória, sem sobrescrever
+    os JSONs das análises originais.
+    """
+    resultados = {}
+
+    for nome_modulo, modulo in MODULOS_RQ.items():
+        resultados[nome_modulo] = modulo.analisar(df)
+
     return resultados
 
 
@@ -432,16 +444,81 @@ if buscar:
 df = st.session_state.get("df")
 resultados_rq = st.session_state.get("resultados_rq", {})
 
+df_exibicao = df
+resultados_exibicao = resultados_rq
+
+if df is not None and not df.empty:
+    repositorios_disponiveis = sorted(
+        df["Nome"]
+        .dropna()
+        .astype(str)
+        .unique()
+        .tolist()
+    )
+
+    with st.sidebar:
+        st.markdown("---")
+        st.header("🔎 Filtrar repositórios")
+
+        repositorios_selecionados = st.multiselect(
+            "Repositórios",
+            options=repositorios_disponiveis,
+            default=[],
+            placeholder="Selecione um ou mais repositórios",
+            help=(
+                "Deixe vazio para visualizar todos os repositórios. "
+                "Ao selecionar repositórios, as métricas, gráficos e "
+                "tabelas serão recalculados somente para a seleção."
+            ),
+        )
+
+        if repositorios_selecionados:
+            df_exibicao = df[
+                df["Nome"].isin(repositorios_selecionados)
+            ].copy()
+
+            resultados_exibicao = executar_analises_memoria(
+                df_exibicao
+            )
+
+            st.success(
+                f"{len(repositorios_selecionados)} "
+                f"repositório(s) selecionado(s)."
+            )
+        else:
+            st.caption(
+                f"Exibindo todos os {len(df)} repositórios."
+            )
+
 if df is None or df.empty:
     st.info("Defina os parâmetros na barra lateral e clique em **Buscar 🚀** para começar.")
 else:
-    st.success(f"{len(df)} repositório(s) carregado(s). JSONs de cada RQ salvos em `data/rq/`.")
-    col1, col2, col3 = st.columns(3)
-    col1.metric("Total de repositórios", len(df))
-    col2.metric("Total de estrelas", f"{int(df['Estrelas'].sum()):,}".replace(",", "."))
-    col3.metric("Linguagens distintas", df["Linguagem"].nunique())
+    st.success(
+        f"{len(df_exibicao)} repositório(s) sendo exibido(s). "
+        f"Dataset original: {len(df)} repositório(s)."
+    )
 
-    df_export = construir_csv_completo(df, resultados_rq)
+    col1, col2, col3 = st.columns(3)
+
+    col1.metric(
+        "Repositórios exibidos",
+        len(df_exibicao),
+    )
+
+    col2.metric(
+        "Total de estrelas",
+        f"{int(df_exibicao['Estrelas'].sum()):,}".replace(",", "."),
+    )
+
+    col3.metric(
+        "Linguagens distintas",
+        df_exibicao["Linguagem"].nunique(),
+    )
+
+    df_export = construir_csv_completo(
+    df_exibicao,
+    resultados_exibicao,
+)
     csv = df_export.to_csv(index=False).encode("utf-8")
     st.download_button(
         "Baixar CSV com todas as métricas",
@@ -470,7 +547,7 @@ else:
         st.write("**Métrica:** idade do repositório, em anos, a partir da data de criação.")
         st.metric("Idade mediana", f"{r['idade_mediana_anos']:.1f} anos")
         dist_idade = _distribuicao_binned(
-        df["Idade (anos)"],
+        df_exibicao["Idade (anos)"],
         tipo="idade",
         )
 
@@ -480,7 +557,7 @@ else:
         )
 
     with rq02:
-        r = resultados_rq["rq02_pr_aceitos"]
+        r = resultados_exibicao["rq02_pr_aceitos"]
         st.subheader("RQ02 — Sistemas populares recebem muita contribuição externa?")
         st.write(
             "**Métrica:** total de pull requests aceitas (estado MERGED). "
@@ -504,7 +581,7 @@ else:
 
         st.markdown("#### 📊 Distribuição por faixas")
         dist_prs = _distribuicao_binned(
-            df["PRs aceitas"],
+            df_exibicao["PRs aceitas"],
             tipo="contagem",
         )
 
@@ -514,7 +591,7 @@ else:
         )
 
     with rq03:
-        r = resultados_rq["rq03_releases"]
+        r = resultados_exibicao["rq03_releases"]
         st.subheader("RQ03 — Sistemas populares lançam releases com frequência?")
         st.write(
             "**Métrica:** total de releases do repositório. "
@@ -545,7 +622,7 @@ else:
         st.markdown("#### 📊 Distribuição por faixas")
         # RQ03
         dist_releases = _distribuicao_binned(
-            df["Total de releases"],
+            df_exibicao["Total de releases"],
             tipo="contagem",
         )
 
@@ -555,7 +632,7 @@ else:
 )
 
     with rq04:
-        r = resultados_rq["rq04_ultima_atualizacao"]
+        r = resultados_exibicao["rq04_ultima_atualizacao"]
         st.subheader("RQ04 — Sistemas populares são atualizados com frequência?")
         st.write("**Métrica:** dias decorridos desde o último push no repositório (pushedAt).")
         col_a, col_b = st.columns(2)
@@ -563,7 +640,7 @@ else:
         col_b.metric("Dias desde atualização (média)", f"{r['dias_desde_atualizacao_media']:.1f}")
         # RQ04
         dist_dias = _distribuicao_binned(
-            df["Dias desde última atualização"],
+            df_exibicao["Dias desde última atualização"],
             tipo="dias",
         )
 
@@ -573,19 +650,19 @@ else:
         )
 
     with rq05:
-        r = resultados_rq["rq05_linguagem"]
+        r = resultados_exibicao["rq05_linguagem"]
         st.subheader("RQ05 — Sistemas populares são escritos nas linguagens mais populares?")
         st.write(
             "**Métrica:** linguagem primária de cada repositório, comparada ao ranking de "
             "linguagens mais populares do **GitHub Octoverse** (https://octoverse.github.com/), "
             "usado como referência única em todo o laboratório."
         )
-        st.bar_chart(df["Linguagem"].value_counts())
+        st.bar_chart(df_exibicao["Linguagem"].value_counts())
         st.metric("% de repositórios em linguagens do Top 10 Octoverse", f"{r['percentual_no_top10_octoverse']:.1f}%")
         st.caption("Top 10 Octoverse considerado: " + ", ".join(r["ranking_referencia_octoverse"]))
 
     with rq06:
-        r = resultados_rq["rq06_issues_fechadas"]
+        r = resultados_exibicao["rq06_issues_fechadas"]
         st.subheader("RQ06 — Sistemas populares possuem alto percentual de issues fechadas?")
         st.write("**Métrica:** percentual de issues fechadas sobre o total de issues, entre repositórios que têm issues.")
         if r["percentual_issues_fechadas_mediana"] is None:
@@ -596,7 +673,7 @@ else:
             col_b.metric("% issues fechadas (média)", f"{r['percentual_issues_fechadas_media']:.1f}%")
             # RQ06
             dist_issues = _distribuicao_binned(
-                df["% issues fechadas"],
+                df_exibicao["% issues fechadas"],
                 tipo="percentual",
             )
 
@@ -610,7 +687,7 @@ else:
         )
 
     with rq07:
-        r = resultados_rq["rq07_cruzamento"]
+        r = resultados_exibicao["rq07_cruzamento"]
         st.subheader("RQ07 — Linguagens populares recebem mais contribuição, mais releases e mais atualizações?")
         st.write(
             "Cruzamento das RQ02, RQ03 e RQ04, agrupado por linguagem "
@@ -665,14 +742,16 @@ else:
 
     with tabela:
         st.dataframe(
-            df,
+            df_exibicao,
             use_container_width=True,
             hide_index=True,
-            column_config={"URL": st.column_config.LinkColumn("URL")},
+            column_config={
+                "URL": st.column_config.LinkColumn("URL")
+            },
         )
 
     with rq10:
-        r = resultados_rq["rq10_idade_issues"]
+        r = resultados_exibicao["rq10_idade_issues"]
 
         st.subheader(
             "RQ10 — Repositórios mais antigos apresentam maior proporção de issues fechadas?"
@@ -716,27 +795,27 @@ else:
 
         import altair as alt
 
-        dados_rq08 = df[
+        dados_rq10  = df_exibicao[
             ["Nome", "Idade (anos)", "% issues fechadas"]
         ].copy()
 
-        dados_rq08["Idade (anos)"] = pd.to_numeric(
-            dados_rq08["Idade (anos)"],
+        dados_rq10 ["Idade (anos)"] = pd.to_numeric(
+            dados_rq10 ["Idade (anos)"],
             errors="coerce",
         )
 
-        dados_rq08["% issues fechadas"] = pd.to_numeric(
-            dados_rq08["% issues fechadas"],
+        dados_rq10 ["% issues fechadas"] = pd.to_numeric(
+            dados_rq10 ["% issues fechadas"],
             errors="coerce",
         )
 
-        dados_rq08 = dados_rq08.dropna(
+        dados_rq10  = dados_rq10 .dropna(
             subset=["Idade (anos)", "% issues fechadas"]
         )
 
-        if not dados_rq08.empty:
+        if not dados_rq10 .empty:
             chart = (
-                alt.Chart(dados_rq08)
+                alt.Chart(dados_rq10 )
                 .mark_circle(size=80, opacity=0.7)
                 .encode(
                     x=alt.X(
