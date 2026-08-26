@@ -1,0 +1,105 @@
+{
+  "questao": "RQ09",
+  "descricao": "Repositórios com maior intensidade de pull requests mescladas também apresentam maior intensidade de releases?",
+  "metricas": {
+    "intensidade_prs": "PRs mescladas divididas pela idade do repositório em anos",
+    "intensidade_releases": "Releases acumuladas divididas pela idade do repositório em anos"
+  },
+  "hipotese_informal": "Espera-se uma associação positiva entre a intensidade anual de PRs mescladas e a intensidade anual de releases.",
+  "criterios": {
+    "idade_minima_analise_anos": 1.0,
+    "precisao_taxas_anuais_casas_decimais": 4,
+    "correlacao": "Spearman calculada como correlação de Pearson entre ranks médios",
+    "quartis_prs": "Ordenação crescente por PRs por ano e Nome, seguida de divisão posicional determinística em Q1 a Q4",
+    "outliers": "Critério de 1,5 vez o IQR, calculado por taxa anual",
+    "politica_outliers": "Mantidos na correlação e nas faixas"
+  },
+  "amostra": {
+    "total_repositorios": 1000,
+    "analise_principal": 917,
+    "excluidos_idade_menor_1_ano": 83,
+    "excluidos_dados_ausentes_ou_invalidos": 0
+  },
+  "taxas_anuais_analise_principal": {
+    "prs_por_ano": {
+      "mediana": 115.5732,
+      "media": 575.4574,
+      "q1": 26.1601,
+      "q3": 554.4073,
+      "minimo": 0.0,
+      "maximo": 10831.1927
+    },
+    "releases_por_ano": {
+      "mediana": 6.4576,
+      "media": 31.3631,
+      "q1": 0.0,
+      "q3": 23.4317,
+      "minimo": 0.0,
+      "maximo": 2008.9595
+    }
+  },
+  "correlacao_spearman": {
+    "rho": 0.6263,
+    "n": 917
+  },
+  "interpretacao_correlacao": "Associação monotônica positiva forte.",
+  "resumo_por_quartil_prs": [
+    {
+      "faixa": "Q1 — menor intensidade",
+      "repositorios": 230,
+      "prs_por_ano_minimo": 0.0,
+      "prs_por_ano_mediana": 8.243,
+      "prs_por_ano_maximo": 26.1601,
+      "releases_por_ano_mediana": 0.0
+    },
+    {
+      "faixa": "Q2",
+      "repositorios": 229,
+      "prs_por_ano_minimo": 26.5625,
+      "prs_por_ano_mediana": 58.7389,
+      "prs_por_ano_maximo": 115.5732,
+      "releases_por_ano_mediana": 3.1111
+    },
+    {
+      "faixa": "Q3",
+      "repositorios": 229,
+      "prs_por_ano_minimo": 116.1959,
+      "prs_por_ano_mediana": 266.0714,
+      "prs_por_ano_maximo": 554.4073,
+      "releases_por_ano_mediana": 11.7057
+    },
+    {
+      "faixa": "Q4 — maior intensidade",
+      "repositorios": 229,
+      "prs_por_ano_minimo": 554.9703,
+      "prs_por_ano_mediana": 1311.2195,
+      "prs_por_ano_maximo": 10831.1927,
+      "releases_por_ano_mediana": 27.4182
+    }
+  ],
+  "outliers_iqr": {
+    "prs_por_ano": {
+      "q1": 26.1601,
+      "q3": 554.4073,
+      "iqr": 528.2472,
+      "limite_inferior": -766.2107,
+      "limite_superior": 1346.7781,
+      "quantidade": 112,
+      "inferiores": 0,
+      "superiores": 112
+    },
+    "releases_por_ano": {
+      "q1": 0.0,
+      "q3": 23.4317,
+      "iqr": 23.4317,
+      "limite_inferior": -35.1475,
+      "limite_superior": 58.5792,
+      "quantidade": 92,
+      "inferiores": 0,
+      "superiores": 92
+    },
+    "uniao_repositorios_extremos": 165,
+    "extremos_em_ambas_metricas": 39
+  },
+  "total_repositorios": 1000
+}

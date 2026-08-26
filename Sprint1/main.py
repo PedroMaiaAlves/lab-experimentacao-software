@@ -284,7 +284,7 @@ def construir_csv_completo(
     - informação do Top 10 Octoverse;
     - métricas agregadas da RQ07;
     - métricas gerais das demais RQs;
-    - métricas da RQ10.
+    - métricas da RQ09 e da RQ10.
     """
 
     df_completo = dataframe.copy()
@@ -389,6 +389,11 @@ def construir_csv_completo(
         {},
     )
 
+    rq09 = resultados_rq.get(
+        "rq09_colaboracao_releases",
+        {},
+    )
+
     rq10 = resultados_rq.get(
         "rq10_idade_issues",
         {},
@@ -429,6 +434,21 @@ def construir_csv_completo(
         ] = rq05[
             "percentual_no_top10_octoverse"
         ]
+
+    correlacao_rq09 = rq09.get(
+        "correlacao_spearman",
+        {},
+    )
+
+    if "rho" in correlacao_rq09:
+        df_completo[
+            "RQ09 - Correlação Spearman PRs/ano x releases/ano"
+        ] = correlacao_rq09["rho"]
+
+    if "n" in correlacao_rq09:
+        df_completo[
+            "RQ09 - Repositórios analisados"
+        ] = correlacao_rq09["n"]
 
     if "correlacao_spearman" in rq10:
         df_completo[

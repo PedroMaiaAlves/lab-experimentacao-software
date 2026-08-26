@@ -1,4 +1,4 @@
-"""Gera o relatório intermediário Lab01S03 (RQ01–RQ08 e RQ10) em DOCX."""
+"""Gera o relatório intermediário Lab01S03 (RQ01–RQ10) em DOCX."""
 
 from __future__ import annotations
 
@@ -26,12 +26,14 @@ from docx.shared import Cm, Pt, RGBColor
 
 from analysis.constants import LINGUAGENS_POPULARES_OCTOVERSE
 from analysis.rq08_popularidadeIntensidade import analisar as analisar_rq08
+from analysis.rq09_colaboracao_releases import analisar as analisar_rq09
 from analysis.rq10_idade_issues import analisar as analisar_rq10
 
 
 BASE_DIR = Path(__file__).resolve().parent
 CSV_PADRAO = BASE_DIR / "data" / "raw" / "repositorios_populares.csv"
 SAIDA_PADRAO = BASE_DIR / "docs" / "Relatorio_Parcial_Lab01S03.docx"
+JSON_RQ09_PADRAO = BASE_DIR / "data" / "rq" / "rq09_colaboracao_releases.json"
 JSON_RQ10_PADRAO = BASE_DIR / "data" / "rq" / "rq10_idade_issues.json"
 TEMPLATE_PADRAO = Path.home() / "Downloads" / "Template_Relatorio_Laboratorio.docx"
 
@@ -139,7 +141,20 @@ def calcular_estatisticas(df: pd.DataFrame) -> dict:
     )
 
     rq08 = analisar_rq08(df)
+    rq09 = analisar_rq09(df)
     rq10 = analisar_rq10(df)
+    total_faixas_rq09 = sum(
+        faixa["repositorios"] for faixa in rq09["resumo_por_quartil_prs"]
+    )
+    if rq09["total_repositorios"] != total:
+        raise RuntimeError("A RQ09 não cobre o mesmo total de repositórios do CSV.")
+    if total_faixas_rq09 != rq09["amostra"]["analise_principal"]:
+        raise RuntimeError("Os quartis da RQ09 não cobrem a amostra principal.")
+    if rq09["correlacao_spearman"]["n"] != rq09["amostra"]["analise_principal"]:
+        raise RuntimeError("A correlação da RQ09 não usa toda a amostra principal.")
+    rho_rq09 = rq09["correlacao_spearman"]["rho"]
+    if rho_rq09 is not None and not -1 <= rho_rq09 <= 1:
+        raise RuntimeError("A correlação da RQ09 está fora do intervalo [-1, 1].")
     total_faixas_rq10 = sum(
         faixa["Quantidade_repositorios"]
         for faixa in rq10["resumo_por_faixa_etaria"]
@@ -184,6 +199,7 @@ def calcular_estatisticas(df: pd.DataFrame) -> dict:
         "issues_outliers": quantidade_outliers(issues),
         "rq07": rq07,
         "rq08": rq08,
+        "rq09": rq09,
         "rq10": rq10,
     }
 
@@ -401,6 +417,69 @@ def preparar_graficos(df: pd.DataFrame, estatisticas: dict, diretorio: Path) -> 
     fig.suptitle("RQ08 — Popularidade e intensidade anual (idade ≥ 1 ano)", fontweight="bold")
     graficos["rq08"] = salvar_figura(fig, diretorio / "rq08.png")
 
+    rq09 = estatisticas["rq09"]
+    limites_prs = rq09["outliers_iqr"]["prs_por_ano"]
+    limites_releases = rq09["outliers_iqr"]["releases_por_ano"]
+    mascara_outliers = (
+        (principal["PRs por ano"] < limites_prs["limite_inferior"])
+        | (principal["PRs por ano"] > limites_prs["limite_superior"])
+        | (principal["Releases por ano"] < limites_releases["limite_inferior"])
+        | (principal["Releases por ano"] > limites_releases["limite_superior"])
+    )
+    fig, ax = plt.subplots(figsize=(9.2, 5.2))
+    ax.scatter(
+        principal.loc[~mascara_outliers, "PRs por ano"],
+        principal.loc[~mascara_outliers, "Releases por ano"],
+        s=16,
+        alpha=0.28,
+        color=VERDE_GRAFICO,
+        edgecolors="none",
+        label="Demais repositórios",
+    )
+    ax.scatter(
+        principal.loc[mascara_outliers, "PRs por ano"],
+        principal.loc[mascara_outliers, "Releases por ano"],
+        s=22,
+        alpha=0.7,
+        color=LARANJA_GRAFICO,
+        edgecolors="none",
+        label="Outlier em ao menos uma taxa (IQR)",
+    )
+    coeficiente, intercepto = np.polyfit(
+        principal["PRs por ano"], principal["Releases por ano"], 1
+    )
+    eixo_tendencia = np.linspace(
+        principal["PRs por ano"].min(), principal["PRs por ano"].max(), 200
+    )
+    ax.plot(
+        eixo_tendencia,
+        coeficiente * eixo_tendencia + intercepto,
+        color="#B91C1C",
+        linewidth=2,
+        label="Tendência linear",
+    )
+    ax.set_xscale("symlog", linthresh=1)
+    ax.set_yscale("symlog", linthresh=1)
+    ax.set_ylim(bottom=0)
+    ax.set(
+        title="Intensidade de PRs mescladas × intensidade de releases",
+        xlabel="PRs mescladas por ano (symlog)",
+        ylabel="Releases por ano (symlog)",
+    )
+    correlacao_rq09 = rq09["correlacao_spearman"]
+    ax.text(
+        0.04,
+        0.95,
+        f"ρ = {formatar_numero(correlacao_rq09['rho'], 4)}\n"
+        f"n = {formatar_numero(correlacao_rq09['n'])}",
+        transform=ax.transAxes,
+        va="top",
+        bbox={"facecolor": "white", "alpha": 0.85, "edgecolor": "none"},
+    )
+    ax.legend(frameon=False, loc="lower right")
+    fig.suptitle("RQ09 — Colaboração e publicação de releases", fontweight="bold")
+    graficos["rq09"] = salvar_figura(fig, diretorio / "rq09.png")
+
     rq10 = estatisticas["rq10"]
     dados_rq10 = df[["Idade (anos)", "% issues fechadas"]].copy()
     dados_rq10["Idade (anos)"] = pd.to_numeric(
@@ -547,7 +626,7 @@ def adicionar_capa(documento: Document) -> None:
     run.bold = True
     run.font.size = Pt(15)
     run.font.color.rgb = RGBColor.from_string(VERDE)
-    p = documento.add_paragraph("Lab01S03 — versão intermediária com RQ01–RQ08 e RQ10")
+    p = documento.add_paragraph("Lab01S03 — versão intermediária com RQ01–RQ10")
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p.runs[0].font.size = Pt(12)
     dados = [
@@ -555,8 +634,8 @@ def adicionar_capa(documento: Document) -> None:
         ["Disciplina", "Laboratório de Experimentação de Software"],
         ["Professor", "Danilo Maia"],
         ["Entrega", "Lab01S03 — análise e visualização de dados"],
-        ["Integrantes", "Pedro Henrique Maia Alves; Diogo C. Brunoro; [TERCEIRO INTEGRANTE — EDITAR]"],
-        ["Situação", "Relatório intermediário; RQ09 e snapshot final do board pendentes"],
+        ["Integrantes", "Pedro Henrique Maia Alves; Diogo C. Brunoro; Lorran Pedro Avelar Xavier"],
+        ["Situação", "RQ01–RQ10 integradas; snapshot final do board pendente"],
         ["Data de geração", date.today().strftime("%d/%m/%Y")],
     ]
     tabela = adicionar_tabela(documento, ["Identificação", "Informação"], dados, fonte=9.5)
@@ -587,19 +666,22 @@ def construir_documento(template: Path, saida: Path, df: pd.DataFrame, estatisti
     secao.footer.is_linked_to_previous = False
     cabecalho = secao.header.paragraphs[0]
     cabecalho.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    cabecalho.add_run("Laboratório de Experimentação de Software — Lab01S03 — RQ01–RQ08 e RQ10").font.size = Pt(8.5)
+    cabecalho.add_run("Laboratório de Experimentação de Software — Lab01S03 — RQ01–RQ10").font.size = Pt(8.5)
     adicionar_numero_pagina(secao.footer.paragraphs[0])
 
     total = estatisticas["total"]
     rq08 = estatisticas["rq08"]
+    rq09 = estatisticas["rq09"]
     rq10 = estatisticas["rq10"]
     corr_principal = rq08["correlacoes_spearman"]["principal_idade_maior_igual_1"]
     corr_sens = rq08["correlacoes_spearman"]["sensibilidade_todas_idades_positivas"]
     amostra8 = rq08["amostra"]
+    correlacao9 = rq09["correlacao_spearman"]
+    amostra9 = rq09["amostra"]
 
     documento.add_heading("1. Introdução", level=1)
     adicionar_texto(documento, "O GitHub reúne projetos com diferentes níveis de maturidade, atividade e participação. Este laboratório investiga características dos 1.000 repositórios públicos mais estrelados retornados pela API GraphQL. Estrelas são usadas como definição operacional de popularidade, sem pressupor qualidade técnica.")
-    adicionar_texto(documento, "Esta é a versão intermediária da sprint S03. Ela consolida os resultados atualizados das sete questões sugeridas pelo professor e incorpora a RQ08, sobre popularidade e intensidade anual de desenvolvimento, e a RQ10, sobre maturidade e tratamento de issues. A aplicação Streamlit integra mineração, análise, visualização e exportação do CSV.")
+    adicionar_texto(documento, "Esta é a versão intermediária da sprint S03. Ela consolida os resultados atualizados das sete questões sugeridas pelo professor e incorpora a RQ08, sobre popularidade e intensidade anual de desenvolvimento, a RQ09, sobre colaboração e publicação de releases, e a RQ10, sobre maturidade e tratamento de issues. A aplicação Streamlit integra mineração, análise, visualização e exportação do CSV.")
     adicionar_texto(documento, "As hipóteses são informais e exploratórias: orientam a leitura descritiva, não foram pré-registradas e não substituem testes confirmatórios.")
 
     documento.add_heading("1.1 Questões de pesquisa e hipóteses informais", level=2)
@@ -612,6 +694,7 @@ def construir_documento(template: Path, saida: Path, df: pd.DataFrame, estatisti
         ["RQ06", "Sistemas populares possuem alto percentual de issues fechadas?", "H06: a mediana de fechamento supera 80% entre projetos com issues."],
         ["RQ07", "Linguagens populares recebem mais contribuição, releases e atualização?", "H07: o grupo Top 10 tem maiores medianas de PRs e releases e menor recência."],
         ["RQ08", "Popularidade está associada à intensidade anual de desenvolvimento?", "H08: estrelas apresentam associação positiva ao menos moderada com PRs/ano e releases/ano."],
+        ["RQ09", "Maior intensidade de PRs está associada a maior intensidade de releases?", "H09: espera-se associação positiva entre PRs mescladas/ano e releases/ano."],
         ["RQ10", "Repositórios mais antigos apresentam maior proporção de issues fechadas?", "H10: repositórios mais antigos apresentam maior percentual mediano de issues fechadas, por possuírem processos de manutenção mais consolidados."],
     ]
     adicionar_tabela(documento, ["RQ", "Pergunta", "Hipótese informal"], hipoteses, fonte=8.1)
@@ -619,12 +702,12 @@ def construir_documento(template: Path, saida: Path, df: pd.DataFrame, estatisti
     documento.add_heading("2. Desenvolvimento", level=1)
     documento.add_heading("2.1 Evolução do trabalho em S01, S02 e S03", level=2)
     adicionar_texto(documento, "Na S01 foram implementadas a consulta GraphQL inicial, a transformação tabular, as RQ01–RQ07 e a primeira interface Streamlit. Na S02, o coletor em lote passou a percorrer cursores até reunir exatamente 1.000 nomes únicos, exportar CSV e registrar o primeiro snapshot do Project.")
-    adicionar_texto(documento, "Na S03, a Issue #44 incorporou a RQ08 com taxas anualizadas, correlações, quartis e visualizações. A Issue #46 acrescentou a RQ10, relacionando idade e percentual de issues fechadas por correlação de Spearman e faixas etárias. A Issue #47 evoluiu a exibição e a busca dos dados no Streamlit. Permanecem pendentes a RQ09 e o print final do board.")
+    adicionar_texto(documento, "Na S03, a Issue #44 incorporou a RQ08 com taxas anualizadas, correlações, quartis e visualizações. A Issue #45 acrescentou a RQ09, relacionando PRs mescladas/ano e releases/ano. A Issue #46 incorporou a RQ10 sobre idade e percentual de issues fechadas, e a Issue #47 evoluiu a exibição e a busca no Streamlit. O snapshot final do board permanece pendente até a conclusão do trabalho.")
     adicionar_tabela(documento, ["Sprint", "Atividade", "Responsável", "Rastreabilidade"], [
         ["S01", "Coleta inicial, RQ01–RQ07 e Streamlit", "Pedro e Diogo", "Issues e PRs da S01"],
         ["S02", "Paginação para 1.000, CSV, validação e hipóteses", "Pedro e Diogo", "Issues #8–#15 e #22–#38"],
-        ["S03", "RQ08 — popularidade e intensidade", "[TERCEIRO INTEGRANTE — EDITAR]", "Issue #44"],
-        ["S03", "RQ09 — colaboração e releases", "Pendente", "Issue #45"],
+        ["S03", "RQ08 — popularidade e intensidade", "Pedro Henrique Maia Alves", "Issue #44"],
+        ["S03", "RQ09 — colaboração e releases", "Lorran Pedro Avelar Xavier", "Issue #45"],
         ["S03", "RQ10 — maturidade e issues", "Diogo", "Issue #46 — concluída"],
         ["S03", "Evolução de exibição e busca", "Diogo", "Issue #47 — concluída"],
     ], fonte=8.4)
@@ -633,13 +716,13 @@ def construir_documento(template: Path, saida: Path, df: pd.DataFrame, estatisti
     adicionar_lista(documento, [
         "main.py pagina a consulta GraphQL, valida avanço dos cursores e encerra apenas com 1.000 repositórios únicos;",
         "utils/dataframe.py converte o snapshot bruto e calcula métricas derivadas reproduzíveis;",
-        "analysis contém módulos independentes de RQ01 a RQ08 e RQ10 e exporta nove JSONs estritos;",
-        "app.py apresenta abas para RQ01–RQ08 e RQ10, busca por repositório e download do CSV com as taxas da RQ08;",
+        "analysis contém módulos independentes de RQ01 a RQ10 e exporta dez JSONs estritos;",
+        "app.py apresenta abas para RQ01–RQ10, busca por repositório e download do CSV com as taxas e correlações anualizadas;",
         "gerar_relatorio_docx.py recalcula todos os números exibidos a partir do mesmo CSV canônico.",
     ])
 
     documento.add_heading("2.3 Inovação: aplicação Streamlit", level=2)
-    adicionar_texto(documento, "A inovação do grupo é uma aplicação interativa em Streamlit. A versão atual apresenta a RQ08 com coeficientes, quartis, sensibilidade e gráficos de dispersão, além da RQ10 com a relação entre idade e fechamento de issues. Os tooltips preservam os valores originais; estrelas usam escala logarítmica e as taxas anualizadas usam symlog, mantendo observações iguais a zero.")
+    adicionar_texto(documento, "A inovação do grupo é uma aplicação interativa em Streamlit. A versão atual apresenta a RQ08 com coeficientes, quartis, sensibilidade e gráficos de dispersão, a RQ09 com correlação, quartis de PRs, tendência e identificação de outliers, além da RQ10 com a relação entre idade e fechamento de issues. Os tooltips preservam os valores originais e as taxas anualizadas usam symlog, mantendo observações iguais a zero.")
     adicionar_texto(documento, "A evolução da Issue #47 acrescentou busca e filtragem por repositório às visualizações. A mineração em lote permanece centralizada no main.py, enquanto o Streamlit atua como camada de exploração e comunicação dos resultados.")
 
     documento.add_heading("3. Metodologia", level=1)
@@ -656,6 +739,7 @@ def construir_documento(template: Path, saida: Path, df: pd.DataFrame, estatisti
         ["RQ06", "100 × issues fechadas / (abertas + fechadas)"],
         ["RQ07", "medianas de PRs, releases e recência por grupo de linguagem"],
         ["RQ08", "PRs/ano e releases/ano, divididos pela idade registrada no CSV"],
+        ["RQ09", "Spearman entre PRs mescladas/ano e releases/ano; medianas por quartil de PRs"],
         ["RQ10", "idade × percentual de issues fechadas; Spearman e mediana/Q1/Q3/IQR por faixa etária"],
     ], fonte=8.4)
     adicionar_texto(documento, "A idade é arredondada para duas casas antes da anualização; as duas taxas são arredondadas para quatro casas. Idades não positivas produzem valor nulo, sem resultados numéricos inválidos.")
@@ -664,14 +748,18 @@ def construir_documento(template: Path, saida: Path, df: pd.DataFrame, estatisti
     adicionar_texto(documento, f"A análise principal inclui idade ≥ 1 ano (n = {amostra8['analise_principal']}); a sensibilidade inclui toda idade positiva (n = {amostra8['sensibilidade_idade_positiva']}). Spearman é calculado como Pearson entre postos médios, sem SciPy. Os quartis são formados após ordenação estável por estrelas e nome. Outliers seguem 1,5 × IQR e permanecem em todas as análises.")
     adicionar_texto(documento, "A anualização reduz o efeito mecânico do tempo de existência, mas não controla domínio, tamanho da equipe, governança, automação ou trajetória histórica. As associações não permitem inferência causal.")
 
-    documento.add_heading("3.4 Procedimento analítico da RQ10", level=2)
+    documento.add_heading("3.4 Procedimento analítico da RQ09", level=2)
+    adicionar_texto(documento, f"A RQ09 usa os {amostra9['analise_principal']} repositórios com idade ≥ 1 ano. PRs mescladas e releases acumuladas são divididas pela idade registrada no CSV, com quatro casas decimais. Spearman é calculado entre as duas taxas usando postos médios; os quartis são formados após ordenação estável por PRs/ano e nome.")
+    adicionar_texto(documento, "Outliers são identificados separadamente nas duas taxas pelo critério de 1,5 × IQR e mantidos na correlação e nos quartis. A linha de tendência é uma regressão linear descritiva sobre as taxas anualizadas e não substitui a associação monotônica de Spearman.")
+
+    documento.add_heading("3.5 Procedimento analítico da RQ10", level=2)
     adicionar_texto(documento, f"A RQ10 utiliza a idade registrada no CSV e o percentual acumulado de issues fechadas. Dos {formatar_numero(total)} projetos, {formatar_numero(rq10['repositorios_com_issues'])} possuem ao menos uma issue e formam a amostra válida; os {formatar_numero(rq10['repositorios_sem_issues'])} sem issues têm percentual estruturalmente indefinido e são excluídos da correlação e dos resumos por faixa.")
     adicionar_texto(documento, "A associação monotônica é estimada por Spearman, calculado como a correlação de Pearson entre postos médios para tratar empates. A distribuição é resumida nas faixas 0–2, >2–5, >5–10, >10–15 e >15 anos, usando quantidade, mediana, primeiro quartil, terceiro quartil e IQR. Outliers seguem 1,5 × IQR e são mantidos na análise.")
     adicionar_texto(documento, "O percentual acumulado de fechamento não mede velocidade, complexidade ou qualidade da resolução. Projetos podem usar rastreadores externos, e a análise transversal não permite atribuir diferenças etárias a processos de manutenção mais consolidados.")
 
     documento.add_heading("4. Resultados", level=1)
     documento.add_heading("4.1 Validação do snapshot", level=2)
-    adicionar_texto(documento, f"O snapshot contém {formatar_numero(total)} linhas, {formatar_numero(df['Nome'].nunique())} nomes e {formatar_numero(df['URL'].nunique())} URLs únicas. As estrelas estão em ordem não crescente. O CSV contém as taxas PRs por ano e Releases por ano, e os nove arquivos JSON de RQ01–RQ08 e RQ10 registram total_repositorios = {formatar_numero(total)}.")
+    adicionar_texto(documento, f"O snapshot contém {formatar_numero(total)} linhas, {formatar_numero(df['Nome'].nunique())} nomes e {formatar_numero(df['URL'].nunique())} URLs únicas. As estrelas estão em ordem não crescente. O CSV contém as taxas PRs por ano e Releases por ano, e os dez arquivos JSON de RQ01–RQ10 registram total_repositorios = {formatar_numero(total)}.")
 
     documento.add_heading("4.2 Visualizações e resultados por RQ", level=2)
     idade = estatisticas["idade"]
@@ -724,6 +812,35 @@ def construir_documento(template: Path, saida: Path, df: pd.DataFrame, estatisti
     adicionar_texto(documento, f"Na sensibilidade com todas as idades positivas (n = {amostra8['sensibilidade_idade_positiva']}), os coeficientes foram ρ = {formatar_numero(sens_pr['rho'], 4)} para PRs/ano e ρ = {formatar_numero(sens_rel['rho'], 4)} para releases/ano. O IQR marcou {rq08['outliers_iqr']['prs_por_ano']['quantidade']} extremos em PRs/ano, {rq08['outliers_iqr']['releases_por_ano']['quantidade']} em releases/ano e {rq08['outliers_iqr']['uniao_repositorios_extremos']} na união.")
     adicionar_figura(documento, graficos["rq08"], 9, "Dispersões de estrelas versus PRs/ano e releases/ano.")
 
+    faixas9 = rq09["resumo_por_quartil_prs"]
+    medianas_releases9 = [faixa["releases_por_ano_mediana"] for faixa in faixas9]
+    crescimento_monotonico9 = all(
+        atual <= seguinte
+        for atual, seguinte in zip(medianas_releases9, medianas_releases9[1:])
+    )
+    rho9 = correlacao9["rho"]
+    documento.add_heading(
+        "4.2.9 RQ09 — Colaboração e publicação de releases", level=3
+    )
+    adicionar_texto(documento, f"Na amostra principal (idade ≥ 1 ano; n = {correlacao9['n']}), a correlação entre PRs mescladas/ano e releases/ano foi {classificar_correlacao(rho9)} (ρ = {formatar_numero(rho9, 4)}). As medianas de releases/ano {'cresceram em todos os quartis' if crescimento_monotonico9 else 'não cresceram em todos os quartis'}, de {formatar_numero(medianas_releases9[0], 4)} no Q1 para {formatar_numero(medianas_releases9[-1], 4)} no Q4.")
+    adicionar_tabela(
+        documento,
+        ["Faixa de PRs/ano", "N", "Limites de PRs/ano", "Mediana PRs/ano", "Mediana releases/ano"],
+        [
+            [
+                faixa["faixa"],
+                faixa["repositorios"],
+                f"{formatar_numero(faixa['prs_por_ano_minimo'], 4)}–{formatar_numero(faixa['prs_por_ano_maximo'], 4)}",
+                formatar_numero(faixa["prs_por_ano_mediana"], 4),
+                formatar_numero(faixa["releases_por_ano_mediana"], 4),
+            ]
+            for faixa in faixas9
+        ],
+        fonte=8.5,
+    )
+    adicionar_texto(documento, f"O critério de 1,5 × IQR identificou {rq09['outliers_iqr']['prs_por_ano']['quantidade']} extremos em PRs/ano, {rq09['outliers_iqr']['releases_por_ano']['quantidade']} em releases/ano e {rq09['outliers_iqr']['uniao_repositorios_extremos']} repositórios na união; {rq09['outliers_iqr']['extremos_em_ambas_metricas']} foram extremos nas duas taxas. Todos foram mantidos.")
+    adicionar_figura(documento, graficos["rq09"], 10, "Dispersão de PRs/ano versus releases/ano, com outliers e linha de tendência.")
+
     faixas10 = rq10["resumo_por_faixa_etaria"]
     medianas10 = [faixa["Mediana_issues_fechadas"] for faixa in faixas10]
     crescimento_monotonico10 = all(
@@ -732,7 +849,7 @@ def construir_documento(template: Path, saida: Path, df: pd.DataFrame, estatisti
     )
     rho10 = rq10["correlacao_spearman"]
     titulo_rq10 = documento.add_heading(
-        "4.2.9 RQ10 — Maturidade e tratamento de issues", level=3
+        "4.2.10 RQ10 — Maturidade e tratamento de issues", level=3
     )
     titulo_rq10.paragraph_format.page_break_before = True
     adicionar_texto(documento, f"A análise inclui {formatar_numero(rq10['repositorios_com_issues'])} repositórios com issues e exclui os {formatar_numero(rq10['repositorios_sem_issues'])} projetos sem issues. A correlação entre idade e percentual de issues fechadas foi {classificar_correlacao(rho10)} (ρ = {formatar_numero(rho10, 4)}). Entre os casos válidos, a idade mediana foi {formatar_numero(rq10['idade_mediana_repositorios_com_issues'], 2)} anos e o percentual mediano de fechamento foi {formatar_numero(rq10['percentual_issues_fechadas_mediana'], 2)}%.")
@@ -754,7 +871,7 @@ def construir_documento(template: Path, saida: Path, df: pd.DataFrame, estatisti
         fonte=8.5,
     )
     adicionar_texto(documento, f"No percentual de fechamento, o critério global de 1,5 × IQR identificou {formatar_numero(estatisticas['issues_outliers']['inferiores'])} outliers inferiores e {formatar_numero(estatisticas['issues_outliers']['superiores'])} superiores; todos foram mantidos. Há ainda {formatar_numero(estatisticas['issues_100'])} projetos no teto de 100% de issues fechadas.")
-    adicionar_figura(documento, graficos["rq10"], 10, "Relação entre idade e percentual de issues fechadas, com medianas e IQR por faixa etária.")
+    adicionar_figura(documento, graficos["rq10"], 11, "Relação entre idade e percentual de issues fechadas, com medianas e IQR por faixa etária.")
 
     documento.add_heading("4.3 Discussão e avaliação das hipóteses", level=2)
     textos_discussao = [
@@ -766,7 +883,8 @@ def construir_documento(template: Path, saida: Path, df: pd.DataFrame, estatisti
         ["4.3.6 RQ06", f"A mediana de {formatar_numero(issues['mediana'], 2)}% descreve somente projetos com issues. A taxa não informa tempo, complexidade ou qualidade do fechamento."],
         ["4.3.7 RQ07", "A comparação é descritiva. Diferenças entre grupos podem refletir idade, domínio, comunidade, governança e tamanhos desiguais, não o efeito da linguagem isoladamente."],
         ["4.3.8 RQ08", f"A relação com PRs/ano foi {classificar_correlacao(principal_pr['rho'])} (ρ = {formatar_numero(principal_pr['rho'], 4)}) e com releases/ano foi {classificar_correlacao(principal_rel['rho'])} (ρ = {formatar_numero(principal_rel['rho'], 4)}). Assim, H08 não é sustentada no critério de duas associações positivas ao menos moderadas. A sensibilidade manteve a mesma interpretação geral."],
-        ["4.3.9 RQ10", f"A H10 recebeu apoio descritivo parcial. As medianas {'cresceram monotonicamente' if crescimento_monotonico10 else 'não cresceram monotonicamente'} de {formatar_numero(medianas10[0], 2)}% para {formatar_numero(medianas10[-1], 2)}%, mas a associação foi apenas {classificar_correlacao(rho10)} (ρ = {formatar_numero(rho10, 4)}) e os intervalos interquartis se sobrepõem. A idade isoladamente explica uma parcela limitada da variação e o desenho não permite inferir causalidade."],
+        ["4.3.9 RQ09", f"A H09 recebeu apoio descritivo: a associação foi {classificar_correlacao(rho9)} (ρ = {formatar_numero(rho9, 4)}) e as medianas de releases/ano {'cresceram' if crescimento_monotonico9 else 'não cresceram'} ao longo dos quartis de PRs/ano. O desenho transversal não demonstra que elevar a colaboração cause mais releases."],
+        ["4.3.10 RQ10", f"A H10 recebeu apoio descritivo parcial. As medianas {'cresceram monotonicamente' if crescimento_monotonico10 else 'não cresceram monotonicamente'} de {formatar_numero(medianas10[0], 2)}% para {formatar_numero(medianas10[-1], 2)}%, mas a associação foi apenas {classificar_correlacao(rho10)} (ρ = {formatar_numero(rho10, 4)}) e os intervalos interquartis se sobrepõem. A idade isoladamente explica uma parcela limitada da variação e o desenho não permite inferir causalidade."],
     ]
     for titulo, texto in textos_discussao:
         documento.add_heading(titulo, level=3)
@@ -783,13 +901,14 @@ def construir_documento(template: Path, saida: Path, df: pd.DataFrame, estatisti
         ["H06", "Compatível entre projetos com issues" if issues["mediana"] > 80 else "Não compatível"],
         ["H07", "Compatível descritivamente" if top_linha["prs"] > outra_linha["prs"] and top_linha["releases"] > outra_linha["releases"] and top_linha["dias"] < outra_linha["dias"] else "Parcial ou não compatível"],
         ["H08", "Não sustentada: as duas associações não foram ao menos moderadas" if not (principal_pr["rho"] >= 0.3 and principal_rel["rho"] >= 0.3) else "Compatível descritivamente"],
+        ["H09", "Compatível descritivamente" if rho9 is not None and rho9 > 0 and crescimento_monotonico9 else "Não sustentada"],
         ["H10", "Parcialmente sustentada: tendência monotônica, mas associação fraca" if crescimento_monotonico10 and rho10 is not None and 0 < rho10 < 0.3 else "Compatível descritivamente" if crescimento_monotonico10 and rho10 is not None and rho10 >= 0.3 else "Não sustentada"],
     ]
     adicionar_tabela(documento, ["Hipótese", "Avaliação exploratória"], avaliacoes, fonte=8.7)
 
-    documento.add_heading("4.3.10 Ameaças à validade", level=3)
+    documento.add_heading("4.3.11 Ameaças à validade", level=3)
     adicionar_texto(documento, "Validade de construto. Estrelas aproximam popularidade; PRs mescladas não garantem contribuição externa; releases acumuladas e último push não medem frequência histórica; linguagem primária não descreve todo o código. O percentual de issues fechadas é acumulado e não representa velocidade, dificuldade ou qualidade da resolução.", "Validade de construto.")
-    adicionar_texto(documento, "Anualização. Dividir acumulados pela idade supõe uma taxa média constante e amplifica valores de projetos muito jovens. Por isso, a análise principal exige um ano e a sensibilidade inclui todas as idades positivas.", "Anualização.")
+    adicionar_texto(documento, "Anualização. Dividir acumulados pela idade supõe uma taxa média constante e amplifica valores de projetos muito jovens. Como PRs/ano e releases/ano usam a mesma idade como denominador, parte da associação pode refletir esse fator comum. Por isso, a análise principal exige ao menos um ano.", "Anualização.")
     adicionar_texto(documento, f"Ausências e efeito teto. Os {formatar_numero(rq10['repositorios_sem_issues'])} projetos sem issues podem usar rastreadores externos ou ainda não ter demandas registradas e foram excluídos da RQ10. Outros {formatar_numero(estatisticas['issues_100'])} aparecem no teto de 100%, reduzindo a discriminação entre projetos.", "Ausências e efeito teto.")
     adicionar_texto(documento, "Outliers. Projetos com automação ou fluxos incomuns produzem taxas extremas. Eles foram identificados por 1,5 × IQR e mantidos; a correlação por postos reduz, mas não elimina, sua influência interpretativa.", "Outliers.")
     adicionar_texto(documento, "Arredondamento e agrupamento. Idades e percentuais registrados no CSV são arredondados, o que cria empates tratados por postos médios. As faixas etárias têm tamanhos distintos, e seus intervalos interquartis se sobrepõem.", "Arredondamento e agrupamento.")
@@ -797,10 +916,11 @@ def construir_documento(template: Path, saida: Path, df: pd.DataFrame, estatisti
     adicionar_texto(documento, "Validade externa e temporal. A amostra cobre somente os 1.000 repositórios públicos mais estrelados no instante da coleta. Resultados não se generalizam automaticamente e podem variar entre snapshots.", "Validade externa e temporal.")
 
     documento.add_heading("5. Conclusão", level=1)
-    adicionar_texto(documento, f"A coleta oficial reuniu {formatar_numero(total)} repositórios únicos, ordenados por estrelas, e gerou CSV e nove JSONs coerentes para RQ01–RQ08 e RQ10. Todos os valores do relatório foram recalculados do mesmo snapshot, reduzindo o risco de divergência entre dados, texto, tabelas e gráficos.")
+    adicionar_texto(documento, f"A coleta oficial reuniu {formatar_numero(total)} repositórios únicos, ordenados por estrelas, e gerou CSV e dez JSONs coerentes para RQ01–RQ10. Todos os valores do relatório foram recalculados do mesmo snapshot, reduzindo o risco de divergência entre dados, texto, tabelas e gráficos.")
     adicionar_texto(documento, f"RQ01–RQ07 descrevem maturidade, contribuições, releases, atualização, linguagens e issues. A RQ08 acrescenta controle simples por idade: na amostra principal, ρ foi {formatar_numero(principal_pr['rho'], 4)} para PRs/ano e {formatar_numero(principal_rel['rho'], 4)} para releases/ano. Os resultados não sustentam a hipótese de duas associações positivas ao menos moderadas e não autorizam conclusão causal.")
+    adicionar_texto(documento, f"A RQ09 respondeu positivamente à pergunta de pesquisa: PRs mescladas/ano e releases/ano apresentaram associação {classificar_correlacao(rho9)} (ρ = {formatar_numero(rho9, 4)}), acompanhada pelo crescimento das medianas de releases/ano entre Q1 e Q4. A evidência é associativa e não causal.")
     adicionar_texto(documento, f"Na RQ10, as medianas de issues fechadas aumentaram de {formatar_numero(medianas10[0], 2)}% para {formatar_numero(medianas10[-1], 2)}% entre as faixas extremas, mas a correlação foi positiva fraca (ρ = {formatar_numero(rho10, 4)}). A H10 recebeu apoio descritivo parcial, sem evidência de que a idade cause maior capacidade de fechamento.")
-    adicionar_texto(documento, "O Streamlit comunica a RQ08 e a RQ10 junto às questões anteriores, oferece busca por repositório e download do CSV. Esta versão é intermediária: RQ09, revisão final do texto e anexo com o print do board e a política de WIP ainda devem ser concluídos antes do Relatório Final.")
+    adicionar_texto(documento, "O Streamlit comunica as RQ01–RQ10, oferece busca por repositório e download do CSV. Esta versão permanece intermediária somente quanto à evidência final do processo: o anexo com o print do fluxo completo do grupo no GitHub Project/Kanban deve ser preenchido após a conclusão de todo o trabalho.")
 
     documento.add_heading("6. Referências", level=1)
     referencias = [
@@ -817,7 +937,7 @@ def construir_documento(template: Path, saida: Path, df: pd.DataFrame, estatisti
 
     titulo_anexo = documento.add_heading("Anexo A — Fluxo do GitHub Project", level=1)
     titulo_anexo.paragraph_format.page_break_before = True
-    adicionar_texto(documento, "PENDÊNCIA DA VERSÃO INTERMEDIÁRIA: inserir no Relatório Final o print do board mostrando o fluxo completo de S01 a S03 e a política de WIP em uso. O primeiro snapshot da S02 permanece preservado no histórico do projeto.")
+    adicionar_texto(documento, "PENDÊNCIA DA ISSUE #48: capturar somente ao final do trabalho o GitHub Project/Kanban mostrando o fluxo completo do grupo. O estado atual não substitui a captura final.")
     tabela = documento.add_table(rows=1, cols=1)
     tabela.style = "Table Grid"
     celula = tabela.cell(0, 0)
@@ -826,15 +946,25 @@ def construir_documento(template: Path, saida: Path, df: pd.DataFrame, estatisti
     sombrear(celula, "F5F7FA")
     p = celula.paragraphs[0]
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p.add_run("INSERIR SNAPSHOT FINAL DO BOARD E EVIDÊNCIA DA POLÍTICA DE WIP").bold = True
+    p.add_run("CAPTURAR AO FINAL: SNAPSHOT DO BOARD COM O FLUXO COMPLETO DO GRUPO").bold = True
 
     propriedades = documento.core_properties
-    propriedades.title = "Lab01S03 — Relatório intermediário RQ01–RQ08 e RQ10"
+    propriedades.title = "Lab01S03 — Relatório intermediário RQ01–RQ10"
     propriedades.subject = "Mineração de 1.000 repositórios populares do GitHub"
-    propriedades.author = "Pedro Henrique Maia Alves; Diogo C. Brunoro; [TERCEIRO INTEGRANTE — EDITAR]"
-    propriedades.keywords = "GitHub, GraphQL, Streamlit, RQ08, RQ10, issues, maturidade, Spearman, Lab01S03"
+    propriedades.author = "Pedro Henrique Maia Alves; Diogo C. Brunoro; Lorran Pedro Avelar Xavier"
+    propriedades.keywords = "GitHub, GraphQL, Streamlit, RQ08, RQ09, RQ10, releases, issues, Spearman, Lab01S03"
     saida.parent.mkdir(parents=True, exist_ok=True)
     documento.save(saida)
+
+
+def validar_paridade_rq09_json(rq09: dict, caminho_json: Path) -> None:
+    """Garante que o recálculo da RQ09 coincide com o JSON persistido."""
+
+    if not caminho_json.exists():
+        raise RuntimeError(f"JSON da RQ09 não encontrado: {caminho_json}")
+    esperado = json.loads(caminho_json.read_text(encoding="utf-8"))
+    if rq09 != esperado:
+        raise RuntimeError("A RQ09 recalculada do CSV diverge do JSON persistido.")
 
 
 def validar_paridade_rq10_json(rq10: dict, caminho_json: Path) -> None:
@@ -948,7 +1078,7 @@ def converter_docx_para_pdf(docx: Path, pdf: Path) -> None:
         "<h1>1. Introdução", "<h1 class='nova-pagina'>1. Introdução", 1
     )
     html = html.replace(
-        "<h3>4.2.9 RQ10", "<h3 class='nova-pagina'>4.2.9 RQ10", 1
+        "<h3>4.2.10 RQ10", "<h3 class='nova-pagina'>4.2.10 RQ10", 1
     )
     html = html.replace(
         "<h1>Anexo A", "<h1 class='nova-pagina'>Anexo A", 1
@@ -1041,23 +1171,30 @@ def validar_documento_gerado(docx: Path) -> None:
     imagens = len(documento.inline_shapes)
 
     termos_obrigatorios = (
-        "3.4 Procedimento analítico da RQ10",
-        "4.2.9 RQ10",
-        "4.3.9 RQ10",
+        "3.4 Procedimento analítico da RQ09",
+        "3.5 Procedimento analítico da RQ10",
+        "4.2.9 RQ09",
+        "4.2.10 RQ10",
+        "4.3.9 RQ09",
+        "4.3.10 RQ10",
         "Figura 10",
+        "Figura 11",
+        "H09",
         "H10",
-        "[TERCEIRO INTEGRANTE — EDITAR]",
-        "INSERIR SNAPSHOT FINAL DO BOARD",
+        "Lorran Pedro Avelar Xavier",
+        "CAPTURAR AO FINAL: SNAPSHOT DO BOARD",
     )
     faltantes = [termo for termo in termos_obrigatorios if termo not in texto]
     if faltantes:
         raise RuntimeError(f"Documento incompleto; termos ausentes: {', '.join(faltantes)}")
     if "RQ10 pendente" in texto or "RQ10 — pendente" in texto:
         raise RuntimeError("O documento ainda menciona RQ10 como pendente.")
-    if tabelas != 13:
-        raise RuntimeError(f"Esperadas 13 tabelas, encontradas {tabelas}.")
-    if imagens != 9:
-        raise RuntimeError(f"Esperadas 9 imagens, encontradas {imagens}.")
+    if "RQ09 pendente" in texto or "RQ09 — pendente" in texto:
+        raise RuntimeError("O documento ainda menciona RQ09 como pendente.")
+    if tabelas != 14:
+        raise RuntimeError(f"Esperadas 14 tabelas, encontradas {tabelas}.")
+    if imagens != 10:
+        raise RuntimeError(f"Esperadas 10 imagens, encontradas {imagens}.")
     invalido = re.search(r"(?i)\b(?:nan|inf|infinity|infinito)\b", texto)
     if invalido:
         raise RuntimeError(f"Documento contém valor proibido: {invalido.group(0)}")
@@ -1080,6 +1217,12 @@ def criar_parser() -> argparse.ArgumentParser:
         help="Destino do PDF (padrão: mesmo nome do DOCX com extensão .pdf).",
     )
     parser.add_argument(
+        "--json-rq09",
+        type=Path,
+        default=JSON_RQ09_PADRAO,
+        help="JSON da RQ09 usado na validação de paridade.",
+    )
+    parser.add_argument(
         "--json-rq10",
         type=Path,
         default=JSON_RQ10_PADRAO,
@@ -1097,6 +1240,7 @@ def main() -> None:
     df = pd.read_csv(argumentos.csv)
     validar_dados(df)
     estatisticas = calcular_estatisticas(df)
+    validar_paridade_rq09_json(estatisticas["rq09"], argumentos.json_rq09)
     validar_paridade_rq10_json(estatisticas["rq10"], argumentos.json_rq10)
     with tempfile.TemporaryDirectory(prefix="lab01s03_figuras_") as pasta:
         graficos = preparar_graficos(df, estatisticas, Path(pasta))
