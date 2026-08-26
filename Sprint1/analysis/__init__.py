@@ -1,4 +1,4 @@
-"""Pacote com um módulo por questão de pesquisa (RQ01 a RQ07).
+"""Pacote com um módulo por questão de pesquisa implementada.
 
 Cada módulo expõe:
     - analisar(df) -> dict:      calcula as métricas daquela RQ
@@ -16,6 +16,7 @@ from . import (
     rq05_linguagem,
     rq06_issuesFechadas,
     rq07_relacaoLinguagemContribuicao,
+    rq08_popularidadeIntensidade,
     rq10_idade_issues,
 )
 
@@ -27,6 +28,7 @@ MODULOS_RQ = {
     "rq05_linguagem": rq05_linguagem,
     "rq06_issues_fechadas": rq06_issuesFechadas,
     "rq07_cruzamento": rq07_relacaoLinguagemContribuicao,
+    "rq08_popularidade_intensidade": rq08_popularidadeIntensidade,
     "rq10_idade_issues": rq10_idade_issues,
 }
 

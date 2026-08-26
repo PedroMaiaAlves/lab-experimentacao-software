@@ -1,55 +1,55 @@
 {
-  "questao": "RQ08",
+  "questao": "RQ10",
   "descricao": "Repositórios mais antigos apresentam maior proporção de issues fechadas?",
   "metrica": "Idade em anos, percentual de issues fechadas, correlação de Spearman e mediana/IQR do percentual de issues fechadas por faixa de idade",
   "hipotese_informal": "Espera-se que repositórios mais antigos apresentem maior percentual mediano de issues fechadas, por possuírem processos de manutenção mais consolidados.",
-  "total_repositorios": 100,
-  "repositorios_com_issues": 88,
-  "repositorios_sem_issues": 12,
-  "correlacao_spearman": 0.3201,
-  "interpretacao_correlacao": "Correlação positiva moderada.",
-  "idade_mediana_repositorios_com_issues": 7.55,
-  "percentual_issues_fechadas_mediana": 92.55,
+  "total_repositorios": 1000,
+  "repositorios_com_issues": 957,
+  "repositorios_sem_issues": 43,
+  "correlacao_spearman": 0.2323,
+  "interpretacao_correlacao": "Correlação positiva fraca.",
+  "idade_mediana_repositorios_com_issues": 7.65,
+  "percentual_issues_fechadas_mediana": 87.6,
   "resumo_por_faixa_etaria": [
     {
       "Faixa de idade": "0–2 anos",
-      "Quantidade_repositorios": 18,
-      "Mediana_issues_fechadas": 71.15,
-      "Q1_issues_fechadas": 51.12,
-      "Q3_issues_fechadas": 86.32,
-      "IQR_issues_fechadas": 35.2
+      "Quantidade_repositorios": 140,
+      "Mediana_issues_fechadas": 79.55,
+      "Q1_issues_fechadas": 57.28,
+      "Q3_issues_fechadas": 91.58,
+      "IQR_issues_fechadas": 34.3
     },
     {
       "Faixa de idade": ">2–5 anos",
-      "Quantidade_repositorios": 18,
-      "Mediana_issues_fechadas": 93.4,
-      "Q1_issues_fechadas": 88.8,
-      "Q3_issues_fechadas": 96.45,
-      "IQR_issues_fechadas": 7.65
+      "Quantidade_repositorios": 176,
+      "Mediana_issues_fechadas": 84.95,
+      "Q1_issues_fechadas": 69.08,
+      "Q3_issues_fechadas": 95.22,
+      "IQR_issues_fechadas": 26.15
     },
     {
       "Faixa de idade": ">5–10 anos",
-      "Quantidade_repositorios": 21,
-      "Mediana_issues_fechadas": 94.1,
-      "Q1_issues_fechadas": 63.8,
-      "Q3_issues_fechadas": 99.5,
-      "IQR_issues_fechadas": 35.7
+      "Quantidade_repositorios": 318,
+      "Mediana_issues_fechadas": 86.95,
+      "Q1_issues_fechadas": 67.72,
+      "Q3_issues_fechadas": 97.22,
+      "IQR_issues_fechadas": 29.5
     },
     {
       "Faixa de idade": ">10–15 anos",
-      "Quantidade_repositorios": 25,
-      "Mediana_issues_fechadas": 95.7,
-      "Q1_issues_fechadas": 86.8,
-      "Q3_issues_fechadas": 97.0,
-      "IQR_issues_fechadas": 10.2
+      "Quantidade_repositorios": 280,
+      "Mediana_issues_fechadas": 91.85,
+      "Q1_issues_fechadas": 80.2,
+      "Q3_issues_fechadas": 97.6,
+      "IQR_issues_fechadas": 17.4
     },
     {
       "Faixa de idade": ">15 anos",
-      "Quantidade_repositorios": 6,
-      "Mediana_issues_fechadas": 97.6,
-      "Q1_issues_fechadas": 89.12,
-      "Q3_issues_fechadas": 99.18,
-      "IQR_issues_fechadas": 10.05
+      "Quantidade_repositorios": 43,
+      "Mediana_issues_fechadas": 95.4,
+      "Q1_issues_fechadas": 88.55,
+      "Q3_issues_fechadas": 97.65,
+      "IQR_issues_fechadas": 9.1
     }
   ]
 }

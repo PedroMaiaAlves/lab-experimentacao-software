@@ -3,6 +3,14 @@ import json
 
 
 def salvar_json(resultado: dict, caminho: str) -> None:
-    """Salva o dicionário de resultado de uma RQ em um arquivo JSON."""
+    """Salva o resultado como JSON estrito, recusando NaN e infinito."""
     with open(caminho, "w", encoding="utf-8") as f:
-        json.dump(resultado, f, ensure_ascii=False, indent=2, default=str)
+        json.dump(
+            resultado,
+            f,
+            ensure_ascii=False,
+            indent=2,
+            allow_nan=False,
+            default=str,
+        )
+        f.write("\n")

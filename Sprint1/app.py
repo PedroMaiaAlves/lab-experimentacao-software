@@ -45,7 +45,7 @@ st.markdown("""
 st.markdown("""
 <div class="hero">
     <h1>🐙 Repositórios Populares do GitHub — Laboratório de Experimentação</h1>
-    <p>Coleta via GraphQL dos repositórios com mais estrelas e análise das RQ01–RQ10.</p>
+    <p>Coleta via GraphQL dos repositórios com mais estrelas e análise das RQ01–RQ08 e RQ10.</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -54,8 +54,21 @@ def salvar_dataset_bruto(df: pd.DataFrame) -> None:
     """Salva o dataset completo coletado em CSV e JSON na pasta data/raw."""
     DATA_RAW_DIR.mkdir(parents=True, exist_ok=True)
     df.to_csv(DATA_RAW_DIR / "repositorios_populares.csv", index=False)
+    registros_json = (
+        df.astype(object)
+        .where(pd.notna(df), None)
+        .to_dict(orient="records")
+    )
     with open(DATA_RAW_DIR / "repositorios_populares.json", "w", encoding="utf-8") as f:
-        json.dump(df.to_dict(orient="records"), f, ensure_ascii=False, indent=2, default=str)
+        json.dump(
+            registros_json,
+            f,
+            ensure_ascii=False,
+            indent=2,
+            allow_nan=False,
+            default=str,
+        )
+        f.write("\n")
 
 
 def executar_analises(df: pd.DataFrame) -> dict:
@@ -222,7 +235,7 @@ def _grafico_barras(df_grafico: pd.DataFrame, categoria: str, valor: str, titulo
         )
         .properties(title=titulo, height=max(250, min(600, len(df_grafico) * 30)))
     )
-    st.altair_chart(chart, use_container_width=True)
+    st.altair_chart(chart, width="stretch")
 
 def _grafico_distribuicao(
     df_grafico: pd.DataFrame,
@@ -269,7 +282,7 @@ def _grafico_distribuicao(
 
     st.altair_chart(
         chart,
-        use_container_width=True,
+        width="stretch",
     )
 
 def _top_repos(df: pd.DataFrame, coluna: str, n: int = 15) -> pd.DataFrame:
@@ -335,7 +348,93 @@ def _grafico_rq07(resumo: pd.DataFrame):
         .interactive()
     )
 
-    st.altair_chart(chart, use_container_width=True)
+    st.altair_chart(chart, width="stretch")
+
+
+def _formatar_rho(valor) -> str:
+    """Formata uma correlação, preservando cenários sem valor calculável."""
+
+    if valor is None or pd.isna(valor):
+        return "—"
+    return f"{float(valor):.3f}"
+
+
+def _extrair_correlacao(cenario: dict, chave: str) -> tuple[object, object]:
+    """Extrai rho e n do contrato da RQ08 sem falhar em dados incompletos."""
+
+    correlacao = cenario.get(chave, {}) if isinstance(cenario, dict) else {}
+    if isinstance(correlacao, dict):
+        return correlacao.get("rho"), correlacao.get("n")
+    return correlacao, cenario.get("n") if isinstance(cenario, dict) else None
+
+
+def _grafico_rq08(
+    df_grafico: pd.DataFrame,
+    coluna_taxa: str,
+    titulo: str,
+):
+    """Dispersão da popularidade contra uma taxa anual da RQ08."""
+
+    import altair as alt
+
+    colunas = [
+        "Nome",
+        "Estrelas",
+        "Idade (anos)",
+        "PRs aceitas",
+        "Total de releases",
+        coluna_taxa,
+    ]
+    if df_grafico.empty or any(coluna not in df_grafico for coluna in colunas):
+        st.info("Não há dados suficientes para gerar este gráfico.")
+        return
+
+    base = df_grafico[colunas].copy()
+    for coluna in colunas[1:]:
+        base[coluna] = pd.to_numeric(base[coluna], errors="coerce")
+    base = base.dropna(subset=["Estrelas", coluna_taxa])
+    base = base[(base["Estrelas"] > 0) & (base[coluna_taxa] >= 0)]
+    if base.empty:
+        st.info("Não há dados válidos para gerar este gráfico.")
+        return
+
+    chart = (
+        alt.Chart(base)
+        .mark_circle(size=55, opacity=0.28, color="#38bdf8")
+        .encode(
+            x=alt.X(
+                "Estrelas:Q",
+                title="Estrelas (escala logarítmica)",
+                scale=alt.Scale(type="log", zero=False),
+            ),
+            y=alt.Y(
+                f"{coluna_taxa}:Q",
+                title=f"{coluna_taxa} (escala symlog)",
+                scale=alt.Scale(type="symlog", constant=1, zero=True),
+            ),
+            tooltip=[
+                alt.Tooltip("Nome:N", title="Repositório"),
+                alt.Tooltip("Estrelas:Q", title="Estrelas", format=",.0f"),
+                alt.Tooltip("Idade (anos):Q", title="Idade (anos)", format=".2f"),
+                alt.Tooltip("PRs aceitas:Q", title="PRs mescladas", format=",.0f"),
+                alt.Tooltip(
+                    "Total de releases:Q",
+                    title="Releases acumuladas",
+                    format=",.0f",
+                ),
+                alt.Tooltip(
+                    f"{coluna_taxa}:Q",
+                    title=coluna_taxa,
+                    format=",.2f",
+                ),
+            ],
+        )
+        .properties(title=titulo, height=410)
+        .interactive()
+    )
+    st.altair_chart(chart, width="stretch")
+
+
 def construir_csv_completo(df: pd.DataFrame, resultados_rq: dict) -> pd.DataFrame:
 
     df_completo = df.copy()
@@ -415,7 +514,7 @@ with st.sidebar:
         index=0,
     )
     qtd_repos = st.number_input("Número de repositórios (top-N por estrelas)", min_value=1, max_value=1000, value=100, step=1)
-    buscar = st.button("Buscar 🚀", type="primary", use_container_width=True)
+    buscar = st.button("Buscar 🚀", type="primary", width="stretch")
     st.caption("Critério fixo: sempre os repositórios com mais estrelas (sort:stars-desc).")
     st.caption("JSON por RQ salvo em `data/rq/`. Dataset completo salvo em `data/raw/`.")
 
@@ -436,8 +535,8 @@ if buscar:
             st.session_state["resultados_rq"] = resultados_rq
         except requests.exceptions.HTTPError as e:
             st.error(f"Erro HTTP ao consultar a API do GitHub: {e}")
-        except RuntimeError as e:
-            st.error(f"Erro da API GraphQL: {e}")
+        except (RuntimeError, ValueError) as e:
+            st.error(f"Erro ao processar os dados da API GraphQL: {e}")
         except requests.exceptions.RequestException as e:
             st.error(f"Erro de conexão: {e}")
 
@@ -516,9 +615,9 @@ else:
     )
 
     df_export = construir_csv_completo(
-    df_exibicao,
-    resultados_exibicao,
-)
+        df_exibicao,
+        resultados_exibicao,
+    )
     csv = df_export.to_csv(index=False).encode("utf-8")
     st.download_button(
         "Baixar CSV com todas as métricas",
@@ -527,7 +626,7 @@ else:
         "text/csv",
     )
 
-    (rq01, rq02, rq03, rq04, rq05, rq06, rq07, rq10, tabela) = st.tabs(
+    (rq01, rq02, rq03, rq04, rq05, rq06, rq07, rq08, rq10, tabela) = st.tabs(
         [
             "RQ01 Idade",
             "RQ02 PRs",
@@ -536,19 +635,20 @@ else:
             "RQ05 Linguagem",
             "RQ06 Issues",
             "RQ07 Cruzamento",
+            "RQ08 Intensidade",
             "RQ10 Idade × Issues",
             "📋 Dados",
         ]
     )
 
     with rq01:
-        r = resultados_rq["rq01_idade"]
+        r = resultados_exibicao["rq01_idade"]
         st.subheader("RQ01 — Sistemas populares são maduros/antigos?")
         st.write("**Métrica:** idade do repositório, em anos, a partir da data de criação.")
         st.metric("Idade mediana", f"{r['idade_mediana_anos']:.1f} anos")
         dist_idade = _distribuicao_binned(
-        df_exibicao["Idade (anos)"],
-        tipo="idade",
+            df_exibicao["Idade (anos)"],
+            tipo="idade",
         )
 
         _grafico_distribuicao(
@@ -570,7 +670,7 @@ else:
         col_c.metric("PRs aceitas — máxima", f"{int(r['prs_aceitas_maxima']):,}".replace(",", "."))
 
         st.markdown("#### 🏆 Repositórios com mais PRs aceitas")
-        top_prs = _top_repos(df, "PRs aceitas", 15)
+        top_prs = _top_repos(df_exibicao, "PRs aceitas", 15)
         if not top_prs.empty:
             _grafico_barras(
                 top_prs.rename(columns={"PRs aceitas": "PRs"}),
@@ -602,15 +702,15 @@ else:
         col_a.metric("Releases — mediana", f"{int(r['releases_mediana']):,}".replace(",", "."))
         col_b.metric(
             "Releases — média",
-            f"{df['Total de releases'].mean():,.0f}".replace(",", "."),
+            f"{df_exibicao['Total de releases'].mean():,.0f}".replace(",", "."),
         )
         col_c.metric(
             "Releases — máximo",
-            f"{int(df['Total de releases'].max()):,}".replace(",", "."),
+            f"{int(df_exibicao['Total de releases'].max()):,}".replace(",", "."),
         )
 
         st.markdown("#### 🚀 Repositórios com mais releases")
-        top_releases = _top_repos(df, "Total de releases", 15)
+        top_releases = _top_repos(df_exibicao, "Total de releases", 15)
         if not top_releases.empty:
             _grafico_barras(
                 top_releases.rename(columns={"Total de releases": "Releases"}),
@@ -702,7 +802,7 @@ else:
             st.markdown("#### 🔎 Resumo por linguagem")
             st.dataframe(
                 resumo.sort_values("PRs_aceitas_mediana", ascending=False),
-                use_container_width=True,
+                width="stretch",
                 hide_index=True,
             )
 
@@ -740,10 +840,149 @@ else:
                 "Comparação entre linguagens",
             )
 
+    with rq08:
+        r = resultados_exibicao.get("rq08_popularidade_intensidade", {})
+        st.subheader("RQ08 — Popularidade e intensidade de desenvolvimento")
+        st.write(
+            "**Métricas:** correlação de Spearman entre estrelas e as taxas "
+            "anuais de PRs mescladas e releases, normalizadas pela idade."
+        )
+        st.warning(
+            "A quantidade de PRs mescladas é uma aproximação do volume de "
+            "contribuições; os dados não identificam se a autoria é externa."
+        )
+
+        if not r:
+            st.info("Os resultados da RQ08 ainda não estão disponíveis para esta amostra.")
+        else:
+            amostra = r.get("amostra", {})
+            correlacoes = r.get("correlacoes_spearman", {})
+            principal = correlacoes.get("principal_idade_maior_igual_1", {})
+            sensibilidade = correlacoes.get(
+                "sensibilidade_todas_idades_positivas",
+                {},
+            )
+
+            rho_prs, n_prs = _extrair_correlacao(
+                principal,
+                "estrelas_vs_prs_por_ano",
+            )
+            rho_releases, n_releases = _extrair_correlacao(
+                principal,
+                "estrelas_vs_releases_por_ano",
+            )
+
+            col_prs, col_releases = st.columns(2)
+            col_prs.metric(
+                "ρ — estrelas × PRs/ano",
+                _formatar_rho(rho_prs),
+                delta=f"n = {n_prs}" if n_prs is not None else "n indisponível",
+                delta_color="off",
+            )
+            col_releases.metric(
+                "ρ — estrelas × releases/ano",
+                _formatar_rho(rho_releases),
+                delta=(
+                    f"n = {n_releases}"
+                    if n_releases is not None
+                    else "n indisponível"
+                ),
+                delta_color="off",
+            )
+
+            col_amostra, col_jovens = st.columns(2)
+            col_amostra.metric(
+                "Amostra principal (idade ≥ 1 ano)",
+                amostra.get("analise_principal", 0),
+            )
+            col_jovens.metric(
+                "Repositórios com idade < 1 ano",
+                amostra.get("idade_menor_1_ano", 0),
+            )
+            st.caption(
+                f"Amostra total: {amostra.get('total_repositorios', 0)} | "
+                f"idade não positiva: {amostra.get('idade_nao_positiva', 0)} | "
+                f"dados ausentes: {amostra.get('dados_ausentes', 0)}"
+            )
+
+            quantidade_principal = amostra.get("analise_principal", 0)
+            if quantidade_principal:
+                idade = pd.to_numeric(
+                    df_exibicao["Idade (anos)"],
+                    errors="coerce",
+                )
+                df_principal = df_exibicao[idade >= 1].copy()
+                grafico_prs, grafico_releases = st.columns(2)
+                with grafico_prs:
+                    _grafico_rq08(
+                        df_principal,
+                        "PRs por ano",
+                        "Estrelas × PRs mescladas por ano",
+                    )
+                with grafico_releases:
+                    _grafico_rq08(
+                        df_principal,
+                        "Releases por ano",
+                        "Estrelas × releases por ano",
+                    )
+                st.caption(
+                    "Os gráficos mostram a análise principal (idade ≥ 1 ano). "
+                    "A escala symlog preserva taxas iguais a zero e reduz a "
+                    "compressão provocada por valores extremos."
+                )
+            else:
+                st.info("A amostra principal da RQ08 está vazia.")
+
+            st.markdown("#### Resumo por quartil de estrelas")
+            resumo_quartis = pd.DataFrame(
+                r.get("resumo_por_quartil_estrelas", [])
+            )
+            if resumo_quartis.empty:
+                st.info("Não há resumo por quartis para esta amostra.")
+            else:
+                st.dataframe(
+                    resumo_quartis,
+                    width="stretch",
+                    hide_index=True,
+                )
+
+            st.markdown("#### Análise de sensibilidade — todas as idades positivas")
+            sens_prs, sens_n_prs = _extrair_correlacao(
+                sensibilidade,
+                "estrelas_vs_prs_por_ano",
+            )
+            sens_releases, sens_n_releases = _extrair_correlacao(
+                sensibilidade,
+                "estrelas_vs_releases_por_ano",
+            )
+            st.dataframe(
+                pd.DataFrame(
+                    [
+                        {
+                            "Relação": "Estrelas × PRs por ano",
+                            "ρ de Spearman": _formatar_rho(sens_prs),
+                            "N": sens_n_prs,
+                        },
+                        {
+                            "Relação": "Estrelas × releases por ano",
+                            "ρ de Spearman": _formatar_rho(sens_releases),
+                            "N": sens_n_releases,
+                        },
+                    ]
+                ),
+                width="stretch",
+                hide_index=True,
+            )
+
+            outliers = r.get("outliers_iqr", {})
+            if outliers:
+                with st.expander("Diagnóstico de outliers pelo IQR"):
+                    st.json(outliers)
+
     with tabela:
         st.dataframe(
             df_exibicao,
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
             column_config={
                 "URL": st.column_config.LinkColumn("URL")
@@ -853,7 +1092,7 @@ else:
 
             st.altair_chart(
                 chart,
-                use_container_width=True,
+                width="stretch",
             )
 
         st.markdown("#### 📊 Mediana e intervalo interquartil por faixa de idade")
@@ -890,7 +1129,7 @@ else:
                         "IQR (%)",
                     ]
                 ],
-                use_container_width=True,
+                width="stretch",
                 hide_index=True,
             )
 
