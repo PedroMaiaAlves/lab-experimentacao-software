@@ -17,6 +17,7 @@ from . import (
     rq06_issuesFechadas,
     rq07_relacaoLinguagemContribuicao,
     rq08_popularidadeIntensidade,
+    rq09_colaboracao_releases,
     rq10_idade_issues,
 )
 
@@ -29,6 +30,7 @@ MODULOS_RQ = {
     "rq06_issues_fechadas": rq06_issuesFechadas,
     "rq07_cruzamento": rq07_relacaoLinguagemContribuicao,
     "rq08_popularidade_intensidade": rq08_popularidadeIntensidade,
+    "rq09_colaboracao_releases": rq09_colaboracao_releases,
     "rq10_idade_issues": rq10_idade_issues,
 }
 

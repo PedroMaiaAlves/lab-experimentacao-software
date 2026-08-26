@@ -45,7 +45,7 @@ st.markdown("""
 st.markdown("""
 <div class="hero">
     <h1>🐙 Repositórios Populares do GitHub — Laboratório de Experimentação</h1>
-    <p>Coleta via GraphQL dos repositórios com mais estrelas e análise das RQ01–RQ08 e RQ10.</p>
+    <p>Coleta via GraphQL dos repositórios com mais estrelas e análise das RQ01–RQ10.</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -435,6 +435,115 @@ def _grafico_rq08(
     st.altair_chart(chart, width="stretch")
 
 
+def _grafico_rq09(df_grafico: pd.DataFrame, resultado: dict):
+    """Dispersão entre as taxas anuais da RQ09, com tendência e outliers."""
+
+    import altair as alt
+
+    colunas = [
+        "Nome",
+        "Idade (anos)",
+        "PRs aceitas",
+        "Total de releases",
+        "PRs por ano",
+        "Releases por ano",
+    ]
+    if df_grafico.empty or any(coluna not in df_grafico for coluna in colunas):
+        st.info("Não há dados suficientes para gerar este gráfico.")
+        return
+
+    base = df_grafico[colunas].copy()
+    for coluna in colunas[1:]:
+        base[coluna] = pd.to_numeric(base[coluna], errors="coerce")
+    base = base.dropna(subset=["Idade (anos)", "PRs por ano", "Releases por ano"])
+    base = base[
+        (base["Idade (anos)"] >= 1)
+        & (base["PRs por ano"] >= 0)
+        & (base["Releases por ano"] >= 0)
+    ]
+    if base.empty:
+        st.info("A amostra principal da RQ09 está vazia.")
+        return
+
+    outliers = resultado.get("outliers_iqr", {})
+    limites_prs = outliers.get("prs_por_ano", {})
+    limites_releases = outliers.get("releases_por_ano", {})
+    mascara_prs = (
+        (base["PRs por ano"] < limites_prs.get("limite_inferior"))
+        | (base["PRs por ano"] > limites_prs.get("limite_superior"))
+    )
+    mascara_releases = (
+        (base["Releases por ano"] < limites_releases.get("limite_inferior"))
+        | (base["Releases por ano"] > limites_releases.get("limite_superior"))
+    )
+    base["Outlier em"] = np.select(
+        [mascara_prs & mascara_releases, mascara_prs, mascara_releases],
+        ["Ambas as taxas", "PRs por ano", "Releases por ano"],
+        default="Não",
+    )
+    base["Classificação"] = np.where(
+        mascara_prs | mascara_releases, "Outlier (IQR)", "Demais repositórios"
+    )
+
+    pontos = alt.Chart(base).mark_circle(size=62, opacity=0.55).encode(
+        x=alt.X(
+            "PRs por ano:Q",
+            title="PRs mescladas por ano (escala symlog)",
+            scale=alt.Scale(type="symlog", constant=1, zero=True),
+        ),
+        y=alt.Y(
+            "Releases por ano:Q",
+            title="Releases por ano (escala symlog)",
+            scale=alt.Scale(type="symlog", constant=1, zero=True),
+        ),
+        color=alt.Color(
+            "Classificação:N",
+            title=None,
+            scale=alt.Scale(
+                domain=["Demais repositórios", "Outlier (IQR)"],
+                range=["#38bdf8", "#f97316"],
+            ),
+        ),
+        tooltip=[
+            alt.Tooltip("Nome:N", title="Repositório"),
+            alt.Tooltip("Idade (anos):Q", title="Idade (anos)", format=".2f"),
+            alt.Tooltip("PRs aceitas:Q", title="PRs mescladas", format=",.0f"),
+            alt.Tooltip(
+                "Total de releases:Q", title="Releases acumuladas", format=",.0f"
+            ),
+            alt.Tooltip("PRs por ano:Q", title="PRs por ano", format=",.2f"),
+            alt.Tooltip(
+                "Releases por ano:Q", title="Releases por ano", format=",.2f"
+            ),
+            alt.Tooltip("Outlier em:N", title="Outlier em"),
+        ],
+    )
+    tendencia = (
+        alt.Chart(base)
+        .transform_regression("PRs por ano", "Releases por ano")
+        .mark_line(color="#facc15", strokeWidth=3)
+    )
+    chart = alt.layer(pontos, tendencia).properties(
+        title="PRs mescladas por ano × releases por ano",
+        height=480,
+    ).interactive()
+    st.altair_chart(chart, width="stretch")
+
+    with st.expander("Repositórios identificados como outliers"):
+        extremos = base.loc[
+            mascara_prs | mascara_releases,
+            ["Nome", "Idade (anos)", "PRs por ano", "Releases por ano", "Outlier em"],
+        ].sort_values(["Releases por ano", "PRs por ano"], ascending=False)
+        if extremos.empty:
+            st.info("Nenhum outlier foi identificado nesta amostra.")
+        else:
+            st.dataframe(
+                extremos.rename(columns={"Nome": "Repositório"}),
+                width="stretch",
+                hide_index=True,
+            )
+
+
 def construir_csv_completo(df: pd.DataFrame, resultados_rq: dict) -> pd.DataFrame:
 
     df_completo = df.copy()
@@ -462,6 +571,7 @@ def construir_csv_completo(df: pd.DataFrame, resultados_rq: dict) -> pd.DataFram
     rq03 = resultados_rq.get("rq03_releases", {})
     rq04 = resultados_rq.get("rq04_ultima_atualizacao", {})
     rq06 = resultados_rq.get("rq06_issues_fechadas", {})
+    rq09 = resultados_rq.get("rq09_colaboracao_releases", {})
     rq10 = resultados_rq.get("rq10_idade_issues", {})
     if "idade_mediana_anos" in rq01:
         df_completo["Idade mediana geral (anos)"] = rq01["idade_mediana_anos"]
@@ -475,6 +585,13 @@ def construir_csv_completo(df: pd.DataFrame, resultados_rq: dict) -> pd.DataFram
         df_completo["% issues fechadas mediana geral"] = rq06["percentual_issues_fechadas_mediana"]
     if "percentual_no_top10_octoverse" in rq05:
         df_completo["% no Top 10 Octoverse (geral)"] = rq05["percentual_no_top10_octoverse"]
+    correlacao_rq09 = rq09.get("correlacao_spearman", {})
+    if "rho" in correlacao_rq09:
+        df_completo["RQ09 - Correlação Spearman PRs/ano x releases/ano"] = (
+            correlacao_rq09["rho"]
+        )
+    if "n" in correlacao_rq09:
+        df_completo["RQ09 - Repositórios analisados"] = correlacao_rq09["n"]
     if "correlacao_spearman" in rq10:
         df_completo["rq10 - Correlação Spearman idade x issues fechadas"] = (
         rq10["correlacao_spearman"]
@@ -626,7 +743,7 @@ else:
         "text/csv",
     )
 
-    (rq01, rq02, rq03, rq04, rq05, rq06, rq07, rq08, rq10, tabela) = st.tabs(
+    (rq01, rq02, rq03, rq04, rq05, rq06, rq07, rq08, rq09, rq10, tabela) = st.tabs(
         [
             "RQ01 Idade",
             "RQ02 PRs",
@@ -636,6 +753,7 @@ else:
             "RQ06 Issues",
             "RQ07 Cruzamento",
             "RQ08 Intensidade",
+            "RQ09 PRs × Releases",
             "RQ10 Idade × Issues",
             "📋 Dados",
         ]
@@ -978,6 +1096,71 @@ else:
             if outliers:
                 with st.expander("Diagnóstico de outliers pelo IQR"):
                     st.json(outliers)
+
+    with rq09:
+        r = resultados_exibicao.get("rq09_colaboracao_releases", {})
+        st.subheader("RQ09 — Colaboração e publicação de releases")
+        st.write(
+            "**Pergunta:** repositórios com maior intensidade de pull requests "
+            "mescladas também apresentam maior intensidade de releases?"
+        )
+        st.caption(
+            "Hipótese: espera-se uma associação positiva entre PRs mescladas por "
+            "ano e releases por ano."
+        )
+
+        if not r:
+            st.info("Os resultados da RQ09 ainda não estão disponíveis para esta amostra.")
+        else:
+            correlacao = r.get("correlacao_spearman", {})
+            outliers = r.get("outliers_iqr", {})
+            col_rho, col_amostra, col_outliers = st.columns(3)
+            col_rho.metric("ρ de Spearman", _formatar_rho(correlacao.get("rho")))
+            col_amostra.metric(
+                "Amostra (idade ≥ 1 ano)", correlacao.get("n", 0)
+            )
+            col_outliers.metric(
+                "Outliers na união",
+                outliers.get("uniao_repositorios_extremos", 0),
+            )
+            st.info(r.get("interpretacao_correlacao", "Interpretação indisponível."))
+
+            _grafico_rq09(df_exibicao, r)
+            st.caption(
+                "A linha amarela é uma tendência linear descritiva. Pontos laranja "
+                "são outliers em pelo menos uma taxa pelo critério de 1,5 × IQR; "
+                "todos permanecem na análise."
+            )
+
+            st.markdown("#### Medianas por faixa de intensidade de PRs")
+            resumo_quartis = pd.DataFrame(r.get("resumo_por_quartil_prs", []))
+            if resumo_quartis.empty:
+                st.info("Não há dados suficientes para formar as faixas.")
+            else:
+                tabela_quartis = resumo_quartis.rename(
+                    columns={
+                        "faixa": "Faixa",
+                        "repositorios": "Repositórios",
+                        "prs_por_ano_minimo": "Mínimo de PRs/ano",
+                        "prs_por_ano_mediana": "Mediana de PRs/ano",
+                        "prs_por_ano_maximo": "Máximo de PRs/ano",
+                        "releases_por_ano_mediana": "Mediana de releases/ano",
+                    }
+                )
+                st.dataframe(
+                    tabela_quartis[
+                        [
+                            "Faixa",
+                            "Repositórios",
+                            "Mínimo de PRs/ano",
+                            "Mediana de PRs/ano",
+                            "Máximo de PRs/ano",
+                            "Mediana de releases/ano",
+                        ]
+                    ],
+                    width="stretch",
+                    hide_index=True,
+                )
 
     with tabela:
         st.dataframe(
