@@ -1,4 +1,4 @@
-"""RQ08 — Repositórios mais antigos apresentam maior proporção de issues fechadas?"""
+"""RQ10 — Repositórios mais antigos apresentam maior proporção de issues fechadas?"""
 
 import pandas as pd
 
@@ -23,7 +23,7 @@ def analisar(df: pd.DataFrame) -> dict:
     for coluna in colunas_necessarias:
         if coluna not in df.columns:
             raise ValueError(
-                f"Coluna necessária para a RQ08 não encontrada: '{coluna}'"
+                f"Coluna necessária para a RQ10 não encontrada: '{coluna}'"
             )
 
     dados = df[colunas_necessarias].copy()
@@ -52,7 +52,7 @@ def analisar(df: pd.DataFrame) -> dict:
 
     if dados_validos.empty:
         return {
-            "questao": "RQ08",
+            "questao": "RQ10",
             "descricao": (
                 "Repositórios mais antigos apresentam maior proporção "
                 "de issues fechadas?"
@@ -77,10 +77,19 @@ def analisar(df: pd.DataFrame) -> dict:
     # ---------------------------------------------------------
     # Correlação de Spearman
     # ---------------------------------------------------------
-    correlacao = dados_validos["Idade (anos)"].corr(
-        dados_validos["% issues fechadas"],
-        method="spearman",
-    )
+    if (
+        len(dados_validos) < 2
+        or dados_validos["Idade (anos)"].nunique() < 2
+        or dados_validos["% issues fechadas"].nunique() < 2
+    ):
+        correlacao = None
+    else:
+        postos = dados_validos[
+            ["Idade (anos)", "% issues fechadas"]
+        ].rank(method="average")
+        correlacao = postos["Idade (anos)"].corr(
+            postos["% issues fechadas"]
+        )
 
     if pd.isna(correlacao):
         correlacao = None
@@ -169,7 +178,7 @@ def analisar(df: pd.DataFrame) -> dict:
         resumo[coluna] = resumo[coluna].astype(float).round(2)
 
     return {
-        "questao": "RQ08",
+        "questao": "RQ10",
         "descricao": (
             "Repositórios mais antigos apresentam maior proporção "
             "de issues fechadas?"
