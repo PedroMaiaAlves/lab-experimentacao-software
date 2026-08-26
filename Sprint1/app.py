@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 
 import pandas as pd
+import numpy as np
 import requests
 import streamlit as st
 from dotenv import load_dotenv
@@ -69,41 +70,127 @@ def executar_analises(df: pd.DataFrame) -> dict:
 
 
 
-def _distribuicao_binned(serie: pd.Series, bins: int = 10, casas: int = 1) -> pd.DataFrame:
-    """Distribuição em faixas categóricas para evitar eixos numéricos pouco intuitivos."""
+def _distribuicao_binned(
+    serie: pd.Series,
+    tipo: str = "contagem",
+) -> pd.DataFrame:
+    """
+    Cria faixas interpretáveis para distribuição.
+
+    Retorna:
+        Faixa
+        Quantidade
+    """
+
     dados = pd.to_numeric(serie, errors="coerce").dropna()
 
     if dados.empty:
         return pd.DataFrame(columns=["Faixa", "Quantidade"])
 
-    if dados.nunique() <= 1:
-        valor = float(dados.iloc[0])
-        return pd.DataFrame({
-            "Faixa": [f"{valor:.{casas}f}"],
-            "Quantidade": [len(dados)]
-        })
+    maximo = float(dados.max())
 
-    # Para contagens, faixas fixas são mais fáceis de interpretar.
-    if casas == 0:
-        maximo = int(dados.max())
-        if maximo <= 20:
-            edges = sorted(set([0, 1, 2, 5, 10, 20, maximo + 1]))
-            edges = [x for x in edges if x <= maximo + 1]
-            if edges[-1] != maximo + 1:
-                edges.append(maximo + 1)
+    if tipo == "contagem":
+        # Faixas adequadas para PRs, releases e outras contagens.
+        if maximo <= 10:
+            edges = [0, 1, 2, 3, 5, 10]
+            labels = [
+                "0",
+                "1",
+                "2",
+                "3–5",
+                "6–10",
+            ]
+
+        elif maximo <= 50:
+            edges = [0, 1, 2, 5, 10, 20, 50]
+            labels = [
+                "0",
+                "1–2",
+                "3–5",
+                "6–10",
+                "11–20",
+                "21–50",
+            ]
+
+        elif maximo <= 100:
+            edges = [0, 1, 5, 10, 20, 50, 100]
+            labels = [
+                "0",
+                "1–5",
+                "6–10",
+                "11–20",
+                "21–50",
+                "51–100",
+            ]
+
         else:
-            edges = list(pd.cut(dados, bins=bins, retbins=True, include_lowest=True)[1])
-        faixas = pd.cut(dados, bins=edges, include_lowest=True, duplicates="drop")
+            edges = [0, 1, 5, 10, 20, 50, 100, 250, 500, float("inf")]
+            labels = [
+                "0",
+                "1–5",
+                "6–10",
+                "11–20",
+                "21–50",
+                "51–100",
+                "101–250",
+                "251–500",
+                ">500",
+            ]
+
+    elif tipo == "percentual":
+        edges = [0, 10, 25, 50, 75, 90, 100]
+        labels = [
+            "0–10%",
+            "11–25%",
+            "26–50%",
+            "51–75%",
+            "76–90%",
+            "91–100%",
+        ]
+
+    elif tipo == "idade":
+        edges = [0, 2, 5, 10, 15, float("inf")]
+        labels = [
+            "0–2 anos",
+            "3–5 anos",
+            "6–10 anos",
+            "11–15 anos",
+            ">15 anos",
+        ]
+
+    elif tipo == "dias":
+        edges = [0, 30, 90, 180, 365, 730, float("inf")]
+        labels = [
+            "0–30 dias",
+            "31–90 dias",
+            "91–180 dias",
+            "181–365 dias",
+            "1–2 anos",
+            ">2 anos",
+        ]
+
     else:
-        faixas = pd.cut(dados, bins=bins, include_lowest=True)
+        raise ValueError(f"Tipo de distribuição inválido: {tipo}")
 
-    contagem = faixas.value_counts().sort_index()
-    contagem.index = [
-        f"{intervalo.left:.{casas}f}–{intervalo.right:.{casas}f}"
-        for intervalo in contagem.index
-    ]
+    categorias = pd.cut(
+        dados,
+        bins=edges,
+        labels=labels,
+        include_lowest=True,
+        right=True,
+    )
 
-    return contagem.rename_axis("Faixa").reset_index(name="Quantidade")
+    contagem = (
+        categorias
+        .value_counts(sort=False)
+        .reset_index()
+    )
+
+    contagem.columns = ["Faixa", "Quantidade"]
+
+    contagem["Faixa"] = contagem["Faixa"].astype(str)
+
+    return contagem
 
 
 def _grafico_barras(df_grafico: pd.DataFrame, categoria: str, valor: str, titulo: str):
@@ -125,6 +212,53 @@ def _grafico_barras(df_grafico: pd.DataFrame, categoria: str, valor: str, titulo
     )
     st.altair_chart(chart, use_container_width=True)
 
+def _grafico_distribuicao(
+    df_grafico: pd.DataFrame,
+    titulo: str,
+):
+    """Gráfico de distribuição: faixa de valores × quantidade de repositórios."""
+    import altair as alt
+
+    if df_grafico.empty:
+        st.info("Não há dados suficientes para montar a distribuição.")
+        return
+
+    chart = (
+        alt.Chart(df_grafico)
+        .mark_bar(cornerRadiusEnd=5)
+        .encode(
+            x=alt.X(
+                "Faixa:N",
+                title="Faixa",
+                sort=None,
+            ),
+            y=alt.Y(
+                "Quantidade:Q",
+                title="Quantidade de repositórios",
+                scale=alt.Scale(zero=True),
+            ),
+            tooltip=[
+                alt.Tooltip(
+                    "Faixa:N",
+                    title="Faixa",
+                ),
+                alt.Tooltip(
+                    "Quantidade:Q",
+                    title="Repositórios",
+                    format=",d",
+                ),
+            ],
+        )
+        .properties(
+            title=titulo,
+            height=400,
+        )
+    )
+
+    st.altair_chart(
+        chart,
+        use_container_width=True,
+    )
 
 def _top_repos(df: pd.DataFrame, coluna: str, n: int = 15) -> pd.DataFrame:
     if coluna not in df.columns:
@@ -217,6 +351,7 @@ def construir_csv_completo(df: pd.DataFrame, resultados_rq: dict) -> pd.DataFram
     rq03 = resultados_rq.get("rq03_releases", {})
     rq04 = resultados_rq.get("rq04_ultima_atualizacao", {})
     rq06 = resultados_rq.get("rq06_issues_fechadas", {})
+    rq10 = resultados_rq.get("rq10_idade_issues", {})
     if "idade_mediana_anos" in rq01:
         df_completo["Idade mediana geral (anos)"] = rq01["idade_mediana_anos"]
     if "prs_aceitas_mediana" in rq02:
@@ -229,6 +364,18 @@ def construir_csv_completo(df: pd.DataFrame, resultados_rq: dict) -> pd.DataFram
         df_completo["% issues fechadas mediana geral"] = rq06["percentual_issues_fechadas_mediana"]
     if "percentual_no_top10_octoverse" in rq05:
         df_completo["% no Top 10 Octoverse (geral)"] = rq05["percentual_no_top10_octoverse"]
+    if "correlacao_spearman" in rq10:
+        df_completo["rq10 - Correlação Spearman idade x issues fechadas"] = (
+        rq10["correlacao_spearman"]
+    )
+    if "repositorios_com_issues" in rq10:
+        df_completo["rq10 - Repositórios com issues"] = (
+            rq10["repositorios_com_issues"]
+        )
+    if "repositorios_sem_issues" in rq10:
+        df_completo["rq10 - Repositórios sem issues"] = (
+            rq10["repositorios_sem_issues"]
+        )
 
     return df_completo
 
@@ -303,9 +450,18 @@ else:
         "text/csv",
     )
 
-    (rq01, rq02, rq03, rq04, rq05, rq06, rq07, tabela) = st.tabs(
-        ["RQ01 Idade", "RQ02 PRs", "RQ03 Releases", "RQ04 Atualização",
-         "RQ05 Linguagem", "RQ06 Issues", "RQ07 Cruzamento", "📋 Dados"]
+    (rq01, rq02, rq03, rq04, rq05, rq06, rq07, rq10, tabela) = st.tabs(
+        [
+            "RQ01 Idade",
+            "RQ02 PRs",
+            "RQ03 Releases",
+            "RQ04 Atualização",
+            "RQ05 Linguagem",
+            "RQ06 Issues",
+            "RQ07 Cruzamento",
+            "RQ10 Idade × Issues",
+            "📋 Dados",
+        ]
     )
 
     with rq01:
@@ -313,7 +469,15 @@ else:
         st.subheader("RQ01 — Sistemas populares são maduros/antigos?")
         st.write("**Métrica:** idade do repositório, em anos, a partir da data de criação.")
         st.metric("Idade mediana", f"{r['idade_mediana_anos']:.1f} anos")
-        st.bar_chart(_distribuicao_binned(df["Idade (anos)"], bins=10, casas=1))
+        dist_idade = _distribuicao_binned(
+        df["Idade (anos)"],
+        tipo="idade",
+        )
+
+        _grafico_distribuicao(
+            dist_idade,
+            "Distribuição dos repositórios por idade",
+        )
 
     with rq02:
         r = resultados_rq["rq02_pr_aceitos"]
@@ -339,12 +503,14 @@ else:
             )
 
         st.markdown("#### 📊 Distribuição por faixas")
-        dist_prs = _distribuicao_binned(df["PRs aceitas"], bins=8, casas=0)
-        _grafico_barras(
+        dist_prs = _distribuicao_binned(
+            df["PRs aceitas"],
+            tipo="contagem",
+        )
+
+        _grafico_distribuicao(
             dist_prs,
-            "Faixa",
-            "Quantidade",
-            "Quantidade de repositórios por faixa de PRs",
+            "Distribuição dos repositórios por quantidade de PRs aceitas",
         )
 
     with rq03:
@@ -377,15 +543,16 @@ else:
             )
 
         st.markdown("#### 📊 Distribuição por faixas")
+        # RQ03
         dist_releases = _distribuicao_binned(
-            df["Total de releases"], bins=8, casas=0
+            df["Total de releases"],
+            tipo="contagem",
         )
-        _grafico_barras(
+
+        _grafico_distribuicao(
             dist_releases,
-            "Faixa",
-            "Quantidade",
-            "Quantidade de repositórios por faixa de releases",
-        )
+            "Distribuição dos repositórios por quantidade de releases",
+)
 
     with rq04:
         r = resultados_rq["rq04_ultima_atualizacao"]
@@ -394,7 +561,16 @@ else:
         col_a, col_b = st.columns(2)
         col_a.metric("Dias desde atualização (mediana)", f"{r['dias_desde_atualizacao_mediana']:.1f}")
         col_b.metric("Dias desde atualização (média)", f"{r['dias_desde_atualizacao_media']:.1f}")
-        st.bar_chart(_distribuicao_binned(df["Dias desde última atualização"], bins=10, casas=1))
+        # RQ04
+        dist_dias = _distribuicao_binned(
+            df["Dias desde última atualização"],
+            tipo="dias",
+        )
+
+        _grafico_distribuicao(
+            dist_dias,
+            "Distribuição dos repositórios por tempo desde a última atualização",
+        )
 
     with rq05:
         r = resultados_rq["rq05_linguagem"]
@@ -418,7 +594,16 @@ else:
             col_a, col_b = st.columns(2)
             col_a.metric("% issues fechadas (mediana)", f"{r['percentual_issues_fechadas_mediana']:.1f}%")
             col_b.metric("% issues fechadas (média)", f"{r['percentual_issues_fechadas_media']:.1f}%")
-            st.bar_chart(_distribuicao_binned(df["% issues fechadas"], bins=10, casas=1))
+            # RQ06
+            dist_issues = _distribuicao_binned(
+                df["% issues fechadas"],
+                tipo="percentual",
+            )
+
+            _grafico_distribuicao(
+                dist_issues,
+                "Distribuição dos repositórios pelo percentual de issues fechadas",
+            )
         st.caption(
             f"Repositórios com issues: {r['repositorios_com_issues']} | "
             f"sem issues: {r['repositorios_sem_issues']}"
@@ -484,4 +669,163 @@ else:
             use_container_width=True,
             hide_index=True,
             column_config={"URL": st.column_config.LinkColumn("URL")},
+        )
+
+    with rq10:
+        r = resultados_rq["rq10_idade_issues"]
+
+        st.subheader(
+            "RQ10 — Repositórios mais antigos apresentam maior proporção de issues fechadas?"
+        )
+
+        st.write(
+            "**Métrica:** relação entre idade do repositório e percentual "
+            "de issues fechadas."
+        )
+
+        st.caption(
+            "Hipótese: espera-se que repositórios mais antigos apresentem "
+            "maior percentual mediano de issues fechadas, por possuírem "
+            "processos de manutenção mais consolidados."
+        )
+
+        col_a, col_b, col_c = st.columns(3)
+
+        correlacao = r["correlacao_spearman"]
+
+        col_a.metric(
+            "Spearman",
+            "N/A" if correlacao is None else f"{correlacao:.3f}",
+        )
+
+        col_b.metric(
+            "Repositórios com issues",
+            r["repositorios_com_issues"],
+        )
+
+        col_c.metric(
+            "Excluídos por não terem issues",
+            r["repositorios_sem_issues"],
+        )
+
+        st.info(
+            f"Interpretação da correlação: {r['interpretacao_correlacao']}"
+        )
+
+        st.markdown("#### 📈 Idade × percentual de issues fechadas")
+
+        import altair as alt
+
+        dados_rq08 = df[
+            ["Nome", "Idade (anos)", "% issues fechadas"]
+        ].copy()
+
+        dados_rq08["Idade (anos)"] = pd.to_numeric(
+            dados_rq08["Idade (anos)"],
+            errors="coerce",
+        )
+
+        dados_rq08["% issues fechadas"] = pd.to_numeric(
+            dados_rq08["% issues fechadas"],
+            errors="coerce",
+        )
+
+        dados_rq08 = dados_rq08.dropna(
+            subset=["Idade (anos)", "% issues fechadas"]
+        )
+
+        if not dados_rq08.empty:
+            chart = (
+                alt.Chart(dados_rq08)
+                .mark_circle(size=80, opacity=0.7)
+                .encode(
+                    x=alt.X(
+                        "Idade (anos):Q",
+                        title="Idade do repositório (anos)",
+                    ),
+                    y=alt.Y(
+                        "% issues fechadas:Q",
+                        title="% de issues fechadas",
+                        scale=alt.Scale(domain=[0, 100]),
+                    ),
+                    tooltip=[
+                        alt.Tooltip(
+                            "Nome:N",
+                            title="Repositório",
+                        ),
+                        alt.Tooltip(
+                            "Idade (anos):Q",
+                            title="Idade",
+                            format=".2f",
+                        ),
+                        alt.Tooltip(
+                            "% issues fechadas:Q",
+                            title="% issues fechadas",
+                            format=".2f",
+                        ),
+                    ],
+                )
+                .properties(
+                    title="Relação entre idade e percentual de issues fechadas",
+                    height=450,
+                )
+                .interactive()
+            )
+
+            st.altair_chart(
+                chart,
+                use_container_width=True,
+            )
+
+        st.markdown("#### 📊 Mediana e intervalo interquartil por faixa de idade")
+
+        resumo_rq08 = pd.DataFrame(
+            r["resumo_por_faixa_etaria"]
+        )
+
+        if resumo_rq08.empty:
+            st.info(
+                "Não existem dados suficientes para calcular "
+                "as estatísticas por faixa de idade."
+            )
+        else:
+            tabela_rq08 = resumo_rq08.rename(
+                columns={
+                    "Faixa de idade": "Faixa de idade",
+                    "Quantidade_repositorios": "Repositórios",
+                    "Mediana_issues_fechadas": "Mediana (%)",
+                    "Q1_issues_fechadas": "Q1 (%)",
+                    "Q3_issues_fechadas": "Q3 (%)",
+                    "IQR_issues_fechadas": "IQR (%)",
+                }
+            )
+
+            st.dataframe(
+                tabela_rq08[
+                    [
+                        "Faixa de idade",
+                        "Repositórios",
+                        "Mediana (%)",
+                        "Q1 (%)",
+                        "Q3 (%)",
+                        "IQR (%)",
+                    ]
+                ],
+                use_container_width=True,
+                hide_index=True,
+            )
+
+            st.markdown("#### 📊 Mediana de issues fechadas por idade")
+
+            grafico_mediana = tabela_rq08[
+                ["Faixa de idade", "Mediana (%)"]
+            ].copy()
+
+            st.bar_chart(
+                grafico_mediana.set_index("Faixa de idade")
+            )
+
+        st.caption(
+            "Critério de exclusão: repositórios que nunca tiveram issues "
+            "não participam da correlação nem das estatísticas por faixa de idade."
         )

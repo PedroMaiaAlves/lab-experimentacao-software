@@ -7,6 +7,7 @@ Cada módulo expõe:
 Manter um arquivo por RQ facilita separar commits/PRs por issue,
 já que cada questão de pesquisa evolui de forma independente.
 """
+
 from . import (
     rq01_idade,
     rq02_prAceitos,
@@ -15,6 +16,7 @@ from . import (
     rq05_linguagem,
     rq06_issuesFechadas,
     rq07_relacaoLinguagemContribuicao,
+    rq10_idade_issues,
 )
 
 MODULOS_RQ = {
@@ -25,6 +27,7 @@ MODULOS_RQ = {
     "rq05_linguagem": rq05_linguagem,
     "rq06_issues_fechadas": rq06_issuesFechadas,
     "rq07_cruzamento": rq07_relacaoLinguagemContribuicao,
+    "rq10_idade_issues": rq10_idade_issues,
 }
 
 __all__ = ["MODULOS_RQ"]

@@ -1,0 +1,55 @@
+{
+  "questao": "RQ08",
+  "descricao": "Repositórios mais antigos apresentam maior proporção de issues fechadas?",
+  "metrica": "Idade em anos, percentual de issues fechadas, correlação de Spearman e mediana/IQR do percentual de issues fechadas por faixa de idade",
+  "hipotese_informal": "Espera-se que repositórios mais antigos apresentem maior percentual mediano de issues fechadas, por possuírem processos de manutenção mais consolidados.",
+  "total_repositorios": 100,
+  "repositorios_com_issues": 88,
+  "repositorios_sem_issues": 12,
+  "correlacao_spearman": 0.32,
+  "interpretacao_correlacao": "Correlação positiva moderada.",
+  "idade_mediana_repositorios_com_issues": 7.55,
+  "percentual_issues_fechadas_mediana": 92.55,
+  "resumo_por_faixa_etaria": [
+    {
+      "Faixa de idade": "0–2 anos",
+      "Quantidade_repositorios": 18,
+      "Mediana_issues_fechadas": 71.15,
+      "Q1_issues_fechadas": 51.2,
+      "Q3_issues_fechadas": 86.32,
+      "IQR_issues_fechadas": 35.12
+    },
+    {
+      "Faixa de idade": ">2–5 anos",
+      "Quantidade_repositorios": 18,
+      "Mediana_issues_fechadas": 93.4,
+      "Q1_issues_fechadas": 88.8,
+      "Q3_issues_fechadas": 96.45,
+      "IQR_issues_fechadas": 7.65
+    },
+    {
+      "Faixa de idade": ">5–10 anos",
+      "Quantidade_repositorios": 21,
+      "Mediana_issues_fechadas": 94.1,
+      "Q1_issues_fechadas": 63.8,
+      "Q3_issues_fechadas": 99.5,
+      "IQR_issues_fechadas": 35.7
+    },
+    {
+      "Faixa de idade": ">10–15 anos",
+      "Quantidade_repositorios": 25,
+      "Mediana_issues_fechadas": 95.7,
+      "Q1_issues_fechadas": 86.8,
+      "Q3_issues_fechadas": 97.0,
+      "IQR_issues_fechadas": 10.2
+    },
+    {
+      "Faixa de idade": ">15 anos",
+      "Quantidade_repositorios": 6,
+      "Mediana_issues_fechadas": 97.6,
+      "Q1_issues_fechadas": 89.12,
+      "Q3_issues_fechadas": 99.18,
+      "IQR_issues_fechadas": 10.05
+    }
+  ]
+}
