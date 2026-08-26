@@ -1,9 +1,16 @@
-"""Gera o relatório Lab01S02 em DOCX a partir do template e do CSV validado."""
+"""Gera o relatório intermediário Lab01S03 (RQ01–RQ08 e RQ10) em DOCX."""
 
 from __future__ import annotations
 
 import argparse
+import json
+import math
+import os
+import re
+import shutil
+import subprocess
 import tempfile
+from datetime import date
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -17,15 +24,18 @@ from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Cm, Pt, RGBColor
 
+from analysis.constants import LINGUAGENS_POPULARES_OCTOVERSE
+from analysis.rq08_popularidadeIntensidade import analisar as analisar_rq08
+from analysis.rq10_idade_issues import analisar as analisar_rq10
+
 
 BASE_DIR = Path(__file__).resolve().parent
 CSV_PADRAO = BASE_DIR / "data" / "raw" / "repositorios_populares.csv"
-SAIDA_PADRAO = BASE_DIR / "docs" / "Relatorio_Lab01S02.docx"
-TEMPLATE_PADRAO = (
-    Path.home() / "Downloads" / "Template_Relatorio_Laboratorio.docx"
-)
+SAIDA_PADRAO = BASE_DIR / "docs" / "Relatorio_Parcial_Lab01S03.docx"
+JSON_RQ10_PADRAO = BASE_DIR / "data" / "rq" / "rq10_idade_issues.json"
+TEMPLATE_PADRAO = Path.home() / "Downloads" / "Template_Relatorio_Laboratorio.docx"
 
-AZUL = "1F3A5F"
+AZUL = "17365D"
 VERDE = "1F6E63"
 VERDE_GRAFICO = "#0F766E"
 LARANJA_GRAFICO = "#D97706"
@@ -35,9 +45,150 @@ BRANCO = "FFFFFF"
 TEXTO = "202020"
 
 
-def limpar_corpo(documento: Document) -> None:
-    """Remove o conteúdo do template, preservando estilos e propriedades da seção."""
+def formatar_numero(valor: float | int | None, casas: int = 0) -> str:
+    """Formata números no padrão brasileiro sem depender do locale do sistema."""
 
+    if valor is None or pd.isna(valor):
+        return "—"
+    texto = f"{float(valor):,.{casas}f}"
+    return texto.replace(",", "X").replace(".", ",").replace("X", ".")
+
+
+def formatar_percentual(parte: int | float, total: int | float, casas: int = 1) -> str:
+    if not total:
+        return "—"
+    return f"{formatar_numero(100 * float(parte) / float(total), casas)}%"
+
+
+def resumo_numerico(serie: pd.Series) -> dict[str, float | int]:
+    valores = pd.to_numeric(serie, errors="coerce").dropna()
+    return {
+        "n": int(len(valores)),
+        "media": float(valores.mean()),
+        "mediana": float(valores.median()),
+        "q1": float(valores.quantile(0.25)),
+        "q3": float(valores.quantile(0.75)),
+        "minimo": float(valores.min()),
+        "maximo": float(valores.max()),
+    }
+
+
+def quantidade_outliers(serie: pd.Series) -> dict[str, float | int]:
+    valores = pd.to_numeric(serie, errors="coerce").dropna()
+    q1 = float(valores.quantile(0.25))
+    q3 = float(valores.quantile(0.75))
+    iqr = q3 - q1
+    inferior = q1 - 1.5 * iqr
+    superior = q3 + 1.5 * iqr
+    return {
+        "q1": q1,
+        "q3": q3,
+        "limite_inferior": inferior,
+        "limite_superior": superior,
+        "inferiores": int((valores < inferior).sum()),
+        "superiores": int((valores > superior).sum()),
+        "total": int(((valores < inferior) | (valores > superior)).sum()),
+    }
+
+
+def calcular_estatisticas(df: pd.DataFrame) -> dict:
+    """Calcula todo número usado no texto, nas tabelas e nas figuras."""
+
+    total = int(len(df))
+    idade = pd.to_numeric(df["Idade (anos)"], errors="coerce")
+    prs = pd.to_numeric(df["PRs aceitas"], errors="coerce")
+    releases = pd.to_numeric(df["Total de releases"], errors="coerce")
+    dias = pd.to_numeric(df["Dias desde última atualização"], errors="coerce")
+    issues = pd.to_numeric(df["% issues fechadas"], errors="coerce")
+    linguagens = df["Linguagem"].fillna("Não definida")
+    top10 = set(LINGUAGENS_POPULARES_OCTOVERSE)
+
+    faixas_idade = [
+        int((idade < 2).sum()),
+        int(((idade >= 2) & (idade < 5)).sum()),
+        int(((idade >= 5) & (idade < 10)).sum()),
+        int((idade >= 10).sum()),
+    ]
+    faixas_dias = [
+        int((dias <= 1).sum()),
+        int(((dias > 1) & (dias <= 7)).sum()),
+        int(((dias > 7) & (dias <= 30)).sum()),
+        int(((dias > 30) & (dias <= 365)).sum()),
+        int((dias > 365).sum()),
+    ]
+
+    contagem_linguagens = linguagens.value_counts()
+    quantidade_top10 = int(linguagens.isin(top10).sum())
+    quantidade_indefinida = int((linguagens == "Não definida").sum())
+    quantidade_definida = total - quantidade_indefinida
+    outras_definidas = quantidade_definida - quantidade_top10
+
+    definidos = df[linguagens != "Não definida"].copy()
+    definidos["Grupo"] = np.where(
+        definidos["Linguagem"].isin(top10), "Top 10 Octoverse", "Outras definidas"
+    )
+    rq07 = (
+        definidos.groupby("Grupo")
+        .agg(
+            n=("Nome", "size"),
+            prs=("PRs aceitas", "median"),
+            releases=("Total de releases", "median"),
+            dias=("Dias desde última atualização", "median"),
+        )
+        .reindex(["Top 10 Octoverse", "Outras definidas"])
+    )
+
+    rq08 = analisar_rq08(df)
+    rq10 = analisar_rq10(df)
+    total_faixas_rq10 = sum(
+        faixa["Quantidade_repositorios"]
+        for faixa in rq10["resumo_por_faixa_etaria"]
+    )
+    if rq10["total_repositorios"] != total:
+        raise RuntimeError("A RQ10 não cobre o mesmo total de repositórios do CSV.")
+    if rq10["repositorios_com_issues"] + rq10["repositorios_sem_issues"] != total:
+        raise RuntimeError("As amostras com e sem issues da RQ10 não somam o total.")
+    if total_faixas_rq10 != rq10["repositorios_com_issues"]:
+        raise RuntimeError("As faixas etárias da RQ10 não cobrem a amostra válida.")
+    rho_rq10 = rq10["correlacao_spearman"]
+    if rho_rq10 is not None and not -1 <= rho_rq10 <= 1:
+        raise RuntimeError("A correlação da RQ10 está fora do intervalo [-1, 1].")
+    return {
+        "total": total,
+        "idade": resumo_numerico(idade),
+        "faixas_idade": faixas_idade,
+        "prs": resumo_numerico(prs),
+        "prs_zero": int((prs == 0).sum()),
+        "prs_outliers": quantidade_outliers(prs),
+        "top_prs": df.nlargest(3, "PRs aceitas")[["Nome", "PRs aceitas"]].values.tolist(),
+        "releases": resumo_numerico(releases),
+        "releases_zero": int((releases == 0).sum()),
+        "releases_com": int((releases > 0).sum()),
+        "releases_outliers": quantidade_outliers(releases),
+        "top_releases": df.nlargest(3, "Total de releases")[["Nome", "Total de releases"]].values.tolist(),
+        "dias": resumo_numerico(dias),
+        "faixas_dias": faixas_dias,
+        "dias_ate_30": int((dias <= 30).sum()),
+        "dias_outliers": quantidade_outliers(dias),
+        "linguagens_distintas_definidas": int(linguagens[linguagens != "Não definida"].nunique()),
+        "linguagens_top": list(contagem_linguagens.head(8).items()),
+        "top10": quantidade_top10,
+        "outras_definidas": outras_definidas,
+        "indefinida": quantidade_indefinida,
+        "definida": quantidade_definida,
+        "issues": resumo_numerico(issues),
+        "issues_sem": int(issues.isna().sum()),
+        "issues_ge80": int((issues >= 80).sum()),
+        "issues_lt50": int((issues < 50).sum()),
+        "issues_100": int((issues == 100).sum()),
+        "issues_outliers": quantidade_outliers(issues),
+        "rq07": rq07,
+        "rq08": rq08,
+        "rq10": rq10,
+    }
+
+
+def limpar_corpo(documento: Document) -> None:
     body = documento._element.body
     for filho in list(body):
         if filho.tag != qn("w:sectPr"):
@@ -51,19 +202,9 @@ def configurar_estilos(documento: Document) -> None:
     normal.font.color.rgb = RGBColor.from_string(TEXTO)
     normal.paragraph_format.space_after = Pt(6)
     normal.paragraph_format.line_spacing = 1.15
-
-    titulo = documento.styles["Title"]
-    titulo.font.name = "Calibri"
-    titulo.font.size = Pt(26)
-    titulo.font.bold = True
-    titulo.font.color.rgb = RGBColor.from_string("17365D")
-
-    subtitulo = documento.styles["Subtitle"]
-    subtitulo.font.name = "Calibri"
-    subtitulo.font.size = Pt(12)
-    subtitulo.font.color.rgb = RGBColor.from_string(VERDE)
-
     for nome, tamanho, cor in (
+        ("Title", 26, AZUL),
+        ("Subtitle", 12, VERDE),
         ("Heading 1", 16, AZUL),
         ("Heading 2", 13, VERDE),
         ("Heading 3", 11.5, AZUL),
@@ -71,14 +212,12 @@ def configurar_estilos(documento: Document) -> None:
         estilo = documento.styles[nome]
         estilo.font.name = "Calibri"
         estilo.font.size = Pt(tamanho)
-        estilo.font.bold = True
+        estilo.font.bold = nome != "Subtitle"
         estilo.font.color.rgb = RGBColor.from_string(cor)
         estilo.paragraph_format.keep_with_next = True
-        estilo.paragraph_format.space_before = Pt(12)
-        estilo.paragraph_format.space_after = Pt(6)
 
 
-def definir_sombreamento(celula, cor: str) -> None:
+def sombrear(celula, cor: str) -> None:
     tc_pr = celula._tc.get_or_add_tcPr()
     shd = tc_pr.find(qn("w:shd"))
     if shd is None:
@@ -87,91 +226,20 @@ def definir_sombreamento(celula, cor: str) -> None:
     shd.set(qn("w:fill"), cor)
 
 
-def definir_margens_celula(celula, superior=90, inferior=90, esquerda=100, direita=100):
-    tc = celula._tc
-    tc_pr = tc.get_or_add_tcPr()
-    tc_mar = tc_pr.first_child_found_in("w:tcMar")
-    if tc_mar is None:
-        tc_mar = OxmlElement("w:tcMar")
-        tc_pr.append(tc_mar)
-    for margem, valor in (
-        ("top", superior),
-        ("bottom", inferior),
-        ("start", esquerda),
-        ("end", direita),
-    ):
-        elemento = tc_mar.find(qn(f"w:{margem}"))
-        if elemento is None:
-            elemento = OxmlElement(f"w:{margem}")
-            tc_mar.append(elemento)
-        elemento.set(qn("w:w"), str(valor))
-        elemento.set(qn("w:type"), "dxa")
-
-
-def repetir_cabecalho(linha) -> None:
-    tr_pr = linha._tr.get_or_add_trPr()
-    tbl_header = OxmlElement("w:tblHeader")
-    tbl_header.set(qn("w:val"), "true")
-    tr_pr.append(tbl_header)
-
-
-def impedir_quebra_linha(linha) -> None:
-    tr_pr = linha._tr.get_or_add_trPr()
-    cant_split = OxmlElement("w:cantSplit")
-    tr_pr.append(cant_split)
-
-
-def adicionar_hyperlink(paragrafo, texto: str, url: str, cor=AZUL) -> None:
-    parte = paragrafo.part
-    r_id = parte.relate_to(
-        url,
-        "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
-        is_external=True,
-    )
-    hyperlink = OxmlElement("w:hyperlink")
-    hyperlink.set(qn("r:id"), r_id)
-    run = OxmlElement("w:r")
-    r_pr = OxmlElement("w:rPr")
-    cor_xml = OxmlElement("w:color")
-    cor_xml.set(qn("w:val"), cor)
-    sublinhado = OxmlElement("w:u")
-    sublinhado.set(qn("w:val"), "single")
-    r_pr.append(cor_xml)
-    r_pr.append(sublinhado)
-    run.append(r_pr)
-    texto_xml = OxmlElement("w:t")
-    texto_xml.text = texto
-    run.append(texto_xml)
-    hyperlink.append(run)
-    paragrafo._p.append(hyperlink)
-
-
 def adicionar_numero_pagina(paragrafo) -> None:
     paragrafo.alignment = WD_ALIGN_PARAGRAPH.CENTER
     run = paragrafo.add_run("Página ")
-    run.font.size = Pt(9)
-    inicio = OxmlElement("w:fldChar")
-    inicio.set(qn("w:fldCharType"), "begin")
-    instrucao = OxmlElement("w:instrText")
-    instrucao.set(qn("xml:space"), "preserve")
-    instrucao.text = " PAGE "
-    fim = OxmlElement("w:fldChar")
-    fim.set(qn("w:fldCharType"), "end")
-    run._r.append(inicio)
-    run._r.append(instrucao)
-    run._r.append(fim)
+    for tipo, texto in (("begin", None), (None, " PAGE "), ("end", None)):
+        elemento = OxmlElement("w:instrText" if texto else "w:fldChar")
+        if texto:
+            elemento.set(qn("xml:space"), "preserve")
+            elemento.text = texto
+        else:
+            elemento.set(qn("w:fldCharType"), tipo)
+        run._r.append(elemento)
 
 
-def reiniciar_numero_pagina(secao, inicio: int = 1) -> None:
-    sect_pr = secao._sectPr
-    pg_num = sect_pr.find(qn("w:pgNumType"))
-    if pg_num is None:
-        pg_num = OxmlElement("w:pgNumType")
-        sect_pr.append(pg_num)
-    pg_num.set(qn("w:start"), str(inicio))
-
-
-def adicionar_texto(documento: Document, texto: str, *, negrito_inicial: str | None = None):
+def adicionar_texto(documento: Document, texto: str, negrito_inicial: str | None = None):
     paragrafo = documento.add_paragraph(style="Normal")
     paragrafo.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
     if negrito_inicial and texto.startswith(negrito_inicial):
@@ -184,480 +252,238 @@ def adicionar_texto(documento: Document, texto: str, *, negrito_inicial: str | N
 
 def adicionar_lista(documento: Document, itens: list[str]) -> None:
     for item in itens:
-        paragrafo = documento.add_paragraph(style="List Bullet")
-        paragrafo.paragraph_format.space_after = Pt(3)
-        paragrafo.add_run(item)
+        documento.add_paragraph(item, style="List Bullet")
 
 
-def adicionar_codigo(documento: Document, texto: str) -> None:
-    tabela = documento.add_table(rows=1, cols=1)
-    tabela.alignment = WD_TABLE_ALIGNMENT.CENTER
-    tabela.style = "Table Grid"
-    celula = tabela.cell(0, 0)
-    definir_sombreamento(celula, "F5F7FA")
-    definir_margens_celula(celula, 130, 130, 160, 160)
-    paragrafo = celula.paragraphs[0]
-    paragrafo.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    run = paragrafo.add_run(texto)
-    run.font.name = "Consolas"
-    run.font.size = Pt(9.5)
-    documento.add_paragraph()
-
-
-def adicionar_tabela(
-    documento: Document,
-    cabecalhos: list[str],
-    linhas: list[list[object]],
-    *,
-    larguras_cm: list[float] | None = None,
-    fonte: float = 9,
-) -> object:
+def adicionar_tabela(documento: Document, cabecalhos: list[str], linhas: list[list[object]], fonte: float = 9):
     tabela = documento.add_table(rows=1, cols=len(cabecalhos))
     tabela.style = "Table Grid"
     tabela.alignment = WD_TABLE_ALIGNMENT.CENTER
-    tabela.autofit = False
-
-    cabecalho = tabela.rows[0]
-    repetir_cabecalho(cabecalho)
-    impedir_quebra_linha(cabecalho)
-    for indice, texto in enumerate(cabecalhos):
-        celula = cabecalho.cells[indice]
-        definir_sombreamento(celula, VERDE)
-        definir_margens_celula(celula)
+    for indice, cabecalho in enumerate(cabecalhos):
+        celula = tabela.rows[0].cells[indice]
+        sombrear(celula, VERDE)
         celula.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
-        if larguras_cm:
-            celula.width = Cm(larguras_cm[indice])
-        paragrafo = celula.paragraphs[0]
-        paragrafo.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        run = paragrafo.add_run(str(texto))
+        p = celula.paragraphs[0]
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        run = p.add_run(str(cabecalho))
         run.bold = True
         run.font.color.rgb = RGBColor.from_string(BRANCO)
         run.font.size = Pt(fonte)
-
+    tr_pr = tabela.rows[0]._tr.get_or_add_trPr()
+    tr_pr.append(OxmlElement("w:tblHeader"))
     for linha in linhas:
-        row = tabela.add_row()
-        impedir_quebra_linha(row)
+        celulas = tabela.add_row().cells
         for indice, valor in enumerate(linha):
-            celula = row.cells[indice]
-            definir_margens_celula(celula)
-            celula.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
-            if larguras_cm:
-                celula.width = Cm(larguras_cm[indice])
-            paragrafo = celula.paragraphs[0]
-            paragrafo.alignment = (
-                WD_ALIGN_PARAGRAPH.CENTER
-                if isinstance(valor, (int, float)) or indice == 0 and len(cabecalhos) <= 3
-                else WD_ALIGN_PARAGRAPH.LEFT
-            )
-            run = paragrafo.add_run(str(valor))
-            run.font.size = Pt(fonte)
-
+            celulas[indice].vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
+            p = celulas[indice].paragraphs[0]
+            p.alignment = WD_ALIGN_PARAGRAPH.CENTER if indice else WD_ALIGN_PARAGRAPH.LEFT
+            p.add_run(str(valor)).font.size = Pt(fonte)
     documento.add_paragraph()
     return tabela
 
 
-def adicionar_legenda(documento: Document, texto: str, fonte: str) -> None:
-    paragrafo = documento.add_paragraph()
-    paragrafo.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    paragrafo.paragraph_format.keep_with_next = True
-    run = paragrafo.add_run(texto)
+def adicionar_figura(documento: Document, caminho: Path, numero: int, legenda: str) -> None:
+    p = documento.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p.add_run().add_picture(str(caminho), width=Cm(15.8))
+    p = documento.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    run = p.add_run(f"Figura {numero} — {legenda}")
     run.bold = True
     run.font.size = Pt(9.5)
-
-    paragrafo_fonte = documento.add_paragraph()
-    paragrafo_fonte.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    run_fonte = paragrafo_fonte.add_run(f"Fonte: {fonte}")
-    run_fonte.italic = True
-    run_fonte.font.size = Pt(8.5)
-
-
-def adicionar_figura(documento: Document, caminho: Path, legenda: str, fonte: str) -> None:
-    paragrafo = documento.add_paragraph()
-    paragrafo.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    paragrafo.paragraph_format.keep_with_next = True
-    paragrafo.add_run().add_picture(str(caminho), width=Cm(15.6))
-    adicionar_legenda(documento, legenda, fonte)
+    p = documento.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    run = p.add_run("Fonte: elaborado pelo grupo com dados da API GraphQL do GitHub, 2026.")
+    run.italic = True
+    run.font.size = Pt(8.5)
 
 
-def adicionar_placeholder_snapshot(documento: Document) -> None:
-    tabela = documento.add_table(rows=1, cols=1)
-    tabela.style = "Table Grid"
-    tabela.alignment = WD_TABLE_ALIGNMENT.CENTER
-    celula = tabela.cell(0, 0)
-    celula.height = Cm(8)
-    celula.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
-    definir_sombreamento(celula, "F5F7FA")
-    paragrafo = celula.paragraphs[0]
-    paragrafo.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    run = paragrafo.add_run(
-        "INSERIR AQUI O SNAPSHOT DO GITHUB PROJECT APÓS A ATUALIZAÇÃO FINAL DO BOARD"
-    )
-    run.bold = True
-    run.font.color.rgb = RGBColor.from_string(CINZA_GRAFICO.removeprefix("#"))
-    run.font.size = Pt(12)
-    documento.add_paragraph()
+def salvar_figura(fig, caminho: Path) -> Path:
+    fig.tight_layout()
+    fig.savefig(caminho, dpi=220, bbox_inches="tight")
+    plt.close(fig)
+    return caminho
 
 
-def adicionar_referencia(documento: Document, prefixo: str, url: str) -> None:
-    paragrafo = documento.add_paragraph(style="Normal")
-    paragrafo.paragraph_format.left_indent = Cm(0)
-    paragrafo.paragraph_format.first_line_indent = Cm(-0.6)
-    paragrafo.paragraph_format.left_indent = Cm(0.6)
-    paragrafo.add_run(prefixo)
-    adicionar_hyperlink(paragrafo, url, url)
-    paragrafo.add_run(". Acesso em: 20 ago. 2026.")
-
-
-def adicionar_titulo_secao(documento: Document, texto: str, *, nova_pagina=False) -> None:
-    paragrafo = documento.add_heading(texto, level=1)
-    if nova_pagina:
-        paragrafo.paragraph_format.page_break_before = True
-
-
-def rotular_barras(ax, barras, *, formato="{:.0f}", cor=TEXTO, tamanho=9) -> None:
-    for barra in barras:
-        altura = barra.get_height()
-        ax.annotate(
-            formato.format(altura),
-            (barra.get_x() + barra.get_width() / 2, altura),
-            xytext=(0, 4),
-            textcoords="offset points",
-            ha="center",
-            va="bottom",
-            fontsize=tamanho,
-            color=f"#{cor}",
-        )
-
-
-def preparar_graficos(df: pd.DataFrame, diretorio: Path) -> dict[str, Path]:
-    plt.rcParams.update(
-        {
-            "font.family": "DejaVu Sans",
-            "font.size": 10,
-            "axes.titlesize": 14,
-            "axes.titleweight": "bold",
-            "axes.labelsize": 10,
-            "figure.facecolor": "white",
-            "axes.facecolor": "white",
-        }
-    )
+def preparar_graficos(df: pd.DataFrame, estatisticas: dict, diretorio: Path) -> dict[str, Path]:
+    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 9, "axes.grid": False})
     graficos: dict[str, Path] = {}
+    total = estatisticas["total"]
 
-    # RQ01
-    caminho = diretorio / "rq01_idade.png"
-    fig, ax = plt.subplots(figsize=(8.2, 4.6))
-    bins = np.arange(0, 22, 2)
-    ax.hist(
-        df["Idade (anos)"],
-        bins=bins,
-        color=VERDE_GRAFICO,
-        edgecolor="white",
-        linewidth=1.2,
-    )
-    mediana = float(df["Idade (anos)"].median())
-    ax.axvline(mediana, color=LARANJA_GRAFICO, linestyle="--", linewidth=2)
-    ax.text(
-        mediana + 0.25,
-        ax.get_ylim()[1] * 0.92,
-        f"Mediana: {mediana:.2f} anos".replace(".", ","),
-        color=LARANJA_GRAFICO,
-        fontweight="bold",
-    )
-    ax.set_title("Distribuição da idade dos repositórios")
-    ax.set_xlabel("Idade (anos)")
-    ax.set_ylabel("Número de repositórios")
-    ax.set_xticks(np.arange(0, 21, 2))
-    ax.set_ylim(bottom=0)
-    ax.grid(axis="y", alpha=0.2)
-    ax.text(0.99, 0.96, "n = 1.000", transform=ax.transAxes, ha="right", va="top")
-    fig.tight_layout()
-    fig.savefig(caminho, dpi=220, bbox_inches="tight")
-    plt.close(fig)
-    graficos["rq01"] = caminho
+    fig, ax = plt.subplots(figsize=(8.2, 4.5))
+    ax.hist(df["Idade (anos)"], bins=np.arange(0, max(22, math.ceil(df["Idade (anos)"].max()) + 2), 2), color=VERDE_GRAFICO, edgecolor="white")
+    mediana = estatisticas["idade"]["mediana"]
+    ax.axvline(mediana, color=LARANJA_GRAFICO, linestyle="--", linewidth=2, label=f"Mediana: {formatar_numero(mediana, 2)} anos")
+    ax.set(title="Distribuição da idade dos repositórios", xlabel="Idade (anos)", ylabel="Repositórios")
+    ax.legend(frameon=False)
+    ax.text(0.99, 0.95, f"n = {formatar_numero(total)}", transform=ax.transAxes, ha="right")
+    graficos["rq01"] = salvar_figura(fig, diretorio / "rq01.png")
 
-    # RQ02
-    caminho = diretorio / "rq02_prs.png"
     prs = pd.to_numeric(df["PRs aceitas"], errors="coerce")
-    faixas = [
-        int((prs == 0).sum()),
-        int(((prs >= 1) & (prs <= 9)).sum()),
-        int(((prs >= 10) & (prs <= 99)).sum()),
-        int(((prs >= 100) & (prs <= 999)).sum()),
-        int(((prs >= 1_000) & (prs <= 9_999)).sum()),
-        int(((prs >= 10_000) & (prs <= 99_999)).sum()),
-        int((prs >= 100_000).sum()),
-    ]
-    rotulos = ["0", "1–9", "10–99", "100–999", "1.000–9.999", "10.000–99.999", "≥100.000"]
-    fig, ax = plt.subplots(figsize=(8.6, 4.8))
-    barras = ax.bar(rotulos, faixas, color=VERDE_GRAFICO)
-    rotular_barras(ax, barras)
-    ax.set_title("Repositórios por faixa de PRs mescladas")
-    ax.set_xlabel("Quantidade acumulada de PRs mescladas")
-    ax.set_ylabel("Número de repositórios")
-    ax.set_ylim(0, max(faixas) * 1.2)
-    ax.grid(axis="y", alpha=0.2)
-    ax.tick_params(axis="x", rotation=22)
-    ax.text(
-        0.99,
-        0.95,
-        "Mediana: 768 | Máximo: 103.387",
-        transform=ax.transAxes,
-        ha="right",
-        va="top",
-        fontweight="bold",
-    )
-    fig.tight_layout()
-    fig.savefig(caminho, dpi=220, bbox_inches="tight")
-    plt.close(fig)
-    graficos["rq02"] = caminho
+    limites_pr = [0, 1, 10, 100, 1_000, 10_000, 100_000, np.inf]
+    rotulos_pr = ["0", "1–9", "10–99", "100–999", "1.000–9.999", "10.000–99.999", "≥100.000"]
+    valores_pr = [int(((prs >= a) & (prs < b)).sum()) for a, b in zip(limites_pr[:-1], limites_pr[1:])]
+    fig, ax = plt.subplots(figsize=(8.6, 4.6))
+    barras = ax.bar(rotulos_pr, valores_pr, color=VERDE_GRAFICO)
+    ax.bar_label(barras, padding=3)
+    ax.set(title="Repositórios por faixa de PRs mescladas", xlabel="PRs mescladas acumuladas", ylabel="Repositórios")
+    ax.tick_params(axis="x", rotation=20)
+    ax.text(0.99, 0.94, f"Mediana: {formatar_numero(estatisticas['prs']['mediana'])} | Máximo: {formatar_numero(estatisticas['prs']['maximo'])}", transform=ax.transAxes, ha="right", fontweight="bold")
+    graficos["rq02"] = salvar_figura(fig, diretorio / "rq02.png")
 
-    # RQ03
-    caminho = diretorio / "rq03_releases.png"
     releases = pd.to_numeric(df["Total de releases"], errors="coerce")
-    faixas = [
-        int((releases == 0).sum()),
-        int(((releases >= 1) & (releases <= 9)).sum()),
-        int(((releases >= 10) & (releases <= 49)).sum()),
-        int(((releases >= 50) & (releases <= 99)).sum()),
-        int(((releases >= 100) & (releases <= 499)).sum()),
-        int(((releases >= 500) & (releases <= 999)).sum()),
-        int((releases >= 1_000).sum()),
-    ]
-    rotulos = ["0", "1–9", "10–49", "50–99", "100–499", "500–999", "≥1.000"]
-    fig, ax = plt.subplots(figsize=(8.4, 4.8))
-    barras = ax.bar(rotulos, faixas, color=VERDE_GRAFICO)
-    rotular_barras(ax, barras)
-    ax.set_title("Repositórios por quantidade acumulada de releases")
-    ax.set_xlabel("Quantidade acumulada de releases")
-    ax.set_ylabel("Número de repositórios")
-    ax.set_ylim(0, max(faixas) * 1.25)
-    ax.grid(axis="y", alpha=0.2)
-    ax.text(
-        0.99,
-        0.95,
-        "Mediana: 41 | 728 com release | Máximo: 6.893",
-        transform=ax.transAxes,
-        ha="right",
-        va="top",
-        fontweight="bold",
-    )
-    fig.tight_layout()
-    fig.savefig(caminho, dpi=220, bbox_inches="tight")
-    plt.close(fig)
-    graficos["rq03"] = caminho
+    limites_rel = [0, 1, 10, 50, 100, 500, 1_000, np.inf]
+    rotulos_rel = ["0", "1–9", "10–49", "50–99", "100–499", "500–999", "≥1.000"]
+    valores_rel = [int(((releases >= a) & (releases < b)).sum()) for a, b in zip(limites_rel[:-1], limites_rel[1:])]
+    fig, ax = plt.subplots(figsize=(8.4, 4.6))
+    barras = ax.bar(rotulos_rel, valores_rel, color=VERDE_GRAFICO)
+    ax.bar_label(barras, padding=3)
+    ax.set(title="Repositórios por quantidade acumulada de releases", xlabel="Releases acumuladas", ylabel="Repositórios")
+    ax.text(0.99, 0.94, f"Mediana: {formatar_numero(estatisticas['releases']['mediana'])} | Com release: {formatar_numero(estatisticas['releases_com'])}", transform=ax.transAxes, ha="right", fontweight="bold")
+    graficos["rq03"] = salvar_figura(fig, diretorio / "rq03.png")
 
-    # RQ04
-    caminho = diretorio / "rq04_atualizacao.png"
-    dias = pd.to_numeric(df["Dias desde última atualização"], errors="coerce")
-    faixas = [
-        int((dias <= 1).sum()),
-        int(((dias > 1) & (dias <= 7)).sum()),
-        int(((dias > 7) & (dias <= 30)).sum()),
-        int(((dias > 30) & (dias <= 365)).sum()),
-        int((dias > 365).sum()),
-    ]
-    rotulos = ["Até 1 dia", ">1–7 dias", ">7–30 dias", ">30–365 dias", ">365 dias"]
-    fig, ax = plt.subplots(figsize=(8.2, 4.8))
-    barras = ax.bar(rotulos, faixas, color=VERDE_GRAFICO)
-    for barra, valor in zip(barras, faixas):
-        percentual = 100 * valor / len(df)
-        ax.annotate(
-            f"{valor}\n({percentual:.1f}%)".replace(".", ","),
-            (barra.get_x() + barra.get_width() / 2, barra.get_height()),
-            xytext=(0, 4),
+    rotulos_dias = ["Até 1 dia", ">1–7", ">7–30", ">30–365", ">365"]
+    fig, ax = plt.subplots(figsize=(8.2, 4.6))
+    barras = ax.bar(rotulos_dias, estatisticas["faixas_dias"], color=VERDE_GRAFICO)
+    ax.bar_label(barras, labels=[f"{v}\n({formatar_percentual(v, total)})" for v in estatisticas["faixas_dias"]], padding=3)
+    ax.set(title="Tempo desde o último push", xlabel="Faixa de recência", ylabel="Repositórios")
+    graficos["rq04"] = salvar_figura(fig, diretorio / "rq04.png")
+
+    valores_ling = [estatisticas["top10"], estatisticas["outras_definidas"], estatisticas["indefinida"]]
+    nomes_ling = ["Top 10 Octoverse", "Outras definidas", "Não definida"]
+    fig, ax = plt.subplots(figsize=(8.5, 3.1))
+    esquerda = 0
+    for valor, nome, cor in zip(valores_ling, nomes_ling, [VERDE_GRAFICO, LARANJA_GRAFICO, CINZA_GRAFICO]):
+        ax.barh([f"{formatar_numero(total)} repositórios"], [valor], left=esquerda, color=cor, label=nome)
+        if valor:
+            ax.text(esquerda + valor / 2, 0, f"{valor}\n{formatar_percentual(valor, total)}", ha="center", va="center", color="white", fontweight="bold")
+        esquerda += valor
+    ax.set_xlim(0, total)
+    ax.set_title("Presença das linguagens do Top 10 Octoverse")
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.24), ncol=3, frameon=False)
+    graficos["rq05"] = salvar_figura(fig, diretorio / "rq05.png")
+
+    issues = pd.to_numeric(df["% issues fechadas"], errors="coerce")
+    validos = issues.dropna()
+    faixas_issues = [int(((validos >= x) & (validos < x + 10)).sum()) for x in range(0, 90, 10)]
+    faixas_issues += [int(((validos >= 90) & (validos <= 100)).sum()), int(issues.isna().sum())]
+    fig, ax = plt.subplots(figsize=(9, 4.6))
+    barras = ax.bar([f"{x}–<{x + 10}%" for x in range(0, 90, 10)] + ["90–100%", "Sem issues"], faixas_issues, color=[VERDE_GRAFICO] * 10 + [CINZA_GRAFICO])
+    ax.bar_label(barras, padding=3, fontsize=8)
+    ax.tick_params(axis="x", rotation=32)
+    ax.set(title="Distribuição do percentual de issues fechadas", xlabel="Percentual", ylabel="Repositórios")
+    graficos["rq06"] = salvar_figura(fig, diretorio / "rq06.png")
+
+    rq07 = estatisticas["rq07"]
+    fig, eixos = plt.subplots(1, 3, figsize=(10.2, 4.2))
+    for ax, (coluna, titulo) in zip(eixos, [("prs", "Mediana de PRs"), ("releases", "Mediana de releases"), ("dias", "Mediana de dias")]):
+        valores = rq07[coluna].astype(float).values
+        barras = ax.bar(["Top 10", "Outras"], valores, color=[VERDE_GRAFICO, LARANJA_GRAFICO])
+        ax.bar_label(barras, labels=[formatar_numero(v, 2 if coluna == "dias" else 0) for v in valores], padding=3)
+        ax.set_title(titulo)
+    fig.suptitle("Indicadores medianos por grupo de linguagens", fontweight="bold")
+    graficos["rq07"] = salvar_figura(fig, diretorio / "rq07.png")
+
+    principal = df[pd.to_numeric(df["Idade (anos)"], errors="coerce") >= 1].copy()
+    rq08 = estatisticas["rq08"]
+    correlacoes = rq08["correlacoes_spearman"]["principal_idade_maior_igual_1"]
+    fig, eixos = plt.subplots(1, 2, figsize=(10.4, 4.6))
+    for ax, coluna, titulo, chave in (
+        (eixos[0], "PRs por ano", "Estrelas × PRs mescladas/ano", "estrelas_vs_prs_por_ano"),
+        (eixos[1], "Releases por ano", "Estrelas × releases/ano", "estrelas_vs_releases_por_ano"),
+    ):
+        ax.scatter(principal["Estrelas"], principal[coluna], s=14, alpha=0.25, color=VERDE_GRAFICO, edgecolors="none")
+        ax.set_xscale("log")
+        ax.set_yscale("symlog", linthresh=1)
+        ax.set(title=titulo, xlabel="Estrelas (log)", ylabel=f"{coluna} (symlog)")
+        resultado = correlacoes[chave]
+        ax.text(0.04, 0.95, f"ρ = {formatar_numero(resultado['rho'], 4)}\nn = {resultado['n']}", transform=ax.transAxes, va="top", bbox={"facecolor": "white", "alpha": 0.85, "edgecolor": "none"})
+    fig.suptitle("RQ08 — Popularidade e intensidade anual (idade ≥ 1 ano)", fontweight="bold")
+    graficos["rq08"] = salvar_figura(fig, diretorio / "rq08.png")
+
+    rq10 = estatisticas["rq10"]
+    dados_rq10 = df[["Idade (anos)", "% issues fechadas"]].copy()
+    dados_rq10["Idade (anos)"] = pd.to_numeric(
+        dados_rq10["Idade (anos)"], errors="coerce"
+    )
+    dados_rq10["% issues fechadas"] = pd.to_numeric(
+        dados_rq10["% issues fechadas"], errors="coerce"
+    )
+    dados_rq10 = dados_rq10.dropna()
+    resumo_rq10 = pd.DataFrame(rq10["resumo_por_faixa_etaria"])
+
+    fig, eixos = plt.subplots(1, 2, figsize=(10.6, 4.8))
+    eixos[0].scatter(
+        dados_rq10["Idade (anos)"],
+        dados_rq10["% issues fechadas"],
+        s=15,
+        alpha=0.22,
+        color=VERDE_GRAFICO,
+        edgecolors="none",
+    )
+    eixos[0].set(
+        title="Idade × percentual de issues fechadas",
+        xlabel="Idade (anos)",
+        ylabel="Issues fechadas (%)",
+        ylim=(-2, 102),
+    )
+    eixos[0].text(
+        0.04,
+        0.95,
+        f"ρ = {formatar_numero(rq10['correlacao_spearman'], 4)}\n"
+        f"n = {formatar_numero(rq10['repositorios_com_issues'])}",
+        transform=eixos[0].transAxes,
+        va="top",
+        bbox={"facecolor": "white", "alpha": 0.85, "edgecolor": "none"},
+    )
+
+    posicoes = np.arange(len(resumo_rq10))
+    medianas = resumo_rq10["Mediana_issues_fechadas"].to_numpy(dtype=float)
+    q1 = resumo_rq10["Q1_issues_fechadas"].to_numpy(dtype=float)
+    q3 = resumo_rq10["Q3_issues_fechadas"].to_numpy(dtype=float)
+    eixos[1].errorbar(
+        posicoes,
+        medianas,
+        yerr=np.vstack((medianas - q1, q3 - medianas)),
+        fmt="o-",
+        color=VERDE_GRAFICO,
+        ecolor=LARANJA_GRAFICO,
+        capsize=5,
+        linewidth=2,
+        markersize=6,
+    )
+    for posicao, mediana_faixa, quantidade in zip(
+        posicoes,
+        medianas,
+        resumo_rq10["Quantidade_repositorios"],
+    ):
+        eixos[1].annotate(
+            f"{formatar_numero(mediana_faixa, 2)}%\nn={int(quantidade)}",
+            (posicao, mediana_faixa),
+            xytext=(0, 9),
             textcoords="offset points",
             ha="center",
-            va="bottom",
-            fontsize=9,
+            fontsize=8,
         )
-    ax.set_title("Tempo desde o último push")
-    ax.set_xlabel("Faixa de recência")
-    ax.set_ylabel("Número de repositórios")
-    ax.set_ylim(0, max(faixas) * 1.25)
-    ax.grid(axis="y", alpha=0.2)
-    ax.text(
-        0.99,
-        0.95,
-        "Mediana: 2,00 dias | 72,7% em até 30 dias",
-        transform=ax.transAxes,
-        ha="right",
-        va="top",
-        fontweight="bold",
+    eixos[1].set(
+        title="Mediana e intervalo interquartil por idade",
+        xlabel="Faixa de idade",
+        ylabel="Issues fechadas (%)",
+        ylim=(45, 105),
+        xticks=posicoes,
+        xticklabels=resumo_rq10["Faixa de idade"],
     )
-    fig.tight_layout()
-    fig.savefig(caminho, dpi=220, bbox_inches="tight")
-    plt.close(fig)
-    graficos["rq04"] = caminho
-
-    # RQ05
-    caminho = diretorio / "rq05_linguagens.png"
-    top10 = {
-        "TypeScript",
-        "Python",
-        "JavaScript",
-        "Java",
-        "C#",
-        "PHP",
-        "Shell",
-        "C++",
-        "HCL",
-        "Go",
-    }
-    linguagem = df["Linguagem"].fillna("Não definida")
-    contagem_top10 = int(linguagem.isin(top10).sum())
-    contagem_indefinida = int((linguagem == "Não definida").sum())
-    contagem_outras = len(df) - contagem_top10 - contagem_indefinida
-    valores = [contagem_top10, contagem_outras, contagem_indefinida]
-    cores = [VERDE_GRAFICO, LARANJA_GRAFICO, CINZA_GRAFICO]
-    nomes = ["Top 10 Octoverse", "Outras definidas", "Não definida"]
-    fig, ax = plt.subplots(figsize=(8.5, 3.2))
-    esquerda = 0
-    for valor, cor, nome in zip(valores, cores, nomes):
-        ax.barh(["1.000 repositórios"], [valor], left=esquerda, color=cor, label=nome)
-        ax.text(
-            esquerda + valor / 2,
-            0,
-            f"{valor}\n{valor / 10:.1f}%".replace(".", ","),
-            ha="center",
-            va="center",
-            color="white",
-            fontweight="bold",
-            fontsize=10,
-        )
-        esquerda += valor
-    ax.set_xlim(0, 1000)
-    ax.set_xlabel("Quantidade de repositórios")
-    ax.set_title("Presença das linguagens do Top 10 Octoverse")
-    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.28), ncol=3, frameon=False)
-    ax.grid(axis="x", alpha=0.15)
-    fig.tight_layout()
-    fig.savefig(caminho, dpi=220, bbox_inches="tight")
-    plt.close(fig)
-    graficos["rq05"] = caminho
-
-    # RQ06
-    caminho = diretorio / "rq06_issues.png"
-    percentual = pd.to_numeric(df["% issues fechadas"], errors="coerce")
-    validos = percentual.dropna()
-    faixas = [
-        int(((validos >= limite) & (validos < limite + 10)).sum())
-        for limite in range(0, 90, 10)
-    ]
-    faixas.append(int(((validos >= 90) & (validos <= 100)).sum()))
-    faixas.append(int(percentual.isna().sum()))
-    rotulos = [
-        "0–<10%",
-        "10–<20%",
-        "20–<30%",
-        "30–<40%",
-        "40–<50%",
-        "50–<60%",
-        "60–<70%",
-        "70–<80%",
-        "80–<90%",
-        "90–100%",
-        "Não aplicável",
-    ]
-    cores = [VERDE_GRAFICO] * 10 + [CINZA_GRAFICO]
-    fig, ax = plt.subplots(figsize=(9.1, 4.9))
-    barras = ax.bar(rotulos, faixas, color=cores)
-    rotular_barras(ax, barras, tamanho=8)
-    ax.set_title("Distribuição do percentual de issues fechadas")
-    ax.set_xlabel("Percentual de fechamento")
-    ax.set_ylabel("Número de repositórios")
-    ax.tick_params(axis="x", rotation=35)
-    ax.set_ylim(0, max(faixas) * 1.2)
-    ax.grid(axis="y", alpha=0.2)
-    ax.text(
-        0.99,
-        0.95,
-        "Mediana: 87,5% (n = 957) | 43 sem issues",
-        transform=ax.transAxes,
-        ha="right",
-        va="top",
-        fontweight="bold",
-    )
-    fig.tight_layout()
-    fig.savefig(caminho, dpi=220, bbox_inches="tight")
-    plt.close(fig)
-    graficos["rq06"] = caminho
-
-    # RQ07
-    caminho = diretorio / "rq07_comparacao.png"
-    definidos = df[df["Linguagem"] != "Não definida"].copy()
-    definidos["Grupo"] = np.where(
-        definidos["Linguagem"].isin(top10),
-        "Top 10 Octoverse\n(n=702)",
-        "Outras definidas\n(n=211)",
-    )
-    ordem = ["Top 10 Octoverse\n(n=702)", "Outras definidas\n(n=211)"]
-    colunas = [
-        ("PRs aceitas", "Mediana de PRs mescladas"),
-        ("Total de releases", "Mediana de releases"),
-        ("Dias desde última atualização", "Mediana de dias desde o push"),
-    ]
-    fig, eixos = plt.subplots(1, 3, figsize=(10.2, 4.6))
-    for ax, (coluna, titulo) in zip(eixos, colunas):
-        medianas = definidos.groupby("Grupo")[coluna].median().reindex(ordem)
-        barras = ax.bar(
-            [0, 1],
-            medianas.values,
-            color=[VERDE_GRAFICO, LARANJA_GRAFICO],
-            width=0.62,
-        )
-        for barra, valor in zip(barras, medianas.values):
-            if coluna == "Dias desde última atualização":
-                rotulo = f"{valor:.2f}".replace(".", ",")
-            else:
-                rotulo = f"{valor:,.0f}".replace(",", ".")
-            ax.annotate(
-                rotulo,
-                (barra.get_x() + barra.get_width() / 2, valor),
-                xytext=(0, 4),
-                textcoords="offset points",
-                ha="center",
-                va="bottom",
-                fontweight="bold",
-                fontsize=10,
-            )
-        ax.set_title(titulo, fontsize=10.5, pad=10)
-        ax.set_xticks([0, 1], ["Top 10", "Outras"])
-        ax.set_ylim(0, max(medianas.values) * 1.18)
-        ax.grid(axis="y", alpha=0.2)
-    eixos[2].text(
-        0.5,
-        -0.18,
-        "Menor valor = atualização mais recente",
-        transform=eixos[2].transAxes,
-        ha="center",
-        fontsize=8.5,
-    )
-    fig.suptitle(
-        "Indicadores medianos por grupo de linguagens",
-        fontsize=14,
-        fontweight="bold",
-        y=0.99,
-    )
-    fig.tight_layout(rect=[0, 0, 1, 0.91])
-    fig.savefig(caminho, dpi=220, bbox_inches="tight")
-    plt.close(fig)
-    graficos["rq07"] = caminho
-
+    eixos[1].tick_params(axis="x", rotation=18)
+    fig.suptitle("RQ10 — Maturidade e tratamento de issues", fontweight="bold")
+    graficos["rq10"] = salvar_figura(fig, diretorio / "rq10.png")
     return graficos
 
 
 def validar_dados(df: pd.DataFrame) -> None:
     colunas = {
-        "Nome",
-        "URL",
-        "Estrelas",
-        "Linguagem",
-        "Idade (anos)",
-        "PRs aceitas",
-        "Total de releases",
-        "Dias desde última atualização",
-        "Issues abertas",
-        "Issues fechadas",
+        "Nome", "URL", "Estrelas", "Linguagem", "Idade (anos)", "PRs aceitas",
+        "Total de releases", "PRs por ano", "Releases por ano",
+        "Dias desde última atualização", "Issues abertas", "Issues fechadas",
         "% issues fechadas",
     }
     ausentes = colunas.difference(df.columns)
@@ -667,849 +493,574 @@ def validar_dados(df: pd.DataFrame) -> None:
         raise RuntimeError(f"O relatório exige 1.000 registros; o CSV contém {len(df)}.")
     if df["Nome"].nunique() != 1_000 or df["URL"].nunique() != 1_000:
         raise RuntimeError("O CSV não contém 1.000 nomes e URLs únicos.")
-    if not df["Estrelas"].is_monotonic_decreasing:
+    if not pd.to_numeric(df["Estrelas"], errors="coerce").is_monotonic_decreasing:
         raise RuntimeError("O CSV não está ordenado por estrelas de forma não crescente.")
+    for coluna in [
+        "Estrelas",
+        "Idade (anos)",
+        "PRs aceitas",
+        "Total de releases",
+        "PRs por ano",
+        "Releases por ano",
+        "Issues abertas",
+        "Issues fechadas",
+    ]:
+        valores = pd.to_numeric(df[coluna], errors="coerce")
+        validos = valores.dropna()
+        if (validos < 0).any() or not np.isfinite(validos).all():
+            raise RuntimeError(f"A coluna {coluna} contém valor negativo ou não finito.")
+    percentual_issues = pd.to_numeric(df["% issues fechadas"], errors="coerce")
+    percentual_valido = percentual_issues.dropna()
+    if (
+        not np.isfinite(percentual_valido).all()
+        or (percentual_valido < 0).any()
+        or (percentual_valido > 100).any()
+    ):
+        raise RuntimeError("O percentual de issues fechadas está fora de 0–100.")
+    abertas = pd.to_numeric(df["Issues abertas"], errors="coerce")
+    fechadas = pd.to_numeric(df["Issues fechadas"], errors="coerce")
+    total_issues = abertas + fechadas
+    if percentual_issues[total_issues == 0].notna().any():
+        raise RuntimeError("Projetos sem issues devem ter percentual de fechamento nulo.")
+    if percentual_issues[total_issues > 0].isna().any():
+        raise RuntimeError("Projetos com issues devem ter percentual de fechamento definido.")
+    idade = pd.to_numeric(df["Idade (anos)"], errors="coerce")
+    esperado_prs = (pd.to_numeric(df["PRs aceitas"], errors="coerce") / idade).round(4).where(idade > 0)
+    esperado_releases = (pd.to_numeric(df["Total de releases"], errors="coerce") / idade).round(4).where(idade > 0)
+    if not np.allclose(df["PRs por ano"].fillna(-1), esperado_prs.fillna(-1), atol=1e-4):
+        raise RuntimeError("PRs por ano não corresponde às contagens divididas pela idade registrada.")
+    if not np.allclose(df["Releases por ano"].fillna(-1), esperado_releases.fillna(-1), atol=1e-4):
+        raise RuntimeError("Releases por ano não corresponde às contagens divididas pela idade registrada.")
 
 
-def construir_documento(template: Path, saida: Path, df: pd.DataFrame, graficos: dict[str, Path]) -> None:
-    documento = Document(template)
-    limpar_corpo(documento)
-    configurar_estilos(documento)
-
-    # Capa
+def adicionar_capa(documento: Document) -> None:
     p = documento.add_paragraph()
-    p.paragraph_format.space_before = Pt(36)
+    p.paragraph_format.space_before = Pt(34)
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     run = p.add_run("RELATÓRIO DE LABORATÓRIO")
     run.bold = True
-    run.font.name = "Calibri"
     run.font.size = Pt(26)
-    run.font.color.rgb = RGBColor.from_string("17365D")
-
+    run.font.color.rgb = RGBColor.from_string(AZUL)
     p = documento.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     run = p.add_run("Mineração e análise dos 1.000 repositórios mais populares do GitHub")
     run.bold = True
     run.font.size = Pt(15)
     run.font.color.rgb = RGBColor.from_string(VERDE)
-
-    p = documento.add_paragraph()
+    p = documento.add_paragraph("Lab01S03 — versão intermediária com RQ01–RQ08 e RQ10")
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    run = p.add_run("Lab01S02")
-    run.font.size = Pt(12)
-    run.font.color.rgb = RGBColor.from_string(CINZA_GRAFICO.removeprefix("#"))
-
-    documento.add_paragraph()
-    capa = documento.add_table(rows=8, cols=2)
-    capa.style = "Table Grid"
-    capa.alignment = WD_TABLE_ALIGNMENT.CENTER
-    capa.autofit = False
-    dados_capa = [
-        ("Curso", "Engenharia de Software"),
-        ("Disciplina", "Laboratório de Experimentação de Software"),
-        ("Turno / Período", "Noite / 6º período"),
-        ("Professor", "Danilo Maia"),
-        ("Laboratório", "Lab01S02 — Paginação e análise de repositórios populares"),
-        ("Grupo", "Pedro Henrique Maia Alves e Diogo C. Brunoro"),
-        ("Repositório / Project", ""),
-        ("Data de entrega", "[INSERIR DATA OFICIAL DE ENTREGA]"),
+    p.runs[0].font.size = Pt(12)
+    dados = [
+        ["Curso", "Engenharia de Software"],
+        ["Disciplina", "Laboratório de Experimentação de Software"],
+        ["Professor", "Danilo Maia"],
+        ["Entrega", "Lab01S03 — análise e visualização de dados"],
+        ["Integrantes", "Pedro Henrique Maia Alves; Diogo C. Brunoro; [TERCEIRO INTEGRANTE — EDITAR]"],
+        ["Situação", "Relatório intermediário; RQ09 e snapshot final do board pendentes"],
+        ["Data de geração", date.today().strftime("%d/%m/%Y")],
     ]
-    for indice, (rotulo, valor) in enumerate(dados_capa):
-        esquerda, direita = capa.rows[indice].cells
-        esquerda.width = Cm(4.3)
-        direita.width = Cm(12.0)
-        definir_sombreamento(esquerda, CINZA_CLARO)
-        definir_margens_celula(esquerda, 120, 120, 120, 120)
-        definir_margens_celula(direita, 120, 120, 120, 120)
-        esquerda.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
-        direita.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
-        run = esquerda.paragraphs[0].add_run(rotulo)
-        run.bold = True
-        run.font.size = Pt(10)
-        if indice == 6:
-            p_link = direita.paragraphs[0]
-            adicionar_hyperlink(
-                p_link,
-                "Repositório",
-                "https://github.com/PedroMaiaAlves/lab-experimentacao-software",
-            )
-            p_link.add_run(" | ")
-            adicionar_hyperlink(
-                p_link,
-                "GitHub Project",
-                "https://github.com/users/PedroMaiaAlves/projects/1",
-            )
-        else:
-            run = direita.paragraphs[0].add_run(valor)
-            run.font.size = Pt(10)
-            if indice == 7:
-                run.bold = True
-                run.font.color.rgb = RGBColor.from_string(LARANJA_GRAFICO.removeprefix("#"))
-
+    tabela = adicionar_tabela(documento, ["Identificação", "Informação"], dados, fonte=9.5)
+    tabela.rows[0]._element.getparent().remove(tabela.rows[0]._element)
     p = documento.add_paragraph()
-    p.paragraph_format.space_before = Pt(48)
+    p.paragraph_format.space_before = Pt(30)
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p.add_run("Belo Horizonte\n2026").font.size = Pt(11)
+    p.add_run("Belo Horizonte\n2026")
 
-    # Nova seção para o conteúdo e numeração reiniciada.
-    secao_corpo = documento.add_section(WD_SECTION.NEW_PAGE)
-    secao_corpo.header.is_linked_to_previous = False
-    secao_corpo.footer.is_linked_to_previous = False
-    secao_corpo.header_distance = Cm(1.27)
-    secao_corpo.footer_distance = Cm(1.27)
-    reiniciar_numero_pagina(secao_corpo, 1)
-    cabecalho = secao_corpo.header.paragraphs[0]
+
+def classificar_correlacao(rho: float | None) -> str:
+    if rho is None:
+        return "indefinida"
+    absoluto = abs(float(rho))
+    intensidade = "desprezível" if absoluto < 0.1 else "fraca" if absoluto < 0.3 else "moderada" if absoluto < 0.5 else "forte"
+    direcao = "positiva" if rho > 0 else "negativa" if rho < 0 else "sem direção"
+    return f"{direcao} {intensidade}"
+
+
+def construir_documento(template: Path, saida: Path, df: pd.DataFrame, estatisticas: dict, graficos: dict[str, Path]) -> None:
+    documento = Document(template)
+    limpar_corpo(documento)
+    configurar_estilos(documento)
+    adicionar_capa(documento)
+
+    secao = documento.add_section(WD_SECTION.NEW_PAGE)
+    secao.header.is_linked_to_previous = False
+    secao.footer.is_linked_to_previous = False
+    cabecalho = secao.header.paragraphs[0]
     cabecalho.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    run = cabecalho.add_run("Laboratório de Experimentação de Software — Lab01S02")
-    run.font.size = Pt(8.5)
-    run.font.color.rgb = RGBColor.from_string(CINZA_GRAFICO.removeprefix("#"))
-    adicionar_numero_pagina(secao_corpo.footer.paragraphs[0])
+    cabecalho.add_run("Laboratório de Experimentação de Software — Lab01S03 — RQ01–RQ08 e RQ10").font.size = Pt(8.5)
+    adicionar_numero_pagina(secao.footer.paragraphs[0])
 
-    # 1. Introdução
-    adicionar_titulo_secao(documento, "1. Introdução")
-    adicionar_texto(
-        documento,
-        "O GitHub é uma plataforma amplamente utilizada para hospedagem, versionamento e colaboração em projetos de software. Seus repositórios apresentam diferentes níveis de popularidade, maturidade, participação da comunidade e atividade de desenvolvimento. A mineração dessas informações permite observar características recorrentes em projetos que alcançaram grande visibilidade e compreender como esses sistemas evoluem, recebem contribuições e administram suas atividades.",
-    )
-    adicionar_texto(
-        documento,
-        "Neste laboratório foi realizada uma análise exploratória dos 1.000 repositórios públicos com maior número de estrelas retornados pela API GraphQL do GitHub. O número de estrelas foi adotado como definição operacional de popularidade. Após a coleta, os dados foram transformados em formato tabular, exportados para CSV e analisados de acordo com sete questões de pesquisa propostas pelo professor.",
-    )
-    adicionar_texto(
-        documento,
-        "O objetivo geral do trabalho é caracterizar os repositórios populares do GitHub com base em indicadores de idade, pull requests mescladas, releases, recência de atualização, linguagem primária e percentual de issues fechadas. Também foi investigada a relação entre a popularidade da linguagem e os indicadores de contribuição, releases e atualização.",
-    )
-    adicionar_texto(
-        documento,
-        "Além das atividades solicitadas, o grupo desenvolveu uma aplicação web em Streamlit. Essa aplicação permite iniciar a mineração por meio de uma interface gráfica, acompanhar o processamento, visualizar os resultados das questões de pesquisa e exportar os dados. A utilização do Streamlit representa a inovação proposta pelo grupo, pois as sete questões de pesquisa foram fornecidas pelo professor.",
-    )
-    adicionar_texto(
-        documento,
-        "As hipóteses apresentadas possuem caráter informal e exploratório. Elas orientam a interpretação descritiva dos resultados, sem representar hipóteses confirmatórias ou pré-registradas.",
-    )
-    adicionar_tabela(
-        documento,
-        ["Questão de pesquisa", "Hipótese informal"],
-        [
-            [
-                "RQ01 — Sistemas populares são maduros/antigos?",
-                "Espera-se que os repositórios populares sejam majoritariamente projetos maduros, apresentando idade mediana superior a cinco anos.",
-            ],
-            [
-                "RQ02 — Sistemas populares recebem muita contribuição externa?",
-                "Espera-se que os repositórios populares acumulem um número elevado de pull requests mescladas, com mediana superior a 500, e apresentem uma distribuição assimétrica, na qual poucos projetos concentram valores muito altos.",
-            ],
-            [
-                "RQ03 — Sistemas populares lançam releases com frequência?",
-                "Espera-se que a maioria dos repositórios populares possua ao menos uma release publicada no GitHub e acumule múltiplas releases ao longo de sua existência.",
-            ],
-            [
-                "RQ04 — Sistemas populares são atualizados com frequência?",
-                "Espera-se que a maioria dos repositórios populares apresente atividade recente, com o último push ocorrido nos últimos 30 dias, embora exista uma parcela de projetos inativos há períodos prolongados.",
-            ],
-            [
-                "RQ05 — Sistemas populares são escritos nas linguagens mais populares?",
-                "Espera-se que a maioria dos repositórios populares com linguagem primária definida utilize uma das dez linguagens mais populares do GitHub Octoverse 2025.",
-            ],
-            [
-                "RQ06 — Sistemas populares possuem alto percentual de issues fechadas?",
-                "Espera-se que os repositórios populares que possuem issues apresentem percentual mediano de fechamento superior a 80%.",
-            ],
-            [
-                "RQ07 — Linguagens populares recebem mais contribuição, mais releases e mais atualizações?",
-                "Espera-se que repositórios cuja linguagem primária pertence ao Top 10 do GitHub Octoverse apresentem maior mediana de pull requests mescladas e releases, além de menor tempo desde o último push, quando comparados aos repositórios escritos em outras linguagens definidas.",
-            ],
-        ],
-        larguras_cm=[5.5, 10.5],
-        fonte=8.8,
-    )
-    adicionar_texto(
-        documento,
-        "Nas RQ02 e RQ07, a quantidade de pull requests mescladas é utilizada como uma aproximação do volume de contribuições. Entretanto, os campos coletados não permitem identificar se cada contribuição foi realizada por um colaborador externo, por um mantenedor ou por uma conta automatizada. Essa limitação é considerada na discussão dos resultados.",
-    )
+    total = estatisticas["total"]
+    rq08 = estatisticas["rq08"]
+    rq10 = estatisticas["rq10"]
+    corr_principal = rq08["correlacoes_spearman"]["principal_idade_maior_igual_1"]
+    corr_sens = rq08["correlacoes_spearman"]["sensibilidade_todas_idades_positivas"]
+    amostra8 = rq08["amostra"]
 
-    # 2. Contexto
-    adicionar_titulo_secao(documento, "2. Contexto", nova_pagina=True)
-    adicionar_texto(
-        documento,
-        "O trabalho foi desenvolvido durante as sprints S01 e S02 do Lab01 da disciplina de Laboratório de Experimentação de Software. Na S01 foram implementadas a consulta inicial à API GraphQL, a transformação dos dados e as análises associadas às questões de pesquisa. Também foi criada a primeira versão da interface web em Streamlit.",
-    )
-    adicionar_texto(
-        documento,
-        "Na S02, a coleta foi ampliada para os 1.000 repositórios exigidos pelo laboratório. Para isso, foi utilizada paginação baseada em cursores. Também foram implementadas a exportação para CSV, a validação dos dados das sete RQs, a criação das hipóteses informais, a evolução dos gráficos, a atualização da metodologia e a preparação do primeiro snapshot do GitHub Project.",
-    )
-    adicionar_texto(
-        documento,
-        "O objeto de estudo é composto pelos 1.000 repositórios públicos retornados pela busca do GitHub em ordem decrescente de estrelas. A consulta empregada foi:",
-    )
-    adicionar_codigo(documento, "stars:>0 is:public sort:stars-desc")
-    adicionar_texto(
-        documento,
-        "Essa expressão restringe a busca a repositórios públicos e solicita a ordenação decrescente pelo número de estrelas. A escolha das estrelas oferece um critério objetivo de seleção, mas não significa que popularidade represente diretamente qualidade, quantidade de usuários ou utilização em produção.",
-    )
-    adicionar_texto(
-        documento,
-        "A conexão GraphQL search retorna no máximo 1.000 resultados. As conexões da API exigem paginação e aceitam no máximo 100 elementos nos argumentos first ou last. O grupo utilizou lotes de até 50 repositórios e percorreu as páginas por meio de endCursor e hasNextPage, seguindo o mecanismo oficial de paginação do GitHub (GITHUB, 2026a; GITHUB, 2026b).",
-    )
-    adicionar_texto(
-        documento,
-        "A literatura sobre mineração de repositórios alerta que dados obtidos do GitHub precisam ser interpretados considerando limitações de seleção, representação e utilização dos recursos da plataforma. Nem todos os repositórios utilizam pull requests, releases ou issues da mesma forma, o que pode afetar a interpretação das métricas (KALLIAMVAKOU et al., 2014).",
-    )
-    adicionar_texto(
-        documento,
-        "Para a RQ05 e a RQ07, foi adotado o ranking do GitHub Octoverse 2025. As dez linguagens utilizadas como referência foram TypeScript, Python, JavaScript, Java, C#, PHP, Shell, C++, HCL e Go. O ranking representa um retrato temporal da atividade na plataforma.",
-    )
+    documento.add_heading("1. Introdução", level=1)
+    adicionar_texto(documento, "O GitHub reúne projetos com diferentes níveis de maturidade, atividade e participação. Este laboratório investiga características dos 1.000 repositórios públicos mais estrelados retornados pela API GraphQL. Estrelas são usadas como definição operacional de popularidade, sem pressupor qualidade técnica.")
+    adicionar_texto(documento, "Esta é a versão intermediária da sprint S03. Ela consolida os resultados atualizados das sete questões sugeridas pelo professor e incorpora a RQ08, sobre popularidade e intensidade anual de desenvolvimento, e a RQ10, sobre maturidade e tratamento de issues. A aplicação Streamlit integra mineração, análise, visualização e exportação do CSV.")
+    adicionar_texto(documento, "As hipóteses são informais e exploratórias: orientam a leitura descritiva, não foram pré-registradas e não substituem testes confirmatórios.")
 
-    # 3. Metodologia
-    adicionar_titulo_secao(documento, "3. Metodologia", nova_pagina=True)
-    adicionar_texto(
-        documento,
-        "Este estudo possui natureza quantitativa, observacional e exploratória. Foram utilizadas informações públicas obtidas diretamente da API GraphQL do GitHub. O processo foi dividido em planejamento, coleta, paginação, transformação, validação, análise, visualização e exportação.",
-    )
+    documento.add_heading("1.1 Questões de pesquisa e hipóteses informais", level=2)
+    hipoteses = [
+        ["RQ01", "Sistemas populares são maduros/antigos?", "H01: a idade mediana é superior a cinco anos."],
+        ["RQ02", "Sistemas populares recebem muita contribuição externa?", "H02: a mediana supera 500 PRs mescladas e a distribuição é assimétrica."],
+        ["RQ03", "Sistemas populares lançam releases com frequência?", "H03: a maioria possui releases e a mediana acumulada supera 20."],
+        ["RQ04", "Sistemas populares são atualizados com frequência?", "H04: a maioria recebeu push nos últimos 30 dias."],
+        ["RQ05", "Sistemas populares usam linguagens populares?", "H05: mais da metade usa uma linguagem do Top 10 Octoverse 2025."],
+        ["RQ06", "Sistemas populares possuem alto percentual de issues fechadas?", "H06: a mediana de fechamento supera 80% entre projetos com issues."],
+        ["RQ07", "Linguagens populares recebem mais contribuição, releases e atualização?", "H07: o grupo Top 10 tem maiores medianas de PRs e releases e menor recência."],
+        ["RQ08", "Popularidade está associada à intensidade anual de desenvolvimento?", "H08: estrelas apresentam associação positiva ao menos moderada com PRs/ano e releases/ano."],
+        ["RQ10", "Repositórios mais antigos apresentam maior proporção de issues fechadas?", "H10: repositórios mais antigos apresentam maior percentual mediano de issues fechadas, por possuírem processos de manutenção mais consolidados."],
+    ]
+    adicionar_tabela(documento, ["RQ", "Pergunta", "Hipótese informal"], hipoteses, fonte=8.1)
 
-    documento.add_heading("3.1 Principais desafios", level=2)
-    adicionar_texto(
-        documento,
-        "O primeiro desafio foi coletar os 1.000 repositórios. Uma requisição GraphQL não retorna toda essa quantidade de uma só vez, tornando necessária a implementação de paginação baseada em cursores. O coletor também precisava verificar se existia uma próxima página e se o cursor retornado realmente permitia avançar.",
-    )
-    adicionar_texto(
-        documento,
-        "Outro desafio foi garantir a cardinalidade e a unicidade da amostra. Um coletor que simplesmente execute determinado número de requisições pode terminar com menos registros do que o solicitado. Por isso, a implementação do main.py acompanha a quantidade efetivamente coletada, elimina nomes repetidos e somente conclui quando alcança 1.000 repositórios únicos.",
-    )
-    adicionar_texto(
-        documento,
-        "A consistência entre formatos também foi relevante. Os dados extraídos precisavam gerar uma lista de nós GraphQL, um CSV normalizado e sete arquivos de resultados sem diferenças de nomes, valores ou quantidade de registros.",
-    )
-    adicionar_texto(
-        documento,
-        "A presença de valores ausentes exigiu decisões explícitas. Alguns repositórios não possuem linguagem primária identificada pelo GitHub. Outros não possuem nenhuma issue aberta ou fechada, impossibilitando o cálculo do percentual de fechamento. Esses casos não poderiam ser substituídos arbitrariamente por uma linguagem ou por uma taxa igual a zero.",
-    )
-    adicionar_texto(
-        documento,
-        "As distribuições de pull requests, releases e dias desde o último push apresentaram grande assimetria. Poucos projetos concentram valores muito superiores aos demais, fazendo com que a média seja influenciada pelos extremos. Por esse motivo, mediana e quartis foram priorizados.",
-    )
-    adicionar_texto(
-        documento,
-        "A RQ07 apresentou um desafio adicional: as linguagens possuem tamanhos de grupos muito diferentes. Algumas aparecem em centenas de repositórios, enquanto outras possuem apenas uma ou duas observações. As medianas de grupos pequenos não oferecem a mesma estabilidade das linguagens mais representadas.",
-    )
-    adicionar_texto(
-        documento,
-        "Por fim, a construção do front-end exigiu integrar coleta, transformação, execução das análises, visualização e exportação em um único fluxo interativo.",
-    )
+    documento.add_heading("2. Desenvolvimento", level=1)
+    documento.add_heading("2.1 Evolução do trabalho em S01, S02 e S03", level=2)
+    adicionar_texto(documento, "Na S01 foram implementadas a consulta GraphQL inicial, a transformação tabular, as RQ01–RQ07 e a primeira interface Streamlit. Na S02, o coletor em lote passou a percorrer cursores até reunir exatamente 1.000 nomes únicos, exportar CSV e registrar o primeiro snapshot do Project.")
+    adicionar_texto(documento, "Na S03, a Issue #44 incorporou a RQ08 com taxas anualizadas, correlações, quartis e visualizações. A Issue #46 acrescentou a RQ10, relacionando idade e percentual de issues fechadas por correlação de Spearman e faixas etárias. A Issue #47 evoluiu a exibição e a busca dos dados no Streamlit. Permanecem pendentes a RQ09 e o print final do board.")
+    adicionar_tabela(documento, ["Sprint", "Atividade", "Responsável", "Rastreabilidade"], [
+        ["S01", "Coleta inicial, RQ01–RQ07 e Streamlit", "Pedro e Diogo", "Issues e PRs da S01"],
+        ["S02", "Paginação para 1.000, CSV, validação e hipóteses", "Pedro e Diogo", "Issues #8–#15 e #22–#38"],
+        ["S03", "RQ08 — popularidade e intensidade", "[TERCEIRO INTEGRANTE — EDITAR]", "Issue #44"],
+        ["S03", "RQ09 — colaboração e releases", "Pendente", "Issue #45"],
+        ["S03", "RQ10 — maturidade e issues", "Diogo", "Issue #46 — concluída"],
+        ["S03", "Evolução de exibição e busca", "Diogo", "Issue #47 — concluída"],
+    ], fonte=8.4)
 
-    documento.add_heading("3.2 Tomadas de decisão", level=2)
-    adicionar_texto(
-        documento,
-        "A coleta oficial da S02 foi executada pelo main.py, configurado para obter exatamente 1.000 repositórios. Cada consulta solicita até 50 registros e envia, por meio da variável after, o cursor obtido na página anterior.",
-    )
-    adicionar_texto(
-        documento,
-        "A query solicita hasNextPage e endCursor dentro de pageInfo. Antes de solicitar uma nova página, o coletor verifica se o GitHub informa resultados adicionais, se o cursor foi retornado e se ainda não havia sido utilizado. Uma página vazia ou o encerramento antes dos 1.000 registros provoca uma falha explícita.",
-    )
-    adicionar_texto(
-        documento,
-        "Os nomes completos no formato proprietário/repositório são utilizados como chave de unicidade. Assim, registros repetidos não são adicionados novamente.",
-    )
-    adicionar_texto(
-        documento,
-        "A lista de nós extraídos foi armazenada em repositorios_graphql.json. Esse arquivo preserva os campos dos repositórios, mas não representa o envelope integral da resposta GraphQL, pois não contém data, search, pageInfo, cursores ou informações de limite.",
-    )
-    adicionar_texto(
-        documento,
-        "Após a coleta, os nós foram transformados em DataFrame e exportados para repositorios_populares.csv. O comando utilizado foi:",
-    )
-    adicionar_codigo(documento, "python main.py --csv")
-    adicionar_lista(
-        documento,
-        [
-            "Representar a ausência de linguagem primária pela categoria Não definida.",
-            "Calcular idade pelo número inteiro de dias entre o instante da transformação e createdAt, dividido por 365,25 e arredondado para duas casas.",
-            "Calcular recência pela diferença, em dias, entre o instante da transformação e pushedAt.",
-            "Calcular o percentual de fechamento somente quando a soma de issues abertas e fechadas for maior que zero.",
-            "Manter ausente o percentual dos repositórios que não possuem issues.",
-            "Não remover outliers confirmados nos dados recebidos da API.",
-            "Priorizar mediana e quartis nas distribuições assimétricas.",
-            "Excluir a categoria Não definida da comparação agregada da RQ07.",
-            "Utilizar o Octoverse 2025 como referência fixa para as linguagens do Top 10.",
-            "Carregar o token pela variável de ambiente GITHUB_TOKEN.",
-        ],
-    )
-    adicionar_texto(
-        documento,
-        "Os dados oficiais do relatório foram obtidos pelo main.py. O Streamlit foi utilizado como camada interativa e exploratória. Essa separação é importante porque a interface permite escolher outras quantidades e linguagens, podendo gerar amostras diferentes daquela utilizada como snapshot oficial.",
-    )
+    documento.add_heading("2.2 Arquitetura e fluxo implementado", level=2)
+    adicionar_lista(documento, [
+        "main.py pagina a consulta GraphQL, valida avanço dos cursores e encerra apenas com 1.000 repositórios únicos;",
+        "utils/dataframe.py converte o snapshot bruto e calcula métricas derivadas reproduzíveis;",
+        "analysis contém módulos independentes de RQ01 a RQ08 e RQ10 e exporta nove JSONs estritos;",
+        "app.py apresenta abas para RQ01–RQ08 e RQ10, busca por repositório e download do CSV com as taxas da RQ08;",
+        "gerar_relatorio_docx.py recalcula todos os números exibidos a partir do mesmo CSV canônico.",
+    ])
 
-    documento.add_heading("3.3 Etapas e configuração do processo", level=2)
-    adicionar_texto(
-        documento,
-        "O processo foi acompanhado no GitHub Project público denominado Laboratorio de Experimentação - Kanban. O fluxo configurado contém as colunas Backlog, To Do, Doing, In review e Done.",
-    )
-    adicionar_tabela(
-        documento,
-        ["Coluna", "Limite de WIP"],
-        [["Backlog", 30], ["Doing", 9], ["In review", 5]],
-        larguras_cm=[9, 4],
-        fonte=9.5,
-    )
-    adicionar_texto(
-        documento,
-        "Também foram configurados os campos Priority, Size, Estimate, Start date e Target date. O Project possui visões específicas para backlog, prioridades, itens do time, roadmap e tarefas atribuídas ao usuário atual.",
-    )
-    adicionar_texto(
-        documento,
-        "Na S01, Diogo ficou responsável pela consulta automática, RQ01, RQ03, RQ05 e pela primeira versão do Streamlit. Pedro ficou responsável por RQ02, RQ04, RQ06, RQ07 e pelos ajustes de integração.",
-    )
-    adicionar_tabela(
-        documento,
-        ["Sprint", "Atividade", "Responsável", "Issue/PR"],
-        [
-            ["S01", "RQ01 — idade", "Diogo", "Issue #1"],
-            ["S01", "RQ02 — pull requests", "Pedro", "Issue #2 / PR #19"],
-            ["S01", "RQ03 — releases", "Diogo", "Issue #3"],
-            ["S01", "RQ04 — última atualização", "Pedro", "Issue #4 / PR #18"],
-            ["S01", "RQ05 — linguagem primária", "Diogo", "Issue #5"],
-            ["S01", "RQ06 — issues fechadas", "Pedro", "Issue #6 / PR #17"],
-            ["S01", "Consulta automática GraphQL", "Diogo", "Issue #7"],
-            ["S01", "Interface web Streamlit", "Diogo", "Issue #9"],
-            ["S01", "RQ07 — cruzamento de métricas", "Pedro", "Issue #16 / PR #20"],
-            ["S01", "Integração geral", "Pedro", "PR #21"],
-        ],
-        larguras_cm=[1.4, 7.6, 2.6, 3.8],
-        fonte=8.5,
-    )
-    adicionar_texto(
-        documento,
-        "Na S02, Diogo realizou a paginação, a coleta dos 1.000 repositórios, a exportação CSV e a evolução dos gráficos. Pedro realizou a validação dos dados, a formulação das hipóteses, a atualização metodológica e a preparação do snapshot.",
-    )
-    adicionar_tabela(
-        documento,
-        ["Sprint", "Atividade", "Responsável", "Issue/PR"],
-        [
-            ["S02", "Paginação da API GraphQL", "Diogo", "Issue #8"],
-            ["S02", "Coleta dos 1.000 repositórios", "Diogo", "Issue #10 / PR #27"],
-            ["S02", "Exportação para CSV", "Diogo", "Issue #11 / PR #28"],
-            ["S02", "Validação geral das RQs", "Pedro", "Issue #12"],
-            ["S02", "Hipóteses e validações individuais", "Pedro", "Issues #32–#38"],
-            ["S02", "Correção e criação de gráficos", "Diogo", "Issues #29–#30 / PR #31"],
-            ["S02", "Criação das hipóteses", "Pedro", "Issue #13"],
-            ["S02", "Snapshot do GitHub Project", "Pedro", "Issue #14"],
-            ["S02", "Documentação e metodologia", "Pedro/grupo", "Issues #15 e #22–#26"],
-        ],
-        larguras_cm=[1.4, 7.4, 2.8, 3.8],
-        fonte=8.5,
-    )
-    adicionar_texto(
-        documento,
-        "As hipóteses individuais foram registradas nos comentários das Issues #32 a #38, fechadas após a validação.",
-    )
-    adicionar_placeholder_snapshot(documento)
-    adicionar_legenda(
-        documento,
-        "Figura 1 — GitHub Project ao final da S02.",
-        "Elaborado pelo grupo, 2026.",
-    )
+    documento.add_heading("2.3 Inovação: aplicação Streamlit", level=2)
+    adicionar_texto(documento, "A inovação do grupo é uma aplicação interativa em Streamlit. A versão atual apresenta a RQ08 com coeficientes, quartis, sensibilidade e gráficos de dispersão, além da RQ10 com a relação entre idade e fechamento de issues. Os tooltips preservam os valores originais; estrelas usam escala logarítmica e as taxas anualizadas usam symlog, mantendo observações iguais a zero.")
+    adicionar_texto(documento, "A evolução da Issue #47 acrescentou busca e filtragem por repositório às visualizações. A mineração em lote permanece centralizada no main.py, enquanto o Streamlit atua como camada de exploração e comunicação dos resultados.")
 
-    documento.add_heading("3.4 Ferramentas", level=2)
-    adicionar_texto(
-        documento,
-        "O desenvolvimento foi realizado em Python 3.13.14. Requests 2.34.2 foi utilizada para requisições HTTP à API GraphQL, enquanto python-dotenv 1.2.2 permitiu carregar o token sem incorporá-lo ao código-fonte.",
-    )
-    adicionar_texto(
-        documento,
-        "Pandas 3.0.5 foi utilizado na transformação dos nós GraphQL em estrutura tabular, no cálculo das métricas, nos agrupamentos e na exportação. A interface foi construída com Streamlit 1.61.1. Altair 6.2.2 foi empregado nas visualizações interativas.",
-    )
-    adicionar_texto(
-        documento,
-        "Git e GitHub foram utilizados no controle de versão. Issues, pull requests e GitHub Projects registraram tarefas, responsáveis e andamento do trabalho.",
-    )
-    adicionar_lista(
-        documento,
-        [
-            "github_collector/schema.py: definição da query GraphQL.",
-            "github_collector/client.py: comunicação utilizada pelo Streamlit.",
-            "utils/dataframe.py: transformação dos nós para a tabela analítica.",
-            "analysis: módulos independentes de RQ01–RQ07.",
-            "main.py: coleta oficial em lote, exportação e análises.",
-            "app.py: camada interativa de apresentação.",
-        ],
-    )
-    adicionar_texto(
-        documento,
-        "As versões foram obtidas do ambiente virtual. Como ainda não existe arquivo de dependências versionado, recomenda-se criar um requirements.txt para melhorar a reprodução.",
-    )
+    documento.add_heading("3. Metodologia", level=1)
+    documento.add_heading("3.1 Seleção e paginação", level=2)
+    adicionar_texto(documento, "A população operacional corresponde aos repositórios públicos encontrados por stars:>0 is:public sort:stars-desc. A conexão search é percorrida em lotes de até 50. Cada nova chamada recebe em after o endCursor anterior; hasNextPage, cursor ausente ou repetido e página vazia são verificados. Duplicatas por nameWithOwner são descartadas até atingir exatamente 1.000 projetos.")
 
-    documento.add_heading("3.5 Tabela de métricas", level=2)
-    adicionar_tabela(
-        documento,
-        ["RQ", "Métrica", "Definição operacional", "Unidade", "Fonte"],
-        [
-            ["RQ01", "Idade", "Diferença entre transformação e createdAt, dividida por 365,25", "Anos", "GraphQL"],
-            ["RQ02", "PRs mescladas", "pullRequests(states: MERGED).totalCount", "Quantidade", "GraphQL"],
-            ["RQ03", "Releases", "releases.totalCount", "Quantidade acumulada", "GraphQL"],
-            ["RQ04", "Recência", "Diferença entre transformação e pushedAt", "Dias", "GraphQL"],
-            ["RQ05", "Linguagem popular", "Pertencimento de primaryLanguage ao Top 10 Octoverse 2025", "Categoria / %", "GraphQL e Octoverse"],
-            ["RQ06", "Issues fechadas", "100 × fechadas / (abertas + fechadas)", "Percentual", "GraphQL"],
-            ["RQ07", "Linguagem versus métricas", "Comparação das medianas de RQ02–RQ04 entre Top 10 e demais", "Medianas por grupo", "Dados derivados"],
-        ],
-        larguras_cm=[1.1, 2.7, 6.4, 2.3, 3.2],
-        fonte=8,
-    )
-    adicionar_texto(
-        documento,
-        "A RQ03 utiliza o termo frequência, mas a implementação mede a quantidade acumulada de releases. Uma frequência exigiria normalização pela idade ou intervalos entre releases. Da mesma maneira, a RQ04 mede recência do último push, não a frequência histórica.",
-    )
+    documento.add_heading("3.2 Transformação e métricas", level=2)
+    adicionar_tabela(documento, ["RQ", "Métrica operacional"], [
+        ["RQ01", "(data da transformação − createdAt) / 365,25, em anos"],
+        ["RQ02", "pullRequests(states: MERGED).totalCount; não identifica autoria externa"],
+        ["RQ03", "releases.totalCount acumulado"],
+        ["RQ04", "dias entre a transformação e pushedAt"],
+        ["RQ05", "primaryLanguage comparada ao Top 10 Octoverse 2025"],
+        ["RQ06", "100 × issues fechadas / (abertas + fechadas)"],
+        ["RQ07", "medianas de PRs, releases e recência por grupo de linguagem"],
+        ["RQ08", "PRs/ano e releases/ano, divididos pela idade registrada no CSV"],
+        ["RQ10", "idade × percentual de issues fechadas; Spearman e mediana/Q1/Q3/IQR por faixa etária"],
+    ], fonte=8.4)
+    adicionar_texto(documento, "A idade é arredondada para duas casas antes da anualização; as duas taxas são arredondadas para quatro casas. Idades não positivas produzem valor nulo, sem resultados numéricos inválidos.")
 
-    documento.add_heading("3.6 Inovação proposta pelo grupo", level=2)
-    adicionar_texto(
-        documento,
-        "As sete questões de pesquisa foram sugeridas pelo professor e não constituem contribuição adicional. A inovação proposta foi uma aplicação web com Streamlit para integrar mineração, processamento, análise, visualização e exportação em um único ambiente.",
-    )
-    adicionar_texto(
-        documento,
-        "O Streamlit é um framework Python para construção de aplicações dinâmicas de dados. Sua utilização permitiu transformar os scripts em uma interface navegável, reduzindo a necessidade de interação direta com o terminal.",
-    )
-    adicionar_texto(
-        documento,
-        "A aplicação permite informar o token por campo protegido ou variável de ambiente, escolher uma linguagem opcional, solicitar entre 1 e 1.000 repositórios e iniciar a consulta. Uma barra de progresso informa o andamento e mensagens específicas tratam erros HTTP, GraphQL e de conexão.",
-    )
-    adicionar_texto(
-        documento,
-        "Depois da coleta, os dados são transformados e as sete análises executadas automaticamente. A interface apresenta indicadores, uma aba por RQ, distribuições, rankings, tabelas, URLs clicáveis, cruzamentos por linguagem e download de CSV enriquecido.",
-    )
-    adicionar_texto(
-        documento,
-        "Essa inovação possui caráter de engenharia, transparência e comunicação. Para consistência, o snapshot oficial foi produzido pelo main.py; o Streamlit foi tratado como ferramenta exploratória, pois aceita filtros e quantidades diferentes.",
-    )
-    adicionar_texto(
-        documento,
-        "A aplicação representa uma primeira versão. Sua quantidade padrão é 100; o coletor do app.py não possui as mesmas garantias de cardinalidade, unicidade e avanço de cursor do main.py, e sua query não inclui explicitamente is:public. Uma consulta pode sobrescrever o CSV, o JSON normalizado e os resultados das RQs. A interface também anuncia um filtro mínimo de três repositórios por linguagem que o módulo ainda não aplica, e a visualização da RQ07 precisa diferenciar o Top 10 das demais linguagens.",
-    )
+    documento.add_heading("3.3 Procedimento analítico da RQ08", level=2)
+    adicionar_texto(documento, f"A análise principal inclui idade ≥ 1 ano (n = {amostra8['analise_principal']}); a sensibilidade inclui toda idade positiva (n = {amostra8['sensibilidade_idade_positiva']}). Spearman é calculado como Pearson entre postos médios, sem SciPy. Os quartis são formados após ordenação estável por estrelas e nome. Outliers seguem 1,5 × IQR e permanecem em todas as análises.")
+    adicionar_texto(documento, "A anualização reduz o efeito mecânico do tempo de existência, mas não controla domínio, tamanho da equipe, governança, automação ou trajetória histórica. As associações não permitem inferência causal.")
 
-    # 4. Resultados
-    adicionar_titulo_secao(documento, "4. Resultados", nova_pagina=True)
-    documento.add_heading("4.1 Coleta e validação dos dados", level=2)
-    adicionar_texto(
-        documento,
-        "O snapshot validado foi gerado em 20 de agosto de 2026. A transformação ocorreu aproximadamente às 09h49 no horário de Brasília, valor inferido dos artefatos porque o horário exato ainda não é armazenado como metadado.",
-    )
-    adicionar_texto(
-        documento,
-        "A coleta produziu exatamente 1.000 repositórios, com 1.000 nomes e 1.000 URLs únicas. A lista de nós GraphQL e o CSV contêm os mesmos projetos e na mesma ordem.",
-    )
-    adicionar_texto(
-        documento,
-        "Os repositórios estão organizados pelo número de estrelas de forma não crescente. No instante da coleta, o maior valor foi 541.471 estrelas e o menor foi 32.950.",
-    )
-    adicionar_texto(
-        documento,
-        "O CSV possui 1.000 linhas e 11 colunas: Nome, URL, Estrelas, Linguagem, Idade em anos, PRs aceitas, Total de releases, Dias desde a última atualização, Issues abertas, Issues fechadas e Percentual de issues fechadas.",
-    )
-    adicionar_texto(
-        documento,
-        "Os campos diretamente coletados foram comparados entre JSON e CSV. Nenhuma divergência foi encontrada, e os sete arquivos de resultados coincidiram com o recálculo realizado a partir do CSV. Esse snapshot foi validado localmente e deve ser versionado antes da entrega para completar sua rastreabilidade.",
-    )
-    adicionar_texto(
-        documento,
-        "Foram encontrados 87 repositórios sem linguagem primária, representados por Não definida, e 43 sem issues abertas ou fechadas. Nesses casos, o percentual de fechamento foi mantido ausente. Não foram observados valores negativos, contagens fracionárias, percentuais fora de 0% a 100% ou duplicações.",
-    )
-    adicionar_texto(
-        documento,
-        "Os outliers identificados estavam presentes nos dados GraphQL e foram mantidos. Sua remoção reduziria artificialmente a diversidade da amostra.",
-    )
-    adicionar_texto(
-        documento,
-        "Durante a validação foi identificado um artefato inconsistente denominado repositorios_populares.json, com somente 100 registros e valores NaN. Ele foi excluído da análise da S02. Os artefatos canônicos são repositorios_graphql.json, repositorios_populares.csv e os sete arquivos de RQ.",
-    )
+    documento.add_heading("3.4 Procedimento analítico da RQ10", level=2)
+    adicionar_texto(documento, f"A RQ10 utiliza a idade registrada no CSV e o percentual acumulado de issues fechadas. Dos {formatar_numero(total)} projetos, {formatar_numero(rq10['repositorios_com_issues'])} possuem ao menos uma issue e formam a amostra válida; os {formatar_numero(rq10['repositorios_sem_issues'])} sem issues têm percentual estruturalmente indefinido e são excluídos da correlação e dos resumos por faixa.")
+    adicionar_texto(documento, "A associação monotônica é estimada por Spearman, calculado como a correlação de Pearson entre postos médios para tratar empates. A distribuição é resumida nas faixas 0–2, >2–5, >5–10, >10–15 e >15 anos, usando quantidade, mediana, primeiro quartil, terceiro quartil e IQR. Outliers seguem 1,5 × IQR e são mantidos na análise.")
+    adicionar_texto(documento, "O percentual acumulado de fechamento não mede velocidade, complexidade ou qualidade da resolução. Projetos podem usar rastreadores externos, e a análise transversal não permite atribuir diferenças etárias a processos de manutenção mais consolidados.")
+
+    documento.add_heading("4. Resultados", level=1)
+    documento.add_heading("4.1 Validação do snapshot", level=2)
+    adicionar_texto(documento, f"O snapshot contém {formatar_numero(total)} linhas, {formatar_numero(df['Nome'].nunique())} nomes e {formatar_numero(df['URL'].nunique())} URLs únicas. As estrelas estão em ordem não crescente. O CSV contém as taxas PRs por ano e Releases por ano, e os nove arquivos JSON de RQ01–RQ08 e RQ10 registram total_repositorios = {formatar_numero(total)}.")
 
     documento.add_heading("4.2 Visualizações e resultados por RQ", level=2)
-
+    idade = estatisticas["idade"]
     documento.add_heading("4.2.1 RQ01 — Sistemas populares são maduros/antigos?", level=3)
-    adicionar_texto(
-        documento,
-        "A idade mediana foi de 7,74 anos e a média foi de 7,66 anos. O mínimo foi 0,02 ano e o máximo 18,36 anos. Dos 1.000 projetos, 139 tinham menos de dois anos, 185 entre dois e menos de cinco, 331 entre cinco e menos de dez e 345 tinham dez anos ou mais.",
-    )
-    adicionar_texto(
-        documento,
-        "Assim, 676 repositórios, correspondentes a 67,6% da amostra, possuíam pelo menos cinco anos. Nenhum valor foi classificado como outlier pelo critério de 1,5 vezes a amplitude interquartil.",
-    )
-    adicionar_figura(
-        documento,
-        graficos["rq01"],
-        "Figura 2 — Distribuição da idade dos repositórios.",
-        "Elaborado pelo grupo com dados da API GraphQL do GitHub, 2026.",
-    )
+    adicionar_texto(documento, f"A idade mediana foi {formatar_numero(idade['mediana'], 2)} anos e a média {formatar_numero(idade['media'], 2)}. O intervalo observado foi de {formatar_numero(idade['minimo'], 2)} a {formatar_numero(idade['maximo'], 2)} anos. As faixas <2, 2–<5, 5–<10 e ≥10 anos reuniram, respectivamente, {', '.join(formatar_numero(v) for v in estatisticas['faixas_idade'])} projetos.")
+    adicionar_figura(documento, graficos["rq01"], 2, "Distribuição da idade dos repositórios.")
 
+    prs = estatisticas["prs"]
     documento.add_heading("4.2.2 RQ02 — Sistemas populares recebem muita contribuição externa?", level=3)
-    adicionar_texto(
-        documento,
-        "A mediana foi de 768 pull requests mescladas e a média foi de 4.240,84. O primeiro quartil foi 175, o terceiro 3.423,5 e o máximo 103.387. Vinte repositórios apresentaram zero PRs mescladas.",
-    )
-    adicionar_texto(
-        documento,
-        "Foram identificados 124 outliers superiores. A diferença entre média e mediana demonstra forte assimetria, com poucos projetos concentrando uma quantidade muito elevada.",
-    )
-    adicionar_tabela(
-        documento,
-        ["Repositório", "PRs mescladas"],
-        [
-            ["firstcontributions/first-contributions", "103.387"],
-            ["llvm/llvm-project", "97.254"],
-            ["elastic/elasticsearch", "95.619"],
-        ],
-        larguras_cm=[11, 4],
-        fonte=9,
-    )
-    adicionar_figura(
-        documento,
-        graficos["rq02"],
-        "Figura 3 — Distribuição dos repositórios por faixa de pull requests mescladas.",
-        "Elaborado pelo grupo com dados da API GraphQL do GitHub, 2026.",
-    )
+    adicionar_texto(documento, f"A mediana foi {formatar_numero(prs['mediana'])} PRs mescladas, a média {formatar_numero(prs['media'], 2)}, Q1 {formatar_numero(prs['q1'], 2)}, Q3 {formatar_numero(prs['q3'], 2)} e o máximo {formatar_numero(prs['maximo'])}. Há {estatisticas['prs_zero']} projetos com zero e {estatisticas['prs_outliers']['superiores']} outliers superiores.")
+    adicionar_tabela(documento, ["Repositório", "PRs mescladas"], [[nome, formatar_numero(valor)] for nome, valor in estatisticas["top_prs"]], fonte=9)
+    adicionar_texto(documento, "PRs mescladas aproximam volume de contribuição, mas a consulta não permite afirmar que a contribuição veio de pessoas externas ao projeto.")
+    adicionar_figura(documento, graficos["rq02"], 3, "Distribuição por faixa de pull requests mescladas.")
 
+    releases = estatisticas["releases"]
     documento.add_heading("4.2.3 RQ03 — Sistemas populares lançam releases com frequência?", level=3)
-    adicionar_texto(
-        documento,
-        "A mediana foi de 41 releases e a média foi de 158,23. O primeiro quartil foi zero, o terceiro 153 e o máximo 6.893. Dos 1.000 projetos, 728 possuíam ao menos uma release, representando 72,8% da amostra; 272 apresentaram zero.",
-    )
-    adicionar_texto(
-        documento,
-        "Foram identificados 90 outliers superiores, confirmando que poucos projetos acumulam números muito acima da maior parte da amostra.",
-    )
-    adicionar_tabela(
-        documento,
-        ["Repositório", "Releases"],
-        [
-            ["ggml-org/llama.cpp", "6.893"],
-            ["gradio-app/gradio", "5.090"],
-            ["vercel/next.js", "3.810"],
-        ],
-        larguras_cm=[11, 4],
-        fonte=9,
-    )
-    adicionar_figura(
-        documento,
-        graficos["rq03"],
-        "Figura 4 — Distribuição dos repositórios por quantidade acumulada de releases.",
-        "Elaborado pelo grupo com dados da API GraphQL do GitHub, 2026.",
-    )
+    adicionar_texto(documento, f"A mediana acumulada foi {formatar_numero(releases['mediana'])}, a média {formatar_numero(releases['media'], 2)}, Q1 {formatar_numero(releases['q1'], 2)}, Q3 {formatar_numero(releases['q3'], 2)} e o máximo {formatar_numero(releases['maximo'])}. {estatisticas['releases_com']} projetos ({formatar_percentual(estatisticas['releases_com'], total)}) possuem ao menos uma release; {estatisticas['releases_zero']} possuem zero. Foram detectados {estatisticas['releases_outliers']['superiores']} outliers superiores.")
+    adicionar_tabela(documento, ["Repositório", "Releases"], [[nome, formatar_numero(valor)] for nome, valor in estatisticas["top_releases"]], fonte=9)
+    adicionar_figura(documento, graficos["rq03"], 4, "Distribuição por quantidade acumulada de releases.")
 
+    dias = estatisticas["dias"]
     documento.add_heading("4.2.4 RQ04 — Sistemas populares são atualizados com frequência?", level=3)
-    adicionar_texto(
-        documento,
-        "A mediana do tempo desde o último push foi de aproximadamente 2,00 dias. A média foi de 114,05 dias e o máximo chegou a 2.452,35 dias.",
-    )
-    adicionar_tabela(
-        documento,
-        ["Recência", "Repositórios"],
-        [
-            ["Até 1 dia", 439],
-            ["Mais de 1 e até 7 dias", 165],
-            ["Mais de 7 e até 30 dias", 123],
-            ["Mais de 30 e até 365 dias", 158],
-            ["Mais de 365 dias", 115],
-        ],
-        larguras_cm=[11, 4],
-        fonte=9,
-    )
-    adicionar_texto(
-        documento,
-        "Portanto, 727 repositórios, ou 72,7%, receberam um push nos 30 dias anteriores à transformação. Ao mesmo tempo, 11,5% estavam há mais de um ano sem push. Foram identificados 197 outliers superiores.",
-    )
-    adicionar_texto(
-        documento,
-        "Um valor igual a zero foi produzido porque o pushedAt retornado pelo GitHub estava aproximadamente 17 segundos à frente do relógio utilizado. O código limitou o resultado mínimo a zero. Quando pushedAt está ausente, a transformação utiliza createdAt como alternativa; esse fallback não foi acionado nos 1.000 registros desta coleta.",
-    )
-    adicionar_figura(
-        documento,
-        graficos["rq04"],
-        "Figura 5 — Distribuição do tempo desde o último push.",
-        "Elaborado pelo grupo com dados da API GraphQL do GitHub, 2026.",
-    )
+    adicionar_texto(documento, f"A mediana desde o último push foi {formatar_numero(dias['mediana'], 2)} dias, a média {formatar_numero(dias['media'], 2)} e o máximo {formatar_numero(dias['maximo'], 2)}. {estatisticas['dias_ate_30']} projetos ({formatar_percentual(estatisticas['dias_ate_30'], total)}) estavam em até 30 dias; {estatisticas['faixas_dias'][-1]} estavam há mais de um ano. O critério IQR identificou {estatisticas['dias_outliers']['superiores']} outliers superiores.")
+    adicionar_tabela(documento, ["Recência", "Repositórios"], [[rotulo, valor] for rotulo, valor in zip(["Até 1 dia", ">1 a 7 dias", ">7 a 30 dias", ">30 a 365 dias", ">365 dias"], estatisticas["faixas_dias"])], fonte=9)
+    adicionar_figura(documento, graficos["rq04"], 5, "Distribuição do tempo desde o último push.")
 
-    documento.add_heading("4.2.5 RQ05 — Sistemas populares são escritos nas linguagens mais populares?", level=3)
-    adicionar_texto(
-        documento,
-        "Foram identificadas 43 linguagens efetivamente definidas. O resultado apresenta 44 categorias porque inclui Não definida.",
-    )
-    adicionar_tabela(
-        documento,
-        ["Linguagem", "Repositórios"],
-        [
-            ["Python", 227],
-            ["TypeScript", 173],
-            ["JavaScript", 111],
-            ["Não definida", 87],
-            ["Go", 77],
-            ["Rust", 58],
-            ["C++", 41],
-            ["Java", 41],
-        ],
-        larguras_cm=[10, 4],
-        fonte=9,
-    )
-    adicionar_texto(
-        documento,
-        "Python, TypeScript e JavaScript concentram 511 repositórios. Ao todo, 702 projetos utilizam uma linguagem do Top 10, correspondendo a 70,2% da amostra. Considerando somente os 913 com linguagem definida, a proporção é 76,9%. Doze linguagens aparecem em somente um repositório.",
-    )
-    adicionar_figura(
-        documento,
-        graficos["rq05"],
-        "Figura 6 — Participação das linguagens do Top 10 do GitHub Octoverse.",
-        "Elaborado pelo grupo com dados da API GraphQL e do GitHub Octoverse 2025.",
-    )
+    documento.add_heading("4.2.5 RQ05 — Sistemas populares usam linguagens populares?", level=3)
+    adicionar_texto(documento, f"Foram observadas {estatisticas['linguagens_distintas_definidas']} linguagens definidas. O Top 10 Octoverse aparece em {estatisticas['top10']} projetos ({formatar_percentual(estatisticas['top10'], total)}) e em {formatar_percentual(estatisticas['top10'], estatisticas['definida'])} daqueles com linguagem definida. {estatisticas['indefinida']} projetos não possuem linguagem primária definida.")
+    adicionar_tabela(documento, ["Linguagem", "Repositórios"], [[nome, valor] for nome, valor in estatisticas["linguagens_top"]], fonte=9)
+    adicionar_figura(documento, graficos["rq05"], 6, "Participação das linguagens do Top 10 GitHub Octoverse 2025.")
 
+    issues = estatisticas["issues"]
     documento.add_heading("4.2.6 RQ06 — Sistemas populares possuem alto percentual de issues fechadas?", level=3)
-    adicionar_texto(
-        documento,
-        "O percentual foi calculado para 957 repositórios; nos 43 restantes não existiam issues abertas ou fechadas. Entre os válidos, a mediana foi 87,5%, a média 80,25%, o primeiro quartil 70,4%, o terceiro 96,8%, o mínimo 7,7% e o máximo 100%.",
-    )
-    adicionar_texto(
-        documento,
-        "Dos 957 repositórios com issues, 618, equivalentes a 64,6%, apresentaram pelo menos 80% de fechamento. Em contrapartida, 108 projetos, ou 11,3%, possuíam percentual abaixo de 50%. Foram identificados 38 outliers inferiores.",
-    )
-    adicionar_figura(
-        documento,
-        graficos["rq06"],
-        "Figura 7 — Distribuição do percentual de issues fechadas.",
-        "Elaborado pelo grupo com dados da API GraphQL do GitHub, 2026.",
-    )
+    adicionar_texto(documento, f"A taxa foi calculável em {issues['n']} projetos; {estatisticas['issues_sem']} não possuíam issues. Entre os válidos, a mediana foi {formatar_numero(issues['mediana'], 2)}%, a média {formatar_numero(issues['media'], 2)}%, Q1 {formatar_numero(issues['q1'], 2)}%, Q3 {formatar_numero(issues['q3'], 2)}%, mínimo {formatar_numero(issues['minimo'], 2)}% e máximo {formatar_numero(issues['maximo'], 2)}%. {estatisticas['issues_ge80']} ({formatar_percentual(estatisticas['issues_ge80'], issues['n'])}) alcançaram pelo menos 80%.")
+    adicionar_figura(documento, graficos["rq06"], 7, "Distribuição do percentual de issues fechadas.")
 
+    rq07 = estatisticas["rq07"]
     documento.add_heading("4.2.7 RQ07 — Linguagens populares recebem mais contribuição, releases e atualizações?", level=3)
-    adicionar_texto(
-        documento,
-        "Os 913 repositórios com linguagem definida foram divididos entre linguagens do Top 10 e outras linguagens. Os 87 classificados como Não definida foram excluídos. Essa comparação agregada foi recalculada para o relatório a partir do CSV; o JSON atual da RQ07 armazena as medianas separadas por linguagem e a marcação de pertencimento ao Top 10.",
+    adicionar_texto(documento, f"A comparação exclui {estatisticas['indefinida']} projetos sem linguagem definida. As estatísticas abaixo foram recalculadas do CSV para os mesmos grupos do Octoverse.")
+    adicionar_tabela(documento, ["Grupo", "N", "Mediana PRs", "Mediana releases", "Mediana dias"], [[indice, int(linha['n']), formatar_numero(linha['prs']), formatar_numero(linha['releases']), formatar_numero(linha['dias'], 2)] for indice, linha in rq07.iterrows()], fonte=8.5)
+    adicionar_figura(documento, graficos["rq07"], 8, "Indicadores medianos por grupo de linguagens.")
+
+    documento.add_heading("4.2.8 RQ08 — Popularidade e intensidade anual de desenvolvimento", level=3)
+    principal_pr = corr_principal["estrelas_vs_prs_por_ano"]
+    principal_rel = corr_principal["estrelas_vs_releases_por_ano"]
+    sens_pr = corr_sens["estrelas_vs_prs_por_ano"]
+    sens_rel = corr_sens["estrelas_vs_releases_por_ano"]
+    adicionar_texto(documento, f"Na amostra principal (idade ≥ 1 ano; n = {amostra8['analise_principal']}), estrelas × PRs/ano apresentou ρ = {formatar_numero(principal_pr['rho'], 4)} e estrelas × releases/ano ρ = {formatar_numero(principal_rel['rho'], 4)}. Há {amostra8['idade_menor_1_ano']} projetos com menos de um ano; nenhum outlier foi removido.")
+    adicionar_tabela(documento, ["Quartil de estrelas", "N", "Limites de estrelas", "Mediana PRs/ano", "Mediana releases/ano"], [[q["quartil"], q["repositorios"], f"{formatar_numero(q['estrelas_minimo'])}–{formatar_numero(q['estrelas_maximo'])}", formatar_numero(q["prs_por_ano_mediana"], 4), formatar_numero(q["releases_por_ano_mediana"], 4)] for q in rq08["resumo_por_quartil_estrelas"]], fonte=8.1)
+    adicionar_texto(documento, f"Na sensibilidade com todas as idades positivas (n = {amostra8['sensibilidade_idade_positiva']}), os coeficientes foram ρ = {formatar_numero(sens_pr['rho'], 4)} para PRs/ano e ρ = {formatar_numero(sens_rel['rho'], 4)} para releases/ano. O IQR marcou {rq08['outliers_iqr']['prs_por_ano']['quantidade']} extremos em PRs/ano, {rq08['outliers_iqr']['releases_por_ano']['quantidade']} em releases/ano e {rq08['outliers_iqr']['uniao_repositorios_extremos']} na união.")
+    adicionar_figura(documento, graficos["rq08"], 9, "Dispersões de estrelas versus PRs/ano e releases/ano.")
+
+    faixas10 = rq10["resumo_por_faixa_etaria"]
+    medianas10 = [faixa["Mediana_issues_fechadas"] for faixa in faixas10]
+    crescimento_monotonico10 = all(
+        atual <= seguinte
+        for atual, seguinte in zip(medianas10, medianas10[1:])
     )
+    rho10 = rq10["correlacao_spearman"]
+    titulo_rq10 = documento.add_heading(
+        "4.2.9 RQ10 — Maturidade e tratamento de issues", level=3
+    )
+    titulo_rq10.paragraph_format.page_break_before = True
+    adicionar_texto(documento, f"A análise inclui {formatar_numero(rq10['repositorios_com_issues'])} repositórios com issues e exclui os {formatar_numero(rq10['repositorios_sem_issues'])} projetos sem issues. A correlação entre idade e percentual de issues fechadas foi {classificar_correlacao(rho10)} (ρ = {formatar_numero(rho10, 4)}). Entre os casos válidos, a idade mediana foi {formatar_numero(rq10['idade_mediana_repositorios_com_issues'], 2)} anos e o percentual mediano de fechamento foi {formatar_numero(rq10['percentual_issues_fechadas_mediana'], 2)}%.")
+    adicionar_texto(documento, f"As medianas por faixa {'cresceram em todas as transições' if crescimento_monotonico10 else 'não cresceram em todas as transições'}, passando de {formatar_numero(medianas10[0], 2)}% nos projetos de até dois anos para {formatar_numero(medianas10[-1], 2)}% naqueles com mais de quinze anos. Os intervalos interquartis, porém, apresentam sobreposição, e a última faixa contém apenas {formatar_numero(faixas10[-1]['Quantidade_repositorios'])} projetos.")
     adicionar_tabela(
         documento,
-        ["Grupo", "N", "Mediana de PRs", "Mediana de releases", "Mediana de dias"],
+        ["Faixa de idade", "N", "Mediana", "Q1", "Q3", "IQR"],
         [
-            ["Linguagens Top 10", 702, "1.000", "64", "1,05"],
-            ["Outras linguagens definidas", 211, "670", "31", "3,67"],
+            [
+                faixa["Faixa de idade"],
+                faixa["Quantidade_repositorios"],
+                f"{formatar_numero(faixa['Mediana_issues_fechadas'], 2)}%",
+                f"{formatar_numero(faixa['Q1_issues_fechadas'], 2)}%",
+                f"{formatar_numero(faixa['Q3_issues_fechadas'], 2)}%",
+                formatar_numero(faixa["IQR_issues_fechadas"], 2),
+            ]
+            for faixa in faixas10
         ],
-        larguras_cm=[5.2, 1.2, 3.1, 3.4, 3.0],
         fonte=8.5,
     )
-    adicionar_texto(
-        documento,
-        "Os projetos associados ao Top 10 apresentaram maior mediana de pull requests e releases e menor número de dias desde o último push, indicando maior recência.",
-    )
-    adicionar_texto(
-        documento,
-        "A comparação individual exige cautela: das 44 categorias apresentadas, 24 possuem menos de cinco repositórios, 19 possuem no máximo dois e 12 são representadas por um único projeto.",
-    )
-    adicionar_figura(
-        documento,
-        graficos["rq07"],
-        "Figura 8 — Indicadores medianos por grupo de linguagens.",
-        "Elaborado pelo grupo com dados da API GraphQL e do GitHub Octoverse 2025.",
-    )
+    adicionar_texto(documento, f"No percentual de fechamento, o critério global de 1,5 × IQR identificou {formatar_numero(estatisticas['issues_outliers']['inferiores'])} outliers inferiores e {formatar_numero(estatisticas['issues_outliers']['superiores'])} superiores; todos foram mantidos. Há ainda {formatar_numero(estatisticas['issues_100'])} projetos no teto de 100% de issues fechadas.")
+    adicionar_figura(documento, graficos["rq10"], 10, "Relação entre idade e percentual de issues fechadas, com medianas e IQR por faixa etária.")
 
-    documento.add_heading("4.3 Discussão", level=2)
-    discussoes = [
-        (
-            "4.3.1 RQ01",
-            "O resultado foi compatível com a expectativa informal de que repositórios populares tendem a ser maduros. A mediana de 7,74 anos ultrapassou cinco anos, e 67,6% da amostra possuía cinco anos ou mais. Entretanto, projetos antigos tiveram mais tempo para acumular estrelas; não se pode concluir que maturidade seja consequência da popularidade.",
-        ),
-        (
-            "4.3.2 RQ02",
-            "A mediana de 768 PRs ultrapassou o limiar operacional da expectativa informal. Os 124 outliers e a diferença entre média e mediana são compatíveis com a assimetria esperada. A comparação vale somente para PRs mescladas; a origem externa não pode ser confirmada.",
-        ),
-        (
-            "4.3.3 RQ03",
-            "O resultado foi compatível com a expectativa quanto à presença e quantidade acumulada: 72,8% possuíam release e a mediana foi 41. O total não mede frequência temporal; projetos antigos tiveram mais tempo para acumular versões e alguns utilizam outros canais.",
-        ),
-        (
-            "4.3.4 RQ04",
-            "O resultado foi compatível com a expectativa quanto à recência. Um total de 72,7% recebeu push nos 30 dias anteriores e a mediana foi dois dias. A métrica não representa frequência histórica nem distingue atualizações manuais de automáticas.",
-        ),
-        (
-            "4.3.5 RQ05",
-            "O resultado foi compatível com a expectativa: linguagens Top 10 estavam em 70,2% da amostra e 76,9% dos projetos com linguagem definida. O resultado depende do ranking e de sua data, e a linguagem primária simplifica projetos multilíngues.",
-        ),
-        (
-            "4.3.6 RQ06",
-            "A mediana de 87,5% ultrapassou o limiar de 80%. Entre os projetos com issues, 64,6% possuíam pelo menos 80% de fechamento. A taxa não informa tempo, complexidade ou qualidade da solução e pode omitir rastreadores externos.",
-        ),
-        (
-            "4.3.7 RQ07",
-            "O resultado foi compatível com a expectativa informal: o grupo Top 10 apresentou mais PRs, mais releases e menor tempo desde o push. A associação não é causal; idade, domínio, comunidade, governança e automação podem influenciar os resultados.",
-        ),
+    documento.add_heading("4.3 Discussão e avaliação das hipóteses", level=2)
+    textos_discussao = [
+        ["4.3.1 RQ01", f"A mediana de {formatar_numero(idade['mediana'], 2)} anos {'superou' if idade['mediana'] > 5 else 'não superou'} cinco anos. Projetos antigos tiveram mais tempo para acumular estrelas; o resultado não estabelece causalidade."],
+        ["4.3.2 RQ02", f"A mediana de {formatar_numero(prs['mediana'])} {'superou' if prs['mediana'] > 500 else 'não superou'} 500. A diferença entre média e mediana e os {estatisticas['prs_outliers']['superiores']} extremos mostram assimetria. A autoria externa não é identificável."],
+        ["4.3.3 RQ03", f"{formatar_percentual(estatisticas['releases_com'], total)} possui release e a mediana é {formatar_numero(releases['mediana'])}. O acumulado não mede intervalos nem frequência temporal."],
+        ["4.3.4 RQ04", f"{formatar_percentual(estatisticas['dias_ate_30'], total)} estava em até 30 dias. O último push mede recência, não frequência histórica, e pode refletir automação."],
+        ["4.3.5 RQ05", f"O Top 10 representa {formatar_percentual(estatisticas['top10'], total)} da amostra. O resultado depende do ranking temporal e primaryLanguage simplifica projetos multilíngues."],
+        ["4.3.6 RQ06", f"A mediana de {formatar_numero(issues['mediana'], 2)}% descreve somente projetos com issues. A taxa não informa tempo, complexidade ou qualidade do fechamento."],
+        ["4.3.7 RQ07", "A comparação é descritiva. Diferenças entre grupos podem refletir idade, domínio, comunidade, governança e tamanhos desiguais, não o efeito da linguagem isoladamente."],
+        ["4.3.8 RQ08", f"A relação com PRs/ano foi {classificar_correlacao(principal_pr['rho'])} (ρ = {formatar_numero(principal_pr['rho'], 4)}) e com releases/ano foi {classificar_correlacao(principal_rel['rho'])} (ρ = {formatar_numero(principal_rel['rho'], 4)}). Assim, H08 não é sustentada no critério de duas associações positivas ao menos moderadas. A sensibilidade manteve a mesma interpretação geral."],
+        ["4.3.9 RQ10", f"A H10 recebeu apoio descritivo parcial. As medianas {'cresceram monotonicamente' if crescimento_monotonico10 else 'não cresceram monotonicamente'} de {formatar_numero(medianas10[0], 2)}% para {formatar_numero(medianas10[-1], 2)}%, mas a associação foi apenas {classificar_correlacao(rho10)} (ρ = {formatar_numero(rho10, 4)}) e os intervalos interquartis se sobrepõem. A idade isoladamente explica uma parcela limitada da variação e o desenho não permite inferir causalidade."],
     ]
-    for titulo, texto in discussoes:
+    for titulo, texto in textos_discussao:
         documento.add_heading(titulo, level=3)
         adicionar_texto(documento, texto)
 
-    adicionar_tabela(
-        documento,
-        ["Hipótese", "Avaliação"],
-        [
-            ["H01 — idade mediana superior a cinco anos", "Resultado compatível com a expectativa"],
-            ["H02 — elevado número de contribuições", "Compatível para PRs mescladas; origem externa não identificada"],
-            ["H03 — maioria com releases", "Compatível para presença e quantidade; frequência não medida"],
-            ["H04 — atualização nos últimos 30 dias", "Compatível para recência; frequência histórica não medida"],
-            ["H05 — maioria nas linguagens Top 10", "Resultado compatível com a expectativa"],
-            ["H06 — mediana de fechamento superior a 80%", "Compatível entre os projetos com issues"],
-            ["H07 — indicadores superiores no Top 10", "Compatível descritivamente, sem evidência causal"],
-        ],
-        larguras_cm=[7.5, 8.5],
-        fonte=8.5,
-    )
+    top_linha = rq07.loc["Top 10 Octoverse"]
+    outra_linha = rq07.loc["Outras definidas"]
+    avaliacoes = [
+        ["H01", "Compatível" if idade["mediana"] > 5 else "Não compatível"],
+        ["H02", "Compatível descritivamente" if prs["mediana"] > 500 and estatisticas["prs_outliers"]["superiores"] else "Não compatível"],
+        ["H03", "Compatível para presença/acumulado" if estatisticas["releases_com"] > total / 2 and releases["mediana"] > 20 else "Não compatível"],
+        ["H04", "Compatível para recência" if estatisticas["dias_ate_30"] > total / 2 else "Não compatível"],
+        ["H05", "Compatível" if estatisticas["top10"] > total / 2 else "Não compatível"],
+        ["H06", "Compatível entre projetos com issues" if issues["mediana"] > 80 else "Não compatível"],
+        ["H07", "Compatível descritivamente" if top_linha["prs"] > outra_linha["prs"] and top_linha["releases"] > outra_linha["releases"] and top_linha["dias"] < outra_linha["dias"] else "Parcial ou não compatível"],
+        ["H08", "Não sustentada: as duas associações não foram ao menos moderadas" if not (principal_pr["rho"] >= 0.3 and principal_rel["rho"] >= 0.3) else "Compatível descritivamente"],
+        ["H10", "Parcialmente sustentada: tendência monotônica, mas associação fraca" if crescimento_monotonico10 and rho10 is not None and 0 < rho10 < 0.3 else "Compatível descritivamente" if crescimento_monotonico10 and rho10 is not None and rho10 >= 0.3 else "Não sustentada"],
+    ]
+    adicionar_tabela(documento, ["Hipótese", "Avaliação exploratória"], avaliacoes, fonte=8.7)
 
-    documento.add_heading("4.3.8 Ameaças à validade", level=3)
-    adicionar_texto(
-        documento,
-        "Validade de construto. Estrelas são aproximação de popularidade. PRs mescladas não identificam contribuição externa. Releases acumuladas não medem frequência, dias desde o push medem recência, e linguagem primária não representa toda a composição de projetos multilíngues.",
-        negrito_inicial="Validade de construto.",
-    )
-    adicionar_texto(
-        documento,
-        "Validade interna. O estudo é observacional e não controla idade, domínio, tamanho da equipe ou governança. As relações encontradas não devem ser interpretadas como causais.",
-        negrito_inicial="Validade interna.",
-    )
-    adicionar_texto(
-        documento,
-        "Validade externa. A amostra contém somente os 1.000 repositórios públicos com mais estrelas retornados pela busca. Os resultados não são automaticamente generalizáveis para repositórios menos populares ou privados.",
-        negrito_inicial="Validade externa.",
-    )
-    adicionar_texto(
-        documento,
-        "Validade de conclusão. Foram utilizadas estatísticas descritivas, sem testes de significância ou modelos de controle. Grupos pequenos tornam algumas medianas por linguagem instáveis.",
-        negrito_inicial="Validade de conclusão.",
-    )
-    adicionar_texto(
-        documento,
-        "Validade temporal. Estrelas, PRs, releases, issues e atualizações mudam continuamente. A paginação ocorre em chamadas separadas, durante as quais a ordenação pode variar.",
-        negrito_inicial="Validade temporal.",
-    )
-    adicionar_texto(
-        documento,
-        "Confiabilidade e reprodutibilidade. O instante e os parâmetros não são armazenados como metadados e não existe arquivo de dependências versionado. A interface e o lote utilizam coletores diferentes.",
-        negrito_inicial="Confiabilidade e reprodutibilidade.",
-    )
-    adicionar_texto(
-        documento,
-        "Limitações da inovação. O Streamlit não carrega automaticamente o snapshot persistido. Uma nova busca pode sobrescrever arquivos, a quantidade padrão é 100 e a visualização da RQ07 ainda requer correções.",
-        negrito_inicial="Limitações da inovação.",
-    )
+    documento.add_heading("4.3.10 Ameaças à validade", level=3)
+    adicionar_texto(documento, "Validade de construto. Estrelas aproximam popularidade; PRs mescladas não garantem contribuição externa; releases acumuladas e último push não medem frequência histórica; linguagem primária não descreve todo o código. O percentual de issues fechadas é acumulado e não representa velocidade, dificuldade ou qualidade da resolução.", "Validade de construto.")
+    adicionar_texto(documento, "Anualização. Dividir acumulados pela idade supõe uma taxa média constante e amplifica valores de projetos muito jovens. Por isso, a análise principal exige um ano e a sensibilidade inclui todas as idades positivas.", "Anualização.")
+    adicionar_texto(documento, f"Ausências e efeito teto. Os {formatar_numero(rq10['repositorios_sem_issues'])} projetos sem issues podem usar rastreadores externos ou ainda não ter demandas registradas e foram excluídos da RQ10. Outros {formatar_numero(estatisticas['issues_100'])} aparecem no teto de 100%, reduzindo a discriminação entre projetos.", "Ausências e efeito teto.")
+    adicionar_texto(documento, "Outliers. Projetos com automação ou fluxos incomuns produzem taxas extremas. Eles foram identificados por 1,5 × IQR e mantidos; a correlação por postos reduz, mas não elimina, sua influência interpretativa.", "Outliers.")
+    adicionar_texto(documento, "Arredondamento e agrupamento. Idades e percentuais registrados no CSV são arredondados, o que cria empates tratados por postos médios. As faixas etárias têm tamanhos distintos, e seus intervalos interquartis se sobrepõem.", "Arredondamento e agrupamento.")
+    adicionar_texto(documento, "Causalidade e confundimento. O estudo observacional não controla domínio, organização, tamanho da equipe, governança, efeitos de coorte ou sobrevivência. Associação entre estrelas, intensidade, idade e fechamento não demonstra causalidade.", "Causalidade e confundimento.")
+    adicionar_texto(documento, "Validade externa e temporal. A amostra cobre somente os 1.000 repositórios públicos mais estrelados no instante da coleta. Resultados não se generalizam automaticamente e podem variar entre snapshots.", "Validade externa e temporal.")
 
-    # 5. Conclusão
-    adicionar_titulo_secao(documento, "5. Conclusão", nova_pagina=True)
-    adicionar_texto(
-        documento,
-        "Este trabalho apresentou uma análise exploratória dos 1.000 repositórios públicos com maior número de estrelas retornados pela API GraphQL do GitHub. A paginação permitiu atingir a quantidade exigida, enquanto a validação confirmou 1.000 nomes e URLs únicos.",
-    )
-    adicionar_texto(
-        documento,
-        "Os dados armazenados na lista de nós GraphQL, no CSV e nos arquivos das sete RQs mostraram-se consistentes. Não foram encontradas divergências nos campos diretamente coletados, duplicações ou valores fora de seus domínios esperados.",
-    )
-    adicionar_texto(
-        documento,
-        "Os projetos analisados são majoritariamente maduros e apresentam atividade recente. A idade mediana foi 7,74 anos, e 72,7% receberam um push nos 30 dias anteriores.",
-    )
-    adicionar_texto(
-        documento,
-        "As distribuições de PRs e releases apresentaram forte assimetria. A mediana foi 768 PRs e 41 releases, mas poucos projetos concentraram valores muito elevados. Por isso, as medianas se mostraram mais representativas que as médias.",
-    )
-    adicionar_texto(
-        documento,
-        "As linguagens Top 10 do Octoverse estavam em 70,2% da amostra e 76,9% dos projetos com linguagem definida. Entre os projetos com issues, a mediana de fechamento foi 87,5%.",
-    )
-    adicionar_texto(
-        documento,
-        "A RQ07 mostrou que projetos associados ao Top 10 possuíam, descritivamente, mais PRs, mais releases e maior recência. Essa associação não permite concluir causalidade.",
-    )
-    adicionar_texto(
-        documento,
-        "Os resultados observados foram compatíveis com as expectativas informais formuladas para as RQs. Essa comparação é exclusivamente exploratória, pois as hipóteses não foram pré-registradas e foram redigidas após uma inspeção preliminar da coleta. A análise não identifica a origem externa, não mede diretamente a frequência de releases e utiliza o último push como aproximação de atualização.",
-    )
-    adicionar_texto(
-        documento,
-        "A principal inovação foi a aplicação em Streamlit, que integra parâmetros de mineração, acompanhamento, análises, indicadores, gráficos, inspeção tabular e download do CSV. O laboratório passa a possuir uma camada interativa de comunicação e exploração.",
-    )
-    adicionar_texto(documento, "Como trabalhos futuros, recomenda-se:")
-    adicionar_lista(
-        documento,
-        [
-            "Unificar os coletores utilizados pelo main.py e pelo app.py.",
-            "Proteger o snapshot oficial contra sobrescrita por consultas exploratórias.",
-            "Permitir que o Streamlit carregue dados já coletados.",
-            "Armazenar data, horário, query, quantidade, cursores e limite da API como metadados.",
-            "Versionar dependências em requirements.txt.",
-            "Identificar se os autores das PRs são externos.",
-            "Normalizar releases e contribuições pela idade.",
-            "Analisar múltiplos snapshots em diferentes datas.",
-            "Aplicar testes estatísticos e intervalos de confiança.",
-            "Corrigir e ampliar a comparação visual da RQ07.",
-        ],
-    )
+    documento.add_heading("5. Conclusão", level=1)
+    adicionar_texto(documento, f"A coleta oficial reuniu {formatar_numero(total)} repositórios únicos, ordenados por estrelas, e gerou CSV e nove JSONs coerentes para RQ01–RQ08 e RQ10. Todos os valores do relatório foram recalculados do mesmo snapshot, reduzindo o risco de divergência entre dados, texto, tabelas e gráficos.")
+    adicionar_texto(documento, f"RQ01–RQ07 descrevem maturidade, contribuições, releases, atualização, linguagens e issues. A RQ08 acrescenta controle simples por idade: na amostra principal, ρ foi {formatar_numero(principal_pr['rho'], 4)} para PRs/ano e {formatar_numero(principal_rel['rho'], 4)} para releases/ano. Os resultados não sustentam a hipótese de duas associações positivas ao menos moderadas e não autorizam conclusão causal.")
+    adicionar_texto(documento, f"Na RQ10, as medianas de issues fechadas aumentaram de {formatar_numero(medianas10[0], 2)}% para {formatar_numero(medianas10[-1], 2)}% entre as faixas extremas, mas a correlação foi positiva fraca (ρ = {formatar_numero(rho10, 4)}). A H10 recebeu apoio descritivo parcial, sem evidência de que a idade cause maior capacidade de fechamento.")
+    adicionar_texto(documento, "O Streamlit comunica a RQ08 e a RQ10 junto às questões anteriores, oferece busca por repositório e download do CSV. Esta versão é intermediária: RQ09, revisão final do texto e anexo com o print do board e a política de WIP ainda devem ser concluídos antes do Relatório Final.")
 
-    # 6. Referências
-    adicionar_titulo_secao(documento, "6. Referências", nova_pagina=True)
-    adicionar_referencia(
-        documento,
-        "ALVES, Pedro Henrique Maia; BRUNORO, Diogo C. Lab-experimentacao-software. GitHub, 2026. Disponível em: ",
-        "https://github.com/PedroMaiaAlves/lab-experimentacao-software",
-    )
-    adicionar_referencia(
-        documento,
-        "GITHUB. GraphQL API documentation. 2026a. Disponível em: ",
-        "https://docs.github.com/en/graphql",
-    )
-    adicionar_referencia(
-        documento,
-        "GITHUB. Using pagination in the GraphQL API. 2026b. Disponível em: ",
-        "https://docs.github.com/en/graphql/guides/using-pagination-in-the-graphql-api",
-    )
-    adicionar_referencia(
-        documento,
-        "GITHUB. Queries: search. 2026c. Disponível em: ",
-        "https://docs.github.com/en/graphql/reference/queries#search",
-    )
-    adicionar_referencia(
-        documento,
-        "GITHUB. Octoverse: a new developer joins GitHub every second as AI leads TypeScript to #1. Publicado em 28 out. 2025; atualizado em 28 fev. 2026. Disponível em: ",
-        "https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/",
-    )
-    adicionar_referencia(
-        documento,
-        "KALLIAMVAKOU, E.; GOUSIOS, G.; BLINCOE, K.; SINGER, L.; GERMAN, D. M.; DAMIAN, D. The promises and perils of mining GitHub. In: Proceedings of the 11th Working Conference on Mining Software Repositories. ACM, 2014. p. 92–101. DOI: ",
-        "https://doi.org/10.1145/2597073.2597074",
-    )
-    adicionar_referencia(
-        documento,
-        "PANDAS. Pandas documentation. Disponível em: ",
-        "https://pandas.pydata.org/docs/",
-    )
-    adicionar_referencia(
-        documento,
-        "PYTHON SOFTWARE FOUNDATION. Python documentation. Disponível em: ",
-        "https://docs.python.org/3/",
-    )
-    adicionar_referencia(
-        documento,
-        "REQUESTS. Requests: HTTP for Humans. Disponível em: ",
-        "https://requests.readthedocs.io/en/latest/",
-    )
-    adicionar_referencia(
-        documento,
-        "STREAMLIT. Streamlit documentation. Disponível em: ",
-        "https://docs.streamlit.io/",
-    )
-    adicionar_referencia(
-        documento,
-        "VEGA-ALTAIR. Declarative visualization in Python. Disponível em: ",
-        "https://altair-viz.github.io/",
-    )
+    documento.add_heading("6. Referências", level=1)
+    referencias = [
+        "GITHUB. GraphQL API documentation. https://docs.github.com/en/graphql. Acesso em: 25 ago. 2026.",
+        "GITHUB. Using pagination in the GraphQL API. https://docs.github.com/en/graphql/guides/using-pagination-in-the-graphql-api. Acesso em: 25 ago. 2026.",
+        "GITHUB. Octoverse 2025. https://github.blog/news-insights/octoverse/. Acesso em: 25 ago. 2026.",
+        "KALLIAMVAKOU, E. et al. The promises and perils of mining GitHub. MSR, 2014. https://doi.org/10.1145/2597073.2597074.",
+        "PANDAS. Pandas documentation. https://pandas.pydata.org/docs/.",
+        "STREAMLIT. Streamlit documentation. https://docs.streamlit.io/.",
+        "VEGA-ALTAIR. Declarative visualization in Python. https://altair-viz.github.io/.",
+    ]
+    for referencia in referencias:
+        adicionar_texto(documento, referencia)
 
-    # Metadados
+    titulo_anexo = documento.add_heading("Anexo A — Fluxo do GitHub Project", level=1)
+    titulo_anexo.paragraph_format.page_break_before = True
+    adicionar_texto(documento, "PENDÊNCIA DA VERSÃO INTERMEDIÁRIA: inserir no Relatório Final o print do board mostrando o fluxo completo de S01 a S03 e a política de WIP em uso. O primeiro snapshot da S02 permanece preservado no histórico do projeto.")
+    tabela = documento.add_table(rows=1, cols=1)
+    tabela.style = "Table Grid"
+    celula = tabela.cell(0, 0)
+    celula.height = Cm(7)
+    celula.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
+    sombrear(celula, "F5F7FA")
+    p = celula.paragraphs[0]
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p.add_run("INSERIR SNAPSHOT FINAL DO BOARD E EVIDÊNCIA DA POLÍTICA DE WIP").bold = True
+
     propriedades = documento.core_properties
-    propriedades.title = "Lab01S02 — Mineração e análise dos 1.000 repositórios mais populares do GitHub"
-    propriedades.subject = "Relatório de Laboratório de Experimentação de Software"
-    propriedades.author = "Pedro Henrique Maia Alves; Diogo C. Brunoro"
-    propriedades.keywords = "GitHub, GraphQL, Streamlit, mineração de repositórios, Lab01S02"
-
+    propriedades.title = "Lab01S03 — Relatório intermediário RQ01–RQ08 e RQ10"
+    propriedades.subject = "Mineração de 1.000 repositórios populares do GitHub"
+    propriedades.author = "Pedro Henrique Maia Alves; Diogo C. Brunoro; [TERCEIRO INTEGRANTE — EDITAR]"
+    propriedades.keywords = "GitHub, GraphQL, Streamlit, RQ08, RQ10, issues, maturidade, Spearman, Lab01S03"
     saida.parent.mkdir(parents=True, exist_ok=True)
     documento.save(saida)
+
+
+def validar_paridade_rq10_json(rq10: dict, caminho_json: Path) -> None:
+    """Garante que o recálculo a partir do CSV coincide com o JSON persistido."""
+
+    if not caminho_json.exists():
+        raise RuntimeError(f"JSON da RQ10 não encontrado: {caminho_json}")
+    esperado = json.loads(caminho_json.read_text(encoding="utf-8"))
+    campos_inteiros = (
+        "total_repositorios",
+        "repositorios_com_issues",
+        "repositorios_sem_issues",
+    )
+    for campo in campos_inteiros:
+        if rq10[campo] != esperado[campo]:
+            raise RuntimeError(
+                f"Paridade RQ10 divergente em {campo}: "
+                f"CSV={rq10[campo]} JSON={esperado[campo]}"
+            )
+    campos_float = (
+        "correlacao_spearman",
+        "idade_mediana_repositorios_com_issues",
+        "percentual_issues_fechadas_mediana",
+    )
+    for campo in campos_float:
+        obtido = rq10.get(campo)
+        alvo = esperado.get(campo)
+        if obtido is None or alvo is None:
+            if obtido != alvo:
+                raise RuntimeError(f"Paridade RQ10 divergente em {campo}: {obtido} vs {alvo}")
+            continue
+        if not math.isclose(float(obtido), float(alvo), rel_tol=0, abs_tol=1e-4):
+            raise RuntimeError(
+                f"Paridade RQ10 divergente em {campo}: CSV={obtido} JSON={alvo}"
+            )
+    campos_faixa = (
+        "Quantidade_repositorios",
+        "Mediana_issues_fechadas",
+        "Q1_issues_fechadas",
+        "Q3_issues_fechadas",
+        "IQR_issues_fechadas",
+    )
+    for obtida, alvo in zip(
+        rq10["resumo_por_faixa_etaria"],
+        esperado["resumo_por_faixa_etaria"],
+        strict=True,
+    ):
+        if obtida["Faixa de idade"] != alvo["Faixa de idade"]:
+            raise RuntimeError(
+                "Paridade RQ10 divergente nas faixas etárias: "
+                f"{obtida['Faixa de idade']} vs {alvo['Faixa de idade']}"
+            )
+        for campo in campos_faixa:
+            valor_obtido = obtida[campo]
+            valor_alvo = alvo[campo]
+            if isinstance(valor_obtido, int) or isinstance(valor_alvo, int):
+                if int(valor_obtido) != int(valor_alvo):
+                    raise RuntimeError(
+                        f"Paridade RQ10 divergente em {campo} "
+                        f"({obtida['Faixa de idade']}): {valor_obtido} vs {valor_alvo}"
+                    )
+            elif not math.isclose(
+                float(valor_obtido), float(valor_alvo), rel_tol=0, abs_tol=1e-4
+            ):
+                raise RuntimeError(
+                    f"Paridade RQ10 divergente em {campo} "
+                    f"({obtida['Faixa de idade']}): {valor_obtido} vs {valor_alvo}"
+                )
+
+
+def localizar_navegador_headless() -> Path:
+    """Localiza Chrome ou Edge para impressão headless no Windows."""
+
+    candidatos: list[Path] = []
+    for variavel in ("PROGRAMFILES", "PROGRAMFILES(X86)"):
+        raiz = os.environ.get(variavel)
+        if not raiz:
+            continue
+        base = Path(raiz)
+        candidatos.extend(
+            [
+                base / "Google/Chrome/Application/chrome.exe",
+                base / "Microsoft/Edge/Application/msedge.exe",
+            ]
+        )
+    for nome in ("chrome", "msedge"):
+        encontrado = shutil.which(nome)
+        if encontrado:
+            candidatos.append(Path(encontrado))
+    for candidato in candidatos:
+        if candidato.exists():
+            return candidato
+    raise RuntimeError(
+        "Navegador Chromium não encontrado. Instale Google Chrome ou Microsoft Edge."
+    )
+
+
+def converter_docx_para_pdf(docx: Path, pdf: Path) -> None:
+    """Converte DOCX em PDF Carta via HTML temporário (Mammoth + Chrome headless)."""
+
+    try:
+        import mammoth
+    except ImportError as exc:
+        raise RuntimeError(
+            "Dependência ausente: instale com 'pip install mammoth'."
+        ) from exc
+
+    with docx.open("rb") as arquivo_docx:
+        html = mammoth.convert_to_html(arquivo_docx).value
+    html = html.replace(
+        "<h1>1. Introdução", "<h1 class='nova-pagina'>1. Introdução", 1
+    )
+    html = html.replace(
+        "<h3>4.2.9 RQ10", "<h3 class='nova-pagina'>4.2.9 RQ10", 1
+    )
+    html = html.replace(
+        "<h1>Anexo A", "<h1 class='nova-pagina'>Anexo A", 1
+    )
+
+    estilo = """
+    @page { size: letter; margin: 2.0cm 2.2cm; }
+    body {
+        font-family: Calibri, Arial, sans-serif;
+        font-size: 11pt;
+        line-height: 1.35;
+        color: #202020;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 0.6em 0;
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    td, th { border: 1px solid #d0d0d0; padding: 4px 6px; vertical-align: top; }
+    img { max-width: 100%; height: auto; }
+    h1, h2, h3 { color: #17365D; break-after: avoid; page-break-after: avoid; }
+    h3 + p { break-inside: avoid; page-break-inside: avoid; }
+    .nova-pagina { break-before: page; page-break-before: always; }
+    p { margin: 0.35em 0 0.6em; orphans: 3; widows: 3; }
+    """
+
+    documento_html = (
+        "<!DOCTYPE html><html lang='pt-BR'><head>"
+        "<meta charset='utf-8'>"
+        f"<style>{estilo}</style>"
+        "</head><body>"
+        f"{html}"
+        "</body></html>"
+    )
+
+    pdf.parent.mkdir(parents=True, exist_ok=True)
+    navegador = localizar_navegador_headless()
+
+    with tempfile.TemporaryDirectory(prefix="lab01s03_pdf_") as pasta:
+        html_temp = Path(pasta) / "relatorio_temp.html"
+        pdf_temp = Path(pasta) / "relatorio_temp.pdf"
+        perfil_temp = Path(pasta) / "chrome-profile"
+        perfil_temp.mkdir()
+        html_temp.write_text(documento_html, encoding="utf-8")
+        uri = Path(html_temp).resolve().as_uri()
+        comando = [
+            str(navegador),
+            "--headless=new",
+            "--disable-gpu",
+            "--disable-extensions",
+            "--no-first-run",
+            "--no-pdf-header-footer",
+            f"--user-data-dir={perfil_temp.resolve()}",
+            f"--print-to-pdf={pdf_temp.resolve()}",
+            uri,
+        ]
+        resultado = subprocess.run(
+            comando,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if (
+            resultado.returncode != 0
+            or not pdf_temp.exists()
+            or pdf_temp.stat().st_size == 0
+        ):
+            detalhes = (resultado.stderr or resultado.stdout or "").strip()
+            raise RuntimeError(
+                "Falha ao converter DOCX para PDF via navegador headless."
+                + (f" Detalhes: {detalhes}" if detalhes else "")
+            )
+        shutil.copyfile(pdf_temp, pdf)
+
+
+def validar_documento_gerado(docx: Path) -> None:
+    """Executa checklist textual/estrutural básico no DOCX gerado."""
+
+    documento = Document(docx)
+    texto = "\n".join(paragrafo.text for paragrafo in documento.paragraphs)
+    texto += "\n" + "\n".join(
+        celula.text
+        for tabela in documento.tables
+        for linha in tabela.rows
+        for celula in linha.cells
+    )
+    tabelas = len(documento.tables)
+    imagens = len(documento.inline_shapes)
+
+    termos_obrigatorios = (
+        "3.4 Procedimento analítico da RQ10",
+        "4.2.9 RQ10",
+        "4.3.9 RQ10",
+        "Figura 10",
+        "H10",
+        "[TERCEIRO INTEGRANTE — EDITAR]",
+        "INSERIR SNAPSHOT FINAL DO BOARD",
+    )
+    faltantes = [termo for termo in termos_obrigatorios if termo not in texto]
+    if faltantes:
+        raise RuntimeError(f"Documento incompleto; termos ausentes: {', '.join(faltantes)}")
+    if "RQ10 pendente" in texto or "RQ10 — pendente" in texto:
+        raise RuntimeError("O documento ainda menciona RQ10 como pendente.")
+    if tabelas != 13:
+        raise RuntimeError(f"Esperadas 13 tabelas, encontradas {tabelas}.")
+    if imagens != 9:
+        raise RuntimeError(f"Esperadas 9 imagens, encontradas {imagens}.")
+    invalido = re.search(r"(?i)\b(?:nan|inf|infinity|infinito)\b", texto)
+    if invalido:
+        raise RuntimeError(f"Documento contém valor proibido: {invalido.group(0)}")
 
 
 def criar_parser() -> argparse.ArgumentParser:
@@ -1517,6 +1068,23 @@ def criar_parser() -> argparse.ArgumentParser:
     parser.add_argument("--template", type=Path, default=TEMPLATE_PADRAO)
     parser.add_argument("--csv", type=Path, default=CSV_PADRAO)
     parser.add_argument("--saida", type=Path, default=SAIDA_PADRAO)
+    parser.add_argument(
+        "--pdf",
+        action="store_true",
+        help="Converte o DOCX gerado para PDF Carta via Mammoth e Chrome headless.",
+    )
+    parser.add_argument(
+        "--pdf-saida",
+        type=Path,
+        default=None,
+        help="Destino do PDF (padrão: mesmo nome do DOCX com extensão .pdf).",
+    )
+    parser.add_argument(
+        "--json-rq10",
+        type=Path,
+        default=JSON_RQ10_PADRAO,
+        help="JSON da RQ10 usado na validação de paridade.",
+    )
     return parser
 
 
@@ -1526,13 +1094,19 @@ def main() -> None:
         raise SystemExit(f"Template não encontrado: {argumentos.template}")
     if not argumentos.csv.exists():
         raise SystemExit(f"CSV não encontrado: {argumentos.csv}")
-
     df = pd.read_csv(argumentos.csv)
     validar_dados(df)
-    with tempfile.TemporaryDirectory(prefix="lab01s02_figuras_") as pasta:
-        graficos = preparar_graficos(df, Path(pasta))
-        construir_documento(argumentos.template, argumentos.saida, df, graficos)
+    estatisticas = calcular_estatisticas(df)
+    validar_paridade_rq10_json(estatisticas["rq10"], argumentos.json_rq10)
+    with tempfile.TemporaryDirectory(prefix="lab01s03_figuras_") as pasta:
+        graficos = preparar_graficos(df, estatisticas, Path(pasta))
+        construir_documento(argumentos.template, argumentos.saida, df, estatisticas, graficos)
+    validar_documento_gerado(argumentos.saida)
     print(f"Relatório gerado em: {argumentos.saida.resolve()}")
+    if argumentos.pdf:
+        pdf_saida = argumentos.pdf_saida or argumentos.saida.with_suffix(".pdf")
+        converter_docx_para_pdf(argumentos.saida, pdf_saida)
+        print(f"PDF gerado em: {pdf_saida.resolve()}")
 
 
 if __name__ == "__main__":
