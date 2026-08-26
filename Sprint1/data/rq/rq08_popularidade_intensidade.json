@@ -1,0 +1,1357 @@
+{
+  "questao": "RQ08",
+  "descricao": "Existe associação entre a popularidade dos repositórios e sua intensidade anual de desenvolvimento?",
+  "metricas": {
+    "popularidade": "Número de estrelas",
+    "intensidade_prs": "PRs mescladas divididas pela idade arredondada em anos",
+    "intensidade_releases": "Total de releases dividido pela idade arredondada em anos"
+  },
+  "criterios": {
+    "idade_minima_analise_principal_anos": 1.0,
+    "precisao_taxas_anuais_casas_decimais": 4,
+    "correlacao": "Spearman calculada como correlação de Pearson entre ranks médios",
+    "quartis_estrelas": "Ordenação crescente por Estrelas e Nome, seguida de divisão posicional determinística em Q1 a Q4",
+    "outliers": "Critério de 1,5 vez o IQR, calculado por taxa anual",
+    "politica_outliers": "Mantidos em todas as análises"
+  },
+  "amostra": {
+    "total_repositorios": 1000,
+    "analise_principal": 917,
+    "sensibilidade_idade_positiva": 1000,
+    "idade_menor_1_ano": 83,
+    "idade_positiva_menor_1_ano": 83,
+    "idade_nao_positiva": 0,
+    "dados_ausentes": 0
+  },
+  "taxas_anuais_analise_principal": {
+    "prs_por_ano": {
+      "mediana": 115.5732,
+      "media": 575.4574,
+      "q1": 26.1601,
+      "q3": 554.4073,
+      "minimo": 0.0,
+      "maximo": 10831.1927
+    },
+    "releases_por_ano": {
+      "mediana": 6.4576,
+      "media": 31.3631,
+      "q1": 0.0,
+      "q3": 23.4317,
+      "minimo": 0.0,
+      "maximo": 2008.9595
+    }
+  },
+  "correlacoes_spearman": {
+    "principal_idade_maior_igual_1": {
+      "estrelas_vs_prs_por_ano": {
+        "rho": 0.1534,
+        "n": 917
+      },
+      "estrelas_vs_releases_por_ano": {
+        "rho": 0.0066,
+        "n": 917
+      }
+    },
+    "sensibilidade_todas_idades_positivas": {
+      "estrelas_vs_prs_por_ano": {
+        "rho": 0.1451,
+        "n": 1000
+      },
+      "estrelas_vs_releases_por_ano": {
+        "rho": 0.007,
+        "n": 1000
+      }
+    }
+  },
+  "resumo_por_quartil_estrelas": [
+    {
+      "quartil": "Q1",
+      "repositorios": 230,
+      "estrelas_minimo": 33022,
+      "estrelas_mediana": 35676.0,
+      "estrelas_maximo": 38502,
+      "prs_por_ano_mediana": 79.1039,
+      "releases_por_ano_mediana": 5.3305
+    },
+    {
+      "quartil": "Q2",
+      "repositorios": 229,
+      "estrelas_minimo": 38550,
+      "estrelas_mediana": 42942.0,
+      "estrelas_maximo": 48469,
+      "prs_por_ano_mediana": 110.9813,
+      "releases_por_ano_mediana": 7.4866
+    },
+    {
+      "quartil": "Q3",
+      "repositorios": 229,
+      "estrelas_minimo": 48485,
+      "estrelas_mediana": 57604.0,
+      "estrelas_maximo": 72000,
+      "prs_por_ano_mediana": 148.7047,
+      "releases_por_ano_mediana": 7.1702
+    },
+    {
+      "quartil": "Q4",
+      "repositorios": 229,
+      "estrelas_minimo": 72148,
+      "estrelas_mediana": 97337.0,
+      "estrelas_maximo": 542947,
+      "prs_por_ano_mediana": 192.7794,
+      "releases_por_ano_mediana": 4.8193
+    }
+  ],
+  "outliers_iqr": {
+    "prs_por_ano": {
+      "q1": 26.1601,
+      "q3": 554.4073,
+      "iqr": 528.2472,
+      "limite_inferior": -766.2107,
+      "limite_superior": 1346.7781,
+      "quantidade": 112,
+      "inferiores": 0,
+      "superiores": 112,
+      "repositorios": [
+        {
+          "repositorio": "NousResearch/hermes-agent",
+          "estrelas": 236425,
+          "idade_anos": 1.09,
+          "valor": 10831.1927
+        },
+        {
+          "repositorio": "firstcontributions/first-contributions",
+          "estrelas": 55669,
+          "idade_anos": 9.93,
+          "valor": 10437.1601
+        },
+        {
+          "repositorio": "llvm/llvm-project",
+          "estrelas": 39935,
+          "idade_anos": 9.71,
+          "valor": 10105.0463
+        },
+        {
+          "repositorio": "PostHog/posthog",
+          "estrelas": 39163,
+          "idade_anos": 6.59,
+          "valor": 8435.2049
+        },
+        {
+          "repositorio": "openai/codex",
+          "estrelas": 118120,
+          "idade_anos": 1.37,
+          "valor": 7272.2628
+        },
+        {
+          "repositorio": "home-assistant/core",
+          "estrelas": 90108,
+          "idade_anos": 12.94,
+          "valor": 7003.5549
+        },
+        {
+          "repositorio": "ClickHouse/ClickHouse",
+          "estrelas": 49447,
+          "idade_anos": 10.23,
+          "valor": 6813.4897
+        },
+        {
+          "repositorio": "python/cpython",
+          "estrelas": 74934,
+          "idade_anos": 9.54,
+          "valor": 6586.0587
+        },
+        {
+          "repositorio": "anomalyco/opencode",
+          "estrelas": 201375,
+          "idade_anos": 1.32,
+          "valor": 5914.3939
+        },
+        {
+          "repositorio": "elastic/elasticsearch",
+          "estrelas": 77863,
+          "idade_anos": 16.54,
+          "valor": 5796.6747
+        },
+        {
+          "repositorio": "vllm-project/vllm",
+          "estrelas": 90032,
+          "idade_anos": 3.54,
+          "valor": 5750.565
+        },
+        {
+          "repositorio": "getsentry/sentry",
+          "estrelas": 44614,
+          "idade_anos": 15.99,
+          "valor": 5719.0744
+        },
+        {
+          "repositorio": "swiftlang/swift",
+          "estrelas": 70289,
+          "idade_anos": 10.84,
+          "valor": 5606.3653
+        },
+        {
+          "repositorio": "grafana/grafana",
+          "estrelas": 76419,
+          "idade_anos": 12.7,
+          "valor": 5490.3937
+        },
+        {
+          "repositorio": "kubernetes/kubernetes",
+          "estrelas": 125189,
+          "idade_anos": 12.22,
+          "valor": 5372.5041
+        },
+        {
+          "repositorio": "google-gemini/gemini-cli",
+          "estrelas": 106685,
+          "idade_anos": 1.36,
+          "valor": 4902.9412
+        },
+        {
+          "repositorio": "BerriAI/litellm",
+          "estrelas": 57263,
+          "idade_anos": 3.08,
+          "valor": 4824.6753
+        },
+        {
+          "repositorio": "zed-industries/zed",
+          "estrelas": 89209,
+          "idade_anos": 5.51,
+          "valor": 4819.2377
+        },
+        {
+          "repositorio": "microsoft/vscode",
+          "estrelas": 189605,
+          "idade_anos": 10.98,
+          "valor": 4781.2386
+        },
+        {
+          "repositorio": "tensorflow/tensorflow",
+          "estrelas": 197634,
+          "idade_anos": 10.8,
+          "valor": 4567.5926
+        },
+        {
+          "repositorio": "rust-lang/rust",
+          "estrelas": 116213,
+          "idade_anos": 16.19,
+          "valor": 4559.2341
+        },
+        {
+          "repositorio": "langchain-ai/langchain",
+          "estrelas": 144984,
+          "idade_anos": 3.85,
+          "valor": 4494.8052
+        },
+        {
+          "repositorio": "flutter/flutter",
+          "estrelas": 178657,
+          "idade_anos": 11.47,
+          "valor": 4343.1561
+        },
+        {
+          "repositorio": "langgenius/dify",
+          "estrelas": 153504,
+          "idade_anos": 3.37,
+          "valor": 4037.092
+        },
+        {
+          "repositorio": "metabase/metabase",
+          "estrelas": 48929,
+          "idade_anos": 11.56,
+          "valor": 4028.8927
+        },
+        {
+          "repositorio": "astral-sh/ruff",
+          "estrelas": 49321,
+          "idade_anos": 4.04,
+          "valor": 3988.1188
+        },
+        {
+          "repositorio": "milvus-io/milvus",
+          "estrelas": 45788,
+          "idade_anos": 6.94,
+          "valor": 3896.6859
+        },
+        {
+          "repositorio": "DefinitelyTyped/DefinitelyTyped",
+          "estrelas": 51399,
+          "idade_anos": 13.89,
+          "valor": 3852.1238
+        },
+        {
+          "repositorio": "twentyhq/twenty",
+          "estrelas": 55532,
+          "idade_anos": 3.73,
+          "valor": 3846.1126
+        },
+        {
+          "repositorio": "LadybirdBrowser/ladybird",
+          "estrelas": 65840,
+          "idade_anos": 2.24,
+          "valor": 3646.875
+        },
+        {
+          "repositorio": "astral-sh/uv",
+          "estrelas": 89082,
+          "idade_anos": 2.9,
+          "valor": 3510.0
+        },
+        {
+          "repositorio": "apache/airflow",
+          "estrelas": 46608,
+          "idade_anos": 11.37,
+          "valor": 3503.1662
+        },
+        {
+          "repositorio": "godotengine/godot",
+          "estrelas": 116148,
+          "idade_anos": 12.64,
+          "valor": 3439.0032
+        },
+        {
+          "repositorio": "nextcloud/server",
+          "estrelas": 36581,
+          "idade_anos": 10.23,
+          "valor": 3350.7331
+        },
+        {
+          "repositorio": "pingcap/tidb",
+          "estrelas": 40472,
+          "idade_anos": 10.97,
+          "valor": 3289.7903
+        },
+        {
+          "repositorio": "backstage/backstage",
+          "estrelas": 34251,
+          "idade_anos": 6.58,
+          "valor": 3287.0821
+        },
+        {
+          "repositorio": "ray-project/ray",
+          "estrelas": 43611,
+          "idade_anos": 9.83,
+          "valor": 3279.3489
+        },
+        {
+          "repositorio": "infiniflow/ragflow",
+          "estrelas": 89242,
+          "idade_anos": 2.7,
+          "valor": 3222.2222
+        },
+        {
+          "repositorio": "istio/istio",
+          "estrelas": 38356,
+          "idade_anos": 9.77,
+          "valor": 3139.2016
+        },
+        {
+          "repositorio": "OpenHands/OpenHands",
+          "estrelas": 85097,
+          "idade_anos": 2.45,
+          "valor": 3081.2245
+        },
+        {
+          "repositorio": "aaif-goose/goose",
+          "estrelas": 53465,
+          "idade_anos": 2.0,
+          "valor": 3009.0
+        },
+        {
+          "repositorio": "vercel/next.js",
+          "estrelas": 141932,
+          "idade_anos": 9.89,
+          "valor": 2866.633
+        },
+        {
+          "repositorio": "ggml-org/llama.cpp",
+          "estrelas": 125638,
+          "idade_anos": 3.46,
+          "valor": 2852.8902
+        },
+        {
+          "repositorio": "n8n-io/n8n",
+          "estrelas": 202423,
+          "idade_anos": 7.18,
+          "valor": 2850.6964
+        },
+        {
+          "repositorio": "ansible/ansible",
+          "estrelas": 70461,
+          "idade_anos": 14.47,
+          "valor": 2768.6938
+        },
+        {
+          "repositorio": "supabase/supabase",
+          "estrelas": 108407,
+          "idade_anos": 6.87,
+          "valor": 2742.2125
+        },
+        {
+          "repositorio": "discourse/discourse",
+          "estrelas": 47731,
+          "idade_anos": 13.62,
+          "valor": 2741.8502
+        },
+        {
+          "repositorio": "jax-ml/jax",
+          "estrelas": 36216,
+          "idade_anos": 7.83,
+          "valor": 2656.1941
+        },
+        {
+          "repositorio": "microsoft/playwright",
+          "estrelas": 95129,
+          "idade_anos": 6.78,
+          "valor": 2617.5516
+        },
+        {
+          "repositorio": "SerenityOS/serenity",
+          "estrelas": 33783,
+          "idade_anos": 7.73,
+          "valor": 2609.9612
+        },
+        {
+          "repositorio": "huggingface/transformers",
+          "estrelas": 164441,
+          "idade_anos": 7.82,
+          "valor": 2593.0946
+        },
+        {
+          "repositorio": "freeCodeCamp/freeCodeCamp",
+          "estrelas": 454603,
+          "idade_anos": 11.67,
+          "valor": 2501.7995
+        },
+        {
+          "repositorio": "lobehub/lobehub",
+          "estrelas": 81989,
+          "idade_anos": 3.26,
+          "valor": 2457.0552
+        },
+        {
+          "repositorio": "calcom/cal.diy",
+          "estrelas": 47926,
+          "idade_anos": 5.43,
+          "valor": 2412.3389
+        },
+        {
+          "repositorio": "expo/expo",
+          "estrelas": 51830,
+          "idade_anos": 10.03,
+          "valor": 2389.6311
+        },
+        {
+          "repositorio": "langfuse/langfuse",
+          "estrelas": 33693,
+          "idade_anos": 3.27,
+          "valor": 2356.5749
+        },
+        {
+          "repositorio": "appsmithorg/appsmith",
+          "estrelas": 40748,
+          "idade_anos": 6.15,
+          "valor": 2330.8943
+        },
+        {
+          "repositorio": "toeverything/AFFiNE",
+          "estrelas": 71875,
+          "idade_anos": 4.07,
+          "valor": 2299.7543
+        },
+        {
+          "repositorio": "CherryHQ/cherry-studio",
+          "estrelas": 51066,
+          "idade_anos": 2.25,
+          "valor": 2277.7778
+        },
+        {
+          "repositorio": "immich-app/immich",
+          "estrelas": 112663,
+          "idade_anos": 4.56,
+          "valor": 2211.4035
+        },
+        {
+          "repositorio": "pola-rs/polars",
+          "estrelas": 39488,
+          "idade_anos": 6.28,
+          "valor": 2187.5796
+        },
+        {
+          "repositorio": "tinygrad/tinygrad",
+          "estrelas": 33506,
+          "idade_anos": 5.85,
+          "valor": 2128.2051
+        },
+        {
+          "repositorio": "cline/cline",
+          "estrelas": 66843,
+          "idade_anos": 2.14,
+          "valor": 2121.4953
+        },
+        {
+          "repositorio": "frappe/erpnext",
+          "estrelas": 38502,
+          "idade_anos": 15.21,
+          "valor": 2118.8034
+        },
+        {
+          "repositorio": "langflow-ai/langflow",
+          "estrelas": 153679,
+          "idade_anos": 3.54,
+          "valor": 2087.2881
+        },
+        {
+          "repositorio": "run-llama/llama_index",
+          "estrelas": 51871,
+          "idade_anos": 3.81,
+          "valor": 2086.0892
+        },
+        {
+          "repositorio": "go-gitea/gitea",
+          "estrelas": 57604,
+          "idade_anos": 9.81,
+          "valor": 2019.7757
+        },
+        {
+          "repositorio": "electron/electron",
+          "estrelas": 122716,
+          "idade_anos": 13.37,
+          "valor": 2006.5071
+        },
+        {
+          "repositorio": "mattermost/mattermost",
+          "estrelas": 38901,
+          "idade_anos": 11.2,
+          "valor": 1998.3036
+        },
+        {
+          "repositorio": "denoland/deno",
+          "estrelas": 108308,
+          "idade_anos": 8.28,
+          "valor": 1990.7005
+        },
+        {
+          "repositorio": "juspay/hyperswitch",
+          "estrelas": 43531,
+          "idade_anos": 3.85,
+          "valor": 1981.2987
+        },
+        {
+          "repositorio": "mudler/LocalAI",
+          "estrelas": 48680,
+          "idade_anos": 3.44,
+          "valor": 1971.8023
+        },
+        {
+          "repositorio": "mastodon/mastodon",
+          "estrelas": 50252,
+          "idade_anos": 10.51,
+          "valor": 1968.5062
+        },
+        {
+          "repositorio": "punkpeye/awesome-mcp-servers",
+          "estrelas": 92818,
+          "idade_anos": 1.73,
+          "valor": 1961.2717
+        },
+        {
+          "repositorio": "oven-sh/bun",
+          "estrelas": 95689,
+          "idade_anos": 5.37,
+          "valor": 1859.2179
+        },
+        {
+          "repositorio": "hashicorp/vault",
+          "estrelas": 36167,
+          "idade_anos": 11.5,
+          "valor": 1855.1304
+        },
+        {
+          "repositorio": "mui/material-ui",
+          "estrelas": 98925,
+          "idade_anos": 12.02,
+          "valor": 1847.5874
+        },
+        {
+          "repositorio": "pandas-dev/pandas",
+          "estrelas": 49563,
+          "idade_anos": 16.0,
+          "valor": 1841.5625
+        },
+        {
+          "repositorio": "vlang/v",
+          "estrelas": 37803,
+          "idade_anos": 7.54,
+          "valor": 1833.2891
+        },
+        {
+          "repositorio": "JuliaLang/julia",
+          "estrelas": 49036,
+          "idade_anos": 15.35,
+          "valor": 1812.7687
+        },
+        {
+          "repositorio": "apache/superset",
+          "estrelas": 74461,
+          "idade_anos": 11.1,
+          "valor": 1787.1171
+        },
+        {
+          "repositorio": "grpc/grpc",
+          "estrelas": 45260,
+          "idade_anos": 11.71,
+          "valor": 1782.579
+        },
+        {
+          "repositorio": "servo/servo",
+          "estrelas": 37793,
+          "idade_anos": 14.54,
+          "valor": 1777.7166
+        },
+        {
+          "repositorio": "makeplane/plane",
+          "estrelas": 58271,
+          "idade_anos": 3.76,
+          "valor": 1715.4255
+        },
+        {
+          "repositorio": "withastro/astro",
+          "estrelas": 62047,
+          "idade_anos": 5.45,
+          "valor": 1701.1009
+        },
+        {
+          "repositorio": "novuhq/novu",
+          "estrelas": 39669,
+          "idade_anos": 5.0,
+          "valor": 1698.6
+        },
+        {
+          "repositorio": "moby/moby",
+          "estrelas": 72000,
+          "idade_anos": 13.6,
+          "valor": 1696.25
+        },
+        {
+          "repositorio": "ccxt/ccxt",
+          "estrelas": 43745,
+          "idade_anos": 9.28,
+          "valor": 1689.8707
+        },
+        {
+          "repositorio": "ToolJet/ToolJet",
+          "estrelas": 40765,
+          "idade_anos": 5.4,
+          "valor": 1689.6296
+        },
+        {
+          "repositorio": "gatsbyjs/gatsby",
+          "estrelas": 55943,
+          "idade_anos": 11.26,
+          "valor": 1625.5773
+        },
+        {
+          "repositorio": "ant-design/ant-design",
+          "estrelas": 99187,
+          "idade_anos": 11.34,
+          "valor": 1610.1411
+        },
+        {
+          "repositorio": "keycloak/keycloak",
+          "estrelas": 36411,
+          "idade_anos": 13.15,
+          "valor": 1606.692
+        },
+        {
+          "repositorio": "dotnet/aspnetcore",
+          "estrelas": 38393,
+          "idade_anos": 12.46,
+          "valor": 1598.4751
+        },
+        {
+          "repositorio": "DIYgod/RSSHub",
+          "estrelas": 45889,
+          "idade_anos": 8.4,
+          "valor": 1572.5
+        },
+        {
+          "repositorio": "neovim/neovim",
+          "estrelas": 101957,
+          "idade_anos": 12.56,
+          "valor": 1570.0637
+        },
+        {
+          "repositorio": "tldr-pages/tldr",
+          "estrelas": 63484,
+          "idade_anos": 12.71,
+          "valor": 1538.4736
+        },
+        {
+          "repositorio": "RocketChat/Rocket.Chat",
+          "estrelas": 46031,
+          "idade_anos": 11.27,
+          "valor": 1503.9929
+        },
+        {
+          "repositorio": "rails/rails",
+          "estrelas": 58714,
+          "idade_anos": 18.37,
+          "valor": 1463.7997
+        },
+        {
+          "repositorio": "Homebrew/brew",
+          "estrelas": 49269,
+          "idade_anos": 10.47,
+          "valor": 1461.7001
+        },
+        {
+          "repositorio": "duckdb/duckdb",
+          "estrelas": 40618,
+          "idade_anos": 8.16,
+          "valor": 1438.3578
+        },
+        {
+          "repositorio": "github/spec-kit",
+          "estrelas": 131466,
+          "idade_anos": 1.01,
+          "valor": 1432.6733
+        },
+        {
+          "repositorio": "huggingface/diffusers",
+          "estrelas": 34380,
+          "idade_anos": 4.24,
+          "valor": 1428.3019
+        },
+        {
+          "repositorio": "open-webui/open-webui",
+          "estrelas": 149917,
+          "idade_anos": 2.89,
+          "valor": 1427.3356
+        },
+        {
+          "repositorio": "medusajs/medusa",
+          "estrelas": 36002,
+          "idade_anos": 6.6,
+          "valor": 1416.2121
+        },
+        {
+          "repositorio": "bytedance/deer-flow",
+          "estrelas": 80876,
+          "idade_anos": 1.3,
+          "valor": 1400.0
+        },
+        {
+          "repositorio": "ultralytics/ultralytics",
+          "estrelas": 60957,
+          "idade_anos": 3.95,
+          "valor": 1398.7342
+        },
+        {
+          "repositorio": "TryGhost/Ghost",
+          "estrelas": 55059,
+          "idade_anos": 13.31,
+          "valor": 1394.3651
+        },
+        {
+          "repositorio": "Significant-Gravitas/AutoGPT",
+          "estrelas": 186868,
+          "idade_anos": 3.44,
+          "valor": 1394.186
+        },
+        {
+          "repositorio": "unslothai/unsloth",
+          "estrelas": 74736,
+          "idade_anos": 2.74,
+          "valor": 1377.7372
+        },
+        {
+          "repositorio": "payloadcms/payload",
+          "estrelas": 44402,
+          "idade_anos": 5.63,
+          "valor": 1371.9361
+        },
+        {
+          "repositorio": "commaai/openpilot",
+          "estrelas": 63496,
+          "idade_anos": 9.75,
+          "valor": 1364.5128
+        },
+        {
+          "repositorio": "laravel/framework",
+          "estrelas": 34883,
+          "idade_anos": 13.62,
+          "valor": 1361.2335
+        }
+      ]
+    },
+    "releases_por_ano": {
+      "q1": 0.0,
+      "q3": 23.4317,
+      "iqr": 23.4317,
+      "limite_inferior": -35.1475,
+      "limite_superior": 58.5792,
+      "quantidade": 92,
+      "inferiores": 0,
+      "superiores": 92,
+      "repositorios": [
+        {
+          "repositorio": "ggml-org/llama.cpp",
+          "estrelas": 125638,
+          "idade_anos": 3.46,
+          "valor": 2008.9595
+        },
+        {
+          "repositorio": "ruvnet/ruflo",
+          "estrelas": 69406,
+          "idade_anos": 1.23,
+          "valor": 1330.8943
+        },
+        {
+          "repositorio": "lobehub/lobehub",
+          "estrelas": 81989,
+          "idade_anos": 3.26,
+          "valor": 930.6748
+        },
+        {
+          "repositorio": "openai/codex",
+          "estrelas": 118120,
+          "idade_anos": 1.37,
+          "valor": 741.6058
+        },
+        {
+          "repositorio": "abhigyanpatwari/GitNexus",
+          "estrelas": 45756,
+          "idade_anos": 1.06,
+          "valor": 716.9811
+        },
+        {
+          "repositorio": "router-for-me/CLIProxyAPI",
+          "estrelas": 48756,
+          "idade_anos": 1.15,
+          "valor": 715.6522
+        },
+        {
+          "repositorio": "gradio-app/gradio",
+          "estrelas": 43422,
+          "idade_anos": 7.68,
+          "valor": 663.4115
+        },
+        {
+          "repositorio": "anomalyco/opencode",
+          "estrelas": 201375,
+          "idade_anos": 1.32,
+          "valor": 655.303
+        },
+        {
+          "repositorio": "withastro/astro",
+          "estrelas": 62047,
+          "idade_anos": 5.45,
+          "valor": 590.0917
+        },
+        {
+          "repositorio": "chakra-ui/chakra-ui",
+          "estrelas": 40596,
+          "idade_anos": 7.02,
+          "valor": 513.1054
+        },
+        {
+          "repositorio": "BerriAI/litellm",
+          "estrelas": 57263,
+          "idade_anos": 3.08,
+          "valor": 469.1558
+        },
+        {
+          "repositorio": "CopilotKit/CopilotKit",
+          "estrelas": 37038,
+          "idade_anos": 3.18,
+          "valor": 452.5157
+        },
+        {
+          "repositorio": "google-gemini/gemini-cli",
+          "estrelas": 106685,
+          "idade_anos": 1.36,
+          "valor": 441.9118
+        },
+        {
+          "repositorio": "vercel/next.js",
+          "estrelas": 141932,
+          "idade_anos": 9.89,
+          "valor": 386.5521
+        },
+        {
+          "repositorio": "langchain-ai/langchain",
+          "estrelas": 144984,
+          "idade_anos": 3.85,
+          "valor": 348.0519
+        },
+        {
+          "repositorio": "TanStack/query",
+          "estrelas": 50207,
+          "idade_anos": 6.96,
+          "valor": 344.3966
+        },
+        {
+          "repositorio": "refinedev/refine",
+          "estrelas": 35574,
+          "idade_anos": 5.59,
+          "valor": 301.7889
+        },
+        {
+          "repositorio": "continuedev/continue",
+          "estrelas": 35636,
+          "idade_anos": 3.26,
+          "valor": 253.681
+        },
+        {
+          "repositorio": "earendil-works/pi",
+          "estrelas": 97238,
+          "idade_anos": 1.04,
+          "valor": 246.1538
+        },
+        {
+          "repositorio": "ruvnet/RuView",
+          "estrelas": 91639,
+          "idade_anos": 1.22,
+          "valor": 238.5246
+        },
+        {
+          "repositorio": "zed-industries/zed",
+          "estrelas": 89209,
+          "idade_anos": 5.51,
+          "valor": 233.7568
+        },
+        {
+          "repositorio": "tauri-apps/tauri",
+          "estrelas": 110562,
+          "idade_anos": 7.12,
+          "valor": 229.7753
+        },
+        {
+          "repositorio": "github/spec-kit",
+          "estrelas": 131466,
+          "idade_anos": 1.01,
+          "valor": 212.8713
+        },
+        {
+          "repositorio": "langfuse/langfuse",
+          "estrelas": 33693,
+          "idade_anos": 3.27,
+          "valor": 202.4465
+        },
+        {
+          "repositorio": "langchain-ai/langgraph",
+          "estrelas": 40442,
+          "idade_anos": 3.04,
+          "valor": 184.2105
+        },
+        {
+          "repositorio": "QuantumNous/new-api",
+          "estrelas": 46263,
+          "idade_anos": 2.79,
+          "valor": 183.5125
+        },
+        {
+          "repositorio": "cline/cline",
+          "estrelas": 66843,
+          "idade_anos": 2.14,
+          "valor": 182.7103
+        },
+        {
+          "repositorio": "storybookjs/storybook",
+          "estrelas": 90934,
+          "idade_anos": 10.44,
+          "valor": 176.1494
+        },
+        {
+          "repositorio": "danielmiessler/Fabric",
+          "estrelas": 43529,
+          "idade_anos": 2.64,
+          "valor": 160.2273
+        },
+        {
+          "repositorio": "siyuan-note/siyuan",
+          "estrelas": 45981,
+          "idade_anos": 5.98,
+          "valor": 158.5284
+        },
+        {
+          "repositorio": "xtekky/gpt4free",
+          "estrelas": 66605,
+          "idade_anos": 3.41,
+          "valor": 148.9736
+        },
+        {
+          "repositorio": "electron/electron",
+          "estrelas": 122716,
+          "idade_anos": 13.37,
+          "valor": 148.9155
+        },
+        {
+          "repositorio": "PostHog/posthog",
+          "estrelas": 39163,
+          "idade_anos": 6.59,
+          "valor": 142.7921
+        },
+        {
+          "repositorio": "SagerNet/sing-box",
+          "estrelas": 37273,
+          "idade_anos": 4.15,
+          "valor": 140.9639
+        },
+        {
+          "repositorio": "toeverything/AFFiNE",
+          "estrelas": 71875,
+          "idade_anos": 4.07,
+          "valor": 140.0491
+        },
+        {
+          "repositorio": "anthropics/claude-code",
+          "estrelas": 143005,
+          "idade_anos": 1.5,
+          "valor": 132.6667
+        },
+        {
+          "repositorio": "run-llama/llama_index",
+          "estrelas": 51871,
+          "idade_anos": 3.81,
+          "valor": 130.1837
+        },
+        {
+          "repositorio": "home-assistant/core",
+          "estrelas": 90108,
+          "idade_anos": 12.94,
+          "valor": 126.0433
+        },
+        {
+          "repositorio": "k3s-io/k3s",
+          "estrelas": 33819,
+          "idade_anos": 8.24,
+          "valor": 124.5146
+        },
+        {
+          "repositorio": "coollabsio/coolify",
+          "estrelas": 61040,
+          "idade_anos": 5.58,
+          "valor": 124.3728
+        },
+        {
+          "repositorio": "CherryHQ/cherry-studio",
+          "estrelas": 51066,
+          "idade_anos": 2.25,
+          "valor": 123.5556
+        },
+        {
+          "repositorio": "ueberdosis/tiptap",
+          "estrelas": 38165,
+          "idade_anos": 8.01,
+          "valor": 123.0961
+        },
+        {
+          "repositorio": "mem0ai/mem0",
+          "estrelas": 64032,
+          "idade_anos": 3.18,
+          "valor": 122.956
+        },
+        {
+          "repositorio": "carbon-language/carbon-lang",
+          "estrelas": 33868,
+          "idade_anos": 6.33,
+          "valor": 121.8009
+        },
+        {
+          "repositorio": "frappe/erpnext",
+          "estrelas": 38502,
+          "idade_anos": 15.21,
+          "valor": 117.62
+        },
+        {
+          "repositorio": "ultralytics/ultralytics",
+          "estrelas": 60957,
+          "idade_anos": 3.95,
+          "valor": 115.6962
+        },
+        {
+          "repositorio": "vitejs/vite",
+          "estrelas": 82534,
+          "idade_anos": 6.34,
+          "valor": 112.776
+        },
+        {
+          "repositorio": "RocketChat/Rocket.Chat",
+          "estrelas": 46031,
+          "idade_anos": 11.27,
+          "valor": 112.5998
+        },
+        {
+          "repositorio": "calcom/cal.diy",
+          "estrelas": 47926,
+          "idade_anos": 5.43,
+          "valor": 112.523
+        },
+        {
+          "repositorio": "ToolJet/ToolJet",
+          "estrelas": 40765,
+          "idade_anos": 5.4,
+          "valor": 110.7407
+        },
+        {
+          "repositorio": "pnpm/pnpm",
+          "estrelas": 36211,
+          "idade_anos": 10.57,
+          "valor": 109.7446
+        },
+        {
+          "repositorio": "remix-run/remix",
+          "estrelas": 33326,
+          "idade_anos": 5.83,
+          "valor": 109.6055
+        },
+        {
+          "repositorio": "remotion-dev/remotion",
+          "estrelas": 57336,
+          "idade_anos": 6.17,
+          "valor": 109.5624
+        },
+        {
+          "repositorio": "n8n-io/n8n",
+          "estrelas": 202423,
+          "idade_anos": 7.18,
+          "valor": 108.4958
+        },
+        {
+          "repositorio": "QuivrHQ/quivr",
+          "estrelas": 39423,
+          "idade_anos": 3.29,
+          "valor": 107.5988
+        },
+        {
+          "repositorio": "RSSNext/Folo",
+          "estrelas": 38857,
+          "idade_anos": 2.38,
+          "valor": 105.8824
+        },
+        {
+          "repositorio": "astral-sh/ruff",
+          "estrelas": 49321,
+          "idade_anos": 4.04,
+          "valor": 104.9505
+        },
+        {
+          "repositorio": "astral-sh/uv",
+          "estrelas": 89082,
+          "idade_anos": 2.9,
+          "valor": 104.8276
+        },
+        {
+          "repositorio": "payloadcms/payload",
+          "estrelas": 44402,
+          "idade_anos": 5.63,
+          "valor": 101.9538
+        },
+        {
+          "repositorio": "docling-project/docling",
+          "estrelas": 65558,
+          "idade_anos": 2.13,
+          "valor": 97.6526
+        },
+        {
+          "repositorio": "swc-project/swc",
+          "estrelas": 34192,
+          "idade_anos": 8.67,
+          "valor": 94.3483
+        },
+        {
+          "repositorio": "mattermost/mattermost",
+          "estrelas": 38901,
+          "idade_anos": 11.2,
+          "valor": 90.8929
+        },
+        {
+          "repositorio": "langflow-ai/langflow",
+          "estrelas": 153679,
+          "idade_anos": 3.54,
+          "valor": 86.1582
+        },
+        {
+          "repositorio": "backstage/backstage",
+          "estrelas": 34251,
+          "idade_anos": 6.58,
+          "valor": 82.9787
+        },
+        {
+          "repositorio": "react-hook-form/react-hook-form",
+          "estrelas": 44836,
+          "idade_anos": 7.47,
+          "valor": 82.8648
+        },
+        {
+          "repositorio": "crewAIInc/crewAI",
+          "estrelas": 57611,
+          "idade_anos": 2.83,
+          "valor": 81.6254
+        },
+        {
+          "repositorio": "ClickHouse/ClickHouse",
+          "estrelas": 49447,
+          "idade_anos": 10.23,
+          "valor": 81.5249
+        },
+        {
+          "repositorio": "slidevjs/slidev",
+          "estrelas": 48244,
+          "idade_anos": 5.34,
+          "valor": 80.7116
+        },
+        {
+          "repositorio": "daytonaio/daytona",
+          "estrelas": 71874,
+          "idade_anos": 2.55,
+          "valor": 80.3922
+        },
+        {
+          "repositorio": "ollama/ollama",
+          "estrelas": 179428,
+          "idade_anos": 3.16,
+          "valor": 78.1646
+        },
+        {
+          "repositorio": "zen-browser/desktop",
+          "estrelas": 44084,
+          "idade_anos": 2.41,
+          "valor": 77.1784
+        },
+        {
+          "repositorio": "puppeteer/puppeteer",
+          "estrelas": 95499,
+          "idade_anos": 9.3,
+          "valor": 75.5914
+        },
+        {
+          "repositorio": "TryGhost/Ghost",
+          "estrelas": 55059,
+          "idade_anos": 13.31,
+          "valor": 75.2066
+        },
+        {
+          "repositorio": "opendatalab/MinerU",
+          "estrelas": 78474,
+          "idade_anos": 2.49,
+          "valor": 74.6988
+        },
+        {
+          "repositorio": "upstash/context7",
+          "estrelas": 61215,
+          "idade_anos": 1.42,
+          "valor": 74.6479
+        },
+        {
+          "repositorio": "browser-use/browser-use",
+          "estrelas": 110517,
+          "idade_anos": 1.82,
+          "valor": 74.1758
+        },
+        {
+          "repositorio": "aaif-goose/goose",
+          "estrelas": 53465,
+          "idade_anos": 2.0,
+          "valor": 73.5
+        },
+        {
+          "repositorio": "ionic-team/ionic-framework",
+          "estrelas": 52632,
+          "idade_anos": 13.01,
+          "valor": 73.0208
+        },
+        {
+          "repositorio": "TabbyML/tabby",
+          "estrelas": 33836,
+          "idade_anos": 3.44,
+          "valor": 72.3837
+        },
+        {
+          "repositorio": "Dokploy/dokploy",
+          "estrelas": 36865,
+          "idade_anos": 2.35,
+          "valor": 72.3404
+        },
+        {
+          "repositorio": "laravel/framework",
+          "estrelas": 34883,
+          "idade_anos": 13.62,
+          "valor": 71.1454
+        },
+        {
+          "repositorio": "metabase/metabase",
+          "estrelas": 48929,
+          "idade_anos": 11.56,
+          "valor": 71.1073
+        },
+        {
+          "repositorio": "pocketbase/pocketbase",
+          "estrelas": 60804,
+          "idade_anos": 4.14,
+          "valor": 69.3237
+        },
+        {
+          "repositorio": "vuetifyjs/vuetify",
+          "estrelas": 41035,
+          "idade_anos": 9.95,
+          "valor": 67.8392
+        },
+        {
+          "repositorio": "AstrBotDevs/AstrBot",
+          "estrelas": 39600,
+          "idade_anos": 3.71,
+          "valor": 67.655
+        },
+        {
+          "repositorio": "ant-design/ant-design",
+          "estrelas": 99187,
+          "idade_anos": 11.34,
+          "valor": 66.9312
+        },
+        {
+          "repositorio": "immich-app/immich",
+          "estrelas": 112663,
+          "idade_anos": 4.56,
+          "valor": 66.886
+        },
+        {
+          "repositorio": "kubernetes/kubernetes",
+          "estrelas": 125189,
+          "idade_anos": 12.22,
+          "valor": 66.6121
+        },
+        {
+          "repositorio": "sveltejs/svelte",
+          "estrelas": 87991,
+          "idade_anos": 9.76,
+          "valor": 65.1639
+        },
+        {
+          "repositorio": "Crosstalk-Solutions/project-nomad",
+          "estrelas": 36306,
+          "idade_anos": 1.17,
+          "valor": 64.9573
+        },
+        {
+          "repositorio": "gitroomhq/postiz-app",
+          "estrelas": 35128,
+          "idade_anos": 3.13,
+          "valor": 63.5783
+        },
+        {
+          "repositorio": "valinet/ExplorerPatcher",
+          "estrelas": 33709,
+          "idade_anos": 5.04,
+          "valor": 59.5238
+        }
+      ]
+    },
+    "uniao_repositorios_extremos": 165,
+    "extremos_em_ambas_metricas": 39
+  },
+  "total_repositorios": 1000
+}
