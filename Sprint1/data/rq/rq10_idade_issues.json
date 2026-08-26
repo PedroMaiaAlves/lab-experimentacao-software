@@ -6,7 +6,7 @@
   "total_repositorios": 100,
   "repositorios_com_issues": 88,
   "repositorios_sem_issues": 12,
-  "correlacao_spearman": 0.32,
+  "correlacao_spearman": 0.3201,
   "interpretacao_correlacao": "Correlação positiva moderada.",
   "idade_mediana_repositorios_com_issues": 7.55,
   "percentual_issues_fechadas_mediana": 92.55,
@@ -15,9 +15,9 @@
       "Faixa de idade": "0–2 anos",
       "Quantidade_repositorios": 18,
       "Mediana_issues_fechadas": 71.15,
-      "Q1_issues_fechadas": 51.2,
+      "Q1_issues_fechadas": 51.12,
       "Q3_issues_fechadas": 86.32,
-      "IQR_issues_fechadas": 35.12
+      "IQR_issues_fechadas": 35.2
     },
     {
       "Faixa de idade": ">2–5 anos",
