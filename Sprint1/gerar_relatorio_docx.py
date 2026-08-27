@@ -1,4 +1,4 @@
-"""Gera o relatório intermediário Lab01S03 (RQ01–RQ10) em DOCX."""
+"""Gera o relatório final Lab01 (RQ01–RQ10) em DOCX."""
 
 from __future__ import annotations
 
@@ -32,7 +32,10 @@ from analysis.rq10_idade_issues import analisar as analisar_rq10
 
 BASE_DIR = Path(__file__).resolve().parent
 CSV_PADRAO = BASE_DIR / "data" / "raw" / "repositorios_populares.csv"
-SAIDA_PADRAO = BASE_DIR / "docs" / "Relatorio_Parcial_Lab01S03.docx"
+SAIDA_PADRAO = BASE_DIR / "docs" / "Relatorio_Final_Lab01.docx"
+REPO_URL = "https://github.com/PedroMaiaAlves/lab-experimentacao-software"
+PROJECT_URL = "https://github.com/users/PedroMaiaAlves/projects/1"
+BOARD_PRINT_PADRAO = BASE_DIR / "docs" / "board_github_project_lab01.png"
 JSON_RQ09_PADRAO = BASE_DIR / "data" / "rq" / "rq09_colaboracao_releases.json"
 JSON_RQ10_PADRAO = BASE_DIR / "data" / "rq" / "rq10_idade_issues.json"
 TEMPLATE_PADRAO = Path.home() / "Downloads" / "Template_Relatorio_Laboratorio.docx"
@@ -298,7 +301,13 @@ def adicionar_tabela(documento: Document, cabecalhos: list[str], linhas: list[li
     return tabela
 
 
-def adicionar_figura(documento: Document, caminho: Path, numero: int, legenda: str) -> None:
+def adicionar_figura(
+    documento: Document,
+    caminho: Path,
+    numero: int,
+    legenda: str,
+    fonte: str = "Fonte: elaborado pelo grupo com dados da API GraphQL do GitHub, 2026.",
+) -> None:
     p = documento.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p.add_run().add_picture(str(caminho), width=Cm(15.8))
@@ -309,7 +318,7 @@ def adicionar_figura(documento: Document, caminho: Path, numero: int, legenda: s
     run.font.size = Pt(9.5)
     p = documento.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    run = p.add_run("Fonte: elaborado pelo grupo com dados da API GraphQL do GitHub, 2026.")
+    run = p.add_run(fonte)
     run.italic = True
     run.font.size = Pt(8.5)
 
@@ -626,16 +635,17 @@ def adicionar_capa(documento: Document) -> None:
     run.bold = True
     run.font.size = Pt(15)
     run.font.color.rgb = RGBColor.from_string(VERDE)
-    p = documento.add_paragraph("Lab01S03 — versão intermediária com RQ01–RQ10")
+    p = documento.add_paragraph("Lab01 — Relatório Final")
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p.runs[0].font.size = Pt(12)
     dados = [
         ["Curso", "Engenharia de Software"],
         ["Disciplina", "Laboratório de Experimentação de Software"],
         ["Professor", "Danilo Maia"],
-        ["Entrega", "Lab01S03 — análise e visualização de dados"],
+        ["Entrega", "Lab01 — entrega final"],
         ["Integrantes", "Pedro Henrique Maia Alves; Diogo C. Brunoro; Lorran Pedro Avelar Xavier"],
-        ["Situação", "RQ01–RQ10 integradas; snapshot final do board pendente"],
+        ["Repositório", REPO_URL],
+        ["GitHub Project", PROJECT_URL],
         ["Data de geração", date.today().strftime("%d/%m/%Y")],
     ]
     tabela = adicionar_tabela(documento, ["Identificação", "Informação"], dados, fonte=9.5)
@@ -666,7 +676,7 @@ def construir_documento(template: Path, saida: Path, df: pd.DataFrame, estatisti
     secao.footer.is_linked_to_previous = False
     cabecalho = secao.header.paragraphs[0]
     cabecalho.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    cabecalho.add_run("Laboratório de Experimentação de Software — Lab01S03 — RQ01–RQ10").font.size = Pt(8.5)
+    cabecalho.add_run("Laboratório de Experimentação de Software — Lab01 — Relatório Final").font.size = Pt(8.5)
     adicionar_numero_pagina(secao.footer.paragraphs[0])
 
     total = estatisticas["total"]
@@ -681,7 +691,7 @@ def construir_documento(template: Path, saida: Path, df: pd.DataFrame, estatisti
 
     documento.add_heading("1. Introdução", level=1)
     adicionar_texto(documento, "O GitHub reúne projetos com diferentes níveis de maturidade, atividade e participação. Este laboratório investiga características dos 1.000 repositórios públicos mais estrelados retornados pela API GraphQL. Estrelas são usadas como definição operacional de popularidade, sem pressupor qualidade técnica.")
-    adicionar_texto(documento, "Esta é a versão intermediária da sprint S03. Ela consolida os resultados atualizados das sete questões sugeridas pelo professor e incorpora a RQ08, sobre popularidade e intensidade anual de desenvolvimento, a RQ09, sobre colaboração e publicação de releases, e a RQ10, sobre maturidade e tratamento de issues. A aplicação Streamlit integra mineração, análise, visualização e exportação do CSV.")
+    adicionar_texto(documento, "Este relatório consolida as sete questões de pesquisa exigidas pelo enunciado (RQ01–RQ07) e, como extensão do grupo, as RQ08 (popularidade e intensidade anual), RQ09 (colaboração e releases) e RQ10 (maturidade e issues). A aplicação Streamlit integra mineração, análise, visualização e exportação do CSV.")
     adicionar_texto(documento, "As hipóteses são informais e exploratórias: orientam a leitura descritiva, não foram pré-registradas e não substituem testes confirmatórios.")
 
     documento.add_heading("1.1 Questões de pesquisa e hipóteses informais", level=2)
@@ -702,7 +712,7 @@ def construir_documento(template: Path, saida: Path, df: pd.DataFrame, estatisti
     documento.add_heading("2. Desenvolvimento", level=1)
     documento.add_heading("2.1 Evolução do trabalho em S01, S02 e S03", level=2)
     adicionar_texto(documento, "Na S01 foram implementadas a consulta GraphQL inicial, a transformação tabular, as RQ01–RQ07 e a primeira interface Streamlit. Na S02, o coletor em lote passou a percorrer cursores até reunir exatamente 1.000 nomes únicos, exportar CSV e registrar o primeiro snapshot do Project.")
-    adicionar_texto(documento, "Na S03, a Issue #44 incorporou a RQ08 com taxas anualizadas, correlações, quartis e visualizações. A Issue #45 acrescentou a RQ09, relacionando PRs mescladas/ano e releases/ano. A Issue #46 incorporou a RQ10 sobre idade e percentual de issues fechadas, e a Issue #47 evoluiu a exibição e a busca no Streamlit. O snapshot final do board permanece pendente até a conclusão do trabalho.")
+    adicionar_texto(documento, "Na S03, a Issue #44 incorporou a RQ08 com taxas anualizadas, correlações, quartis e visualizações. A Issue #45 acrescentou a RQ09, relacionando PRs mescladas/ano e releases/ano. A Issue #46 incorporou a RQ10 sobre idade e percentual de issues fechadas, e a Issue #47 evoluiu a exibição e a busca no Streamlit.")
     adicionar_tabela(documento, ["Sprint", "Atividade", "Responsável", "Rastreabilidade"], [
         ["S01", "Coleta inicial, RQ01–RQ07 e Streamlit", "Pedro e Diogo", "Issues e PRs da S01"],
         ["S02", "Paginação para 1.000, CSV, validação e hipóteses", "Pedro e Diogo", "Issues #8–#15 e #22–#38"],
@@ -920,9 +930,31 @@ def construir_documento(template: Path, saida: Path, df: pd.DataFrame, estatisti
     adicionar_texto(documento, f"RQ01–RQ07 descrevem maturidade, contribuições, releases, atualização, linguagens e issues. A RQ08 acrescenta controle simples por idade: na amostra principal, ρ foi {formatar_numero(principal_pr['rho'], 4)} para PRs/ano e {formatar_numero(principal_rel['rho'], 4)} para releases/ano. Os resultados não sustentam a hipótese de duas associações positivas ao menos moderadas e não autorizam conclusão causal.")
     adicionar_texto(documento, f"A RQ09 respondeu positivamente à pergunta de pesquisa: PRs mescladas/ano e releases/ano apresentaram associação {classificar_correlacao(rho9)} (ρ = {formatar_numero(rho9, 4)}), acompanhada pelo crescimento das medianas de releases/ano entre Q1 e Q4. A evidência é associativa e não causal.")
     adicionar_texto(documento, f"Na RQ10, as medianas de issues fechadas aumentaram de {formatar_numero(medianas10[0], 2)}% para {formatar_numero(medianas10[-1], 2)}% entre as faixas extremas, mas a correlação foi positiva fraca (ρ = {formatar_numero(rho10, 4)}). A H10 recebeu apoio descritivo parcial, sem evidência de que a idade cause maior capacidade de fechamento.")
-    adicionar_texto(documento, "O Streamlit comunica as RQ01–RQ10, oferece busca por repositório e download do CSV. Esta versão permanece intermediária somente quanto à evidência final do processo: o anexo com o print do fluxo completo do grupo no GitHub Project/Kanban deve ser preenchido após a conclusão de todo o trabalho.")
+    adicionar_texto(documento, "O Streamlit comunica as RQ01–RQ10, oferece busca por repositório e download do CSV. As RQ08–RQ10 e a interface interativa são extensões do grupo além do mínimo exigido pelo enunciado.")
 
-    documento.add_heading("6. Referências", level=1)
+    documento.add_heading("6. Configuração do processo", level=1)
+    adicionar_texto(documento, "O grupo utiliza GitHub Projects (v2) vinculado ao repositório do laboratório. Cada tarefa é registrada como Issue real, atribuída a um responsável e movimentada no board conforme o progresso efetivo do trio.")
+    adicionar_tabela(documento, ["Elemento", "Configuração adotada"], [
+        ["Repositório", REPO_URL],
+        ["GitHub Project", PROJECT_URL],
+        ["Colunas (Status)", "Backlog → To Do → Doing → Review → Done"],
+        ["Política de WIP (Doing)", "2–3 tarefas por integrante por sprint (6–9 tarefas no total para o trio)"],
+        ["Rastreabilidade", "Commits referenciam o número da Issue correspondente (#N)"],
+        ["Snapshots do board", "Exportação manual em TSV/CSV em docs/snapshots/ (Issue #14 e fechamento do Lab01)"],
+    ], fonte=9)
+    adicionar_texto(documento, "A política de WIP limita o trabalho simultâneo em Doing para preservar foco e revisão em trio. Com três integrantes, a faixa de 2–3 tarefas por pessoa resulta em sprints de 6–9 itens, equilibrando paralelismo e capacidade de code review antes de mover cartões para Done.")
+    adicionar_texto(documento, "O fluxo do Lab01 no GitHub Project está registrado na Figura 12. Os snapshots em docs/snapshots/ serão base para os laboratórios 04 e 05, conforme orientação da disciplina.")
+    if not BOARD_PRINT_PADRAO.exists():
+        raise RuntimeError(f"Print do board não encontrada: {BOARD_PRINT_PADRAO}")
+    adicionar_figura(
+        documento,
+        BOARD_PRINT_PADRAO,
+        12,
+        "Fluxo do GitHub Project ao final do Lab01",
+        fonte=f"Fonte: GitHub Projects — {PROJECT_URL}. Captura de tela do grupo, 26 ago. 2026.",
+    )
+
+    documento.add_heading("7. Referências", level=1)
     referencias = [
         "GITHUB. GraphQL API documentation. https://docs.github.com/en/graphql. Acesso em: 25 ago. 2026.",
         "GITHUB. Using pagination in the GraphQL API. https://docs.github.com/en/graphql/guides/using-pagination-in-the-graphql-api. Acesso em: 25 ago. 2026.",
@@ -935,24 +967,11 @@ def construir_documento(template: Path, saida: Path, df: pd.DataFrame, estatisti
     for referencia in referencias:
         adicionar_texto(documento, referencia)
 
-    titulo_anexo = documento.add_heading("Anexo A — Fluxo do GitHub Project", level=1)
-    titulo_anexo.paragraph_format.page_break_before = True
-    adicionar_texto(documento, "PENDÊNCIA DA ISSUE #48: capturar somente ao final do trabalho o GitHub Project/Kanban mostrando o fluxo completo do grupo. O estado atual não substitui a captura final.")
-    tabela = documento.add_table(rows=1, cols=1)
-    tabela.style = "Table Grid"
-    celula = tabela.cell(0, 0)
-    celula.height = Cm(7)
-    celula.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
-    sombrear(celula, "F5F7FA")
-    p = celula.paragraphs[0]
-    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p.add_run("CAPTURAR AO FINAL: SNAPSHOT DO BOARD COM O FLUXO COMPLETO DO GRUPO").bold = True
-
     propriedades = documento.core_properties
-    propriedades.title = "Lab01S03 — Relatório intermediário RQ01–RQ10"
+    propriedades.title = "Lab01 — Relatório Final RQ01–RQ10"
     propriedades.subject = "Mineração de 1.000 repositórios populares do GitHub"
     propriedades.author = "Pedro Henrique Maia Alves; Diogo C. Brunoro; Lorran Pedro Avelar Xavier"
-    propriedades.keywords = "GitHub, GraphQL, Streamlit, RQ08, RQ09, RQ10, releases, issues, Spearman, Lab01S03"
+    propriedades.keywords = "GitHub, GraphQL, Streamlit, RQ08, RQ09, RQ10, releases, issues, Spearman, Lab01"
     saida.parent.mkdir(parents=True, exist_ok=True)
     documento.save(saida)
 
@@ -1182,19 +1201,26 @@ def validar_documento_gerado(docx: Path) -> None:
         "H09",
         "H10",
         "Lorran Pedro Avelar Xavier",
-        "CAPTURAR AO FINAL: SNAPSHOT DO BOARD",
+        "6. Configuração do processo",
+        "Figura 12",
+        REPO_URL,
+        PROJECT_URL,
     )
     faltantes = [termo for termo in termos_obrigatorios if termo not in texto]
     if faltantes:
         raise RuntimeError(f"Documento incompleto; termos ausentes: {', '.join(faltantes)}")
+    if re.search(r"(?i)youtube|shorts", texto):
+        raise RuntimeError("Documento contém referência a YouTube/Shorts (pegadinha do template).")
+    if "versão intermediária" in texto.lower():
+        raise RuntimeError("O documento ainda menciona versão intermediária.")
     if "RQ10 pendente" in texto or "RQ10 — pendente" in texto:
         raise RuntimeError("O documento ainda menciona RQ10 como pendente.")
     if "RQ09 pendente" in texto or "RQ09 — pendente" in texto:
         raise RuntimeError("O documento ainda menciona RQ09 como pendente.")
     if tabelas != 14:
         raise RuntimeError(f"Esperadas 14 tabelas, encontradas {tabelas}.")
-    if imagens != 10:
-        raise RuntimeError(f"Esperadas 10 imagens, encontradas {imagens}.")
+    if imagens != 11:
+        raise RuntimeError(f"Esperadas 11 imagens, encontradas {imagens}.")
     invalido = re.search(r"(?i)\b(?:nan|inf|infinity|infinito)\b", texto)
     if invalido:
         raise RuntimeError(f"Documento contém valor proibido: {invalido.group(0)}")
