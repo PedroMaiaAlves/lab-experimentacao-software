@@ -518,15 +518,30 @@ def _grafico_rq09(df_grafico: pd.DataFrame, resultado: dict):
             alt.Tooltip("Outlier em:N", title="Outlier em"),
         ],
     )
+    coeficiente, intercepto = np.polyfit(
+        base["PRs por ano"], base["Releases por ano"], 1
+    )
+    eixo_tendencia = np.linspace(
+        base["PRs por ano"].min(), base["PRs por ano"].max(), 200
+    )
+    dados_tendencia = pd.DataFrame(
+        {
+            "PRs por ano": eixo_tendencia,
+            "Releases por ano": coeficiente * eixo_tendencia + intercepto,
+        }
+    )
     tendencia = (
-        alt.Chart(base)
-        .transform_regression("PRs por ano", "Releases por ano")
+        alt.Chart(dados_tendencia)
         .mark_line(color="#facc15", strokeWidth=3)
+        .encode(
+            x=alt.X("PRs por ano:Q"),
+            y=alt.Y("Releases por ano:Q"),
+        )
     )
     chart = alt.layer(pontos, tendencia).properties(
         title="PRs mescladas por ano × releases por ano",
         height=480,
-    ).interactive()
+    )
     st.altair_chart(chart, width="stretch")
 
     with st.expander("Repositórios identificados como outliers"):
