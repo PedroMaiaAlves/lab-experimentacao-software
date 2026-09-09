@@ -1,0 +1,78 @@
+{
+  "experiment": "LAB02",
+  "sprint": "Sprint 02 - Execucao",
+  "timebox_seconds": 2100,
+  "assistant": {
+    "name": "ChatGPT",
+    "plan": "Free",
+    "model": "GPT-5.6 Luna",
+    "model_verified_at": null,
+    "session_policy": "Nova conversa ou conversa temporaria, sem memoria e sem instrucoes personalizadas"
+  },
+  "resources": {
+    "web_search": "Permitida nos dois tratamentos; registrar URLs na Issue",
+    "other_ai_tools": "Proibidos nos dois tratamentos",
+    "manual_treatment": "ChatGPT e extensoes de IA desabilitados"
+  },
+  "participants": [
+    {
+      "id": "pedro",
+      "name": "Pedro",
+      "github": "PedroMaiaAlves"
+    },
+    {
+      "id": "diogo",
+      "name": "Diogo",
+      "github": "DiogoBrunoro"
+    },
+    {
+      "id": "lorran",
+      "name": "Lorran",
+      "github": "LorranX"
+    }
+  ],
+  "katas": [
+    {
+      "id": "kata01",
+      "name": "Consolidar Janelas",
+      "function": "consolidar_janelas",
+      "expected_tests": 8,
+      "owner": "pedro"
+    },
+    {
+      "id": "kata02",
+      "name": "Planejar Recargas",
+      "function": "planejar_recargas",
+      "expected_tests": 8,
+      "owner": "diogo"
+    },
+    {
+      "id": "kata03",
+      "name": "Agrupar Alertas",
+      "function": "agrupar_alertas",
+      "expected_tests": 8,
+      "owner": "lorran"
+    },
+    {
+      "id": "kata04",
+      "name": "Distribuir Cotas",
+      "function": "distribuir_cotas",
+      "expected_tests": 8,
+      "owner": "lorran"
+    }
+  ],
+  "assignments": [
+    {"participant": "pedro", "kata": "kata01", "treatment": "ia", "order": 1},
+    {"participant": "pedro", "kata": "kata02", "treatment": "manual", "order": 2},
+    {"participant": "pedro", "kata": "kata03", "treatment": "ia", "order": 3},
+    {"participant": "pedro", "kata": "kata04", "treatment": "manual", "order": 4},
+    {"participant": "diogo", "kata": "kata02", "treatment": "manual", "order": 1},
+    {"participant": "diogo", "kata": "kata03", "treatment": "ia", "order": 2},
+    {"participant": "diogo", "kata": "kata04", "treatment": "ia", "order": 3},
+    {"participant": "diogo", "kata": "kata01", "treatment": "manual", "order": 4},
+    {"participant": "lorran", "kata": "kata03", "treatment": "manual", "order": 1},
+    {"participant": "lorran", "kata": "kata04", "treatment": "ia", "order": 2},
+    {"participant": "lorran", "kata": "kata01", "treatment": "manual", "order": 3},
+    {"participant": "lorran", "kata": "kata02", "treatment": "ia", "order": 4}
+  ]
+}
