@@ -55,26 +55,31 @@ PROTOCOL_FIXTURE = {
     ],
 }
 
-KATA_STUB = """\
-def consolidar_janelas(janelas, tolerancia=0):
+# Exercício sintético exclusivo dos testes da ferramenta. Nenhuma solução dos
+# quatro katas do experimento deve ser incluída nestas fixtures.
+SYNTHETIC_STUB = """\
+def dobro(numero):
     raise NotImplementedError
 """
 
-KATA_ACCEPTANCE = """\
+SYNTHETIC_SOLUTION = """\
+def dobro(numero):
+    return numero * 2
+"""
+
+SYNTHETIC_ACCEPTANCE = """\
 import unittest
-from solution import consolidar_janelas
+from solution import dobro
 
 class AcceptanceTest(unittest.TestCase):
-    def test_01(self): self.assertEqual([], consolidar_janelas([]))
-    def test_02(self): self.assertEqual([(1, 2)], consolidar_janelas([(1, 2)]))
-    def test_03(self): self.assertEqual([(1, 4)], consolidar_janelas([(1, 3), (3, 4)]))
-    def test_04(self): self.assertEqual([(1, 7)], consolidar_janelas([(1, 5), (3, 7)]))
-    def test_05(self): self.assertEqual([(1, 6)], consolidar_janelas([(1, 2), (4, 6)], 2))
-    def test_06(self): self.assertEqual([(5, 5)], consolidar_janelas([(5, 5)]))
-    def test_07(self):
-        with self.assertRaises(ValueError): consolidar_janelas([], -1)
-    def test_08(self):
-        with self.assertRaises(ValueError): consolidar_janelas([(4, 2)])
+    def test_01(self): self.assertEqual(0, dobro(0))
+    def test_02(self): self.assertEqual(2, dobro(1))
+    def test_03(self): self.assertEqual(4, dobro(2))
+    def test_04(self): self.assertEqual(-2, dobro(-1))
+    def test_05(self): self.assertEqual(-20, dobro(-10))
+    def test_06(self): self.assertEqual(2000, dobro(1000))
+    def test_07(self): self.assertEqual(1.0, dobro(0.5))
+    def test_08(self): self.assertEqual(-3.0, dobro(-1.5))
 """
 
 
@@ -99,14 +104,14 @@ class TrialToolTest(unittest.TestCase):
         self._globals.start()
         self.addCleanup(self._globals.stop)
         self.addCleanup(self.temporary.cleanup)
-        self._create_kata01()
+        self._create_synthetic_kata()
 
-    def _create_kata01(self):
+    def _create_synthetic_kata(self):
         target = self.root / "katas" / "kata01"
         target.mkdir(parents=True)
-        (target / "README.md").write_text("# Kata de teste", encoding="utf-8")
-        (target / "stub.py").write_text(KATA_STUB, encoding="utf-8")
-        (target / "acceptance.py").write_text(KATA_ACCEPTANCE, encoding="utf-8")
+        (target / "README.md").write_text("# Exercício sintético: dobro", encoding="utf-8")
+        (target / "stub.py").write_text(SYNTHETIC_STUB, encoding="utf-8")
+        (target / "acceptance.py").write_text(SYNTHETIC_ACCEPTANCE, encoding="utf-8")
 
     def _start(self, participant="pedro", kata="kata01", issue=101):
         trial.start(
@@ -158,24 +163,7 @@ class TrialToolTest(unittest.TestCase):
 
     def test_valid_temporary_solution_passes_all_tests(self):
         solution = self.root / "solution.py"
-        solution.write_text(
-            """
-def consolidar_janelas(janelas, tolerancia=0):
-    if tolerancia < 0:
-        raise ValueError('tolerancia invalida')
-    ordenadas = sorted(janelas)
-    if any(inicio > fim for inicio, fim in ordenadas):
-        raise ValueError('janela invalida')
-    resultado = []
-    for inicio, fim in ordenadas:
-        if not resultado or inicio - resultado[-1][1] > tolerancia:
-            resultado.append((inicio, fim))
-        else:
-            resultado[-1] = (resultado[-1][0], max(resultado[-1][1], fim))
-    return resultado
-""".strip(),
-            encoding="utf-8",
-        )
+        solution.write_text(SYNTHETIC_SOLUTION, encoding="utf-8")
         result = trial.run_tests(
             solution, self.root / "katas" / "kata01" / "acceptance.py"
         )
@@ -211,24 +199,7 @@ def consolidar_janelas(janelas, tolerancia=0):
         with mock.patch.object(trial, "utc_now", return_value=started):
             self._start()
         solution = self.root / "trials" / "pedro" / "kata01" / "solution.py"
-        solution.write_text(
-            """
-def consolidar_janelas(janelas, tolerancia=0):
-    if tolerancia < 0:
-        raise ValueError
-    ordenadas = sorted(janelas)
-    if any(a > b for a, b in ordenadas):
-        raise ValueError
-    saida = []
-    for inicio, fim in ordenadas:
-        if not saida or inicio - saida[-1][1] > tolerancia:
-            saida.append((inicio, fim))
-        else:
-            saida[-1] = (saida[-1][0], max(saida[-1][1], fim))
-    return saida
-""".strip(),
-            encoding="utf-8",
-        )
+        solution.write_text(SYNTHETIC_SOLUTION, encoding="utf-8")
         args = argparse.Namespace(participant="pedro", kata="kata01", prompts=3)
         with mock.patch.object(trial, "utc_now", return_value=started + timedelta(seconds=75)):
             trial.conclude(args, explicit_finish=False)
@@ -239,6 +210,7 @@ def consolidar_janelas(janelas, tolerancia=0):
         self.assertEqual("100.0", row["success_rate"])
         self.assertEqual("", row["loc"])
         self.assertEqual("GPT-5.6 Luna", row["assistant_model"])
+        self.assertEqual("3", row["prompt_count"])
 
     def test_negative_prompt_count_is_rejected(self):
         args = argparse.Namespace(participant="pedro", kata="kata01", prompts=-1)
