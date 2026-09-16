@@ -4,9 +4,32 @@ Este diretório reúne o planejamento e os artefatos do LAB02 da disciplina de
 Laboratório de Experimentação de Software. O experimento compara a resolução de
 pequenos exercícios de programação com ChatGPT e de forma manual.
 
-> Estado atual: a base comum e as entregas de Pedro da Sprint 01 estão
-> implementadas. As entregas atribuídas a Diogo e Lorran continuam pendentes e
-> a Sprint 02 ainda não deve ser executada.
+> Estado atual: as entregas técnicas da Sprint 01 de Pedro, Diogo e Lorran
+> estão integradas. A preparação técnica da Sprint 02 foi validada localmente:
+> 35 testes passaram em CPython 3.11.16, e a validação do pacote passou.
+> Os ambientes dos colegas e o modelo das três contas ainda precisam ser
+> confirmados. A tag `lab02-s02-baseline` só será publicada depois dessas
+> confirmações e da integração da preparação na `main`. Não iniciar trials antes disso.
+
+## Por onde começar
+
+1. Preparar o [ambiente isolado Python 3.11.16](docs/ambiente.md).
+2. Conferir as [pendências para publicar a baseline](#confirmações-para-a-baseline).
+3. Depois da liberação, seguir o [roteiro passo a passo da Sprint 02](docs/execucao_sprint02.md).
+
+### Onde estão os quatro exercícios
+
+| Kata | Enunciado | Preparado por |
+| --- | --- | --- |
+| 01 | [Consolidar Janelas](katas/kata01/README.md) | Pedro |
+| 02 | [Planejar Recargas](katas/kata02/README.md) | Diogo |
+| 03 | [Agrupar Alertas](katas/kata03/README.md) | Lorran |
+| 04 | [Distribuir Cotas](katas/kata04/README.md) | Lorran |
+
+Todos resolvem os mesmos quatro exercícios, uma vez cada: dois com IA e dois
+manuais. São **4 katas × 3 participantes = 12 trials**. A autoria do enunciado
+não torna sua execução exclusiva de quem o preparou. Use a `main` integrada ou
+a baseline liberada; as branches antigas da Sprint 01 podem conter só parte dos arquivos.
 
 ## Termos essenciais
 
@@ -148,13 +171,14 @@ o balanço por kata é necessariamente 2 × 1.
 
 ### Assistente padronizado
 
-O tratamento `ia` utilizará **ChatGPT Free com GPT-5.6 Luna**, modelo padrão da
-oferta gratuita na data desta preparação. Antes do primeiro trial, os três
+O protocolo prevê **ChatGPT Free com GPT-5.6 Luna**. Antes do primeiro trial, os três
 participantes devem confirmar que veem o mesmo nome de modelo e preencher
 `assistant.model_verified_at` em `protocol.json`. Se um participante não tiver
 o mesmo modelo, nenhum trial com IA deve começar até a condição ser uniforme.
 
 Referência: [OpenAI Docs — novidades do ChatGPT](https://learn.chatgpt.com/pt-BR/docs/whats-new).
+A documentação não comprova a disponibilidade em uma conta individual.
+Enquanto faltar uma confirmação, `assistant.model_verified_at` fica `null`.
 
 Cada trial com IA usa uma conversa nova ou temporária, sem memória e sem
 instruções personalizadas. Nos trials manuais, todos os assistentes de IA devem
@@ -163,25 +187,40 @@ tratamentos, mas as URLs consultadas precisam ser registradas na Issue.
 
 ## Ferramenta de trials
 
-Os comandos são executados a partir da raiz do repositório:
+Os comandos abaixo são para Windows, na raiz do repositório, com o ambiente
+exclusivo `Lab02/.venv`. Substitua os marcadores em maiúsculas pelos dados reais.
+Não execute `start` para testar a instalação; use `validate` e a suíte automatizada.
 
 ```text
-python Lab02/tools/trial.py validate
-python Lab02/tools/trial.py start PARTICIPANTE KATA --issue NUMERO
-python Lab02/tools/trial.py check PARTICIPANTE KATA
-python Lab02/tools/trial.py finish PARTICIPANTE KATA --prompts QUANTIDADE
-python Lab02/tools/trial.py link-commit PARTICIPANTE KATA --commit HASH
+.\Lab02\.venv\Scripts\python.exe Lab02/tools/trial.py validate
+.\Lab02\.venv\Scripts\python.exe Lab02/tools/trial.py start PARTICIPANTE KATA --issue NUMERO
+.\Lab02\.venv\Scripts\python.exe Lab02/tools/trial.py check PARTICIPANTE KATA --prompts QUANTIDADE
+.\Lab02\.venv\Scripts\python.exe Lab02/tools/trial.py finish PARTICIPANTE KATA --prompts QUANTIDADE
+.\Lab02\.venv\Scripts\python.exe Lab02/tools/trial.py link-commit PARTICIPANTE KATA --commit HASH
 ```
 
-- `validate` verifica o protocolo e todos os artefatos da Sprint 01.
+- `validate` verifica a estrutura do protocolo, a presença dos artefatos,
+  os testes dos stubs e o cabeçalho do CSV. Não substitui a suíte automatizada
+  nem confirma o ambiente ou a conta de cada participante.
 - `start` copia o stub para a área isolada do participante e inicia o relógio.
 - `check` executa os testes; finaliza se estiver verde ou se o limite acabou.
 - `finish` encerra quando estiver verde ou censura depois de 35 minutos.
 - `link-commit` registra no CSV o commit que contém a solução congelada.
 
+Informe a contagem **acumulada** de prompts em todo `check` e `finish`; no
+tratamento manual use `0`. Cada mensagem enviada ao assistente conta como um
+prompt, inclusive a primeira e os pedidos de correção. Ao aparecer
+`TRIAL FINALIZADO`, pare de editar. Se já ficou verde, não execute `finish`
+novamente. Trials vermelhos não podem terminar antes do limite.
+
+Use um alarme externo de 35 minutos, ativado ao iniciar o trial. O programa
+não executa em segundo plano: o encerramento ocorre quando `check` ou `finish`
+é chamado. Ao atingir o prazo, pare de editar e execute `finish` imediatamente.
+
 O Git é vinculado depois da medição para que o tempo de commit não seja contado
 no Time-to-Green. Até essa vinculação, o CSV usa `PENDING` no campo
-`commit_sha`.
+`commit_sha`. Primeiro faça o commit da solução e do resultado; depois rode
+`link-commit --commit HEAD` e faça um segundo commit com o CSV atualizado.
 
 ### Fluxo de um trial
 
@@ -189,7 +228,7 @@ no Time-to-Green. Até essa vinculação, o CSV usa `PENDING` no campo
 2. Mover a Issue para `In Progress`.
 3. Executar `start` com o número da Issue.
 4. Editar apenas o `solution.py` indicado pelo comando.
-5. Usar `check` durante o trabalho.
+5. Usar `check --prompts QUANTIDADE` durante o trabalho, sempre com a contagem atual.
 6. Parar ao ficar verde ou ao chegar a 35 minutos.
 7. Executar `finish` se necessário e não modificar mais a solução.
 8. Commitar solução e primeira versão do resultado mencionando a Issue.
@@ -209,39 +248,114 @@ combinação `participant + kata` como chave única.
 - Métrica indisponível: campo vazio e justificativa na Issue; nunca zero
   inventado.
 
-## Handoffs pendentes
+## Entregas integradas da Sprint 01
 
 ### Diogo
 
-- criar `Lab02/requirements.txt` e `Lab02/docs/ambiente.md`, documentando e
-  fixando as versões do ambiente;
-- implementar `Lab02/tools/metrics.py` com
+- ambiente e dependências em `Lab02/requirements.txt` e `Lab02/docs/ambiente.md`;
+- `Lab02/tools/metrics.py` com
   `collect(path) -> {loc, mean_complexity, maintainability_index, duplication_percent}`;
-- implementar Kata 02 com oito testes;
-- ampliar a validação automatizada e revisar a ferramenta de trials.
+- Kata 02 com oito testes;
+- testes de métricas e validação do pacote (Issues #62–#65).
 
 ### Lorran
 
-- criar `Lab02/docs/catalogo_katas.md` com a seleção, adaptação e calibração dos
-  katas;
-- implementar Katas 03 e 04, com oito testes cada;
-- implementar `Lab02/tools/create_issues.py` com prévia segura por padrão;
-- configurar e registrar evidências do GitHub Projects.
+- catálogo dos katas em `Lab02/docs/catalogo_katas.md`;
+- Katas 03 e 04, com oito testes cada;
+- `Lab02/tools/create_issues.py` com prévia segura por padrão (Issues #66–#69,
+  integradas pela PR #78).
+
+### Pedro
+
+- desenho experimental, protocolo, ferramenta de trials e Kata 01
+  (Issues #58–#61);
+- preparação complementar para a Sprint 02: documentação operacional,
+  fixtures sintéticas e ambiente local isolado.
+
+As entregas integradas não comprovam, por si só, a revisão de todos os cartões
+do Projects ou a instalação nas três máquinas. As evidências devem ser
+registradas pelos responsáveis, sem atribuir commits de uma pessoa a outra.
 
 ## Definition of Done da Sprint 01
 
-- [ ] 12 trials válidos no protocolo, sendo 6 IA e 6 manuais.
-- [ ] Quatro katas com especificação, stub e oito testes cada.
-- [ ] Todos os stubs falham e as referências de validação passam.
-- [ ] Cronometragem, censura, CSV e vínculo de commit testados.
-- [ ] Métricas estáticas reproduzíveis.
-- [ ] Instalação limpa documentada e validada.
+- [x] 12 trials válidos no protocolo, sendo 6 IA e 6 manuais.
+- [x] Quatro katas com especificação, stub e oito testes cada.
+- [x] Os quatro stubs falham; a solução sintética dos testes da ferramenta passa.
+- [x] Cronometragem, censura, CSV e vínculo de commit testados.
+- [x] Métricas estáticas testadas e dependências fixadas.
+- [x] Instalação limpa documentada e validada no computador de Pedro.
+- [ ] Instalação reproduzida e confirmada por Diogo e Lorran.
 - [ ] Cada integrante possui código, commit e revisão rastreáveis.
-- [ ] Nenhum piloto foi incluído nos resultados oficiais.
+- [x] Nenhum piloto foi incluído nos resultados oficiais; CSV somente com cabeçalho.
 
-## Sprint 02 — próxima etapa, ainda não executar
+## Confirmações para a baseline
 
-A Sprint 02 executará os 12 trials definidos no protocolo. Os títulos das
-Issues poderão ser gerados a partir da matriz somente depois que a Sprint 01
-atingir integralmente sua Definition of Done. Nenhum resultado deve ser criado
-ou preenchido antecipadamente.
+| Participante | Ambiente CPython 3.11.16 | ChatGPT Free / GPT-5.6 Luna |
+| --- | --- | --- |
+| Pedro | Validado em 2026-09-16: 35 testes e `validate` passaram | Pendente |
+| Diogo | Pendente: enviar saída da verificação | Pendente |
+| Lorran | Pendente: enviar saída da verificação | Pendente |
+
+Para o ambiente, seguir a [conferência reproduzível](docs/ambiente.md#2-conferência-que-cada-participante-deve-executar)
+e anexar a saída à PR de preparação. Para a conta, cada integrante fornece:
+
+```text
+Participante:
+Plano exibido:
+Modelo disponível:
+Data da conferência:
+```
+
+Após as três confirmações compatíveis com o protocolo, registrar a data real
+da confirmação conjunta em UTC, no formato ISO 8601, em
+`assistant.model_verified_at`. Não preencher esse campo só para liberar `start`.
+Se houver divergência de modelo, resolver a condição comum antes da baseline.
+
+Pedro informou que o grupo não teve contato com soluções prontas. A familiaridade
+com os enunciados preparados pelo próprio grupo continua sendo uma ameaça à validade.
+As soluções anteriormente presentes nos testes internos são substituídas por
+exercícios sintéticos; os commits antigos continuam no histórico e não devem
+ser consultados para obter respostas durante os trials.
+
+### Publicação da versão inicial comum
+
+Somente depois de integrar a preparação e as confirmações à `main`, atualizar
+a branch, executar os testes nessa versão final e confirmar CSV vazio e
+árvore de trabalho limpa. Então publicar uma tag anotada:
+
+```powershell
+git switch main
+git pull --ff-only
+.\Lab02\.venv\Scripts\python.exe -m unittest discover -s Lab02/tests -v -b
+.\Lab02\.venv\Scripts\python.exe Lab02/tools/trial.py validate
+git status --short
+git tag -a lab02-s02-baseline -m "Baseline validada para os 12 trials do LAB02"
+git push origin refs/tags/lab02-s02-baseline
+git rev-parse 'lab02-s02-baseline^{commit}'
+git ls-remote origin 'refs/tags/lab02-s02-baseline^{}'
+```
+
+Parar se alguma verificação falhar, se `git status --short` listar mudanças ou
+se faltar confirmação. Os dois últimos comandos devem mostrar o mesmo hash
+do commit; a tag anotada tem um objeto próprio, diferente do commit apontado.
+Não substituir nem mover uma tag já publicada. Enquanto houver pendências,
+a PR técnica pode ser entregue, mas a baseline fica sem publicação.
+
+## Sprint 02 — execução após a liberação
+
+A Sprint 02 executará os 12 trials definidos no protocolo, em horários
+individuais e seguindo a ordem da matriz. Fazer pausa mínima de 10 minutos
+entre trials no mesmo dia. Nenhum resultado deve ser preenchido antecipadamente.
+
+O [roteiro passo a passo](docs/execucao_sprint02.md) cobre Issues, branches,
+início, arquivo a editar, prompts, testes, encerramento, commits e publicação.
+A prévia dos 12 cartões pode ser consultada sem publicação:
+
+```powershell
+.\Lab02\.venv\Scripts\python.exe Lab02/tools/create_issues.py
+```
+
+Pedro fará o cadastro manual. Não usar `--apply` para evitar duplicação de
+Issues. Guardar as soluções em branches locais até os três concluírem seus
+quatro trials; depois publicar, revisar e consolidar as 12 linhas do CSV.
+A análise estatística fica para a Sprint 03.

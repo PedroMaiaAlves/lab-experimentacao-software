@@ -45,13 +45,17 @@ agrupar_alertas([
 
 ## Execução dos testes
 
-O arquivo de trabalho oficial será criado pela ferramenta de trials. Para uma
-verificação local fora dos trials, copie `stub.py` para um arquivo temporário
-chamado `solution.py` no mesmo diretório e execute:
+Prepare o [ambiente CPython 3.11.16](../../docs/ambiente.md) e siga o
+[roteiro de execução](../../docs/execucao_sprint02.md). A ferramenta de trials
+criará seu arquivo de trabalho em `Lab02/trials/PARTICIPANTE/kata03/solution.py`.
+Não escreva a solução neste diretório nem altere o stub ou os testes.
+
+Depois de iniciar o trial pelo roteiro, verifique sua solução a partir da
+raiz do repositório, substituindo `PARTICIPANTE` e `TOTAL`:
 
 ```text
-python -m unittest Lab02/katas/kata03/acceptance.py
+.\Lab02\.venv\Scripts\python.exe Lab02/tools/trial.py check PARTICIPANTE kata03 --prompts TOTAL
 ```
 
-Não coloque uma solução de referência neste diretório antes do fim do
-experimento.
+Use a contagem acumulada de prompts (zero no manual). `check` pode finalizar
+o trial no primeiro verde ou após 35 minutos. Preserve a solução ao encerrar.

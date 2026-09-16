@@ -1,1 +1,6 @@
+# Ambiente experimental: CPython 3.11.16.
+# Dependência direta e suas dependências transitivas fixadas.
+colorama==0.4.6
+mando==0.7.1
 radon==6.0.1
+six==1.17.0
