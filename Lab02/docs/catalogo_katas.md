@@ -46,8 +46,10 @@ Os padrões de união de intervalos, agrupamento temporal e maiores restos são
 conhecidos, portanto o risco de a IA reconhecer parte da estratégia não é
 nulo. O experimento reduz esse risco usando nomes e contextos próprios,
 combinando restrições que não costumam aparecer juntas e exigindo formatos de
-entrada e saída específicos. As soluções de referência não são versionadas,
-e cada trial com IA parte de uma conversa nova ou temporária.
+entrada e saída específicos. A preparação da Sprint 02 substitui as soluções
+reais nos testes internos por um exercício sintético. O histórico anterior do
+Git ainda contém essas soluções e não deve ser consultado durante os trials.
+Cada trial com IA parte de uma conversa nova ou temporária.
 
 Essas medidas reduzem respostas copiadas por associação direta, mas não
 eliminam conhecimento prévio do modelo. Por isso, o risco residual deve ser

@@ -26,6 +26,7 @@ if str(TOOLS_DIR) not in sys.path:
     sys.path.insert(0, str(TOOLS_DIR))
 
 import metrics  # noqa: E402
+import trial  # noqa: E402
 
 
 EXPECTED_METRIC_KEYS = {
@@ -34,6 +35,19 @@ EXPECTED_METRIC_KEYS = {
     "maintainability_index",
     "duplication_percent",
 }
+
+
+class AcceptancePackageValidationTest(unittest.TestCase):
+    def test_all_four_real_kata_stubs_fail_their_eight_acceptance_tests(self):
+        protocol = trial.load_protocol()
+        self.assertEqual(4, len(protocol["katas"]))
+        for kata in protocol["katas"]:
+            with self.subTest(kata=kata["id"]):
+                kata_dir = LAB02_ROOT / "katas" / kata["id"]
+                result = trial.run_tests(kata_dir / "stub.py", kata_dir / "acceptance.py")
+                self.assertEqual(8, result["total"], result["output"])
+                self.assertEqual(0, result["passed"], result["output"])
+                self.assertFalse(result["green"])
 
 
 class RequirementsValidationTest(unittest.TestCase):
