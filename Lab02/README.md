@@ -7,9 +7,11 @@ pequenos exercícios de programação com ChatGPT e de forma manual.
 > Estado atual: as entregas técnicas da Sprint 01 de Pedro, Diogo e Lorran
 > estão integradas. A preparação técnica da Sprint 02 foi validada localmente:
 > 35 testes passaram em CPython 3.11.16, e a validação do pacote passou.
-> Os ambientes dos colegas e o modelo das três contas ainda precisam ser
-> confirmados. A tag `lab02-s02-baseline` só será publicada depois dessas
-> confirmações e da integração da preparação na `main`. Não iniciar trials antes disso.
+> Pedro confirmou o mesmo assistente nas três contas; as verificações dos
+> ambientes de Diogo e Lorran continuam pendentes. A tag `lab02-s02-baseline`
+> ainda não foi publicada. Os trials já registrados começaram sem essa tag;
+> isso é um desvio do protocolo, não uma execução sobre uma baseline congelada.
+> Não iniciar novos trials antes de regularizar a preparação.
 
 ## Por onde começar
 
@@ -292,9 +294,17 @@ registradas pelos responsáveis, sem atribuir commits de uma pessoa a outra.
 
 | Participante | Ambiente CPython 3.11.16 | ChatGPT Free / GPT-5.6 Luna |
 | --- | --- | --- |
-| Pedro | Validado em 2026-09-16: 35 testes e `validate` passaram | Pendente |
-| Diogo | Pendente: enviar saída da verificação | Pendente |
-| Lorran | Pendente: enviar saída da verificação | Pendente |
+| Pedro | Validado em 2026-09-16: 35 testes e `validate` passaram | Confirmado conforme declaração de Pedro; ver registro abaixo |
+| Diogo | Pendente: enviar saída da verificação | Confirmado conforme declaração de Pedro; ver registro abaixo |
+| Lorran | Pendente: enviar saída da verificação | Confirmado conforme declaração de Pedro; ver registro abaixo |
+
+Pedro declarou nesta preparação corretiva que os três participantes conferiram
+o mesmo plano e modelo em suas próprias contas e confirmou o instante conjunto
+de 2026-09-16 às 16:42 (UTC-03:00). O campo `assistant.model_verified_at` registra
+o mesmo instante em UTC: `2026-09-16T19:42:00+00:00`. A fonte é a declaração de
+Pedro na conversa de correção, não uma verificação automatizada das contas.
+Essa confirmação não valida os ambientes de Diogo e Lorran. Não criar uma tag
+retroativa para apresentar os trials já realizados como iniciados na baseline.
 
 Para o ambiente, seguir a [conferência reproduzível](docs/ambiente.md#2-conferência-que-cada-participante-deve-executar)
 e anexar a saída à PR de preparação. Para a conta, cada integrante fornece:
