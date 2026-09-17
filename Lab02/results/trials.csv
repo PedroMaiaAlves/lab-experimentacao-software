@@ -1,5 +1,6 @@
 participant,kata,treatment,order,started_at,ended_at,duration_seconds,time_to_green_seconds,censored,total_tests,passed_tests,failed_tests,success_rate,loc,mean_complexity,duplication_percent,maintainability_index,assistant,assistant_plan,assistant_model,prompt_count,commit_sha,issue_number
 pedro,kata01,ia,1,2026-09-16T19:43:08+00:00,2026-09-16T19:46:52+00:00,224.78,224.78,false,8,8,0,100.0,19,7.0,0.0,82.1,ChatGPT,Free,GPT-5.6 Luna,1,2d3b382,79
+diogo,kata04,ia,3,2026-09-16T22:53:14+00:00,2026-09-16T22:55:42+00:00,148.852,148.852,false,8,8,0,100.0,35,19.0,0.0,72.28,ChatGPT,Free,GPT-5.6 Luna,1,2e05d85,0
 diogo,kata01,manual,4,2026-09-16T23:03:14+00:00,2026-09-16T23:21:01+00:00,1067.125,1067.125,false,8,8,0,100.0,20,7.0,0.0,58.66,,,,0,71e9bd0,0
 diogo,kata03,ia,2,2026-09-16T22:33:10+00:00,2026-09-16T22:37:23+00:00,253.636,253.636,false,8,8,0,100.0,66,17.0,38.81,62.27,ChatGPT,Free,GPT-5.6 Luna,1,58c15a2,0
 pedro,kata02,manual,2,2026-09-16T20:02:33+00:00,2026-09-16T20:37:24+00:00,2091.348,2091.348,false,8,8,0,100.0,19,9.0,0.0,75.37,,,,0,3de0374,80
