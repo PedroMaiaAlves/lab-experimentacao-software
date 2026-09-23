@@ -1,0 +1,9 @@
+treatment,metric,n,median,q1,q3,iqr
+ia,mean_complexity,6,15.0,8.75,16.75,8.0
+ia,duplication_percent,6,0.0,0.0,19.5675,19.5675
+ia,loc,6,36.0,23.0,43.75,20.75
+ia,maintainability_index,6,61.66,60.2025,69.7775,9.575000000000003
+manual,mean_complexity,6,8.0,7.0,14.25,7.25
+manual,duplication_percent,6,0.0,0.0,0.0,0.0
+manual,loc,6,19.5,18.25,35.0,16.75
+manual,maintainability_index,6,58.364999999999995,48.8825,60.58,11.697499999999998

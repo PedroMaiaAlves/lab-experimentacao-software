@@ -1,0 +1,1324 @@
+{
+  "summary_by_treatment": [
+    {
+      "treatment": "ia",
+      "metric": "mean_complexity",
+      "n": 6,
+      "median": 15.0,
+      "q1": 8.75,
+      "q3": 16.75,
+      "iqr": 8.0
+    },
+    {
+      "treatment": "ia",
+      "metric": "duplication_percent",
+      "n": 6,
+      "median": 0.0,
+      "q1": 0.0,
+      "q3": 19.5675,
+      "iqr": 19.5675
+    },
+    {
+      "treatment": "ia",
+      "metric": "loc",
+      "n": 6,
+      "median": 36.0,
+      "q1": 23.0,
+      "q3": 43.75,
+      "iqr": 20.75
+    },
+    {
+      "treatment": "ia",
+      "metric": "maintainability_index",
+      "n": 6,
+      "median": 61.66,
+      "q1": 60.2025,
+      "q3": 69.7775,
+      "iqr": 9.575000000000003
+    },
+    {
+      "treatment": "manual",
+      "metric": "mean_complexity",
+      "n": 6,
+      "median": 8.0,
+      "q1": 7.0,
+      "q3": 14.25,
+      "iqr": 7.25
+    },
+    {
+      "treatment": "manual",
+      "metric": "duplication_percent",
+      "n": 6,
+      "median": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "iqr": 0.0
+    },
+    {
+      "treatment": "manual",
+      "metric": "loc",
+      "n": 6,
+      "median": 19.5,
+      "q1": 18.25,
+      "q3": 35.0,
+      "iqr": 16.75
+    },
+    {
+      "treatment": "manual",
+      "metric": "maintainability_index",
+      "n": 6,
+      "median": 58.364999999999995,
+      "q1": 48.8825,
+      "q3": 60.58,
+      "iqr": 11.697499999999998
+    }
+  ],
+  "summary_by_participant": [
+    {
+      "participant": "diogo",
+      "treatment": "ia",
+      "metric": "mean_complexity",
+      "n": 2,
+      "median": 18.0,
+      "q1": 17.5,
+      "q3": 18.5,
+      "iqr": 1.0
+    },
+    {
+      "participant": "diogo",
+      "treatment": "ia",
+      "metric": "duplication_percent",
+      "n": 2,
+      "median": 19.405,
+      "q1": 9.7025,
+      "q3": 29.1075,
+      "iqr": 19.405
+    },
+    {
+      "participant": "diogo",
+      "treatment": "ia",
+      "metric": "loc",
+      "n": 2,
+      "median": 50.5,
+      "q1": 42.75,
+      "q3": 58.25,
+      "iqr": 15.5
+    },
+    {
+      "participant": "diogo",
+      "treatment": "ia",
+      "metric": "maintainability_index",
+      "n": 2,
+      "median": 67.275,
+      "q1": 64.77250000000001,
+      "q3": 69.7775,
+      "iqr": 5.0049999999999955
+    },
+    {
+      "participant": "diogo",
+      "treatment": "manual",
+      "metric": "mean_complexity",
+      "n": 2,
+      "median": 7.0,
+      "q1": 7.0,
+      "q3": 7.0,
+      "iqr": 0.0
+    },
+    {
+      "participant": "diogo",
+      "treatment": "manual",
+      "metric": "duplication_percent",
+      "n": 2,
+      "median": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "iqr": 0.0
+    },
+    {
+      "participant": "diogo",
+      "treatment": "manual",
+      "metric": "loc",
+      "n": 2,
+      "median": 18.0,
+      "q1": 17.0,
+      "q3": 19.0,
+      "iqr": 2.0
+    },
+    {
+      "participant": "diogo",
+      "treatment": "manual",
+      "metric": "maintainability_index",
+      "n": 2,
+      "median": 59.94,
+      "q1": 59.3,
+      "q3": 60.58,
+      "iqr": 1.2800000000000011
+    },
+    {
+      "participant": "lorran",
+      "treatment": "ia",
+      "metric": "mean_complexity",
+      "n": 2,
+      "median": 11.5,
+      "q1": 9.25,
+      "q3": 13.75,
+      "iqr": 4.5
+    },
+    {
+      "participant": "lorran",
+      "treatment": "ia",
+      "metric": "duplication_percent",
+      "n": 2,
+      "median": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "iqr": 0.0
+    },
+    {
+      "participant": "lorran",
+      "treatment": "ia",
+      "metric": "loc",
+      "n": 2,
+      "median": 26.5,
+      "q1": 21.25,
+      "q3": 31.75,
+      "iqr": 10.5
+    },
+    {
+      "participant": "lorran",
+      "treatment": "ia",
+      "metric": "maintainability_index",
+      "n": 2,
+      "median": 53.67,
+      "q1": 49.98,
+      "q3": 57.36,
+      "iqr": 7.380000000000003
+    },
+    {
+      "participant": "lorran",
+      "treatment": "manual",
+      "metric": "mean_complexity",
+      "n": 2,
+      "median": 12.0,
+      "q1": 9.5,
+      "q3": 14.5,
+      "iqr": 5.0
+    },
+    {
+      "participant": "lorran",
+      "treatment": "manual",
+      "metric": "duplication_percent",
+      "n": 2,
+      "median": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "iqr": 0.0
+    },
+    {
+      "participant": "lorran",
+      "treatment": "manual",
+      "metric": "loc",
+      "n": 2,
+      "median": 29.0,
+      "q1": 23.5,
+      "q3": 34.5,
+      "iqr": 11.0
+    },
+    {
+      "participant": "lorran",
+      "treatment": "manual",
+      "metric": "maintainability_index",
+      "n": 2,
+      "median": 51.945,
+      "q1": 48.8825,
+      "q3": 55.0075,
+      "iqr": 6.125
+    },
+    {
+      "participant": "pedro",
+      "treatment": "ia",
+      "metric": "mean_complexity",
+      "n": 2,
+      "median": 10.5,
+      "q1": 8.75,
+      "q3": 12.25,
+      "iqr": 3.5
+    },
+    {
+      "participant": "pedro",
+      "treatment": "ia",
+      "metric": "duplication_percent",
+      "n": 2,
+      "median": 13.045,
+      "q1": 6.5225,
+      "q3": 19.5675,
+      "iqr": 13.044999999999998
+    },
+    {
+      "participant": "pedro",
+      "treatment": "ia",
+      "metric": "loc",
+      "n": 2,
+      "median": 32.5,
+      "q1": 25.75,
+      "q3": 39.25,
+      "iqr": 13.5
+    },
+    {
+      "participant": "pedro",
+      "treatment": "ia",
+      "metric": "maintainability_index",
+      "n": 2,
+      "median": 71.00999999999999,
+      "q1": 65.465,
+      "q3": 76.55499999999999,
+      "iqr": 11.08999999999999
+    },
+    {
+      "participant": "pedro",
+      "treatment": "manual",
+      "metric": "mean_complexity",
+      "n": 2,
+      "median": 12.5,
+      "q1": 10.75,
+      "q3": 14.25,
+      "iqr": 3.5
+    },
+    {
+      "participant": "pedro",
+      "treatment": "manual",
+      "metric": "duplication_percent",
+      "n": 2,
+      "median": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "iqr": 0.0
+    },
+    {
+      "participant": "pedro",
+      "treatment": "manual",
+      "metric": "loc",
+      "n": 2,
+      "median": 30.0,
+      "q1": 24.5,
+      "q3": 35.5,
+      "iqr": 11.0
+    },
+    {
+      "participant": "pedro",
+      "treatment": "manual",
+      "metric": "maintainability_index",
+      "n": 2,
+      "median": 60.015,
+      "q1": 52.3375,
+      "q3": 67.6925,
+      "iqr": 15.354999999999997
+    }
+  ],
+  "summary_by_kata": [
+    {
+      "kata": "kata01",
+      "treatment": "ia",
+      "metric": "mean_complexity",
+      "n": 1,
+      "median": 7.0,
+      "q1": 7.0,
+      "q3": 7.0,
+      "iqr": 0.0
+    },
+    {
+      "kata": "kata01",
+      "treatment": "ia",
+      "metric": "duplication_percent",
+      "n": 1,
+      "median": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "iqr": 0.0
+    },
+    {
+      "kata": "kata01",
+      "treatment": "ia",
+      "metric": "loc",
+      "n": 1,
+      "median": 19,
+      "q1": 19.0,
+      "q3": 19.0,
+      "iqr": 0.0
+    },
+    {
+      "kata": "kata01",
+      "treatment": "ia",
+      "metric": "maintainability_index",
+      "n": 1,
+      "median": 82.1,
+      "q1": 82.1,
+      "q3": 82.1,
+      "iqr": 0.0
+    },
+    {
+      "kata": "kata01",
+      "treatment": "manual",
+      "metric": "mean_complexity",
+      "n": 2,
+      "median": 7.0,
+      "q1": 7.0,
+      "q3": 7.0,
+      "iqr": 0.0
+    },
+    {
+      "kata": "kata01",
+      "treatment": "manual",
+      "metric": "duplication_percent",
+      "n": 2,
+      "median": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "iqr": 0.0
+    },
+    {
+      "kata": "kata01",
+      "treatment": "manual",
+      "metric": "loc",
+      "n": 2,
+      "median": 19.0,
+      "q1": 18.5,
+      "q3": 19.5,
+      "iqr": 1.0
+    },
+    {
+      "kata": "kata01",
+      "treatment": "manual",
+      "metric": "maintainability_index",
+      "n": 2,
+      "median": 58.364999999999995,
+      "q1": 58.2175,
+      "q3": 58.512499999999996,
+      "iqr": 0.2949999999999946
+    },
+    {
+      "kata": "kata02",
+      "treatment": "ia",
+      "metric": "mean_complexity",
+      "n": 1,
+      "median": 7.0,
+      "q1": 7.0,
+      "q3": 7.0,
+      "iqr": 0.0
+    },
+    {
+      "kata": "kata02",
+      "treatment": "ia",
+      "metric": "duplication_percent",
+      "n": 1,
+      "median": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "iqr": 0.0
+    },
+    {
+      "kata": "kata02",
+      "treatment": "ia",
+      "metric": "loc",
+      "n": 1,
+      "median": 16,
+      "q1": 16.0,
+      "q3": 16.0,
+      "iqr": 0.0
+    },
+    {
+      "kata": "kata02",
+      "treatment": "ia",
+      "metric": "maintainability_index",
+      "n": 1,
+      "median": 61.05,
+      "q1": 61.05,
+      "q3": 61.05,
+      "iqr": 0.0
+    },
+    {
+      "kata": "kata02",
+      "treatment": "manual",
+      "metric": "mean_complexity",
+      "n": 2,
+      "median": 8.0,
+      "q1": 7.5,
+      "q3": 8.5,
+      "iqr": 1.0
+    },
+    {
+      "kata": "kata02",
+      "treatment": "manual",
+      "metric": "duplication_percent",
+      "n": 2,
+      "median": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "iqr": 0.0
+    },
+    {
+      "kata": "kata02",
+      "treatment": "manual",
+      "metric": "loc",
+      "n": 2,
+      "median": 17.5,
+      "q1": 16.75,
+      "q3": 18.25,
+      "iqr": 1.5
+    },
+    {
+      "kata": "kata02",
+      "treatment": "manual",
+      "metric": "maintainability_index",
+      "n": 2,
+      "median": 68.295,
+      "q1": 64.7575,
+      "q3": 71.83250000000001,
+      "iqr": 7.075000000000017
+    },
+    {
+      "kata": "kata03",
+      "treatment": "ia",
+      "metric": "mean_complexity",
+      "n": 2,
+      "median": 15.5,
+      "q1": 14.75,
+      "q3": 16.25,
+      "iqr": 1.5
+    },
+    {
+      "kata": "kata03",
+      "treatment": "ia",
+      "metric": "duplication_percent",
+      "n": 2,
+      "median": 32.45,
+      "q1": 29.27,
+      "q3": 35.63,
+      "iqr": 6.360000000000003
+    },
+    {
+      "kata": "kata03",
+      "treatment": "ia",
+      "metric": "loc",
+      "n": 2,
+      "median": 56.0,
+      "q1": 51.0,
+      "q3": 61.0,
+      "iqr": 10.0
+    },
+    {
+      "kata": "kata03",
+      "treatment": "ia",
+      "metric": "maintainability_index",
+      "n": 2,
+      "median": 61.095,
+      "q1": 60.5075,
+      "q3": 61.682500000000005,
+      "iqr": 1.1750000000000043
+    },
+    {
+      "kata": "kata03",
+      "treatment": "manual",
+      "metric": "mean_complexity",
+      "n": 1,
+      "median": 17.0,
+      "q1": 17.0,
+      "q3": 17.0,
+      "iqr": 0.0
+    },
+    {
+      "kata": "kata03",
+      "treatment": "manual",
+      "metric": "duplication_percent",
+      "n": 1,
+      "median": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "iqr": 0.0
+    },
+    {
+      "kata": "kata03",
+      "treatment": "manual",
+      "metric": "loc",
+      "n": 1,
+      "median": 40,
+      "q1": 40.0,
+      "q3": 40.0,
+      "iqr": 0.0
+    },
+    {
+      "kata": "kata03",
+      "treatment": "manual",
+      "metric": "maintainability_index",
+      "n": 1,
+      "median": 45.82,
+      "q1": 45.82,
+      "q3": 45.82,
+      "iqr": 0.0
+    },
+    {
+      "kata": "kata04",
+      "treatment": "ia",
+      "metric": "mean_complexity",
+      "n": 2,
+      "median": 17.5,
+      "q1": 16.75,
+      "q3": 18.25,
+      "iqr": 1.5
+    },
+    {
+      "kata": "kata04",
+      "treatment": "ia",
+      "metric": "duplication_percent",
+      "n": 2,
+      "median": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "iqr": 0.0
+    },
+    {
+      "kata": "kata04",
+      "treatment": "ia",
+      "metric": "loc",
+      "n": 2,
+      "median": 36.0,
+      "q1": 35.5,
+      "q3": 36.5,
+      "iqr": 1.0
+    },
+    {
+      "kata": "kata04",
+      "treatment": "ia",
+      "metric": "maintainability_index",
+      "n": 2,
+      "median": 59.285,
+      "q1": 52.7875,
+      "q3": 65.7825,
+      "iqr": 12.994999999999997
+    },
+    {
+      "kata": "kata04",
+      "treatment": "manual",
+      "metric": "mean_complexity",
+      "n": 1,
+      "median": 16.0,
+      "q1": 16.0,
+      "q3": 16.0,
+      "iqr": 0.0
+    },
+    {
+      "kata": "kata04",
+      "treatment": "manual",
+      "metric": "duplication_percent",
+      "n": 1,
+      "median": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "iqr": 0.0
+    },
+    {
+      "kata": "kata04",
+      "treatment": "manual",
+      "metric": "loc",
+      "n": 1,
+      "median": 41,
+      "q1": 41.0,
+      "q3": 41.0,
+      "iqr": 0.0
+    },
+    {
+      "kata": "kata04",
+      "treatment": "manual",
+      "metric": "maintainability_index",
+      "n": 1,
+      "median": 44.66,
+      "q1": 44.66,
+      "q3": 44.66,
+      "iqr": 0.0
+    }
+  ],
+  "paired": [
+    {
+      "participant": "pedro",
+      "metric": "mean_complexity",
+      "complete": true,
+      "ia": 10.5,
+      "manual": 12.5,
+      "difference_ia_minus_manual": -2.0
+    },
+    {
+      "participant": "diogo",
+      "metric": "mean_complexity",
+      "complete": true,
+      "ia": 18.0,
+      "manual": 7.0,
+      "difference_ia_minus_manual": 11.0
+    },
+    {
+      "participant": "lorran",
+      "metric": "mean_complexity",
+      "complete": true,
+      "ia": 11.5,
+      "manual": 12.0,
+      "difference_ia_minus_manual": -0.5
+    },
+    {
+      "participant": "pedro",
+      "metric": "duplication_percent",
+      "complete": true,
+      "ia": 13.045,
+      "manual": 0.0,
+      "difference_ia_minus_manual": 13.045
+    },
+    {
+      "participant": "diogo",
+      "metric": "duplication_percent",
+      "complete": true,
+      "ia": 19.405,
+      "manual": 0.0,
+      "difference_ia_minus_manual": 19.405
+    },
+    {
+      "participant": "lorran",
+      "metric": "duplication_percent",
+      "complete": true,
+      "ia": 0.0,
+      "manual": 0.0,
+      "difference_ia_minus_manual": 0.0
+    },
+    {
+      "participant": "pedro",
+      "metric": "loc",
+      "complete": true,
+      "ia": 32.5,
+      "manual": 30.0,
+      "difference_ia_minus_manual": 2.5
+    },
+    {
+      "participant": "diogo",
+      "metric": "loc",
+      "complete": true,
+      "ia": 50.5,
+      "manual": 18.0,
+      "difference_ia_minus_manual": 32.5
+    },
+    {
+      "participant": "lorran",
+      "metric": "loc",
+      "complete": true,
+      "ia": 26.5,
+      "manual": 29.0,
+      "difference_ia_minus_manual": -2.5
+    },
+    {
+      "participant": "pedro",
+      "metric": "maintainability_index",
+      "complete": true,
+      "ia": 71.00999999999999,
+      "manual": 60.015,
+      "difference_ia_minus_manual": 10.995
+    },
+    {
+      "participant": "diogo",
+      "metric": "maintainability_index",
+      "complete": true,
+      "ia": 67.275,
+      "manual": 59.94,
+      "difference_ia_minus_manual": 7.335
+    },
+    {
+      "participant": "lorran",
+      "metric": "maintainability_index",
+      "complete": true,
+      "ia": 53.67,
+      "manual": 51.945,
+      "difference_ia_minus_manual": 1.725
+    }
+  ],
+  "tests": {
+    "mean_complexity": {
+      "n_pairs": 3,
+      "n_effective": 3,
+      "zero_differences": 0,
+      "statistic": 3,
+      "w_plus": 3,
+      "w_minus": 3,
+      "p_value": 1.0,
+      "method": "exact_sign_enumeration",
+      "alternative": "two-sided",
+      "status": "calculado",
+      "median_difference": -0.5,
+      "p_holm": 1.0,
+      "reject_at_05": false
+    },
+    "duplication_percent": {
+      "n_pairs": 3,
+      "n_effective": 2,
+      "zero_differences": 1,
+      "statistic": 0,
+      "w_plus": 3,
+      "w_minus": 0,
+      "p_value": 0.5,
+      "method": "exact_sign_enumeration",
+      "alternative": "two-sided",
+      "status": "calculado",
+      "median_difference": 13.045,
+      "p_holm": 1.0,
+      "reject_at_05": false
+    }
+  },
+  "sensitivity": [
+    {
+      "excluded_participant": "pedro",
+      "summaries": [
+        {
+          "treatment": "ia",
+          "metric": "mean_complexity",
+          "n": 4,
+          "median": 16.5,
+          "q1": 13.75,
+          "q3": 17.5,
+          "iqr": 3.75
+        },
+        {
+          "treatment": "ia",
+          "metric": "duplication_percent",
+          "n": 4,
+          "median": 0.0,
+          "q1": 0.0,
+          "q3": 9.7025,
+          "iqr": 9.7025
+        },
+        {
+          "treatment": "ia",
+          "metric": "loc",
+          "n": 4,
+          "median": 36.0,
+          "q1": 30.25,
+          "q3": 44.25,
+          "iqr": 14.0
+        },
+        {
+          "treatment": "ia",
+          "metric": "maintainability_index",
+          "n": 4,
+          "median": 61.66,
+          "q1": 57.36,
+          "q3": 64.77250000000001,
+          "iqr": 7.4125000000000085
+        },
+        {
+          "treatment": "manual",
+          "metric": "mean_complexity",
+          "n": 4,
+          "median": 7.0,
+          "q1": 7.0,
+          "q3": 9.5,
+          "iqr": 2.5
+        },
+        {
+          "treatment": "manual",
+          "metric": "duplication_percent",
+          "n": 4,
+          "median": 0.0,
+          "q1": 0.0,
+          "q3": 0.0,
+          "iqr": 0.0
+        },
+        {
+          "treatment": "manual",
+          "metric": "loc",
+          "n": 4,
+          "median": 19.0,
+          "q1": 17.5,
+          "q3": 25.0,
+          "iqr": 7.5
+        },
+        {
+          "treatment": "manual",
+          "metric": "maintainability_index",
+          "n": 4,
+          "median": 58.364999999999995,
+          "q1": 55.0075,
+          "q3": 59.3,
+          "iqr": 4.292499999999997
+        }
+      ],
+      "tests": {
+        "mean_complexity": {
+          "n_pairs": 2,
+          "n_effective": 2,
+          "zero_differences": 0,
+          "statistic": 1,
+          "w_plus": 2,
+          "w_minus": 1,
+          "p_value": 1.0,
+          "method": "exact_sign_enumeration",
+          "alternative": "two-sided",
+          "status": "calculado",
+          "median_difference": 5.25,
+          "p_holm": 1.0,
+          "reject_at_05": false
+        },
+        "duplication_percent": {
+          "n_pairs": 2,
+          "n_effective": 1,
+          "zero_differences": 1,
+          "statistic": 0,
+          "w_plus": 1,
+          "w_minus": 0,
+          "p_value": 1.0,
+          "method": "exact_sign_enumeration",
+          "alternative": "two-sided",
+          "status": "calculado",
+          "median_difference": 9.7025,
+          "p_holm": 1.0,
+          "reject_at_05": false
+        }
+      }
+    },
+    {
+      "excluded_participant": "diogo",
+      "summaries": [
+        {
+          "treatment": "ia",
+          "metric": "mean_complexity",
+          "n": 4,
+          "median": 10.5,
+          "q1": 7.0,
+          "q3": 14.5,
+          "iqr": 7.5
+        },
+        {
+          "treatment": "ia",
+          "metric": "duplication_percent",
+          "n": 4,
+          "median": 0.0,
+          "q1": 0.0,
+          "q3": 6.5225,
+          "iqr": 6.5225
+        },
+        {
+          "treatment": "ia",
+          "metric": "loc",
+          "n": 4,
+          "median": 28.0,
+          "q1": 18.25,
+          "q3": 39.25,
+          "iqr": 21.0
+        },
+        {
+          "treatment": "ia",
+          "metric": "maintainability_index",
+          "n": 4,
+          "median": 60.485,
+          "q1": 56.5125,
+          "q3": 66.3125,
+          "iqr": 9.799999999999997
+        },
+        {
+          "treatment": "manual",
+          "metric": "mean_complexity",
+          "n": 4,
+          "median": 12.5,
+          "q1": 8.5,
+          "q3": 16.25,
+          "iqr": 7.75
+        },
+        {
+          "treatment": "manual",
+          "metric": "duplication_percent",
+          "n": 4,
+          "median": 0.0,
+          "q1": 0.0,
+          "q3": 0.0,
+          "iqr": 0.0
+        },
+        {
+          "treatment": "manual",
+          "metric": "loc",
+          "n": 4,
+          "median": 29.5,
+          "q1": 18.75,
+          "q3": 40.25,
+          "iqr": 21.5
+        },
+        {
+          "treatment": "manual",
+          "metric": "maintainability_index",
+          "n": 4,
+          "median": 51.945,
+          "q1": 45.53,
+          "q3": 62.395,
+          "iqr": 16.865000000000002
+        }
+      ],
+      "tests": {
+        "mean_complexity": {
+          "n_pairs": 2,
+          "n_effective": 2,
+          "zero_differences": 0,
+          "statistic": 0,
+          "w_plus": 0,
+          "w_minus": 3,
+          "p_value": 0.5,
+          "method": "exact_sign_enumeration",
+          "alternative": "two-sided",
+          "status": "calculado",
+          "median_difference": -1.25,
+          "p_holm": 1.0,
+          "reject_at_05": false
+        },
+        "duplication_percent": {
+          "n_pairs": 2,
+          "n_effective": 1,
+          "zero_differences": 1,
+          "statistic": 0,
+          "w_plus": 1,
+          "w_minus": 0,
+          "p_value": 1.0,
+          "method": "exact_sign_enumeration",
+          "alternative": "two-sided",
+          "status": "calculado",
+          "median_difference": 6.5225,
+          "p_holm": 1.0,
+          "reject_at_05": false
+        }
+      }
+    },
+    {
+      "excluded_participant": "lorran",
+      "summaries": [
+        {
+          "treatment": "ia",
+          "metric": "mean_complexity",
+          "n": 4,
+          "median": 15.5,
+          "q1": 12.25,
+          "q3": 17.5,
+          "iqr": 5.25
+        },
+        {
+          "treatment": "ia",
+          "metric": "duplication_percent",
+          "n": 4,
+          "median": 13.045,
+          "q1": 0.0,
+          "q3": 29.27,
+          "iqr": 29.27
+        },
+        {
+          "treatment": "ia",
+          "metric": "loc",
+          "n": 4,
+          "median": 40.5,
+          "q1": 31.0,
+          "q3": 51.0,
+          "iqr": 20.0
+        },
+        {
+          "treatment": "ia",
+          "metric": "maintainability_index",
+          "n": 4,
+          "median": 67.275,
+          "q1": 61.682500000000005,
+          "q3": 74.735,
+          "iqr": 13.052499999999995
+        },
+        {
+          "treatment": "manual",
+          "metric": "mean_complexity",
+          "n": 4,
+          "median": 8.0,
+          "q1": 7.0,
+          "q3": 10.75,
+          "iqr": 3.75
+        },
+        {
+          "treatment": "manual",
+          "metric": "duplication_percent",
+          "n": 4,
+          "median": 0.0,
+          "q1": 0.0,
+          "q3": 0.0,
+          "iqr": 0.0
+        },
+        {
+          "treatment": "manual",
+          "metric": "loc",
+          "n": 4,
+          "median": 19.5,
+          "q1": 18.25,
+          "q3": 25.25,
+          "iqr": 7.0
+        },
+        {
+          "treatment": "manual",
+          "metric": "maintainability_index",
+          "n": 4,
+          "median": 59.94,
+          "q1": 55.16,
+          "q3": 64.7575,
+          "iqr": 9.597499999999997
+        }
+      ],
+      "tests": {
+        "mean_complexity": {
+          "n_pairs": 2,
+          "n_effective": 2,
+          "zero_differences": 0,
+          "statistic": 1,
+          "w_plus": 2,
+          "w_minus": 1,
+          "p_value": 1.0,
+          "method": "exact_sign_enumeration",
+          "alternative": "two-sided",
+          "status": "calculado",
+          "median_difference": 4.5,
+          "p_holm": 1.0,
+          "reject_at_05": false
+        },
+        "duplication_percent": {
+          "n_pairs": 2,
+          "n_effective": 2,
+          "zero_differences": 0,
+          "statistic": 0,
+          "w_plus": 3,
+          "w_minus": 0,
+          "p_value": 0.5,
+          "method": "exact_sign_enumeration",
+          "alternative": "two-sided",
+          "status": "calculado",
+          "median_difference": 16.225,
+          "p_holm": 1.0,
+          "reject_at_05": false
+        }
+      }
+    }
+  ],
+  "outliers": [],
+  "audit": [
+    {
+      "participant": "pedro",
+      "kata": "kata01",
+      "recorded_commit": "2d3b382",
+      "path": "Lab02/trials/pedro/kata01/solution.py",
+      "status": "ok",
+      "differences": [],
+      "full_commit": "2d3b382eea3d5bc3b37e7dd60b4b295e13233cdd",
+      "source_sha256": "5cf6101636a8111e3d7d596e64dc6f8b75bf29ab005f1dcffd7efd027e99c2f7",
+      "recomputed": {
+        "loc": 19,
+        "mean_complexity": 7.0,
+        "maintainability_index": 82.1,
+        "duplication_percent": 0.0
+      }
+    },
+    {
+      "participant": "pedro",
+      "kata": "kata02",
+      "recorded_commit": "3de0374",
+      "path": "Lab02/trials/pedro/kata02/solution.py",
+      "status": "ok",
+      "differences": [],
+      "full_commit": "3de03746be96837cc42bbca019c10c31e5ef7c14",
+      "source_sha256": "6f4e633a24fab1f7b30c48a335ccb3df105c3b017ff3ca5357b9b6909cde2fb8",
+      "recomputed": {
+        "loc": 19,
+        "mean_complexity": 9.0,
+        "maintainability_index": 75.37,
+        "duplication_percent": 0.0
+      }
+    },
+    {
+      "participant": "pedro",
+      "kata": "kata03",
+      "recorded_commit": "af55bdc",
+      "path": "Lab02/trials/pedro/kata03/solution.py",
+      "status": "ok",
+      "differences": [],
+      "full_commit": "af55bdc86e002cfb191af66b13b2e467793a83cc",
+      "source_sha256": "82ae7cd42c9e958155667d85a9d0a1f32e0677c53a683aa8f3281802479e30c9",
+      "recomputed": {
+        "loc": 46,
+        "mean_complexity": 14.0,
+        "maintainability_index": 59.92,
+        "duplication_percent": 26.09
+      }
+    },
+    {
+      "participant": "pedro",
+      "kata": "kata04",
+      "recorded_commit": "f54a4c6",
+      "path": "Lab02/trials/pedro/kata04/solution.py",
+      "status": "ok",
+      "differences": [],
+      "full_commit": "f54a4c6e4cfc3e8abd3043aa4ed774fa56453d0c",
+      "source_sha256": "c9e3c96165fa22ed9ae1d88293f707c9ee6ae40ec3ba9ecba2170936d7b017dc",
+      "recomputed": {
+        "loc": 41,
+        "mean_complexity": 16.0,
+        "maintainability_index": 44.66,
+        "duplication_percent": 0.0
+      }
+    },
+    {
+      "participant": "diogo",
+      "kata": "kata02",
+      "recorded_commit": "c0b67c8",
+      "path": "Lab02/trials/diogo/kata02/solution.py",
+      "status": "ok",
+      "differences": [],
+      "full_commit": "c0b67c81a93d43baee4e1f6d6c07d5944444f594",
+      "source_sha256": "fc30ea49ea8c383fd4503915fb9d53405c64d24f744fe150f48beef49f94d91c",
+      "recomputed": {
+        "loc": 16,
+        "mean_complexity": 7.0,
+        "maintainability_index": 61.22,
+        "duplication_percent": 0.0
+      }
+    },
+    {
+      "participant": "diogo",
+      "kata": "kata03",
+      "recorded_commit": "58c15a2",
+      "path": "Lab02/trials/diogo/kata03/solution.py",
+      "status": "ok",
+      "differences": [],
+      "full_commit": "58c15a238f28f35cf06c59c608e3ebbc76112525",
+      "source_sha256": "202b8e021ceb2e6d1d5098bd375632f39f48889a671d5aaa35a9f41b3ec71939",
+      "recomputed": {
+        "loc": 66,
+        "mean_complexity": 17.0,
+        "maintainability_index": 62.27,
+        "duplication_percent": 38.81
+      }
+    },
+    {
+      "participant": "diogo",
+      "kata": "kata04",
+      "recorded_commit": "2e05d85",
+      "path": "Lab02/trials/diogo/kata04/solution.py",
+      "status": "ok",
+      "differences": [],
+      "full_commit": "2e05d85a943d8107dec26eb8aaf2eb96b5787daf",
+      "source_sha256": "e375a5d3b3c7ccc1198c5e69d14ef053081928bf20ed9903db81acd8a08982b4",
+      "recomputed": {
+        "loc": 35,
+        "mean_complexity": 19.0,
+        "maintainability_index": 72.28,
+        "duplication_percent": 0.0
+      }
+    },
+    {
+      "participant": "diogo",
+      "kata": "kata01",
+      "recorded_commit": "71e9bd0",
+      "path": "Lab02/trials/diogo/kata01/solution.py",
+      "status": "ok",
+      "differences": [],
+      "full_commit": "71e9bd098ea397226698d1ab988dad4b9d5a8947",
+      "source_sha256": "f4f6cc4f0b2cecda3d8d77de3738d6b21c7c086aac84185f5ab0d597b83fa99b",
+      "recomputed": {
+        "loc": 20,
+        "mean_complexity": 7.0,
+        "maintainability_index": 58.66,
+        "duplication_percent": 0.0
+      }
+    },
+    {
+      "participant": "lorran",
+      "kata": "kata03",
+      "recorded_commit": "e4d4fa5",
+      "path": "Lab02/trials/lorran/kata03/solution.py",
+      "status": "ok",
+      "differences": [],
+      "full_commit": "e4d4fa5ba064cbe15168ed1e2a5afdfb0d071761",
+      "source_sha256": "877117826fdf153353f64d8a8a2947956621b7b21abc943a62058fd34fb37e43",
+      "recomputed": {
+        "loc": 40,
+        "mean_complexity": 17.0,
+        "maintainability_index": 45.82,
+        "duplication_percent": 0.0
+      }
+    },
+    {
+      "participant": "lorran",
+      "kata": "kata04",
+      "recorded_commit": "203008f",
+      "path": "Lab02/trials/lorran/kata04/solution.py",
+      "status": "ok",
+      "differences": [],
+      "full_commit": "203008f449234ea21d75cbf58928c8cd88821d4d",
+      "source_sha256": "20f5770718caf07113aa9ade0c46ca255ab7611ea94f2dac2b560bd803befda2",
+      "recomputed": {
+        "loc": 37,
+        "mean_complexity": 16.0,
+        "maintainability_index": 46.29,
+        "duplication_percent": 0.0
+      }
+    },
+    {
+      "participant": "lorran",
+      "kata": "kata01",
+      "recorded_commit": "37926e8",
+      "path": "Lab02/trials/lorran/kata01/solution.py",
+      "status": "ok",
+      "differences": [],
+      "full_commit": "37926e83a5bd8012bfc2658508781de436251134",
+      "source_sha256": "1e76f0251cf2ace7af4d2f633b3f86eb657fdf2c524694e3f89f73a3fa20c8f4",
+      "recomputed": {
+        "loc": 18,
+        "mean_complexity": 7.0,
+        "maintainability_index": 58.07,
+        "duplication_percent": 0.0
+      }
+    },
+    {
+      "participant": "lorran",
+      "kata": "kata02",
+      "recorded_commit": "8138701",
+      "path": "Lab02/trials/lorran/kata02/solution.py",
+      "status": "ok",
+      "differences": [],
+      "full_commit": "8138701814a78e1f321c04a2552fd4817ee628e6",
+      "source_sha256": "c693e64dd839e69553804e09c5e8fb551cca114e17eb890102b25edc5f0bda7e",
+      "recomputed": {
+        "loc": 16,
+        "mean_complexity": 7.0,
+        "maintainability_index": 61.05,
+        "duplication_percent": 0.0
+      }
+    }
+  ],
+  "warnings": [
+    "Somente três participantes; pareamento controla participante, mas não a dificuldade dos diferentes katas.",
+    "README registra início dos trials sem a baseline congelada prevista.",
+    "As confirmações individuais de ambiente não estão todas documentadas.",
+    "diogo/kata02: issue_number=0 no CSV original.",
+    "diogo/kata03: issue_number=0 no CSV original.",
+    "diogo/kata04: issue_number=0 no CSV original.",
+    "diogo/kata01: issue_number=0 no CSV original."
+  ],
+  "release_status": "audited",
+  "provenance": {
+    "schema_version": 1,
+    "repository_commit": "ae69e1bc3cc79627c17d1f9965a2cdca78ddf70c",
+    "trials_sha256": "f9a5dc4082ce86320370d6a5eae512d5ae256dfc7f72525d138d8f8e3a105947",
+    "protocol_sha256": "5821d48388d250849a73009d6eaf2f779a4a8f5346e3b008e630feb112ffe56c",
+    "metrics_script_sha256": "b8fcbec9db4831bd5185d8ff9afd73bc403bfc2d0b3330138baa9e09d4a86b87",
+    "analysis_script_sha256": "30e378cc1ec89c30f1bf63fd62cf22da1ed5b2a574eea90340c41aac89d0db10",
+    "python": "3.11.16",
+    "packages": {
+      "radon": "6.0.1",
+      "pandas": "2.2.3",
+      "numpy": "2.2.6",
+      "matplotlib": "3.10.3",
+      "seaborn": "0.13.2"
+    },
+    "quantiles": "linear/type7",
+    "alpha": 0.05,
+    "difference": "IA - Manual",
+    "source_policy": "CSV preservado; auditoria sobre git show commit:path, sem executar soluções"
+  }
+}

@@ -1,0 +1,13 @@
+participant,metric,complete,ia,manual,difference_ia_minus_manual
+pedro,mean_complexity,True,10.5,12.5,-2.0
+diogo,mean_complexity,True,18.0,7.0,11.0
+lorran,mean_complexity,True,11.5,12.0,-0.5
+pedro,duplication_percent,True,13.045,0.0,13.045
+diogo,duplication_percent,True,19.405,0.0,19.405
+lorran,duplication_percent,True,0.0,0.0,0.0
+pedro,loc,True,32.5,30.0,2.5
+diogo,loc,True,50.5,18.0,32.5
+lorran,loc,True,26.5,29.0,-2.5
+pedro,maintainability_index,True,71.00999999999999,60.015,10.995
+diogo,maintainability_index,True,67.275,59.94,7.335
+lorran,maintainability_index,True,53.67,51.945,1.725
