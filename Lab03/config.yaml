@@ -1,0 +1,53 @@
+# ---------------------------------------------------------------
+# Janela de observação (12 meses).
+# SUBSTITUIR pelas datas fixadas pelo professor na abertura do Lab03S01.
+# ---------------------------------------------------------------
+janela_inicio: 2025-10-01
+janela_fim: 2026-09-30
+
+# Semente única para qualquer sorteio do pipeline (reprodutibilidade)
+semente: 42
+
+# Critério mínimo de inclusão (enunciado, seção 3)
+criterios:
+  min_releases: 5
+  min_runs: 50
+
+selecao:
+  # S01: 100. Na S02, subir para o valor que garanta >= 300 após os filtros.
+  meta_repositorios: 100
+  # Cada faixa é uma consulta (a Search API devolve no máximo 1.000 por consulta)
+  faixas_estrelas:
+    - "1000..1500"
+    - "1500..2000"
+    - "2000..3000"
+    - "3000..5000"
+    - "5000..8000"
+    - "8000..15000"
+    - "15000..30000"
+    - ">30000"
+  # Usadas para subdividir faixas com mais de 1.000 resultados
+  linguagens:
+    - Python
+    - JavaScript
+    - TypeScript
+    - Java
+    - Go
+    - Rust
+    - "C++"
+    - "C#"
+    - PHP
+    - Ruby
+    - Kotlin
+    - Swift
+    - C
+
+saida:
+  dir_dados: data
+  dir_cache: cache
+
+# Etapas de coleta de B e C, executadas em ordem depois do funil.
+# Contrato: cada módulo expõe coletar(client, cfg, repos).
+etapas_coleta:
+  - pipeline.coleta_releases
+  - pipeline.coleta_runs

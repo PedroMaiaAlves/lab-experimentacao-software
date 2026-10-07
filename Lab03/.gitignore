@@ -1,0 +1,12 @@
+# segredos
+.env
+# cache de respostas da API (grande; compartilhe por pasta à parte)
+cache/
+# python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
