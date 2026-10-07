@@ -1,0 +1,59 @@
+\section{Introdução}
+\label{sec:introducao}
+
+As métricas DORA (\textit{DevOps Research and Assessment}) tornaram-se o padrão de mercado para
+medir o desempenho de entrega de software~\cite{forsgren2018accelerate,dora}. Quatro métricas
+descrevem duas dimensões: velocidade, com a frequência de implantação (\textit{deployment
+frequency}) e o tempo de entrega de mudanças (\textit{lead time for changes}); e estabilidade,
+com a taxa de falha das mudanças (\textit{change failure rate}, CFR) e o tempo de recuperação.
+
+Medir essas métricas em projetos \textit{open-source} esbarra em um problema de construto: o GitHub
+não registra implantações em produção nem falhas em produção. O que existe são \textit{releases},
+\textit{commits} e execuções de \textit{workflows} de integração contínua. Neste trabalho, esses
+artefatos funcionam como \textit{proxies}: uma \textit{release} publicada representa uma
+implantação, e uma execução de CI que falhou representa uma falha. Um \textit{proxy} pode enganar.
+Uma biblioteca que publica uma \textit{release} por mês não implanta nada em produção, pois quem
+faz isso são os seus usuários, e uma falha de pipeline não é uma falha em produção.
+
+O objetivo deste estudo é minerar automaticamente as métricas DORA em repositórios populares do
+GitHub que usam GitHub Actions e avaliar quanto se pode confiar nessas medidas. Para isso, o
+grupo (i) calcula as métricas com definições operacionais explícitas, (ii) valida os critérios
+automáticos contra o julgamento humano e (iii) mede o quanto as conclusões mudam quando a
+definição da métrica muda. Este artigo responde às seguintes questões de pesquisa (RQ):
+
+\begin{itemize}
+  \item \textbf{RQ01:} qual a frequência de \textit{deploys} dos repositórios populares que usam CI/CD?
+  \item \textbf{RQ02:} qual o tempo entre um \textit{commit} e o seu respectivo \textit{deploy}?
+  \item \textbf{RQ03:} qual a taxa de falha das mudanças entregues por esses repositórios?
+  \item \textbf{RQ04:} qual o tempo de recuperação após uma execução de CI/CD com falha?
+  \item \textbf{RQ05:} repositórios com maior frequência de \textit{deploy} apresentam maior ou menor taxa de falha?
+  \item \textbf{RQ06:} quais características dos repositórios estão associadas a um melhor desempenho DORA?
+  \item \textbf{RQ07:} o quanto a classificação DORA de um repositório depende da definição operacional escolhida?
+\end{itemize}
+
+\subsection{Hipóteses}
+\label{sec:hipoteses}
+
+As hipóteses abaixo foram escritas antes de qualquer análise dos dados coletados.
+
+\begin{itemize}
+  \item \textbf{H1 (RQ01).} Esperamos que a mediana fique abaixo de uma \textit{release} por
+  semana, pois a maioria dos projetos populares são bibliotecas e ferramentas que publicam versões
+  por ciclos de funcionalidades, e não de forma contínua. Esperamos também uma cauda longa, com
+  poucos repositórios publicando \textit{releases} diariamente.
+  \item \textbf{H2 (RQ02).} Esperamos que o \textit{lead time} por \textit{release} (variante a)
+  seja bem maior que o por \textit{commit} (variante b), porque a variante (a) é dominada pelo
+  \textit{commit} mais antigo de cada \textit{release}, enquanto a (b) pondera todos os
+  \textit{commits}, a maioria deles escrita perto da publicação.
+  \item \textbf{H3 (RQ03).} Esperamos que o CFR de pipeline (variante a) seja maior que o CFR de
+  entrega (variante b), pois falhas de CI são baratas, frequentes e ocorrem justamente para
+  impedir que o problema chegue a uma \textit{release}, enquanto \textit{releases} corretivas em
+  até sete dias são mais raras.
+  \item \textbf{H4 (RQ04).} Esperamos que a mediana do tempo de recuperação seja de poucas horas,
+  já que falhas de CI costumam ser corrigidas por um novo \textit{commit} no mesmo dia, mas com
+  cauda pesada e uma proporção não desprezível de episódios censurados, de \textit{workflows}
+  quebrados que ficam abandonados por semanas.
+  \item \textbf{H5 (RQ05).} [escrita por B]
+  \item \textbf{H6 (RQ06).} [escrita por B]
+  \item \textbf{H7 (RQ07).} [escrita por B]
+\end{itemize}
