@@ -1,0 +1,518 @@
+﻿id,titulo,resp,sprint,tipo,descricao
+"S01-A1","Estrutura do repositório, config e GitHub Projects","A","S01","Infra","## Critério de aceite
+Repositório com pastas pipeline/, metricas/, tests/, data/, notebooks/ e docs/; requirements.txt; .gitignore (cache e token); config.yaml com a janela de 12 meses definida pelo professor; README esqueleto; Projects com colunas e milestones, e todas as Issues criadas com Assignee.
+
+**Depende de:** —
+
+## Passos
+- [ ] Criar o repositório e as pastas; o módulo de métricas deve se chamar `metricas` (nome usado em `pytest --cov=metricas`).
+- [ ] Criar o `config.yaml` com `janela_inicio` e `janela_fim` (datas do professor), tamanho da amostra e sementes aleatórias.
+- [ ] Adicionar o `.gitignore` com `.env`, `cache/` e `__pycache__/`; o token nunca entra no repositório.
+- [ ] Criar o GitHub Projects (board) com as colunas Backlog / Em andamento / Em revisão / Concluído; milestones S01, S02, S03 e Final; labels por tipo.
+- [ ] Criar todas as Issues da Parte 1 deste documento com Assignee, milestone e label, e combinar o limite de WIP.
+
+> Atenção: Faça isso nos primeiros dias: Issues sem Assignee e cartões desatualizados já descontam nota."
+"S01-A2","Seleção de repositórios candidatos (Search API fatiada)","A","S01","Código","## Critério de aceite
+Script que gera data/candidatos.csv com repositórios populares obtidos por consultas fatiadas, sem duplicatas, em quantidade suficiente para restarem ≥100 após os filtros.
+
+**Depende de:** S01-C1
+
+## Passos
+- [ ] Consultar `GET /search/repositories?q=stars:>1000` fatiando por faixas de estrelas (`stars:1000..2000`, `2000..5000`…) e, se preciso, por linguagem: cada consulta devolve no máximo 1.000 resultados.
+- [ ] Paginar com `per_page=100` até o fim e remover duplicatas por `full_name`.
+- [ ] Usar o cliente HTTP de C (cache e rate limit); enquanto ele não existir, desenvolver contra respostas simuladas.
+- [ ] Salvar nome, estrelas, linguagem, `default_branch` e `created_at` de cada candidato.
+
+> Atenção: A Search API tem cota própria e menor que o resto da API REST: confie nos cabeçalhos de rate limit."
+"S01-A3","Filtros, funil de seleção e metadados","A","S01","Código","## Critério de aceite
+Funil gerado automaticamente (data/funil.csv) com nº de repositórios por etapa e motivo de descarte; metadados.csv com estrelas, linguagem, nº de contribuidores, idade e default_branch dos 100 repositórios.
+
+**Depende de:** S01-A2, S01-B2, S01-C2
+
+## Passos
+- [ ] Etapa 1: descartar repositórios sem workflows (`GET /repos/{owner}/{repo}/actions/workflows` com `total_count = 0`) antes de gastar chamadas com eles.
+- [ ] Etapa 2: aplicar o critério mínimo (≥5 releases e ≥50 workflow runs válidos na janela) usando as contagens produzidas por B e C.
+- [ ] Registrar em cada etapa quantos entraram, quantos saíram e o motivo; salvar o `funil.csv` (ex.: 4.000 → 2.900 → 610 → 350).
+- [ ] Contribuidores: `GET /repos/{o}/{r}/contributors?per_page=1&anon=true` e ler o número da última página no cabeçalho `Link`.
+- [ ] Idade do repositório = fim da janela − `created_at`, em dias."
+"S01-A4","Classificação DORA (faixas e nota geral) com testes","A","S01","Teste","## Critério de aceite
+Módulo metricas/classificacao.py com as faixas da tabela de referência da RQ 07 e a nota geral; testes cobrindo valores nos limites das faixas e o exemplo (4, 3, 3, 1) = High.
+
+**Depende de:** —
+
+## Passos
+- [ ] Implementar uma função por métrica que recebe o valor e devolve Elite/High/Medium/Low com os cortes da tabela de referência (atenção a ≥ e < em cada limite).
+- [ ] Mapear Elite=4, High=3, Medium=2, Low=1; a categoria geral é a mediana das quatro notas, arredondada para baixo.
+- [ ] Com 4 valores, a mediana é a média dos dois centrais: notas (3, 2) dão 2,5, que arredonda para 2 (Medium).
+- [ ] Testes com fixtures: valores exatamente nos cortes (7 por semana, 15%, 1 hora, 1 dia…), o exemplo (4, 3, 3, 1) = High e métrica ausente.
+
+> Atenção: Defina e documente o que fazer quando uma métrica não existe para o repositório (ex.: nenhum episódio de falha, logo sem tempo de recuperação)."
+"S01-A5","Introdução e hipóteses das RQ 01 a RQ 04","A","S01","Escrita","## Critério de aceite
+Seção Introdução no template SBC (Overleaf) com contexto, objetivo, problema do proxy e hipótese informal para RQ 01 a RQ 04, escrita antes de ver os dados; fonte .tex exportada para docs/artigo/.
+
+**Depende de:** S01-A1
+
+## Passos
+- [ ] Criar o projeto no Overleaf com o template da SBC e compartilhar com os três.
+- [ ] Escrever o contexto (DORA, quatro métricas, proxies) e o objetivo do estudo.
+- [ ] Para cada RQ 01 a RQ 04, escrever uma hipótese: o que o grupo espera encontrar e por quê.
+- [ ] Exportar o .tex e commitar em `docs/artigo/` referenciando a Issue.
+
+> Atenção: As hipóteses precisam ser escritas antes de olhar qualquer resultado; commite essa versão para ter a data registrada."
+"S01-A6","Orquestração: comando único e README","A","S01","Código","## Critério de aceite
+`python -m pipeline --config config.yaml` executa todas as etapas para 100 repositórios; README com instalação, variável GITHUB_TOKEN, configuração e como rodar os testes.
+
+**Depende de:** S01-A2, S01-A3, S01-B3, S01-C2
+
+## Passos
+- [ ] Criar o `pipeline/__main__.py` com o argumento `--config` chamando as etapas na ordem: seleção → filtro Actions → metadados → releases → commits → runs → métricas → funil.
+- [ ] Ler o token de `GITHUB_TOKEN`; falhar com mensagem clara se estiver ausente.
+- [ ] Garantir a retomada: rodar duas vezes seguidas não deve repetir chamadas já cacheadas.
+- [ ] Testar com 5 repositórios antes de rodar os 100.
+- [ ] Escrever o README como se um estranho fosse executá-lo: a replicação cruzada depende disso."
+"S01-B1","CI do grupo (GitHub Actions com pytest e cobertura)","B","S01","Infra","## Critério de aceite
+Workflow .github/workflows/testes.yml roda pytest com --cov=metricas --cov-fail-under=80 a cada push e pull request, e passa no branch principal.
+
+**Depende de:** S01-A1
+
+## Passos
+- [ ] Copiar o workflow de exemplo do enunciado (Python 3.12, `actions/checkout@v4`, `actions/setup-python@v5`) para `.github/workflows/testes.yml`.
+- [ ] Adicionar `pytest` e `pytest-cov` ao `requirements.txt`.
+- [ ] Criar um teste mínimo para o CI ficar verde já no primeiro push.
+- [ ] Provocar uma falha de propósito em uma branch para confirmar que o CI quebra, e remover em seguida.
+- [ ] Colocar o badge de status no README.
+
+> Atenção: Com o CI ativo, o grupo também passa a gerar workflow runs, o mesmo tipo de dado que o estudo minera."
+"S01-B2","Coleta de releases e tags","B","S01","Código","## Critério de aceite
+Script que salva, por repositório, todas as releases (draft, prerelease, published_at, tag_name) em cache e as tags com a data do commit apontado; filtro de janela e de drafts em função separada.
+
+**Depende de:** S01-C1
+
+## Passos
+- [ ] Coletar `GET /repos/{o}/{r}/releases` paginando até o fim, inclusive releases anteriores à janela (necessárias para achar a release anterior).
+- [ ] Guardar `draft`, `prerelease`, `published_at`, `tag_name` e `target_commitish`.
+- [ ] Em função separada, filtrar `draft=false` e `published_at` dentro da janela; as pré-releases ficam guardadas para a variante da RQ 07.
+- [ ] Tags: `GET /repos/{o}/{r}/tags` não traz data; buscar o commit apontado e usar a data dele (só para os repositórios da amostra, para poupar cota)."
+"S01-B3","Coleta de commits entre releases","B","S01","Código","## Critério de aceite
+Para cada release da janela, lista de commits incluídos (compare com a release anterior) com commit.author.date, cobrindo mais de 250 commits entre releases; erros 404 registrados e contados.
+
+**Depende de:** S01-B2
+
+## Passos
+- [ ] Ordenar as releases por data e, para cada R, chamar `GET /repos/{o}/{r}/compare/{anterior}...{R}` com os `tag_name`.
+- [ ] Sem paginação, o `compare` devolve no máximo 250 commits: usar `per_page` e `page` até esgotar.
+- [ ] Usar `commit.author.date` como data do commit.
+- [ ] Primeira release da história (sem anterior): marcar para ignorar no lead time.
+- [ ] Erro 404 (tag apagada ou reescrita): registrar, ignorar a release e contar quantas foram ignoradas."
+"S01-B4","Lead time (a) e (b) com testes","B","S01","Teste","## Critério de aceite
+Funções puras em metricas/lead_time.py para as variantes por release e por commit, com testes para o exemplo do enunciado e os casos de borda.
+
+**Depende de:** S01-B3
+
+## Passos
+- [ ] Variante (a): lead time de R = data de R − data do commit mais antigo; valor do repositório = mediana entre as releases.
+- [ ] Variante (b): cada commit de cada release gera um valor; valor do repositório = mediana de todos.
+- [ ] Trabalhar em horas e converter só na apresentação.
+- [ ] Fixture: release v1.1 (15/03) com commits de 02/03, 10/03 e 14/03 dá (a) = 13 dias e (b) = 13, 5 e 1 dias.
+- [ ] Bordas: release sem commits novos, repositório com uma única release, primeira release ignorada, release com 404 ignorada.
+
+> Atenção: Escreva as funções recebendo dados simples (listas/dicts), sem chamar a API dentro delas: é isso que as torna testáveis."
+"S01-B5","Deployment frequency com testes","B","S01","Teste","## Critério de aceite
+Função que calcula releases por semana a partir de uma lista genérica de datas de deploy (reaproveitável para pré-releases e tags na RQ 07); testes com drafts, pré-releases e fronteiras da janela.
+
+**Depende de:** S01-B2
+
+## Passos
+- [ ] Frequência = releases publicadas na janela ÷ semanas da janela (≈ 52,1; calcule a partir das datas do `config.yaml`).
+- [ ] A função recebe só as datas de deploy, sem saber se vieram de release, pré-release ou tag.
+- [ ] Testes: drafts e pré-releases fora da definição principal; release exatamente no início/fim da janela; zero releases."
+"S01-B6","Hipóteses das RQ 05 a RQ 07","B","S01","Escrita","## Critério de aceite
+Hipótese informal para RQ 05, RQ 06 e RQ 07 na Introdução, escrita antes de ver os dados.
+
+**Depende de:** S01-A5
+
+## Passos
+- [ ] Ler as RQ 05 a RQ 07 e o material do DORA sobre velocidade × estabilidade.
+- [ ] Redigir uma hipótese por RQ dizendo o que se espera e por quê (quais fatores devem se associar a melhor desempenho; quanto a classificação deve mudar entre definições).
+- [ ] Integrar ao texto de A no Overleaf mantendo um estilo único."
+"S01-C1","Cliente HTTP: autenticação, paginação, cache, retomada e rate limit","C","S01","Código","## Critério de aceite
+Módulo pipeline/http_client.py usado por todas as coletas: token por variável de ambiente, paginação por Link, espera automática pelo rate limit, backoff exponencial em 5xx e cache em disco que permite retomar após Ctrl+C; testes com respostas simuladas.
+
+**Depende de:** S01-A1
+
+## Passos
+- [ ] Ler o token de `GITHUB_TOKEN` e enviá-lo no cabeçalho de autorização.
+- [ ] Paginação: seguir o cabeçalho `Link` (`rel=""next""`) até acabar.
+- [ ] Rate limit: ler `X-RateLimit-Remaining` e `X-RateLimit-Reset` (epoch) e, quando a cota acabar, dormir até o reset; `GET /rate_limit` não consome cota.
+- [ ] Erros 5xx: repetir com backoff exponencial (1 s, 2 s, 4 s, 8 s…) até um máximo de tentativas.
+- [ ] Cache: salvar cada resposta em disco (JSON por URL + parâmetros, ou SQLite) e consultar antes de chamar a API; assim a execução retoma de onde parou.
+- [ ] Testes com respostas simuladas (`unittest.mock`): paginação, rate limit esgotado, 5xx seguido de sucesso e acerto de cache.
+
+> Atenção: É a dependência de todo o grupo: entregue uma primeira versão utilizável nos primeiros dias e refine depois. Não é permitido usar PyGithub nem outra biblioteca pronta de acesso à API do GitHub."
+"S01-C2","Coleta de workflow runs do default branch","C","S01","Código","## Critério de aceite
+Para cada repositório, todos os workflow runs do default branch com event=push na janela, coletados mês a mês, com aviso quando algum mês atinge o teto de 1.000 resultados.
+
+**Depende de:** S01-C1
+
+## Passos
+- [ ] Usar `GET /repos/{o}/{r}/actions/runs?branch={default_branch}&event=push&created=AAAA-MM-DD..AAAA-MM-DD`, uma consulta por mês da janela.
+- [ ] Se um mês retornar `total_count` acima de 1.000, subdividir em semanas ou dias e conferir de novo.
+- [ ] Guardar `id`, `workflow_id`, `name`, `conclusion`, `run_started_at`, `updated_at` e `created_at`.
+- [ ] Registrar os repositórios/meses que chegaram ao teto, para constar nas ameaças à validade."
+"S01-C3","Classificação de conclusion e CFR (a) com testes","C","S01","Teste","## Critério de aceite
+Função de CFR (a) = falhas ÷ (falhas + sucessos) conforme a tabela de conclusion do enunciado, ignorando as conclusões que não entram no cálculo; testes com casos de borda.
+
+**Depende de:** S01-C2
+
+## Passos
+- [ ] Mapear `success` como sucesso; `failure`, `timed_out` e `startup_failure` como falha; `cancelled`, `skipped`, `neutral`, `action_required`, `stale` e vazio como ignorados.
+- [ ] O CFR (a) considera todos os workflows do repositório juntos.
+- [ ] Testes: runs `cancelled` não alteram o resultado; só sucessos dão 0; nenhum run válido devolve valor ausente (não zero); proporção calculada à mão numa fixture pequena."
+"S01-C4","Tempo de recuperação (episódios de falha) com testes","C","S01","Teste","## Critério de aceite
+Função que identifica episódios por workflow e devolve o tempo de recuperação em horas com marcação de censura; teste com o exemplo do enunciado (1h20) e bordas.
+
+**Depende de:** S01-C2
+
+## Passos
+- [ ] Agrupar os runs por `workflow_id` e ordenar por `run_started_at`.
+- [ ] O episódio começa na primeira falha após um sucesso e termina no próximo sucesso do mesmo workflow; tempo = `updated_at` do sucesso − `run_started_at` da primeira falha.
+- [ ] Falhas consecutivas pertencem ao mesmo episódio; runs ignorados (cancelled etc.) não iniciam nem encerram episódio.
+- [ ] Episódio sem sucesso até o fim da janela é censurado: não descartar; devolver a proporção de censurados.
+- [ ] Teste do exemplo: 10:00 falha, 10:30 falha, 11:15 sucesso terminando às 11:20 resulta em 1h20.
+
+> Atenção: Decida e documente o caso de uma falha anterior a qualquer sucesso: pela definição, o episódio só começa após um sucesso, então essa falha inicial não abre episódio."
+"S01-C5","Revisão da Introdução e integração no Overleaf","C","S01","Escrita","## Critério de aceite
+Introdução revisada quanto a coerência, formatação SBC e referências; versão final commitada em docs/artigo/.
+
+**Depende de:** S01-A5, S01-B6
+
+## Passos
+- [ ] Ler a Introdução completa e conferir se cada RQ tem uma hipótese.
+- [ ] Padronizar estilo, referências (Forsgren et al., relatórios DORA) e formatação do template.
+- [ ] Commitar a versão revisada referenciando a Issue."
+"S02-A1","Sorteio da amostra-ouro e geração das planilhas de rotulagem","A","S02","Código","## Critério de aceite
+Script reprodutível que sorteia 60 repositórios com semente fixa documentada, sorteia 5 releases por repositório e gera três planilhas idênticas (uma por avaliador) com links diretos, sem nenhuma coluna da heurística.
+
+**Depende de:** S02-C1
+
+## Passos
+- [ ] Sortear com `df.sample(n=60, random_state=42)` a amostra final congelada por C; documentar a semente no código e no README.
+- [ ] Para cada repositório sorteado, sortear 5 releases (outra semente fixa).
+- [ ] Gerar `rotulos_A.csv`, `rotulos_B.csv` e `rotulos_C.csv` com: link do repositório, tipo do projeto, releases = entregas reais, e para cada release o link da página no GitHub e a coluna corretiva (sim/não).
+- [ ] Não incluir a saída da heurística; guardar a lista de releases sorteadas separadamente.
+
+> Atenção: O sorteio só vale depois que a amostra final estiver congelada; se ela mudar, sorteie de novo."
+"S02-A2","Rotulagem independente da amostra-ouro (integrante A)","A","S02","Validação","## Critério de aceite
+Arquivo data/rotulos/rotulos_A.csv completo e commitado, preenchido sem consultar os outros dois e sem ver a saída da heurística.
+
+**Depende de:** S02-A1
+
+## Passos
+- [ ] Rotular os 60 repositórios: tipo do projeto (biblioteca/framework, aplicação/serviço, ferramenta CLI ou outro) e se as releases representam entregas reais (sim, não ou incerto).
+- [ ] Para as 5 releases sorteadas de cada repositório, ler as release notes e a lista de commits e marcar se a release é corretiva (sim/não).
+- [ ] Usar os links diretos da planilha; trabalhar sozinho e não comentar rótulos com os outros dois até todos commitarem.
+- [ ] Commitar `rotulos_A.csv` referenciando a Issue.
+
+> Atenção: É a tarefa mais demorada da sprint (60 repositórios e 300 releases por pessoa): reserve blocos de tempo cedo. Combinar por escrito a definição de cada categoria antes de rotular (sem discutir repositórios) é uma decisão do grupo; se fizer isso, relate no artigo, porque afeta o kappa."
+"S02-A3","Kappa de Fleiss e rótulo de consenso","A","S02","Código","## Critério de aceite
+Script que calcula o kappa de Fleiss nas três dimensões e gera consenso.csv; protocolo de desempate documentado; casos divergentes discutidos em reunião dos três.
+
+**Depende de:** S02-A2, S02-B2, S02-C3
+
+## Passos
+- [ ] Ler os três arquivos de rótulos e montar uma tabela item × avaliador para cada dimensão.
+- [ ] Calcular `aggregate_raters` seguido de `fleiss_kappa` (statsmodels) para tipo do projeto, entregas reais e release corretiva.
+- [ ] Interpretar com Landis & Koch; kappa baixo é um achado, não uma falha, e será discutido no artigo.
+- [ ] Registrar o protocolo de desempate em `docs/protocolo_consenso.md` (ex.: maioria simples; casos 1-1-1 decididos em reunião).
+- [ ] Gerar o `consenso.csv` com o rótulo final e uma coluna indicando se houve divergência."
+"S02-A4","Dicionário de dados","A","S02","Dados","## Critério de aceite
+docs/dicionario_dados.md (ou .csv) com, para cada coluna dos CSVs finais: nome, tipo, unidade e fórmula ou origem na API.
+
+**Depende de:** S02-C2
+
+## Passos
+- [ ] Listar todas as colunas de `dataset.csv`, `funil.csv` e `consenso.csv`.
+- [ ] Para cada uma, registrar tipo, unidade (horas, dias, %), fórmula e endpoint de origem.
+- [ ] Pedir a B e C que confiram as colunas das suas métricas.
+
+> Atenção: Sem unidades explícitas, o grupo replicador não consegue comparar valores."
+"S02-A5","Escrita: Metodologia (fonte, funil, janela e definições operacionais)","A","S02","Escrita","## Critério de aceite
+Subseções da Metodologia com fonte de dados, funil de seleção final (tabela), janela, default branch, definição de deploy/falha/censura e as variantes obrigatórias.
+
+**Depende de:** S02-C1
+
+## Passos
+- [ ] Inserir a tabela do funil gerada pelo pipeline.
+- [ ] Descrever janela, default branch, release como proxy de deploy, tabela de conclusion e censura.
+- [ ] Descrever as variantes obrigatórias (lead time a/b; CFR a/b).
+- [ ] Unificar no Overleaf as subseções escritas por B e C."
+"S02-B1","Heurística de release corretiva (v1) e CFR (b)","B","S02","Código","## Critério de aceite
+Funções que classificam uma release como corretiva e calculam o CFR (b) com janela de 7 dias e censura das releases dos últimos 7 dias; testes com os exemplos do enunciado; versão v1 registrada.
+
+**Depende de:** S01-B2, S01-B3
+
+## Passos
+- [ ] Implementar regras configuráveis: mudança apenas no número de patch (SemVer, tolerando prefixo ""v"") e/ou commits entre as releases com `revert`, `hotfix` ou `fix` na mensagem.
+- [ ] A release R falha se for seguida, em até 7 dias, por uma release corretiva; CFR (b) = releases que falharam ÷ releases avaliadas.
+- [ ] Releases dos últimos 7 dias da janela ficam fora do denominador (censura); reportar quantas.
+- [ ] Testes: v2.3.0 (10/05) seguida de v2.3.1 (12/05, commit ""fix: crash ao abrir arquivo"") falhou; v2.4.0 (01/06) seguida de v2.5.0 (20/06) não falhou.
+- [ ] Decidir o que fazer com tags fora do padrão SemVer e registrar a decisão; marcar a versão com a tag git `heuristica-v1`."
+"S02-B2","Rotulagem independente da amostra-ouro (integrante B)","B","S02","Validação","## Critério de aceite
+Arquivo data/rotulos/rotulos_B.csv completo e commitado, preenchido sem consultar os outros dois e sem ver a saída da heurística.
+
+**Depende de:** S02-A1
+
+## Passos
+- [ ] Rotular os 60 repositórios: tipo do projeto (biblioteca/framework, aplicação/serviço, ferramenta CLI ou outro) e se as releases representam entregas reais (sim, não ou incerto).
+- [ ] Para as 5 releases sorteadas de cada repositório, ler as release notes e a lista de commits e marcar se a release é corretiva (sim/não).
+- [ ] Usar os links diretos da planilha; trabalhar sozinho e não comentar rótulos com os outros dois até todos commitarem.
+- [ ] Commitar `rotulos_B.csv` referenciando a Issue.
+
+> Atenção: É a tarefa mais demorada da sprint (60 repositórios e 300 releases por pessoa): reserve blocos de tempo cedo. Combinar por escrito a definição de cada categoria antes de rotular (sem discutir repositórios) é uma decisão do grupo; se fizer isso, relate no artigo, porque afeta o kappa."
+"S02-B3","Avaliação (precisão, recall, F1) e refinamento da heurística","B","S02","Código","## Critério de aceite
+Script que compara a heurística com o consenso (`precision_recall_fscore_support`); se F1 < 0,70, heurística refinada e reavaliada; todas as versões e seus F1 registrados.
+
+**Depende de:** S02-A3, S02-B1
+
+## Passos
+- [ ] Aplicar a heurística v1 às releases da amostra-ouro (5 por repositório × 60) e comparar com o consenso.
+- [ ] Calcular `precision_recall_fscore_support` para a classe corretiva.
+- [ ] Se F1 < 0,70, olhar os falsos positivos e falsos negativos, ajustar as regras e reavaliar.
+- [ ] Registrar em `docs/heuristica_versoes.md` cada versão: regras, precisão, recall e F1 (isso vai para o artigo).
+- [ ] Avisar C quando a versão final estiver pronta para recalcular o CFR (b) no dataset.
+
+> Atenção: Refinar a heurística olhando os erros da mesma amostra usada para avaliá-la favorece o F1; registre isso como limitação nas ameaças à validade."
+"S02-B4","Escrita: Metodologia, validação manual e heurística","B","S02","Escrita","## Critério de aceite
+Subseção descrevendo amostra-ouro, protocolo de rotulagem, kappas com interpretação, consenso, versões da heurística e P/R/F1.
+
+**Depende de:** S02-B3
+
+## Passos
+- [ ] Descrever o sorteio (semente), os três rótulos independentes e o protocolo de consenso.
+- [ ] Reportar os kappas de Fleiss das três dimensões com a interpretação de Landis & Koch.
+- [ ] Mostrar uma tabela com cada versão da heurística e seu F1."
+"S02-C1","Coleta completa (≥300 repositórios) e amostra final congelada","C","S02","Código","## Critério de aceite
+Pipeline executado para a amostra completa com ≥300 repositórios após os filtros; funil final gerado; lista da amostra final congelada em data/amostra_final.csv.
+
+**Depende de:** S01-A6
+
+## Passos
+- [ ] Ampliar a busca de candidatos (mais faixas de estrelas e linguagens) para que sobrem ≥300 após os filtros.
+- [ ] Rodar o pipeline em segundo plano numa máquina estável; se for interrompido, basta rodar de novo (cache).
+- [ ] Acompanhar o rate limit e os meses saturados dos runs; anotar os problemas.
+- [ ] Congelar a amostra final e avisar o grupo: dela saem o sorteio e o dataset.
+- [ ] Compartilhar o cache entre os três (pasta compartilhada), sem commitá-lo.
+
+> Atenção: A coleta leva horas ou dias por causa do rate limit: comece no primeiro dia da sprint, antes de terminar as outras tarefas."
+"S02-C2","Cálculo das métricas e dataset final (CSV)","C","S02","Código","## Critério de aceite
+Script reexecutável que gera data/dataset.csv com uma linha por repositório: metadados, métricas em todas as variantes, contagens de itens ignorados/censurados e tipo do projeto.
+
+**Depende de:** S02-C1, S02-B1, S02-A3
+
+## Passos
+- [ ] Para cada repositório, chamar as funções de A, B e C: deployment frequency, lead time (a) e (b), CFR (a) e (b), tempo de recuperação.
+- [ ] Incluir colunas de apoio: nº de releases avaliadas, nº ignoradas (404/primeira), proporção de episódios censurados e nº de runs válidos.
+- [ ] Juntar o tipo do projeto vindo do consenso.
+- [ ] Recalcular tudo quando B avisar que a heurística final está pronta.
+- [ ] Manter nomes de colunas estáveis, para A documentar no dicionário."
+"S02-C3","Rotulagem independente da amostra-ouro (integrante C)","C","S02","Validação","## Critério de aceite
+Arquivo data/rotulos/rotulos_C.csv completo e commitado, preenchido sem consultar os outros dois e sem ver a saída da heurística.
+
+**Depende de:** S02-A1
+
+## Passos
+- [ ] Rotular os 60 repositórios: tipo do projeto (biblioteca/framework, aplicação/serviço, ferramenta CLI ou outro) e se as releases representam entregas reais (sim, não ou incerto).
+- [ ] Para as 5 releases sorteadas de cada repositório, ler as release notes e a lista de commits e marcar se a release é corretiva (sim/não).
+- [ ] Usar os links diretos da planilha; trabalhar sozinho e não comentar rótulos com os outros dois até todos commitarem.
+- [ ] Commitar `rotulos_C.csv` referenciando a Issue.
+
+> Atenção: É a tarefa mais demorada da sprint (60 repositórios e 300 releases por pessoa): reserve blocos de tempo cedo. Combinar por escrito a definição de cada categoria antes de rotular (sem discutir repositórios) é uma decisão do grupo; se fizer isso, relate no artigo, porque afeta o kappa."
+"S02-C4","Escrita: Metodologia, coleta e pipeline","C","S02","Escrita","## Critério de aceite
+Subseção descrevendo o script de coleta, os endpoints, cache/retomada, rate limit, saturação de 1.000 resultados e tratamento de censura.
+
+**Depende de:** S02-C1
+
+## Passos
+- [ ] Descrever os endpoints usados e a coleta (REST/GraphQL, sem bibliotecas de API).
+- [ ] Explicar cache e retomada, rate limit e backoff.
+- [ ] Relatar meses saturados, releases ignoradas (404) e casos censurados com os números reais."
+"S03-A1","Notebook das RQ 01 a RQ 04 (mediana e IQR)","A","S03","Código","## Critério de aceite
+Notebook reexecutável a partir do dataset.csv com mediana e IQR de cada métrica (todas as variantes), gráficos e tratamento explícito de valores ausentes e censurados.
+
+**Depende de:** S02-C2
+
+## Passos
+- [ ] Carregar o `dataset.csv` e, para cada RQ 01 a RQ 04, calcular mediana e IQR (Q1 e Q3); nunca média e desvio-padrão.
+- [ ] Gráficos: boxplot ou histograma por métrica, em escala logarítmica quando a variação for grande.
+- [ ] RQ 02: comparar as variantes (a) e (b) e preparar a explicação da divergência.
+- [ ] RQ 03: comparar CFR (a) e (b) e discutir falha de pipeline × falha em produção.
+- [ ] RQ 04: reportar a proporção de episódios censurados por repositório."
+"S03-A2","Classificação DORA de referência (C1)","A","S03","Código","## Critério de aceite
+Tabela data/classificacao_C1.csv com a categoria de cada repositório por métrica e geral, e distribuição Elite/High/Medium/Low resumida.
+
+**Depende de:** S03-A1, S01-A4
+
+## Passos
+- [ ] Aplicar as funções de S01-A4 a cada métrica da combinação C1 (release, lead time (a), CFR (a)).
+- [ ] Calcular a nota geral (mediana das quatro notas, arredondada para baixo).
+- [ ] Resumir a distribuição por categoria em tabela e gráfico de barras.
+- [ ] Contar e reportar os repositórios sem alguma métrica."
+"S03-A3","Escrita: Resultados RQ 01 a RQ 04 e consolidação da Discussão","A","S03","Escrita","## Critério de aceite
+Resultados das RQ 01 a RQ 04 e seção de Discussão (hipóteses × resultados, surpresas e explicações) cobrindo as RQ 01 a RQ 07.
+
+**Depende de:** S03-A1, S03-A2, S03-B3, S03-C4
+
+## Passos
+- [ ] Escrever os resultados das RQ 01 a RQ 04 com as tabelas e figuras do notebook.
+- [ ] Reunir as hipóteses (S01) e os resultados de todas as RQ em uma tabela esperado × observado.
+- [ ] Discutir o que surpreendeu e por quê; pedir a B e C o parágrafo das RQ deles."
+"S03-B1","Notebook da RQ 05 (correlação de Spearman)","B","S03","Código","## Critério de aceite
+Notebook com Spearman entre deployment frequency e CFR nas variantes (a) e (b), reportando ρ, p-valor e n, com gráfico de dispersão.
+
+**Depende de:** S02-C2
+
+## Passos
+- [ ] Montar os pares (frequência, CFR) por repositório, remover os sem CFR avaliável e reportar o n de cada variante.
+- [ ] Usar `scipy.stats.spearmanr` separadamente para CFR (a) e CFR (b).
+- [ ] Gráfico de dispersão com eixo logarítmico na frequência (e no CFR, se preciso).
+- [ ] Comparar com a afirmação do DORA (velocidade e estabilidade não são trade-off), sem concluir causalidade."
+"S03-B2","Notebook da RQ 06 (testes, Holm e tamanho de efeito)","B","S03","Código","## Critério de aceite
+Notebook com ≥3 fatores × 4 métricas: Kruskal-Wallis ou Mann-Whitney, p-valores ajustados por Holm, ε² ou Cliff's δ, tudo numa tabela final.
+
+**Depende de:** S02-C2, S02-A3
+
+## Passos
+- [ ] Escolher no mínimo três fatores (ex.: linguagem, estrelas em quartis, tipo do projeto) e converter os numéricos em grupos por quartis.
+- [ ] Para cada fator × métrica: `scipy.stats.kruskal` (3 ou mais grupos) ou `scipy.stats.mannwhitneyu` (2 grupos).
+- [ ] Tamanho de efeito: ε² = H / (n − 1) para Kruskal-Wallis; Cliff's δ = 2·U₁ / (n₁·n₂) − 1 para dois grupos, interpretado por Romano et al.
+- [ ] Corrigir todos os p-valores juntos com `multipletests(..., method='holm')` (statsmodels).
+- [ ] Agrupar categorias muito pequenas (ex.: linguagens raras em ""Outras"") e reportar o n de cada grupo."
+"S03-B3","Escrita: Resultados RQ 05 e RQ 06","B","S03","Escrita","## Critério de aceite
+Resultados das RQ 05 e RQ 06 com tabelas (ρ, p, n; testes ajustados e efeitos) e gráfico de dispersão.
+
+**Depende de:** S03-B1, S03-B2
+
+## Passos
+- [ ] Reportar ρ, p e n e discutir a relação à luz do DORA.
+- [ ] Apresentar a tabela de testes com p ajustado e tamanho de efeito, destacando os efeitos não desprezíveis.
+- [ ] Lembrar que correlação não implica causalidade."
+"S03-C1","Variantes de definição operacional (C2 e C3)","C","S03","Código","## Critério de aceite
+Script que gera as métricas nas combinações C1, C2 e C3 definidas pelo grupo (ex.: release; release + pré-release; tag), cada combinação em colunas ou arquivo próprio.
+
+**Depende de:** S02-C2, S01-B2, S01-B5
+
+## Passos
+- [ ] Definir e documentar pelo menos três combinações (unidade de deploy, lead time a/b, CFR a/b), como na tabela de exemplo da RQ 07.
+- [ ] Reutilizar as funções de B passando a lista de datas de deploy de cada variante (releases; releases + pré-releases; tags).
+- [ ] Para tags, usar a data do commit apontado (S01-B2).
+- [ ] Gerar `metricas_combinacoes.csv` com as métricas de cada combinação por repositório."
+"S03-C2","Notebook da RQ 07 (sensibilidade)","C","S03","Código","## Critério de aceite
+Notebook que classifica cada repositório em cada combinação e calcula, para cada par, a % que mudou de categoria e o kappa de Cohen ponderado linear.
+
+**Depende de:** S03-C1, S01-A4
+
+## Passos
+- [ ] Classificar cada repositório em Elite/High/Medium/Low em C1, C2 e C3 com as funções de A.
+- [ ] Para C1×C2, C1×C3 e C2×C3: % que mudou de categoria e `cohen_kappa_score(..., weights='linear')` (scikit-learn).
+- [ ] Codificar as categorias em ordem (Low < Medium < High < Elite) antes do kappa.
+- [ ] Avaliar se as conclusões das RQ 01 a RQ 06 se mantêm entre as combinações."
+"S03-C3","(Opcional) Bônus RQ 08","C","S03","Código","## Critério de aceite
+Se o grupo optar: rework rate OU tendência temporal (Mann-Kendall), com resultados e discussão.
+
+**Depende de:** S03-C2
+
+## Passos
+- [ ] Decidir com o grupo qual opção fazer (rework rate ou evolução temporal).
+- [ ] Rework rate: releases corretivas ÷ total de releases, comparando com o CFR (b).
+- [ ] Evolução temporal: métricas por trimestre e `pymannkendall` por repositório; reportar a proporção com tendência de melhora e de piora."
+"S03-C4","Escrita: Resultados RQ 07 e discussão de robustez","C","S03","Escrita","## Critério de aceite
+Seção da RQ 07 com combinações, tabela de mudança de categoria e kappa ponderado, e discussão sobre a robustez das RQ 01 a RQ 06.
+
+**Depende de:** S03-C2
+
+## Passos
+- [ ] Apresentar a tabela das combinações e a de mudança de categoria.
+- [ ] Discutir se as conclusões dependem de uma escolha arbitrária de definição.
+- [ ] Se o bônus foi feito, incluí-lo aqui."
+"FIN-A1","Executar o pipeline do outro grupo (apenas README)","A","FIN","Código","## Critério de aceite
+Script e registro de execução em docs/replicacao/ com subamostra de 30 repositórios do dataset original e log completo, seguindo somente o README do grupo autor.
+
+**Depende de:** —
+
+## Passos
+- [ ] Clonar o repositório do grupo sorteado e seguir exclusivamente o README; não pedir ajuda ao grupo autor.
+- [ ] Sortear 30 repositórios do dataset original com semente fixa e configurar o pipeline deles para essa subamostra.
+- [ ] Guardar comandos, saídas, tempo e erros em `docs/replicacao/execucao.md` e commitar o script usado para sortear e rodar.
+- [ ] Se travar, registrar onde e por quê: isso é resultado."
+"FIN-A2","Escrita: relato de execução e ameaças de construto","A","FIN","Escrita","## Critério de aceite
+Parte do relato de execução na seção Replicação cruzada e subseção de ameaças de construto (ex.: release ≠ deploy), apoiadas na validação manual.
+
+**Depende de:** FIN-A1
+
+## Passos
+- [ ] Resumir o que foi executado, o tempo gasto e os obstáculos.
+- [ ] Ameaças de construto: proxies (release, CI), datas de commit afetadas por rebase/squash, resultado do F1 da heurística.
+- [ ] Citar o kappa e o F1 como evidência."
+"FIN-A3","Revisão final: Introdução e Metodologia","A","FIN","Escrita","## Critério de aceite
+Introdução e Metodologia revisadas e coerentes com o que foi de fato executado.
+
+**Depende de:** S03-A3
+
+## Passos
+- [ ] Conferir se as hipóteses, o funil, as definições e as variantes descritos batem com o pipeline final.
+- [ ] Padronizar estilo e referências."
+"FIN-B1","Comparar resultados com o CSV original","B","FIN","Código","## Critério de aceite
+Notebook que calcula a diferença relativa por métrica e a % de repositórios com a mesma classificação DORA entre a replicação e o CSV original.
+
+**Depende de:** FIN-A1
+
+## Passos
+- [ ] Alinhar as duas tabelas pelos 30 repositórios.
+- [ ] Diferença relativa por métrica: (replicado − original) ÷ original, resumida por mediana e IQR.
+- [ ] Calcular a % de repositórios com a mesma categoria DORA geral e por métrica.
+- [ ] Explicar as diferenças esperadas: os repositórios continuam recebendo commits e as datas de coleta diferem."
+"FIN-B2","Abrir Issues no grupo autor e escrever comparação e ameaças interna/conclusão","B","FIN","Validação","## Critério de aceite
+Uma Issue no repositório do grupo autor para cada problema (falha de execução, documentação faltante, divergência), com comando, erro e valores esperados × obtidos; relato da comparação e ameaças interna e de conclusão no artigo.
+
+**Depende de:** FIN-B1, FIN-A1
+
+## Passos
+- [ ] Para cada problema, abrir uma Issue separada com: comando executado, mensagem de erro e valores esperados × obtidos.
+- [ ] Escrever a parte de comparação da Replicação cruzada.
+- [ ] Ameaça interna: fatores não controlados (ex.: repositórios mais antigos têm mais releases).
+- [ ] Ameaça de conclusão: muitos testes, subgrupos pequenos, correção de Holm."
+"FIN-B3","Revisão final: Resultados e Discussão","B","FIN","Escrita","## Critério de aceite
+Resultados e Discussão revisados, com os números do artigo batendo com os notebooks e o CSV.
+
+**Depende de:** S03-A3
+
+## Passos
+- [ ] Conferir cada número, tabela e figura contra os notebooks.
+- [ ] Verificar se a Discussão responde a cada hipótese da Introdução."
+"FIN-C1","Tratar as Issues recebidas do grupo replicador","C","FIN","Código","## Critério de aceite
+Cada Issue recebida respondida e fechada com commit que a referencie (correção no pipeline ou no README) ou com justificativa registrada; Issues adicionadas ao próprio GitHub Projects.
+
+**Depende de:** —
+
+## Passos
+- [ ] Adicionar as Issues recebidas ao Projects, com Assignee e Status.
+- [ ] Reproduzir cada problema; corrigir no pipeline ou na documentação e commitar referenciando o `#número`.
+- [ ] Quando não corrigir, responder com a justificativa na própria Issue.
+- [ ] Re-executar o pipeline do zero (clone limpo, seguindo o README) para garantir que as correções não quebraram nada."
+"FIN-C2","Escrita: ameaça externa e resposta às Issues no artigo","C","FIN","Escrita","## Critério de aceite
+Subseção de ameaças externas (projetos populares ≠ corporativos etc.) e relato das Issues recebidas e das respostas dadas.
+
+**Depende de:** FIN-C1
+
+## Passos
+- [ ] Ameaças externas: viés de popularidade, só open-source, só GitHub Actions, critério de ≥5 releases.
+- [ ] Relatar as Issues recebidas e o que foi corrigido ou justificado."
+"FIN-C3","Revisão final: Ameaças, Replicação e conferência do artigo","C","FIN","Escrita","## Critério de aceite
+Artigo com no máximo 10 páginas no template SBC, link do Projects preenchido e referências conferidas.
+
+**Depende de:** FIN-A2, FIN-B2, FIN-C2
+
+## Passos
+- [ ] Revisar Ameaças à validade e Replicação cruzada.
+- [ ] Conferir o limite de 10 páginas, o template SBC e as referências.
+- [ ] Preencher o link do repositório/GitHub Projects no artigo."
