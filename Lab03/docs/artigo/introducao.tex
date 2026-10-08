@@ -53,22 +53,21 @@ As hipóteses abaixo foram escritas antes de qualquer análise dos dados coletad
   já que falhas de CI costumam ser corrigidas por um novo \textit{commit} no mesmo dia, mas com
   cauda pesada e uma proporção não desprezível de episódios censurados, de \textit{workflows}
   quebrados que ficam abandonados por semanas.
-  \item \textbf{H5 (RQ05).} Esperamos que uma maior frequência de entrega esteja associada
-  a uma menor taxa de falha, pois mudanças menores e mais frequentes podem facilitar a
-  validação e a correção. Essa expectativa acompanha a relação entre velocidade e
-  estabilidade descrita pelo DORA~\cite{doraMetricas}. Entretanto, a associação pode ser
-  mais fraca nos nossos proxies, já que falhas de CI não representam necessariamente
-  falhas das versões entregues, e uma correlação não demonstrará causalidade.
-  \item \textbf{H6 (RQ06).} Esperamos que repositórios com mais contribuidores e maior
-  popularidade apresentem melhor classificação DORA, pois uma comunidade maior pode
-  sustentar revisão e manutenção mais contínuas. Para idade e linguagem, esperamos
-  associações menos uniformes: maturidade, complexidade e tipo do projeto podem produzir
-  diferenças de desempenho. Essas expectativas serão avaliadas como associações,
-  sem atribuir às características um efeito causal.
-  \item \textbf{H7 (RQ07).} Esperamos que a classificação mude para parte dos repositórios
-  quando a definição operacional mudar. Incluir pré-releases ou tags pode aumentar a
-  frequência medida; trocar o lead time por release pelo lead time por commit altera
-  a ponderação dos tempos; e substituir falhas de CI por releases corretivas observa
-  outro tipo de falha. Esperamos maior sensibilidade em repositórios próximos dos
-  limites das categorias, reforçando a necessidade de explicitar os proxies utilizados.
+  \item \textbf{H5 (RQ05).} Esperamos uma correlação fraca e negativa entre a frequência de
+  \textit{deploys} e o CFR, isto é, que repositórios que entregam com maior frequência tenham
+  taxa de falha igual ou menor. Essa expectativa acompanha a evidência do DORA de que velocidade
+  e estabilidade não constituem necessariamente um \textit{trade-off}~\cite{doraMetricas}.
+  Entretanto, a associação pode ser mais fraca nos nossos proxies, já que falhas de CI não
+  representam necessariamente falhas das versões entregues, e correlação não demonstra causalidade.
+  \item \textbf{H6 (RQ06).} Esperamos que o tipo do projeto e o tamanho da comunidade de
+  contribuidores apresentem associações mais claras com o desempenho DORA do que a linguagem
+  principal. Aplicações e serviços devem publicar com maior frequência, enquanto comunidades
+  maiores podem sustentar revisão, manutenção e recuperação mais contínuas. Popularidade, idade e
+  linguagem podem apresentar associações menos uniformes; elas serão interpretadas sem atribuição
+  de efeito causal.
+  \item \textbf{H7 (RQ07).} Esperamos concordância moderada ou alta entre as classificações,
+  mas com mudanças nos repositórios próximos aos limites das categorias. Incluir pré-releases ou
+  tags pode aumentar a frequência medida; trocar o \textit{lead time} por release pelo \textit{lead
+  time} por commit altera a ponderação; e substituir falhas de CI por releases corretivas observa
+  outro tipo de falha. Essa sensibilidade reforça a necessidade de explicitar os proxies usados.
 \end{itemize}

@@ -9,27 +9,41 @@ from pathlib import Path
 from pipeline.candidatos import salvar_candidatos, selecionar_candidatos
 from pipeline.config import carregar_config
 from pipeline.funil import executar_funil
-
-try:  # cliente de C (S01-C1); enquanto não existir, usa o provisório
-    from pipeline.http_client import GitHubClient
-except ImportError:
-    from pipeline.http_client_provisorio import GitHubClient
+from pipeline.http_client import GitHubClient
 
 log = logging.getLogger("pipeline")
+
+
+def validar_tamanho_amostra(repos, meta):
+    if len(repos) < meta:
+        raise RuntimeError(
+            f"amostra insuficiente: {len(repos)} repositórios aceitos; meta configurada: {meta}"
+        )
 
 
 def executar_etapas_de_coleta(client, cfg, repos):
     """Executa as etapas de B e C listadas em `etapas_coleta` (módulos com coletar())."""
     for nome in cfg.get("etapas_coleta", []):
-        try:
-            modulo = importlib.import_module(nome)
-        except ModuleNotFoundError as e:
-            if e.name == nome:  # o módulo em si não existe ainda
-                log.warning("etapa %s ainda não implementada; pulando", nome)
-                continue
-            raise
+        modulo = importlib.import_module(nome)
         log.info("executando etapa %s", nome)
         modulo.coletar(client, cfg, repos)
+
+
+def executar_pipeline(client, cfg):
+    """Executa todas as etapas na ordem e devolve a amostra aprovada pelo funil."""
+    dados = Path(cfg["saida"]["dir_dados"])
+
+    log.info("1/3 selecionando candidatos")
+    candidatos = selecionar_candidatos(client, cfg)
+    salvar_candidatos(candidatos, dados / "candidatos.csv")
+
+    log.info("2/3 aplicando filtros e coletando metadados")
+    repos = executar_funil(client, candidatos, cfg, dados)
+    validar_tamanho_amostra(repos, cfg["selecao"]["meta_repositorios"])
+
+    log.info("3/3 coletas de releases e workflow runs")
+    executar_etapas_de_coleta(client, cfg, repos)
+    return repos
 
 
 def main(argv=None):
@@ -42,6 +56,9 @@ def main(argv=None):
     ap.add_argument("-v", "--verbose", action="store_true", help="logs detalhados")
     args = ap.parse_args(argv)
 
+    if args.meta is not None and args.meta <= 0:
+        ap.error("--meta deve ser um inteiro positivo")
+
     logging.basicConfig(level=logging.DEBUG if args.verbose else logging.INFO,
                         format="%(asctime)s %(levelname)s %(name)s: %(message)s")
 
@@ -50,23 +67,15 @@ def main(argv=None):
         sys.exit("Erro: defina a variável de ambiente GITHUB_TOKEN (veja o README).")
 
     cfg = carregar_config(args.config)
-    if args.meta:
+    if args.meta is not None:
         cfg["selecao"]["meta_repositorios"] = args.meta
 
-    dados = Path(cfg["saida"]["dir_dados"])
     client = GitHubClient(token, cache_dir=cfg["saida"]["dir_cache"])
-
-    log.info("1/3 selecionando candidatos")
-    candidatos = selecionar_candidatos(client, cfg)
-    salvar_candidatos(candidatos, dados / "candidatos.csv")
-
-    log.info("2/3 aplicando filtros e coletando metadados")
-    repos = executar_funil(client, candidatos, cfg, dados)
-
-    log.info("3/3 coletas de releases e workflow runs")
-    executar_etapas_de_coleta(client, cfg, repos)
-
-    log.info("concluído: %d repositórios na amostra. Saídas em %s/", len(repos), dados)
+    repos = executar_pipeline(client, cfg)
+    log.info(
+        "concluído: %d repositórios na amostra. Saídas em %s/",
+        len(repos), cfg["saida"]["dir_dados"],
+    )
 
 
 if __name__ == "__main__":

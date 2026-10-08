@@ -26,7 +26,8 @@ selecao:
     - "8000..15000"
     - "15000..30000"
     - ">30000"
-  # Usadas para subdividir faixas com mais de 1.000 resultados
+  # Fallback para uma faixa unitária de estrelas que ainda tenha >= 1.000 resultados.
+  # Se uma partição por estrela + linguagem também saturar, o pipeline falha claramente.
   linguagens:
     - Python
     - JavaScript

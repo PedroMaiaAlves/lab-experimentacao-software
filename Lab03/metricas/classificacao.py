@@ -77,12 +77,11 @@ def classificar_tempo_recuperacao(horas):
     return Categoria.LOW
 
 
-def classificar_geral(categorias, minimo_metricas=3):
+def classificar_geral(categorias, minimo_metricas=4):
     """Mediana das notas (Elite=4 ... Low=1), arredondada para baixo.
 
-    Métricas ausentes (None) são ignoradas; com menos de `minimo_metricas` notas
-    disponíveis o repositório fica sem classificação geral (None).
-    DECISÃO DO GRUPO: registrar esse mínimo na Metodologia.
+    A definição principal exige as quatro métricas. Métricas ausentes (None) são
+    ignoradas apenas quando o chamador escolhe explicitamente outro mínimo.
     """
     notas = [int(c) for c in categorias if c is not None]
     if len(notas) < minimo_metricas:
@@ -91,7 +90,7 @@ def classificar_geral(categorias, minimo_metricas=3):
 
 
 def classificar_repositorio(deployment_frequency, lead_time_horas, cfr, tempo_recuperacao_horas,
-                            minimo_metricas=3):
+                            minimo_metricas=4):
     por_metrica = {
         "deployment_frequency": classificar_deployment_frequency(deployment_frequency),
         "lead_time": classificar_lead_time(lead_time_horas),

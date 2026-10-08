@@ -66,8 +66,8 @@ Para recomeçar do zero, apague a pasta `cache/`.
 | `semente` | Semente de qualquer sorteio do pipeline |
 | `criterios.min_releases` / `min_runs` | Critério mínimo de inclusão (5 releases e 50 runs válidos) |
 | `selecao.meta_repositorios` | Quantos repositórios devem restar após os filtros |
-| `selecao.faixas_estrelas` | Faixas de estrelas das consultas de busca (cada uma devolve até 1.000) |
-| `selecao.linguagens` | Linguagens usadas para subdividir faixas com mais de 1.000 resultados |
+| `selecao.faixas_estrelas` | Faixas de estrelas subdivididas recursivamente enquanto uma consulta tiver 1.000 ou mais resultados |
+| `selecao.linguagens` | Fallback para uma faixa unitária de estrelas com 1.000 ou mais resultados; uma partição por linguagem ainda saturada interrompe a coleta |
 | `saida.dir_dados` / `dir_cache` | Pastas de saída e de cache |
 | `etapas_coleta` | Módulos de coleta executados após o funil (`coletar(client, cfg, repos)`) |
 
@@ -85,9 +85,14 @@ Para recomeçar do zero, apague a pasta `cache/`.
 | `commits_entre_releases.csv` | SHA e data de autoria de cada commit por comparação válida |
 | `lead_time.csv` | Medianas das variantes (a)/(b), em horas, e contagens de exclusões |
 | `deployment_frequency.csv` | Releases principais por semana na janela inclusiva |
+| `workflow_runs/*.json` | Runs de `push` do default branch, coletados mês a mês |
+| `runs_saturados.csv` | Intervalos subdivididos ou incompletos por atingirem 1.000 runs |
 
 O contrato e as decisões da coleta de releases/commits estão em [docs/coleta_b.md](docs/coleta_b.md).
 O dicionário de dados completo estará em `docs/dicionario_dados.md`.
+
+> **Janela provisória:** confirme com o professor as datas de `janela_inicio` e
+> `janela_fim` antes de executar a coleta definitiva dos 100 repositórios.
 
 ## Testes
 
@@ -95,7 +100,14 @@ O dicionário de dados completo estará em `docs/dicionario_dados.md`.
 python -m pytest --cov=metricas --cov-report=term-missing --cov-fail-under=80
 ```
 
-Os testes também rodam a cada push no GitHub Actions (`.github/workflows/testes.yml`).
+Os testes também rodam a cada push e pull request pelo GitHub Actions, conforme
+`.github/workflows/testes.yml`.
+
+## Artigo
+
+O documento principal está em `docs/artigo/artigo.tex`, acompanhado do estilo e da
+bibliografia SBC. Veja `docs/artigo/README.md` para atribuição CC BY 4.0 e instruções de
+compilação. Os campos `PREENCHER` devem ser completados antes da submissão.
 
 ## Estrutura
 
