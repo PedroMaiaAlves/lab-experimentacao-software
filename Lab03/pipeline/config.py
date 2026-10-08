@@ -8,6 +8,11 @@ CHAVES_OBRIGATORIAS = {
     "janela_inicio", "janela_fim", "semente", "criterios", "selecao", "saida",
     "etapas_coleta",
 }
+ETAPAS_OBRIGATORIAS_S01 = (
+    "pipeline.coleta_releases",
+    "pipeline.coleta_commits",
+    "pipeline.coleta_runs",
+)
 
 
 def _exigir_mapeamento(valor, caminho):
@@ -61,6 +66,12 @@ def validar_config(cfg):
             raise ValueError(f"saida.{chave} deve ser um texto não vazio")
 
     _exigir_lista_de_textos(cfg["etapas_coleta"], "etapas_coleta")
+    etapas = cfg["etapas_coleta"]
+    ausentes = [etapa for etapa in ETAPAS_OBRIGATORIAS_S01 if etapa not in etapas]
+    if ausentes:
+        raise ValueError("etapas obrigatórias da Lab03S01 ausentes: " + ", ".join(ausentes))
+    if etapas.index("pipeline.coleta_releases") > etapas.index("pipeline.coleta_commits"):
+        raise ValueError("pipeline.coleta_releases deve preceder pipeline.coleta_commits")
     return cfg
 
 

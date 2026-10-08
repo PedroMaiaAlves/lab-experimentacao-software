@@ -51,4 +51,5 @@ saida:
 # Contrato: cada módulo expõe coletar(client, cfg, repos).
 etapas_coleta:
   - pipeline.coleta_releases
+  - pipeline.coleta_commits
   - pipeline.coleta_runs

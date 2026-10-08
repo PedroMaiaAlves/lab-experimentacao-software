@@ -1,5 +1,7 @@
 # Lab03 — Mineração de métricas DORA
 
+[![Testes LAB03](https://github.com/PedroMaiaAlves/lab-experimentacao-software/actions/workflows/testes.yml/badge.svg)](https://github.com/PedroMaiaAlves/lab-experimentacao-software/actions/workflows/testes.yml)
+
 Pipeline reprodutível que seleciona repositórios open-source populares com GitHub Actions,
 coleta releases, commits e workflow runs na janela de observação e calcula as métricas DORA
 (deployment frequency, lead time for changes, change failure rate e tempo de recuperação).
@@ -14,7 +16,7 @@ Disciplina: Laboratório de Experimentação de Software — PUC Minas.
 ## Instalação
 
 ```bash
-git clone <URL-DO-REPOSITORIO>
+git clone https://github.com/PedroMaiaAlves/lab-experimentacao-software.git
 cd lab-experimentacao-software/Lab03
 python -m venv .venv
 # Linux/macOS
@@ -77,10 +79,18 @@ Para recomeçar do zero, apague a pasta `cache/`.
 | `funil.csv` | Quantos repositórios restaram em cada etapa e o motivo dos descartes |
 | `descartes.csv` | Cada repositório descartado, a etapa e o motivo |
 | `metadados.csv` | Estrelas, linguagem, idade em dias e nº de contribuidores da amostra |
+| `releases.csv` | Histórico de releases da amostra, incluindo drafts acessíveis e pré-releases |
+| `tags.csv` | Tags e data de autoria do commit apontado; status de consulta |
+| `comparacoes_releases.csv` | Comparação de cada release principal na janela com sua antecessora; status e contagem |
+| `commits_entre_releases.csv` | SHA e data de autoria de cada commit por comparação válida |
+| `lead_time.csv` | Medianas das variantes (a)/(b), em horas, e contagens de exclusões |
+| `deployment_frequency.csv` | Releases principais por semana na janela inclusiva |
 | `workflow_runs/*.json` | Runs de `push` do default branch, coletados mês a mês |
 | `runs_saturados.csv` | Intervalos subdivididos ou incompletos por atingirem 1.000 runs |
 
-O dicionário de dados completo estará em `docs/dicionario_dados.md`.
+O contrato e as decisões da coleta de releases/commits estão em [docs/coleta_b.md](docs/coleta_b.md).
+Tipos, unidades, fórmulas e origem de cada campo estão no
+[dicionário de dados](docs/dicionario_dados.md).
 
 > **Janela provisória:** confirme com o professor as datas de `janela_inicio` e
 > `janela_fim` antes de executar a coleta definitiva dos 100 repositórios.
@@ -91,9 +101,15 @@ O dicionário de dados completo estará em `docs/dicionario_dados.md`.
 python -m pytest --cov=metricas --cov-report=term-missing --cov-fail-under=80
 ```
 
-O workflow de CI do grupo ainda deve executar esse comando a cada push antes da entrega
-da Sprint 1. Enquanto `.github/workflows/testes.yml` não estiver integrado, a execução
-local não substitui o requisito de CI verde.
+Os testes também rodam a cada push e pull request pelo GitHub Actions, conforme
+`.github/workflows/testes.yml`.
+
+### Validação final da execução
+
+Depois das coletas de A, B e C, o comando único verifica automaticamente se todos os
+artefatos obrigatórios existem, se os CSVs-resumo cobrem exatamente a amostra, se cada
+repositório mantém pelo menos 5 releases principais e 50 runs válidos e se nenhum arquivo
+de runs está incompleto. A mensagem `concluído` só é exibida depois dessa validação.
 
 ## Artigo
 
@@ -116,8 +132,10 @@ scripts/               utilitários (criação das Issues)
 
 ## Observações de método
 
-- Apenas o *default branch*; deploy = release publicada (`draft = false`); CI = runs com
-  `event = push`.
+- CI = runs do *default branch* com `event = push`. Deploy = release publicada,
+  com `draft = false` e `prerelease = false`; as releases são artefatos do repositório.
+- O histórico completo permanece disponível para as variantes da RQ07.
+- As hipóteses RQ05–RQ07 estão em `docs/artigo/introducao.tex`, registradas antes da análise.
 - Repositórios arquivados e forks ficam fora da busca.
 - Os candidatos são embaralhados com a semente e avaliados em ordem até atingir a meta; por isso o
   funil registra quantos candidatos foram de fato avaliados.

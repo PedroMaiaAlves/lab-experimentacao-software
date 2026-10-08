@@ -10,6 +10,7 @@ from pipeline.candidatos import salvar_candidatos, selecionar_candidatos
 from pipeline.config import carregar_config
 from pipeline.funil import executar_funil
 from pipeline.http_client import GitHubClient
+from pipeline.validacao_s01 import validar_artefatos_s01
 
 log = logging.getLogger("pipeline")
 
@@ -41,8 +42,9 @@ def executar_pipeline(client, cfg):
     repos = executar_funil(client, candidatos, cfg, dados)
     validar_tamanho_amostra(repos, cfg["selecao"]["meta_repositorios"])
 
-    log.info("3/3 coletas de releases e workflow runs")
+    log.info("3/3 coletas de releases, tags, commits e workflow runs")
     executar_etapas_de_coleta(client, cfg, repos)
+    validar_artefatos_s01(cfg, repos)
     return repos
 
 
