@@ -1,0 +1,856 @@
+{
+  "full_name": "byJoey/ech-wk",
+  "default_branch": "main",
+  "janela_inicio": "2025-10-01",
+  "janela_fim": "2026-09-30",
+  "complete": true,
+  "saturated_intervals": [],
+  "workflow_runs": [
+    {
+      "id": 20004731868,
+      "workflow_id": 213731615,
+      "name": ".github/workflows/build-release.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-07T13:11:05Z",
+      "updated_at": "2025-12-07T13:11:05Z",
+      "created_at": "2025-12-07T13:11:05Z"
+    },
+    {
+      "id": 20004745411,
+      "workflow_id": 213731615,
+      "name": ".github/workflows/build-release.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-07T13:12:07Z",
+      "updated_at": "2025-12-07T13:12:07Z",
+      "created_at": "2025-12-07T13:12:07Z"
+    },
+    {
+      "id": 20004745841,
+      "workflow_id": 213731761,
+      "name": "Build",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-07T13:12:08Z",
+      "updated_at": "2025-12-07T13:13:15Z",
+      "created_at": "2025-12-07T13:12:08Z"
+    },
+    {
+      "id": 20004769272,
+      "workflow_id": 213731615,
+      "name": ".github/workflows/build-release.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-07T13:13:56Z",
+      "updated_at": "2025-12-07T13:13:56Z",
+      "created_at": "2025-12-07T13:13:56Z"
+    },
+    {
+      "id": 20004769359,
+      "workflow_id": 213731761,
+      "name": "Build",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-07T13:13:57Z",
+      "updated_at": "2025-12-07T13:15:08Z",
+      "created_at": "2025-12-07T13:13:57Z"
+    },
+    {
+      "id": 20004828597,
+      "workflow_id": 213731615,
+      "name": ".github/workflows/build-release.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-07T13:18:40Z",
+      "updated_at": "2025-12-07T13:18:40Z",
+      "created_at": "2025-12-07T13:18:40Z"
+    },
+    {
+      "id": 20004828734,
+      "workflow_id": 213731761,
+      "name": "Build",
+      "conclusion": "success",
+      "run_started_at": "2025-12-07T13:18:41Z",
+      "updated_at": "2025-12-07T13:19:39Z",
+      "created_at": "2025-12-07T13:18:41Z"
+    },
+    {
+      "id": 20004838607,
+      "workflow_id": 213731615,
+      "name": ".github/workflows/build-release.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-07T13:19:21Z",
+      "updated_at": "2025-12-07T13:19:21Z",
+      "created_at": "2025-12-07T13:19:21Z"
+    },
+    {
+      "id": 20004838718,
+      "workflow_id": 213731761,
+      "name": "Build",
+      "conclusion": "success",
+      "run_started_at": "2025-12-07T13:19:22Z",
+      "updated_at": "2025-12-07T13:22:28Z",
+      "created_at": "2025-12-07T13:19:22Z"
+    },
+    {
+      "id": 20004888976,
+      "workflow_id": 213731615,
+      "name": ".github/workflows/build-release.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-07T13:23:32Z",
+      "updated_at": "2025-12-07T13:23:32Z",
+      "created_at": "2025-12-07T13:23:32Z"
+    },
+    {
+      "id": 20004917853,
+      "workflow_id": 213731761,
+      "name": "Build",
+      "conclusion": "success",
+      "run_started_at": "2025-12-07T13:25:54Z",
+      "updated_at": "2025-12-07T13:26:35Z",
+      "created_at": "2025-12-07T13:25:54Z"
+    },
+    {
+      "id": 20004921388,
+      "workflow_id": 213731761,
+      "name": ".github/workflows/build.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-07T13:26:08Z",
+      "updated_at": "2025-12-07T13:26:08Z",
+      "created_at": "2025-12-07T13:26:08Z"
+    },
+    {
+      "id": 20004932301,
+      "workflow_id": 213731761,
+      "name": ".github/workflows/build.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-07T13:27:05Z",
+      "updated_at": "2025-12-07T13:27:05Z",
+      "created_at": "2025-12-07T13:27:05Z"
+    },
+    {
+      "id": 20004947058,
+      "workflow_id": 213731761,
+      "name": ".github/workflows/build.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-07T13:28:18Z",
+      "updated_at": "2025-12-07T13:28:18Z",
+      "created_at": "2025-12-07T13:28:18Z"
+    },
+    {
+      "id": 20004974143,
+      "workflow_id": 213731761,
+      "name": ".github/workflows/build.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-07T13:30:29Z",
+      "updated_at": "2025-12-07T13:30:29Z",
+      "created_at": "2025-12-07T13:30:29Z"
+    },
+    {
+      "id": 20004999611,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-07T13:32:39Z",
+      "updated_at": "2025-12-07T13:33:55Z",
+      "created_at": "2025-12-07T13:32:39Z"
+    },
+    {
+      "id": 20005037166,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-07T13:35:53Z",
+      "updated_at": "2025-12-07T13:36:50Z",
+      "created_at": "2025-12-07T13:35:53Z"
+    },
+    {
+      "id": 20005143666,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-07T13:44:52Z",
+      "updated_at": "2025-12-07T13:45:59Z",
+      "created_at": "2025-12-07T13:44:52Z"
+    },
+    {
+      "id": 20005187440,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "cancelled",
+      "run_started_at": "2025-12-07T13:48:39Z",
+      "updated_at": "2025-12-07T13:49:02Z",
+      "created_at": "2025-12-07T13:48:39Z"
+    },
+    {
+      "id": 20005256455,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-07T13:55:19Z",
+      "updated_at": "2025-12-07T13:56:02Z",
+      "created_at": "2025-12-07T13:55:19Z"
+    },
+    {
+      "id": 20005321352,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "cancelled",
+      "run_started_at": "2025-12-07T14:01:47Z",
+      "updated_at": "2025-12-07T14:03:01Z",
+      "created_at": "2025-12-07T14:01:47Z"
+    },
+    {
+      "id": 20005421958,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "cancelled",
+      "run_started_at": "2025-12-07T14:09:23Z",
+      "updated_at": "2025-12-07T14:14:27Z",
+      "created_at": "2025-12-07T14:09:23Z"
+    },
+    {
+      "id": 20005701332,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "cancelled",
+      "run_started_at": "2025-12-07T14:32:00Z",
+      "updated_at": "2025-12-07T14:32:09Z",
+      "created_at": "2025-12-07T14:32:00Z"
+    },
+    {
+      "id": 20015869415,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "cancelled",
+      "run_started_at": "2025-12-08T03:36:46Z",
+      "updated_at": "2025-12-08T03:36:55Z",
+      "created_at": "2025-12-08T03:36:46Z"
+    },
+    {
+      "id": 20019723297,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "cancelled",
+      "run_started_at": "2025-12-08T07:08:53Z",
+      "updated_at": "2025-12-08T07:09:02Z",
+      "created_at": "2025-12-08T07:08:53Z"
+    },
+    {
+      "id": 20019878963,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-08T07:15:24Z",
+      "updated_at": "2025-12-08T07:16:55Z",
+      "created_at": "2025-12-08T07:15:24Z"
+    },
+    {
+      "id": 20027035015,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "cancelled",
+      "run_started_at": "2025-12-08T11:46:41Z",
+      "updated_at": "2025-12-08T11:47:34Z",
+      "created_at": "2025-12-08T11:46:41Z"
+    },
+    {
+      "id": 20028134756,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "cancelled",
+      "run_started_at": "2025-12-08T12:28:51Z",
+      "updated_at": "2025-12-08T12:29:08Z",
+      "created_at": "2025-12-08T12:28:51Z"
+    },
+    {
+      "id": 20028534810,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-08T12:44:05Z",
+      "updated_at": "2025-12-08T12:45:01Z",
+      "created_at": "2025-12-08T12:44:05Z"
+    },
+    {
+      "id": 20028546904,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-08T12:44:32Z",
+      "updated_at": "2025-12-08T12:45:16Z",
+      "created_at": "2025-12-08T12:44:32Z"
+    },
+    {
+      "id": 20032161037,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "cancelled",
+      "run_started_at": "2025-12-08T14:49:16Z",
+      "updated_at": "2025-12-08T14:50:08Z",
+      "created_at": "2025-12-08T14:49:16Z"
+    },
+    {
+      "id": 20032227104,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "cancelled",
+      "run_started_at": "2025-12-08T14:51:31Z",
+      "updated_at": "2025-12-08T14:52:42Z",
+      "created_at": "2025-12-08T14:51:31Z"
+    },
+    {
+      "id": 20032341898,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-08T14:57:37Z",
+      "updated_at": "2025-12-08T14:59:15Z",
+      "created_at": "2025-12-08T14:55:24Z"
+    },
+    {
+      "id": 20056253332,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-09T08:04:06Z",
+      "updated_at": "2025-12-09T08:05:12Z",
+      "created_at": "2025-12-09T08:04:06Z"
+    },
+    {
+      "id": 20056272508,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "cancelled",
+      "run_started_at": "2025-12-09T08:04:56Z",
+      "updated_at": "2025-12-10T08:04:57Z",
+      "created_at": "2025-12-09T08:04:56Z"
+    },
+    {
+      "id": 20056296190,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "cancelled",
+      "run_started_at": "2025-12-09T08:05:49Z",
+      "updated_at": "2025-12-10T08:05:51Z",
+      "created_at": "2025-12-09T08:05:49Z"
+    },
+    {
+      "id": 20056350294,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-09T08:08:03Z",
+      "updated_at": "2025-12-09T08:08:59Z",
+      "created_at": "2025-12-09T08:08:03Z"
+    },
+    {
+      "id": 20056597182,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-09T08:17:55Z",
+      "updated_at": "2025-12-09T08:18:44Z",
+      "created_at": "2025-12-09T08:17:55Z"
+    },
+    {
+      "id": 20056967407,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-09T08:32:13Z",
+      "updated_at": "2025-12-09T08:33:19Z",
+      "created_at": "2025-12-09T08:32:13Z"
+    },
+    {
+      "id": 20058664865,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-09T09:33:11Z",
+      "updated_at": "2025-12-09T09:33:56Z",
+      "created_at": "2025-12-09T09:33:11Z"
+    },
+    {
+      "id": 20065265282,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-09T13:31:55Z",
+      "updated_at": "2025-12-09T13:32:50Z",
+      "created_at": "2025-12-09T13:31:55Z"
+    },
+    {
+      "id": 20065775190,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-09T13:49:37Z",
+      "updated_at": "2025-12-09T13:50:28Z",
+      "created_at": "2025-12-09T13:49:37Z"
+    },
+    {
+      "id": 20066008110,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-09T13:57:26Z",
+      "updated_at": "2025-12-09T13:58:41Z",
+      "created_at": "2025-12-09T13:57:26Z"
+    },
+    {
+      "id": 20066163989,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-09T14:02:30Z",
+      "updated_at": "2025-12-09T14:03:36Z",
+      "created_at": "2025-12-09T14:02:30Z"
+    },
+    {
+      "id": 20066832631,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-09T14:23:58Z",
+      "updated_at": "2025-12-09T14:24:50Z",
+      "created_at": "2025-12-09T14:23:58Z"
+    },
+    {
+      "id": 20068125029,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-09T15:04:40Z",
+      "updated_at": "2025-12-09T15:05:45Z",
+      "created_at": "2025-12-09T15:04:40Z"
+    },
+    {
+      "id": 20069900175,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-09T16:00:05Z",
+      "updated_at": "2025-12-09T16:01:30Z",
+      "created_at": "2025-12-09T16:00:05Z"
+    },
+    {
+      "id": 20070019436,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-09T16:03:40Z",
+      "updated_at": "2025-12-09T16:04:26Z",
+      "created_at": "2025-12-09T16:03:40Z"
+    },
+    {
+      "id": 20070228583,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-09T16:10:10Z",
+      "updated_at": "2025-12-09T16:11:08Z",
+      "created_at": "2025-12-09T16:10:10Z"
+    },
+    {
+      "id": 20070340507,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-09T16:13:45Z",
+      "updated_at": "2025-12-09T16:14:36Z",
+      "created_at": "2025-12-09T16:13:45Z"
+    },
+    {
+      "id": 20087704854,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T04:50:48Z",
+      "updated_at": "2025-12-10T04:51:36Z",
+      "created_at": "2025-12-10T04:50:48Z"
+    },
+    {
+      "id": 20088030838,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T05:08:59Z",
+      "updated_at": "2025-12-10T05:09:58Z",
+      "created_at": "2025-12-10T05:08:59Z"
+    },
+    {
+      "id": 20088144985,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T05:15:05Z",
+      "updated_at": "2025-12-10T05:16:09Z",
+      "created_at": "2025-12-10T05:15:05Z"
+    },
+    {
+      "id": 20088243313,
+      "workflow_id": 213731761,
+      "name": ".github/workflows/build.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-10T05:20:35Z",
+      "updated_at": "2025-12-10T05:20:35Z",
+      "created_at": "2025-12-10T05:20:35Z"
+    },
+    {
+      "id": 20088285767,
+      "workflow_id": 213731761,
+      "name": ".github/workflows/build.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-10T05:22:58Z",
+      "updated_at": "2025-12-10T05:22:58Z",
+      "created_at": "2025-12-10T05:22:58Z"
+    },
+    {
+      "id": 20088362048,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "cancelled",
+      "run_started_at": "2025-12-10T05:27:09Z",
+      "updated_at": "2025-12-11T05:27:11Z",
+      "created_at": "2025-12-10T05:27:09Z"
+    },
+    {
+      "id": 20088592025,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "cancelled",
+      "run_started_at": "2025-12-10T05:39:33Z",
+      "updated_at": "2025-12-11T05:39:35Z",
+      "created_at": "2025-12-10T05:39:33Z"
+    },
+    {
+      "id": 20088691047,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T05:44:45Z",
+      "updated_at": "2025-12-10T05:45:32Z",
+      "created_at": "2025-12-10T05:44:45Z"
+    },
+    {
+      "id": 20089092138,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T06:06:40Z",
+      "updated_at": "2025-12-10T06:07:24Z",
+      "created_at": "2025-12-10T06:06:40Z"
+    },
+    {
+      "id": 20089464570,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T06:24:42Z",
+      "updated_at": "2025-12-10T06:25:36Z",
+      "created_at": "2025-12-10T06:24:42Z"
+    },
+    {
+      "id": 20089646147,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T06:33:31Z",
+      "updated_at": "2025-12-10T06:34:21Z",
+      "created_at": "2025-12-10T06:33:31Z"
+    },
+    {
+      "id": 20089882416,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T06:45:29Z",
+      "updated_at": "2025-12-10T06:46:38Z",
+      "created_at": "2025-12-10T06:45:29Z"
+    },
+    {
+      "id": 20089964782,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T06:49:58Z",
+      "updated_at": "2025-12-10T06:50:42Z",
+      "created_at": "2025-12-10T06:49:58Z"
+    },
+    {
+      "id": 20090451085,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T07:13:07Z",
+      "updated_at": "2025-12-10T07:14:06Z",
+      "created_at": "2025-12-10T07:13:07Z"
+    },
+    {
+      "id": 20090478406,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T07:14:12Z",
+      "updated_at": "2025-12-10T07:15:46Z",
+      "created_at": "2025-12-10T07:14:12Z"
+    },
+    {
+      "id": 20090583156,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T07:18:56Z",
+      "updated_at": "2025-12-10T07:19:44Z",
+      "created_at": "2025-12-10T07:18:56Z"
+    },
+    {
+      "id": 20091404033,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T07:56:53Z",
+      "updated_at": "2025-12-10T07:58:13Z",
+      "created_at": "2025-12-10T07:56:53Z"
+    },
+    {
+      "id": 20091421607,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T07:57:47Z",
+      "updated_at": "2025-12-10T07:58:39Z",
+      "created_at": "2025-12-10T07:57:47Z"
+    },
+    {
+      "id": 20091602588,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T08:05:25Z",
+      "updated_at": "2025-12-10T08:07:06Z",
+      "created_at": "2025-12-10T08:05:25Z"
+    },
+    {
+      "id": 20092583583,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T08:44:59Z",
+      "updated_at": "2025-12-10T08:50:14Z",
+      "created_at": "2025-12-10T08:44:59Z"
+    },
+    {
+      "id": 20093020756,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T09:02:04Z",
+      "updated_at": "2025-12-10T09:02:51Z",
+      "created_at": "2025-12-10T09:02:04Z"
+    },
+    {
+      "id": 20093278289,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T09:11:18Z",
+      "updated_at": "2025-12-10T09:12:12Z",
+      "created_at": "2025-12-10T09:11:18Z"
+    },
+    {
+      "id": 20094038333,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T09:38:35Z",
+      "updated_at": "2025-12-10T09:39:38Z",
+      "created_at": "2025-12-10T09:38:35Z"
+    },
+    {
+      "id": 20094121117,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T09:41:33Z",
+      "updated_at": "2025-12-10T09:47:00Z",
+      "created_at": "2025-12-10T09:41:33Z"
+    },
+    {
+      "id": 20094186855,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T09:43:59Z",
+      "updated_at": "2025-12-10T09:44:52Z",
+      "created_at": "2025-12-10T09:43:59Z"
+    },
+    {
+      "id": 20094221642,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T09:45:15Z",
+      "updated_at": "2025-12-10T09:46:04Z",
+      "created_at": "2025-12-10T09:45:15Z"
+    },
+    {
+      "id": 20094404923,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T09:52:03Z",
+      "updated_at": "2025-12-10T09:52:56Z",
+      "created_at": "2025-12-10T09:52:03Z"
+    },
+    {
+      "id": 20094585479,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T09:58:42Z",
+      "updated_at": "2025-12-10T09:59:37Z",
+      "created_at": "2025-12-10T09:58:42Z"
+    },
+    {
+      "id": 20094607087,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T09:59:33Z",
+      "updated_at": "2025-12-10T10:00:26Z",
+      "created_at": "2025-12-10T09:59:33Z"
+    },
+    {
+      "id": 20094614339,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T09:59:51Z",
+      "updated_at": "2025-12-10T10:00:45Z",
+      "created_at": "2025-12-10T09:59:51Z"
+    },
+    {
+      "id": 20095337402,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T10:25:23Z",
+      "updated_at": "2025-12-10T10:26:10Z",
+      "created_at": "2025-12-10T10:25:23Z"
+    },
+    {
+      "id": 20095381852,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T10:26:56Z",
+      "updated_at": "2025-12-10T10:27:53Z",
+      "created_at": "2025-12-10T10:26:56Z"
+    },
+    {
+      "id": 20097334283,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T11:39:26Z",
+      "updated_at": "2025-12-10T11:40:14Z",
+      "created_at": "2025-12-10T11:39:26Z"
+    },
+    {
+      "id": 20097444451,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "cancelled",
+      "run_started_at": "2025-12-10T11:43:51Z",
+      "updated_at": "2025-12-10T11:45:01Z",
+      "created_at": "2025-12-10T11:43:51Z"
+    },
+    {
+      "id": 20100997809,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T13:54:22Z",
+      "updated_at": "2025-12-10T13:55:37Z",
+      "created_at": "2025-12-10T13:54:22Z"
+    },
+    {
+      "id": 20101212471,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T14:01:45Z",
+      "updated_at": "2025-12-10T14:02:36Z",
+      "created_at": "2025-12-10T14:01:45Z"
+    },
+    {
+      "id": 20101301690,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T14:04:42Z",
+      "updated_at": "2025-12-10T14:06:12Z",
+      "created_at": "2025-12-10T14:04:42Z"
+    },
+    {
+      "id": 20103174599,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-10T15:05:07Z",
+      "updated_at": "2025-12-10T15:06:54Z",
+      "created_at": "2025-12-10T15:05:07Z"
+    },
+    {
+      "id": 20134837215,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-11T13:32:01Z",
+      "updated_at": "2025-12-11T13:32:56Z",
+      "created_at": "2025-12-11T13:32:01Z"
+    },
+    {
+      "id": 20157086114,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-12T05:14:22Z",
+      "updated_at": "2025-12-12T05:15:10Z",
+      "created_at": "2025-12-12T05:14:22Z"
+    },
+    {
+      "id": 20158180955,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-12T06:16:01Z",
+      "updated_at": "2025-12-12T06:16:50Z",
+      "created_at": "2025-12-12T06:16:01Z"
+    },
+    {
+      "id": 20158329608,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-12T06:23:45Z",
+      "updated_at": "2025-12-12T06:24:39Z",
+      "created_at": "2025-12-12T06:23:45Z"
+    },
+    {
+      "id": 20164175392,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-12T10:40:12Z",
+      "updated_at": "2025-12-12T10:40:59Z",
+      "created_at": "2025-12-12T10:40:12Z"
+    },
+    {
+      "id": 20365045443,
+      "workflow_id": 213731761,
+      "name": "Build and Release",
+      "conclusion": "success",
+      "run_started_at": "2025-12-19T09:00:17Z",
+      "updated_at": "2025-12-19T09:01:38Z",
+      "created_at": "2025-12-19T09:00:17Z"
+    }
+  ]
+}

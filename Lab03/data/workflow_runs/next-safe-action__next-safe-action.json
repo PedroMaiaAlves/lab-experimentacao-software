@@ -1,0 +1,1054 @@
+{
+  "full_name": "next-safe-action/next-safe-action",
+  "default_branch": "main",
+  "janela_inicio": "2025-10-01",
+  "janela_fim": "2026-09-30",
+  "complete": true,
+  "saturated_intervals": [],
+  "workflow_runs": [
+    {
+      "id": 22257953616,
+      "workflow_id": 54466996,
+      "name": "CI/CD",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-21T13:50:14Z",
+      "updated_at": "2026-02-21T13:51:44Z",
+      "created_at": "2026-02-21T13:50:14Z"
+    },
+    {
+      "id": 22258630604,
+      "workflow_id": 54466996,
+      "name": "CI/CD",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-21T14:38:09Z",
+      "updated_at": "2026-02-21T14:39:32Z",
+      "created_at": "2026-02-21T14:38:09Z"
+    },
+    {
+      "id": 22260420500,
+      "workflow_id": 54466996,
+      "name": "CI/CD",
+      "conclusion": "success",
+      "run_started_at": "2026-02-21T16:42:59Z",
+      "updated_at": "2026-02-21T16:44:29Z",
+      "created_at": "2026-02-21T16:42:59Z"
+    },
+    {
+      "id": 22260714003,
+      "workflow_id": 54466996,
+      "name": "CI/CD",
+      "conclusion": "success",
+      "run_started_at": "2026-02-21T17:03:08Z",
+      "updated_at": "2026-02-21T17:04:37Z",
+      "created_at": "2026-02-21T17:03:08Z"
+    },
+    {
+      "id": 22360195813,
+      "workflow_id": 54466996,
+      "name": "CI/CD",
+      "conclusion": "success",
+      "run_started_at": "2026-02-24T16:32:20Z",
+      "updated_at": "2026-02-24T16:33:56Z",
+      "created_at": "2026-02-24T16:32:20Z"
+    },
+    {
+      "id": 22365278150,
+      "workflow_id": 54466996,
+      "name": "CI/CD",
+      "conclusion": "success",
+      "run_started_at": "2026-02-24T18:49:21Z",
+      "updated_at": "2026-02-24T18:51:00Z",
+      "created_at": "2026-02-24T18:49:21Z"
+    },
+    {
+      "id": 22393665761,
+      "workflow_id": 54466996,
+      "name": "CI/CD",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-25T10:53:28Z",
+      "updated_at": "2026-02-25T10:53:53Z",
+      "created_at": "2026-02-25T10:53:28Z"
+    },
+    {
+      "id": 22393936541,
+      "workflow_id": 54466996,
+      "name": "CI/CD",
+      "conclusion": "success",
+      "run_started_at": "2026-02-25T11:01:19Z",
+      "updated_at": "2026-02-25T11:02:52Z",
+      "created_at": "2026-02-25T11:01:19Z"
+    },
+    {
+      "id": 22403651454,
+      "workflow_id": 54466996,
+      "name": "CI/CD",
+      "conclusion": "success",
+      "run_started_at": "2026-02-25T15:30:13Z",
+      "updated_at": "2026-02-25T15:31:39Z",
+      "created_at": "2026-02-25T15:30:13Z"
+    },
+    {
+      "id": 22448729578,
+      "workflow_id": 54466996,
+      "name": "CI/CD",
+      "conclusion": "success",
+      "run_started_at": "2026-02-26T15:27:26Z",
+      "updated_at": "2026-02-26T15:29:04Z",
+      "created_at": "2026-02-26T15:27:26Z"
+    },
+    {
+      "id": 22448857165,
+      "workflow_id": 54466996,
+      "name": "CI/CD",
+      "conclusion": "success",
+      "run_started_at": "2026-02-26T15:30:25Z",
+      "updated_at": "2026-02-26T15:32:00Z",
+      "created_at": "2026-02-26T15:30:25Z"
+    },
+    {
+      "id": 22690267072,
+      "workflow_id": 54466996,
+      "name": "CI/CD",
+      "conclusion": "success",
+      "run_started_at": "2026-03-04T21:30:56Z",
+      "updated_at": "2026-03-04T21:32:40Z",
+      "created_at": "2026-03-04T21:30:56Z"
+    },
+    {
+      "id": 22728606598,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-05T17:35:09Z",
+      "updated_at": "2026-03-05T17:35:52Z",
+      "created_at": "2026-03-05T17:35:09Z"
+    },
+    {
+      "id": 22728804428,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-05T17:39:54Z",
+      "updated_at": "2026-03-05T17:40:41Z",
+      "created_at": "2026-03-05T17:39:54Z"
+    },
+    {
+      "id": 22729020771,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-05T17:45:21Z",
+      "updated_at": "2026-03-05T17:46:12Z",
+      "created_at": "2026-03-05T17:45:21Z"
+    },
+    {
+      "id": 22730638646,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-05T18:24:56Z",
+      "updated_at": "2026-03-05T18:25:33Z",
+      "created_at": "2026-03-05T18:24:56Z"
+    },
+    {
+      "id": 22730728552,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-05T18:27:11Z",
+      "updated_at": "2026-03-05T18:28:05Z",
+      "created_at": "2026-03-05T18:27:11Z"
+    },
+    {
+      "id": 22731531221,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-05T18:46:32Z",
+      "updated_at": "2026-03-05T18:47:37Z",
+      "created_at": "2026-03-05T18:46:32Z"
+    },
+    {
+      "id": 22760752243,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-06T11:06:26Z",
+      "updated_at": "2026-03-06T11:07:02Z",
+      "created_at": "2026-03-06T11:06:26Z"
+    },
+    {
+      "id": 22760846255,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-06T11:09:09Z",
+      "updated_at": "2026-03-06T11:10:03Z",
+      "created_at": "2026-03-06T11:09:09Z"
+    },
+    {
+      "id": 22760928902,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-06T11:11:37Z",
+      "updated_at": "2026-03-06T11:12:19Z",
+      "created_at": "2026-03-06T11:11:37Z"
+    },
+    {
+      "id": 22760962208,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-06T11:12:35Z",
+      "updated_at": "2026-03-06T11:13:35Z",
+      "created_at": "2026-03-06T11:12:35Z"
+    },
+    {
+      "id": 22769567686,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-06T15:17:14Z",
+      "updated_at": "2026-03-06T15:17:50Z",
+      "created_at": "2026-03-06T15:17:14Z"
+    },
+    {
+      "id": 22770170080,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-06T15:33:08Z",
+      "updated_at": "2026-03-06T15:33:50Z",
+      "created_at": "2026-03-06T15:33:08Z"
+    },
+    {
+      "id": 22771663314,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-06T16:12:34Z",
+      "updated_at": "2026-03-06T16:13:12Z",
+      "created_at": "2026-03-06T16:12:34Z"
+    },
+    {
+      "id": 22773165528,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-06T16:52:51Z",
+      "updated_at": "2026-03-06T16:53:29Z",
+      "created_at": "2026-03-06T16:52:51Z"
+    },
+    {
+      "id": 22773408190,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-06T16:59:28Z",
+      "updated_at": "2026-03-06T17:00:08Z",
+      "created_at": "2026-03-06T16:59:28Z"
+    },
+    {
+      "id": 22773764982,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-06T17:09:05Z",
+      "updated_at": "2026-03-06T17:09:43Z",
+      "created_at": "2026-03-06T17:09:05Z"
+    },
+    {
+      "id": 22774772735,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-06T17:37:00Z",
+      "updated_at": "2026-03-06T17:37:42Z",
+      "created_at": "2026-03-06T17:37:00Z"
+    },
+    {
+      "id": 22775183521,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-06T17:48:36Z",
+      "updated_at": "2026-03-06T17:49:38Z",
+      "created_at": "2026-03-06T17:48:36Z"
+    },
+    {
+      "id": 22775295391,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-06T17:51:46Z",
+      "updated_at": "2026-03-06T17:52:23Z",
+      "created_at": "2026-03-06T17:51:46Z"
+    },
+    {
+      "id": 22832370065,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-08T23:29:39Z",
+      "updated_at": "2026-03-08T23:30:17Z",
+      "created_at": "2026-03-08T23:29:39Z"
+    },
+    {
+      "id": 22832438479,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-08T23:33:29Z",
+      "updated_at": "2026-03-08T23:34:10Z",
+      "created_at": "2026-03-08T23:33:29Z"
+    },
+    {
+      "id": 22858122261,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-09T14:24:41Z",
+      "updated_at": "2026-03-09T14:25:24Z",
+      "created_at": "2026-03-09T14:24:41Z"
+    },
+    {
+      "id": 22915421035,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-10T17:25:04Z",
+      "updated_at": "2026-03-10T17:25:42Z",
+      "created_at": "2026-03-10T17:25:04Z"
+    },
+    {
+      "id": 23237572347,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-18T09:19:15Z",
+      "updated_at": "2026-03-18T09:19:57Z",
+      "created_at": "2026-03-18T09:19:15Z"
+    },
+    {
+      "id": 23237767226,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-18T09:24:17Z",
+      "updated_at": "2026-03-18T09:25:07Z",
+      "created_at": "2026-03-18T09:24:17Z"
+    },
+    {
+      "id": 23649653914,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-27T13:55:37Z",
+      "updated_at": "2026-03-27T13:56:29Z",
+      "created_at": "2026-03-27T13:55:37Z"
+    },
+    {
+      "id": 23649749609,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-27T13:57:43Z",
+      "updated_at": "2026-03-27T13:58:42Z",
+      "created_at": "2026-03-27T13:57:43Z"
+    },
+    {
+      "id": 23715467899,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-29T18:01:32Z",
+      "updated_at": "2026-03-29T18:02:25Z",
+      "created_at": "2026-03-29T18:01:32Z"
+    },
+    {
+      "id": 23715535053,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-29T18:04:42Z",
+      "updated_at": "2026-03-29T18:05:43Z",
+      "created_at": "2026-03-29T18:04:42Z"
+    },
+    {
+      "id": 23743680036,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-30T12:01:50Z",
+      "updated_at": "2026-03-30T12:02:34Z",
+      "created_at": "2026-03-30T12:01:50Z"
+    },
+    {
+      "id": 23743805108,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-30T12:05:07Z",
+      "updated_at": "2026-03-30T12:06:07Z",
+      "created_at": "2026-03-30T12:05:07Z"
+    },
+    {
+      "id": 23744102649,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-30T12:12:59Z",
+      "updated_at": "2026-03-30T12:13:41Z",
+      "created_at": "2026-03-30T12:12:59Z"
+    },
+    {
+      "id": 23745361798,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-30T12:45:09Z",
+      "updated_at": "2026-03-30T12:46:02Z",
+      "created_at": "2026-03-30T12:45:09Z"
+    },
+    {
+      "id": 23759962978,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-30T18:05:02Z",
+      "updated_at": "2026-03-30T18:05:53Z",
+      "created_at": "2026-03-30T18:05:02Z"
+    },
+    {
+      "id": 23760276725,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-30T18:12:21Z",
+      "updated_at": "2026-03-30T18:13:20Z",
+      "created_at": "2026-03-30T18:12:21Z"
+    },
+    {
+      "id": 23822481660,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-03-31T22:30:40Z",
+      "updated_at": "2026-03-31T22:31:29Z",
+      "created_at": "2026-03-31T22:30:40Z"
+    },
+    {
+      "id": 23875232696,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-01T23:07:42Z",
+      "updated_at": "2026-04-01T23:08:34Z",
+      "created_at": "2026-04-01T23:07:42Z"
+    },
+    {
+      "id": 23875318666,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-01T23:10:29Z",
+      "updated_at": "2026-04-01T23:11:15Z",
+      "created_at": "2026-04-01T23:10:29Z"
+    },
+    {
+      "id": 23875831237,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-01T23:27:26Z",
+      "updated_at": "2026-04-01T23:28:16Z",
+      "created_at": "2026-04-01T23:27:26Z"
+    },
+    {
+      "id": 23950959893,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-03T15:08:39Z",
+      "updated_at": "2026-04-03T15:09:26Z",
+      "created_at": "2026-04-03T15:08:39Z"
+    },
+    {
+      "id": 23954833386,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-03T17:10:03Z",
+      "updated_at": "2026-04-03T17:10:52Z",
+      "created_at": "2026-04-03T17:10:03Z"
+    },
+    {
+      "id": 23983877544,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-04T17:26:22Z",
+      "updated_at": "2026-04-04T17:27:06Z",
+      "created_at": "2026-04-04T17:26:22Z"
+    },
+    {
+      "id": 23983906004,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-04T17:28:01Z",
+      "updated_at": "2026-04-04T17:29:01Z",
+      "created_at": "2026-04-04T17:28:01Z"
+    },
+    {
+      "id": 23983962421,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-04T17:31:07Z",
+      "updated_at": "2026-04-04T17:31:56Z",
+      "created_at": "2026-04-04T17:31:07Z"
+    },
+    {
+      "id": 24006880170,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-05T17:39:48Z",
+      "updated_at": "2026-04-05T17:40:40Z",
+      "created_at": "2026-04-05T17:39:48Z"
+    },
+    {
+      "id": 24006902842,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-05T17:41:01Z",
+      "updated_at": "2026-04-05T17:41:55Z",
+      "created_at": "2026-04-05T17:41:01Z"
+    },
+    {
+      "id": 24008631711,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-05T19:20:29Z",
+      "updated_at": "2026-04-05T19:21:24Z",
+      "created_at": "2026-04-05T19:20:29Z"
+    },
+    {
+      "id": 24008786140,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-05T19:29:18Z",
+      "updated_at": "2026-04-05T19:30:13Z",
+      "created_at": "2026-04-05T19:29:18Z"
+    },
+    {
+      "id": 24008884274,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-05T19:34:41Z",
+      "updated_at": "2026-04-05T19:35:37Z",
+      "created_at": "2026-04-05T19:34:41Z"
+    },
+    {
+      "id": 24009693256,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-05T20:20:55Z",
+      "updated_at": "2026-04-05T20:21:50Z",
+      "created_at": "2026-04-05T20:20:55Z"
+    },
+    {
+      "id": 24009735853,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-05T20:23:24Z",
+      "updated_at": "2026-04-05T20:24:21Z",
+      "created_at": "2026-04-05T20:23:24Z"
+    },
+    {
+      "id": 24010114707,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-05T20:45:42Z",
+      "updated_at": "2026-04-05T20:46:34Z",
+      "created_at": "2026-04-05T20:45:42Z"
+    },
+    {
+      "id": 24010146513,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-05T20:47:32Z",
+      "updated_at": "2026-04-05T20:48:26Z",
+      "created_at": "2026-04-05T20:47:32Z"
+    },
+    {
+      "id": 24024941993,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-06T08:31:56Z",
+      "updated_at": "2026-04-06T08:32:46Z",
+      "created_at": "2026-04-06T08:31:56Z"
+    },
+    {
+      "id": 24071620293,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-07T08:19:22Z",
+      "updated_at": "2026-04-07T08:20:23Z",
+      "created_at": "2026-04-07T08:19:22Z"
+    },
+    {
+      "id": 24071695512,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-07T08:21:19Z",
+      "updated_at": "2026-04-07T08:22:23Z",
+      "created_at": "2026-04-07T08:21:19Z"
+    },
+    {
+      "id": 24072634740,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-07T08:45:15Z",
+      "updated_at": "2026-04-07T08:46:09Z",
+      "created_at": "2026-04-07T08:45:15Z"
+    },
+    {
+      "id": 24072806908,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-07T08:49:33Z",
+      "updated_at": "2026-04-07T08:50:26Z",
+      "created_at": "2026-04-07T08:49:33Z"
+    },
+    {
+      "id": 24125464450,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-08T08:21:47Z",
+      "updated_at": "2026-04-08T08:22:51Z",
+      "created_at": "2026-04-08T08:21:47Z"
+    },
+    {
+      "id": 24125699993,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-08T08:27:36Z",
+      "updated_at": "2026-04-08T08:28:38Z",
+      "created_at": "2026-04-08T08:27:36Z"
+    },
+    {
+      "id": 24128022008,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-08T09:23:02Z",
+      "updated_at": "2026-04-08T09:24:05Z",
+      "created_at": "2026-04-08T09:23:02Z"
+    },
+    {
+      "id": 24128123958,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-08T09:25:28Z",
+      "updated_at": "2026-04-08T09:26:36Z",
+      "created_at": "2026-04-08T09:25:28Z"
+    },
+    {
+      "id": 24142109985,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-08T14:55:13Z",
+      "updated_at": "2026-04-08T14:56:14Z",
+      "created_at": "2026-04-08T14:55:13Z"
+    },
+    {
+      "id": 24348293537,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-13T14:15:57Z",
+      "updated_at": "2026-04-13T14:16:52Z",
+      "created_at": "2026-04-13T14:15:57Z"
+    },
+    {
+      "id": 24348498236,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-13T14:20:13Z",
+      "updated_at": "2026-04-13T14:21:15Z",
+      "created_at": "2026-04-13T14:20:13Z"
+    },
+    {
+      "id": 24349862708,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-13T14:47:49Z",
+      "updated_at": "2026-04-13T14:48:51Z",
+      "created_at": "2026-04-13T14:47:49Z"
+    },
+    {
+      "id": 24349999872,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-13T14:50:34Z",
+      "updated_at": "2026-04-13T14:51:31Z",
+      "created_at": "2026-04-13T14:50:34Z"
+    },
+    {
+      "id": 24350674963,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-13T15:04:06Z",
+      "updated_at": "2026-04-13T15:04:59Z",
+      "created_at": "2026-04-13T15:04:06Z"
+    },
+    {
+      "id": 24350767275,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-13T15:05:56Z",
+      "updated_at": "2026-04-13T15:07:07Z",
+      "created_at": "2026-04-13T15:05:56Z"
+    },
+    {
+      "id": 24421529274,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-14T20:33:20Z",
+      "updated_at": "2026-04-14T20:34:10Z",
+      "created_at": "2026-04-14T20:33:20Z"
+    },
+    {
+      "id": 24446186852,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-15T09:10:08Z",
+      "updated_at": "2026-04-15T09:11:02Z",
+      "created_at": "2026-04-15T09:10:08Z"
+    },
+    {
+      "id": 24587907865,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-17T21:40:57Z",
+      "updated_at": "2026-04-17T21:41:56Z",
+      "created_at": "2026-04-17T21:40:57Z"
+    },
+    {
+      "id": 24600782242,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-18T08:27:34Z",
+      "updated_at": "2026-04-18T08:28:28Z",
+      "created_at": "2026-04-18T08:27:34Z"
+    },
+    {
+      "id": 24600903411,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-04-18T08:35:07Z",
+      "updated_at": "2026-04-18T08:35:59Z",
+      "created_at": "2026-04-18T08:35:07Z"
+    },
+    {
+      "id": 25523261597,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-05-07T21:32:23Z",
+      "updated_at": "2026-05-07T21:33:24Z",
+      "created_at": "2026-05-07T21:32:23Z"
+    },
+    {
+      "id": 25727541864,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-05-12T10:04:14Z",
+      "updated_at": "2026-05-12T10:05:28Z",
+      "created_at": "2026-05-12T10:04:14Z"
+    },
+    {
+      "id": 25728695833,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-05-12T10:28:56Z",
+      "updated_at": "2026-05-12T10:30:02Z",
+      "created_at": "2026-05-12T10:28:56Z"
+    },
+    {
+      "id": 25728953839,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-05-12T10:34:25Z",
+      "updated_at": "2026-05-12T10:35:35Z",
+      "created_at": "2026-05-12T10:34:25Z"
+    },
+    {
+      "id": 26374919517,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-05-24T22:47:57Z",
+      "updated_at": "2026-05-24T22:49:01Z",
+      "created_at": "2026-05-24T22:47:57Z"
+    },
+    {
+      "id": 26375061485,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-05-24T22:54:55Z",
+      "updated_at": "2026-05-24T22:56:07Z",
+      "created_at": "2026-05-24T22:54:55Z"
+    },
+    {
+      "id": 27338546996,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-06-11T09:50:35Z",
+      "updated_at": "2026-06-11T09:51:46Z",
+      "created_at": "2026-06-11T09:50:35Z"
+    },
+    {
+      "id": 27339438839,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-06-11T10:07:06Z",
+      "updated_at": "2026-06-11T10:08:16Z",
+      "created_at": "2026-06-11T10:07:06Z"
+    },
+    {
+      "id": 27433562387,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-06-12T17:59:31Z",
+      "updated_at": "2026-06-12T18:00:43Z",
+      "created_at": "2026-06-12T17:59:31Z"
+    },
+    {
+      "id": 27567206966,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-06-15T18:23:00Z",
+      "updated_at": "2026-06-15T18:24:12Z",
+      "created_at": "2026-06-15T18:23:00Z"
+    },
+    {
+      "id": 27609083702,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-06-16T09:49:12Z",
+      "updated_at": "2026-06-16T09:50:31Z",
+      "created_at": "2026-06-16T09:49:12Z"
+    },
+    {
+      "id": 27616500838,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-06-16T12:10:15Z",
+      "updated_at": "2026-06-16T12:11:33Z",
+      "created_at": "2026-06-16T12:10:15Z"
+    },
+    {
+      "id": 27618399819,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-06-16T12:43:58Z",
+      "updated_at": "2026-06-16T12:45:08Z",
+      "created_at": "2026-06-16T12:43:58Z"
+    },
+    {
+      "id": 29653841589,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-07-18T17:24:12Z",
+      "updated_at": "2026-07-18T17:25:28Z",
+      "created_at": "2026-07-18T17:24:12Z"
+    },
+    {
+      "id": 29654408167,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-07-18T17:41:34Z",
+      "updated_at": "2026-07-18T17:42:58Z",
+      "created_at": "2026-07-18T17:41:34Z"
+    },
+    {
+      "id": 31421987743,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-08-10T19:00:59Z",
+      "updated_at": "2026-08-10T19:02:18Z",
+      "created_at": "2026-08-10T19:00:59Z"
+    },
+    {
+      "id": 32380697309,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-08-20T14:32:00Z",
+      "updated_at": "2026-08-20T14:33:21Z",
+      "created_at": "2026-08-20T14:32:00Z"
+    },
+    {
+      "id": 32404516248,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-08-20T18:40:51Z",
+      "updated_at": "2026-08-20T18:42:15Z",
+      "created_at": "2026-08-20T18:40:51Z"
+    },
+    {
+      "id": 32404713574,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-08-20T18:43:03Z",
+      "updated_at": "2026-08-20T18:44:38Z",
+      "created_at": "2026-08-20T18:43:03Z"
+    },
+    {
+      "id": 33756687642,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-09-03T12:41:51Z",
+      "updated_at": "2026-09-03T12:43:22Z",
+      "created_at": "2026-09-03T12:41:51Z"
+    },
+    {
+      "id": 33757460394,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-09-03T12:49:43Z",
+      "updated_at": "2026-09-03T12:51:20Z",
+      "created_at": "2026-09-03T12:49:43Z"
+    },
+    {
+      "id": 33776222852,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-09-03T16:02:28Z",
+      "updated_at": "2026-09-03T16:03:48Z",
+      "created_at": "2026-09-03T16:02:28Z"
+    },
+    {
+      "id": 33776731457,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-09-03T16:07:28Z",
+      "updated_at": "2026-09-03T16:09:24Z",
+      "created_at": "2026-09-03T16:07:28Z"
+    },
+    {
+      "id": 33779255625,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-09-03T16:32:38Z",
+      "updated_at": "2026-09-03T16:33:59Z",
+      "created_at": "2026-09-03T16:32:38Z"
+    },
+    {
+      "id": 33779430084,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-09-03T16:34:24Z",
+      "updated_at": "2026-09-03T16:35:50Z",
+      "created_at": "2026-09-03T16:34:24Z"
+    },
+    {
+      "id": 33870552962,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-09-04T11:59:45Z",
+      "updated_at": "2026-09-04T12:00:52Z",
+      "created_at": "2026-09-04T11:59:45Z"
+    },
+    {
+      "id": 34159430214,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-09-07T20:26:42Z",
+      "updated_at": "2026-09-07T20:27:44Z",
+      "created_at": "2026-09-07T20:26:42Z"
+    },
+    {
+      "id": 34159601236,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-09-07T20:29:28Z",
+      "updated_at": "2026-09-07T20:30:53Z",
+      "created_at": "2026-09-07T20:29:28Z"
+    },
+    {
+      "id": 34161691808,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-09-07T21:03:11Z",
+      "updated_at": "2026-09-07T21:04:39Z",
+      "created_at": "2026-09-07T21:03:11Z"
+    },
+    {
+      "id": 34161832127,
+      "workflow_id": 242097292,
+      "name": "Release",
+      "conclusion": "success",
+      "run_started_at": "2026-09-07T21:05:25Z",
+      "updated_at": "2026-09-07T21:07:04Z",
+      "created_at": "2026-09-07T21:05:25Z"
+    }
+  ]
+}

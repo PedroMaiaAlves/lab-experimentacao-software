@@ -1,0 +1,577 @@
+{
+  "full_name": "carvel-dev/ytt",
+  "default_branch": "develop",
+  "janela_inicio": "2025-10-01",
+  "janela_fim": "2026-09-30",
+  "complete": true,
+  "saturated_intervals": [],
+  "workflow_runs": [
+    {
+      "id": 19459337698,
+      "workflow_id": 32808,
+      "name": "test-all",
+      "conclusion": "success",
+      "run_started_at": "2025-11-18T08:31:37Z",
+      "updated_at": "2025-11-18T08:33:33Z",
+      "created_at": "2025-11-18T08:31:37Z"
+    },
+    {
+      "id": 19459337701,
+      "workflow_id": 2087076,
+      "name": "test-windows",
+      "conclusion": "success",
+      "run_started_at": "2025-11-18T08:31:37Z",
+      "updated_at": "2025-11-18T08:33:16Z",
+      "created_at": "2025-11-18T08:31:37Z"
+    },
+    {
+      "id": 19459337758,
+      "workflow_id": 5125919,
+      "name": "golangci-lint",
+      "conclusion": "success",
+      "run_started_at": "2025-11-18T08:31:38Z",
+      "updated_at": "2025-11-18T08:32:15Z",
+      "created_at": "2025-11-18T08:31:38Z"
+    },
+    {
+      "id": 21388497969,
+      "workflow_id": 32808,
+      "name": "test-all",
+      "conclusion": "success",
+      "run_started_at": "2026-01-27T07:31:45Z",
+      "updated_at": "2026-01-27T07:33:40Z",
+      "created_at": "2026-01-27T07:31:45Z"
+    },
+    {
+      "id": 21388497976,
+      "workflow_id": 5125919,
+      "name": "golangci-lint",
+      "conclusion": "success",
+      "run_started_at": "2026-01-27T07:31:45Z",
+      "updated_at": "2026-01-27T07:32:19Z",
+      "created_at": "2026-01-27T07:31:45Z"
+    },
+    {
+      "id": 21388497978,
+      "workflow_id": 2087076,
+      "name": "test-windows",
+      "conclusion": "success",
+      "run_started_at": "2026-01-27T07:31:45Z",
+      "updated_at": "2026-01-27T07:32:39Z",
+      "created_at": "2026-01-27T07:31:45Z"
+    },
+    {
+      "id": 21691816150,
+      "workflow_id": 5125919,
+      "name": "golangci-lint",
+      "conclusion": "success",
+      "run_started_at": "2026-02-04T23:04:00Z",
+      "updated_at": "2026-02-04T23:04:36Z",
+      "created_at": "2026-02-04T23:04:00Z"
+    },
+    {
+      "id": 21691816153,
+      "workflow_id": 2087076,
+      "name": "test-windows",
+      "conclusion": "success",
+      "run_started_at": "2026-02-04T23:04:00Z",
+      "updated_at": "2026-02-04T23:04:35Z",
+      "created_at": "2026-02-04T23:04:00Z"
+    },
+    {
+      "id": 21691816177,
+      "workflow_id": 32808,
+      "name": "test-all",
+      "conclusion": "success",
+      "run_started_at": "2026-02-04T23:04:00Z",
+      "updated_at": "2026-02-04T23:06:00Z",
+      "created_at": "2026-02-04T23:04:00Z"
+    },
+    {
+      "id": 21696037859,
+      "workflow_id": 32808,
+      "name": "test-all",
+      "conclusion": "success",
+      "run_started_at": "2026-02-05T02:09:21Z",
+      "updated_at": "2026-02-05T02:11:16Z",
+      "created_at": "2026-02-05T02:09:21Z"
+    },
+    {
+      "id": 21696037861,
+      "workflow_id": 5125919,
+      "name": "golangci-lint",
+      "conclusion": "success",
+      "run_started_at": "2026-02-05T02:09:21Z",
+      "updated_at": "2026-02-05T02:09:54Z",
+      "created_at": "2026-02-05T02:09:21Z"
+    },
+    {
+      "id": 21696037867,
+      "workflow_id": 2087076,
+      "name": "test-windows",
+      "conclusion": "success",
+      "run_started_at": "2026-02-05T02:09:21Z",
+      "updated_at": "2026-02-05T02:10:00Z",
+      "created_at": "2026-02-05T02:09:21Z"
+    },
+    {
+      "id": 22089030691,
+      "workflow_id": 5125919,
+      "name": "golangci-lint",
+      "conclusion": "success",
+      "run_started_at": "2026-02-17T07:01:18Z",
+      "updated_at": "2026-02-17T07:01:54Z",
+      "created_at": "2026-02-17T07:01:18Z"
+    },
+    {
+      "id": 22089030698,
+      "workflow_id": 2087076,
+      "name": "test-windows",
+      "conclusion": "success",
+      "run_started_at": "2026-02-17T07:01:18Z",
+      "updated_at": "2026-02-17T07:02:22Z",
+      "created_at": "2026-02-17T07:01:18Z"
+    },
+    {
+      "id": 22089030710,
+      "workflow_id": 32808,
+      "name": "test-all",
+      "conclusion": "success",
+      "run_started_at": "2026-02-17T07:01:18Z",
+      "updated_at": "2026-02-17T07:03:17Z",
+      "created_at": "2026-02-17T07:01:18Z"
+    },
+    {
+      "id": 22202088672,
+      "workflow_id": 5125919,
+      "name": "golangci-lint",
+      "conclusion": "success",
+      "run_started_at": "2026-02-19T22:07:04Z",
+      "updated_at": "2026-02-19T22:07:46Z",
+      "created_at": "2026-02-19T22:07:04Z"
+    },
+    {
+      "id": 22202088682,
+      "workflow_id": 32808,
+      "name": "test-all",
+      "conclusion": "success",
+      "run_started_at": "2026-02-19T22:07:04Z",
+      "updated_at": "2026-02-19T22:09:02Z",
+      "created_at": "2026-02-19T22:07:04Z"
+    },
+    {
+      "id": 22202088697,
+      "workflow_id": 2087076,
+      "name": "test-windows",
+      "conclusion": "success",
+      "run_started_at": "2026-02-19T22:07:04Z",
+      "updated_at": "2026-02-19T22:07:36Z",
+      "created_at": "2026-02-19T22:07:04Z"
+    },
+    {
+      "id": 23651760216,
+      "workflow_id": 32808,
+      "name": "test-all",
+      "conclusion": "success",
+      "run_started_at": "2026-03-27T14:40:36Z",
+      "updated_at": "2026-03-27T14:42:38Z",
+      "created_at": "2026-03-27T14:40:36Z"
+    },
+    {
+      "id": 23651760267,
+      "workflow_id": 5125919,
+      "name": "golangci-lint",
+      "conclusion": "success",
+      "run_started_at": "2026-03-27T14:40:37Z",
+      "updated_at": "2026-03-27T14:41:21Z",
+      "created_at": "2026-03-27T14:40:37Z"
+    },
+    {
+      "id": 23651760376,
+      "workflow_id": 2087076,
+      "name": "test-windows",
+      "conclusion": "success",
+      "run_started_at": "2026-03-27T14:40:37Z",
+      "updated_at": "2026-03-27T14:41:43Z",
+      "created_at": "2026-03-27T14:40:37Z"
+    },
+    {
+      "id": 23652180196,
+      "workflow_id": 2087076,
+      "name": "test-windows",
+      "conclusion": "success",
+      "run_started_at": "2026-03-27T14:49:28Z",
+      "updated_at": "2026-03-27T14:50:25Z",
+      "created_at": "2026-03-27T14:49:28Z"
+    },
+    {
+      "id": 23652180198,
+      "workflow_id": 5125919,
+      "name": "golangci-lint",
+      "conclusion": "success",
+      "run_started_at": "2026-03-27T14:49:28Z",
+      "updated_at": "2026-03-27T14:50:03Z",
+      "created_at": "2026-03-27T14:49:28Z"
+    },
+    {
+      "id": 23652180221,
+      "workflow_id": 32808,
+      "name": "test-all",
+      "conclusion": "success",
+      "run_started_at": "2026-03-27T14:49:28Z",
+      "updated_at": "2026-03-27T14:51:52Z",
+      "created_at": "2026-03-27T14:49:28Z"
+    },
+    {
+      "id": 24531537466,
+      "workflow_id": 2087076,
+      "name": "test-windows",
+      "conclusion": "success",
+      "run_started_at": "2026-04-16T20:09:37Z",
+      "updated_at": "2026-04-16T20:10:36Z",
+      "created_at": "2026-04-16T20:09:37Z"
+    },
+    {
+      "id": 24531537488,
+      "workflow_id": 5125919,
+      "name": "golangci-lint",
+      "conclusion": "success",
+      "run_started_at": "2026-04-16T20:09:37Z",
+      "updated_at": "2026-04-16T20:10:16Z",
+      "created_at": "2026-04-16T20:09:37Z"
+    },
+    {
+      "id": 24531537523,
+      "workflow_id": 32808,
+      "name": "test-all",
+      "conclusion": "success",
+      "run_started_at": "2026-04-16T20:09:37Z",
+      "updated_at": "2026-04-16T20:11:34Z",
+      "created_at": "2026-04-16T20:09:37Z"
+    },
+    {
+      "id": 25567955591,
+      "workflow_id": 2087076,
+      "name": "test-windows",
+      "conclusion": "success",
+      "run_started_at": "2026-05-08T16:49:39Z",
+      "updated_at": "2026-05-08T16:50:38Z",
+      "created_at": "2026-05-08T16:49:39Z"
+    },
+    {
+      "id": 25567955594,
+      "workflow_id": 5125919,
+      "name": "golangci-lint",
+      "conclusion": "success",
+      "run_started_at": "2026-05-08T16:49:39Z",
+      "updated_at": "2026-05-08T16:50:28Z",
+      "created_at": "2026-05-08T16:49:39Z"
+    },
+    {
+      "id": 25567961543,
+      "workflow_id": 32808,
+      "name": "test-all",
+      "conclusion": "success",
+      "run_started_at": "2026-05-08T16:49:47Z",
+      "updated_at": "2026-05-08T16:51:49Z",
+      "created_at": "2026-05-08T16:49:47Z"
+    },
+    {
+      "id": 26502770345,
+      "workflow_id": 32808,
+      "name": "test-all",
+      "conclusion": "success",
+      "run_started_at": "2026-05-27T09:25:22Z",
+      "updated_at": "2026-05-27T09:27:27Z",
+      "created_at": "2026-05-27T09:25:22Z"
+    },
+    {
+      "id": 26502770348,
+      "workflow_id": 2087076,
+      "name": "test-windows",
+      "conclusion": "success",
+      "run_started_at": "2026-05-27T09:25:22Z",
+      "updated_at": "2026-05-27T09:26:24Z",
+      "created_at": "2026-05-27T09:25:22Z"
+    },
+    {
+      "id": 26502770722,
+      "workflow_id": 5125919,
+      "name": "golangci-lint",
+      "conclusion": "success",
+      "run_started_at": "2026-05-27T09:25:23Z",
+      "updated_at": "2026-05-27T09:26:02Z",
+      "created_at": "2026-05-27T09:25:23Z"
+    },
+    {
+      "id": 26533930383,
+      "workflow_id": 5125919,
+      "name": "golangci-lint",
+      "conclusion": "success",
+      "run_started_at": "2026-05-27T19:31:25Z",
+      "updated_at": "2026-05-27T19:31:46Z",
+      "created_at": "2026-05-27T19:31:25Z"
+    },
+    {
+      "id": 26533930401,
+      "workflow_id": 32808,
+      "name": "test-all",
+      "conclusion": "success",
+      "run_started_at": "2026-05-27T19:31:25Z",
+      "updated_at": "2026-05-27T19:33:30Z",
+      "created_at": "2026-05-27T19:31:25Z"
+    },
+    {
+      "id": 26533930387,
+      "workflow_id": 2087076,
+      "name": "test-windows",
+      "conclusion": "success",
+      "run_started_at": "2026-05-27T19:31:26Z",
+      "updated_at": "2026-05-27T19:32:18Z",
+      "created_at": "2026-05-27T19:31:26Z"
+    },
+    {
+      "id": 26892136450,
+      "workflow_id": 2087076,
+      "name": "test-windows",
+      "conclusion": "success",
+      "run_started_at": "2026-06-03T14:39:31Z",
+      "updated_at": "2026-06-03T14:41:20Z",
+      "created_at": "2026-06-03T14:39:31Z"
+    },
+    {
+      "id": 26892136479,
+      "workflow_id": 5125919,
+      "name": "golangci-lint",
+      "conclusion": "success",
+      "run_started_at": "2026-06-03T14:39:31Z",
+      "updated_at": "2026-06-03T14:42:24Z",
+      "created_at": "2026-06-03T14:39:31Z"
+    },
+    {
+      "id": 26892136596,
+      "workflow_id": 32808,
+      "name": "test-all",
+      "conclusion": "success",
+      "run_started_at": "2026-06-03T14:39:31Z",
+      "updated_at": "2026-06-03T14:44:12Z",
+      "created_at": "2026-06-03T14:39:31Z"
+    },
+    {
+      "id": 27029844236,
+      "workflow_id": 32808,
+      "name": "test-all",
+      "conclusion": "success",
+      "run_started_at": "2026-06-05T17:26:57Z",
+      "updated_at": "2026-06-05T17:29:13Z",
+      "created_at": "2026-06-05T17:26:57Z"
+    },
+    {
+      "id": 27029844337,
+      "workflow_id": 5125919,
+      "name": "golangci-lint",
+      "conclusion": "success",
+      "run_started_at": "2026-06-05T17:26:57Z",
+      "updated_at": "2026-06-05T17:28:02Z",
+      "created_at": "2026-06-05T17:26:57Z"
+    },
+    {
+      "id": 27029844345,
+      "workflow_id": 2087076,
+      "name": "test-windows",
+      "conclusion": "success",
+      "run_started_at": "2026-06-05T17:26:57Z",
+      "updated_at": "2026-06-05T17:28:19Z",
+      "created_at": "2026-06-05T17:26:57Z"
+    },
+    {
+      "id": 27680280561,
+      "workflow_id": 5125919,
+      "name": "golangci-lint",
+      "conclusion": "success",
+      "run_started_at": "2026-06-17T09:46:33Z",
+      "updated_at": "2026-06-17T09:47:11Z",
+      "created_at": "2026-06-17T09:46:33Z"
+    },
+    {
+      "id": 27680280567,
+      "workflow_id": 32808,
+      "name": "test-all",
+      "conclusion": "success",
+      "run_started_at": "2026-06-17T09:46:33Z",
+      "updated_at": "2026-06-17T09:48:17Z",
+      "created_at": "2026-06-17T09:46:33Z"
+    },
+    {
+      "id": 27680280627,
+      "workflow_id": 2087076,
+      "name": "test-windows",
+      "conclusion": "success",
+      "run_started_at": "2026-06-17T09:46:33Z",
+      "updated_at": "2026-06-17T09:47:36Z",
+      "created_at": "2026-06-17T09:46:33Z"
+    },
+    {
+      "id": 31753102342,
+      "workflow_id": 32808,
+      "name": "test-all",
+      "conclusion": "success",
+      "run_started_at": "2026-08-13T23:14:39Z",
+      "updated_at": "2026-08-13T23:16:21Z",
+      "created_at": "2026-08-13T23:14:39Z"
+    },
+    {
+      "id": 31753102345,
+      "workflow_id": 2087076,
+      "name": "test-windows",
+      "conclusion": "success",
+      "run_started_at": "2026-08-13T23:14:39Z",
+      "updated_at": "2026-08-13T23:15:53Z",
+      "created_at": "2026-08-13T23:14:39Z"
+    },
+    {
+      "id": 31753102386,
+      "workflow_id": 5125919,
+      "name": "golangci-lint",
+      "conclusion": "success",
+      "run_started_at": "2026-08-13T23:14:40Z",
+      "updated_at": "2026-08-13T23:15:15Z",
+      "created_at": "2026-08-13T23:14:40Z"
+    },
+    {
+      "id": 31753409951,
+      "workflow_id": 32808,
+      "name": "test-all",
+      "conclusion": "success",
+      "run_started_at": "2026-08-13T23:19:48Z",
+      "updated_at": "2026-08-13T23:21:50Z",
+      "created_at": "2026-08-13T23:19:48Z"
+    },
+    {
+      "id": 31753409956,
+      "workflow_id": 2087076,
+      "name": "test-windows",
+      "conclusion": "success",
+      "run_started_at": "2026-08-13T23:19:48Z",
+      "updated_at": "2026-08-13T23:20:28Z",
+      "created_at": "2026-08-13T23:19:48Z"
+    },
+    {
+      "id": 31753409992,
+      "workflow_id": 5125919,
+      "name": "golangci-lint",
+      "conclusion": "success",
+      "run_started_at": "2026-08-13T23:19:48Z",
+      "updated_at": "2026-08-13T23:20:16Z",
+      "created_at": "2026-08-13T23:19:48Z"
+    },
+    {
+      "id": 32079720272,
+      "workflow_id": 5125919,
+      "name": "golangci-lint",
+      "conclusion": "success",
+      "run_started_at": "2026-08-17T23:16:19Z",
+      "updated_at": "2026-08-17T23:16:38Z",
+      "created_at": "2026-08-17T23:16:19Z"
+    },
+    {
+      "id": 32079720287,
+      "workflow_id": 2087076,
+      "name": "test-windows",
+      "conclusion": "success",
+      "run_started_at": "2026-08-17T23:16:19Z",
+      "updated_at": "2026-08-17T23:17:07Z",
+      "created_at": "2026-08-17T23:16:19Z"
+    },
+    {
+      "id": 32079720596,
+      "workflow_id": 32808,
+      "name": "test-all",
+      "conclusion": "success",
+      "run_started_at": "2026-08-17T23:16:19Z",
+      "updated_at": "2026-08-17T23:18:13Z",
+      "created_at": "2026-08-17T23:16:19Z"
+    },
+    {
+      "id": 32080121653,
+      "workflow_id": 2087076,
+      "name": "test-windows",
+      "conclusion": "success",
+      "run_started_at": "2026-08-17T23:22:08Z",
+      "updated_at": "2026-08-17T23:23:07Z",
+      "created_at": "2026-08-17T23:22:08Z"
+    },
+    {
+      "id": 32080121661,
+      "workflow_id": 32808,
+      "name": "test-all",
+      "conclusion": "success",
+      "run_started_at": "2026-08-17T23:22:08Z",
+      "updated_at": "2026-08-17T23:24:19Z",
+      "created_at": "2026-08-17T23:22:08Z"
+    },
+    {
+      "id": 32080121722,
+      "workflow_id": 5125919,
+      "name": "golangci-lint",
+      "conclusion": "success",
+      "run_started_at": "2026-08-17T23:22:08Z",
+      "updated_at": "2026-08-17T23:22:38Z",
+      "created_at": "2026-08-17T23:22:08Z"
+    },
+    {
+      "id": 32801031510,
+      "workflow_id": 32808,
+      "name": "test-all",
+      "conclusion": "success",
+      "run_started_at": "2026-08-25T02:20:33Z",
+      "updated_at": "2026-08-25T02:22:44Z",
+      "created_at": "2026-08-25T02:20:33Z"
+    },
+    {
+      "id": 32801031543,
+      "workflow_id": 5125919,
+      "name": "golangci-lint",
+      "conclusion": "success",
+      "run_started_at": "2026-08-25T02:20:33Z",
+      "updated_at": "2026-08-25T02:21:01Z",
+      "created_at": "2026-08-25T02:20:33Z"
+    },
+    {
+      "id": 32801031545,
+      "workflow_id": 2087076,
+      "name": "test-windows",
+      "conclusion": "success",
+      "run_started_at": "2026-08-25T02:20:33Z",
+      "updated_at": "2026-08-25T02:21:24Z",
+      "created_at": "2026-08-25T02:20:33Z"
+    },
+    {
+      "id": 35893788894,
+      "workflow_id": 2087076,
+      "name": "test-windows",
+      "conclusion": "success",
+      "run_started_at": "2026-09-23T17:10:28Z",
+      "updated_at": "2026-09-23T17:11:30Z",
+      "created_at": "2026-09-23T17:10:28Z"
+    },
+    {
+      "id": 35893788941,
+      "workflow_id": 5125919,
+      "name": "golangci-lint",
+      "conclusion": "success",
+      "run_started_at": "2026-09-23T17:10:28Z",
+      "updated_at": "2026-09-23T17:11:13Z",
+      "created_at": "2026-09-23T17:10:28Z"
+    },
+    {
+      "id": 35893789029,
+      "workflow_id": 32808,
+      "name": "test-all",
+      "conclusion": "success",
+      "run_started_at": "2026-09-23T17:10:28Z",
+      "updated_at": "2026-09-23T17:12:34Z",
+      "created_at": "2026-09-23T17:10:28Z"
+    }
+  ]
+}

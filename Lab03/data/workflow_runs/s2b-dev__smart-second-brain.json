@@ -1,0 +1,730 @@
+{
+  "full_name": "s2b-dev/smart-second-brain",
+  "default_branch": "main",
+  "janela_inicio": "2025-10-01",
+  "janela_fim": "2026-09-30",
+  "complete": true,
+  "saturated_intervals": [],
+  "workflow_runs": [
+    {
+      "id": 33792808179,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-03T18:49:39Z",
+      "updated_at": "2026-09-03T18:51:42Z",
+      "created_at": "2026-09-03T18:49:39Z"
+    },
+    {
+      "id": 33794362238,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-03T19:05:20Z",
+      "updated_at": "2026-09-03T19:08:20Z",
+      "created_at": "2026-09-03T19:05:20Z"
+    },
+    {
+      "id": 33794756696,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-03T19:09:18Z",
+      "updated_at": "2026-09-03T19:12:09Z",
+      "created_at": "2026-09-03T19:09:18Z"
+    },
+    {
+      "id": 33797237429,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-03T19:34:36Z",
+      "updated_at": "2026-09-03T19:37:32Z",
+      "created_at": "2026-09-03T19:34:36Z"
+    },
+    {
+      "id": 33802305887,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-03T20:26:54Z",
+      "updated_at": "2026-09-03T20:29:33Z",
+      "created_at": "2026-09-03T20:26:54Z"
+    },
+    {
+      "id": 33804509122,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-03T20:49:38Z",
+      "updated_at": "2026-09-03T20:52:35Z",
+      "created_at": "2026-09-03T20:49:38Z"
+    },
+    {
+      "id": 33809466400,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-03T21:43:28Z",
+      "updated_at": "2026-09-03T21:46:25Z",
+      "created_at": "2026-09-03T21:43:28Z"
+    },
+    {
+      "id": 33809720036,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-03T21:46:21Z",
+      "updated_at": "2026-09-03T21:49:17Z",
+      "created_at": "2026-09-03T21:46:21Z"
+    },
+    {
+      "id": 33971378358,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-05T14:17:40Z",
+      "updated_at": "2026-09-05T14:20:37Z",
+      "created_at": "2026-09-05T14:17:40Z"
+    },
+    {
+      "id": 33971778892,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-05T14:25:39Z",
+      "updated_at": "2026-09-05T14:28:08Z",
+      "created_at": "2026-09-05T14:25:39Z"
+    },
+    {
+      "id": 33971895361,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-05T14:27:59Z",
+      "updated_at": "2026-09-05T14:31:03Z",
+      "created_at": "2026-09-05T14:27:59Z"
+    },
+    {
+      "id": 33972131571,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-05T14:32:48Z",
+      "updated_at": "2026-09-05T14:35:09Z",
+      "created_at": "2026-09-05T14:32:48Z"
+    },
+    {
+      "id": 33974389144,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-05T15:18:18Z",
+      "updated_at": "2026-09-05T15:18:33Z",
+      "created_at": "2026-09-05T15:18:18Z"
+    },
+    {
+      "id": 33974397796,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-05T15:18:28Z",
+      "updated_at": "2026-09-05T15:21:33Z",
+      "created_at": "2026-09-05T15:18:28Z"
+    },
+    {
+      "id": 33974606823,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-05T15:22:35Z",
+      "updated_at": "2026-09-05T15:25:34Z",
+      "created_at": "2026-09-05T15:22:35Z"
+    },
+    {
+      "id": 33978187506,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-05T16:32:28Z",
+      "updated_at": "2026-09-05T16:35:31Z",
+      "created_at": "2026-09-05T16:32:28Z"
+    },
+    {
+      "id": 33978355338,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-05T16:35:42Z",
+      "updated_at": "2026-09-05T16:38:29Z",
+      "created_at": "2026-09-05T16:35:42Z"
+    },
+    {
+      "id": 34583994591,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-11T09:23:57Z",
+      "updated_at": "2026-09-11T09:27:08Z",
+      "created_at": "2026-09-11T09:23:57Z"
+    },
+    {
+      "id": 34586446385,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-11T09:53:03Z",
+      "updated_at": "2026-09-11T09:55:14Z",
+      "created_at": "2026-09-11T09:53:03Z"
+    },
+    {
+      "id": 34591988624,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-11T11:01:02Z",
+      "updated_at": "2026-09-11T11:03:57Z",
+      "created_at": "2026-09-11T11:01:02Z"
+    },
+    {
+      "id": 34594466280,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-11T11:31:45Z",
+      "updated_at": "2026-09-11T11:32:28Z",
+      "created_at": "2026-09-11T11:31:45Z"
+    },
+    {
+      "id": 34594518705,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-11T11:32:23Z",
+      "updated_at": "2026-09-11T11:35:31Z",
+      "created_at": "2026-09-11T11:32:23Z"
+    },
+    {
+      "id": 34598907151,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-11T12:26:19Z",
+      "updated_at": "2026-09-11T12:29:23Z",
+      "created_at": "2026-09-11T12:26:19Z"
+    },
+    {
+      "id": 34760553853,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-13T13:41:43Z",
+      "updated_at": "2026-09-13T13:44:19Z",
+      "created_at": "2026-09-13T13:41:43Z"
+    },
+    {
+      "id": 34760758056,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-13T13:46:06Z",
+      "updated_at": "2026-09-13T13:49:08Z",
+      "created_at": "2026-09-13T13:46:06Z"
+    },
+    {
+      "id": 34761182710,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-13T13:55:27Z",
+      "updated_at": "2026-09-13T13:58:50Z",
+      "created_at": "2026-09-13T13:55:27Z"
+    },
+    {
+      "id": 34762250971,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-13T14:17:52Z",
+      "updated_at": "2026-09-13T14:20:49Z",
+      "created_at": "2026-09-13T14:17:52Z"
+    },
+    {
+      "id": 34764635117,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-13T15:07:06Z",
+      "updated_at": "2026-09-13T15:08:19Z",
+      "created_at": "2026-09-13T15:07:06Z"
+    },
+    {
+      "id": 34764682058,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-13T15:08:04Z",
+      "updated_at": "2026-09-13T15:11:20Z",
+      "created_at": "2026-09-13T15:08:04Z"
+    },
+    {
+      "id": 34811416121,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-14T05:55:56Z",
+      "updated_at": "2026-09-14T05:59:07Z",
+      "created_at": "2026-09-14T05:55:56Z"
+    },
+    {
+      "id": 34812059078,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-14T06:06:22Z",
+      "updated_at": "2026-09-14T06:09:33Z",
+      "created_at": "2026-09-14T06:06:22Z"
+    },
+    {
+      "id": 34823024287,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-14T08:29:58Z",
+      "updated_at": "2026-09-14T08:33:05Z",
+      "created_at": "2026-09-14T08:29:58Z"
+    },
+    {
+      "id": 34843602048,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-14T12:28:20Z",
+      "updated_at": "2026-09-14T12:30:28Z",
+      "created_at": "2026-09-14T12:28:20Z"
+    },
+    {
+      "id": 34844516900,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-14T12:38:22Z",
+      "updated_at": "2026-09-14T12:41:14Z",
+      "created_at": "2026-09-14T12:38:22Z"
+    },
+    {
+      "id": 34844824736,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-14T12:41:44Z",
+      "updated_at": "2026-09-14T12:45:01Z",
+      "created_at": "2026-09-14T12:41:44Z"
+    },
+    {
+      "id": 34845172093,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-14T12:45:23Z",
+      "updated_at": "2026-09-14T12:48:36Z",
+      "created_at": "2026-09-14T12:45:23Z"
+    },
+    {
+      "id": 34846494601,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-14T12:59:25Z",
+      "updated_at": "2026-09-14T13:00:05Z",
+      "created_at": "2026-09-14T12:59:25Z"
+    },
+    {
+      "id": 34846530459,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-14T12:59:49Z",
+      "updated_at": "2026-09-14T13:03:28Z",
+      "created_at": "2026-09-14T12:59:49Z"
+    },
+    {
+      "id": 34847672390,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-14T13:11:13Z",
+      "updated_at": "2026-09-14T13:11:31Z",
+      "created_at": "2026-09-14T13:11:13Z"
+    },
+    {
+      "id": 34847703137,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-14T13:11:30Z",
+      "updated_at": "2026-09-14T13:14:37Z",
+      "created_at": "2026-09-14T13:11:30Z"
+    },
+    {
+      "id": 34947248709,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-15T08:29:36Z",
+      "updated_at": "2026-09-15T08:32:52Z",
+      "created_at": "2026-09-15T08:29:36Z"
+    },
+    {
+      "id": 34958508217,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-15T10:32:42Z",
+      "updated_at": "2026-09-15T10:35:50Z",
+      "created_at": "2026-09-15T10:32:42Z"
+    },
+    {
+      "id": 34968088827,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-15T12:18:27Z",
+      "updated_at": "2026-09-15T12:21:52Z",
+      "created_at": "2026-09-15T12:18:27Z"
+    },
+    {
+      "id": 35223369992,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-17T12:49:53Z",
+      "updated_at": "2026-09-17T12:52:21Z",
+      "created_at": "2026-09-17T12:49:53Z"
+    },
+    {
+      "id": 35269097373,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-17T20:09:18Z",
+      "updated_at": "2026-09-17T20:11:36Z",
+      "created_at": "2026-09-17T20:09:18Z"
+    },
+    {
+      "id": 35276722946,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-17T21:26:59Z",
+      "updated_at": "2026-09-17T21:30:19Z",
+      "created_at": "2026-09-17T21:26:59Z"
+    },
+    {
+      "id": 35277130035,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-17T21:31:14Z",
+      "updated_at": "2026-09-17T21:33:50Z",
+      "created_at": "2026-09-17T21:31:14Z"
+    },
+    {
+      "id": 35315373527,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-18T06:33:11Z",
+      "updated_at": "2026-09-18T06:35:47Z",
+      "created_at": "2026-09-18T06:33:11Z"
+    },
+    {
+      "id": 35316065328,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-18T06:42:41Z",
+      "updated_at": "2026-09-18T06:44:41Z",
+      "created_at": "2026-09-18T06:42:41Z"
+    },
+    {
+      "id": 35461244343,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-19T18:27:21Z",
+      "updated_at": "2026-09-19T18:30:40Z",
+      "created_at": "2026-09-19T18:27:21Z"
+    },
+    {
+      "id": 35611434522,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-21T14:19:59Z",
+      "updated_at": "2026-09-21T14:23:27Z",
+      "created_at": "2026-09-21T14:19:59Z"
+    },
+    {
+      "id": 35618963746,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-21T15:26:36Z",
+      "updated_at": "2026-09-21T15:30:17Z",
+      "created_at": "2026-09-21T15:26:36Z"
+    },
+    {
+      "id": 35650920540,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-21T20:25:00Z",
+      "updated_at": "2026-09-21T20:28:29Z",
+      "created_at": "2026-09-21T20:25:00Z"
+    },
+    {
+      "id": 35651418481,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-21T20:29:49Z",
+      "updated_at": "2026-09-21T20:32:40Z",
+      "created_at": "2026-09-21T20:29:49Z"
+    },
+    {
+      "id": 35652228376,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-21T20:37:23Z",
+      "updated_at": "2026-09-21T20:41:02Z",
+      "created_at": "2026-09-21T20:37:23Z"
+    },
+    {
+      "id": 35692736416,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-22T05:57:17Z",
+      "updated_at": "2026-09-22T06:00:04Z",
+      "created_at": "2026-09-22T05:57:17Z"
+    },
+    {
+      "id": 36237219372,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-26T10:55:01Z",
+      "updated_at": "2026-09-26T10:58:29Z",
+      "created_at": "2026-09-26T10:55:01Z"
+    },
+    {
+      "id": 36241280712,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-26T12:14:12Z",
+      "updated_at": "2026-09-26T12:17:43Z",
+      "created_at": "2026-09-26T12:14:12Z"
+    },
+    {
+      "id": 36307240182,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-27T08:46:10Z",
+      "updated_at": "2026-09-27T08:49:38Z",
+      "created_at": "2026-09-27T08:46:10Z"
+    },
+    {
+      "id": 36310479052,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-27T09:47:17Z",
+      "updated_at": "2026-09-27T09:50:51Z",
+      "created_at": "2026-09-27T09:47:17Z"
+    },
+    {
+      "id": 36313948805,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-27T10:52:54Z",
+      "updated_at": "2026-09-27T10:54:58Z",
+      "created_at": "2026-09-27T10:52:54Z"
+    },
+    {
+      "id": 36318163927,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-27T12:11:28Z",
+      "updated_at": "2026-09-27T12:14:10Z",
+      "created_at": "2026-09-27T12:11:28Z"
+    },
+    {
+      "id": 36320031218,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-27T12:45:10Z",
+      "updated_at": "2026-09-27T12:48:34Z",
+      "created_at": "2026-09-27T12:45:10Z"
+    },
+    {
+      "id": 36322837046,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-27T13:33:58Z",
+      "updated_at": "2026-09-27T13:37:33Z",
+      "created_at": "2026-09-27T13:33:58Z"
+    },
+    {
+      "id": 36324141489,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-27T13:56:37Z",
+      "updated_at": "2026-09-27T13:59:24Z",
+      "created_at": "2026-09-27T13:56:37Z"
+    },
+    {
+      "id": 36325313785,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-27T14:16:26Z",
+      "updated_at": "2026-09-27T14:19:53Z",
+      "created_at": "2026-09-27T14:16:26Z"
+    },
+    {
+      "id": 36327822688,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-27T14:58:10Z",
+      "updated_at": "2026-09-27T15:01:54Z",
+      "created_at": "2026-09-27T14:58:10Z"
+    },
+    {
+      "id": 36334305780,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-27T16:43:45Z",
+      "updated_at": "2026-09-27T16:47:22Z",
+      "created_at": "2026-09-27T16:43:45Z"
+    },
+    {
+      "id": 36334903497,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-27T16:53:35Z",
+      "updated_at": "2026-09-27T16:56:43Z",
+      "created_at": "2026-09-27T16:53:35Z"
+    },
+    {
+      "id": 36337456578,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-27T17:34:39Z",
+      "updated_at": "2026-09-27T17:38:09Z",
+      "created_at": "2026-09-27T17:34:39Z"
+    },
+    {
+      "id": 36340752585,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-27T18:28:08Z",
+      "updated_at": "2026-09-27T18:31:40Z",
+      "created_at": "2026-09-27T18:28:08Z"
+    },
+    {
+      "id": 36341229329,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-27T18:35:42Z",
+      "updated_at": "2026-09-27T18:36:39Z",
+      "created_at": "2026-09-27T18:35:42Z"
+    },
+    {
+      "id": 36341269432,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-27T18:36:23Z",
+      "updated_at": "2026-09-27T18:38:44Z",
+      "created_at": "2026-09-27T18:36:23Z"
+    },
+    {
+      "id": 36387458942,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-28T06:38:14Z",
+      "updated_at": "2026-09-28T06:41:01Z",
+      "created_at": "2026-09-28T06:38:14Z"
+    },
+    {
+      "id": 36389386498,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-28T07:01:09Z",
+      "updated_at": "2026-09-28T07:02:19Z",
+      "created_at": "2026-09-28T07:01:09Z"
+    },
+    {
+      "id": 36389462680,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-28T07:02:03Z",
+      "updated_at": "2026-09-28T07:05:25Z",
+      "created_at": "2026-09-28T07:02:03Z"
+    },
+    {
+      "id": 36389897130,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-28T07:07:00Z",
+      "updated_at": "2026-09-28T07:10:36Z",
+      "created_at": "2026-09-28T07:07:00Z"
+    },
+    {
+      "id": 36396380539,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-28T08:16:25Z",
+      "updated_at": "2026-09-28T08:19:59Z",
+      "created_at": "2026-09-28T08:16:25Z"
+    },
+    {
+      "id": 36405771725,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-28T09:47:55Z",
+      "updated_at": "2026-09-28T09:51:21Z",
+      "created_at": "2026-09-28T09:47:55Z"
+    },
+    {
+      "id": 36406281687,
+      "workflow_id": 348645787,
+      "name": "CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-28T09:52:57Z",
+      "updated_at": "2026-09-28T09:55:49Z",
+      "created_at": "2026-09-28T09:52:57Z"
+    }
+  ]
+}

@@ -1,0 +1,2548 @@
+{
+  "full_name": "theotherp/nzbhydra2",
+  "default_branch": "master",
+  "janela_inicio": "2025-10-01",
+  "janela_fim": "2026-09-30",
+  "complete": true,
+  "saturated_intervals": [],
+  "workflow_runs": [
+    {
+      "id": 19404055087,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2025-11-16T10:13:28Z",
+      "updated_at": "2025-11-16T10:31:44Z",
+      "created_at": "2025-11-16T10:13:28Z"
+    },
+    {
+      "id": 19405651344,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2025-11-16T12:33:25Z",
+      "updated_at": "2025-11-16T12:51:05Z",
+      "created_at": "2025-11-16T12:33:25Z"
+    },
+    {
+      "id": 19798966757,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2025-11-30T12:35:47Z",
+      "updated_at": "2025-11-30T12:54:09Z",
+      "created_at": "2025-11-30T12:35:47Z"
+    },
+    {
+      "id": 19800247988,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2025-11-30T14:22:45Z",
+      "updated_at": "2025-11-30T14:26:12Z",
+      "created_at": "2025-11-30T14:22:45Z"
+    },
+    {
+      "id": 19801069452,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2025-11-30T15:32:47Z",
+      "updated_at": "2025-11-30T15:35:43Z",
+      "created_at": "2025-11-30T15:32:47Z"
+    },
+    {
+      "id": 19801377963,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2025-11-30T16:00:58Z",
+      "updated_at": "2025-11-30T16:17:13Z",
+      "created_at": "2025-11-30T16:00:58Z"
+    },
+    {
+      "id": 19803616419,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2025-11-30T19:14:39Z",
+      "updated_at": "2025-11-30T19:34:27Z",
+      "created_at": "2025-11-30T19:14:39Z"
+    },
+    {
+      "id": 19814989018,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-01T07:39:03Z",
+      "updated_at": "2025-12-01T07:56:41Z",
+      "created_at": "2025-12-01T07:39:03Z"
+    },
+    {
+      "id": 19850906029,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2025-12-02T07:38:22Z",
+      "updated_at": "2025-12-02T07:54:34Z",
+      "created_at": "2025-12-02T07:38:22Z"
+    },
+    {
+      "id": 19851018326,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-02T07:43:45Z",
+      "updated_at": "2025-12-02T07:48:11Z",
+      "created_at": "2025-12-02T07:43:45Z"
+    },
+    {
+      "id": 19851391399,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-02T08:01:27Z",
+      "updated_at": "2025-12-02T08:19:37Z",
+      "created_at": "2025-12-02T08:01:27Z"
+    },
+    {
+      "id": 19851949099,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-02T08:24:05Z",
+      "updated_at": "2025-12-02T08:44:16Z",
+      "created_at": "2025-12-02T08:24:05Z"
+    },
+    {
+      "id": 19858192052,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-02T12:13:22Z",
+      "updated_at": "2025-12-02T12:26:27Z",
+      "created_at": "2025-12-02T12:13:22Z"
+    },
+    {
+      "id": 19858703348,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-02T12:32:14Z",
+      "updated_at": "2025-12-02T12:48:58Z",
+      "created_at": "2025-12-02T12:32:14Z"
+    },
+    {
+      "id": 19859642831,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-02T13:06:45Z",
+      "updated_at": "2025-12-02T13:22:51Z",
+      "created_at": "2025-12-02T13:06:45Z"
+    },
+    {
+      "id": 19860869378,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-02T13:49:17Z",
+      "updated_at": "2025-12-02T14:07:13Z",
+      "created_at": "2025-12-02T13:49:17Z"
+    },
+    {
+      "id": 19862994270,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2025-12-02T14:57:41Z",
+      "updated_at": "2025-12-02T15:14:57Z",
+      "created_at": "2025-12-02T14:57:41Z"
+    },
+    {
+      "id": 19867762886,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2025-12-02T17:31:49Z",
+      "updated_at": "2025-12-02T17:47:47Z",
+      "created_at": "2025-12-02T17:31:49Z"
+    },
+    {
+      "id": 19867786979,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2025-12-02T17:32:40Z",
+      "updated_at": "2025-12-02T17:48:28Z",
+      "created_at": "2025-12-02T17:32:40Z"
+    },
+    {
+      "id": 19869189892,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2025-12-02T18:23:05Z",
+      "updated_at": "2025-12-02T18:48:55Z",
+      "created_at": "2025-12-02T18:23:05Z"
+    },
+    {
+      "id": 19893007770,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-03T11:57:34Z",
+      "updated_at": "2025-12-03T12:15:56Z",
+      "created_at": "2025-12-03T11:57:34Z"
+    },
+    {
+      "id": 19920624300,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2025-12-04T07:06:03Z",
+      "updated_at": "2025-12-04T07:20:49Z",
+      "created_at": "2025-12-04T07:06:03Z"
+    },
+    {
+      "id": 19921049134,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2025-12-04T07:25:02Z",
+      "updated_at": "2025-12-04T07:43:37Z",
+      "created_at": "2025-12-04T07:25:02Z"
+    },
+    {
+      "id": 20158090439,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2025-12-12T06:11:31Z",
+      "updated_at": "2025-12-12T06:28:32Z",
+      "created_at": "2025-12-12T06:11:31Z"
+    },
+    {
+      "id": 20674718604,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-01-03T08:21:11Z",
+      "updated_at": "2026-01-03T08:37:22Z",
+      "created_at": "2026-01-03T08:21:11Z"
+    },
+    {
+      "id": 20678705172,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-01-03T14:40:26Z",
+      "updated_at": "2026-01-03T14:57:11Z",
+      "created_at": "2026-01-03T14:40:26Z"
+    },
+    {
+      "id": 20678973694,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-01-03T15:05:31Z",
+      "updated_at": "2026-01-03T15:22:03Z",
+      "created_at": "2026-01-03T15:05:31Z"
+    },
+    {
+      "id": 20679091174,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-01-03T16:18:06Z",
+      "updated_at": "2026-01-03T16:19:48Z",
+      "created_at": "2026-01-03T15:15:38Z"
+    },
+    {
+      "id": 20712297050,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-01-05T10:20:01Z",
+      "updated_at": "2026-01-05T10:37:47Z",
+      "created_at": "2026-01-05T10:20:01Z"
+    },
+    {
+      "id": 20740463754,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-01-06T06:42:47Z",
+      "updated_at": "2026-01-06T07:01:04Z",
+      "created_at": "2026-01-06T06:42:47Z"
+    },
+    {
+      "id": 20760152104,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-01-06T19:49:25Z",
+      "updated_at": "2026-01-06T19:54:06Z",
+      "created_at": "2026-01-06T19:49:25Z"
+    },
+    {
+      "id": 20878885411,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-01-10T13:16:53Z",
+      "updated_at": "2026-01-10T13:18:18Z",
+      "created_at": "2026-01-10T13:16:53Z"
+    },
+    {
+      "id": 20892207187,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-01-11T08:30:05Z",
+      "updated_at": "2026-01-11T08:32:02Z",
+      "created_at": "2026-01-11T08:30:05Z"
+    },
+    {
+      "id": 20893672989,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-01-11T10:29:37Z",
+      "updated_at": "2026-01-11T10:31:20Z",
+      "created_at": "2026-01-11T10:29:37Z"
+    },
+    {
+      "id": 20893764368,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-01-11T10:37:26Z",
+      "updated_at": "2026-01-11T10:54:21Z",
+      "created_at": "2026-01-11T10:37:26Z"
+    },
+    {
+      "id": 20894164248,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-01-11T11:10:28Z",
+      "updated_at": "2026-01-11T11:27:21Z",
+      "created_at": "2026-01-11T11:10:28Z"
+    },
+    {
+      "id": 21008972302,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-01-14T20:35:18Z",
+      "updated_at": "2026-01-14T20:54:32Z",
+      "created_at": "2026-01-14T20:35:18Z"
+    },
+    {
+      "id": 21072183712,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-01-16T15:45:33Z",
+      "updated_at": "2026-01-16T16:02:33Z",
+      "created_at": "2026-01-16T15:45:33Z"
+    },
+    {
+      "id": 21073571635,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-01-16T16:33:23Z",
+      "updated_at": "2026-01-16T16:49:54Z",
+      "created_at": "2026-01-16T16:33:23Z"
+    },
+    {
+      "id": 21100358396,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-01-17T20:25:11Z",
+      "updated_at": "2026-01-17T20:42:40Z",
+      "created_at": "2026-01-17T20:25:11Z"
+    },
+    {
+      "id": 21518215267,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-01-30T13:55:45Z",
+      "updated_at": "2026-01-30T14:12:38Z",
+      "created_at": "2026-01-30T13:55:45Z"
+    },
+    {
+      "id": 21526883373,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-01-30T18:47:27Z",
+      "updated_at": "2026-01-30T19:04:41Z",
+      "created_at": "2026-01-30T18:47:27Z"
+    },
+    {
+      "id": 21541748675,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-01-31T08:32:24Z",
+      "updated_at": "2026-01-31T08:49:32Z",
+      "created_at": "2026-01-31T08:32:24Z"
+    },
+    {
+      "id": 21543197105,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-01-31T10:36:48Z",
+      "updated_at": "2026-01-31T10:38:43Z",
+      "created_at": "2026-01-31T10:36:48Z"
+    },
+    {
+      "id": 21543873317,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-01-31T11:35:48Z",
+      "updated_at": "2026-01-31T11:36:34Z",
+      "created_at": "2026-01-31T11:35:48Z"
+    },
+    {
+      "id": 21543985263,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-01-31T11:45:46Z",
+      "updated_at": "2026-01-31T12:02:12Z",
+      "created_at": "2026-01-31T11:45:46Z"
+    },
+    {
+      "id": 21544255964,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-01-31T12:09:23Z",
+      "updated_at": "2026-01-31T12:27:00Z",
+      "created_at": "2026-01-31T12:09:23Z"
+    },
+    {
+      "id": 21544395502,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-01-31T12:20:42Z",
+      "updated_at": "2026-01-31T12:37:57Z",
+      "created_at": "2026-01-31T12:20:42Z"
+    },
+    {
+      "id": 21544431953,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-01-31T12:23:53Z",
+      "updated_at": "2026-01-31T12:42:03Z",
+      "created_at": "2026-01-31T12:23:53Z"
+    },
+    {
+      "id": 21545333246,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-01-31T13:40:16Z",
+      "updated_at": "2026-01-31T13:43:30Z",
+      "created_at": "2026-01-31T13:40:16Z"
+    },
+    {
+      "id": 21545770522,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-01-31T14:16:11Z",
+      "updated_at": "2026-01-31T14:17:49Z",
+      "created_at": "2026-01-31T14:16:11Z"
+    },
+    {
+      "id": 21545778940,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-01-31T14:16:51Z",
+      "updated_at": "2026-01-31T14:20:21Z",
+      "created_at": "2026-01-31T14:16:51Z"
+    },
+    {
+      "id": 21546700057,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-01-31T15:30:59Z",
+      "updated_at": "2026-01-31T15:47:55Z",
+      "created_at": "2026-01-31T15:30:59Z"
+    },
+    {
+      "id": 21547045233,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-01-31T16:00:03Z",
+      "updated_at": "2026-01-31T16:15:26Z",
+      "created_at": "2026-01-31T16:00:03Z"
+    },
+    {
+      "id": 21558696429,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-02-01T07:13:11Z",
+      "updated_at": "2026-02-01T07:29:24Z",
+      "created_at": "2026-02-01T07:13:11Z"
+    },
+    {
+      "id": 21559205820,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-02-01T07:53:24Z",
+      "updated_at": "2026-02-01T08:10:40Z",
+      "created_at": "2026-02-01T07:53:24Z"
+    },
+    {
+      "id": 21559232493,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-02-01T07:55:34Z",
+      "updated_at": "2026-02-01T08:12:26Z",
+      "created_at": "2026-02-01T07:55:34Z"
+    },
+    {
+      "id": 21801246545,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-02-08T16:12:31Z",
+      "updated_at": "2026-02-08T16:28:35Z",
+      "created_at": "2026-02-08T16:12:31Z"
+    },
+    {
+      "id": 21802640072,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-08T17:53:24Z",
+      "updated_at": "2026-02-08T17:56:09Z",
+      "created_at": "2026-02-08T17:53:24Z"
+    },
+    {
+      "id": 21870392580,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-10T15:09:18Z",
+      "updated_at": "2026-02-10T15:12:31Z",
+      "created_at": "2026-02-10T15:09:18Z"
+    },
+    {
+      "id": 21870403842,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-10T15:09:36Z",
+      "updated_at": "2026-02-10T15:12:39Z",
+      "created_at": "2026-02-10T15:09:36Z"
+    },
+    {
+      "id": 21870418543,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-10T15:09:59Z",
+      "updated_at": "2026-02-10T15:13:02Z",
+      "created_at": "2026-02-10T15:09:59Z"
+    },
+    {
+      "id": 21955095045,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-12T16:28:14Z",
+      "updated_at": "2026-02-12T16:31:06Z",
+      "created_at": "2026-02-12T16:28:14Z"
+    },
+    {
+      "id": 21955362103,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-02-12T16:35:31Z",
+      "updated_at": "2026-02-12T16:52:22Z",
+      "created_at": "2026-02-12T16:35:31Z"
+    },
+    {
+      "id": 21958418560,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-12T18:05:11Z",
+      "updated_at": "2026-02-12T18:26:25Z",
+      "created_at": "2026-02-12T18:05:11Z"
+    },
+    {
+      "id": 21958497125,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-02-12T18:07:39Z",
+      "updated_at": "2026-02-12T18:27:49Z",
+      "created_at": "2026-02-12T18:07:39Z"
+    },
+    {
+      "id": 21994175151,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-02-13T16:20:58Z",
+      "updated_at": "2026-02-13T16:39:08Z",
+      "created_at": "2026-02-13T16:20:58Z"
+    },
+    {
+      "id": 22017632666,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-02-14T12:49:00Z",
+      "updated_at": "2026-02-14T13:04:45Z",
+      "created_at": "2026-02-14T12:49:00Z"
+    },
+    {
+      "id": 22019703117,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-14T15:18:17Z",
+      "updated_at": "2026-02-14T15:33:03Z",
+      "created_at": "2026-02-14T15:18:17Z"
+    },
+    {
+      "id": 22019736823,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-14T15:20:52Z",
+      "updated_at": "2026-02-14T15:38:19Z",
+      "created_at": "2026-02-14T15:20:52Z"
+    },
+    {
+      "id": 22658156333,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-03-04T06:38:34Z",
+      "updated_at": "2026-03-04T06:58:49Z",
+      "created_at": "2026-03-04T06:38:34Z"
+    },
+    {
+      "id": 22796242828,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-03-07T09:12:01Z",
+      "updated_at": "2026-03-07T09:29:23Z",
+      "created_at": "2026-03-07T09:12:01Z"
+    },
+    {
+      "id": 23020732576,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-03-12T19:46:50Z",
+      "updated_at": "2026-03-12T20:03:08Z",
+      "created_at": "2026-03-12T19:46:50Z"
+    },
+    {
+      "id": 23021210854,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-03-12T19:59:02Z",
+      "updated_at": "2026-03-12T20:15:27Z",
+      "created_at": "2026-03-12T19:59:02Z"
+    },
+    {
+      "id": 23021318357,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-03-12T20:01:45Z",
+      "updated_at": "2026-03-12T20:19:35Z",
+      "created_at": "2026-03-12T20:01:45Z"
+    },
+    {
+      "id": 23552750957,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-03-25T17:01:53Z",
+      "updated_at": "2026-03-25T17:03:30Z",
+      "created_at": "2026-03-25T16:42:31Z"
+    },
+    {
+      "id": 23554587409,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-03-25T17:23:22Z",
+      "updated_at": "2026-03-25T17:41:17Z",
+      "created_at": "2026-03-25T17:23:22Z"
+    },
+    {
+      "id": 23554803114,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-03-25T17:28:08Z",
+      "updated_at": "2026-03-25T17:48:35Z",
+      "created_at": "2026-03-25T17:28:08Z"
+    },
+    {
+      "id": 24086990080,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-04-07T14:32:53Z",
+      "updated_at": "2026-04-07T14:36:13Z",
+      "created_at": "2026-04-07T14:32:53Z"
+    },
+    {
+      "id": 24143089949,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-04-08T15:15:39Z",
+      "updated_at": "2026-04-08T15:19:42Z",
+      "created_at": "2026-04-08T15:15:39Z"
+    },
+    {
+      "id": 24144038988,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-04-08T15:35:57Z",
+      "updated_at": "2026-04-08T15:52:44Z",
+      "created_at": "2026-04-08T15:35:57Z"
+    },
+    {
+      "id": 24146083371,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-04-08T16:17:26Z",
+      "updated_at": "2026-04-08T16:34:08Z",
+      "created_at": "2026-04-08T16:17:26Z"
+    },
+    {
+      "id": 24146238162,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-04-08T16:20:54Z",
+      "updated_at": "2026-04-08T16:39:54Z",
+      "created_at": "2026-04-08T16:20:54Z"
+    },
+    {
+      "id": 24250702903,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-04-10T15:31:17Z",
+      "updated_at": "2026-04-10T15:48:28Z",
+      "created_at": "2026-04-10T15:31:17Z"
+    },
+    {
+      "id": 24349901451,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-04-13T14:48:36Z",
+      "updated_at": "2026-04-13T14:51:47Z",
+      "created_at": "2026-04-13T14:48:36Z"
+    },
+    {
+      "id": 24351349623,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-04-13T15:17:53Z",
+      "updated_at": "2026-04-13T15:34:07Z",
+      "created_at": "2026-04-13T15:17:53Z"
+    },
+    {
+      "id": 24585411749,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-04-17T20:31:47Z",
+      "updated_at": "2026-04-17T20:47:29Z",
+      "created_at": "2026-04-17T20:31:47Z"
+    },
+    {
+      "id": 24601309002,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-04-18T09:00:43Z",
+      "updated_at": "2026-04-18T09:17:23Z",
+      "created_at": "2026-04-18T09:00:43Z"
+    },
+    {
+      "id": 24601379337,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-04-18T09:05:00Z",
+      "updated_at": "2026-04-18T09:22:07Z",
+      "created_at": "2026-04-18T09:05:00Z"
+    },
+    {
+      "id": 24632256711,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-04-19T15:13:16Z",
+      "updated_at": "2026-04-19T15:30:02Z",
+      "created_at": "2026-04-19T15:13:16Z"
+    },
+    {
+      "id": 24636666035,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-04-19T18:58:40Z",
+      "updated_at": "2026-04-19T19:16:30Z",
+      "created_at": "2026-04-19T18:58:40Z"
+    },
+    {
+      "id": 24636702752,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-04-19T19:00:30Z",
+      "updated_at": "2026-04-19T19:19:18Z",
+      "created_at": "2026-04-19T19:00:30Z"
+    },
+    {
+      "id": 24637631359,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-04-19T19:48:37Z",
+      "updated_at": "2026-04-19T20:05:57Z",
+      "created_at": "2026-04-19T19:48:37Z"
+    },
+    {
+      "id": 24637690215,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-04-19T19:51:38Z",
+      "updated_at": "2026-04-19T20:13:45Z",
+      "created_at": "2026-04-19T19:51:38Z"
+    },
+    {
+      "id": 24676273450,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-04-20T15:51:23Z",
+      "updated_at": "2026-04-20T16:09:06Z",
+      "created_at": "2026-04-20T15:51:23Z"
+    },
+    {
+      "id": 24905262299,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-04-24T18:23:22Z",
+      "updated_at": "2026-04-24T18:39:36Z",
+      "created_at": "2026-04-24T18:23:22Z"
+    },
+    {
+      "id": 24905960847,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-04-24T18:39:41Z",
+      "updated_at": "2026-04-24T18:42:58Z",
+      "created_at": "2026-04-24T18:39:41Z"
+    },
+    {
+      "id": 24950749045,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-04-26T07:03:29Z",
+      "updated_at": "2026-04-26T07:06:25Z",
+      "created_at": "2026-04-26T07:03:29Z"
+    },
+    {
+      "id": 24950817013,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-04-26T07:07:28Z",
+      "updated_at": "2026-04-26T07:10:55Z",
+      "created_at": "2026-04-26T07:07:28Z"
+    },
+    {
+      "id": 24950901358,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-04-26T07:12:18Z",
+      "updated_at": "2026-04-26T07:28:44Z",
+      "created_at": "2026-04-26T07:12:18Z"
+    },
+    {
+      "id": 24951583126,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-04-26T07:51:17Z",
+      "updated_at": "2026-04-26T08:07:31Z",
+      "created_at": "2026-04-26T07:51:17Z"
+    },
+    {
+      "id": 24952082750,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-04-26T08:19:42Z",
+      "updated_at": "2026-04-26T08:37:47Z",
+      "created_at": "2026-04-26T08:19:42Z"
+    },
+    {
+      "id": 24952134203,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-04-26T08:22:31Z",
+      "updated_at": "2026-04-26T08:40:35Z",
+      "created_at": "2026-04-26T08:22:31Z"
+    },
+    {
+      "id": 25217525435,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-05-01T14:11:42Z",
+      "updated_at": "2026-05-01T14:28:32Z",
+      "created_at": "2026-05-01T14:11:42Z"
+    },
+    {
+      "id": 25246445583,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-05-02T07:04:25Z",
+      "updated_at": "2026-05-02T07:21:20Z",
+      "created_at": "2026-05-02T07:04:25Z"
+    },
+    {
+      "id": 25246521417,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-05-02T07:08:43Z",
+      "updated_at": "2026-05-02T07:26:48Z",
+      "created_at": "2026-05-02T07:08:43Z"
+    },
+    {
+      "id": 25272027900,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-05-03T06:31:45Z",
+      "updated_at": "2026-05-03T06:48:23Z",
+      "created_at": "2026-05-03T06:31:45Z"
+    },
+    {
+      "id": 25960069272,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-05-16T10:51:34Z",
+      "updated_at": "2026-05-16T11:07:47Z",
+      "created_at": "2026-05-16T10:51:34Z"
+    },
+    {
+      "id": 26174726432,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-05-20T16:06:33Z",
+      "updated_at": "2026-05-20T16:25:31Z",
+      "created_at": "2026-05-20T16:06:33Z"
+    },
+    {
+      "id": 26773276333,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-06-01T18:15:42Z",
+      "updated_at": "2026-06-01T18:35:35Z",
+      "created_at": "2026-06-01T18:15:42Z"
+    },
+    {
+      "id": 27062218740,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-06-06T12:24:08Z",
+      "updated_at": "2026-06-06T12:40:15Z",
+      "created_at": "2026-06-06T12:24:08Z"
+    },
+    {
+      "id": 27064181097,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-06-06T13:55:46Z",
+      "updated_at": "2026-06-06T14:12:36Z",
+      "created_at": "2026-06-06T13:55:46Z"
+    },
+    {
+      "id": 27064326864,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-06-06T14:02:11Z",
+      "updated_at": "2026-06-06T14:19:33Z",
+      "created_at": "2026-06-06T14:02:11Z"
+    },
+    {
+      "id": 27096628295,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-06-07T15:22:17Z",
+      "updated_at": "2026-06-07T15:39:41Z",
+      "created_at": "2026-06-07T15:22:17Z"
+    },
+    {
+      "id": 27100685307,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-06-07T18:11:59Z",
+      "updated_at": "2026-06-07T18:28:00Z",
+      "created_at": "2026-06-07T18:11:59Z"
+    },
+    {
+      "id": 27100769638,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-06-07T18:15:25Z",
+      "updated_at": "2026-06-07T18:31:59Z",
+      "created_at": "2026-06-07T18:15:25Z"
+    },
+    {
+      "id": 27835738500,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-06-19T15:53:43Z",
+      "updated_at": "2026-06-19T16:09:19Z",
+      "created_at": "2026-06-19T15:53:43Z"
+    },
+    {
+      "id": 27836348109,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-06-19T16:06:34Z",
+      "updated_at": "2026-06-19T16:25:29Z",
+      "created_at": "2026-06-19T16:06:34Z"
+    },
+    {
+      "id": 27836511517,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-06-19T16:10:11Z",
+      "updated_at": "2026-06-19T16:27:40Z",
+      "created_at": "2026-06-19T16:10:11Z"
+    },
+    {
+      "id": 28399029067,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-06-29T20:00:39Z",
+      "updated_at": "2026-06-29T20:18:44Z",
+      "created_at": "2026-06-29T20:00:39Z"
+    },
+    {
+      "id": 28399215900,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-06-29T20:03:52Z",
+      "updated_at": "2026-06-29T20:21:32Z",
+      "created_at": "2026-06-29T20:03:52Z"
+    },
+    {
+      "id": 28801434974,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-07-06T15:04:05Z",
+      "updated_at": "2026-07-06T15:20:32Z",
+      "created_at": "2026-07-06T15:04:05Z"
+    },
+    {
+      "id": 29031261207,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-07-09T15:52:43Z",
+      "updated_at": "2026-07-09T16:10:43Z",
+      "created_at": "2026-07-09T15:52:43Z"
+    },
+    {
+      "id": 29032015509,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-07-09T16:43:19Z",
+      "updated_at": "2026-07-09T17:01:23Z",
+      "created_at": "2026-07-09T16:04:20Z"
+    },
+    {
+      "id": 29036033056,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-07-09T17:09:26Z",
+      "updated_at": "2026-07-09T17:27:30Z",
+      "created_at": "2026-07-09T17:09:26Z"
+    },
+    {
+      "id": 29036278510,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-07-09T17:13:35Z",
+      "updated_at": "2026-07-09T17:32:27Z",
+      "created_at": "2026-07-09T17:13:35Z"
+    },
+    {
+      "id": 31832041343,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-08-14T19:10:10Z",
+      "updated_at": "2026-08-14T19:28:06Z",
+      "created_at": "2026-08-14T19:10:10Z"
+    },
+    {
+      "id": 32650111981,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-08-23T15:56:16Z",
+      "updated_at": "2026-08-23T16:15:19Z",
+      "created_at": "2026-08-23T15:56:16Z"
+    },
+    {
+      "id": 34757125792,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-13T12:27:10Z",
+      "updated_at": "2026-09-13T12:31:10Z",
+      "created_at": "2026-09-13T12:27:10Z"
+    },
+    {
+      "id": 34757126002,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-13T12:27:10Z",
+      "updated_at": "2026-09-13T13:07:06Z",
+      "created_at": "2026-09-13T12:27:10Z"
+    },
+    {
+      "id": 34758889880,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-13T13:06:04Z",
+      "updated_at": "2026-09-13T13:09:57Z",
+      "created_at": "2026-09-13T13:06:04Z"
+    },
+    {
+      "id": 34758889992,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-13T13:06:04Z",
+      "updated_at": "2026-09-13T13:34:52Z",
+      "created_at": "2026-09-13T13:06:04Z"
+    },
+    {
+      "id": 34760189302,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-13T13:33:49Z",
+      "updated_at": "2026-09-13T13:38:49Z",
+      "created_at": "2026-09-13T13:33:49Z"
+    },
+    {
+      "id": 34760189511,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-13T13:33:49Z",
+      "updated_at": "2026-09-13T14:16:51Z",
+      "created_at": "2026-09-13T13:33:49Z"
+    },
+    {
+      "id": 34775783955,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-13T18:48:55Z",
+      "updated_at": "2026-09-13T18:53:30Z",
+      "created_at": "2026-09-13T18:48:55Z"
+    },
+    {
+      "id": 34775784181,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-13T18:48:55Z",
+      "updated_at": "2026-09-13T19:31:44Z",
+      "created_at": "2026-09-13T18:48:55Z"
+    },
+    {
+      "id": 35229110835,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-17T13:45:31Z",
+      "updated_at": "2026-09-17T13:49:36Z",
+      "created_at": "2026-09-17T13:45:31Z"
+    },
+    {
+      "id": 35229111444,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-17T13:45:31Z",
+      "updated_at": "2026-09-17T14:24:25Z",
+      "created_at": "2026-09-17T13:45:31Z"
+    },
+    {
+      "id": 35230107601,
+      "workflow_id": 44674137,
+      "name": ".github/workflows/system-test.yml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-17T13:54:45Z",
+      "updated_at": "2026-09-17T13:54:45Z",
+      "created_at": "2026-09-17T13:54:45Z"
+    },
+    {
+      "id": 35230108678,
+      "workflow_id": 46021983,
+      "name": ".github/workflows/release.yml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-17T13:54:45Z",
+      "updated_at": "2026-09-17T13:54:45Z",
+      "created_at": "2026-09-17T13:54:45Z"
+    },
+    {
+      "id": 35230109827,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-17T13:54:46Z",
+      "updated_at": "2026-09-17T13:59:54Z",
+      "created_at": "2026-09-17T13:54:46Z"
+    },
+    {
+      "id": 35233361358,
+      "workflow_id": 46021983,
+      "name": ".github/workflows/release.yml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-17T14:24:36Z",
+      "updated_at": "2026-09-17T14:24:36Z",
+      "created_at": "2026-09-17T14:24:36Z"
+    },
+    {
+      "id": 35233362641,
+      "workflow_id": 44674137,
+      "name": ".github/workflows/system-test.yml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-17T14:24:37Z",
+      "updated_at": "2026-09-17T14:24:37Z",
+      "created_at": "2026-09-17T14:24:37Z"
+    },
+    {
+      "id": 35233364127,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-17T14:24:38Z",
+      "updated_at": "2026-09-17T14:29:35Z",
+      "created_at": "2026-09-17T14:24:38Z"
+    },
+    {
+      "id": 35233695022,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-17T14:27:34Z",
+      "updated_at": "2026-09-17T14:32:39Z",
+      "created_at": "2026-09-17T14:27:34Z"
+    },
+    {
+      "id": 35233695874,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-17T14:27:34Z",
+      "updated_at": "2026-09-17T15:09:50Z",
+      "created_at": "2026-09-17T14:27:34Z"
+    },
+    {
+      "id": 35238217967,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-17T15:08:03Z",
+      "updated_at": "2026-09-17T15:13:15Z",
+      "created_at": "2026-09-17T15:08:03Z"
+    },
+    {
+      "id": 35238219269,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-17T15:08:03Z",
+      "updated_at": "2026-09-17T15:11:33Z",
+      "created_at": "2026-09-17T15:08:03Z"
+    },
+    {
+      "id": 35238472265,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-17T15:10:24Z",
+      "updated_at": "2026-09-17T15:13:17Z",
+      "created_at": "2026-09-17T15:10:24Z"
+    },
+    {
+      "id": 35238472472,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-17T15:13:35Z",
+      "updated_at": "2026-09-17T15:39:06Z",
+      "created_at": "2026-09-17T15:10:24Z"
+    },
+    {
+      "id": 35241486307,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-17T15:37:50Z",
+      "updated_at": "2026-09-17T15:42:47Z",
+      "created_at": "2026-09-17T15:37:50Z"
+    },
+    {
+      "id": 35241486457,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-17T15:37:50Z",
+      "updated_at": "2026-09-17T16:23:42Z",
+      "created_at": "2026-09-17T15:37:50Z"
+    },
+    {
+      "id": 35247613194,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-17T16:36:19Z",
+      "updated_at": "2026-09-17T16:41:00Z",
+      "created_at": "2026-09-17T16:36:19Z"
+    },
+    {
+      "id": 35247613730,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-17T16:36:20Z",
+      "updated_at": "2026-09-17T17:03:08Z",
+      "created_at": "2026-09-17T16:36:20Z"
+    },
+    {
+      "id": 35252384374,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-17T17:22:53Z",
+      "updated_at": "2026-09-17T17:27:44Z",
+      "created_at": "2026-09-17T17:22:53Z"
+    },
+    {
+      "id": 35252384678,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-17T17:22:54Z",
+      "updated_at": "2026-09-17T18:04:25Z",
+      "created_at": "2026-09-17T17:22:54Z"
+    },
+    {
+      "id": 35308626733,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-18T04:52:33Z",
+      "updated_at": "2026-09-18T04:57:34Z",
+      "created_at": "2026-09-18T04:52:33Z"
+    },
+    {
+      "id": 35308626901,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-18T04:52:33Z",
+      "updated_at": "2026-09-18T04:54:52Z",
+      "created_at": "2026-09-18T04:52:33Z"
+    },
+    {
+      "id": 35308742322,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-18T04:54:20Z",
+      "updated_at": "2026-09-18T04:58:56Z",
+      "created_at": "2026-09-18T04:54:20Z"
+    },
+    {
+      "id": 35308742589,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-18T04:54:20Z",
+      "updated_at": "2026-09-18T05:37:02Z",
+      "created_at": "2026-09-18T04:54:20Z"
+    },
+    {
+      "id": 35362164664,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-18T15:23:53Z",
+      "updated_at": "2026-09-18T15:28:49Z",
+      "created_at": "2026-09-18T15:23:53Z"
+    },
+    {
+      "id": 35362165137,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-18T15:23:53Z",
+      "updated_at": "2026-09-18T16:06:28Z",
+      "created_at": "2026-09-18T15:23:53Z"
+    },
+    {
+      "id": 35370739021,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-18T16:49:27Z",
+      "updated_at": "2026-09-18T16:54:20Z",
+      "created_at": "2026-09-18T16:49:27Z"
+    },
+    {
+      "id": 35370739398,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-18T16:49:28Z",
+      "updated_at": "2026-09-18T16:53:20Z",
+      "created_at": "2026-09-18T16:49:28Z"
+    },
+    {
+      "id": 35370884813,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-18T16:50:57Z",
+      "updated_at": "2026-09-18T16:56:24Z",
+      "created_at": "2026-09-18T16:50:57Z"
+    },
+    {
+      "id": 35370885257,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-18T16:50:57Z",
+      "updated_at": "2026-09-18T17:38:47Z",
+      "created_at": "2026-09-18T16:50:57Z"
+    },
+    {
+      "id": 35382449654,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-18T18:49:48Z",
+      "updated_at": "2026-09-18T18:54:54Z",
+      "created_at": "2026-09-18T18:49:48Z"
+    },
+    {
+      "id": 35382450022,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-18T18:49:49Z",
+      "updated_at": "2026-09-18T19:32:01Z",
+      "created_at": "2026-09-18T18:49:49Z"
+    },
+    {
+      "id": 35425961729,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-19T06:12:01Z",
+      "updated_at": "2026-09-19T06:17:20Z",
+      "created_at": "2026-09-19T06:12:01Z"
+    },
+    {
+      "id": 35425962166,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-19T06:12:02Z",
+      "updated_at": "2026-09-19T06:54:07Z",
+      "created_at": "2026-09-19T06:12:02Z"
+    },
+    {
+      "id": 35428097892,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-19T06:59:37Z",
+      "updated_at": "2026-09-19T07:03:32Z",
+      "created_at": "2026-09-19T06:59:37Z"
+    },
+    {
+      "id": 35428098145,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-19T06:59:37Z",
+      "updated_at": "2026-09-19T07:30:55Z",
+      "created_at": "2026-09-19T06:59:37Z"
+    },
+    {
+      "id": 35449211484,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-19T14:35:33Z",
+      "updated_at": "2026-09-19T14:40:28Z",
+      "created_at": "2026-09-19T14:35:33Z"
+    },
+    {
+      "id": 35449211551,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-19T14:35:34Z",
+      "updated_at": "2026-09-19T15:05:47Z",
+      "created_at": "2026-09-19T14:35:34Z"
+    },
+    {
+      "id": 35491712851,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-20T05:27:12Z",
+      "updated_at": "2026-09-20T05:32:34Z",
+      "created_at": "2026-09-20T05:27:12Z"
+    },
+    {
+      "id": 35491713118,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-20T05:27:12Z",
+      "updated_at": "2026-09-20T06:06:36Z",
+      "created_at": "2026-09-20T05:27:12Z"
+    },
+    {
+      "id": 35494579881,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-20T06:34:27Z",
+      "updated_at": "2026-09-20T06:37:59Z",
+      "created_at": "2026-09-20T06:34:27Z"
+    },
+    {
+      "id": 35494580041,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-20T06:34:27Z",
+      "updated_at": "2026-09-20T06:36:59Z",
+      "created_at": "2026-09-20T06:34:27Z"
+    },
+    {
+      "id": 35494673578,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-20T06:36:34Z",
+      "updated_at": "2026-09-20T06:41:36Z",
+      "created_at": "2026-09-20T06:36:34Z"
+    },
+    {
+      "id": 35494673775,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-20T06:36:35Z",
+      "updated_at": "2026-09-20T06:36:48Z",
+      "created_at": "2026-09-20T06:36:35Z"
+    },
+    {
+      "id": 35494682747,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-20T06:36:47Z",
+      "updated_at": "2026-09-20T06:42:07Z",
+      "created_at": "2026-09-20T06:36:47Z"
+    },
+    {
+      "id": 35494682915,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-20T06:36:47Z",
+      "updated_at": "2026-09-20T06:54:09Z",
+      "created_at": "2026-09-20T06:36:47Z"
+    },
+    {
+      "id": 35495379863,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-20T06:52:54Z",
+      "updated_at": "2026-09-20T06:57:33Z",
+      "created_at": "2026-09-20T06:52:54Z"
+    },
+    {
+      "id": 35495380031,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-20T06:52:55Z",
+      "updated_at": "2026-09-20T06:54:07Z",
+      "created_at": "2026-09-20T06:52:55Z"
+    },
+    {
+      "id": 35495432507,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-20T06:54:05Z",
+      "updated_at": "2026-09-20T06:58:11Z",
+      "created_at": "2026-09-20T06:54:05Z"
+    },
+    {
+      "id": 35495432717,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-20T06:54:06Z",
+      "updated_at": "2026-09-20T07:36:12Z",
+      "created_at": "2026-09-20T06:54:06Z"
+    },
+    {
+      "id": 35527820427,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-20T18:03:25Z",
+      "updated_at": "2026-09-20T18:07:41Z",
+      "created_at": "2026-09-20T18:03:25Z"
+    },
+    {
+      "id": 35527820643,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-20T18:03:25Z",
+      "updated_at": "2026-09-20T18:10:25Z",
+      "created_at": "2026-09-20T18:03:25Z"
+    },
+    {
+      "id": 35530651926,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-20T18:56:17Z",
+      "updated_at": "2026-09-20T19:01:24Z",
+      "created_at": "2026-09-20T18:56:17Z"
+    },
+    {
+      "id": 35530652191,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-20T18:56:17Z",
+      "updated_at": "2026-09-20T19:32:25Z",
+      "created_at": "2026-09-20T18:56:17Z"
+    },
+    {
+      "id": 35532568860,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-20T19:31:21Z",
+      "updated_at": "2026-09-20T19:36:37Z",
+      "created_at": "2026-09-20T19:31:21Z"
+    },
+    {
+      "id": 35532569309,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-20T19:31:21Z",
+      "updated_at": "2026-09-20T20:13:58Z",
+      "created_at": "2026-09-20T19:31:21Z"
+    },
+    {
+      "id": 35593399320,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-21T11:18:57Z",
+      "updated_at": "2026-09-21T11:23:58Z",
+      "created_at": "2026-09-21T11:18:57Z"
+    },
+    {
+      "id": 35593399713,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-21T11:18:57Z",
+      "updated_at": "2026-09-21T12:01:19Z",
+      "created_at": "2026-09-21T11:18:57Z"
+    },
+    {
+      "id": 35607895971,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-21T13:47:40Z",
+      "updated_at": "2026-09-21T13:53:18Z",
+      "created_at": "2026-09-21T13:47:40Z"
+    },
+    {
+      "id": 35607896623,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-21T13:47:40Z",
+      "updated_at": "2026-09-21T14:31:23Z",
+      "created_at": "2026-09-21T13:47:40Z"
+    },
+    {
+      "id": 35622769249,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-21T16:00:32Z",
+      "updated_at": "2026-09-21T16:06:07Z",
+      "created_at": "2026-09-21T16:00:32Z"
+    },
+    {
+      "id": 35622770164,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-21T16:00:32Z",
+      "updated_at": "2026-09-21T16:18:09Z",
+      "created_at": "2026-09-21T16:00:32Z"
+    },
+    {
+      "id": 35624472292,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-21T16:15:46Z",
+      "updated_at": "2026-09-21T16:21:16Z",
+      "created_at": "2026-09-21T16:15:46Z"
+    },
+    {
+      "id": 35624472766,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-21T16:15:46Z",
+      "updated_at": "2026-09-21T16:17:20Z",
+      "created_at": "2026-09-21T16:15:46Z"
+    },
+    {
+      "id": 35624632860,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-21T16:17:18Z",
+      "updated_at": "2026-09-21T16:22:30Z",
+      "created_at": "2026-09-21T16:17:18Z"
+    },
+    {
+      "id": 35624633395,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-21T16:17:18Z",
+      "updated_at": "2026-09-21T16:55:37Z",
+      "created_at": "2026-09-21T16:17:18Z"
+    },
+    {
+      "id": 35729279765,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-22T12:47:00Z",
+      "updated_at": "2026-09-22T12:51:05Z",
+      "created_at": "2026-09-22T12:47:00Z"
+    },
+    {
+      "id": 35729280186,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-22T12:47:00Z",
+      "updated_at": "2026-09-22T13:30:49Z",
+      "created_at": "2026-09-22T12:47:00Z"
+    },
+    {
+      "id": 35737018071,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-22T13:58:01Z",
+      "updated_at": "2026-09-22T13:58:45Z",
+      "created_at": "2026-09-22T13:58:01Z"
+    },
+    {
+      "id": 35737018675,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-22T13:58:01Z",
+      "updated_at": "2026-09-22T13:59:52Z",
+      "created_at": "2026-09-22T13:58:01Z"
+    },
+    {
+      "id": 35737158963,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-22T13:59:17Z",
+      "updated_at": "2026-09-22T13:59:59Z",
+      "created_at": "2026-09-22T13:59:17Z"
+    },
+    {
+      "id": 35737159821,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-22T13:59:17Z",
+      "updated_at": "2026-09-22T14:39:59Z",
+      "created_at": "2026-09-22T13:59:17Z"
+    },
+    {
+      "id": 35900942943,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-23T18:13:13Z",
+      "updated_at": "2026-09-23T18:13:58Z",
+      "created_at": "2026-09-23T18:13:13Z"
+    },
+    {
+      "id": 35900943551,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-23T18:13:14Z",
+      "updated_at": "2026-09-23T18:22:25Z",
+      "created_at": "2026-09-23T18:13:14Z"
+    },
+    {
+      "id": 35901677523,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-23T18:19:38Z",
+      "updated_at": "2026-09-23T18:20:20Z",
+      "created_at": "2026-09-23T18:19:38Z"
+    },
+    {
+      "id": 35901678136,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-23T18:19:38Z",
+      "updated_at": "2026-09-23T19:06:15Z",
+      "created_at": "2026-09-23T18:19:38Z"
+    },
+    {
+      "id": 35972635683,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-24T07:59:25Z",
+      "updated_at": "2026-09-24T08:00:09Z",
+      "created_at": "2026-09-24T07:59:25Z"
+    },
+    {
+      "id": 35972635956,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-24T07:59:25Z",
+      "updated_at": "2026-09-24T08:34:30Z",
+      "created_at": "2026-09-24T07:59:25Z"
+    },
+    {
+      "id": 35982325393,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-24T09:37:07Z",
+      "updated_at": "2026-09-24T09:37:49Z",
+      "created_at": "2026-09-24T09:37:07Z"
+    },
+    {
+      "id": 35982325974,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-24T09:37:07Z",
+      "updated_at": "2026-09-24T09:55:53Z",
+      "created_at": "2026-09-24T09:37:07Z"
+    },
+    {
+      "id": 35984058636,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-24T09:54:10Z",
+      "updated_at": "2026-09-24T10:00:04Z",
+      "created_at": "2026-09-24T09:54:10Z"
+    },
+    {
+      "id": 35984058937,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-24T09:54:10Z",
+      "updated_at": "2026-09-24T10:43:22Z",
+      "created_at": "2026-09-24T09:54:10Z"
+    },
+    {
+      "id": 36002400200,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-24T12:57:26Z",
+      "updated_at": "2026-09-24T13:02:39Z",
+      "created_at": "2026-09-24T12:57:26Z"
+    },
+    {
+      "id": 36002400711,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-24T12:57:27Z",
+      "updated_at": "2026-09-24T13:41:42Z",
+      "created_at": "2026-09-24T12:57:27Z"
+    },
+    {
+      "id": 36027901379,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-24T16:30:57Z",
+      "updated_at": "2026-09-24T16:36:47Z",
+      "created_at": "2026-09-24T16:30:57Z"
+    },
+    {
+      "id": 36027902374,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-24T16:30:57Z",
+      "updated_at": "2026-09-24T16:33:25Z",
+      "created_at": "2026-09-24T16:30:57Z"
+    },
+    {
+      "id": 36028037948,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-24T16:32:07Z",
+      "updated_at": "2026-09-24T16:37:43Z",
+      "created_at": "2026-09-24T16:32:07Z"
+    },
+    {
+      "id": 36028038486,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-24T16:32:08Z",
+      "updated_at": "2026-09-24T16:57:08Z",
+      "created_at": "2026-09-24T16:32:08Z"
+    },
+    {
+      "id": 36035248297,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-24T17:34:25Z",
+      "updated_at": "2026-09-24T17:40:16Z",
+      "created_at": "2026-09-24T17:34:25Z"
+    },
+    {
+      "id": 36035248637,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-24T17:34:26Z",
+      "updated_at": "2026-09-24T17:37:54Z",
+      "created_at": "2026-09-24T17:34:26Z"
+    },
+    {
+      "id": 36045818902,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-24T19:06:02Z",
+      "updated_at": "2026-09-24T19:11:33Z",
+      "created_at": "2026-09-24T19:06:02Z"
+    },
+    {
+      "id": 36045819487,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-24T19:06:02Z",
+      "updated_at": "2026-09-24T19:45:45Z",
+      "created_at": "2026-09-24T19:06:02Z"
+    },
+    {
+      "id": 36251165817,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-26T15:13:11Z",
+      "updated_at": "2026-09-26T15:19:03Z",
+      "created_at": "2026-09-26T15:13:11Z"
+    },
+    {
+      "id": 36251166052,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-26T15:13:12Z",
+      "updated_at": "2026-09-26T15:50:23Z",
+      "created_at": "2026-09-26T15:13:12Z"
+    },
+    {
+      "id": 36258454006,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-26T17:16:41Z",
+      "updated_at": "2026-09-26T17:22:14Z",
+      "created_at": "2026-09-26T17:16:41Z"
+    },
+    {
+      "id": 36258454175,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-26T17:16:41Z",
+      "updated_at": "2026-09-26T17:43:53Z",
+      "created_at": "2026-09-26T17:16:41Z"
+    },
+    {
+      "id": 36260019325,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-26T17:43:08Z",
+      "updated_at": "2026-09-26T17:47:15Z",
+      "created_at": "2026-09-26T17:43:08Z"
+    },
+    {
+      "id": 36260019504,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-26T17:43:08Z",
+      "updated_at": "2026-09-26T17:44:36Z",
+      "created_at": "2026-09-26T17:43:08Z"
+    },
+    {
+      "id": 36260086577,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-26T17:44:19Z",
+      "updated_at": "2026-09-26T17:49:32Z",
+      "created_at": "2026-09-26T17:44:19Z"
+    },
+    {
+      "id": 36260086810,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-26T17:44:19Z",
+      "updated_at": "2026-09-26T18:11:59Z",
+      "created_at": "2026-09-26T17:44:19Z"
+    },
+    {
+      "id": 36261596442,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-26T18:10:21Z",
+      "updated_at": "2026-09-26T18:14:32Z",
+      "created_at": "2026-09-26T18:10:21Z"
+    },
+    {
+      "id": 36261596829,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-26T18:10:22Z",
+      "updated_at": "2026-09-26T18:22:03Z",
+      "created_at": "2026-09-26T18:10:22Z"
+    },
+    {
+      "id": 36262197907,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-26T18:20:35Z",
+      "updated_at": "2026-09-26T18:26:38Z",
+      "created_at": "2026-09-26T18:20:35Z"
+    },
+    {
+      "id": 36262198013,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-26T18:20:35Z",
+      "updated_at": "2026-09-26T19:05:35Z",
+      "created_at": "2026-09-26T18:20:35Z"
+    },
+    {
+      "id": 36306721397,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-27T08:36:21Z",
+      "updated_at": "2026-09-27T08:41:51Z",
+      "created_at": "2026-09-27T08:36:21Z"
+    },
+    {
+      "id": 36306721696,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-27T08:36:21Z",
+      "updated_at": "2026-09-27T09:22:40Z",
+      "created_at": "2026-09-27T08:36:21Z"
+    },
+    {
+      "id": 36312693875,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-27T10:29:27Z",
+      "updated_at": "2026-09-27T10:33:28Z",
+      "created_at": "2026-09-27T10:29:27Z"
+    },
+    {
+      "id": 36312694028,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-27T10:29:27Z",
+      "updated_at": "2026-09-27T11:03:30Z",
+      "created_at": "2026-09-27T10:29:27Z"
+    },
+    {
+      "id": 36326697765,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-27T14:39:25Z",
+      "updated_at": "2026-09-27T14:44:57Z",
+      "created_at": "2026-09-27T14:39:25Z"
+    },
+    {
+      "id": 36326698064,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-27T14:39:26Z",
+      "updated_at": "2026-09-27T15:07:40Z",
+      "created_at": "2026-09-27T14:39:26Z"
+    },
+    {
+      "id": 36335359709,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-27T17:01:11Z",
+      "updated_at": "2026-09-27T17:06:45Z",
+      "created_at": "2026-09-27T17:01:11Z"
+    },
+    {
+      "id": 36335360075,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-27T17:01:11Z",
+      "updated_at": "2026-09-27T17:32:35Z",
+      "created_at": "2026-09-27T17:01:11Z"
+    },
+    {
+      "id": 36338574226,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-27T17:52:50Z",
+      "updated_at": "2026-09-27T17:58:36Z",
+      "created_at": "2026-09-27T17:52:50Z"
+    },
+    {
+      "id": 36338574600,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-27T17:52:50Z",
+      "updated_at": "2026-09-27T18:31:43Z",
+      "created_at": "2026-09-27T17:52:50Z"
+    },
+    {
+      "id": 36343800519,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-27T19:17:19Z",
+      "updated_at": "2026-09-27T19:22:54Z",
+      "created_at": "2026-09-27T19:17:19Z"
+    },
+    {
+      "id": 36343800773,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-27T19:17:19Z",
+      "updated_at": "2026-09-27T19:19:00Z",
+      "created_at": "2026-09-27T19:17:19Z"
+    },
+    {
+      "id": 36343851346,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-27T19:18:09Z",
+      "updated_at": "2026-09-27T19:23:48Z",
+      "created_at": "2026-09-27T19:18:09Z"
+    },
+    {
+      "id": 36343851794,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-27T19:18:09Z",
+      "updated_at": "2026-09-27T20:05:53Z",
+      "created_at": "2026-09-27T19:18:09Z"
+    },
+    {
+      "id": 36398778717,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-28T08:40:37Z",
+      "updated_at": "2026-09-28T08:45:07Z",
+      "created_at": "2026-09-28T08:40:37Z"
+    },
+    {
+      "id": 36398779032,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-28T08:40:37Z",
+      "updated_at": "2026-09-28T09:25:01Z",
+      "created_at": "2026-09-28T08:40:37Z"
+    },
+    {
+      "id": 36407366393,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-28T10:03:30Z",
+      "updated_at": "2026-09-28T10:08:41Z",
+      "created_at": "2026-09-28T10:03:30Z"
+    },
+    {
+      "id": 36407367127,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-28T10:03:30Z",
+      "updated_at": "2026-09-28T10:48:17Z",
+      "created_at": "2026-09-28T10:03:30Z"
+    },
+    {
+      "id": 36417271733,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-28T11:42:41Z",
+      "updated_at": "2026-09-28T11:46:42Z",
+      "created_at": "2026-09-28T11:42:41Z"
+    },
+    {
+      "id": 36417272148,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-28T11:42:41Z",
+      "updated_at": "2026-09-28T12:26:31Z",
+      "created_at": "2026-09-28T11:42:41Z"
+    },
+    {
+      "id": 36461456817,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-28T17:54:30Z",
+      "updated_at": "2026-09-28T18:00:36Z",
+      "created_at": "2026-09-28T17:54:30Z"
+    },
+    {
+      "id": 36461457528,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-28T17:54:30Z",
+      "updated_at": "2026-09-28T18:41:07Z",
+      "created_at": "2026-09-28T17:54:30Z"
+    },
+    {
+      "id": 36467718791,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-28T18:47:49Z",
+      "updated_at": "2026-09-28T18:53:18Z",
+      "created_at": "2026-09-28T18:47:49Z"
+    },
+    {
+      "id": 36467719066,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-28T18:47:50Z",
+      "updated_at": "2026-09-28T18:50:49Z",
+      "created_at": "2026-09-28T18:47:50Z"
+    },
+    {
+      "id": 36467760819,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-28T18:48:11Z",
+      "updated_at": "2026-09-28T18:53:53Z",
+      "created_at": "2026-09-28T18:48:11Z"
+    },
+    {
+      "id": 36467761697,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-28T18:48:11Z",
+      "updated_at": "2026-09-28T19:35:59Z",
+      "created_at": "2026-09-28T18:48:11Z"
+    },
+    {
+      "id": 36523426552,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-29T04:50:43Z",
+      "updated_at": "2026-09-29T04:55:41Z",
+      "created_at": "2026-09-29T04:50:43Z"
+    },
+    {
+      "id": 36523426960,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-29T04:50:43Z",
+      "updated_at": "2026-09-29T05:29:55Z",
+      "created_at": "2026-09-29T04:50:43Z"
+    },
+    {
+      "id": 36531436498,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-29T06:30:40Z",
+      "updated_at": "2026-09-29T06:37:00Z",
+      "created_at": "2026-09-29T06:30:40Z"
+    },
+    {
+      "id": 36531436933,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-29T06:30:40Z",
+      "updated_at": "2026-09-29T06:33:39Z",
+      "created_at": "2026-09-29T06:30:40Z"
+    },
+    {
+      "id": 36531556446,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-29T06:32:02Z",
+      "updated_at": "2026-09-29T06:37:39Z",
+      "created_at": "2026-09-29T06:32:02Z"
+    },
+    {
+      "id": 36531556903,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-29T06:32:02Z",
+      "updated_at": "2026-09-29T07:15:07Z",
+      "created_at": "2026-09-29T06:32:02Z"
+    },
+    {
+      "id": 36720028846,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-30T13:12:55Z",
+      "updated_at": "2026-09-30T13:18:30Z",
+      "created_at": "2026-09-30T13:12:55Z"
+    },
+    {
+      "id": 36720029300,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-30T13:12:55Z",
+      "updated_at": "2026-09-30T13:17:16Z",
+      "created_at": "2026-09-30T13:12:55Z"
+    },
+    {
+      "id": 36720258193,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-30T13:14:52Z",
+      "updated_at": "2026-09-30T13:19:15Z",
+      "created_at": "2026-09-30T13:14:52Z"
+    },
+    {
+      "id": 36720258516,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-30T13:14:52Z",
+      "updated_at": "2026-09-30T13:46:47Z",
+      "created_at": "2026-09-30T13:14:52Z"
+    },
+    {
+      "id": 36729358432,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-30T14:28:18Z",
+      "updated_at": "2026-09-30T14:34:16Z",
+      "created_at": "2026-09-30T14:28:18Z"
+    },
+    {
+      "id": 36729359197,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-30T14:28:18Z",
+      "updated_at": "2026-09-30T15:17:30Z",
+      "created_at": "2026-09-30T14:28:18Z"
+    },
+    {
+      "id": 36739679541,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-30T15:49:41Z",
+      "updated_at": "2026-09-30T15:54:00Z",
+      "created_at": "2026-09-30T15:49:41Z"
+    },
+    {
+      "id": 36739680180,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-30T15:49:41Z",
+      "updated_at": "2026-09-30T15:51:52Z",
+      "created_at": "2026-09-30T15:49:41Z"
+    },
+    {
+      "id": 36739830166,
+      "workflow_id": 331320319,
+      "name": "Frontend CI",
+      "conclusion": "success",
+      "run_started_at": "2026-09-30T15:50:53Z",
+      "updated_at": "2026-09-30T15:57:38Z",
+      "created_at": "2026-09-30T15:50:53Z"
+    },
+    {
+      "id": 36739830703,
+      "workflow_id": 44674137,
+      "name": "system-test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-30T15:50:53Z",
+      "updated_at": "2026-09-30T16:34:35Z",
+      "created_at": "2026-09-30T15:50:53Z"
+    }
+  ]
+}

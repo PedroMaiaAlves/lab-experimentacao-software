@@ -1,0 +1,514 @@
+{
+  "full_name": "dtcooper/raspotify",
+  "default_branch": "master",
+  "janela_inicio": "2025-10-01",
+  "janela_fim": "2026-09-30",
+  "complete": true,
+  "saturated_intervals": [],
+  "workflow_runs": [
+    {
+      "id": 18575661196,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-10-16T21:45:34Z",
+      "updated_at": "2025-10-16T21:45:34Z",
+      "created_at": "2025-10-16T21:45:34Z"
+    },
+    {
+      "id": 18575661400,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "failure",
+      "run_started_at": "2025-10-17T11:18:21Z",
+      "updated_at": "2025-10-17T11:24:34Z",
+      "created_at": "2025-10-16T21:45:35Z"
+    },
+    {
+      "id": 18591097715,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-10-17T11:18:22Z",
+      "updated_at": "2025-10-17T11:18:22Z",
+      "created_at": "2025-10-17T11:18:22Z"
+    },
+    {
+      "id": 19164916040,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-11-07T10:03:03Z",
+      "updated_at": "2025-11-07T10:03:03Z",
+      "created_at": "2025-11-07T10:03:03Z"
+    },
+    {
+      "id": 19164916403,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "failure",
+      "run_started_at": "2025-11-07T10:03:03Z",
+      "updated_at": "2025-11-07T10:03:14Z",
+      "created_at": "2025-11-07T10:03:03Z"
+    },
+    {
+      "id": 19164917494,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-11-07T10:03:06Z",
+      "updated_at": "2025-11-07T10:03:06Z",
+      "created_at": "2025-11-07T10:03:06Z"
+    },
+    {
+      "id": 19229049986,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-11-10T10:48:50Z",
+      "updated_at": "2025-11-10T10:48:50Z",
+      "created_at": "2025-11-10T10:48:50Z"
+    },
+    {
+      "id": 19229050326,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "failure",
+      "run_started_at": "2025-11-10T10:48:51Z",
+      "updated_at": "2025-11-10T10:48:59Z",
+      "created_at": "2025-11-10T10:48:51Z"
+    },
+    {
+      "id": 19293855763,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-11-12T10:12:27Z",
+      "updated_at": "2025-11-12T10:12:27Z",
+      "created_at": "2025-11-12T10:12:27Z"
+    },
+    {
+      "id": 19293856218,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "success",
+      "run_started_at": "2025-11-12T10:12:27Z",
+      "updated_at": "2025-11-12T10:19:13Z",
+      "created_at": "2025-11-12T10:12:27Z"
+    },
+    {
+      "id": 19294430381,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-11-12T10:33:30Z",
+      "updated_at": "2025-11-12T10:33:30Z",
+      "created_at": "2025-11-12T10:33:30Z"
+    },
+    {
+      "id": 19295144359,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-11-12T11:00:31Z",
+      "updated_at": "2025-11-12T11:00:31Z",
+      "created_at": "2025-11-12T11:00:31Z"
+    },
+    {
+      "id": 19295144738,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "success",
+      "run_started_at": "2025-11-12T11:00:32Z",
+      "updated_at": "2025-11-12T11:07:27Z",
+      "created_at": "2025-11-12T11:00:32Z"
+    },
+    {
+      "id": 19627978842,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-11-24T08:31:37Z",
+      "updated_at": "2025-11-24T08:31:37Z",
+      "created_at": "2025-11-24T08:31:37Z"
+    },
+    {
+      "id": 19627979169,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "success",
+      "run_started_at": "2025-11-24T08:31:37Z",
+      "updated_at": "2025-11-24T08:38:46Z",
+      "created_at": "2025-11-24T08:31:37Z"
+    },
+    {
+      "id": 19629086931,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-11-24T09:14:49Z",
+      "updated_at": "2025-11-24T09:14:49Z",
+      "created_at": "2025-11-24T09:14:49Z"
+    },
+    {
+      "id": 19629087294,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "success",
+      "run_started_at": "2025-11-24T09:14:50Z",
+      "updated_at": "2025-11-24T09:21:41Z",
+      "created_at": "2025-11-24T09:14:50Z"
+    },
+    {
+      "id": 19629855339,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-11-24T09:43:34Z",
+      "updated_at": "2025-11-24T09:43:34Z",
+      "created_at": "2025-11-24T09:43:34Z"
+    },
+    {
+      "id": 19629855687,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "failure",
+      "run_started_at": "2025-11-24T09:43:35Z",
+      "updated_at": "2025-11-24T09:50:17Z",
+      "created_at": "2025-11-24T09:43:35Z"
+    },
+    {
+      "id": 19629856478,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-11-24T09:43:37Z",
+      "updated_at": "2025-11-24T09:43:37Z",
+      "created_at": "2025-11-24T09:43:37Z"
+    },
+    {
+      "id": 19853879586,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-02T09:35:07Z",
+      "updated_at": "2025-12-02T09:35:07Z",
+      "created_at": "2025-12-02T09:35:07Z"
+    },
+    {
+      "id": 19853880022,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "success",
+      "run_started_at": "2025-12-02T09:35:08Z",
+      "updated_at": "2025-12-02T09:42:28Z",
+      "created_at": "2025-12-02T09:35:08Z"
+    },
+    {
+      "id": 24878691135,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2026-04-24T07:54:12Z",
+      "updated_at": "2026-04-24T07:54:12Z",
+      "created_at": "2026-04-24T07:54:12Z"
+    },
+    {
+      "id": 24878691703,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "success",
+      "run_started_at": "2026-04-24T07:54:13Z",
+      "updated_at": "2026-04-24T08:01:07Z",
+      "created_at": "2026-04-24T07:54:13Z"
+    },
+    {
+      "id": 27950426176,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-22T11:48:48Z",
+      "updated_at": "2026-06-22T11:48:48Z",
+      "created_at": "2026-06-22T11:48:48Z"
+    },
+    {
+      "id": 27950426932,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "success",
+      "run_started_at": "2026-06-22T11:48:49Z",
+      "updated_at": "2026-06-22T11:56:29Z",
+      "created_at": "2026-06-22T11:48:49Z"
+    },
+    {
+      "id": 29660456817,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-18T20:50:07Z",
+      "updated_at": "2026-07-18T20:50:07Z",
+      "created_at": "2026-07-18T20:50:07Z"
+    },
+    {
+      "id": 29660457322,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "success",
+      "run_started_at": "2026-07-18T20:50:08Z",
+      "updated_at": "2026-07-18T21:11:01Z",
+      "created_at": "2026-07-18T20:50:08Z"
+    },
+    {
+      "id": 29661733041,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-18T21:30:44Z",
+      "updated_at": "2026-07-18T21:30:44Z",
+      "created_at": "2026-07-18T21:30:44Z"
+    },
+    {
+      "id": 29661733447,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "success",
+      "run_started_at": "2026-07-18T21:30:45Z",
+      "updated_at": "2026-07-18T21:37:45Z",
+      "created_at": "2026-07-18T21:30:45Z"
+    },
+    {
+      "id": 29661734694,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-18T21:30:48Z",
+      "updated_at": "2026-07-18T21:30:48Z",
+      "created_at": "2026-07-18T21:30:48Z"
+    },
+    {
+      "id": 30793037988,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2026-08-03T07:16:20Z",
+      "updated_at": "2026-08-03T07:16:20Z",
+      "created_at": "2026-08-03T07:16:20Z"
+    },
+    {
+      "id": 30793039036,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "success",
+      "run_started_at": "2026-08-03T07:16:21Z",
+      "updated_at": "2026-08-03T07:23:26Z",
+      "created_at": "2026-08-03T07:16:21Z"
+    },
+    {
+      "id": 33602484902,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-02T07:13:13Z",
+      "updated_at": "2026-09-02T07:13:13Z",
+      "created_at": "2026-09-02T07:13:13Z"
+    },
+    {
+      "id": 33602485942,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-02T07:13:14Z",
+      "updated_at": "2026-09-02T07:14:54Z",
+      "created_at": "2026-09-02T07:13:14Z"
+    },
+    {
+      "id": 33602590727,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-02T07:14:31Z",
+      "updated_at": "2026-09-02T07:14:31Z",
+      "created_at": "2026-09-02T07:14:31Z"
+    },
+    {
+      "id": 33602596408,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-02T07:14:35Z",
+      "updated_at": "2026-09-02T07:22:23Z",
+      "created_at": "2026-09-02T07:14:35Z"
+    },
+    {
+      "id": 33846625806,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-04T06:58:26Z",
+      "updated_at": "2026-09-04T06:58:26Z",
+      "created_at": "2026-09-04T06:58:26Z"
+    },
+    {
+      "id": 33846626723,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-04T06:58:26Z",
+      "updated_at": "2026-09-04T07:05:11Z",
+      "created_at": "2026-09-04T06:58:26Z"
+    },
+    {
+      "id": 34253026289,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-08T16:45:41Z",
+      "updated_at": "2026-09-08T16:45:41Z",
+      "created_at": "2026-09-08T16:45:41Z"
+    },
+    {
+      "id": 34253027248,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-08T16:45:41Z",
+      "updated_at": "2026-09-08T16:52:20Z",
+      "created_at": "2026-09-08T16:45:41Z"
+    },
+    {
+      "id": 35655354185,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-21T21:07:59Z",
+      "updated_at": "2026-09-21T21:07:59Z",
+      "created_at": "2026-09-21T21:07:59Z"
+    },
+    {
+      "id": 35655355811,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-21T21:08:00Z",
+      "updated_at": "2026-09-21T21:14:34Z",
+      "created_at": "2026-09-21T21:08:00Z"
+    },
+    {
+      "id": 35838150219,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-23T08:37:12Z",
+      "updated_at": "2026-09-23T08:37:12Z",
+      "created_at": "2026-09-23T08:37:12Z"
+    },
+    {
+      "id": 35838151442,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-23T08:37:13Z",
+      "updated_at": "2026-09-23T08:43:29Z",
+      "created_at": "2026-09-23T08:37:13Z"
+    },
+    {
+      "id": 35838153877,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-23T08:37:14Z",
+      "updated_at": "2026-09-23T08:37:14Z",
+      "created_at": "2026-09-23T08:37:14Z"
+    },
+    {
+      "id": 35839428396,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-23T08:50:33Z",
+      "updated_at": "2026-09-23T08:56:36Z",
+      "created_at": "2026-09-23T08:50:33Z"
+    },
+    {
+      "id": 35839948548,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-23T08:56:01Z",
+      "updated_at": "2026-09-23T09:02:41Z",
+      "created_at": "2026-09-23T08:56:01Z"
+    },
+    {
+      "id": 35841502203,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-23T09:11:52Z",
+      "updated_at": "2026-09-23T09:17:49Z",
+      "created_at": "2026-09-23T09:11:52Z"
+    },
+    {
+      "id": 35846635704,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-23T10:04:11Z",
+      "updated_at": "2026-09-23T10:07:00Z",
+      "created_at": "2026-09-23T10:04:11Z"
+    },
+    {
+      "id": 35846776509,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-23T10:05:33Z",
+      "updated_at": "2026-09-23T10:12:55Z",
+      "created_at": "2026-09-23T10:05:33Z"
+    },
+    {
+      "id": 35847573862,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-23T10:13:48Z",
+      "updated_at": "2026-09-23T10:19:40Z",
+      "created_at": "2026-09-23T10:13:48Z"
+    },
+    {
+      "id": 35848963854,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-23T10:28:11Z",
+      "updated_at": "2026-09-23T10:34:35Z",
+      "created_at": "2026-09-23T10:28:11Z"
+    },
+    {
+      "id": 35849483747,
+      "workflow_id": 18024614,
+      "name": ".github/workflows/apt-deploy.yml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-23T10:33:33Z",
+      "updated_at": "2026-09-23T10:33:33Z",
+      "created_at": "2026-09-23T10:33:33Z"
+    },
+    {
+      "id": 35849485169,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-09-23T10:33:33Z",
+      "updated_at": "2026-09-23T10:36:11Z",
+      "created_at": "2026-09-23T10:33:33Z"
+    },
+    {
+      "id": 35849604773,
+      "workflow_id": 137803909,
+      "name": "Build test",
+      "conclusion": "success",
+      "run_started_at": "2026-09-23T10:34:47Z",
+      "updated_at": "2026-09-23T10:42:37Z",
+      "created_at": "2026-09-23T10:34:47Z"
+    }
+  ]
+}

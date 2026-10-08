@@ -1,0 +1,1495 @@
+{
+  "full_name": "waditu/czsc",
+  "default_branch": "master",
+  "janela_inicio": "2025-10-01",
+  "janela_fim": "2026-09-30",
+  "complete": true,
+  "saturated_intervals": [],
+  "workflow_runs": [
+    {
+      "id": 18213002635,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2025-10-03T04:36:07Z",
+      "updated_at": "2025-10-03T04:40:54Z",
+      "created_at": "2025-10-03T04:36:07Z"
+    },
+    {
+      "id": 18219267288,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2025-10-03T10:04:53Z",
+      "updated_at": "2025-10-03T10:09:50Z",
+      "created_at": "2025-10-03T10:04:53Z"
+    },
+    {
+      "id": 18223677454,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2025-10-03T13:29:00Z",
+      "updated_at": "2025-10-03T13:33:44Z",
+      "created_at": "2025-10-03T13:29:00Z"
+    },
+    {
+      "id": 18284416476,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-10-06T14:33:33Z",
+      "updated_at": "2025-10-06T14:34:26Z",
+      "created_at": "2025-10-06T14:33:33Z"
+    },
+    {
+      "id": 18284656382,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-10-06T14:41:33Z",
+      "updated_at": "2025-10-06T14:42:34Z",
+      "created_at": "2025-10-06T14:41:33Z"
+    },
+    {
+      "id": 18429914894,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-10-11T13:16:40Z",
+      "updated_at": "2025-10-11T13:17:39Z",
+      "created_at": "2025-10-11T13:16:40Z"
+    },
+    {
+      "id": 18429959769,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-10-11T13:20:37Z",
+      "updated_at": "2025-10-11T13:21:33Z",
+      "created_at": "2025-10-11T13:20:37Z"
+    },
+    {
+      "id": 18429996941,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-10-11T13:23:49Z",
+      "updated_at": "2025-10-11T13:24:45Z",
+      "created_at": "2025-10-11T13:23:49Z"
+    },
+    {
+      "id": 18471328824,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-10-13T15:51:09Z",
+      "updated_at": "2025-10-13T15:52:06Z",
+      "created_at": "2025-10-13T15:51:09Z"
+    },
+    {
+      "id": 18484293913,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-10-14T03:12:13Z",
+      "updated_at": "2025-10-14T03:13:19Z",
+      "created_at": "2025-10-14T03:12:13Z"
+    },
+    {
+      "id": 18593507098,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-10-17T13:02:01Z",
+      "updated_at": "2025-10-17T13:03:04Z",
+      "created_at": "2025-10-17T13:02:01Z"
+    },
+    {
+      "id": 18594020014,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-10-17T13:21:39Z",
+      "updated_at": "2025-10-17T13:22:49Z",
+      "created_at": "2025-10-17T13:21:39Z"
+    },
+    {
+      "id": 18835396049,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-10-27T09:01:59Z",
+      "updated_at": "2025-10-27T09:08:41Z",
+      "created_at": "2025-10-27T09:01:59Z"
+    },
+    {
+      "id": 18836463823,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-10-27T09:40:25Z",
+      "updated_at": "2025-10-27T09:47:12Z",
+      "created_at": "2025-10-27T09:40:25Z"
+    },
+    {
+      "id": 18844204967,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-10-27T14:19:03Z",
+      "updated_at": "2025-10-27T14:26:06Z",
+      "created_at": "2025-10-27T14:19:03Z"
+    },
+    {
+      "id": 18958100836,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-10-30T23:40:39Z",
+      "updated_at": "2025-10-30T23:43:37Z",
+      "created_at": "2025-10-30T23:40:39Z"
+    },
+    {
+      "id": 18958137743,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-10-30T23:42:54Z",
+      "updated_at": "2025-10-30T23:55:04Z",
+      "created_at": "2025-10-30T23:42:54Z"
+    },
+    {
+      "id": 19069016975,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-11-04T12:42:46Z",
+      "updated_at": "2025-11-04T12:43:41Z",
+      "created_at": "2025-11-04T12:42:46Z"
+    },
+    {
+      "id": 19208223168,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-11-09T12:08:46Z",
+      "updated_at": "2025-11-09T12:09:59Z",
+      "created_at": "2025-11-09T12:08:46Z"
+    },
+    {
+      "id": 19210057176,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-11-09T14:43:04Z",
+      "updated_at": "2025-11-09T14:44:11Z",
+      "created_at": "2025-11-09T14:43:04Z"
+    },
+    {
+      "id": 19210092573,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-11-09T14:46:43Z",
+      "updated_at": "2025-11-09T14:47:40Z",
+      "created_at": "2025-11-09T14:46:43Z"
+    },
+    {
+      "id": 19210271058,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-11-09T15:03:25Z",
+      "updated_at": "2025-11-09T15:04:34Z",
+      "created_at": "2025-11-09T15:03:25Z"
+    },
+    {
+      "id": 19210359490,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-11-09T15:10:13Z",
+      "updated_at": "2025-11-09T15:11:18Z",
+      "created_at": "2025-11-09T15:10:13Z"
+    },
+    {
+      "id": 19210450486,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-11-09T15:17:24Z",
+      "updated_at": "2025-11-09T15:18:15Z",
+      "created_at": "2025-11-09T15:17:24Z"
+    },
+    {
+      "id": 19225493844,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-11-10T08:32:58Z",
+      "updated_at": "2025-11-10T08:35:34Z",
+      "created_at": "2025-11-10T08:32:58Z"
+    },
+    {
+      "id": 19628701360,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2025-11-24T09:00:28Z",
+      "updated_at": "2025-11-24T09:03:38Z",
+      "created_at": "2025-11-24T09:00:28Z"
+    },
+    {
+      "id": 19663179969,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-11-25T08:32:29Z",
+      "updated_at": "2025-11-25T08:34:44Z",
+      "created_at": "2025-11-25T08:32:29Z"
+    },
+    {
+      "id": 20028552550,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-08T12:44:46Z",
+      "updated_at": "2025-12-08T12:47:06Z",
+      "created_at": "2025-12-08T12:44:46Z"
+    },
+    {
+      "id": 20028741182,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-08T12:52:04Z",
+      "updated_at": "2025-12-08T12:54:23Z",
+      "created_at": "2025-12-08T12:52:04Z"
+    },
+    {
+      "id": 20031193370,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2025-12-08T14:17:32Z",
+      "updated_at": "2025-12-08T14:20:55Z",
+      "created_at": "2025-12-08T14:17:32Z"
+    },
+    {
+      "id": 20031527859,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-08T14:28:11Z",
+      "updated_at": "2025-12-08T14:30:32Z",
+      "created_at": "2025-12-08T14:28:11Z"
+    },
+    {
+      "id": 20031879823,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-08T14:39:37Z",
+      "updated_at": "2025-12-08T14:42:08Z",
+      "created_at": "2025-12-08T14:39:37Z"
+    },
+    {
+      "id": 20058531328,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2025-12-09T09:28:41Z",
+      "updated_at": "2025-12-09T09:31:57Z",
+      "created_at": "2025-12-09T09:28:41Z"
+    },
+    {
+      "id": 20063214085,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-09T12:18:54Z",
+      "updated_at": "2025-12-09T12:21:13Z",
+      "created_at": "2025-12-09T12:18:54Z"
+    },
+    {
+      "id": 20269099878,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-16T13:11:36Z",
+      "updated_at": "2025-12-16T13:13:57Z",
+      "created_at": "2025-12-16T13:11:36Z"
+    },
+    {
+      "id": 20269335335,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-16T13:19:53Z",
+      "updated_at": "2025-12-16T13:22:08Z",
+      "created_at": "2025-12-16T13:19:53Z"
+    },
+    {
+      "id": 20386711641,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-20T01:04:41Z",
+      "updated_at": "2025-12-20T01:07:02Z",
+      "created_at": "2025-12-20T01:04:41Z"
+    },
+    {
+      "id": 20450395087,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-23T03:22:08Z",
+      "updated_at": "2025-12-23T03:24:27Z",
+      "created_at": "2025-12-23T03:22:08Z"
+    },
+    {
+      "id": 20481941799,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2025-12-24T08:24:34Z",
+      "updated_at": "2025-12-24T08:27:38Z",
+      "created_at": "2025-12-24T08:24:34Z"
+    },
+    {
+      "id": 20517520825,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-26T06:29:40Z",
+      "updated_at": "2025-12-26T06:32:02Z",
+      "created_at": "2025-12-26T06:29:40Z"
+    },
+    {
+      "id": 20520538906,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-26T10:05:20Z",
+      "updated_at": "2025-12-26T10:07:41Z",
+      "created_at": "2025-12-26T10:05:20Z"
+    },
+    {
+      "id": 20522253361,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2025-12-26T12:15:01Z",
+      "updated_at": "2025-12-26T12:18:12Z",
+      "created_at": "2025-12-26T12:15:01Z"
+    },
+    {
+      "id": 20523526659,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2025-12-26T13:50:07Z",
+      "updated_at": "2025-12-26T13:53:11Z",
+      "created_at": "2025-12-26T13:50:07Z"
+    },
+    {
+      "id": 20610171189,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2025-12-31T02:00:18Z",
+      "updated_at": "2025-12-31T02:03:37Z",
+      "created_at": "2025-12-31T02:00:18Z"
+    },
+    {
+      "id": 20611901060,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-31T04:16:32Z",
+      "updated_at": "2025-12-31T04:18:55Z",
+      "created_at": "2025-12-31T04:16:32Z"
+    },
+    {
+      "id": 20714415621,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-01-05T11:47:12Z",
+      "updated_at": "2026-01-05T11:49:32Z",
+      "created_at": "2026-01-05T11:47:12Z"
+    },
+    {
+      "id": 20750428202,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-01-06T13:55:06Z",
+      "updated_at": "2026-01-06T13:55:58Z",
+      "created_at": "2026-01-06T13:55:06Z"
+    },
+    {
+      "id": 21200712052,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-01-21T07:17:08Z",
+      "updated_at": "2026-01-21T07:18:04Z",
+      "created_at": "2026-01-21T07:17:08Z"
+    },
+    {
+      "id": 21200729123,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-01-21T07:17:52Z",
+      "updated_at": "2026-01-21T07:18:46Z",
+      "created_at": "2026-01-21T07:17:52Z"
+    },
+    {
+      "id": 21201018144,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-01-21T07:30:20Z",
+      "updated_at": "2026-01-21T07:32:45Z",
+      "created_at": "2026-01-21T07:30:20Z"
+    },
+    {
+      "id": 21201468864,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-01-21T07:49:39Z",
+      "updated_at": "2026-01-21T07:52:52Z",
+      "created_at": "2026-01-21T07:49:39Z"
+    },
+    {
+      "id": 21201816480,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-01-21T08:03:35Z",
+      "updated_at": "2026-01-21T08:05:59Z",
+      "created_at": "2026-01-21T08:03:35Z"
+    },
+    {
+      "id": 21203232476,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-01-21T08:55:59Z",
+      "updated_at": "2026-01-21T08:59:06Z",
+      "created_at": "2026-01-21T08:55:59Z"
+    },
+    {
+      "id": 21251141262,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-01-22T13:55:58Z",
+      "updated_at": "2026-01-22T13:58:19Z",
+      "created_at": "2026-01-22T13:55:58Z"
+    },
+    {
+      "id": 21286145697,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-01-23T12:27:50Z",
+      "updated_at": "2026-01-23T12:30:06Z",
+      "created_at": "2026-01-23T12:27:50Z"
+    },
+    {
+      "id": 21788142952,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-07T22:44:53Z",
+      "updated_at": "2026-02-07T22:47:13Z",
+      "created_at": "2026-02-07T22:44:53Z"
+    },
+    {
+      "id": 21896089566,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-02-11T07:15:50Z",
+      "updated_at": "2026-02-11T07:18:58Z",
+      "created_at": "2026-02-11T07:15:50Z"
+    },
+    {
+      "id": 22017513978,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-02-14T12:42:24Z",
+      "updated_at": "2026-02-14T12:45:31Z",
+      "created_at": "2026-02-14T12:42:24Z"
+    },
+    {
+      "id": 22035788209,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-15T12:36:53Z",
+      "updated_at": "2026-02-15T12:41:33Z",
+      "created_at": "2026-02-15T12:36:53Z"
+    },
+    {
+      "id": 22035893441,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-15T12:44:49Z",
+      "updated_at": "2026-02-15T12:50:22Z",
+      "created_at": "2026-02-15T12:44:49Z"
+    },
+    {
+      "id": 22036357312,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-15T13:19:09Z",
+      "updated_at": "2026-02-15T13:24:46Z",
+      "created_at": "2026-02-15T13:19:09Z"
+    },
+    {
+      "id": 22036560213,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-15T13:33:18Z",
+      "updated_at": "2026-02-15T13:38:48Z",
+      "created_at": "2026-02-15T13:33:18Z"
+    },
+    {
+      "id": 22048573286,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-16T02:57:33Z",
+      "updated_at": "2026-02-16T02:58:12Z",
+      "created_at": "2026-02-16T02:57:33Z"
+    },
+    {
+      "id": 22049017878,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-02-16T03:22:46Z",
+      "updated_at": "2026-02-16T03:29:24Z",
+      "created_at": "2026-02-16T03:22:46Z"
+    },
+    {
+      "id": 22062134318,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-02-16T12:08:44Z",
+      "updated_at": "2026-02-16T12:15:23Z",
+      "created_at": "2026-02-16T12:08:44Z"
+    },
+    {
+      "id": 22062226941,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-02-16T12:11:47Z",
+      "updated_at": "2026-02-16T12:18:30Z",
+      "created_at": "2026-02-16T12:11:47Z"
+    },
+    {
+      "id": 22062372604,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-02-16T12:16:28Z",
+      "updated_at": "2026-02-16T12:23:14Z",
+      "created_at": "2026-02-16T12:16:28Z"
+    },
+    {
+      "id": 22289372656,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-02-23T01:03:56Z",
+      "updated_at": "2026-02-23T01:10:43Z",
+      "created_at": "2026-02-23T01:03:56Z"
+    },
+    {
+      "id": 22290448810,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-23T02:05:54Z",
+      "updated_at": "2026-02-23T02:12:17Z",
+      "created_at": "2026-02-23T02:05:54Z"
+    },
+    {
+      "id": 22290804417,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-23T02:26:38Z",
+      "updated_at": "2026-02-23T02:33:00Z",
+      "created_at": "2026-02-23T02:26:38Z"
+    },
+    {
+      "id": 22294598242,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-02-23T05:54:02Z",
+      "updated_at": "2026-02-23T06:00:47Z",
+      "created_at": "2026-02-23T05:54:02Z"
+    },
+    {
+      "id": 22294915062,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-02-23T06:09:02Z",
+      "updated_at": "2026-02-23T06:15:41Z",
+      "created_at": "2026-02-23T06:09:02Z"
+    },
+    {
+      "id": 22305179766,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-02-23T11:59:46Z",
+      "updated_at": "2026-02-23T12:06:32Z",
+      "created_at": "2026-02-23T11:59:46Z"
+    },
+    {
+      "id": 22306518992,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-02-23T12:40:34Z",
+      "updated_at": "2026-02-23T12:47:26Z",
+      "created_at": "2026-02-23T12:40:34Z"
+    },
+    {
+      "id": 22306888023,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-02-23T12:51:34Z",
+      "updated_at": "2026-02-23T12:58:29Z",
+      "created_at": "2026-02-23T12:51:34Z"
+    },
+    {
+      "id": 22346160846,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-02-24T10:09:21Z",
+      "updated_at": "2026-02-24T10:16:54Z",
+      "created_at": "2026-02-24T10:09:21Z"
+    },
+    {
+      "id": 22346455653,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-02-24T10:17:35Z",
+      "updated_at": "2026-02-24T10:25:18Z",
+      "created_at": "2026-02-24T10:17:35Z"
+    },
+    {
+      "id": 22349552750,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-02-24T11:50:05Z",
+      "updated_at": "2026-02-24T11:57:34Z",
+      "created_at": "2026-02-24T11:50:05Z"
+    },
+    {
+      "id": 22351018492,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-02-24T12:33:56Z",
+      "updated_at": "2026-02-24T12:41:27Z",
+      "created_at": "2026-02-24T12:33:56Z"
+    },
+    {
+      "id": 22352870237,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-02-24T13:27:15Z",
+      "updated_at": "2026-02-24T13:34:40Z",
+      "created_at": "2026-02-24T13:27:15Z"
+    },
+    {
+      "id": 22352979253,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-02-24T13:30:10Z",
+      "updated_at": "2026-02-24T13:37:36Z",
+      "created_at": "2026-02-24T13:30:10Z"
+    },
+    {
+      "id": 22353295674,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-02-24T13:38:53Z",
+      "updated_at": "2026-02-24T13:46:22Z",
+      "created_at": "2026-02-24T13:38:53Z"
+    },
+    {
+      "id": 22353316132,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-02-24T13:39:27Z",
+      "updated_at": "2026-02-24T13:46:46Z",
+      "created_at": "2026-02-24T13:39:27Z"
+    },
+    {
+      "id": 22443129486,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-02-26T12:59:01Z",
+      "updated_at": "2026-02-26T13:06:30Z",
+      "created_at": "2026-02-26T12:59:01Z"
+    },
+    {
+      "id": 22511770323,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-02-28T02:50:09Z",
+      "updated_at": "2026-02-28T02:57:28Z",
+      "created_at": "2026-02-28T02:50:09Z"
+    },
+    {
+      "id": 22622624344,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-03-03T12:17:48Z",
+      "updated_at": "2026-03-03T12:25:04Z",
+      "created_at": "2026-03-03T12:17:48Z"
+    },
+    {
+      "id": 22654481554,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-03-04T04:02:04Z",
+      "updated_at": "2026-03-04T04:09:25Z",
+      "created_at": "2026-03-04T04:02:04Z"
+    },
+    {
+      "id": 22656983905,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-03-04T05:50:45Z",
+      "updated_at": "2026-03-04T05:51:18Z",
+      "created_at": "2026-03-04T05:50:45Z"
+    },
+    {
+      "id": 22657162507,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-03-04T05:58:23Z",
+      "updated_at": "2026-03-04T06:05:45Z",
+      "created_at": "2026-03-04T05:58:23Z"
+    },
+    {
+      "id": 22795130198,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-03-07T07:55:31Z",
+      "updated_at": "2026-03-07T08:02:47Z",
+      "created_at": "2026-03-07T07:55:31Z"
+    },
+    {
+      "id": 22838502342,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-03-09T04:32:54Z",
+      "updated_at": "2026-03-09T04:39:54Z",
+      "created_at": "2026-03-09T04:32:54Z"
+    },
+    {
+      "id": 22843910375,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-03-09T08:03:11Z",
+      "updated_at": "2026-03-09T08:10:42Z",
+      "created_at": "2026-03-09T08:03:11Z"
+    },
+    {
+      "id": 22846147500,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-03-09T09:08:41Z",
+      "updated_at": "2026-03-09T09:15:48Z",
+      "created_at": "2026-03-09T09:08:41Z"
+    },
+    {
+      "id": 22854178678,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-03-09T12:48:23Z",
+      "updated_at": "2026-03-09T12:55:38Z",
+      "created_at": "2026-03-09T12:48:23Z"
+    },
+    {
+      "id": 22854879853,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-03-09T13:06:49Z",
+      "updated_at": "2026-03-09T13:14:05Z",
+      "created_at": "2026-03-09T13:06:49Z"
+    },
+    {
+      "id": 22855490261,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-03-09T13:22:30Z",
+      "updated_at": "2026-03-09T13:29:41Z",
+      "created_at": "2026-03-09T13:22:30Z"
+    },
+    {
+      "id": 23002179170,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-03-12T12:33:54Z",
+      "updated_at": "2026-03-12T12:41:06Z",
+      "created_at": "2026-03-12T12:33:54Z"
+    },
+    {
+      "id": 23129234237,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-03-16T05:24:57Z",
+      "updated_at": "2026-03-16T05:32:04Z",
+      "created_at": "2026-03-16T05:24:57Z"
+    },
+    {
+      "id": 23629531366,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-03-27T03:20:18Z",
+      "updated_at": "2026-03-27T03:27:23Z",
+      "created_at": "2026-03-27T03:20:18Z"
+    },
+    {
+      "id": 23683750745,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-03-28T10:58:04Z",
+      "updated_at": "2026-03-28T11:05:19Z",
+      "created_at": "2026-03-28T10:58:04Z"
+    },
+    {
+      "id": 23710832337,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-03-29T14:06:16Z",
+      "updated_at": "2026-03-29T14:12:47Z",
+      "created_at": "2026-03-29T14:06:16Z"
+    },
+    {
+      "id": 25276121303,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-05-03T10:00:42Z",
+      "updated_at": "2026-05-03T10:05:25Z",
+      "created_at": "2026-05-03T10:00:42Z"
+    },
+    {
+      "id": 25276413957,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-05-03T10:15:27Z",
+      "updated_at": "2026-05-03T10:17:44Z",
+      "created_at": "2026-05-03T10:15:27Z"
+    },
+    {
+      "id": 25280452068,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-05-03T13:27:53Z",
+      "updated_at": "2026-05-03T13:29:49Z",
+      "created_at": "2026-05-03T13:27:53Z"
+    },
+    {
+      "id": 25546888362,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-05-08T09:00:23Z",
+      "updated_at": "2026-05-08T09:48:56Z",
+      "created_at": "2026-05-08T09:00:23Z"
+    },
+    {
+      "id": 25561430734,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-05-08T14:34:05Z",
+      "updated_at": "2026-05-08T15:11:02Z",
+      "created_at": "2026-05-08T14:34:05Z"
+    },
+    {
+      "id": 25585766976,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-05-09T00:10:33Z",
+      "updated_at": "2026-05-09T00:47:39Z",
+      "created_at": "2026-05-09T00:10:33Z"
+    },
+    {
+      "id": 25586928941,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-05-09T00:55:16Z",
+      "updated_at": "2026-05-09T01:31:51Z",
+      "created_at": "2026-05-09T00:55:16Z"
+    },
+    {
+      "id": 25595890145,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-05-09T07:55:48Z",
+      "updated_at": "2026-05-09T08:32:56Z",
+      "created_at": "2026-05-09T07:55:48Z"
+    },
+    {
+      "id": 25596022763,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-05-09T08:02:20Z",
+      "updated_at": "2026-05-09T08:39:30Z",
+      "created_at": "2026-05-09T08:02:20Z"
+    },
+    {
+      "id": 25599214262,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-05-09T10:45:58Z",
+      "updated_at": "2026-05-09T11:23:27Z",
+      "created_at": "2026-05-09T10:45:58Z"
+    },
+    {
+      "id": 25599517347,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-05-09T11:02:11Z",
+      "updated_at": "2026-05-09T11:39:34Z",
+      "created_at": "2026-05-09T11:02:11Z"
+    },
+    {
+      "id": 25599718758,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-05-09T11:12:51Z",
+      "updated_at": "2026-05-09T11:49:16Z",
+      "created_at": "2026-05-09T11:12:51Z"
+    },
+    {
+      "id": 25599967235,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-05-09T11:25:40Z",
+      "updated_at": "2026-05-09T12:02:39Z",
+      "created_at": "2026-05-09T11:25:40Z"
+    },
+    {
+      "id": 25771374962,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-05-13T00:55:59Z",
+      "updated_at": "2026-05-13T01:33:23Z",
+      "created_at": "2026-05-13T00:55:59Z"
+    },
+    {
+      "id": 25864049781,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-05-14T13:55:15Z",
+      "updated_at": "2026-05-14T14:31:50Z",
+      "created_at": "2026-05-14T13:55:15Z"
+    },
+    {
+      "id": 25905708957,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-05-15T07:19:46Z",
+      "updated_at": "2026-05-15T08:36:42Z",
+      "created_at": "2026-05-15T07:19:46Z"
+    },
+    {
+      "id": 25905844588,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-05-15T07:23:18Z",
+      "updated_at": "2026-05-15T08:35:48Z",
+      "created_at": "2026-05-15T07:23:18Z"
+    },
+    {
+      "id": 25962770409,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-05-16T13:10:02Z",
+      "updated_at": "2026-05-16T13:14:00Z",
+      "created_at": "2026-05-16T13:10:02Z"
+    },
+    {
+      "id": 25963170702,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-05-16T13:29:26Z",
+      "updated_at": "2026-05-16T13:33:09Z",
+      "created_at": "2026-05-16T13:29:26Z"
+    },
+    {
+      "id": 25963589067,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-05-16T13:49:33Z",
+      "updated_at": "2026-05-16T14:37:34Z",
+      "created_at": "2026-05-16T13:49:33Z"
+    },
+    {
+      "id": 25964525747,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-05-16T14:33:22Z",
+      "updated_at": "2026-05-16T15:15:51Z",
+      "created_at": "2026-05-16T14:33:22Z"
+    },
+    {
+      "id": 25977346779,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-05-17T00:52:50Z",
+      "updated_at": "2026-05-17T01:34:15Z",
+      "created_at": "2026-05-17T00:52:50Z"
+    },
+    {
+      "id": 25979806053,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-05-17T03:05:11Z",
+      "updated_at": "2026-05-17T03:48:25Z",
+      "created_at": "2026-05-17T03:05:11Z"
+    },
+    {
+      "id": 25982735345,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-05-17T05:47:08Z",
+      "updated_at": "2026-05-17T06:27:04Z",
+      "created_at": "2026-05-17T05:47:08Z"
+    },
+    {
+      "id": 25984151893,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-05-17T07:02:44Z",
+      "updated_at": "2026-05-17T07:45:43Z",
+      "created_at": "2026-05-17T07:02:44Z"
+    },
+    {
+      "id": 25993059814,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-05-17T14:06:22Z",
+      "updated_at": "2026-05-17T14:48:24Z",
+      "created_at": "2026-05-17T14:06:22Z"
+    },
+    {
+      "id": 25993186692,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-05-17T14:12:03Z",
+      "updated_at": "2026-05-17T14:56:12Z",
+      "created_at": "2026-05-17T14:12:03Z"
+    },
+    {
+      "id": 25993456495,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-05-17T14:24:02Z",
+      "updated_at": "2026-05-17T15:06:52Z",
+      "created_at": "2026-05-17T14:24:02Z"
+    },
+    {
+      "id": 25995073185,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-05-17T15:33:30Z",
+      "updated_at": "2026-05-17T16:14:49Z",
+      "created_at": "2026-05-17T15:33:30Z"
+    },
+    {
+      "id": 26007100986,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-05-18T00:25:12Z",
+      "updated_at": "2026-05-18T01:08:18Z",
+      "created_at": "2026-05-18T00:25:12Z"
+    },
+    {
+      "id": 26008121118,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-05-18T01:05:31Z",
+      "updated_at": "2026-05-18T01:49:39Z",
+      "created_at": "2026-05-18T01:05:31Z"
+    },
+    {
+      "id": 26008917066,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-05-18T01:36:30Z",
+      "updated_at": "2026-05-18T02:21:38Z",
+      "created_at": "2026-05-18T01:36:30Z"
+    },
+    {
+      "id": 26009959209,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-05-18T02:15:53Z",
+      "updated_at": "2026-05-18T03:00:09Z",
+      "created_at": "2026-05-18T02:15:53Z"
+    },
+    {
+      "id": 26011653736,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-05-18T03:19:16Z",
+      "updated_at": "2026-05-18T03:57:14Z",
+      "created_at": "2026-05-18T03:19:16Z"
+    },
+    {
+      "id": 26100602806,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-05-19T13:33:01Z",
+      "updated_at": "2026-05-19T14:17:16Z",
+      "created_at": "2026-05-19T13:33:01Z"
+    },
+    {
+      "id": 26141149379,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-05-20T04:23:20Z",
+      "updated_at": "2026-05-20T05:07:29Z",
+      "created_at": "2026-05-20T04:23:20Z"
+    },
+    {
+      "id": 26613640999,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-05-29T02:05:41Z",
+      "updated_at": "2026-05-29T02:57:07Z",
+      "created_at": "2026-05-29T02:05:41Z"
+    },
+    {
+      "id": 26617433765,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-05-29T04:10:30Z",
+      "updated_at": "2026-05-29T04:52:49Z",
+      "created_at": "2026-05-29T04:10:30Z"
+    },
+    {
+      "id": 26619572321,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-05-29T05:18:26Z",
+      "updated_at": "2026-05-29T05:59:27Z",
+      "created_at": "2026-05-29T05:18:26Z"
+    },
+    {
+      "id": 26620161541,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-05-29T05:36:19Z",
+      "updated_at": "2026-05-29T06:17:17Z",
+      "created_at": "2026-05-29T05:36:19Z"
+    },
+    {
+      "id": 26626791232,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-05-29T08:27:28Z",
+      "updated_at": "2026-05-29T09:09:40Z",
+      "created_at": "2026-05-29T08:27:28Z"
+    },
+    {
+      "id": 26630677738,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-05-29T09:54:24Z",
+      "updated_at": "2026-05-29T10:36:45Z",
+      "created_at": "2026-05-29T09:54:24Z"
+    },
+    {
+      "id": 26811342574,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-06-02T09:35:39Z",
+      "updated_at": "2026-06-02T10:17:05Z",
+      "created_at": "2026-06-02T09:35:39Z"
+    },
+    {
+      "id": 27673191621,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-06-17T07:33:00Z",
+      "updated_at": "2026-06-17T08:21:55Z",
+      "created_at": "2026-06-17T07:33:00Z"
+    },
+    {
+      "id": 27679565948,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-06-17T09:33:10Z",
+      "updated_at": "2026-06-17T10:21:11Z",
+      "created_at": "2026-06-17T09:33:10Z"
+    },
+    {
+      "id": 27679879549,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-06-17T09:39:08Z",
+      "updated_at": "2026-06-17T10:22:29Z",
+      "created_at": "2026-06-17T09:39:08Z"
+    },
+    {
+      "id": 27679928751,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-06-17T09:40:05Z",
+      "updated_at": "2026-06-17T10:23:15Z",
+      "created_at": "2026-06-17T09:40:05Z"
+    },
+    {
+      "id": 27679956808,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-06-17T09:40:36Z",
+      "updated_at": "2026-06-17T10:25:15Z",
+      "created_at": "2026-06-17T09:40:36Z"
+    },
+    {
+      "id": 27681481154,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-06-17T10:08:25Z",
+      "updated_at": "2026-06-17T10:53:27Z",
+      "created_at": "2026-06-17T10:08:25Z"
+    },
+    {
+      "id": 28283355672,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-06-27T08:04:25Z",
+      "updated_at": "2026-06-27T08:46:24Z",
+      "created_at": "2026-06-27T08:04:25Z"
+    },
+    {
+      "id": 28289618307,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-27T12:46:23Z",
+      "updated_at": "2026-06-27T13:27:41Z",
+      "created_at": "2026-06-27T12:46:23Z"
+    },
+    {
+      "id": 28306695131,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-28T00:43:55Z",
+      "updated_at": "2026-06-28T01:21:59Z",
+      "created_at": "2026-06-28T00:43:55Z"
+    },
+    {
+      "id": 28308035961,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-06-28T01:49:25Z",
+      "updated_at": "2026-06-28T02:27:41Z",
+      "created_at": "2026-06-28T01:49:25Z"
+    },
+    {
+      "id": 29153305907,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-11T12:50:23Z",
+      "updated_at": "2026-07-11T13:42:35Z",
+      "created_at": "2026-07-11T12:50:23Z"
+    },
+    {
+      "id": 29153307794,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-11T12:50:27Z",
+      "updated_at": "2026-07-11T13:42:03Z",
+      "created_at": "2026-07-11T12:50:27Z"
+    },
+    {
+      "id": 29153309686,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-11T12:50:31Z",
+      "updated_at": "2026-07-11T13:36:37Z",
+      "created_at": "2026-07-11T12:50:31Z"
+    },
+    {
+      "id": 29153311699,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-11T12:50:35Z",
+      "updated_at": "2026-07-11T13:40:39Z",
+      "created_at": "2026-07-11T12:50:35Z"
+    },
+    {
+      "id": 31292518748,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-08-09T03:29:08Z",
+      "updated_at": "2026-08-09T04:16:33Z",
+      "created_at": "2026-08-09T03:29:08Z"
+    },
+    {
+      "id": 31294071492,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "failure",
+      "run_started_at": "2026-08-09T04:12:29Z",
+      "updated_at": "2026-08-09T04:57:14Z",
+      "created_at": "2026-08-09T04:12:29Z"
+    },
+    {
+      "id": 31310986637,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-08-09T11:31:09Z",
+      "updated_at": "2026-08-09T12:15:24Z",
+      "created_at": "2026-08-09T11:31:09Z"
+    },
+    {
+      "id": 31316299829,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-08-09T13:37:43Z",
+      "updated_at": "2026-08-09T14:20:09Z",
+      "created_at": "2026-08-09T13:37:43Z"
+    },
+    {
+      "id": 31587933910,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-08-12T10:33:18Z",
+      "updated_at": "2026-08-12T11:13:52Z",
+      "created_at": "2026-08-12T10:33:18Z"
+    },
+    {
+      "id": 31884026587,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-08-15T12:12:44Z",
+      "updated_at": "2026-08-15T12:54:51Z",
+      "created_at": "2026-08-15T12:12:44Z"
+    },
+    {
+      "id": 31917999882,
+      "workflow_id": 174029992,
+      "name": "Code Quality",
+      "conclusion": "success",
+      "run_started_at": "2026-08-16T00:45:52Z",
+      "updated_at": "2026-08-16T01:25:22Z",
+      "created_at": "2026-08-16T00:45:52Z"
+    }
+  ]
+}

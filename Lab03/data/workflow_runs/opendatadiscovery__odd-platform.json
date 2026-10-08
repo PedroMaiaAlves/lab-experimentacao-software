@@ -1,0 +1,3844 @@
+{
+  "full_name": "opendatadiscovery/odd-platform",
+  "default_branch": "main",
+  "janela_inicio": "2025-10-01",
+  "janela_fim": "2026-09-30",
+  "complete": true,
+  "saturated_intervals": [],
+  "workflow_runs": [
+    {
+      "id": 20273314013,
+      "workflow_id": 23325664,
+      "name": "SonarCloud Scan [backend]",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-16T15:28:11Z",
+      "updated_at": "2025-12-16T15:29:37Z",
+      "created_at": "2025-12-16T15:28:11Z"
+    },
+    {
+      "id": 20273314023,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2025-12-16T15:28:11Z",
+      "updated_at": "2025-12-16T15:35:02Z",
+      "created_at": "2025-12-16T15:28:11Z"
+    },
+    {
+      "id": 20273314024,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2025-12-16T15:28:11Z",
+      "updated_at": "2025-12-16T15:28:22Z",
+      "created_at": "2025-12-16T15:28:11Z"
+    },
+    {
+      "id": 20273314054,
+      "workflow_id": 23325665,
+      "name": "SonarCloud Scan [frontend]",
+      "conclusion": "failure",
+      "run_started_at": "2025-12-16T15:28:11Z",
+      "updated_at": "2025-12-16T15:28:57Z",
+      "created_at": "2025-12-16T15:28:11Z"
+    },
+    {
+      "id": 20697311505,
+      "workflow_id": 23325665,
+      "name": "SonarCloud Scan [frontend]",
+      "conclusion": "failure",
+      "run_started_at": "2026-01-04T18:32:02Z",
+      "updated_at": "2026-01-04T18:32:47Z",
+      "created_at": "2026-01-04T18:32:02Z"
+    },
+    {
+      "id": 20697311508,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-01-04T18:32:02Z",
+      "updated_at": "2026-01-04T18:32:13Z",
+      "created_at": "2026-01-04T18:32:02Z"
+    },
+    {
+      "id": 20697311511,
+      "workflow_id": 23325664,
+      "name": "SonarCloud Scan [backend]",
+      "conclusion": "failure",
+      "run_started_at": "2026-01-04T18:32:02Z",
+      "updated_at": "2026-01-04T18:33:27Z",
+      "created_at": "2026-01-04T18:32:02Z"
+    },
+    {
+      "id": 20697311519,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-01-04T18:32:02Z",
+      "updated_at": "2026-01-04T18:39:06Z",
+      "created_at": "2026-01-04T18:32:02Z"
+    },
+    {
+      "id": 21820903770,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-09T10:12:08Z",
+      "updated_at": "2026-02-09T10:12:08Z",
+      "created_at": "2026-02-09T10:12:08Z"
+    },
+    {
+      "id": 21820904017,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-09T10:12:08Z",
+      "updated_at": "2026-02-09T10:12:08Z",
+      "created_at": "2026-02-09T10:12:08Z"
+    },
+    {
+      "id": 21820904382,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-02-09T10:12:09Z",
+      "updated_at": "2026-02-09T10:12:19Z",
+      "created_at": "2026-02-09T10:12:09Z"
+    },
+    {
+      "id": 21820904399,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-02-09T10:12:09Z",
+      "updated_at": "2026-02-09T10:18:55Z",
+      "created_at": "2026-02-09T10:12:09Z"
+    },
+    {
+      "id": 21907073529,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-11T13:31:28Z",
+      "updated_at": "2026-02-11T13:31:28Z",
+      "created_at": "2026-02-11T13:31:28Z"
+    },
+    {
+      "id": 21907073915,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-11T13:31:29Z",
+      "updated_at": "2026-02-11T13:31:29Z",
+      "created_at": "2026-02-11T13:31:29Z"
+    },
+    {
+      "id": 21907074644,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-02-11T13:31:30Z",
+      "updated_at": "2026-02-11T13:31:41Z",
+      "created_at": "2026-02-11T13:31:30Z"
+    },
+    {
+      "id": 21907074651,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-02-11T13:31:30Z",
+      "updated_at": "2026-02-11T13:39:04Z",
+      "created_at": "2026-02-11T13:31:30Z"
+    },
+    {
+      "id": 21952163858,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-12T15:09:18Z",
+      "updated_at": "2026-02-12T15:09:18Z",
+      "created_at": "2026-02-12T15:09:18Z"
+    },
+    {
+      "id": 21952164290,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-12T15:09:19Z",
+      "updated_at": "2026-02-12T15:09:19Z",
+      "created_at": "2026-02-12T15:09:19Z"
+    },
+    {
+      "id": 22103693078,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-17T15:05:49Z",
+      "updated_at": "2026-02-17T15:05:49Z",
+      "created_at": "2026-02-17T15:05:49Z"
+    },
+    {
+      "id": 22103693520,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-17T15:05:50Z",
+      "updated_at": "2026-02-17T15:05:50Z",
+      "created_at": "2026-02-17T15:05:50Z"
+    },
+    {
+      "id": 22103694400,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-02-17T15:05:51Z",
+      "updated_at": "2026-02-17T15:12:33Z",
+      "created_at": "2026-02-17T15:05:51Z"
+    },
+    {
+      "id": 22103694437,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-02-17T15:05:51Z",
+      "updated_at": "2026-02-17T15:06:02Z",
+      "created_at": "2026-02-17T15:05:51Z"
+    },
+    {
+      "id": 22349549488,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-24T11:49:59Z",
+      "updated_at": "2026-02-24T11:49:59Z",
+      "created_at": "2026-02-24T11:49:59Z"
+    },
+    {
+      "id": 22349549779,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-24T11:50:00Z",
+      "updated_at": "2026-02-24T11:50:00Z",
+      "created_at": "2026-02-24T11:50:00Z"
+    },
+    {
+      "id": 22349550391,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-02-24T11:50:01Z",
+      "updated_at": "2026-02-24T11:56:54Z",
+      "created_at": "2026-02-24T11:50:01Z"
+    },
+    {
+      "id": 22349550421,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-02-24T11:50:01Z",
+      "updated_at": "2026-02-24T11:50:11Z",
+      "created_at": "2026-02-24T11:50:01Z"
+    },
+    {
+      "id": 22355768137,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-24T14:43:43Z",
+      "updated_at": "2026-02-24T14:43:43Z",
+      "created_at": "2026-02-24T14:43:43Z"
+    },
+    {
+      "id": 22355768688,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-24T14:43:44Z",
+      "updated_at": "2026-02-24T14:43:44Z",
+      "created_at": "2026-02-24T14:43:44Z"
+    },
+    {
+      "id": 22355769692,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-02-24T14:43:45Z",
+      "updated_at": "2026-02-24T14:52:03Z",
+      "created_at": "2026-02-24T14:43:45Z"
+    },
+    {
+      "id": 22355769710,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-02-24T14:43:45Z",
+      "updated_at": "2026-02-24T14:43:59Z",
+      "created_at": "2026-02-24T14:43:45Z"
+    },
+    {
+      "id": 22401964846,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-25T14:47:49Z",
+      "updated_at": "2026-02-25T14:47:49Z",
+      "created_at": "2026-02-25T14:47:49Z"
+    },
+    {
+      "id": 22401965671,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-25T14:47:50Z",
+      "updated_at": "2026-02-25T14:47:50Z",
+      "created_at": "2026-02-25T14:47:50Z"
+    },
+    {
+      "id": 22401967254,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-02-25T14:47:52Z",
+      "updated_at": "2026-02-25T14:48:03Z",
+      "created_at": "2026-02-25T14:47:52Z"
+    },
+    {
+      "id": 22401967459,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-02-25T14:47:53Z",
+      "updated_at": "2026-02-25T14:55:45Z",
+      "created_at": "2026-02-25T14:47:53Z"
+    },
+    {
+      "id": 22439977945,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-26T11:24:34Z",
+      "updated_at": "2026-02-26T11:24:34Z",
+      "created_at": "2026-02-26T11:24:34Z"
+    },
+    {
+      "id": 22439978216,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-02-26T11:24:35Z",
+      "updated_at": "2026-02-26T11:24:35Z",
+      "created_at": "2026-02-26T11:24:35Z"
+    },
+    {
+      "id": 23198356936,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-03-17T14:08:18Z",
+      "updated_at": "2026-03-17T14:08:18Z",
+      "created_at": "2026-03-17T14:08:18Z"
+    },
+    {
+      "id": 23198357489,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-03-17T14:08:19Z",
+      "updated_at": "2026-03-17T14:08:19Z",
+      "created_at": "2026-03-17T14:08:19Z"
+    },
+    {
+      "id": 23198358669,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-03-17T14:08:21Z",
+      "updated_at": "2026-03-17T14:08:33Z",
+      "created_at": "2026-03-17T14:08:21Z"
+    },
+    {
+      "id": 23198358727,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-03-17T14:08:21Z",
+      "updated_at": "2026-03-17T14:17:15Z",
+      "created_at": "2026-03-17T14:08:21Z"
+    },
+    {
+      "id": 23198682660,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-03-17T14:15:16Z",
+      "updated_at": "2026-03-17T14:15:27Z",
+      "created_at": "2026-03-17T14:15:16Z"
+    },
+    {
+      "id": 23198682729,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-03-17T14:15:16Z",
+      "updated_at": "2026-03-17T14:26:14Z",
+      "created_at": "2026-03-17T14:15:16Z"
+    },
+    {
+      "id": 23344083092,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-03-20T13:04:15Z",
+      "updated_at": "2026-03-20T13:04:15Z",
+      "created_at": "2026-03-20T13:04:15Z"
+    },
+    {
+      "id": 23344083284,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-03-20T13:04:16Z",
+      "updated_at": "2026-03-20T13:04:16Z",
+      "created_at": "2026-03-20T13:04:16Z"
+    },
+    {
+      "id": 23844646482,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-04-01T10:42:14Z",
+      "updated_at": "2026-04-01T10:42:14Z",
+      "created_at": "2026-04-01T10:42:14Z"
+    },
+    {
+      "id": 23844646757,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-04-01T10:42:14Z",
+      "updated_at": "2026-04-01T10:42:14Z",
+      "created_at": "2026-04-01T10:42:14Z"
+    },
+    {
+      "id": 23844647133,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-04-01T10:42:15Z",
+      "updated_at": "2026-04-01T10:49:57Z",
+      "created_at": "2026-04-01T10:42:15Z"
+    },
+    {
+      "id": 23844647166,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-04-01T10:42:15Z",
+      "updated_at": "2026-04-01T10:42:25Z",
+      "created_at": "2026-04-01T10:42:15Z"
+    },
+    {
+      "id": 23847881944,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-04-01T12:10:44Z",
+      "updated_at": "2026-04-01T12:10:44Z",
+      "created_at": "2026-04-01T12:10:44Z"
+    },
+    {
+      "id": 23847882298,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-04-01T12:10:45Z",
+      "updated_at": "2026-04-01T12:10:45Z",
+      "created_at": "2026-04-01T12:10:45Z"
+    },
+    {
+      "id": 23945280181,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-04-03T11:53:56Z",
+      "updated_at": "2026-04-03T11:53:56Z",
+      "created_at": "2026-04-03T11:53:56Z"
+    },
+    {
+      "id": 23945280322,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-04-03T11:53:57Z",
+      "updated_at": "2026-04-03T11:53:57Z",
+      "created_at": "2026-04-03T11:53:57Z"
+    },
+    {
+      "id": 23945280606,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-04-03T11:53:58Z",
+      "updated_at": "2026-04-03T12:01:01Z",
+      "created_at": "2026-04-03T11:53:58Z"
+    },
+    {
+      "id": 23945280624,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-04-03T11:53:58Z",
+      "updated_at": "2026-04-03T11:54:07Z",
+      "created_at": "2026-04-03T11:53:58Z"
+    },
+    {
+      "id": 23945681301,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-04-03T12:09:32Z",
+      "updated_at": "2026-04-03T12:09:32Z",
+      "created_at": "2026-04-03T12:09:32Z"
+    },
+    {
+      "id": 23945681427,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-04-03T12:09:33Z",
+      "updated_at": "2026-04-03T12:09:33Z",
+      "created_at": "2026-04-03T12:09:33Z"
+    },
+    {
+      "id": 23947563294,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-04-03T13:18:40Z",
+      "updated_at": "2026-04-03T13:18:40Z",
+      "created_at": "2026-04-03T13:18:40Z"
+    },
+    {
+      "id": 23947563510,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-04-03T13:18:41Z",
+      "updated_at": "2026-04-03T13:18:41Z",
+      "created_at": "2026-04-03T13:18:41Z"
+    },
+    {
+      "id": 23947563818,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-04-03T13:18:42Z",
+      "updated_at": "2026-04-03T13:18:53Z",
+      "created_at": "2026-04-03T13:18:42Z"
+    },
+    {
+      "id": 23947563824,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-04-03T13:18:42Z",
+      "updated_at": "2026-04-03T13:26:38Z",
+      "created_at": "2026-04-03T13:18:42Z"
+    },
+    {
+      "id": 23947808635,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-04-03T13:27:11Z",
+      "updated_at": "2026-04-03T13:27:11Z",
+      "created_at": "2026-04-03T13:27:11Z"
+    },
+    {
+      "id": 23947808925,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-04-03T13:27:11Z",
+      "updated_at": "2026-04-03T13:27:11Z",
+      "created_at": "2026-04-03T13:27:11Z"
+    },
+    {
+      "id": 26768098008,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-01T16:33:41Z",
+      "updated_at": "2026-06-01T16:33:41Z",
+      "created_at": "2026-06-01T16:33:41Z"
+    },
+    {
+      "id": 26768099510,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-01T16:33:43Z",
+      "updated_at": "2026-06-01T16:33:43Z",
+      "created_at": "2026-06-01T16:33:43Z"
+    },
+    {
+      "id": 26768102312,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-01T16:33:46Z",
+      "updated_at": "2026-06-01T16:41:52Z",
+      "created_at": "2026-06-01T16:33:46Z"
+    },
+    {
+      "id": 26768102511,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-01T16:33:47Z",
+      "updated_at": "2026-06-01T16:33:59Z",
+      "created_at": "2026-06-01T16:33:47Z"
+    },
+    {
+      "id": 27124877884,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-08T08:19:01Z",
+      "updated_at": "2026-06-08T08:19:01Z",
+      "created_at": "2026-06-08T08:19:01Z"
+    },
+    {
+      "id": 27124878357,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-08T08:19:02Z",
+      "updated_at": "2026-06-08T08:19:02Z",
+      "created_at": "2026-06-08T08:19:02Z"
+    },
+    {
+      "id": 27124879367,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-08T08:19:03Z",
+      "updated_at": "2026-06-08T08:27:54Z",
+      "created_at": "2026-06-08T08:19:03Z"
+    },
+    {
+      "id": 27124879371,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-08T08:19:03Z",
+      "updated_at": "2026-06-08T08:19:12Z",
+      "created_at": "2026-06-08T08:19:03Z"
+    },
+    {
+      "id": 27287940103,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-10T15:44:48Z",
+      "updated_at": "2026-06-10T15:44:48Z",
+      "created_at": "2026-06-10T15:44:48Z"
+    },
+    {
+      "id": 27287941608,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-10T15:44:49Z",
+      "updated_at": "2026-06-10T15:44:49Z",
+      "created_at": "2026-06-10T15:44:49Z"
+    },
+    {
+      "id": 27287944388,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-10T15:44:52Z",
+      "updated_at": "2026-06-10T15:53:01Z",
+      "created_at": "2026-06-10T15:44:52Z"
+    },
+    {
+      "id": 27287944665,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-10T15:44:52Z",
+      "updated_at": "2026-06-10T15:45:06Z",
+      "created_at": "2026-06-10T15:44:52Z"
+    },
+    {
+      "id": 27292340362,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-10T17:02:36Z",
+      "updated_at": "2026-06-10T17:02:36Z",
+      "created_at": "2026-06-10T17:02:36Z"
+    },
+    {
+      "id": 27292341283,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-10T17:02:37Z",
+      "updated_at": "2026-06-10T17:02:37Z",
+      "created_at": "2026-06-10T17:02:37Z"
+    },
+    {
+      "id": 27292343518,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-10T17:02:39Z",
+      "updated_at": "2026-06-10T17:02:49Z",
+      "created_at": "2026-06-10T17:02:39Z"
+    },
+    {
+      "id": 27292343547,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-10T17:02:39Z",
+      "updated_at": "2026-06-10T17:10:17Z",
+      "created_at": "2026-06-10T17:02:39Z"
+    },
+    {
+      "id": 27296919898,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-10T18:20:31Z",
+      "updated_at": "2026-06-10T18:20:31Z",
+      "created_at": "2026-06-10T18:20:31Z"
+    },
+    {
+      "id": 27296920883,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-10T18:20:32Z",
+      "updated_at": "2026-06-10T18:20:32Z",
+      "created_at": "2026-06-10T18:20:32Z"
+    },
+    {
+      "id": 27296922819,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-10T18:20:33Z",
+      "updated_at": "2026-06-10T18:20:43Z",
+      "created_at": "2026-06-10T18:20:33Z"
+    },
+    {
+      "id": 27296922846,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-10T18:20:33Z",
+      "updated_at": "2026-06-10T18:27:51Z",
+      "created_at": "2026-06-10T18:20:33Z"
+    },
+    {
+      "id": 27364006017,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-11T17:06:49Z",
+      "updated_at": "2026-06-11T17:06:49Z",
+      "created_at": "2026-06-11T17:06:49Z"
+    },
+    {
+      "id": 27364007152,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-11T17:06:50Z",
+      "updated_at": "2026-06-11T17:06:50Z",
+      "created_at": "2026-06-11T17:06:50Z"
+    },
+    {
+      "id": 27364010368,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-11T17:06:53Z",
+      "updated_at": "2026-06-11T17:07:07Z",
+      "created_at": "2026-06-11T17:06:53Z"
+    },
+    {
+      "id": 27364010373,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-11T17:06:53Z",
+      "updated_at": "2026-06-11T17:15:08Z",
+      "created_at": "2026-06-11T17:06:53Z"
+    },
+    {
+      "id": 27378427178,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-11T21:25:32Z",
+      "updated_at": "2026-06-11T21:25:32Z",
+      "created_at": "2026-06-11T21:25:32Z"
+    },
+    {
+      "id": 27378427722,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-11T21:25:33Z",
+      "updated_at": "2026-06-11T21:25:33Z",
+      "created_at": "2026-06-11T21:25:33Z"
+    },
+    {
+      "id": 27378428414,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-11T21:25:33Z",
+      "updated_at": "2026-06-11T21:33:18Z",
+      "created_at": "2026-06-11T21:25:33Z"
+    },
+    {
+      "id": 27378428460,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-11T21:25:34Z",
+      "updated_at": "2026-06-11T21:25:43Z",
+      "created_at": "2026-06-11T21:25:34Z"
+    },
+    {
+      "id": 27413324282,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-12T11:39:09Z",
+      "updated_at": "2026-06-12T11:39:09Z",
+      "created_at": "2026-06-12T11:39:09Z"
+    },
+    {
+      "id": 27413324704,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-12T11:39:10Z",
+      "updated_at": "2026-06-12T11:39:10Z",
+      "created_at": "2026-06-12T11:39:10Z"
+    },
+    {
+      "id": 27413325471,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-12T11:39:11Z",
+      "updated_at": "2026-06-12T11:47:03Z",
+      "created_at": "2026-06-12T11:39:11Z"
+    },
+    {
+      "id": 27413325516,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-12T11:39:11Z",
+      "updated_at": "2026-06-12T11:39:20Z",
+      "created_at": "2026-06-12T11:39:11Z"
+    },
+    {
+      "id": 27417986785,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-12T13:14:35Z",
+      "updated_at": "2026-06-12T13:14:35Z",
+      "created_at": "2026-06-12T13:14:35Z"
+    },
+    {
+      "id": 27417987450,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-12T13:14:36Z",
+      "updated_at": "2026-06-12T13:14:36Z",
+      "created_at": "2026-06-12T13:14:36Z"
+    },
+    {
+      "id": 27417988929,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-12T13:14:38Z",
+      "updated_at": "2026-06-12T13:14:50Z",
+      "created_at": "2026-06-12T13:14:38Z"
+    },
+    {
+      "id": 27417988980,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-12T13:14:38Z",
+      "updated_at": "2026-06-12T13:22:48Z",
+      "created_at": "2026-06-12T13:14:38Z"
+    },
+    {
+      "id": 27421571803,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-12T14:19:23Z",
+      "updated_at": "2026-06-12T14:19:23Z",
+      "created_at": "2026-06-12T14:19:23Z"
+    },
+    {
+      "id": 27421572457,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-12T14:19:24Z",
+      "updated_at": "2026-06-12T14:19:24Z",
+      "created_at": "2026-06-12T14:19:24Z"
+    },
+    {
+      "id": 27421573344,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-12T14:19:25Z",
+      "updated_at": "2026-06-12T14:19:37Z",
+      "created_at": "2026-06-12T14:19:25Z"
+    },
+    {
+      "id": 27421573355,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-12T14:19:25Z",
+      "updated_at": "2026-06-12T14:27:57Z",
+      "created_at": "2026-06-12T14:19:25Z"
+    },
+    {
+      "id": 27443212213,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-12T21:09:08Z",
+      "updated_at": "2026-06-12T21:09:08Z",
+      "created_at": "2026-06-12T21:09:08Z"
+    },
+    {
+      "id": 27443212637,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-12T21:09:09Z",
+      "updated_at": "2026-06-12T21:09:09Z",
+      "created_at": "2026-06-12T21:09:09Z"
+    },
+    {
+      "id": 27443213145,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-12T21:09:09Z",
+      "updated_at": "2026-06-12T21:17:20Z",
+      "created_at": "2026-06-12T21:09:09Z"
+    },
+    {
+      "id": 27443213166,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-12T21:09:10Z",
+      "updated_at": "2026-06-12T21:09:21Z",
+      "created_at": "2026-06-12T21:09:10Z"
+    },
+    {
+      "id": 27443999607,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-12T21:26:11Z",
+      "updated_at": "2026-06-12T21:26:11Z",
+      "created_at": "2026-06-12T21:26:11Z"
+    },
+    {
+      "id": 27443999992,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-12T21:26:12Z",
+      "updated_at": "2026-06-12T21:26:12Z",
+      "created_at": "2026-06-12T21:26:12Z"
+    },
+    {
+      "id": 27444000749,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-12T21:26:13Z",
+      "updated_at": "2026-06-12T21:26:24Z",
+      "created_at": "2026-06-12T21:26:13Z"
+    },
+    {
+      "id": 27444000808,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-12T21:26:13Z",
+      "updated_at": "2026-06-12T21:34:03Z",
+      "created_at": "2026-06-12T21:26:13Z"
+    },
+    {
+      "id": 27449722421,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-12T23:51:05Z",
+      "updated_at": "2026-06-12T23:51:05Z",
+      "created_at": "2026-06-12T23:51:05Z"
+    },
+    {
+      "id": 27449722697,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-12T23:51:06Z",
+      "updated_at": "2026-06-12T23:51:06Z",
+      "created_at": "2026-06-12T23:51:06Z"
+    },
+    {
+      "id": 27449722998,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-12T23:51:06Z",
+      "updated_at": "2026-06-12T23:58:55Z",
+      "created_at": "2026-06-12T23:51:06Z"
+    },
+    {
+      "id": 27449723005,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-12T23:51:06Z",
+      "updated_at": "2026-06-12T23:51:15Z",
+      "created_at": "2026-06-12T23:51:06Z"
+    },
+    {
+      "id": 27477468968,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-13T19:58:09Z",
+      "updated_at": "2026-06-13T19:58:09Z",
+      "created_at": "2026-06-13T19:58:09Z"
+    },
+    {
+      "id": 27477469143,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-13T19:58:10Z",
+      "updated_at": "2026-06-13T19:58:10Z",
+      "created_at": "2026-06-13T19:58:10Z"
+    },
+    {
+      "id": 27477469389,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-13T19:58:10Z",
+      "updated_at": "2026-06-13T19:58:25Z",
+      "created_at": "2026-06-13T19:58:10Z"
+    },
+    {
+      "id": 27477469398,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-13T19:58:10Z",
+      "updated_at": "2026-06-13T20:06:06Z",
+      "created_at": "2026-06-13T19:58:10Z"
+    },
+    {
+      "id": 27496447005,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-14T10:48:43Z",
+      "updated_at": "2026-06-14T10:48:43Z",
+      "created_at": "2026-06-14T10:48:43Z"
+    },
+    {
+      "id": 27496447162,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-14T10:48:44Z",
+      "updated_at": "2026-06-14T10:48:44Z",
+      "created_at": "2026-06-14T10:48:44Z"
+    },
+    {
+      "id": 27496447360,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-14T10:48:45Z",
+      "updated_at": "2026-06-14T10:49:00Z",
+      "created_at": "2026-06-14T10:48:45Z"
+    },
+    {
+      "id": 27496447361,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-14T10:48:45Z",
+      "updated_at": "2026-06-14T10:57:11Z",
+      "created_at": "2026-06-14T10:48:45Z"
+    },
+    {
+      "id": 27497888870,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-14T11:49:18Z",
+      "updated_at": "2026-06-14T11:49:18Z",
+      "created_at": "2026-06-14T11:49:18Z"
+    },
+    {
+      "id": 27497889112,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-14T11:49:19Z",
+      "updated_at": "2026-06-14T11:49:19Z",
+      "created_at": "2026-06-14T11:49:19Z"
+    },
+    {
+      "id": 27497889441,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-14T11:49:20Z",
+      "updated_at": "2026-06-14T11:58:15Z",
+      "created_at": "2026-06-14T11:49:20Z"
+    },
+    {
+      "id": 27497889444,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-14T11:49:20Z",
+      "updated_at": "2026-06-14T11:49:28Z",
+      "created_at": "2026-06-14T11:49:20Z"
+    },
+    {
+      "id": 27535324644,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-15T08:58:33Z",
+      "updated_at": "2026-06-15T08:58:33Z",
+      "created_at": "2026-06-15T08:58:33Z"
+    },
+    {
+      "id": 27535325524,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-15T08:58:34Z",
+      "updated_at": "2026-06-15T08:58:34Z",
+      "created_at": "2026-06-15T08:58:34Z"
+    },
+    {
+      "id": 27535327505,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-15T08:58:37Z",
+      "updated_at": "2026-06-15T09:06:32Z",
+      "created_at": "2026-06-15T08:58:37Z"
+    },
+    {
+      "id": 27535327791,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-15T08:58:37Z",
+      "updated_at": "2026-06-15T08:58:49Z",
+      "created_at": "2026-06-15T08:58:37Z"
+    },
+    {
+      "id": 27563415033,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-15T17:14:57Z",
+      "updated_at": "2026-06-15T17:14:57Z",
+      "created_at": "2026-06-15T17:14:57Z"
+    },
+    {
+      "id": 27563417311,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-15T17:14:59Z",
+      "updated_at": "2026-06-15T17:14:59Z",
+      "created_at": "2026-06-15T17:14:59Z"
+    },
+    {
+      "id": 27563423471,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-15T17:15:05Z",
+      "updated_at": "2026-06-15T17:23:09Z",
+      "created_at": "2026-06-15T17:15:05Z"
+    },
+    {
+      "id": 27563423519,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-15T17:15:05Z",
+      "updated_at": "2026-06-15T17:15:18Z",
+      "created_at": "2026-06-15T17:15:05Z"
+    },
+    {
+      "id": 27563635651,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-15T17:18:52Z",
+      "updated_at": "2026-06-15T17:18:52Z",
+      "created_at": "2026-06-15T17:18:52Z"
+    },
+    {
+      "id": 27563636345,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-15T17:18:52Z",
+      "updated_at": "2026-06-15T17:18:52Z",
+      "created_at": "2026-06-15T17:18:52Z"
+    },
+    {
+      "id": 27578385936,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-15T21:43:49Z",
+      "updated_at": "2026-06-15T21:43:49Z",
+      "created_at": "2026-06-15T21:43:49Z"
+    },
+    {
+      "id": 27578386802,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-15T21:43:50Z",
+      "updated_at": "2026-06-15T21:43:50Z",
+      "created_at": "2026-06-15T21:43:50Z"
+    },
+    {
+      "id": 27578387771,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-15T21:43:51Z",
+      "updated_at": "2026-06-15T21:44:00Z",
+      "created_at": "2026-06-15T21:43:51Z"
+    },
+    {
+      "id": 27578387790,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-15T21:43:51Z",
+      "updated_at": "2026-06-15T21:52:13Z",
+      "created_at": "2026-06-15T21:43:51Z"
+    },
+    {
+      "id": 27579042745,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-15T21:56:53Z",
+      "updated_at": "2026-06-15T21:56:53Z",
+      "created_at": "2026-06-15T21:56:53Z"
+    },
+    {
+      "id": 27579043107,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-15T21:56:53Z",
+      "updated_at": "2026-06-15T21:56:53Z",
+      "created_at": "2026-06-15T21:56:53Z"
+    },
+    {
+      "id": 27579043618,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-15T21:56:54Z",
+      "updated_at": "2026-06-15T22:05:15Z",
+      "created_at": "2026-06-15T21:56:54Z"
+    },
+    {
+      "id": 27579043629,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-15T21:56:54Z",
+      "updated_at": "2026-06-15T21:57:06Z",
+      "created_at": "2026-06-15T21:56:54Z"
+    },
+    {
+      "id": 27607651743,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-16T09:22:44Z",
+      "updated_at": "2026-06-16T09:22:44Z",
+      "created_at": "2026-06-16T09:22:44Z"
+    },
+    {
+      "id": 27607652355,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-16T09:22:45Z",
+      "updated_at": "2026-06-16T09:22:45Z",
+      "created_at": "2026-06-16T09:22:45Z"
+    },
+    {
+      "id": 27607654098,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-16T09:22:47Z",
+      "updated_at": "2026-06-16T09:31:21Z",
+      "created_at": "2026-06-16T09:22:47Z"
+    },
+    {
+      "id": 27607654121,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-16T09:22:47Z",
+      "updated_at": "2026-06-16T09:23:06Z",
+      "created_at": "2026-06-16T09:22:47Z"
+    },
+    {
+      "id": 27616279870,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-16T12:06:13Z",
+      "updated_at": "2026-06-16T12:06:13Z",
+      "created_at": "2026-06-16T12:06:13Z"
+    },
+    {
+      "id": 27616280769,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-16T12:06:14Z",
+      "updated_at": "2026-06-16T12:06:14Z",
+      "created_at": "2026-06-16T12:06:14Z"
+    },
+    {
+      "id": 27616282487,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-16T12:06:16Z",
+      "updated_at": "2026-06-16T12:15:47Z",
+      "created_at": "2026-06-16T12:06:16Z"
+    },
+    {
+      "id": 27616282598,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-16T12:06:16Z",
+      "updated_at": "2026-06-16T12:06:27Z",
+      "created_at": "2026-06-16T12:06:16Z"
+    },
+    {
+      "id": 27700876803,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-17T15:37:01Z",
+      "updated_at": "2026-06-17T15:37:01Z",
+      "created_at": "2026-06-17T15:37:01Z"
+    },
+    {
+      "id": 27700879384,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-17T15:37:03Z",
+      "updated_at": "2026-06-17T15:37:03Z",
+      "created_at": "2026-06-17T15:37:03Z"
+    },
+    {
+      "id": 27700886560,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-17T15:37:10Z",
+      "updated_at": "2026-06-17T15:45:50Z",
+      "created_at": "2026-06-17T15:37:10Z"
+    },
+    {
+      "id": 27700886647,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-17T15:37:10Z",
+      "updated_at": "2026-06-17T15:37:22Z",
+      "created_at": "2026-06-17T15:37:10Z"
+    },
+    {
+      "id": 27702024940,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-17T15:55:26Z",
+      "updated_at": "2026-06-17T15:55:26Z",
+      "created_at": "2026-06-17T15:55:26Z"
+    },
+    {
+      "id": 27702027039,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-17T15:55:28Z",
+      "updated_at": "2026-06-17T15:55:28Z",
+      "created_at": "2026-06-17T15:55:28Z"
+    },
+    {
+      "id": 27702034987,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-17T15:55:36Z",
+      "updated_at": "2026-06-17T16:03:18Z",
+      "created_at": "2026-06-17T15:55:36Z"
+    },
+    {
+      "id": 27702035845,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-17T15:55:37Z",
+      "updated_at": "2026-06-17T15:55:50Z",
+      "created_at": "2026-06-17T15:55:37Z"
+    },
+    {
+      "id": 27702345589,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-17T16:00:37Z",
+      "updated_at": "2026-06-17T16:00:37Z",
+      "created_at": "2026-06-17T16:00:37Z"
+    },
+    {
+      "id": 27702348023,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-17T16:00:39Z",
+      "updated_at": "2026-06-17T16:00:39Z",
+      "created_at": "2026-06-17T16:00:39Z"
+    },
+    {
+      "id": 27702354813,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "cancelled",
+      "run_started_at": "2026-06-17T16:00:45Z",
+      "updated_at": "2026-06-17T16:03:12Z",
+      "created_at": "2026-06-17T16:00:45Z"
+    },
+    {
+      "id": 27702355490,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-17T16:00:46Z",
+      "updated_at": "2026-06-17T16:01:04Z",
+      "created_at": "2026-06-17T16:00:46Z"
+    },
+    {
+      "id": 27702506660,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-17T16:03:08Z",
+      "updated_at": "2026-06-17T16:03:08Z",
+      "created_at": "2026-06-17T16:03:08Z"
+    },
+    {
+      "id": 27702507325,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-17T16:03:08Z",
+      "updated_at": "2026-06-17T16:03:08Z",
+      "created_at": "2026-06-17T16:03:08Z"
+    },
+    {
+      "id": 27702509641,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-17T16:03:10Z",
+      "updated_at": "2026-06-17T16:12:28Z",
+      "created_at": "2026-06-17T16:03:10Z"
+    },
+    {
+      "id": 27702509645,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-17T16:03:10Z",
+      "updated_at": "2026-06-17T16:03:24Z",
+      "created_at": "2026-06-17T16:03:10Z"
+    },
+    {
+      "id": 27703672486,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-17T16:22:39Z",
+      "updated_at": "2026-06-17T16:22:39Z",
+      "created_at": "2026-06-17T16:22:39Z"
+    },
+    {
+      "id": 27703673044,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-17T16:22:39Z",
+      "updated_at": "2026-06-17T16:22:39Z",
+      "created_at": "2026-06-17T16:22:39Z"
+    },
+    {
+      "id": 27815865559,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-19T08:54:27Z",
+      "updated_at": "2026-06-19T08:54:27Z",
+      "created_at": "2026-06-19T08:54:27Z"
+    },
+    {
+      "id": 27815866013,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-19T08:54:27Z",
+      "updated_at": "2026-06-19T08:54:27Z",
+      "created_at": "2026-06-19T08:54:27Z"
+    },
+    {
+      "id": 27815866659,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-19T08:54:28Z",
+      "updated_at": "2026-06-19T08:54:39Z",
+      "created_at": "2026-06-19T08:54:28Z"
+    },
+    {
+      "id": 27815866685,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-19T08:54:28Z",
+      "updated_at": "2026-06-19T09:02:27Z",
+      "created_at": "2026-06-19T08:54:28Z"
+    },
+    {
+      "id": 27829423468,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-19T13:45:14Z",
+      "updated_at": "2026-06-19T13:45:14Z",
+      "created_at": "2026-06-19T13:45:14Z"
+    },
+    {
+      "id": 27829423935,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-19T13:45:14Z",
+      "updated_at": "2026-06-19T13:45:14Z",
+      "created_at": "2026-06-19T13:45:14Z"
+    },
+    {
+      "id": 27829424653,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-19T13:45:15Z",
+      "updated_at": "2026-06-19T13:52:50Z",
+      "created_at": "2026-06-19T13:45:15Z"
+    },
+    {
+      "id": 27829424682,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-19T13:45:15Z",
+      "updated_at": "2026-06-19T13:45:25Z",
+      "created_at": "2026-06-19T13:45:15Z"
+    },
+    {
+      "id": 27839298032,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-19T17:14:37Z",
+      "updated_at": "2026-06-19T17:14:37Z",
+      "created_at": "2026-06-19T17:14:37Z"
+    },
+    {
+      "id": 27839298362,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-19T17:14:38Z",
+      "updated_at": "2026-06-19T17:14:38Z",
+      "created_at": "2026-06-19T17:14:38Z"
+    },
+    {
+      "id": 27839299079,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-19T17:14:39Z",
+      "updated_at": "2026-06-19T17:14:51Z",
+      "created_at": "2026-06-19T17:14:39Z"
+    },
+    {
+      "id": 27839299098,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-19T17:14:39Z",
+      "updated_at": "2026-06-19T17:22:48Z",
+      "created_at": "2026-06-19T17:14:39Z"
+    },
+    {
+      "id": 27846980267,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-19T20:27:42Z",
+      "updated_at": "2026-06-19T20:27:42Z",
+      "created_at": "2026-06-19T20:27:42Z"
+    },
+    {
+      "id": 27846980502,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-19T20:27:43Z",
+      "updated_at": "2026-06-19T20:27:43Z",
+      "created_at": "2026-06-19T20:27:43Z"
+    },
+    {
+      "id": 27846981074,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-19T20:27:43Z",
+      "updated_at": "2026-06-19T20:36:17Z",
+      "created_at": "2026-06-19T20:27:43Z"
+    },
+    {
+      "id": 27846981080,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-19T20:27:43Z",
+      "updated_at": "2026-06-19T20:27:52Z",
+      "created_at": "2026-06-19T20:27:43Z"
+    },
+    {
+      "id": 27885042076,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-20T21:55:22Z",
+      "updated_at": "2026-06-20T21:55:22Z",
+      "created_at": "2026-06-20T21:55:22Z"
+    },
+    {
+      "id": 27885042247,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-20T21:55:22Z",
+      "updated_at": "2026-06-20T21:55:22Z",
+      "created_at": "2026-06-20T21:55:22Z"
+    },
+    {
+      "id": 27885042480,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-20T21:55:23Z",
+      "updated_at": "2026-06-20T21:55:34Z",
+      "created_at": "2026-06-20T21:55:23Z"
+    },
+    {
+      "id": 27885042482,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-20T21:55:23Z",
+      "updated_at": "2026-06-20T22:03:33Z",
+      "created_at": "2026-06-20T21:55:23Z"
+    },
+    {
+      "id": 27931838505,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-22T05:34:34Z",
+      "updated_at": "2026-06-22T05:34:34Z",
+      "created_at": "2026-06-22T05:34:34Z"
+    },
+    {
+      "id": 27931838807,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-22T05:34:34Z",
+      "updated_at": "2026-06-22T05:34:34Z",
+      "created_at": "2026-06-22T05:34:34Z"
+    },
+    {
+      "id": 27931839258,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-22T05:34:35Z",
+      "updated_at": "2026-06-22T05:43:13Z",
+      "created_at": "2026-06-22T05:34:35Z"
+    },
+    {
+      "id": 27931839262,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-22T05:34:35Z",
+      "updated_at": "2026-06-22T05:34:46Z",
+      "created_at": "2026-06-22T05:34:35Z"
+    },
+    {
+      "id": 27946998849,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-22T10:42:49Z",
+      "updated_at": "2026-06-22T10:42:49Z",
+      "created_at": "2026-06-22T10:42:49Z"
+    },
+    {
+      "id": 27946999237,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-22T10:42:50Z",
+      "updated_at": "2026-06-22T10:42:50Z",
+      "created_at": "2026-06-22T10:42:50Z"
+    },
+    {
+      "id": 27947000302,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-22T10:42:51Z",
+      "updated_at": "2026-06-22T10:51:03Z",
+      "created_at": "2026-06-22T10:42:51Z"
+    },
+    {
+      "id": 27947000312,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-22T10:42:51Z",
+      "updated_at": "2026-06-22T10:43:01Z",
+      "created_at": "2026-06-22T10:42:51Z"
+    },
+    {
+      "id": 27954962339,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-22T13:07:37Z",
+      "updated_at": "2026-06-22T13:07:37Z",
+      "created_at": "2026-06-22T13:07:37Z"
+    },
+    {
+      "id": 27954963081,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-22T13:07:38Z",
+      "updated_at": "2026-06-22T13:07:38Z",
+      "created_at": "2026-06-22T13:07:38Z"
+    },
+    {
+      "id": 27954965343,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-22T13:07:41Z",
+      "updated_at": "2026-06-22T13:15:56Z",
+      "created_at": "2026-06-22T13:07:41Z"
+    },
+    {
+      "id": 27954965382,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-22T13:07:41Z",
+      "updated_at": "2026-06-22T13:07:51Z",
+      "created_at": "2026-06-22T13:07:41Z"
+    },
+    {
+      "id": 27955808438,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-22T13:20:57Z",
+      "updated_at": "2026-06-22T13:20:57Z",
+      "created_at": "2026-06-22T13:20:57Z"
+    },
+    {
+      "id": 27955809770,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-22T13:20:58Z",
+      "updated_at": "2026-06-22T13:20:58Z",
+      "created_at": "2026-06-22T13:20:58Z"
+    },
+    {
+      "id": 27955813267,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-22T13:21:02Z",
+      "updated_at": "2026-06-22T13:29:37Z",
+      "created_at": "2026-06-22T13:21:02Z"
+    },
+    {
+      "id": 27955813412,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-22T13:21:02Z",
+      "updated_at": "2026-06-22T13:21:12Z",
+      "created_at": "2026-06-22T13:21:02Z"
+    },
+    {
+      "id": 27955877985,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-22T13:22:02Z",
+      "updated_at": "2026-06-22T13:22:02Z",
+      "created_at": "2026-06-22T13:22:02Z"
+    },
+    {
+      "id": 27955879510,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-22T13:22:04Z",
+      "updated_at": "2026-06-22T13:22:04Z",
+      "created_at": "2026-06-22T13:22:04Z"
+    },
+    {
+      "id": 27973344748,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-22T18:00:54Z",
+      "updated_at": "2026-06-22T18:00:54Z",
+      "created_at": "2026-06-22T18:00:54Z"
+    },
+    {
+      "id": 27973345558,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-22T18:00:54Z",
+      "updated_at": "2026-06-22T18:00:54Z",
+      "created_at": "2026-06-22T18:00:54Z"
+    },
+    {
+      "id": 27973347896,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-22T18:00:57Z",
+      "updated_at": "2026-06-22T18:01:10Z",
+      "created_at": "2026-06-22T18:00:57Z"
+    },
+    {
+      "id": 27973347951,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-22T18:00:57Z",
+      "updated_at": "2026-06-22T18:09:21Z",
+      "created_at": "2026-06-22T18:00:57Z"
+    },
+    {
+      "id": 27982243281,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-22T20:35:28Z",
+      "updated_at": "2026-06-22T20:35:28Z",
+      "created_at": "2026-06-22T20:35:28Z"
+    },
+    {
+      "id": 27982244399,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-22T20:35:29Z",
+      "updated_at": "2026-06-22T20:35:29Z",
+      "created_at": "2026-06-22T20:35:29Z"
+    },
+    {
+      "id": 27982246021,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-22T20:35:30Z",
+      "updated_at": "2026-06-22T20:35:42Z",
+      "created_at": "2026-06-22T20:35:30Z"
+    },
+    {
+      "id": 27982246024,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-22T20:35:30Z",
+      "updated_at": "2026-06-22T20:44:10Z",
+      "created_at": "2026-06-22T20:35:30Z"
+    },
+    {
+      "id": 28021549161,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-23T11:03:28Z",
+      "updated_at": "2026-06-23T11:03:28Z",
+      "created_at": "2026-06-23T11:03:28Z"
+    },
+    {
+      "id": 28021549819,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-23T11:03:28Z",
+      "updated_at": "2026-06-23T11:03:28Z",
+      "created_at": "2026-06-23T11:03:28Z"
+    },
+    {
+      "id": 28021551390,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-23T11:03:30Z",
+      "updated_at": "2026-06-23T11:12:02Z",
+      "created_at": "2026-06-23T11:03:30Z"
+    },
+    {
+      "id": 28021551456,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-23T11:03:30Z",
+      "updated_at": "2026-06-23T11:03:42Z",
+      "created_at": "2026-06-23T11:03:30Z"
+    },
+    {
+      "id": 28031012719,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-23T13:47:41Z",
+      "updated_at": "2026-06-23T13:47:41Z",
+      "created_at": "2026-06-23T13:47:41Z"
+    },
+    {
+      "id": 28031015092,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-23T13:47:44Z",
+      "updated_at": "2026-06-23T13:47:44Z",
+      "created_at": "2026-06-23T13:47:44Z"
+    },
+    {
+      "id": 28031022143,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-23T13:47:50Z",
+      "updated_at": "2026-06-23T13:56:06Z",
+      "created_at": "2026-06-23T13:47:50Z"
+    },
+    {
+      "id": 28031022982,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-23T13:47:51Z",
+      "updated_at": "2026-06-23T13:48:03Z",
+      "created_at": "2026-06-23T13:47:51Z"
+    },
+    {
+      "id": 28037020658,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-23T15:28:24Z",
+      "updated_at": "2026-06-23T15:28:24Z",
+      "created_at": "2026-06-23T15:28:24Z"
+    },
+    {
+      "id": 28037022401,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-23T15:28:26Z",
+      "updated_at": "2026-06-23T15:28:26Z",
+      "created_at": "2026-06-23T15:28:26Z"
+    },
+    {
+      "id": 28037028887,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-23T15:28:32Z",
+      "updated_at": "2026-06-23T15:28:44Z",
+      "created_at": "2026-06-23T15:28:32Z"
+    },
+    {
+      "id": 28037028919,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-23T15:28:32Z",
+      "updated_at": "2026-06-23T15:36:44Z",
+      "created_at": "2026-06-23T15:28:32Z"
+    },
+    {
+      "id": 28080056721,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-24T06:35:28Z",
+      "updated_at": "2026-06-24T06:35:28Z",
+      "created_at": "2026-06-24T06:35:28Z"
+    },
+    {
+      "id": 28080057139,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-24T06:35:28Z",
+      "updated_at": "2026-06-24T06:35:28Z",
+      "created_at": "2026-06-24T06:35:28Z"
+    },
+    {
+      "id": 28080057816,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-24T06:35:29Z",
+      "updated_at": "2026-06-24T06:35:39Z",
+      "created_at": "2026-06-24T06:35:29Z"
+    },
+    {
+      "id": 28080057837,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-24T06:35:29Z",
+      "updated_at": "2026-06-24T06:44:22Z",
+      "created_at": "2026-06-24T06:35:29Z"
+    },
+    {
+      "id": 28132891665,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-24T22:10:37Z",
+      "updated_at": "2026-06-24T22:10:37Z",
+      "created_at": "2026-06-24T22:10:37Z"
+    },
+    {
+      "id": 28132892010,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-24T22:10:38Z",
+      "updated_at": "2026-06-24T22:10:38Z",
+      "created_at": "2026-06-24T22:10:38Z"
+    },
+    {
+      "id": 28132892689,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-24T22:10:39Z",
+      "updated_at": "2026-06-24T22:10:48Z",
+      "created_at": "2026-06-24T22:10:39Z"
+    },
+    {
+      "id": 28132892692,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-24T22:10:39Z",
+      "updated_at": "2026-06-24T22:19:39Z",
+      "created_at": "2026-06-24T22:10:39Z"
+    },
+    {
+      "id": 28148100602,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-25T05:03:36Z",
+      "updated_at": "2026-06-25T05:03:36Z",
+      "created_at": "2026-06-25T05:03:36Z"
+    },
+    {
+      "id": 28148100929,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-25T05:03:36Z",
+      "updated_at": "2026-06-25T05:03:36Z",
+      "created_at": "2026-06-25T05:03:36Z"
+    },
+    {
+      "id": 28148101546,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-25T05:03:37Z",
+      "updated_at": "2026-06-25T05:03:46Z",
+      "created_at": "2026-06-25T05:03:37Z"
+    },
+    {
+      "id": 28148101548,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-25T05:03:37Z",
+      "updated_at": "2026-06-25T05:12:02Z",
+      "created_at": "2026-06-25T05:03:37Z"
+    },
+    {
+      "id": 28173949026,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-25T13:33:33Z",
+      "updated_at": "2026-06-25T13:33:33Z",
+      "created_at": "2026-06-25T13:33:33Z"
+    },
+    {
+      "id": 28173949635,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-25T13:33:34Z",
+      "updated_at": "2026-06-25T13:33:34Z",
+      "created_at": "2026-06-25T13:33:34Z"
+    },
+    {
+      "id": 28173951027,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-25T13:33:35Z",
+      "updated_at": "2026-06-25T13:33:45Z",
+      "created_at": "2026-06-25T13:33:35Z"
+    },
+    {
+      "id": 28173951226,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-25T13:33:35Z",
+      "updated_at": "2026-06-25T13:42:18Z",
+      "created_at": "2026-06-25T13:33:35Z"
+    },
+    {
+      "id": 28174721809,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-25T13:45:51Z",
+      "updated_at": "2026-06-25T13:45:51Z",
+      "created_at": "2026-06-25T13:45:51Z"
+    },
+    {
+      "id": 28174722467,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-25T13:45:52Z",
+      "updated_at": "2026-06-25T13:45:52Z",
+      "created_at": "2026-06-25T13:45:52Z"
+    },
+    {
+      "id": 28174724263,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-25T13:45:54Z",
+      "updated_at": "2026-06-25T13:54:53Z",
+      "created_at": "2026-06-25T13:45:54Z"
+    },
+    {
+      "id": 28174724546,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-25T13:45:54Z",
+      "updated_at": "2026-06-25T13:46:06Z",
+      "created_at": "2026-06-25T13:45:54Z"
+    },
+    {
+      "id": 28177853404,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-25T14:34:45Z",
+      "updated_at": "2026-06-25T14:34:45Z",
+      "created_at": "2026-06-25T14:34:45Z"
+    },
+    {
+      "id": 28177854762,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-25T14:34:46Z",
+      "updated_at": "2026-06-25T14:34:46Z",
+      "created_at": "2026-06-25T14:34:46Z"
+    },
+    {
+      "id": 28177855849,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-25T14:34:47Z",
+      "updated_at": "2026-06-25T14:34:57Z",
+      "created_at": "2026-06-25T14:34:47Z"
+    },
+    {
+      "id": 28177856109,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-25T14:34:47Z",
+      "updated_at": "2026-06-25T14:43:49Z",
+      "created_at": "2026-06-25T14:34:47Z"
+    },
+    {
+      "id": 28226034085,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-26T08:15:49Z",
+      "updated_at": "2026-06-26T08:15:49Z",
+      "created_at": "2026-06-26T08:15:49Z"
+    },
+    {
+      "id": 28226034499,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-26T08:15:49Z",
+      "updated_at": "2026-06-26T08:15:49Z",
+      "created_at": "2026-06-26T08:15:49Z"
+    },
+    {
+      "id": 28280650336,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-27T06:03:06Z",
+      "updated_at": "2026-06-27T06:03:06Z",
+      "created_at": "2026-06-27T06:03:06Z"
+    },
+    {
+      "id": 28280650536,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-27T06:03:07Z",
+      "updated_at": "2026-06-27T06:03:07Z",
+      "created_at": "2026-06-27T06:03:07Z"
+    },
+    {
+      "id": 28280650810,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-27T06:03:07Z",
+      "updated_at": "2026-06-27T06:03:18Z",
+      "created_at": "2026-06-27T06:03:07Z"
+    },
+    {
+      "id": 28280650819,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-27T06:03:07Z",
+      "updated_at": "2026-06-27T06:11:40Z",
+      "created_at": "2026-06-27T06:03:07Z"
+    },
+    {
+      "id": 28281337596,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-27T06:34:27Z",
+      "updated_at": "2026-06-27T06:34:27Z",
+      "created_at": "2026-06-27T06:34:27Z"
+    },
+    {
+      "id": 28281337772,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-27T06:34:27Z",
+      "updated_at": "2026-06-27T06:34:27Z",
+      "created_at": "2026-06-27T06:34:27Z"
+    },
+    {
+      "id": 28281338022,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-27T06:34:28Z",
+      "updated_at": "2026-06-27T06:34:38Z",
+      "created_at": "2026-06-27T06:34:28Z"
+    },
+    {
+      "id": 28281338039,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-27T06:34:28Z",
+      "updated_at": "2026-06-27T06:43:24Z",
+      "created_at": "2026-06-27T06:34:28Z"
+    },
+    {
+      "id": 28282882074,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-27T07:44:00Z",
+      "updated_at": "2026-06-27T07:44:00Z",
+      "created_at": "2026-06-27T07:44:00Z"
+    },
+    {
+      "id": 28282882212,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-27T07:44:00Z",
+      "updated_at": "2026-06-27T07:44:00Z",
+      "created_at": "2026-06-27T07:44:00Z"
+    },
+    {
+      "id": 28282882447,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-27T07:44:01Z",
+      "updated_at": "2026-06-27T07:52:35Z",
+      "created_at": "2026-06-27T07:44:01Z"
+    },
+    {
+      "id": 28282882456,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-27T07:44:01Z",
+      "updated_at": "2026-06-27T07:44:09Z",
+      "created_at": "2026-06-27T07:44:01Z"
+    },
+    {
+      "id": 28298002974,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-27T18:30:03Z",
+      "updated_at": "2026-06-27T18:30:03Z",
+      "created_at": "2026-06-27T18:30:03Z"
+    },
+    {
+      "id": 28298003219,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-27T18:30:03Z",
+      "updated_at": "2026-06-27T18:30:03Z",
+      "created_at": "2026-06-27T18:30:03Z"
+    },
+    {
+      "id": 28298003691,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-27T18:30:04Z",
+      "updated_at": "2026-06-27T18:30:14Z",
+      "created_at": "2026-06-27T18:30:04Z"
+    },
+    {
+      "id": 28298003696,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-27T18:30:04Z",
+      "updated_at": "2026-06-27T18:38:55Z",
+      "created_at": "2026-06-27T18:30:04Z"
+    },
+    {
+      "id": 28301718407,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-27T21:03:04Z",
+      "updated_at": "2026-06-27T21:03:04Z",
+      "created_at": "2026-06-27T21:03:04Z"
+    },
+    {
+      "id": 28301718614,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-27T21:03:04Z",
+      "updated_at": "2026-06-27T21:03:04Z",
+      "created_at": "2026-06-27T21:03:04Z"
+    },
+    {
+      "id": 28301718922,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-27T21:03:05Z",
+      "updated_at": "2026-06-27T21:12:07Z",
+      "created_at": "2026-06-27T21:03:05Z"
+    },
+    {
+      "id": 28301718932,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-27T21:03:05Z",
+      "updated_at": "2026-06-27T21:03:14Z",
+      "created_at": "2026-06-27T21:03:05Z"
+    },
+    {
+      "id": 28329546196,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-28T17:02:04Z",
+      "updated_at": "2026-06-28T17:02:04Z",
+      "created_at": "2026-06-28T17:02:04Z"
+    },
+    {
+      "id": 28329546460,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-28T17:02:04Z",
+      "updated_at": "2026-06-28T17:02:04Z",
+      "created_at": "2026-06-28T17:02:04Z"
+    },
+    {
+      "id": 28329546888,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-28T17:02:05Z",
+      "updated_at": "2026-06-28T17:02:16Z",
+      "created_at": "2026-06-28T17:02:05Z"
+    },
+    {
+      "id": 28329546897,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-28T17:02:05Z",
+      "updated_at": "2026-06-28T17:10:33Z",
+      "created_at": "2026-06-28T17:02:05Z"
+    },
+    {
+      "id": 28335045679,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-28T20:30:42Z",
+      "updated_at": "2026-06-28T20:30:42Z",
+      "created_at": "2026-06-28T20:30:42Z"
+    },
+    {
+      "id": 28335045904,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-28T20:30:42Z",
+      "updated_at": "2026-06-28T20:30:42Z",
+      "created_at": "2026-06-28T20:30:42Z"
+    },
+    {
+      "id": 28335046241,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-28T20:30:43Z",
+      "updated_at": "2026-06-28T20:39:50Z",
+      "created_at": "2026-06-28T20:30:43Z"
+    },
+    {
+      "id": 28335046248,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-28T20:30:43Z",
+      "updated_at": "2026-06-28T20:30:52Z",
+      "created_at": "2026-06-28T20:30:43Z"
+    },
+    {
+      "id": 28335590422,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-28T20:50:54Z",
+      "updated_at": "2026-06-28T20:50:54Z",
+      "created_at": "2026-06-28T20:50:54Z"
+    },
+    {
+      "id": 28335590567,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-28T20:50:55Z",
+      "updated_at": "2026-06-28T20:50:55Z",
+      "created_at": "2026-06-28T20:50:55Z"
+    },
+    {
+      "id": 28335590823,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-28T20:50:55Z",
+      "updated_at": "2026-06-28T20:59:18Z",
+      "created_at": "2026-06-28T20:50:55Z"
+    },
+    {
+      "id": 28335590841,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-28T20:50:55Z",
+      "updated_at": "2026-06-28T20:51:07Z",
+      "created_at": "2026-06-28T20:50:55Z"
+    },
+    {
+      "id": 28379217399,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-29T14:24:53Z",
+      "updated_at": "2026-06-29T14:24:53Z",
+      "created_at": "2026-06-29T14:24:53Z"
+    },
+    {
+      "id": 28379218000,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-29T14:24:53Z",
+      "updated_at": "2026-06-29T14:24:53Z",
+      "created_at": "2026-06-29T14:24:53Z"
+    },
+    {
+      "id": 28379219283,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-29T14:24:54Z",
+      "updated_at": "2026-06-29T14:25:04Z",
+      "created_at": "2026-06-29T14:24:54Z"
+    },
+    {
+      "id": 28379219648,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-29T14:24:55Z",
+      "updated_at": "2026-06-29T14:34:00Z",
+      "created_at": "2026-06-29T14:24:55Z"
+    },
+    {
+      "id": 28383244284,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-29T15:26:02Z",
+      "updated_at": "2026-06-29T15:26:02Z",
+      "created_at": "2026-06-29T15:26:02Z"
+    },
+    {
+      "id": 28383245048,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-29T15:26:03Z",
+      "updated_at": "2026-06-29T15:26:03Z",
+      "created_at": "2026-06-29T15:26:03Z"
+    },
+    {
+      "id": 28383246182,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-29T15:26:04Z",
+      "updated_at": "2026-06-29T15:26:13Z",
+      "created_at": "2026-06-29T15:26:04Z"
+    },
+    {
+      "id": 28383246260,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-29T15:26:04Z",
+      "updated_at": "2026-06-29T15:34:45Z",
+      "created_at": "2026-06-29T15:26:04Z"
+    },
+    {
+      "id": 28392461201,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-29T18:01:28Z",
+      "updated_at": "2026-06-29T18:01:28Z",
+      "created_at": "2026-06-29T18:01:28Z"
+    },
+    {
+      "id": 28392461827,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-29T18:01:29Z",
+      "updated_at": "2026-06-29T18:01:29Z",
+      "created_at": "2026-06-29T18:01:29Z"
+    },
+    {
+      "id": 28392462590,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-29T18:01:29Z",
+      "updated_at": "2026-06-29T18:11:07Z",
+      "created_at": "2026-06-29T18:01:29Z"
+    },
+    {
+      "id": 28392462591,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-29T18:01:29Z",
+      "updated_at": "2026-06-29T18:01:41Z",
+      "created_at": "2026-06-29T18:01:29Z"
+    },
+    {
+      "id": 28398981430,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-29T19:59:53Z",
+      "updated_at": "2026-06-29T19:59:53Z",
+      "created_at": "2026-06-29T19:59:53Z"
+    },
+    {
+      "id": 28398981934,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-29T19:59:54Z",
+      "updated_at": "2026-06-29T19:59:54Z",
+      "created_at": "2026-06-29T19:59:54Z"
+    },
+    {
+      "id": 28398982790,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-29T19:59:54Z",
+      "updated_at": "2026-06-29T20:00:04Z",
+      "created_at": "2026-06-29T19:59:54Z"
+    },
+    {
+      "id": 28398982792,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-29T19:59:54Z",
+      "updated_at": "2026-06-29T20:09:04Z",
+      "created_at": "2026-06-29T19:59:54Z"
+    },
+    {
+      "id": 28425062378,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-30T06:31:21Z",
+      "updated_at": "2026-06-30T06:31:21Z",
+      "created_at": "2026-06-30T06:31:21Z"
+    },
+    {
+      "id": 28425062788,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-30T06:31:21Z",
+      "updated_at": "2026-06-30T06:31:21Z",
+      "created_at": "2026-06-30T06:31:21Z"
+    },
+    {
+      "id": 28425063389,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-30T06:31:22Z",
+      "updated_at": "2026-06-30T06:40:18Z",
+      "created_at": "2026-06-30T06:31:22Z"
+    },
+    {
+      "id": 28425063429,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-30T06:31:22Z",
+      "updated_at": "2026-06-30T06:31:31Z",
+      "created_at": "2026-06-30T06:31:22Z"
+    },
+    {
+      "id": 28429650131,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-30T08:04:30Z",
+      "updated_at": "2026-06-30T08:04:30Z",
+      "created_at": "2026-06-30T08:04:30Z"
+    },
+    {
+      "id": 28429650676,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-30T08:04:30Z",
+      "updated_at": "2026-06-30T08:04:30Z",
+      "created_at": "2026-06-30T08:04:30Z"
+    },
+    {
+      "id": 28429651454,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-30T08:04:31Z",
+      "updated_at": "2026-06-30T08:04:40Z",
+      "created_at": "2026-06-30T08:04:31Z"
+    },
+    {
+      "id": 28429651471,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-30T08:04:31Z",
+      "updated_at": "2026-06-30T08:13:31Z",
+      "created_at": "2026-06-30T08:04:31Z"
+    },
+    {
+      "id": 28476629362,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-30T21:20:17Z",
+      "updated_at": "2026-06-30T21:20:17Z",
+      "created_at": "2026-06-30T21:20:17Z"
+    },
+    {
+      "id": 28476629811,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-06-30T21:20:17Z",
+      "updated_at": "2026-06-30T21:20:17Z",
+      "created_at": "2026-06-30T21:20:17Z"
+    },
+    {
+      "id": 28476630567,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-06-30T21:20:18Z",
+      "updated_at": "2026-06-30T21:20:30Z",
+      "created_at": "2026-06-30T21:20:18Z"
+    },
+    {
+      "id": 28476630627,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-06-30T21:20:18Z",
+      "updated_at": "2026-06-30T21:29:26Z",
+      "created_at": "2026-06-30T21:20:18Z"
+    },
+    {
+      "id": 28581176348,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-02T09:51:42Z",
+      "updated_at": "2026-07-02T09:51:42Z",
+      "created_at": "2026-07-02T09:51:42Z"
+    },
+    {
+      "id": 28581176838,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-02T09:51:42Z",
+      "updated_at": "2026-07-02T09:51:42Z",
+      "created_at": "2026-07-02T09:51:42Z"
+    },
+    {
+      "id": 28581177820,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-07-02T09:51:44Z",
+      "updated_at": "2026-07-02T10:00:36Z",
+      "created_at": "2026-07-02T09:51:44Z"
+    },
+    {
+      "id": 28581177856,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-07-02T09:51:44Z",
+      "updated_at": "2026-07-02T09:51:56Z",
+      "created_at": "2026-07-02T09:51:44Z"
+    },
+    {
+      "id": 28653843035,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-03T10:11:59Z",
+      "updated_at": "2026-07-03T10:11:59Z",
+      "created_at": "2026-07-03T10:11:59Z"
+    },
+    {
+      "id": 28653843528,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-03T10:11:59Z",
+      "updated_at": "2026-07-03T10:11:59Z",
+      "created_at": "2026-07-03T10:11:59Z"
+    },
+    {
+      "id": 28653844157,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-07-03T10:12:00Z",
+      "updated_at": "2026-07-03T10:12:10Z",
+      "created_at": "2026-07-03T10:12:00Z"
+    },
+    {
+      "id": 28653844164,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-07-03T10:12:00Z",
+      "updated_at": "2026-07-03T10:20:53Z",
+      "created_at": "2026-07-03T10:12:00Z"
+    },
+    {
+      "id": 28668177790,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-03T14:54:57Z",
+      "updated_at": "2026-07-03T14:54:57Z",
+      "created_at": "2026-07-03T14:54:57Z"
+    },
+    {
+      "id": 28668178155,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-03T14:54:57Z",
+      "updated_at": "2026-07-03T14:54:57Z",
+      "created_at": "2026-07-03T14:54:57Z"
+    },
+    {
+      "id": 28668178869,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-07-03T14:54:58Z",
+      "updated_at": "2026-07-03T14:55:08Z",
+      "created_at": "2026-07-03T14:54:58Z"
+    },
+    {
+      "id": 28668178876,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-07-03T14:54:58Z",
+      "updated_at": "2026-07-03T15:04:30Z",
+      "created_at": "2026-07-03T14:54:58Z"
+    },
+    {
+      "id": 28686671475,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-03T22:50:30Z",
+      "updated_at": "2026-07-03T22:50:30Z",
+      "created_at": "2026-07-03T22:50:30Z"
+    },
+    {
+      "id": 28686671714,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-03T22:50:30Z",
+      "updated_at": "2026-07-03T22:50:30Z",
+      "created_at": "2026-07-03T22:50:30Z"
+    },
+    {
+      "id": 28686672039,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-07-03T22:50:31Z",
+      "updated_at": "2026-07-03T22:59:39Z",
+      "created_at": "2026-07-03T22:50:31Z"
+    },
+    {
+      "id": 28686672041,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-07-03T22:50:31Z",
+      "updated_at": "2026-07-03T22:50:39Z",
+      "created_at": "2026-07-03T22:50:31Z"
+    },
+    {
+      "id": 28709261514,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-04T14:28:41Z",
+      "updated_at": "2026-07-04T14:28:41Z",
+      "created_at": "2026-07-04T14:28:41Z"
+    },
+    {
+      "id": 28709261687,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-04T14:28:42Z",
+      "updated_at": "2026-07-04T14:28:42Z",
+      "created_at": "2026-07-04T14:28:42Z"
+    },
+    {
+      "id": 28709262028,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-07-04T14:28:42Z",
+      "updated_at": "2026-07-04T14:38:09Z",
+      "created_at": "2026-07-04T14:28:42Z"
+    },
+    {
+      "id": 28709262039,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-07-04T14:28:42Z",
+      "updated_at": "2026-07-04T14:28:51Z",
+      "created_at": "2026-07-04T14:28:42Z"
+    },
+    {
+      "id": 28719107228,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-04T20:44:11Z",
+      "updated_at": "2026-07-04T20:44:11Z",
+      "created_at": "2026-07-04T20:44:11Z"
+    },
+    {
+      "id": 28719107467,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-04T20:44:12Z",
+      "updated_at": "2026-07-04T20:44:12Z",
+      "created_at": "2026-07-04T20:44:12Z"
+    },
+    {
+      "id": 28719107756,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-07-04T20:44:12Z",
+      "updated_at": "2026-07-04T20:53:20Z",
+      "created_at": "2026-07-04T20:44:12Z"
+    },
+    {
+      "id": 28719107759,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-07-04T20:44:12Z",
+      "updated_at": "2026-07-04T20:44:23Z",
+      "created_at": "2026-07-04T20:44:12Z"
+    },
+    {
+      "id": 28736624641,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-05T09:43:51Z",
+      "updated_at": "2026-07-05T09:43:51Z",
+      "created_at": "2026-07-05T09:43:51Z"
+    },
+    {
+      "id": 28736624858,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-05T09:43:51Z",
+      "updated_at": "2026-07-05T09:43:51Z",
+      "created_at": "2026-07-05T09:43:51Z"
+    },
+    {
+      "id": 28736625171,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-07-05T09:43:52Z",
+      "updated_at": "2026-07-05T09:52:47Z",
+      "created_at": "2026-07-05T09:43:52Z"
+    },
+    {
+      "id": 28736625182,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-07-05T09:43:52Z",
+      "updated_at": "2026-07-05T09:44:04Z",
+      "created_at": "2026-07-05T09:43:52Z"
+    },
+    {
+      "id": 28782380982,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-06T09:40:48Z",
+      "updated_at": "2026-07-06T09:40:48Z",
+      "created_at": "2026-07-06T09:40:48Z"
+    },
+    {
+      "id": 28782381711,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-06T09:40:48Z",
+      "updated_at": "2026-07-06T09:40:48Z",
+      "created_at": "2026-07-06T09:40:48Z"
+    },
+    {
+      "id": 28782382905,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-07-06T09:40:50Z",
+      "updated_at": "2026-07-06T09:41:00Z",
+      "created_at": "2026-07-06T09:40:50Z"
+    },
+    {
+      "id": 28782383011,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-07-06T09:40:50Z",
+      "updated_at": "2026-07-06T09:50:05Z",
+      "created_at": "2026-07-06T09:40:50Z"
+    },
+    {
+      "id": 28786933004,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-06T11:04:34Z",
+      "updated_at": "2026-07-06T11:04:34Z",
+      "created_at": "2026-07-06T11:04:34Z"
+    },
+    {
+      "id": 28786933411,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-06T11:04:35Z",
+      "updated_at": "2026-07-06T11:04:35Z",
+      "created_at": "2026-07-06T11:04:35Z"
+    },
+    {
+      "id": 28786934130,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-07-06T11:04:35Z",
+      "updated_at": "2026-07-06T11:14:21Z",
+      "created_at": "2026-07-06T11:04:35Z"
+    },
+    {
+      "id": 28786934209,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-07-06T11:04:36Z",
+      "updated_at": "2026-07-06T11:04:48Z",
+      "created_at": "2026-07-06T11:04:36Z"
+    },
+    {
+      "id": 28796407272,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-06T13:48:20Z",
+      "updated_at": "2026-07-06T13:48:20Z",
+      "created_at": "2026-07-06T13:48:20Z"
+    },
+    {
+      "id": 28796407858,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-06T13:48:20Z",
+      "updated_at": "2026-07-06T13:48:20Z",
+      "created_at": "2026-07-06T13:48:20Z"
+    },
+    {
+      "id": 28796410216,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-07-06T13:48:23Z",
+      "updated_at": "2026-07-06T13:48:32Z",
+      "created_at": "2026-07-06T13:48:23Z"
+    },
+    {
+      "id": 28796410811,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-07-06T13:48:23Z",
+      "updated_at": "2026-07-06T13:58:10Z",
+      "created_at": "2026-07-06T13:48:23Z"
+    },
+    {
+      "id": 28824664133,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-06T21:31:38Z",
+      "updated_at": "2026-07-06T21:31:38Z",
+      "created_at": "2026-07-06T21:31:38Z"
+    },
+    {
+      "id": 28824664447,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-06T21:31:39Z",
+      "updated_at": "2026-07-06T21:31:39Z",
+      "created_at": "2026-07-06T21:31:39Z"
+    },
+    {
+      "id": 28824665106,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-07-06T21:31:39Z",
+      "updated_at": "2026-07-06T21:31:52Z",
+      "created_at": "2026-07-06T21:31:39Z"
+    },
+    {
+      "id": 28824665191,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-07-06T21:31:40Z",
+      "updated_at": "2026-07-06T21:40:48Z",
+      "created_at": "2026-07-06T21:31:40Z"
+    },
+    {
+      "id": 28886005523,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-07T17:32:38Z",
+      "updated_at": "2026-07-07T17:32:38Z",
+      "created_at": "2026-07-07T17:32:38Z"
+    },
+    {
+      "id": 28886006231,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-07-07T17:32:39Z",
+      "updated_at": "2026-07-07T17:32:39Z",
+      "created_at": "2026-07-07T17:32:39Z"
+    },
+    {
+      "id": 28886007159,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-07-07T17:32:40Z",
+      "updated_at": "2026-07-07T17:42:21Z",
+      "created_at": "2026-07-07T17:32:40Z"
+    },
+    {
+      "id": 28886007199,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-07-07T17:32:40Z",
+      "updated_at": "2026-07-07T17:32:52Z",
+      "created_at": "2026-07-07T17:32:40Z"
+    },
+    {
+      "id": 33310163545,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-08-30T11:56:12Z",
+      "updated_at": "2026-08-30T11:56:12Z",
+      "created_at": "2026-08-30T11:56:12Z"
+    },
+    {
+      "id": 33310164063,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-08-30T11:56:13Z",
+      "updated_at": "2026-08-30T11:56:13Z",
+      "created_at": "2026-08-30T11:56:13Z"
+    },
+    {
+      "id": 33310164513,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-08-30T11:56:14Z",
+      "updated_at": "2026-08-30T11:56:24Z",
+      "created_at": "2026-08-30T11:56:14Z"
+    },
+    {
+      "id": 33310164525,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-08-30T11:56:14Z",
+      "updated_at": "2026-08-30T12:07:14Z",
+      "created_at": "2026-08-30T11:56:14Z"
+    },
+    {
+      "id": 33331610290,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-08-30T19:42:22Z",
+      "updated_at": "2026-08-30T19:42:22Z",
+      "created_at": "2026-08-30T19:42:22Z"
+    },
+    {
+      "id": 33331610687,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-08-30T19:42:23Z",
+      "updated_at": "2026-08-30T19:42:23Z",
+      "created_at": "2026-08-30T19:42:23Z"
+    },
+    {
+      "id": 33331611269,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-08-30T19:42:24Z",
+      "updated_at": "2026-08-30T19:51:28Z",
+      "created_at": "2026-08-30T19:42:24Z"
+    },
+    {
+      "id": 33331611278,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-08-30T19:42:24Z",
+      "updated_at": "2026-08-30T19:42:35Z",
+      "created_at": "2026-08-30T19:42:24Z"
+    },
+    {
+      "id": 33504618190,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-01T11:51:28Z",
+      "updated_at": "2026-09-01T11:51:28Z",
+      "created_at": "2026-09-01T11:51:28Z"
+    },
+    {
+      "id": 33504619384,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-01T11:51:29Z",
+      "updated_at": "2026-09-01T11:51:29Z",
+      "created_at": "2026-09-01T11:51:29Z"
+    },
+    {
+      "id": 33504620611,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-09-01T11:51:30Z",
+      "updated_at": "2026-09-01T11:51:40Z",
+      "created_at": "2026-09-01T11:51:30Z"
+    },
+    {
+      "id": 33504620679,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-09-01T11:51:30Z",
+      "updated_at": "2026-09-01T12:01:39Z",
+      "created_at": "2026-09-01T11:51:30Z"
+    },
+    {
+      "id": 33624895023,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-02T11:29:51Z",
+      "updated_at": "2026-09-02T11:29:51Z",
+      "created_at": "2026-09-02T11:29:51Z"
+    },
+    {
+      "id": 33624896310,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-02T11:29:52Z",
+      "updated_at": "2026-09-02T11:29:52Z",
+      "created_at": "2026-09-02T11:29:52Z"
+    },
+    {
+      "id": 33624897710,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-09-02T11:29:53Z",
+      "updated_at": "2026-09-02T11:37:46Z",
+      "created_at": "2026-09-02T11:29:53Z"
+    },
+    {
+      "id": 33624897806,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-09-02T11:29:53Z",
+      "updated_at": "2026-09-02T11:30:08Z",
+      "created_at": "2026-09-02T11:29:53Z"
+    },
+    {
+      "id": 33763405325,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-03T13:50:41Z",
+      "updated_at": "2026-09-03T13:50:41Z",
+      "created_at": "2026-09-03T13:50:41Z"
+    },
+    {
+      "id": 33763406695,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-03T13:50:42Z",
+      "updated_at": "2026-09-03T13:50:42Z",
+      "created_at": "2026-09-03T13:50:42Z"
+    },
+    {
+      "id": 33763408381,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-09-03T13:50:43Z",
+      "updated_at": "2026-09-03T13:59:32Z",
+      "created_at": "2026-09-03T13:50:43Z"
+    },
+    {
+      "id": 33763408452,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-09-03T13:50:43Z",
+      "updated_at": "2026-09-03T13:50:58Z",
+      "created_at": "2026-09-03T13:50:43Z"
+    },
+    {
+      "id": 33772613333,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-03T15:26:27Z",
+      "updated_at": "2026-09-03T15:26:27Z",
+      "created_at": "2026-09-03T15:26:27Z"
+    },
+    {
+      "id": 33772614945,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-03T15:26:28Z",
+      "updated_at": "2026-09-03T15:26:28Z",
+      "created_at": "2026-09-03T15:26:28Z"
+    },
+    {
+      "id": 33772616579,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-09-03T15:26:29Z",
+      "updated_at": "2026-09-03T15:26:42Z",
+      "created_at": "2026-09-03T15:26:29Z"
+    },
+    {
+      "id": 33772616864,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-09-03T15:26:29Z",
+      "updated_at": "2026-09-03T15:35:47Z",
+      "created_at": "2026-09-03T15:26:29Z"
+    },
+    {
+      "id": 33788691401,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-03T18:08:08Z",
+      "updated_at": "2026-09-03T18:08:08Z",
+      "created_at": "2026-09-03T18:08:08Z"
+    },
+    {
+      "id": 33788692443,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-03T18:08:08Z",
+      "updated_at": "2026-09-03T18:08:08Z",
+      "created_at": "2026-09-03T18:08:08Z"
+    },
+    {
+      "id": 33788693901,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-09-03T18:08:09Z",
+      "updated_at": "2026-09-03T18:17:26Z",
+      "created_at": "2026-09-03T18:08:09Z"
+    },
+    {
+      "id": 33788693903,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-09-03T18:08:09Z",
+      "updated_at": "2026-09-03T18:08:26Z",
+      "created_at": "2026-09-03T18:08:09Z"
+    },
+    {
+      "id": 33953153496,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-05T07:39:21Z",
+      "updated_at": "2026-09-05T07:39:21Z",
+      "created_at": "2026-09-05T07:39:21Z"
+    },
+    {
+      "id": 33953153948,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-05T07:39:21Z",
+      "updated_at": "2026-09-05T07:39:21Z",
+      "created_at": "2026-09-05T07:39:21Z"
+    },
+    {
+      "id": 33953154478,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-09-05T07:39:22Z",
+      "updated_at": "2026-09-05T07:49:02Z",
+      "created_at": "2026-09-05T07:39:22Z"
+    },
+    {
+      "id": 33953154492,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-09-05T07:39:22Z",
+      "updated_at": "2026-09-05T07:39:33Z",
+      "created_at": "2026-09-05T07:39:22Z"
+    },
+    {
+      "id": 34051699974,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-06T18:26:06Z",
+      "updated_at": "2026-09-06T18:26:06Z",
+      "created_at": "2026-09-06T18:26:06Z"
+    },
+    {
+      "id": 34051700470,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-06T18:26:06Z",
+      "updated_at": "2026-09-06T18:26:06Z",
+      "created_at": "2026-09-06T18:26:06Z"
+    },
+    {
+      "id": 34051701049,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-09-06T18:26:07Z",
+      "updated_at": "2026-09-06T18:35:34Z",
+      "created_at": "2026-09-06T18:26:07Z"
+    },
+    {
+      "id": 34051701076,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-09-06T18:26:07Z",
+      "updated_at": "2026-09-06T18:26:17Z",
+      "created_at": "2026-09-06T18:26:07Z"
+    },
+    {
+      "id": 34241669194,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-08T14:57:52Z",
+      "updated_at": "2026-09-08T14:57:52Z",
+      "created_at": "2026-09-08T14:57:52Z"
+    },
+    {
+      "id": 34241670419,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-08T14:57:53Z",
+      "updated_at": "2026-09-08T14:57:53Z",
+      "created_at": "2026-09-08T14:57:53Z"
+    },
+    {
+      "id": 34241671836,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-09-08T14:57:54Z",
+      "updated_at": "2026-09-08T14:58:07Z",
+      "created_at": "2026-09-08T14:57:54Z"
+    },
+    {
+      "id": 34241672010,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-09-08T14:57:54Z",
+      "updated_at": "2026-09-08T15:07:00Z",
+      "created_at": "2026-09-08T14:57:54Z"
+    },
+    {
+      "id": 34273496189,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-08T20:13:05Z",
+      "updated_at": "2026-09-08T20:13:05Z",
+      "created_at": "2026-09-08T20:13:05Z"
+    },
+    {
+      "id": 34273497328,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-08T20:13:05Z",
+      "updated_at": "2026-09-08T20:13:05Z",
+      "created_at": "2026-09-08T20:13:05Z"
+    },
+    {
+      "id": 34273498660,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-09-08T20:13:06Z",
+      "updated_at": "2026-09-08T20:13:16Z",
+      "created_at": "2026-09-08T20:13:06Z"
+    },
+    {
+      "id": 34273498745,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-09-08T20:13:06Z",
+      "updated_at": "2026-09-08T20:21:43Z",
+      "created_at": "2026-09-08T20:13:06Z"
+    },
+    {
+      "id": 34511680361,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-10T18:00:37Z",
+      "updated_at": "2026-09-10T18:00:37Z",
+      "created_at": "2026-09-10T18:00:37Z"
+    },
+    {
+      "id": 34511681467,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-10T18:00:38Z",
+      "updated_at": "2026-09-10T18:00:38Z",
+      "created_at": "2026-09-10T18:00:38Z"
+    },
+    {
+      "id": 34511682655,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-09-10T18:00:39Z",
+      "updated_at": "2026-09-10T18:00:51Z",
+      "created_at": "2026-09-10T18:00:39Z"
+    },
+    {
+      "id": 34511682682,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-09-10T18:00:39Z",
+      "updated_at": "2026-09-10T18:10:01Z",
+      "created_at": "2026-09-10T18:00:39Z"
+    },
+    {
+      "id": 34577031569,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-11T08:00:15Z",
+      "updated_at": "2026-09-11T08:00:15Z",
+      "created_at": "2026-09-11T08:00:15Z"
+    },
+    {
+      "id": 34577032329,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-11T08:00:15Z",
+      "updated_at": "2026-09-11T08:00:15Z",
+      "created_at": "2026-09-11T08:00:15Z"
+    },
+    {
+      "id": 34577033296,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-09-11T08:00:16Z",
+      "updated_at": "2026-09-11T08:00:27Z",
+      "created_at": "2026-09-11T08:00:16Z"
+    },
+    {
+      "id": 34577033397,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-09-11T08:00:16Z",
+      "updated_at": "2026-09-11T08:10:19Z",
+      "created_at": "2026-09-11T08:00:16Z"
+    },
+    {
+      "id": 34818379981,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-14T07:33:07Z",
+      "updated_at": "2026-09-14T07:33:07Z",
+      "created_at": "2026-09-14T07:33:07Z"
+    },
+    {
+      "id": 34818380767,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-14T07:33:07Z",
+      "updated_at": "2026-09-14T07:33:07Z",
+      "created_at": "2026-09-14T07:33:07Z"
+    },
+    {
+      "id": 34818381885,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-09-14T07:33:08Z",
+      "updated_at": "2026-09-14T07:33:19Z",
+      "created_at": "2026-09-14T07:33:08Z"
+    },
+    {
+      "id": 34818381887,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-09-14T07:33:08Z",
+      "updated_at": "2026-09-14T07:43:45Z",
+      "created_at": "2026-09-14T07:33:08Z"
+    },
+    {
+      "id": 34864393730,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-14T15:46:42Z",
+      "updated_at": "2026-09-14T15:46:42Z",
+      "created_at": "2026-09-14T15:46:42Z"
+    },
+    {
+      "id": 34864394883,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-14T15:46:43Z",
+      "updated_at": "2026-09-14T15:46:43Z",
+      "created_at": "2026-09-14T15:46:43Z"
+    },
+    {
+      "id": 34864396191,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-09-14T15:46:44Z",
+      "updated_at": "2026-09-14T15:46:56Z",
+      "created_at": "2026-09-14T15:46:44Z"
+    },
+    {
+      "id": 34864396233,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-09-14T15:46:44Z",
+      "updated_at": "2026-09-14T15:56:54Z",
+      "created_at": "2026-09-14T15:46:44Z"
+    },
+    {
+      "id": 35575084549,
+      "workflow_id": 23325664,
+      "name": ".github/workflows/sonar-backend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-21T07:53:11Z",
+      "updated_at": "2026-09-21T07:53:11Z",
+      "created_at": "2026-09-21T07:53:11Z"
+    },
+    {
+      "id": 35575085325,
+      "workflow_id": 23325665,
+      "name": ".github/workflows/sonar-frontend.yaml",
+      "conclusion": "failure",
+      "run_started_at": "2026-09-21T07:53:12Z",
+      "updated_at": "2026-09-21T07:53:12Z",
+      "created_at": "2026-09-21T07:53:12Z"
+    },
+    {
+      "id": 35575086184,
+      "workflow_id": 11562677,
+      "name": "Release Drafter",
+      "conclusion": "success",
+      "run_started_at": "2026-09-21T07:53:12Z",
+      "updated_at": "2026-09-21T07:53:24Z",
+      "created_at": "2026-09-21T07:53:12Z"
+    },
+    {
+      "id": 35575086207,
+      "workflow_id": 26412307,
+      "name": "Main branch Build",
+      "conclusion": "success",
+      "run_started_at": "2026-09-21T07:53:12Z",
+      "updated_at": "2026-09-21T08:02:47Z",
+      "created_at": "2026-09-21T07:53:12Z"
+    }
+  ]
+}

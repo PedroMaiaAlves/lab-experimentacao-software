@@ -1,0 +1,541 @@
+{
+  "full_name": "massive-com/client-python",
+  "default_branch": "master",
+  "janela_inicio": "2025-10-01",
+  "janela_fim": "2026-09-30",
+  "complete": true,
+  "saturated_intervals": [],
+  "workflow_runs": [
+    {
+      "id": 18318018709,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-10-07T15:36:31Z",
+      "updated_at": "2025-10-07T15:37:34Z",
+      "created_at": "2025-10-07T15:36:31Z"
+    },
+    {
+      "id": 18536053114,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-10-15T16:38:44Z",
+      "updated_at": "2025-10-15T16:39:44Z",
+      "created_at": "2025-10-15T16:38:44Z"
+    },
+    {
+      "id": 18536200597,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-10-15T16:44:44Z",
+      "updated_at": "2025-10-15T16:45:49Z",
+      "created_at": "2025-10-15T16:44:44Z"
+    },
+    {
+      "id": 18536403419,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-10-15T16:52:45Z",
+      "updated_at": "2025-10-15T16:53:53Z",
+      "created_at": "2025-10-15T16:52:45Z"
+    },
+    {
+      "id": 18536458608,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-10-15T16:55:03Z",
+      "updated_at": "2025-10-15T16:56:07Z",
+      "created_at": "2025-10-15T16:55:03Z"
+    },
+    {
+      "id": 18537002193,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-10-15T17:16:17Z",
+      "updated_at": "2025-10-15T17:17:19Z",
+      "created_at": "2025-10-15T17:16:17Z"
+    },
+    {
+      "id": 18537053686,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-10-15T17:18:20Z",
+      "updated_at": "2025-10-15T17:19:28Z",
+      "created_at": "2025-10-15T17:18:20Z"
+    },
+    {
+      "id": 18537187452,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-10-15T17:23:27Z",
+      "updated_at": "2025-10-15T17:24:31Z",
+      "created_at": "2025-10-15T17:23:27Z"
+    },
+    {
+      "id": 18537321665,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-10-15T17:28:31Z",
+      "updated_at": "2025-10-15T17:29:37Z",
+      "created_at": "2025-10-15T17:28:31Z"
+    },
+    {
+      "id": 18538075499,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-10-15T17:59:41Z",
+      "updated_at": "2025-10-15T18:00:42Z",
+      "created_at": "2025-10-15T17:59:41Z"
+    },
+    {
+      "id": 18538166764,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-10-15T18:03:18Z",
+      "updated_at": "2025-10-15T18:04:31Z",
+      "created_at": "2025-10-15T18:03:18Z"
+    },
+    {
+      "id": 18561750905,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-10-16T12:47:27Z",
+      "updated_at": "2025-10-16T12:48:32Z",
+      "created_at": "2025-10-16T12:47:27Z"
+    },
+    {
+      "id": 18561838383,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-10-16T12:50:42Z",
+      "updated_at": "2025-10-16T12:51:48Z",
+      "created_at": "2025-10-16T12:50:42Z"
+    },
+    {
+      "id": 18658527138,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-10-20T16:30:24Z",
+      "updated_at": "2025-10-20T16:31:30Z",
+      "created_at": "2025-10-20T16:30:24Z"
+    },
+    {
+      "id": 18658934497,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-10-20T16:48:00Z",
+      "updated_at": "2025-10-20T16:49:05Z",
+      "created_at": "2025-10-20T16:48:00Z"
+    },
+    {
+      "id": 18659229720,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-10-20T17:01:31Z",
+      "updated_at": "2025-10-20T17:02:33Z",
+      "created_at": "2025-10-20T17:01:31Z"
+    },
+    {
+      "id": 18659403901,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-10-20T17:08:30Z",
+      "updated_at": "2025-10-20T17:09:33Z",
+      "created_at": "2025-10-20T17:08:30Z"
+    },
+    {
+      "id": 18751300477,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-10-23T14:12:44Z",
+      "updated_at": "2025-10-23T14:14:02Z",
+      "created_at": "2025-10-23T14:12:44Z"
+    },
+    {
+      "id": 18752799956,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-10-23T15:03:13Z",
+      "updated_at": "2025-10-23T15:04:23Z",
+      "created_at": "2025-10-23T15:03:13Z"
+    },
+    {
+      "id": 18848908102,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-10-27T16:46:14Z",
+      "updated_at": "2025-10-27T16:47:20Z",
+      "created_at": "2025-10-27T16:46:14Z"
+    },
+    {
+      "id": 18849200485,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-10-27T16:56:12Z",
+      "updated_at": "2025-10-27T16:57:21Z",
+      "created_at": "2025-10-27T16:56:12Z"
+    },
+    {
+      "id": 18944407850,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-10-30T14:38:10Z",
+      "updated_at": "2025-10-30T14:39:13Z",
+      "created_at": "2025-10-30T14:38:10Z"
+    },
+    {
+      "id": 18955480861,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-10-30T21:24:58Z",
+      "updated_at": "2025-10-30T21:25:58Z",
+      "created_at": "2025-10-30T21:24:58Z"
+    },
+    {
+      "id": 18956118960,
+      "workflow_id": 25308124,
+      "name": ".github/workflows/release.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-10-30T21:55:15Z",
+      "updated_at": "2025-10-30T21:55:15Z",
+      "created_at": "2025-10-30T21:55:15Z"
+    },
+    {
+      "id": 18956119288,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-10-30T21:55:16Z",
+      "updated_at": "2025-10-30T21:56:19Z",
+      "created_at": "2025-10-30T21:55:16Z"
+    },
+    {
+      "id": 18956802334,
+      "workflow_id": 25308124,
+      "name": ".github/workflows/release.yml",
+      "conclusion": "failure",
+      "run_started_at": "2025-10-30T22:28:42Z",
+      "updated_at": "2025-10-30T22:28:42Z",
+      "created_at": "2025-10-30T22:28:42Z"
+    },
+    {
+      "id": 18956802558,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-10-30T22:28:43Z",
+      "updated_at": "2025-10-30T22:29:47Z",
+      "created_at": "2025-10-30T22:28:43Z"
+    },
+    {
+      "id": 18956941202,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-10-30T22:35:43Z",
+      "updated_at": "2025-10-30T22:36:45Z",
+      "created_at": "2025-10-30T22:35:43Z"
+    },
+    {
+      "id": 19092308235,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-11-05T05:29:50Z",
+      "updated_at": "2025-11-05T05:30:59Z",
+      "created_at": "2025-11-05T05:29:50Z"
+    },
+    {
+      "id": 19112328886,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-11-05T18:31:05Z",
+      "updated_at": "2025-11-05T18:32:07Z",
+      "created_at": "2025-11-05T18:31:05Z"
+    },
+    {
+      "id": 19506982777,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-11-19T15:35:18Z",
+      "updated_at": "2025-11-19T15:39:20Z",
+      "created_at": "2025-11-19T15:35:18Z"
+    },
+    {
+      "id": 19642614655,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-11-24T17:04:24Z",
+      "updated_at": "2025-11-24T17:05:29Z",
+      "created_at": "2025-11-24T17:04:24Z"
+    },
+    {
+      "id": 19991138014,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-12-06T16:24:14Z",
+      "updated_at": "2025-12-06T16:25:16Z",
+      "created_at": "2025-12-06T16:24:14Z"
+    },
+    {
+      "id": 19991202337,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-12-06T16:30:03Z",
+      "updated_at": "2025-12-06T16:31:03Z",
+      "created_at": "2025-12-06T16:30:03Z"
+    },
+    {
+      "id": 20034505476,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-12-08T16:05:41Z",
+      "updated_at": "2025-12-08T16:06:43Z",
+      "created_at": "2025-12-08T16:05:41Z"
+    },
+    {
+      "id": 20034648772,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-12-08T16:10:14Z",
+      "updated_at": "2025-12-08T16:11:46Z",
+      "created_at": "2025-12-08T16:10:14Z"
+    },
+    {
+      "id": 20570329712,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2025-12-29T10:10:21Z",
+      "updated_at": "2025-12-29T10:11:34Z",
+      "created_at": "2025-12-29T10:10:21Z"
+    },
+    {
+      "id": 20939874997,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2026-01-13T00:24:39Z",
+      "updated_at": "2026-01-13T00:25:42Z",
+      "created_at": "2026-01-13T00:24:39Z"
+    },
+    {
+      "id": 20960350844,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2026-01-13T14:27:19Z",
+      "updated_at": "2026-01-13T14:28:25Z",
+      "created_at": "2026-01-13T14:27:19Z"
+    },
+    {
+      "id": 20960440456,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2026-01-13T14:30:02Z",
+      "updated_at": "2026-01-13T14:31:11Z",
+      "created_at": "2026-01-13T14:30:02Z"
+    },
+    {
+      "id": 20960565487,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2026-01-13T14:33:50Z",
+      "updated_at": "2026-01-13T14:34:54Z",
+      "created_at": "2026-01-13T14:33:50Z"
+    },
+    {
+      "id": 21149253800,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2026-01-19T19:26:36Z",
+      "updated_at": "2026-01-19T19:27:41Z",
+      "created_at": "2026-01-19T19:26:36Z"
+    },
+    {
+      "id": 21352798813,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2026-01-26T09:34:08Z",
+      "updated_at": "2026-01-26T09:35:20Z",
+      "created_at": "2026-01-26T09:34:08Z"
+    },
+    {
+      "id": 21724598415,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2026-02-05T19:01:06Z",
+      "updated_at": "2026-02-05T19:02:20Z",
+      "created_at": "2026-02-05T19:01:06Z"
+    },
+    {
+      "id": 22403995314,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2026-02-25T15:38:50Z",
+      "updated_at": "2026-02-25T15:40:07Z",
+      "created_at": "2026-02-25T15:38:50Z"
+    },
+    {
+      "id": 22404641705,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2026-02-25T15:54:50Z",
+      "updated_at": "2026-02-25T15:56:04Z",
+      "created_at": "2026-02-25T15:54:50Z"
+    },
+    {
+      "id": 22422052860,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2026-02-26T00:18:54Z",
+      "updated_at": "2026-02-26T00:20:03Z",
+      "created_at": "2026-02-26T00:18:54Z"
+    },
+    {
+      "id": 22449533147,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2026-02-26T15:46:50Z",
+      "updated_at": "2026-02-26T15:47:57Z",
+      "created_at": "2026-02-26T15:46:50Z"
+    },
+    {
+      "id": 22590018827,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2026-03-02T18:30:10Z",
+      "updated_at": "2026-03-02T18:31:17Z",
+      "created_at": "2026-03-02T18:30:10Z"
+    },
+    {
+      "id": 22725533585,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2026-03-05T15:40:11Z",
+      "updated_at": "2026-03-05T15:41:25Z",
+      "created_at": "2026-03-05T15:40:11Z"
+    },
+    {
+      "id": 22726269002,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2026-03-05T15:57:01Z",
+      "updated_at": "2026-03-05T15:58:19Z",
+      "created_at": "2026-03-05T15:57:01Z"
+    },
+    {
+      "id": 24245761463,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2026-04-10T13:38:58Z",
+      "updated_at": "2026-04-10T13:40:11Z",
+      "created_at": "2026-04-10T13:38:58Z"
+    },
+    {
+      "id": 24246107391,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2026-04-10T13:47:05Z",
+      "updated_at": "2026-04-10T13:48:17Z",
+      "created_at": "2026-04-10T13:47:05Z"
+    },
+    {
+      "id": 25070234114,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2026-04-28T18:20:20Z",
+      "updated_at": "2026-04-28T18:21:40Z",
+      "created_at": "2026-04-28T18:20:20Z"
+    },
+    {
+      "id": 25337307646,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2026-05-04T18:54:30Z",
+      "updated_at": "2026-05-04T18:55:50Z",
+      "created_at": "2026-05-04T18:54:30Z"
+    },
+    {
+      "id": 26366537555,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2026-05-24T16:25:11Z",
+      "updated_at": "2026-05-24T16:26:26Z",
+      "created_at": "2026-05-24T16:25:11Z"
+    },
+    {
+      "id": 26440761519,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2026-05-26T08:17:25Z",
+      "updated_at": "2026-05-26T08:18:40Z",
+      "created_at": "2026-05-26T08:17:25Z"
+    },
+    {
+      "id": 28809672266,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2026-07-06T17:14:37Z",
+      "updated_at": "2026-07-06T17:15:53Z",
+      "created_at": "2026-07-06T17:14:37Z"
+    },
+    {
+      "id": 29029456291,
+      "workflow_id": 26453149,
+      "name": "codeql",
+      "conclusion": "success",
+      "run_started_at": "2026-07-09T15:25:39Z",
+      "updated_at": "2026-07-09T15:26:56Z",
+      "created_at": "2026-07-09T15:25:39Z"
+    }
+  ]
+}
