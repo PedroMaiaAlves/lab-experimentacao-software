@@ -24,15 +24,23 @@ def _consulta(faixa, linguagem=None):
     return q
 
 
-def _buscar(client, q, max_itens=LIMITE_BUSCA):
+def _primeira_pagina(client, q):
     params = {"q": q, "sort": "stars", "order": "desc", "per_page": 100}
     primeira, _ = client.get_json("/search/repositories", params)
+    return int(primeira["total_count"]), primeira.get("items", []), params
+
+
+def _buscar(client, q, max_itens=LIMITE_BUSCA, primeira=None):
+    if primeira is None:
+        total, _, params = _primeira_pagina(client, q)
+    else:
+        total, _, params = primeira
     itens = []
     for item in client.paginate("/search/repositories", params, chave="items"):
         itens.append(item)
         if len(itens) >= max_itens:
             break
-    return primeira["total_count"], itens
+    return total, itens
 
 
 def _normalizar(item, consulta):
@@ -66,28 +74,32 @@ def _buscar_por_linguagens(client, faixa, linguagens):
     particoes = []
     for linguagem in linguagens:
         q = _consulta(faixa, linguagem)
-        total, itens = _buscar(client, q)
+        primeira = _primeira_pagina(client, q)
+        total = primeira[0]
         log.info(
-            "faixa %s, linguagem %s: %d repositórios no total, %d obtidos",
-            faixa, linguagem, total, len(itens),
+            "faixa %s, linguagem %s: %d repositórios no total",
+            faixa, linguagem, total,
         )
         if total >= LIMITE_BUSCA:
             raise RuntimeError(
                 "consulta saturada mesmo após subdivisão por estrelas e linguagem: "
                 f"{q} ({total} resultados)"
             )
+        _, itens = _buscar(client, q, primeira=primeira)
         particoes.append((q, itens))
     return particoes
 
 
 def _buscar_faixa_completa(client, faixa, linguagens):
     q = _consulta(faixa)
-    total, itens = _buscar(client, q)
-    log.info("faixa %s: %d repositórios no total, %d obtidos", faixa, total, len(itens))
+    primeira = _primeira_pagina(client, q)
+    total, itens_primeira, _ = primeira
+    log.info("faixa %s: %d repositórios no total", faixa, total)
     if total < LIMITE_BUSCA:
+        _, itens = _buscar(client, q, primeira=primeira)
         return [(q, itens)]
 
-    limites = _limites_faixa(faixa, itens)
+    limites = _limites_faixa(faixa, itens_primeira)
     if limites is None or limites[0] >= limites[1]:
         log.warning(
             "faixa %s continua saturada com %d resultados: subdividindo por linguagem",

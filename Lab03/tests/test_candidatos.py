@@ -33,6 +33,7 @@ def test_subdivide_por_estrelas_quando_passa_de_1000():
     cfg = {"semente": 1, "selecao": {"faixas_estrelas": ["1000..1003"], "linguagens": []}}
     selecionar_candidatos(cli, cfg)
     consultas = [p["q"] for _, p in cli.chamadas]
+    assert consultas.count("stars:1000..1003 archived:false fork:false") == 1
     assert any("stars:1000..1001" in q for q in consultas)
     assert any("stars:1002..1003" in q for q in consultas)
 
@@ -107,6 +108,10 @@ def test_fallback_por_linguagem_ainda_saturado_falha_claramente():
 
     with pytest.raises(RuntimeError, match="estrelas e linguagem"):
         selecionar_candidatos(cli, cfg)
+    consultas = [params["q"] for _, params in cli.chamadas]
+    assert consultas.count(
+        'stars:1000..1000 archived:false fork:false language:"Python"'
+    ) == 1
 
 
 def test_salvar_e_carregar_csv(tmp_path):
