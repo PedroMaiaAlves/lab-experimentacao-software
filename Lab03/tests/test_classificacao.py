@@ -60,7 +60,8 @@ def test_geral_mediana_de_dois_centrais_arredonda_para_baixo():
 
 
 def test_geral_com_metrica_ausente_usa_as_disponiveis():
-    assert classificar_geral([E, H, None, H]) == H
+    assert classificar_geral([E, H, None, H]) is None
+    assert classificar_geral([E, H, None, H], minimo_metricas=3) == H
 
 
 def test_geral_sem_notas_suficientes_devolve_none():

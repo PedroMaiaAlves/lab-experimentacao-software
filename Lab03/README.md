@@ -15,7 +15,7 @@ Disciplina: Laboratório de Experimentação de Software — PUC Minas.
 
 ```bash
 git clone <URL-DO-REPOSITORIO>
-cd <PASTA-DO-REPOSITORIO>
+cd lab-experimentacao-software/Lab03
 python -m venv .venv
 # Linux/macOS
 source .venv/bin/activate
@@ -64,8 +64,8 @@ Para recomeçar do zero, apague a pasta `cache/`.
 | `semente` | Semente de qualquer sorteio do pipeline |
 | `criterios.min_releases` / `min_runs` | Critério mínimo de inclusão (5 releases e 50 runs válidos) |
 | `selecao.meta_repositorios` | Quantos repositórios devem restar após os filtros |
-| `selecao.faixas_estrelas` | Faixas de estrelas das consultas de busca (cada uma devolve até 1.000) |
-| `selecao.linguagens` | Linguagens usadas para subdividir faixas com mais de 1.000 resultados |
+| `selecao.faixas_estrelas` | Faixas de estrelas subdivididas recursivamente enquanto uma consulta tiver 1.000 ou mais resultados |
+| `selecao.linguagens` | Fallback para uma faixa unitária de estrelas com 1.000 ou mais resultados; uma partição por linguagem ainda saturada interrompe a coleta |
 | `saida.dir_dados` / `dir_cache` | Pastas de saída e de cache |
 | `etapas_coleta` | Módulos de coleta executados após o funil (`coletar(client, cfg, repos)`) |
 
@@ -77,16 +77,29 @@ Para recomeçar do zero, apague a pasta `cache/`.
 | `funil.csv` | Quantos repositórios restaram em cada etapa e o motivo dos descartes |
 | `descartes.csv` | Cada repositório descartado, a etapa e o motivo |
 | `metadados.csv` | Estrelas, linguagem, idade em dias e nº de contribuidores da amostra |
+| `workflow_runs/*.json` | Runs de `push` do default branch, coletados mês a mês |
+| `runs_saturados.csv` | Intervalos subdivididos ou incompletos por atingirem 1.000 runs |
 
 O dicionário de dados completo estará em `docs/dicionario_dados.md`.
+
+> **Janela provisória:** confirme com o professor as datas de `janela_inicio` e
+> `janela_fim` antes de executar a coleta definitiva dos 100 repositórios.
 
 ## Testes
 
 ```bash
-pytest --cov=metricas --cov-report=term-missing
+python -m pytest --cov=metricas --cov-report=term-missing --cov-fail-under=80
 ```
 
-Os testes também rodam a cada push no GitHub Actions (`.github/workflows/testes.yml`).
+O workflow de CI do grupo ainda deve executar esse comando a cada push antes da entrega
+da Sprint 1. Enquanto `.github/workflows/testes.yml` não estiver integrado, a execução
+local não substitui o requisito de CI verde.
+
+## Artigo
+
+O documento principal está em `docs/artigo/artigo.tex`, acompanhado do estilo e da
+bibliografia SBC. Veja `docs/artigo/README.md` para atribuição CC BY 4.0 e instruções de
+compilação. Os campos `PREENCHER` devem ser completados antes da submissão.
 
 ## Estrutura
 
