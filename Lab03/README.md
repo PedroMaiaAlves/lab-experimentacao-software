@@ -1,5 +1,7 @@
 # Lab03 — Mineração de métricas DORA
 
+[![Testes LAB03](https://github.com/PedroMaiaAlves/lab-experimentacao-software/actions/workflows/testes.yml/badge.svg)](https://github.com/PedroMaiaAlves/lab-experimentacao-software/actions/workflows/testes.yml)
+
 Pipeline reprodutível que seleciona repositórios open-source populares com GitHub Actions,
 coleta releases, commits e workflow runs na janela de observação e calcula as métricas DORA
 (deployment frequency, lead time for changes, change failure rate e tempo de recuperação).
@@ -14,8 +16,8 @@ Disciplina: Laboratório de Experimentação de Software — PUC Minas.
 ## Instalação
 
 ```bash
-git clone <URL-DO-REPOSITORIO>
-cd <PASTA-DO-REPOSITORIO>
+git clone https://github.com/PedroMaiaAlves/lab-experimentacao-software.git
+cd lab-experimentacao-software/Lab03
 python -m venv .venv
 # Linux/macOS
 source .venv/bin/activate
@@ -77,13 +79,20 @@ Para recomeçar do zero, apague a pasta `cache/`.
 | `funil.csv` | Quantos repositórios restaram em cada etapa e o motivo dos descartes |
 | `descartes.csv` | Cada repositório descartado, a etapa e o motivo |
 | `metadados.csv` | Estrelas, linguagem, idade em dias e nº de contribuidores da amostra |
+| `releases.csv` | Histórico de releases da amostra, incluindo drafts acessíveis e pré-releases |
+| `tags.csv` | Tags e data de autoria do commit apontado; status de consulta |
+| `comparacoes_releases.csv` | Comparação de cada release principal na janela com sua antecessora; status e contagem |
+| `commits_entre_releases.csv` | SHA e data de autoria de cada commit por comparação válida |
+| `lead_time.csv` | Medianas das variantes (a)/(b), em horas, e contagens de exclusões |
+| `deployment_frequency.csv` | Releases principais por semana na janela inclusiva |
 
+O contrato e as decisões da coleta de releases/commits estão em [docs/coleta_b.md](docs/coleta_b.md).
 O dicionário de dados completo estará em `docs/dicionario_dados.md`.
 
 ## Testes
 
 ```bash
-pytest --cov=metricas --cov-report=term-missing
+python -m pytest --cov=metricas --cov-report=term-missing --cov-fail-under=80
 ```
 
 Os testes também rodam a cada push no GitHub Actions (`.github/workflows/testes.yml`).
@@ -103,8 +112,10 @@ scripts/               utilitários (criação das Issues)
 
 ## Observações de método
 
-- Apenas o *default branch*; deploy = release publicada (`draft = false`); CI = runs com
-  `event = push`.
+- CI = runs do *default branch* com `event = push`. Deploy = release publicada,
+  com `draft = false` e `prerelease = false`; as releases são artefatos do repositório.
+- O histórico completo permanece disponível para as variantes da RQ07.
+- As hipóteses RQ05–RQ07 estão em `docs/artigo/introducao.tex`, registradas antes da análise.
 - Repositórios arquivados e forks ficam fora da busca.
 - Os candidatos são embaralhados com a semente e avaliados em ordem até atingir a meta; por isso o
   funil registra quantos candidatos foram de fato avaliados.
