@@ -1,7 +1,9 @@
 """S01-A2: seleção de repositórios candidatos via Search API.
 
-A busca devolve no máximo 1.000 resultados por consulta; por isso fatiamos por faixas
-de estrelas e, se uma faixa ainda passar de 1.000, subdividimos por linguagem.
+A busca devolve no máximo 1.000 resultados por consulta; por isso fatiamos
+recursivamente por faixas de estrelas até cada consulta ficar abaixo do teto.
+Se uma faixa unitária ainda estiver saturada, usamos as linguagens configuradas
+como última dimensão de partição e recusamos qualquer partição ainda saturada.
 """
 import csv
 import logging
@@ -45,23 +47,69 @@ def _normalizar(item, consulta):
     }
 
 
+def _limites_faixa(faixa, itens):
+    if ".." in faixa:
+        inicio, fim = faixa.split("..", 1)
+        return int(inicio), int(fim)
+    if faixa.startswith(">") and itens:
+        return int(faixa[1:]) + 1, max(int(item["stargazers_count"]) for item in itens)
+    return None
+
+
+def _buscar_por_linguagens(client, faixa, linguagens):
+    if not linguagens:
+        raise RuntimeError(
+            "consulta saturada não pode ser subdividida por estrelas e "
+            f"não há linguagens de fallback configuradas: {_consulta(faixa)}"
+        )
+
+    particoes = []
+    for linguagem in linguagens:
+        q = _consulta(faixa, linguagem)
+        total, itens = _buscar(client, q)
+        log.info(
+            "faixa %s, linguagem %s: %d repositórios no total, %d obtidos",
+            faixa, linguagem, total, len(itens),
+        )
+        if total >= LIMITE_BUSCA:
+            raise RuntimeError(
+                "consulta saturada mesmo após subdivisão por estrelas e linguagem: "
+                f"{q} ({total} resultados)"
+            )
+        particoes.append((q, itens))
+    return particoes
+
+
+def _buscar_faixa_completa(client, faixa, linguagens):
+    q = _consulta(faixa)
+    total, itens = _buscar(client, q)
+    log.info("faixa %s: %d repositórios no total, %d obtidos", faixa, total, len(itens))
+    if total < LIMITE_BUSCA:
+        return [(q, itens)]
+
+    limites = _limites_faixa(faixa, itens)
+    if limites is None or limites[0] >= limites[1]:
+        log.warning(
+            "faixa %s continua saturada com %d resultados: subdividindo por linguagem",
+            faixa, total,
+        )
+        return _buscar_por_linguagens(client, faixa, linguagens)
+    inicio, fim = limites
+    meio = (inicio + fim) // 2
+    log.warning("faixa %s tem %d resultados: subdividindo em %d..%d e %d..%d",
+                faixa, total, inicio, meio, meio + 1, fim)
+    return (
+        _buscar_faixa_completa(client, f"{inicio}..{meio}", linguagens)
+        + _buscar_faixa_completa(client, f"{meio + 1}..{fim}", linguagens)
+    )
+
+
 def selecionar_candidatos(client, cfg):
     """Devolve candidatos únicos, embaralhados com a semente do config."""
     sel = cfg["selecao"]
     vistos = {}
     for faixa in sel["faixas_estrelas"]:
-        q = _consulta(faixa)
-        total, itens = _buscar(client, q)
-        log.info("faixa %s: %d repositórios no total, %d obtidos", faixa, total, len(itens))
-        grupos = [(q, itens)]
-        if total > LIMITE_BUSCA:
-            log.warning("faixa %s tem %d resultados (> %d): subdividindo por linguagem",
-                        faixa, total, LIMITE_BUSCA)
-            for lang in sel["linguagens"]:
-                ql = _consulta(faixa, lang)
-                _, itens_l = _buscar(client, ql)
-                grupos.append((ql, itens_l))
-        for consulta, lista in grupos:
+        for consulta, lista in _buscar_faixa_completa(client, faixa, sel["linguagens"]):
             for item in lista:
                 # setdefault: o primeiro que aparece vence; nome em minúsculas evita duplicata por caixa
                 vistos.setdefault(item["full_name"].lower(), _normalizar(item, consulta))
