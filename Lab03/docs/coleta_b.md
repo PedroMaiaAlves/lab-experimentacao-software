@@ -47,8 +47,10 @@ Lead time (a) é a mediana dos tempos entre cada publicação e seu commit mais 
 (b) é a mediana de todos os tempos por relação release/commit. Ambos usam horas e
 timestamps com fuso. Releases sem antecessora, com 404 ou sem commits não entram nas
 medianas; suas contagens ficam em `lead_time.csv`. Sem observações válidas, a mediana
-fica vazia (`None`), não zero. Datas sem fuso ou commits posteriores à publicação
-geram erro explícito, evitando tempos negativos ou correções silenciosas.
+fica vazia (`None`), não zero. A função pura rejeita datas sem fuso ou commits
+posteriores à publicação. Na coleta real, esses registros impossíveis são excluídos
+da mediana e contabilizados em `commits_data_invalida`, evitando tanto tempos
+negativos quanto a interrupção de toda a amostra por uma anomalia isolada.
 
 `deployment_frequency(datas_deploy, cfg)` recebe uma lista genérica de datas, conta as
 que pertencem à janela e divide pelo número de semanas, calculado como

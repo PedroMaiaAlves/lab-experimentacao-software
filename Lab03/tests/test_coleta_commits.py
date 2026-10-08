@@ -127,8 +127,6 @@ def test_contagens_de_404_e_primeira_release_nao_viram_zero(tmp_path):
 def test_retomada_recria_csvs_sem_repetir_chamadas_http(tmp_path, monkeypatch):
     client = GitHubClient("token-falso", tmp_path / "cache")
     rotas = {"/repos/o/r/releases": [release(2), release(1, "2025-09-01T00:00:00Z")],
-             "/repos/o/r/tags": [{"name": "v2", "commit": {"sha": "abc"}}],
-             "/repos/o/r/commits/abc": commit(),
              "/repos/o/r/compare/v1...v2": {"commits": [commit()]}}
     chamadas = []
     def get(url, params=None, timeout=None):
@@ -139,11 +137,24 @@ def test_retomada_recria_csvs_sem_repetir_chamadas_http(tmp_path, monkeypatch):
         return resposta
     monkeypatch.setattr(requests.Session, "get", lambda sessao, url, params=None, timeout=None:
                         get(url, params, timeout))
+    def post(url, payload=None, timeout=None):
+        chamadas.append(url)
+        resposta = requests.Response()
+        resposta.status_code = 200
+        resposta._content = json.dumps({"data": {"repository": {
+            "refs": {"nodes": [{"name": "v2", "target": {
+                "__typename": "Commit", "oid": "abc",
+                "authoredDate": "2026-01-01T00:00:00Z"}}],
+                "pageInfo": {"hasNextPage": False, "endCursor": None}}
+        }}}).encode()
+        return resposta
+    monkeypatch.setattr(requests.Session, "post", lambda sessao, url, json=None, timeout=None:
+                        post(url, json, timeout))
     cfg = {**CFG, "saida": {"dir_dados": str(tmp_path)},
            "etapas_coleta": ["pipeline.coleta_releases", "pipeline.coleta_commits"]}
     repos = [{"full_name": "o/r"}]
     executar_etapas_de_coleta(client, cfg, repos)
     primeira_saida = (tmp_path / "lead_time.csv").read_bytes()
     executar_etapas_de_coleta(GitHubClient("token-falso", tmp_path / "cache"), cfg, repos)
-    assert len(chamadas) == 4
+    assert len(chamadas) == 3
     assert (tmp_path / "lead_time.csv").read_bytes() == primeira_saida

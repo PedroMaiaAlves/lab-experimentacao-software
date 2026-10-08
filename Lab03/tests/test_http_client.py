@@ -34,6 +34,13 @@ class SessaoFalsa:
             raise resposta
         return resposta
 
+    def post(self, url, json=None, timeout=None):
+        self.chamadas.append((url, json, timeout))
+        resposta = self.respostas.popleft()
+        if isinstance(resposta, Exception):
+            raise resposta
+        return resposta
+
 
 @pytest.fixture
 def fabrica_cliente(tmp_path):
@@ -104,3 +111,15 @@ def test_erro_final_nao_e_gravado_no_cache(fabrica_cliente):
     with pytest.raises(requests.HTTPError):
         cliente.get_json("/x")
     assert list(cliente.cache.glob("*.json")) == []
+
+
+def test_post_json_usa_cache_separado_do_get(fabrica_cliente):
+    cliente, sessao, _ = fabrica_cliente([
+        RespostaFalsa(200, {"metodo": "get"}),
+        RespostaFalsa(200, {"metodo": "post"}),
+    ])
+    assert cliente.get_json("/graphql", {"q": 1})[0]["metodo"] == "get"
+    payload = {"query": "query { viewer { login } }", "variables": {}}
+    assert cliente.post_json("/graphql", payload)[0]["metodo"] == "post"
+    assert cliente.post_json("/graphql", payload)[0]["metodo"] == "post"
+    assert len(sessao.chamadas) == 2

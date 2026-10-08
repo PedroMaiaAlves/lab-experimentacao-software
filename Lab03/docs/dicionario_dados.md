@@ -121,6 +121,7 @@ visíveis ao token e pré-releases. Isso preserva o histórico necessário às v
 | `full_name` | texto | `owner/repo` | Repositório da amostra |
 | `lead_time_a_horas` | real | horas | Mediana, entre releases válidas, de `published_at - commit mais antigo` |
 | `lead_time_b_horas` | real | horas | Mediana dos tempos de todos os commits de todas as comparações válidas |
+| `commits_data_invalida` | inteiro | contagem | Commits excluídos da métrica por timestamp ausente, sem fuso ou posterior à publicação |
 | `releases_comparadas` | inteiro | releases | Comparações com status `ok`, inclusive as sem commits novos |
 | `releases_sem_anterior` | inteiro | releases | Releases sem uma antecessora histórica válida |
 | `releases_erro_404` | inteiro | releases | Comparações indisponíveis por HTTP 404 |

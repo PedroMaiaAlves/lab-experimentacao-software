@@ -80,3 +80,29 @@ def test_saida_preserva_textos_flags_e_calcula_frequencia(tmp_path):
         frequencia = next(csv.DictReader(arquivo))
     assert frequencia["releases_principais"] == "1"
     assert float(frequencia["deployment_frequency"]) == pytest.approx(7 / 365)
+
+
+def test_tags_graphql_sao_coletadas_em_lotes_e_seguem_cursor():
+    class ClienteGraphQL:
+        def __init__(self):
+            self.payloads = []
+
+        def post_json(self, caminho, payload):
+            self.payloads.append((caminho, payload))
+            cursor = payload["variables"]["cursor"]
+            nodes = [{
+                "name": "v1" if cursor is None else "v2",
+                "target": {"__typename": "Commit", "oid": "abc" if cursor is None else "def",
+                           "authoredDate": "2026-01-01T00:00:00Z"},
+            }]
+            return {"data": {"repository": {"refs": {
+                "nodes": nodes,
+                "pageInfo": {"hasNextPage": cursor is None,
+                             "endCursor": "pagina-2" if cursor is None else None},
+            }}}}, {}
+
+    cliente = ClienteGraphQL()
+    tags = list(coletar_tags(cliente, "o/r"))
+    assert [tag["tag_name"] for tag in tags] == ["v1", "v2"]
+    assert [tag["commit_sha"] for tag in tags] == ["abc", "def"]
+    assert cliente.payloads[1][1]["variables"]["cursor"] == "pagina-2"

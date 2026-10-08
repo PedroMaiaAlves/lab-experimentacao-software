@@ -52,3 +52,15 @@ def test_rejeita_data_posterior_ou_sem_fuso(data):
     release = {"published_at": "2026-03-15T00:00:00Z", "commits": [{"author_date": data}]}
     with pytest.raises(ValueError):
         calcular_lead_time([release])
+
+
+def test_modo_de_coleta_ignora_dados_impossiveis_sem_perder_os_validos():
+    release = {"published_at": "2026-03-15T00:00:00Z", "commits": [
+        {"author_date": "2026-03-14T00:00:00Z"},
+        {"author_date": "2026-03-16T00:00:00Z"},
+        {"author_date": "sem-data"},
+    ]}
+    assert calcular_lead_time([release], ignorar_invalidos=True) == {
+        "lead_time_a_horas": 24,
+        "lead_time_b_horas": 24,
+    }

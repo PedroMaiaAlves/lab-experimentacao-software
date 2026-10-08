@@ -6,7 +6,7 @@ from urllib.parse import quote
 
 import requests
 
-from metricas.lead_time import calcular_lead_time
+from metricas.lead_time import calcular_lead_time, data_commit_valida
 from pipeline.arquivos import abrir_csv
 from pipeline.janela import na_janela
 
@@ -16,7 +16,8 @@ CAMPOS_COMPARACOES = ["full_name", "release_id", "tag_name", "published_at",
 CAMPOS_COMMITS = ["full_name", "release_id", "tag_name", "published_at",
                   "previous_tag_name", "sha", "author_date"]
 CAMPOS_METRICAS = ["full_name", "lead_time_a_horas", "lead_time_b_horas", "releases_comparadas",
-                   "releases_sem_anterior", "releases_erro_404", "releases_sem_commits"]
+                   "releases_sem_anterior", "releases_erro_404", "releases_sem_commits",
+                   "commits_data_invalida"]
 
 
 def coletar_commits(client, nome, releases, cfg, incluir_prereleases=False):
@@ -77,7 +78,16 @@ def coletar(client, cfg, repos):
             contagens = {"releases_comparadas": sum(c["status"] == "ok" for c in comparacoes),
                          "releases_sem_anterior": sum(c["status"] == "sem_anterior" for c in comparacoes),
                          "releases_erro_404": sum(c["status"] == "erro_404" for c in comparacoes),
-                         "releases_sem_commits": sum(c["status"] == "ok" and not c["commits"] for c in comparacoes)}
-            metricas_csv.writerow({"full_name": nome, **calcular_lead_time(comparacoes), **contagens})
+                         "releases_sem_commits": sum(c["status"] == "ok" and not c["commits"] for c in comparacoes),
+                         "commits_data_invalida": sum(
+                             not data_commit_valida(c["published_at"], commit["author_date"])
+                             for c in comparacoes if c["status"] == "ok"
+                             for commit in c["commits"]
+                         )}
+            metricas_csv.writerow({
+                "full_name": nome,
+                **calcular_lead_time(comparacoes, ignorar_invalidos=True),
+                **contagens,
+            })
             log.info("%s: %d comparações, %d ignoradas por 404", nome,
                      contagens["releases_comparadas"], contagens["releases_erro_404"])

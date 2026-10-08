@@ -23,9 +23,9 @@ selecao:
     - "2000..3000"
     - "3000..5000"
     - "5000..8000"
-    - "8000..15000"
-    - "15000..30000"
-    - ">30000"
+  # Recorte operacional da S01: projetos populares entre 1.000 e 8.000 estrelas.
+  # O limite torna a coleta de 100 repositórios reprodutível e viável; ampliar
+  # as faixas na S02 exigirá apenas nova execução, sem mudar o pipeline.
   # Fallback para uma faixa unitária de estrelas que ainda tenha >= 1.000 resultados.
   # Se uma partição por estrela + linguagem também saturar, o pipeline falha claramente.
   linguagens:

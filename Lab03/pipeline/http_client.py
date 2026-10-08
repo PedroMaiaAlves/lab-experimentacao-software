@@ -131,6 +131,51 @@ class GitHubClient:
         # O laço sempre retorna ou levanta, mas mantém o erro explícito para type checkers.
         raise RuntimeError("requisição terminou sem resposta")
 
+    def post_json(
+        self, caminho: str, payload: dict[str, Any]
+    ) -> tuple[Any, dict[str, str]]:
+        """Faz POST JSON com o mesmo cache, retomada e rate limit do GET.
+
+        O método é usado para consultas GraphQL em lote. O prefixo ``POST`` na
+        chave impede colisão com uma requisição GET de mesma URL e parâmetros.
+        """
+        url = caminho if caminho.startswith("http") else API + caminho
+        arquivo = self._arquivo("POST " + url, payload)
+        if arquivo.exists():
+            cache = json.loads(arquivo.read_text(encoding="utf-8"))
+            return cache["data"], cache["headers"]
+
+        resposta = None
+        for tentativa in range(self.max_attempts):
+            try:
+                resposta = self.sessao.post(url, json=payload, timeout=self.timeout)
+            except (requests.ConnectionError, requests.Timeout):
+                if tentativa == self.max_attempts - 1:
+                    raise
+                self._sleep(2 ** tentativa)
+                continue
+
+            headers = self._headers_minusculos(resposta.headers)
+            if resposta.status_code in (403, 429):
+                if tentativa == self.max_attempts - 1:
+                    resposta.raise_for_status()
+                self._sleep(self._espera_rate_limit(headers, tentativa))
+                continue
+            if resposta.status_code >= 500:
+                if tentativa == self.max_attempts - 1:
+                    resposta.raise_for_status()
+                self._sleep(2 ** tentativa)
+                continue
+
+            resposta.raise_for_status()
+            dados = resposta.json() if resposta.content else None
+            self._salvar_atomico(arquivo, {"data": dados, "headers": headers})
+            if headers.get("x-ratelimit-remaining") == "0":
+                self._sleep(self._espera_rate_limit(headers, tentativa))
+            return dados, headers
+
+        raise RuntimeError("requisição terminou sem resposta")
+
     def paginate(
         self,
         caminho: str,

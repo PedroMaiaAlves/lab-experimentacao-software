@@ -7,8 +7,7 @@ from pathlib import Path
 
 import requests
 
-from metricas.cfr import classificar_conclusao
-from pipeline.coleta_runs import coletar_runs_repositorio
+from pipeline.coleta_runs import contar_runs_validos_repositorio
 from pipeline.janela import na_janela
 
 log = logging.getLogger(__name__)
@@ -35,13 +34,12 @@ def contar_releases_janela(client, nome, cfg, parar_em):
 
 
 def contar_runs_validos(client, nome, branch, cfg, parar_em):
-    """Conta localmente as conclusions válidas dos runs coletados mês a mês."""
-    resultado = coletar_runs_repositorio(
-        client, {"full_name": nome, "default_branch": branch}, cfg
-    )
-    return sum(
-        classificar_conclusao(run.get("conclusion")) != "ignorar"
-        for run in resultado["workflow_runs"]
+    """Conta localmente e para assim que o mínimo de runs estiver comprovado."""
+    return contar_runs_validos_repositorio(
+        client,
+        {"full_name": nome, "default_branch": branch},
+        cfg,
+        parar_em,
     )
 
 

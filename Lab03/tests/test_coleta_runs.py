@@ -2,7 +2,11 @@ import csv
 import json
 from datetime import date
 
-from pipeline.coleta_runs import coletar, coletar_runs_repositorio
+from pipeline.coleta_runs import (
+    coletar,
+    coletar_runs_repositorio,
+    contar_runs_validos_repositorio,
+)
 
 CFG = {
     "janela_inicio": date(2025, 10, 1),
@@ -112,3 +116,14 @@ def test_coletar_grava_json_e_relatorio_csv(tmp_path):
     assert json.loads(arquivo.read_text(encoding="utf-8"))["workflow_runs"][0]["id"] == 1
     with open(tmp_path / "runs_saturados.csv", newline="", encoding="utf-8") as f:
         assert list(csv.DictReader(f)) == []
+
+
+def test_contagem_do_funil_para_assim_que_atinge_o_limite():
+    def responder(_caminho, params):
+        assert params["created"] == "2025-10-01..2025-10-31"
+        itens = [run(i) for i in range(1, 51)]
+        return {"total_count": len(itens), "workflow_runs": itens}, {}
+
+    cliente = ClienteColeta(responder)
+    assert contar_runs_validos_repositorio(cliente, REPO, CFG, 50) == 50
+    assert len(cliente.chamadas) == 1

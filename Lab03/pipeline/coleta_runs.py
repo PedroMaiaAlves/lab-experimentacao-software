@@ -10,6 +10,7 @@ from datetime import date, timedelta
 from pathlib import Path
 from typing import Any
 
+from metricas.cfr import classificar_conclusao
 from pipeline.janela import meses_da_janela
 
 LIMITE_CONSULTA = 1000
@@ -38,6 +39,39 @@ def _paginar_a_partir_da_primeira(client, dados, headers) -> list[dict[str, Any]
         proxima = _PROXIMA.search(cabecalhos.get("link", ""))
         url = proxima.group(1) if proxima else None
     return runs
+
+
+def contar_runs_validos_repositorio(
+    client, repo: dict[str, Any], cfg: dict[str, Any], limite: int
+) -> int:
+    """Conta somente até ``limite`` runs válidos para o filtro de inclusão.
+
+    O funil não precisa baixar doze meses completos para decidir se o repositório
+    atingiu o mínimo. As consultas continuam mensais e sem filtro de ``status``;
+    cada página é classificada localmente e a busca termina assim que o critério
+    estiver comprovado. A coleta definitiva, feita por ``coletar``, permanece
+    completa e percorre toda a janela.
+    """
+    nome = repo["full_name"]
+    branch = repo["default_branch"]
+    caminho = f"/repos/{nome}/actions/runs"
+    total_validos = 0
+
+    for inicio, fim in meses_da_janela(cfg):
+        dados, headers = client.get_json(caminho, _params(branch, inicio, fim))
+        while True:
+            for run in dados.get("workflow_runs", []):
+                if classificar_conclusao(run.get("conclusion")) != "ignorar":
+                    total_validos += 1
+                    if total_validos >= limite:
+                        return total_validos
+
+            proxima = _PROXIMA.search(headers.get("link", ""))
+            if not proxima:
+                break
+            dados, headers = client.get_json(proxima.group(1))
+
+    return total_validos
 
 
 def _coletar_intervalo(client, nome: str, branch: str, inicio: date, fim: date):
