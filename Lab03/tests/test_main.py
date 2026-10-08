@@ -48,17 +48,24 @@ def test_pipeline_preserva_ordem_e_passa_a_mesma_amostra(monkeypatch, tmp_path):
     def coletas(client, cfg, recebidos):
         eventos.append(("coletas", recebidos, cfg))
 
+    def validar(cfg, recebidos):
+        eventos.append(("validacao", recebidos, cfg))
+
     monkeypatch.setattr(pipeline_main, "selecionar_candidatos", selecionar)
     monkeypatch.setattr(pipeline_main, "salvar_candidatos", salvar)
     monkeypatch.setattr(pipeline_main, "executar_funil", funil)
     monkeypatch.setattr(pipeline_main, "executar_etapas_de_coleta", coletas)
+    monkeypatch.setattr(pipeline_main, "validar_artefatos_s01", validar)
     cfg = {"saida": {"dir_dados": str(tmp_path)}, "selecao": {"meta_repositorios": 1}}
     client = object()
 
     resultado = executar_pipeline(client, cfg)
 
-    assert [evento[0] for evento in eventos] == ["selecao", "salvar", "funil", "coletas"]
+    assert [evento[0] for evento in eventos] == [
+        "selecao", "salvar", "funil", "coletas", "validacao"
+    ]
     assert eventos[1][1] is candidatos
     assert eventos[2][1] is candidatos
     assert eventos[3][1] is aprovados
+    assert eventos[4][1] is aprovados
     assert resultado is aprovados

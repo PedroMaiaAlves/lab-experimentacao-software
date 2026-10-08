@@ -89,7 +89,8 @@ Para recomeçar do zero, apague a pasta `cache/`.
 | `runs_saturados.csv` | Intervalos subdivididos ou incompletos por atingirem 1.000 runs |
 
 O contrato e as decisões da coleta de releases/commits estão em [docs/coleta_b.md](docs/coleta_b.md).
-O dicionário de dados completo estará em `docs/dicionario_dados.md`.
+Tipos, unidades, fórmulas e origem de cada campo estão no
+[dicionário de dados](docs/dicionario_dados.md).
 
 > **Janela provisória:** confirme com o professor as datas de `janela_inicio` e
 > `janela_fim` antes de executar a coleta definitiva dos 100 repositórios.
@@ -102,6 +103,13 @@ python -m pytest --cov=metricas --cov-report=term-missing --cov-fail-under=80
 
 Os testes também rodam a cada push e pull request pelo GitHub Actions, conforme
 `.github/workflows/testes.yml`.
+
+### Validação final da execução
+
+Depois das coletas de A, B e C, o comando único verifica automaticamente se todos os
+artefatos obrigatórios existem, se os CSVs-resumo cobrem exatamente a amostra, se cada
+repositório mantém pelo menos 5 releases principais e 50 runs válidos e se nenhum arquivo
+de runs está incompleto. A mensagem `concluído` só é exibida depois dessa validação.
 
 ## Artigo
 

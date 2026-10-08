@@ -19,7 +19,11 @@ def config_valida():
             "linguagens": ["Python"],
         },
         "saida": {"dir_dados": "data", "dir_cache": "cache"},
-        "etapas_coleta": ["pipeline.coleta_runs"],
+        "etapas_coleta": [
+            "pipeline.coleta_releases",
+            "pipeline.coleta_commits",
+            "pipeline.coleta_runs",
+        ],
     }
 
 
@@ -83,3 +87,15 @@ def test_janela_invertida_falha(config_valida, tmp_path):
     caminho.write_text(yaml.safe_dump(config_valida), encoding="utf-8")
     with pytest.raises(ValueError, match="posterior"):
         carregar_config(caminho)
+
+
+def test_etapa_obrigatoria_ausente_falha(config_valida):
+    config_valida["etapas_coleta"].remove("pipeline.coleta_commits")
+    with pytest.raises(ValueError, match="coleta_commits"):
+        validar_config(config_valida)
+
+
+def test_releases_deve_preceder_commits(config_valida):
+    config_valida["etapas_coleta"][:2] = reversed(config_valida["etapas_coleta"][:2])
+    with pytest.raises(ValueError, match="deve preceder"):
+        validar_config(config_valida)
