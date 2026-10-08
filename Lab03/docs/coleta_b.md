@@ -9,8 +9,8 @@ Execute os comandos do README a partir de `Lab03/`. As etapas registradas no con
 `pipeline.coleta_releases`, `pipeline.coleta_commits` e a coleta de runs do integrante C.
 Cada módulo de coleta recebe `coletar(client, cfg, repos)`. O cliente compartilhado deve
 expor `get_json(caminho, params=None)` e `paginate(caminho, params=None, chave=None)`,
-com cache, rate limit e paginação por `Link`. Enquanto C entrega seu cliente, a
-orquestração existente utiliza o provisório. As respostas completas ficam no cache HTTP;
+com cache, rate limit e paginação por `Link`. A integração utiliza o `GitHubClient`
+de `pipeline.http_client`, entregue por C. As respostas completas ficam no cache HTTP;
 os CSVs preservam os campos usados pelo estudo.
 
 As coletas recebem apenas a amostra aprovada pelo funil. Releases e tags são paginadas
