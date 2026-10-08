@@ -7,11 +7,12 @@ from pathlib import Path
 
 import requests
 
-from pipeline.janela import intervalo_created, na_janela
+from metricas.cfr import classificar_conclusao
+from pipeline.coleta_runs import coletar_runs_repositorio
+from pipeline.janela import na_janela
 
 log = logging.getLogger(__name__)
 
-CONCLUSOES_VALIDAS = ("success", "failure", "timed_out", "startup_failure")
 _ULTIMA_PAGINA = re.compile(r'[?&]page=(\d+)[^>]*>;\s*rel="last"')
 
 
@@ -22,10 +23,10 @@ def usa_actions(client, nome):
 
 
 def contar_releases_janela(client, nome, cfg, parar_em):
-    """Conta releases publicadas (draft=false) na janela; para assim que atingir `parar_em`."""
+    """Conta releases principais publicadas na janela; para ao atingir ``parar_em``."""
     n = 0
     for rel in client.paginate(f"/repos/{nome}/releases", {"per_page": 100}):
-        if rel.get("draft") or not na_janela(rel.get("published_at"), cfg):
+        if rel.get("draft") or rel.get("prerelease") or not na_janela(rel.get("published_at"), cfg):
             continue
         n += 1
         if n >= parar_em:
@@ -34,16 +35,14 @@ def contar_releases_janela(client, nome, cfg, parar_em):
 
 
 def contar_runs_validos(client, nome, branch, cfg, parar_em):
-    """Soma runs do default branch (event=push) com conclusion válida, dentro da janela."""
-    total = 0
-    for conclusao in CONCLUSOES_VALIDAS:
-        params = {"branch": branch, "event": "push", "status": conclusao,
-                  "created": intervalo_created(cfg), "per_page": 1}
-        dados, _ = client.get_json(f"/repos/{nome}/actions/runs", params)
-        total += dados["total_count"]
-        if total >= parar_em:
-            break
-    return total
+    """Conta localmente as conclusions válidas dos runs coletados mês a mês."""
+    resultado = coletar_runs_repositorio(
+        client, {"full_name": nome, "default_branch": branch}, cfg
+    )
+    return sum(
+        classificar_conclusao(run.get("conclusion")) != "ignorar"
+        for run in resultado["workflow_runs"]
+    )
 
 
 # ---------- metadados ----------

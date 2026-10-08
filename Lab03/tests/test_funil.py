@@ -20,10 +20,30 @@ def cand(nome):
 def rotas(nome, workflows=1, releases=None, runs=None, link=""):
     releases = RELEASES_OK if releases is None else releases
     runs = {"success": 60} if runs is None else runs
+
+    def rota_runs(params):
+        if not params["created"].startswith("2026-01"):
+            return {"total_count": 0, "workflow_runs": []}
+        itens = []
+        identificador = 1
+        for conclusao, quantidade in runs.items():
+            for _ in range(quantidade):
+                itens.append({
+                    "id": identificador,
+                    "workflow_id": 10,
+                    "name": "CI",
+                    "conclusion": conclusao,
+                    "run_started_at": f"2026-01-{1 + identificador % 20:02d}T10:00:00Z",
+                    "updated_at": f"2026-01-{1 + identificador % 20:02d}T10:05:00Z",
+                    "created_at": f"2026-01-{1 + identificador % 20:02d}T10:00:00Z",
+                })
+                identificador += 1
+        return {"total_count": len(itens), "workflow_runs": itens}
+
     return {
         f"/repos/{nome}/actions/workflows": {"total_count": workflows},
         f"/repos/{nome}/releases": releases,
-        f"/repos/{nome}/actions/runs": lambda p: {"total_count": runs.get(p["status"], 0)},
+        f"/repos/{nome}/actions/runs": rota_runs,
         f"/repos/{nome}/contributors": ([{"login": "x"}], {"link": link}),
     }
 
@@ -63,6 +83,23 @@ def test_releases_draft_e_fora_da_janela_nao_contam(tmp_path):
              {"draft": False, "published_at": "2024-01-10T10:00:00Z"}] + RELEASES_OK[:3]
     cli = ClienteFalso(rotas("a/x", releases=ruins))
     assert executar_funil(cli, [cand("a/x")], CFG, tmp_path) == []
+
+
+def test_prereleases_nao_contam_para_o_minimo(tmp_path):
+    ruins = [
+        {"draft": False, "prerelease": True, "published_at": "2026-01-10T10:00:00Z"},
+        *RELEASES_OK[:4],
+    ]
+    cli = ClienteFalso(rotas("a/x", releases=ruins))
+    assert executar_funil(cli, [cand("a/x")], CFG, tmp_path) == []
+
+
+def test_startup_failure_e_contada_localmente(tmp_path):
+    cli = ClienteFalso(rotas("a/x", runs={"success": 49, "startup_failure": 1}))
+    assert len(executar_funil(cli, [cand("a/x")], CFG, tmp_path)) == 1
+    chamadas_runs = [params for caminho, params in cli.chamadas if caminho.endswith("/actions/runs")]
+    assert chamadas_runs
+    assert all("status" not in params for params in chamadas_runs)
 
 
 def test_para_ao_atingir_a_meta(tmp_path):
