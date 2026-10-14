@@ -19,10 +19,13 @@ essa limitação deve ser reportada no artigo.
 
 ## Resultados
 
-Os resultados serão inseridos somente depois que `consenso.csv` for produzido por A3.
+Os resultados abaixo usam `data/amostra_ouro/consenso_releases.csv`. Para a v1,
+19.836 assuntos de commits foram recuperados dos patches públicos de 294 das 300
+comparações; cinco releases não tinham `compare_url` e uma comparação retornou erro HTTP.
+Como a v1 já superou a meta de F1, não houve refinamento posterior.
 
 <!-- resultados:start -->
 | Versão | Precisão | Recall | F1 | Suporte | TP | FP | FN | TN |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| v1 | pendente | pendente | pendente | pendente | pendente | pendente | pendente | pendente |
+| v1 | 0.589 | 0.906 | 0.714 | 160 | 145 | 101 | 15 | 39 |
 <!-- resultados:end -->
