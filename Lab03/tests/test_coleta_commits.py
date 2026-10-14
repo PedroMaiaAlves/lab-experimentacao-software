@@ -10,9 +10,10 @@ from tests.fakes import ClienteFalso
 from tests.test_coleta_releases import CFG, erro_http, release
 
 
-def commit(sha="abc", data="2026-03-02T00:00:00Z"):
+def commit(sha="abc", data="2026-03-02T00:00:00Z", mensagem="fix: corrige falha"):
     return {"sha": sha, "commit": {"author": {"date": data},
-                                   "committer": {"date": "2026-03-14T00:00:00Z"}}}
+                                   "committer": {"date": "2026-03-14T00:00:00Z"},
+                                   "message": mensagem}}
 
 
 def test_compara_com_anterior_fora_da_janela_e_usa_author_date():
@@ -21,7 +22,8 @@ def test_compara_com_anterior_fora_da_janela_e_usa_author_date():
     cli = ClienteFalso({"/repos/o/r/compare/v1...v2": {"commits": [commit()]}})
     resultado = coletar_commits(cli, "o/r", historico, CFG)
     assert len(resultado) == 1 and resultado[0]["previous_tag_name"] == "v1"
-    assert resultado[0]["commits"] == [{"sha": "abc", "author_date": "2026-03-02T00:00:00Z"}]
+    assert resultado[0]["commits"] == [{"sha": "abc", "author_date": "2026-03-02T00:00:00Z",
+                                        "message": "fix: corrige falha"}]
 
 
 def test_primeira_release_sem_anterior_e_comparacao_vazia():
@@ -102,6 +104,8 @@ def test_etapas_integradas_com_100_repositorios_simulados(tmp_path):
     assert len(ler_csv(tmp_path / "releases.csv")) == 200
     assert len(ler_csv(tmp_path / "tags.csv")) == 100
     assert len(ler_csv(tmp_path / "commits_entre_releases.csv")) == 300
+    assert all(c["message"] == "fix: corrige falha"
+               for c in ler_csv(tmp_path / "commits_entre_releases.csv"))
     comparacoes = ler_csv(tmp_path / "comparacoes_releases.csv")
     assert len(comparacoes) == 100 and all(c["commits_count"] == "3" for c in comparacoes)
     metricas = ler_csv(tmp_path / "lead_time.csv")

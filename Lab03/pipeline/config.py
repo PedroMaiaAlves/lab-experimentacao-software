@@ -5,8 +5,8 @@ import yaml
 
 
 CHAVES_OBRIGATORIAS = {
-    "janela_inicio", "janela_fim", "semente", "criterios", "selecao", "saida",
-    "etapas_coleta",
+    "janela_inicio", "janela_fim", "semente", "criterios", "heuristica_release",
+    "selecao", "saida", "etapas_coleta",
 }
 ETAPAS_OBRIGATORIAS_S01 = (
     "pipeline.coleta_releases",
@@ -50,6 +50,26 @@ def validar_config(cfg):
     _exigir_chaves(criterios, {"min_releases", "min_runs"}, "criterios")
     _exigir_inteiro_positivo(criterios["min_releases"], "criterios.min_releases")
     _exigir_inteiro_positivo(criterios["min_runs"], "criterios.min_runs")
+
+    heuristica = _exigir_mapeamento(cfg["heuristica_release"], "heuristica_release")
+    _exigir_chaves(
+        heuristica,
+        {"versao", "janela_dias", "usar_patch_semver", "usar_palavras_commits",
+         "palavras_chave", "politica_tag_nao_semver"},
+        "heuristica_release",
+    )
+    if not isinstance(heuristica["versao"], str) or not heuristica["versao"].strip():
+        raise ValueError("heuristica_release.versao deve ser um texto não vazio")
+    _exigir_inteiro_positivo(heuristica["janela_dias"], "heuristica_release.janela_dias")
+    for chave in ("usar_patch_semver", "usar_palavras_commits"):
+        if not isinstance(heuristica[chave], bool):
+            raise ValueError(f"heuristica_release.{chave} deve ser booleano")
+    _exigir_lista_de_textos(heuristica["palavras_chave"],
+                            "heuristica_release.palavras_chave")
+    if heuristica["politica_tag_nao_semver"] != "fallback_textual":
+        raise ValueError(
+            "heuristica_release.politica_tag_nao_semver deve ser fallback_textual"
+        )
 
     selecao = _exigir_mapeamento(cfg["selecao"], "selecao")
     _exigir_chaves(

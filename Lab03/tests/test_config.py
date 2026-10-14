@@ -13,6 +13,14 @@ def config_valida():
         "janela_fim": "2026-09-30",
         "semente": 42,
         "criterios": {"min_releases": 5, "min_runs": 50},
+        "heuristica_release": {
+            "versao": "v1",
+            "janela_dias": 7,
+            "usar_patch_semver": True,
+            "usar_palavras_commits": True,
+            "palavras_chave": ["fix", "hotfix", "revert"],
+            "politica_tag_nao_semver": "fallback_textual",
+        },
         "selecao": {
             "meta_repositorios": 100,
             "faixas_estrelas": ["1000..2000"],
@@ -50,6 +58,7 @@ def test_chave_obrigatoria_ausente_falha(config_valida):
         (("semente",), 0),
         (("criterios", "min_releases"), 0),
         (("criterios", "min_runs"), -1),
+        (("heuristica_release", "janela_dias"), 0),
         (("selecao", "meta_repositorios"), 0),
     ],
 )
@@ -68,6 +77,7 @@ def test_inteiros_que_devem_ser_positivos(config_valida, caminho, valor):
     [
         ("selecao", "faixas_estrelas"),
         ("selecao", "linguagens"),
+        ("heuristica_release", "palavras_chave"),
         ("etapas_coleta",),
     ],
 )
@@ -98,4 +108,17 @@ def test_etapa_obrigatoria_ausente_falha(config_valida):
 def test_releases_deve_preceder_commits(config_valida):
     config_valida["etapas_coleta"][:2] = reversed(config_valida["etapas_coleta"][:2])
     with pytest.raises(ValueError, match="deve preceder"):
+        validar_config(config_valida)
+
+
+@pytest.mark.parametrize("chave", ["usar_patch_semver", "usar_palavras_commits"])
+def test_flags_da_heuristica_devem_ser_booleanas(config_valida, chave):
+    config_valida["heuristica_release"][chave] = 1
+    with pytest.raises(ValueError, match="booleano"):
+        validar_config(config_valida)
+
+
+def test_politica_de_tag_nao_semver_e_fixa(config_valida):
+    config_valida["heuristica_release"]["politica_tag_nao_semver"] = "excluir"
+    with pytest.raises(ValueError, match="fallback_textual"):
         validar_config(config_valida)

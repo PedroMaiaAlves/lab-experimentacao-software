@@ -14,7 +14,7 @@ log = logging.getLogger(__name__)
 CAMPOS_COMPARACOES = ["full_name", "release_id", "tag_name", "published_at",
                       "previous_tag_name", "status", "commits_count"]
 CAMPOS_COMMITS = ["full_name", "release_id", "tag_name", "published_at",
-                  "previous_tag_name", "sha", "author_date"]
+                  "previous_tag_name", "sha", "author_date", "message"]
 CAMPOS_METRICAS = ["full_name", "lead_time_a_horas", "lead_time_b_horas", "releases_comparadas",
                    "releases_sem_anterior", "releases_erro_404", "releases_sem_commits",
                    "commits_data_invalida"]
@@ -38,7 +38,9 @@ def coletar_commits(client, nome, releases, cfg, incluir_prereleases=False):
             try:
                 commits = client.paginate(caminho, {"per_page": 100}, chave="commits")
                 unicos = {commit["sha"]: {"sha": commit["sha"],
-                          "author_date": commit["commit"]["author"]["date"]} for commit in commits}
+                          "author_date": commit["commit"]["author"]["date"],
+                          "message": commit["commit"].get("message", "")}
+                          for commit in commits}
                 registro["commits"] = list(unicos.values())
             except requests.HTTPError as erro:
                 if erro.response is None or erro.response.status_code != 404:
