@@ -59,7 +59,9 @@ python -m pipeline.dataset --config config_s02.yaml
 O cálculo é offline. Os arquivos agregados são lidos em ordem por repositório,
 sem precisar do cache ou das pastas intermediárias de coleta. Os hashes das
 fontes e a janela precisam coincidir com o congelamento. Não é permitido juntar
-snapshots diferentes. O resultado é `data/dataset.csv`, com uma linha por
+snapshots diferentes. Os atributos Git dos artefatos de C preservam seus bytes,
+inclusive quebras de linha, para que os hashes continuem válidos entre Windows e Linux.
+O resultado é `data/dataset.csv`, com uma linha por
 repositório, e `data/dataset.manifest.json`, com versão da heurística, hashes,
 contagens reais e quantidade de tipos ausentes. Uma nova regra de B recalcula
 o CFR (b) a partir dos mesmos commits, sem nova mineração.
