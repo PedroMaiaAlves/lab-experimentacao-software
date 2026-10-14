@@ -1,0 +1,61 @@
+\section{Metodologia}
+\label{sec:metodologia}
+
+Foi utilizada a amostra congelada da S02, gerada com a semente definida em
+\texttt{config.yaml}, contendo 60 repositórios e cinco releases principais por
+repositório (300 releases). Rascunhos e pré-releases foram excluídos. Os tipos de
+projeto foram classificados como biblioteca/framework, aplicação/serviço, ferramenta
+CLI ou outro. Também se registrou se as releases representam entregas reais.
+
+Três avaliadores (A, B e C) realizaram a rotulagem manual e independente da
+amostra, sem consultar os rótulos dos demais avaliadores nem a saída da heurística
+avaliada. Para cada release, os avaliadores consultaram as notas de lançamento e,
+quando necessário, os commits associados, classificando-a como corretiva quando a
+correção de defeitos, regressões, vulnerabilidades ou a reversão de uma mudança
+defeituosa constituía seu objetivo principal. As divergências foram resolvidas por
+maioria simples e os casos sem maioria seriam discutidos em reunião de consenso.
+
+A concordância foi medida pelo kappa de Fleiss e interpretada pelas faixas de
+Landis--Koch~\cite{landis1977measurement}. O kappa foi 1,00 para tipo de projeto e
+entregas reais e 0,742 para release corretiva, correspondente a concordância
+substancial. Para releases corretivas, 80,7\% dos 300 casos foram unânimes e os 58
+restantes foram decididos por maioria.
+
+A heurística v1 classifica uma release como corretiva quando: (i) as tags atual e
+anterior são SemVer estrito, admitindo apenas o prefixo \texttt{v}, possuem os mesmos
+major e minor e apresentam patch crescente; ou (ii) algum assunto de commit contém o
+token completo \texttt{fix}, \texttt{hotfix} ou \texttt{revert}, sem distinção entre
+maiúsculas e minúsculas. Tags não-SemVer não acionam o primeiro critério, mas continuam
+elegíveis ao critério textual. Foram recuperados 19.836 assuntos dos patches públicos
+de 294 comparações; cinco releases não possuíam URL de comparação e uma coleta falhou.
+
+Em relação ao consenso, a v1 obteve precisão 0,589, recall 0,906 e F1 0,714 para a
+classe positiva, ultrapassando a meta de 0,70 sem refinamento adicional. A matriz de
+confusão apresentou 145 verdadeiros positivos, 101 falsos positivos, 15 falsos
+negativos e 39 verdadeiros negativos, com suporte positivo de 160 releases.
+
+\begin{table}[ht]
+  \centering
+  \caption{Desempenho da heurística de release corretiva.}
+  \label{tab:heuristica-corretiva}
+  \begin{tabular}{lrrrrrrrr}
+    \hline
+    Versão & Precisão & Recall & F1 & Suporte & VP & FP & FN & VN \\
+    \hline
+    v1 & 0,589 & 0,906 & 0,714 & 160 & 145 & 101 & 15 & 39 \\
+    \hline
+  \end{tabular}
+\end{table}
+
+No CFR (b), uma release avaliada falha quando existe uma release classificada como
+corretiva publicada em intervalo inclusivo de até sete dias. Releases publicadas nos
+últimos sete dias da janela são censuradas e não integram o denominador. Assim,
+$CFR_b = N_{releases\ com\ falha}/N_{releases\ avaliadas}$.
+
+A rotulagem manual está sujeita à interpretação dos avaliadores, especialmente em
+releases mistas ou com notas incompletas. Para reduzir essa ameaça, foram adotadas
+definições comuns, avaliações independentes e um protocolo de consenso. Ainda assim,
+o consenso não elimina completamente a subjetividade dos rótulos. O refinamento e a
+avaliação da heurística sobre a mesma amostra também podem superestimar sua capacidade
+de generalização. A ausência de seis comparações completas constitui uma limitação
+adicional.
