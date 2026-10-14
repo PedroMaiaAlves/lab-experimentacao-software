@@ -39,8 +39,8 @@ as páginas para ultrapassar o limite de 250 commits da resposta sem paginação
 - `sem_anterior`: primeira release da história nessa definição, sem base para lead time.
 - `erro_404`: tag/comparação indisponível; commits parciais são descartados.
 
-`commits_entre_releases.csv` contém uma linha por relação release/commit, com SHA e
-`author_date`. Duplicatas de SHA dentro da mesma comparação são removidas. O mesmo
+`commits_entre_releases.csv` contém uma linha por relação release/commit, com SHA,
+`author_date` e a mensagem integral do commit. Duplicatas de SHA dentro da mesma comparação são removidas. O mesmo
 commit presente em releases diferentes continua em cada relação.
 
 Lead time (a) é a mediana dos tempos entre cada publicação e seu commit mais antigo;
@@ -60,6 +60,22 @@ a coleta principal passa apenas datas de releases não draft e não prerelease.
 Os CSVs são UTF-8, separados por vírgula, com ponto decimal e valores ausentes vazios.
 Cada nova execução recria os CSVs; as chamadas já respondidas são reutilizadas pelo
 cache do cliente. Os arquivos são escritos por repositório para limitar o uso de memória.
+
+## Heurística de release corretiva e CFR (b)
+
+A versão v1 combina duas evidências configuráveis. A primeira reconhece SemVer estrito,
+com prefixo `v` opcional, e indica correção quando somente o patch cresce em relação à
+release principal anterior. A segunda procura os tokens completos `fix`, `hotfix` ou
+`revert`, sem distinção entre maiúsculas e minúsculas, nas mensagens dos commits da
+comparação. Tags fora desse padrão SemVer não acionam a evidência de versão, mas ainda
+podem ser classificadas pela evidência textual.
+
+Uma release avaliada falha se qualquer release corretiva posterior for publicada em um
+intervalo inclusivo de até 168 horas. Para garantir uma janela completa de observação,
+releases com data posterior a `janela_fim - 7 dias` não entram no denominador. Assim,
+para `janela_fim = 2026-09-30`, as datas de 24 a 30 de setembro ficam censuradas. A função
+retorna a taxa, as contagens de releases avaliadas, falhas e censuradas; sem observações
+avaliáveis, a taxa é `None`, não zero.
 
 ## Verificação
 

@@ -91,3 +91,20 @@ Itens em que os avaliadores não foram unânimes, para a reunião de consenso.
 | `A`, `B`, `C` | texto | categoria | Rótulo de cada avaliador |
 | `desempate` | texto | `maioria`/`reuniao` | Regra aplicada |
 | `rotulo_final` | texto | categoria | Rótulo resultante; vazio enquanto um caso 1-1-1 não tem decisão |
+
+### `commits_entre_releases.csv`
+
+| Coluna | Tipo | Unidade/formato | Origem ou definição |
+|---|---|---|---|
+| `full_name` | texto | `owner/repo` | Repositório do commit |
+| `release_id` | inteiro | identificador GitHub | Release atual da comparação |
+| `tag_name` | texto | nome da tag | Release atual |
+| `published_at` | timestamp | ISO 8601 | Publicação da release atual |
+| `previous_tag_name` | texto | nome da tag | Base da comparação |
+| `sha` | texto | SHA Git | Identificador do commit |
+| `author_date` | timestamp | ISO 8601 | `commit.author.date`, conforme definição obrigatória |
+| `message` | texto | livre | Mensagem integral de `commit.message`, usada pela heurística de release corretiva |
+
+O snapshot S01 versionado antes da heurística não possui a coluna `message`. Ela é
+materializada ao reexecutar a coleta de commits para a S02; o cache HTTP evita repetir
+chamadas já armazenadas.

@@ -15,6 +15,20 @@ criterios:
   min_releases: 5
   min_runs: 50
 
+# Heurística de release corretiva usada no CFR (b).
+heuristica_release:
+  versao: v1
+  janela_dias: 7
+  usar_patch_semver: true
+  usar_palavras_commits: true
+  palavras_chave:
+    - fix
+    - hotfix
+    - revert
+  # Tags fora de SemVer estrito (com prefixo "v" opcional) ainda podem ser
+  # classificadas pelo texto dos commits.
+  politica_tag_nao_semver: fallback_textual
+
 selecao:
   # S01: 100. Na S02, subir para o valor que garanta >= 300 após os filtros.
   meta_repositorios: 100

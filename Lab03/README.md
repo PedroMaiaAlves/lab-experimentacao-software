@@ -65,6 +65,7 @@ Para recomeçar do zero, apague a pasta `cache/`.
 | `janela_inicio`, `janela_fim` | Janela de observação de 12 meses (datas fixadas pelo professor) |
 | `semente` | Semente de qualquer sorteio do pipeline |
 | `criterios.min_releases` / `min_runs` | Critério mínimo de inclusão (5 releases e 50 runs válidos) |
+| `heuristica_release` | Versão e regras da heurística de release corretiva usada no CFR (b) |
 | `selecao.meta_repositorios` | Quantos repositórios devem restar após os filtros |
 | `selecao.faixas_estrelas` | Faixas de estrelas subdivididas recursivamente enquanto uma consulta tiver 1.000 ou mais resultados |
 | `selecao.linguagens` | Fallback para uma faixa unitária de estrelas com 1.000 ou mais resultados; uma partição por linguagem ainda saturada interrompe a coleta |
@@ -82,7 +83,7 @@ Para recomeçar do zero, apague a pasta `cache/`.
 | `releases.csv` | Histórico de releases da amostra, incluindo drafts acessíveis e pré-releases |
 | `tags.csv` | Tags e data de autoria do commit apontado; status de consulta |
 | `comparacoes_releases.csv` | Comparação de cada release principal na janela com sua antecessora; status e contagem |
-| `commits_entre_releases.csv` | SHA e data de autoria de cada commit por comparação válida |
+| `commits_entre_releases.csv` | SHA, data de autoria e mensagem de cada commit por comparação válida |
 | `lead_time.csv` | Medianas das variantes (a)/(b), em horas, e contagens de exclusões |
 | `deployment_frequency.csv` | Releases principais por semana na janela inclusiva |
 | `workflow_runs/*.json` | Runs de `push` do default branch, coletados mês a mês |
@@ -160,6 +161,8 @@ scripts/               utilitários (criação das Issues)
 
 - CI = runs do *default branch* com `event = push`. Deploy = release publicada,
   com `draft = false` e `prerelease = false`; as releases são artefatos do repositório.
+- No CFR (b), uma release falha se outra release classificada como corretiva for publicada
+  em até 7 dias. Releases das sete últimas datas da janela ficam censuradas.
 - O histórico completo permanece disponível para as variantes da RQ07.
 - As hipóteses RQ05–RQ07 estão em `docs/artigo/introducao.tex`, registradas antes da análise.
 - Repositórios arquivados e forks ficam fora da busca.
