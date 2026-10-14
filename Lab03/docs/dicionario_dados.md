@@ -1,173 +1,93 @@
-# Dicionário de dados — Lab03
 
-Os CSVs são gravados em UTF-8, separados por vírgula e com cabeçalho. Números usam
-ponto decimal; valores indisponíveis ficam vazios. Timestamps vindos da API estão em
-ISO 8601, normalmente em UTC (`Z`). A janela tem extremos inclusivos.
+## Amostra-ouro e validação manual (Sprint 2)
 
-## Seleção e funil
+Os rótulos humanos são preenchidos em planilhas `data/amostra_ouro/rotulos/rotulos_<A|B|C>.xlsx`
+(abas `repositorios` e `releases`, geradas a partir de `modelo/rotulos_modelo.xlsx`). Os arquivos abaixo
+são gerados por `python -m validacao.amostra_ouro` e `python -m validacao.concordancia`.
 
-### `candidatos.csv`
+### `repos_sorteados.csv`
 
-| Coluna | Tipo | Unidade/formato | Origem ou definição |
-|---|---|---|---|
-| `full_name` | texto | `owner/repo` | `repository.full_name` da Search API; identificador do repositório |
-| `stars` | inteiro | estrelas | `stargazers_count` no momento da coleta |
-| `language` | texto | nome da linguagem | Linguagem principal informada pelo GitHub; vazio quando ausente |
-| `default_branch` | texto | nome do branch | `default_branch` informado pela API |
-| `created_at` | timestamp | ISO 8601 | Data de criação do repositório |
-| `html_url` | texto | URL | Página do repositório no GitHub |
-| `consulta` | texto | consulta Search API | Partição de estrelas/linguagem que encontrou o candidato |
-
-### `funil.csv`
+Os 60 repositórios sorteados com `df.sample(n=60, random_state=semente)`, depois de ordenar a amostra por
+`full_name`. Mantém as colunas de `metadados.csv`, mais `repo_url`.
 
 | Coluna | Tipo | Unidade/formato | Origem ou definição |
 |---|---|---|---|
-| `etapa` | texto | categoria | Busca, candidatos avaliados, Actions, releases, runs ou amostra final |
-| `entraram` | inteiro | repositórios | Quantidade que iniciou a etapa; vazio quando não se aplica |
-| `descartados` | inteiro | repositórios | Quantidade rejeitada na etapa; vazio quando não se aplica |
-| `restaram` | inteiro | repositórios | Quantidade restante registrada para a etapa |
-| `motivo_descarte` | texto | categoria/descrição | Regra aplicada aos descartes da etapa |
+| `full_name` | texto | `owner/repo` | Repositório sorteado |
+| `stars` | inteiro | estrelas | Igual a `metadados.csv` |
+| `language` | texto | nome da linguagem | Igual a `metadados.csv` |
+| `default_branch` | texto | nome do branch | Igual a `metadados.csv` |
+| `created_at` | data | `AAAA-MM-DD` | Igual a `metadados.csv` |
+| `idade_dias` | inteiro | dias | Igual a `metadados.csv` |
+| `contribuidores` | inteiro | pessoas/entradas | Igual a `metadados.csv` |
+| `repo_url` | texto | URL | `https://github.com/` + `full_name` |
 
-### `descartes.csv`
+### `releases_sorteadas.csv`
 
-| Coluna | Tipo | Unidade/formato | Origem ou definição |
-|---|---|---|---|
-| `full_name` | texto | `owner/repo` | Repositório descartado |
-| `etapa` | texto | categoria | Etapa em que ocorreu o descarte |
-| `motivo` | texto | categoria | Motivo do descarte, inclusive eventual código HTTP |
-
-### `metadados.csv`
-
-| Coluna | Tipo | Unidade/formato | Origem ou definição |
-|---|---|---|---|
-| `full_name` | texto | `owner/repo` | Repositório da amostra final |
-| `stars` | inteiro | estrelas | `stargazers_count` obtido na seleção |
-| `language` | texto | nome da linguagem | Linguagem principal informada pelo GitHub |
-| `default_branch` | texto | nome do branch | Branch usado nas coletas de CI |
-| `created_at` | data | `AAAA-MM-DD` | Data de criação do repositório |
-| `idade_dias` | inteiro | dias | `janela_fim - created_at` |
-| `contribuidores` | inteiro | pessoas/entradas | Total estimado pela última página de `/contributors?per_page=1&anon=true`; vazio se indisponível |
-
-## Releases, tags e commits
-
-### `releases.csv`
-
-Uma linha por release retornada pela API, inclusive registros fora da janela, drafts
-visíveis ao token e pré-releases. Isso preserva o histórico necessário às variantes.
+Até 5 releases por repositório sorteado, entre as da definição principal (`draft=false`,
+`prerelease=false`, publicadas na janela).
 
 | Coluna | Tipo | Unidade/formato | Origem ou definição |
 |---|---|---|---|
 | `full_name` | texto | `owner/repo` | Repositório da release |
-| `id` | inteiro | identificador GitHub | `release.id` |
-| `tag_name` | texto | nome da tag | `release.tag_name` |
-| `target_commitish` | texto | branch/SHA | Alvo informado na release |
-| `draft` | booleano | `True`/`False` | Indica rascunho; drafts não entram na definição principal |
-| `prerelease` | booleano | `True`/`False` | Indica pré-release; não entra na definição principal |
-| `published_at` | timestamp | ISO 8601 | Data de publicação; usada como instante do deploy proxy |
-| `created_at` | timestamp | ISO 8601 | Data de criação do objeto release |
-| `html_url` | texto | URL | Página da release |
-| `name` | texto | livre | Título da release |
-| `body` | texto | livre/Markdown | Notas da release |
+| `release_id` | inteiro | identificador GitHub | `id` em `releases.csv` |
+| `tag_name` | texto | nome da tag | `tag_name` em `releases.csv` |
+| `published_at` | timestamp | ISO 8601 | `published_at` em `releases.csv` |
+| `release_url` | texto | URL | `html_url` em `releases.csv`; página com as notas |
+| `compare_url` | texto/vazio | URL | Comparação com a release anterior (`previous_tag_name` em `comparacoes_releases.csv`); vazio se não há anterior |
 
-### `tags.csv`
+### `decisoes_reuniao.csv`
+
+Decisões do grupo para os casos em que os três avaliadores discordaram entre si (1-1-1).
 
 | Coluna | Tipo | Unidade/formato | Origem ou definição |
 |---|---|---|---|
-| `full_name` | texto | `owner/repo` | Repositório da tag |
-| `tag_name` | texto | nome da tag | Nome retornado por `/tags` |
-| `commit_sha` | texto | SHA Git | Commit apontado pela tag |
-| `commit_author_date` | timestamp | ISO 8601 | `commit.author.date` do commit apontado; não é a data de criação da tag |
-| `status` | texto | `ok`/`erro_404` | Resultado da consulta do commit apontado |
+| `dimensao` | texto | `tipo_projeto`, `releases_sao_entregas` ou `corretiva` | Dimensão rotulada |
+| `chave` | texto | `full_name` ou `full_name\|release_id` | Item decidido |
+| `rotulo` | texto | categoria | Rótulo escolhido em reunião |
 
-### `comparacoes_releases.csv`
+### `kappa_fleiss.csv`
 
 | Coluna | Tipo | Unidade/formato | Origem ou definição |
 |---|---|---|---|
-| `full_name` | texto | `owner/repo` | Repositório comparado |
-| `release_id` | inteiro | identificador GitHub | Release atual dentro da janela |
-| `tag_name` | texto | nome da tag | Head da comparação |
-| `published_at` | timestamp | ISO 8601 | Publicação da release atual |
-| `previous_tag_name` | texto | nome da tag | Release principal imediatamente anterior, inclusive fora da janela |
-| `status` | texto | `ok`/`sem_anterior`/`erro_404` | Resultado da comparação |
-| `commits_count` | inteiro | commits | Commits únicos obtidos na comparação; zero pode ser válido |
+| `dimensao` | texto | categoria | Dimensão rotulada |
+| `n_itens` | inteiro | itens | Repositórios (tipo, entregas) ou releases (corretiva) rotulados |
+| `kappa` | real | −1 a 1 | Kappa de Fleiss com três avaliadores; vazio se todos usaram uma só categoria |
+| `interpretacao` | texto | categoria | Faixa de Landis & Koch (1977) |
+| `concordancia_unanime_pct` | real | % | Itens em que os três avaliadores concordaram |
+| `n_maioria` | inteiro | itens | Itens decididos por maioria 2-1 |
+| `n_reuniao` | inteiro | itens | Itens 1-1-1, decididos em reunião |
 
-### `commits_entre_releases.csv`
-
-| Coluna | Tipo | Unidade/formato | Origem ou definição |
-|---|---|---|---|
-| `full_name` | texto | `owner/repo` | Repositório do commit |
-| `release_id` | inteiro | identificador GitHub | Release atual da comparação |
-| `tag_name` | texto | nome da tag | Release atual |
-| `published_at` | timestamp | ISO 8601 | Publicação da release atual |
-| `previous_tag_name` | texto | nome da tag | Base da comparação |
-| `sha` | texto | SHA Git | Identificador do commit |
-| `author_date` | timestamp | ISO 8601 | `commit.author.date`, conforme definição obrigatória |
-
-## Métricas já materializadas na Sprint 1
-
-### `deployment_frequency.csv`
-
-| Coluna | Tipo | Unidade/formato | Origem ou fórmula |
-|---|---|---|---|
-| `full_name` | texto | `owner/repo` | Repositório da amostra |
-| `deployment_frequency` | real | releases/semana | `releases_principais / semanas_janela` |
-| `releases_principais` | inteiro | releases | Releases na janela com `draft=false` e `prerelease=false` |
-| `semanas_janela` | real | semanas | `(janela_fim - janela_inicio + 1 dia) / 7` |
-
-### `lead_time.csv`
-
-| Coluna | Tipo | Unidade/formato | Origem ou fórmula |
-|---|---|---|---|
-| `full_name` | texto | `owner/repo` | Repositório da amostra |
-| `lead_time_a_horas` | real | horas | Mediana, entre releases válidas, de `published_at - commit mais antigo` |
-| `lead_time_b_horas` | real | horas | Mediana dos tempos de todos os commits de todas as comparações válidas |
-| `commits_data_invalida` | inteiro | contagem | Commits excluídos da métrica por timestamp ausente, sem fuso ou posterior à publicação |
-| `releases_comparadas` | inteiro | releases | Comparações com status `ok`, inclusive as sem commits novos |
-| `releases_sem_anterior` | inteiro | releases | Releases sem uma antecessora histórica válida |
-| `releases_erro_404` | inteiro | releases | Comparações indisponíveis por HTTP 404 |
-| `releases_sem_commits` | inteiro | releases | Comparações `ok` que não retornaram commits novos |
-
-## Workflow runs
-
-### `workflow_runs/<owner>__<repo>.json`
-
-Cada arquivo representa um repositório. O objeto raiz contém:
-
-| Campo | Tipo | Unidade/formato | Origem ou definição |
-|---|---|---|---|
-| `full_name` | texto | `owner/repo` | Repositório coletado |
-| `default_branch` | texto | nome do branch | Branch enviado ao filtro da API |
-| `janela_inicio` | data | `AAAA-MM-DD` | Início inclusivo da coleta |
-| `janela_fim` | data | `AAAA-MM-DD` | Fim inclusivo da coleta |
-| `complete` | booleano | `true`/`false` | `false` se algum intervalo diário ainda atingiu o teto de 1.000 resultados |
-| `saturated_intervals` | lista | objetos | Intervalos subdivididos ou irredutivelmente incompletos |
-| `workflow_runs` | lista | objetos | Runs únicos, deduplicados por `id` |
-
-Cada item de `workflow_runs` contém:
-
-| Campo | Tipo | Unidade/formato | Origem ou definição |
-|---|---|---|---|
-| `id` | inteiro | identificador GitHub | ID único do run |
-| `workflow_id` | inteiro | identificador GitHub | Workflow usado para agrupar episódios de recuperação |
-| `name` | texto | livre | Nome do workflow |
-| `conclusion` | texto/vazio | categoria GitHub | `success`; falhas; ou valores ignorados segundo o enunciado |
-| `run_started_at` | timestamp | ISO 8601 | Início usado no tempo de recuperação |
-| `updated_at` | timestamp | ISO 8601 | Fim do sucesso que encerra um episódio |
-| `created_at` | timestamp | ISO 8601 | Data usada pela API para limitar a janela |
-
-### `runs_saturados.csv`
+### `consenso_repos.csv`
 
 | Coluna | Tipo | Unidade/formato | Origem ou definição |
 |---|---|---|---|
-| `full_name` | texto | `owner/repo` | Repositório consultado |
-| `inicio` | data | `AAAA-MM-DD` | Primeiro dia inclusivo do intervalo |
-| `fim` | data | `AAAA-MM-DD` | Último dia inclusivo do intervalo |
-| `total_count` | inteiro | runs | Total informado pela API antes da subdivisão |
-| `status` | texto | `subdividido`/`incompleto` | `incompleto` significa que um único dia ainda atingiu 1.000 resultados |
+| `full_name` | texto | `owner/repo` | Repositório rotulado |
+| `tipo_projeto_A`, `tipo_projeto_B`, `tipo_projeto_C` | texto | categoria | Rótulo de cada avaliador: biblioteca/framework, aplicação/serviço, ferramenta CLI ou outro |
+| `tipo_projeto` | texto | categoria | Rótulo de consenso; usado como fator na RQ 06 |
+| `tipo_projeto_decisao` | texto | `unanime`/`maioria`/`reuniao` | Como o consenso foi obtido |
+| `releases_sao_entregas_A`, `releases_sao_entregas_B`, `releases_sao_entregas_C` | texto | `sim`/`não`/`incerto` | Rótulo de cada avaliador |
+| `releases_sao_entregas` | texto | `sim`/`não`/`incerto` | Rótulo de consenso |
+| `releases_sao_entregas_decisao` | texto | `unanime`/`maioria`/`reuniao` | Como o consenso foi obtido |
 
-## Cache
+### `consenso_releases.csv`
 
-Os arquivos em `cache/` não integram o dataset. Cada JSON armazena a resposta e os
-cabeçalhos de uma combinação de URL e parâmetros, identificada por SHA-256. Eles permitem
-retomada sem repetir chamadas, mas podem conter campos adicionais da API e não devem ser
-usados diretamente na análise.
+| Coluna | Tipo | Unidade/formato | Origem ou definição |
+|---|---|---|---|
+| `full_name` | texto | `owner/repo` | Repositório da release |
+| `release_id` | inteiro | identificador GitHub | Release rotulada |
+| `tag_name` | texto | nome da tag | Tag da release |
+| `corretiva_A`, `corretiva_B`, `corretiva_C` | texto | `sim`/`não` | A release tem como objetivo principal corrigir defeito recente, segundo cada avaliador |
+| `corretiva` | texto | `sim`/`não` | Rótulo de consenso; referência para precisão, recall e F1 da heurística |
+| `corretiva_decisao` | texto | `unanime`/`maioria`/`reuniao` | Como o consenso foi obtido |
+
+### `casos_divergentes.csv`
+
+Itens em que os avaliadores não foram unânimes, para a reunião de consenso.
+
+| Coluna | Tipo | Unidade/formato | Origem ou definição |
+|---|---|---|---|
+| `dimensao` | texto | categoria | Dimensão rotulada |
+| `chave` | texto | `full_name` ou `full_name\|release_id` | Item com divergência |
+| `A`, `B`, `C` | texto | categoria | Rótulo de cada avaliador |
+| `desempate` | texto | `maioria`/`reuniao` | Regra aplicada |
+| `rotulo_final` | texto | categoria | Rótulo resultante; vazio enquanto um caso 1-1-1 não tem decisão |
