@@ -142,6 +142,12 @@ valide a estrutura:
 python scripts/validar_rotulos_b.py data/amostra_ouro/rotulos/rotulos_B.xlsx
 ```
 
+Com o consenso produzido, avalie a versão ativa e registre precisão, recall e F1:
+
+```bash
+python scripts/avaliar_heuristica.py --commits data/commits_entre_releases_s02.csv
+```
+
 ### Validação final da execução
 
 Depois das coletas de A, B e C, o comando único verifica automaticamente se todos os
