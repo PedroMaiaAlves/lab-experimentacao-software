@@ -1,0 +1,36 @@
+\subsection{Coleta completa e consolidação do dataset}
+
+A coleta da Sprint 2 utiliza a janela de 1 de outubro de 2025 a 30 de setembro
+de 2026, semente 42 e meta mínima de 300 repositórios após os filtros de inclusão.
+O comando de coleta permite reaproveitar um snapshot versionado de candidatos;
+nesse caso, sua ordem e consultas de origem são preservadas. Uma nova busca pode
+ampliar as faixas de estrelas, com subdivisão para respeitar o teto da Search API.
+Não se considera a amostra final congelada antes da coleta e validação completas.
+
+O pipeline utiliza Python e \texttt{requests}, sem bibliotecas que encapsulem a
+API do GitHub. São consultados os endpoints de workflows, releases, comparações
+entre tags, commits, contribuidores e execuções do GitHub Actions. As tags podem
+ser recuperadas em lotes por GraphQL. Releases e comparações são paginadas; a
+data de autoria do commit é utilizada nos cálculos de lead time e nas datas das
+tags. Os runs são restritos ao default branch, ao evento push e à janela do estudo.
+Consultas mensais com pelo menos mil resultados são subdivididas; intervalos
+diários ainda saturados são registrados como incompletos e impedem o congelamento.
+
+O cache em disco permite reutilizar respostas, enquanto checkpoints registram o
+avanço da seleção e as coletas completas por repositório. O cliente respeita os
+limites indicados nos cabeçalhos e aplica novas tentativas com espera crescente
+em falhas temporárias. Erros transitórios não constituem evidência de exclusão.
+Comparações com erro 404 são contabilizadas e excluídas do lead time; datas
+inválidas de commits também são registradas e excluídas das medianas.
+
+O dataset reutiliza as funções de cálculo do grupo, mantém uma linha por
+repositório e registra métricas, versão da heurística e contagens de ignorados
+e censurados. O CFR de CI considera falhas sobre falhas mais sucessos. O CFR por
+release observa uma corretiva posterior em até sete dias, excluindo do denominador
+as releases das sete últimas datas da janela. Episódios de recuperação não
+encerrados são mantidos como censurados. Valores ausentes não são substituídos
+por zero, nem tipos de projeto são inferidos automaticamente fora do consenso.
+
+\IfFileExists{tabelas/coleta_s02.tex}{\input{tabelas/coleta_s02}}{
+A coleta completa e seus números ainda aguardam o fechamento dos artefatos da S02.
+}

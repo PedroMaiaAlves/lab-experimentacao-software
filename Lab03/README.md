@@ -122,6 +122,14 @@ avaliador preenche só o próprio arquivo, sem consultar os outros.
 > **Janela provisória:** confirme com o professor as datas de `janela_inicio` e
 > `janela_fim` antes de executar a coleta definitiva dos 100 repositórios.
 
+## Sprint 2 — coleta completa e dataset (integrante C)
+
+As instruções de coleta retomável, congelamento, cálculo offline e dependências
+da rotulagem estão em [docs/entrega_s02_c.md](docs/entrega_s02_c.md).
+Use `config_s02.yaml`; as saídas ficam separadas da S01 em `data/s02/`.
+O congelamento exige 300 repositórios validados e publica `data/amostra_final.csv`.
+O dataset só é gerado depois desse congelamento; execução iniciada não é entrega concluída.
+
 ## Testes
 
 ```bash
