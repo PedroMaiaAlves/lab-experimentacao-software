@@ -92,6 +92,32 @@ O contrato e as decisões da coleta de releases/commits estão em [docs/coleta_b
 Tipos, unidades, fórmulas e origem de cada campo estão no
 [dicionário de dados](docs/dicionario_dados.md).
 
+## Amostra-ouro (S02-A1)
+
+O sorteio só vale sobre a amostra final congelada por C (`data/amostra_final.csv`).
+Se esse arquivo ainda não existir, o script usa `data/metadados.csv` e avisa no log;
+rode de novo depois do congelamento.
+
+```bash
+python -m pipeline.amostra_ouro --config config.yaml
+```
+
+Sementes documentadas (não altere sem registrar no artigo):
+
+- 60 repositórios: `DataFrame.sample(n=60, random_state=42)`
+- 5 releases por repositório: `sample(n=5, random_state=43)`, entre as releases
+  da definição principal (não draft, não pré-release, `published_at` na janela)
+
+Saídas em `data/rotulos/`:
+
+| Arquivo | Conteúdo |
+|---|---|
+| `rotulos_A.csv`, `rotulos_B.csv`, `rotulos_C.csv` | Planilhas idênticas, com links e colunas de rótulo vazias |
+| `releases_sorteadas.csv` | Lista das 300 releases sorteadas, sem heurística |
+
+As planilhas **não** incluem a classificação automática de release corretiva. Cada
+avaliador preenche só o próprio arquivo, sem consultar os outros.
+
 > **Janela provisória:** confirme com o professor as datas de `janela_inicio` e
 > `janela_fim` antes de executar a coleta definitiva dos 100 repositórios.
 
