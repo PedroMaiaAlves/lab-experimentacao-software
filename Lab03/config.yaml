@@ -7,6 +7,8 @@ janela_fim: 2026-09-30
 
 # Semente única para qualquer sorteio do pipeline (reprodutibilidade)
 semente: 42
+# Amostra-ouro (S02-A1): 60 repositórios com random_state=42 e 5 releases
+# por repositório com random_state=43. Sem coluna da heurística.
 
 # Critério mínimo de inclusão (enunciado, seção 3)
 criterios:
