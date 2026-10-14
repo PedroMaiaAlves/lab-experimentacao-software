@@ -131,6 +131,17 @@ python -m pytest --cov=metricas --cov-report=term-missing --cov-fail-under=80
 Os testes também rodam a cada push e pull request pelo GitHub Actions, conforme
 `.github/workflows/testes.yml`.
 
+## Validação da rotulagem manual (S02)
+
+O protocolo do integrante B está em
+[`docs/protocolo_rotulagem_B.md`](docs/protocolo_rotulagem_B.md). Cada integrante deve
+rotular manualmente sem consultar os demais avaliadores nem a heurística. Depois,
+valide a estrutura:
+
+```bash
+python scripts/validar_rotulos_b.py data/amostra_ouro/rotulos/rotulos_B.xlsx
+```
+
 ### Validação final da execução
 
 Depois das coletas de A, B e C, o comando único verifica automaticamente se todos os
