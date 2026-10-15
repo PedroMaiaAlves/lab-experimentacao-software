@@ -75,9 +75,13 @@ também precisam ser declaradas e podem compartilhar vieses do modelo.
 - `concluido` qualifica a coleta e a validação computacional com a proveniência
   declarada; não equivale a aceite do professor de avaliadores de IA, aprovação
   pelos colegas ou compilação/publicação do artigo.
-- A decisão entre preservar as avaliações dos integrantes ou usar três agentes
-  separados de IA, com origem declarada, foi solicitada a Lorran. Sem essa escolha,
-  não são fabricadas avaliações dos outros integrantes ou encerradas suas tarefas.
+- Lorran decidiu manter as avaliações dos integrantes. Não serão geradas três
+  avaliações substitutas por agentes de IA. As avaliações anteriores podem ser
+  reaproveitadas nos mesmos itens e definições, com origem confirmada; os itens
+  novos da amostra definitiva ainda precisam das avaliações independentes.
+- O C legado não é automaticamente atribuído a Lorran: ele informou não o ter
+  preenchido. A revisão assistida provisória continua separada e não substitui
+  a avaliação humana C sem uma revisão efetivamente realizada e registrada.
 
 ## Situação desta execução
 

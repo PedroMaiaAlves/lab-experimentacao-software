@@ -11,8 +11,11 @@ agora cobre todas as colunas do dataset.
 A coleta foi retomada com 65 repositórios completos preservados para aplicar a
 preparação automática do novo sorteio e das tabelas. O log ativo é
 `cache/s02/fechamento.stderr.log`; cache, checkpoint e log anterior foram mantidos.
-A coleta, a decisão sobre avaliadores independentes e os resultados definitivos
-ainda não estão concluídos. O contrato e as pendências estão em `fechamento_s02.md`.
+A coleta e os resultados definitivos ainda não estão concluídos. Lorran escolheu
+manter as avaliações dos integrantes, sem três agentes de IA substitutos. O
+reaproveitamento depende da correspondência dos itens e da origem dos rótulos;
+o C legado não foi confirmado como avaliação de Lorran. O contrato e as pendências
+estão em `fechamento_s02.md`.
 
 Base: `main@fdfac27`. Implementação de C na branch
 `codex/lab03-s02-lorran-parte-c`; sem alterações nos coletores, cálculos ou
