@@ -1,0 +1,4 @@
+versao,precisao,recall,f1,suporte,tp,fp,fn,tn,regras
+v1,0.3137254901960784,0.9195402298850575,0.4678362573099415,87,80,175,7,38,"{""janela_dias"": 7, ""palavras_chave"": [""fix"", ""hotfix"", ""revert""], ""politica_tag_nao_semver"": ""fallback_textual"", ""usar_palavras_commits"": true, ""usar_patch_semver"": true, ""versao"": ""v1""}"
+v2,0.7010309278350515,0.7816091954022989,0.7391304347826086,87,68,29,19,184,"{""janela_dias"": 7, ""palavras_chave"": [""fix"", ""hotfix"", ""revert""], ""politica_tag_nao_semver"": ""fallback_textual"", ""usar_palavras_commits"": true, ""usar_patch_semver"": true, ""versao"": ""v2""}"
+v3,0.7083333333333334,0.7816091954022989,0.7431693989071039,87,68,28,19,185,"{""janela_dias"": 7, ""palavras_chave"": [""fix"", ""hotfix"", ""revert""], ""politica_tag_nao_semver"": ""fallback_textual"", ""usar_palavras_commits"": true, ""usar_patch_semver"": true, ""versao"": ""v3""}"

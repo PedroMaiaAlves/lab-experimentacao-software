@@ -1,13 +1,17 @@
 from pathlib import Path
 
+import pytest
+
 from pipeline.config import carregar_config
 from pipeline.dataset import gerar_dataset
 import pipeline.sprint2 as sprint
 from tests.fakes import ClienteFalso
 
 
-def test_300_repositorios_simulados_coleta_congelamento_dataset_e_recalculo(tmp_path, monkeypatch):
+@pytest.mark.parametrize("versao,cfr_esperado", [("v1", "0.8"), ("v3", "0.0")])
+def test_300_repositorios_simulados_coleta_congelamento_dataset_e_recalculo(tmp_path, monkeypatch, versao, cfr_esperado):
     cfg = carregar_config("config_s02.yaml")
+    cfg["heuristica_release"]["versao"] = versao
     cfg["saida"] = {"dir_dados": str(tmp_path / "dados"), "dir_cache": str(tmp_path / "cache")}
     candidatos, rotas = [], {}
     for i in range(300):
@@ -51,7 +55,7 @@ def test_300_repositorios_simulados_coleta_congelamento_dataset_e_recalculo(tmp_
     assert resumo["repositorios"] == resumo["repositorios_sem_tipo"] == 300
     assert resumo["totais"]["runs_validos"] == 15000
     assert resumo["totais"]["releases_principais"] == 1500
-    assert {r["cfr_b"] for r in sprint.ler_csv(destino)} == {"0.8"}
+    assert {r["cfr_b"] for r in sprint.ler_csv(destino)} == {cfr_esperado}
     assert "300 repositórios" in relato.read_text(encoding="utf-8")
     cfg["heuristica_release"].update(versao="v2-fixture", usar_patch_semver=False)
     gerar_dataset(cfg, amostra, tmp_path / "sem-consenso.csv", destino)

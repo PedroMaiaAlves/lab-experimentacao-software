@@ -18,9 +18,9 @@ efetivamente utilizado; não se misturam amostra-ouro piloto e definitiva.
 | `created_at` | timestamp | ISO 8601 UTC | Criação do repositório |
 | `idade_dias` | inteiro | dias | Diferença entre criação e fim da janela, conforme coletor de metadados |
 | `contribuidores` | inteiro/vazio | entradas | Contagem fornecida pelo coletor de contribuidores; vazio se indisponível |
-| `tipo_projeto` | categoria/vazio | categoria | Consenso validado: biblioteca/framework, aplicação/serviço, ferramenta CLI ou outro |
-| `releases_sao_entregas` | categoria/vazio | sim/não/incerto | Consenso sobre releases representarem entregas consumíveis |
-| `rotulo_disponivel` | booleano | lógico | Há tipo do projeto no consenso utilizado; não comprova avaliação humana |
+| `tipo_projeto` | categoria/vazio | categoria | Consenso validado (60 da amostra-ouro) ou classificação complementar validada (240 restantes): biblioteca/framework, aplicação/serviço, ferramenta CLI ou outro |
+| `releases_sao_entregas` | categoria/vazio | sim/não/incerto | Consenso sobre releases representarem entregas consumíveis (disponível para a amostra-ouro de 60 repositórios) |
+| `rotulo_disponivel` | booleano | lógico | Há tipo do projeto disponível no dataset consolidado (consenso ou complementar validada); não comprova avaliação humana |
 | `heuristica_versao` | texto | versão | Regra efetivamente utilizada no CFR (b) |
 | `deployment_frequency` | real | entregas/semana | Releases principais / W |
 | `deployment_frequency_prereleases` | real | entregas/semana | Releases não draft, incluindo pré-releases, na janela / W |
@@ -56,14 +56,20 @@ efetivamente utilizado; não se misturam amostra-ouro piloto e definitiva.
 | `intervalos_saturados` | inteiro | intervalos | Consultas com teto atingido, incluindo intervalos posteriormente subdivididos |
 | `intervalos_incompletos` | inteiro | intervalos | Intervalos diários ainda saturados; qualquer ocorrência impede congelamento |
 
-O tipo não é imputado aos repositórios não cobertos pelo consenso. Classificações
-adicionais, se produzidas, devem ser identificadas como tal e não confundidas com
-a amostra-ouro. As datas e contagens detalhadas da mineração permanecem nas fontes.
+Para os 240 repositórios fora da amostra-ouro de consenso, a classificação de `tipo_projeto`
+é realizada de forma complementar e particionada entre os integrantes em `data/classificacao_complementar/`
+(80 repositórios por integrante), acompanhada de URLs de evidência pública e do manifesto de integridade.
+Segundo confirmação dos integrantes, as sugestões automáticas de categoria e justificativa
+foram revisadas individualmente nos READMEs antes do manifesto final. Isso não é consenso
+triplo dos 300. O importador exige campos completos, URLs HTTP(S), datas `AAAA-MM-DD`,
+identidades exatas e correspondência dos hashes e metadados do manifesto existente,
+que não é sobrescrito na conferência. As datas e contagens da mineração permanecem nas fontes.
 
 ## Amostra-ouro e validação manual (Sprint 2)
 
-Os rótulos humanos são preenchidos em planilhas `data/amostra_ouro/rotulos/rotulos_<A|B|C>.xlsx`
-(abas `repositorios` e `releases`, geradas a partir de `modelo/rotulos_modelo.xlsx`). Os arquivos abaixo
+Na população definitiva, os rótulos usam `data/amostra_ouro_s02/rotulos/rotulos_<A|B|C>.xlsx`.
+O diretório `data/amostra_ouro/` é legado do piloto. As planilhas têm
+abas `repositorios` e `releases`, geradas a partir de `modelo/rotulos_modelo.xlsx`. Os arquivos abaixo
 são gerados por `python -m validacao.amostra_ouro` e `python -m validacao.concordancia`.
 
 ### `repos_sorteados.csv`
@@ -117,7 +123,7 @@ Decisões do grupo para os casos em que os três avaliadores discordaram entre s
 | `concordancia_unanime_pct` | real | % | Itens em que os três avaliadores concordaram |
 | `n_maioria` | inteiro | itens | Itens decididos por maioria 2-1 |
 | `n_reuniao` | inteiro | itens | Itens 1-1-1, decididos em reunião |
-| `n_adjudicacao_IA` | inteiro | itens | Itens 1-1-1 submetidos a adjudicação por IA; não são reuniões humanas |
+| `n_adjudicacao_IA` | inteiro | itens | Contagem de desempates por adjudicação automatizada; zero na S02 |
 
 ### `consenso_repos.csv`
 

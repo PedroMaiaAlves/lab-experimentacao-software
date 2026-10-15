@@ -1,0 +1,17 @@
+{
+  "regras": {
+    "versao": "v3",
+    "janela_dias": 7,
+    "usar_patch_semver": true,
+    "usar_palavras_commits": true,
+    "palavras_chave": [
+      "fix",
+      "hotfix",
+      "revert"
+    ],
+    "politica_tag_nao_semver": "fallback_textual"
+  },
+  "consenso_sha256": "e05a41e8d8f031f18cf188997eb8a131e61d7dec780c5e717303fd5ed28d3214",
+  "implementacao_sha256": "722934ddddd772b532893c614677106cbb61ff5aaa7c82e02343c6abb9afc48b",
+  "implementacao_formato": "utf-8-lf"
+}

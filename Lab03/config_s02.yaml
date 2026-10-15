@@ -5,7 +5,7 @@ criterios:
   min_releases: 5
   min_runs: 50
 heuristica_release:
-  versao: v1
+  versao: v3
   janela_dias: 7
   usar_patch_semver: true
   usar_palavras_commits: true

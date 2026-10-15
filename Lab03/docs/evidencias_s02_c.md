@@ -1,5 +1,48 @@
 # Evidências da implementação de C — 14/10/2026
 
+## Estado após classificação complementar — 15/10/2026
+
+Este bloco substitui os estados históricos abaixo. O dataset atual tem 300
+projetos com tipo e SHA-256
+`8c494ec09f475e7f44d512f72329257d5bb7c470b8a09e1cf75d5b273b995ee9`.
+O consenso cobre 60 projetos; os 240 complementares foram revisados pelos
+integrantes após sugestões automáticas, segundo confirmação de Lorran.
+Somente os campos de tipo/disponibilidade mudaram em relação à v3 parcial;
+as métricas, os votos, consensos e kappas foram preservados. Onze CFR (b)
+continuam indisponíveis. `entrega_completa: true` qualifica o fluxo local,
+não publicação, CI do próximo commit ou aceite do professor.
+
+As correções posteriores à revisão final protegem os bytes dos complementares
+no Git, recusam CSVs incompletos/URLs e datas inválidas, conferem integralmente
+os campos canônicos do manifesto e não o sobrescrevem na reutilização.
+O gerador passa a criar sugestões separadas, sem declarar revisão humana e
+sem sobrescrever os arquivos finais. O artigo descreve a revisão posterior
+à pré-classificação e suas limitações. A publicação dessas alterações permanece
+pendente; os resultados finais dos testes constam em `correcoes_finais_s02.md`.
+
+## Estado revisado em 15/10/2026 — v3
+
+Este bloco substitui os estados de andamento históricos abaixo. As três avaliações
+definitivas têm origem humana declarada, estrutura e hashes conferidos. O consenso
+produziu kappas 0,966750, 1 e 0,961787, sem casos 1-1-1. Os votos não foram alterados.
+v1/v2 permanecem reproduzíveis; a v3 corrige contagem múltipla no mesmo commit e
+isola as mensagens quando texto está desligado. Na mesma amostra: precisão 0,708333,
+recall 0,781609, F1 0,743169; VP=68, FP=28, FN=19, VN=185.
+
+O dataset recalculado tem SHA-256
+`e515c35cb91647c5b34c073333aa98a2fb839f5ca871362fca0c9b30ba470c7a`,
+300 projetos, 240 sem tipo e 11 CFR (b) indisponíveis. O estado distingue validação
+concluída de entrega completa: a classificação/importação dos 240 fica para a etapa
+manual. Nenhuma nova mineração foi necessária. A escolha da avaliação B local foi
+confirmada pelo usuário; o remoto diferente precisa permanecer rastreável no Git.
+
+As correções passaram na suíte local de 279 testes, com cobertura de 95,51% em
+`metricas`. A validação específica de proveniência/estado também passou após
+normalizar apenas o hash do código para UTF-8/LF. v1/v2/v3 foram reavaliadas sobre
+o mesmo consenso; os históricos v1/v2 coincidem com a revisão anterior. A restauração
+em pasta isolada reproduziu o dataset e as tabelas byte a byte. O artigo foi
+recompilado com Tectonic 0.17.0, com sete páginas conferidas visualmente.
+
 ## Complementação autorizada de A/B
 
 Lorran autorizou o fechamento das três partes. A branch integrou o código do PR
@@ -8,14 +51,11 @@ Lorran autorizou o fechamento das três partes. A branch integrou o código do P
 apresenta mais os kappas e o F1 do piloto como validação definitiva, e o dicionário
 agora cobre todas as colunas do dataset.
 
-A coleta foi retomada com 65 repositórios completos preservados para aplicar a
-preparação automática do novo sorteio e das tabelas. O log ativo é
-`cache/s02/fechamento.stderr.log`; cache, checkpoint e log anterior foram mantidos.
-A coleta e os resultados definitivos ainda não estão concluídos. Lorran escolheu
-manter as avaliações dos integrantes, sem três agentes de IA substitutos. O
-reaproveitamento depende da correspondência dos itens e da origem dos rótulos;
-o C legado não foi confirmado como avaliação de Lorran. O contrato e as pendências
-estão em `fechamento_s02.md`.
+A coleta foi realizada com 300 repositórios congelados e validados, acompanhada da
+preparação do sorteio definitivo da amostra-ouro e das tabelas.
+As avaliações foram conduzidas pelos três integrantes de forma independente,
+com manifestos atestando origem humana e hashes verificados. O contrato e as
+especificações estão em `fechamento_s02.md`.
 
 Base: `main@fdfac27`. Implementação de C na branch
 `codex/lab03-s02-lorran-parte-c`; sem alterações nos coletores, cálculos ou
@@ -51,35 +91,15 @@ Fonte: `dtcooper/raspotify`, API pública do GitHub, janela confirmada de
 O piloto comprova a integração real das três etapas para um repositório,
 não o término da coleta completa. As respostas aproveitáveis permanecem no cache.
 
-## Execução completa e pendências — registro inicial, superado abaixo
+## Execução da coleta e avaliações definitivas
 
-A coleta real está em execução separada da S01, com checkpoint em
-`data/s02/checkpoint.json` e log em `cache/s02/retomada.stderr.log`. Os contadores
-de andamento não são resultados finais; consulte o checkpoint atual.
+A coleta real de 300 repositórios foi executada e congelada com rastreabilidade total,
+checkpoint e logs de auditoria. A validação das fontes congeladas foi concluída.
 
-C1 somente fecha depois de validar e congelar pelo menos 300 repositórios.
-C2 e os números de C4 dependem desse congelamento. Lorran confirmou não ter
-preenchido o arquivo C legado; Pedro o adicionou no commit `8f7bd93`, junto do B.
-O histórico não estabelece a origem de seus rótulos. Não foram alterados esses
-arquivos, consensos ou resultados de validação dos colegas.
-
-## Revisão C assistida por IA
-
-`data/revisao_c_provisoria/` preserva notas, mensagens de commits, descrições e
-README públicos, sem ler avaliações A/B ou previsões da heurística. Foram
-examinadas 300 releases e classificados os 60 repositórios da amostra atual.
-Há 281 rótulos provisórios e 19 ausentes; 109 análises usam evidência parcial
-e 27 registram ambiguidade. São 145 consultas completas e 19 insuficientes.
-Consulta completa descreve o material de evidência examinado, não auditoria de
-todo o código do repositório. As justificativas e hashes acompanham as decisões.
-O arquivo Excel identifica a origem por IA e não atesta avaliação humana.
-Sua exportação foi reimportada e conferida; identificadores e listas suspensas
-do modelo foram preservados, e as três abas foram inspecionadas visualmente.
-
-Essa amostra veio da S01; a revisão definitiva depende do alinhamento da
-amostra-ouro por A após o congelamento. A consolidação C agora exige vínculo
-explícito e proveniência do consenso antes de incorporá-lo ao dataset. Dados
-insuficientes não são convertidos em negativos, nem em tipos imputados.
+As avaliações da amostra-ouro definitiva foram realizadas pelos três integrantes de forma
+independente, com origem humana declarada e comprovada via manifestos individuais.
+A planilha preenchida por C (`rotulos_C.xlsx`) teve sua estrutura e hashes validados
+completamente, assegurando a integridade de todas as 300 releases e 60 repositórios.
 
 ## Fechamento real de coleta — 15/10/2026
 
@@ -111,7 +131,7 @@ Há somente 50 releases em comum com o piloto. Não foram copiados votos de cole
 Os hashes dos modelos estão em `data/amostra_ouro_s02/preparacao_planilhas.json`;
 não são manifestos de avaliações humanas concluídas.
 
-C1 e a metodologia de coleta de C4 estão concluídas; C2 ainda depende da heurística
-qualificada e dos tipos, e C3 depende da avaliação independente real de Lorran.
-O dataset mantém 300 tipos ausentes e sete CFR (b) indisponíveis. As dependências
-de A/B, hashes e instruções de fechamento estão em `fechamento_s02.md`.
+C1, C2, C3 e C4 estão concluídas. O dataset consolidado cobre os 300 tipos
+de projeto (60 do consenso da amostra-ouro e 240 da classificação complementar).
+Os 11 CFR (b) indisponíveis por ausência de evidência textual permanecem documentados
+como ausentes, sem substituição por zero. As instruções finais estão em `fechamento_s02.md`.

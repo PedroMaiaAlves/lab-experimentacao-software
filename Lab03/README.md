@@ -96,8 +96,7 @@ Tipos, unidades, fórmulas e origem de cada campo estão no
 ## Amostra-ouro (S02-A1)
 
 O sorteio só vale sobre a amostra final congelada por C (`data/amostra_final.csv`).
-Se esse arquivo ainda não existir, o script usa `data/metadados.csv` e avisa no log;
-rode de novo depois do congelamento.
+O fechamento integrado exige esse congelamento; não usa automaticamente a amostra do piloto.
 
 ```bash
 python -m validacao.fechamento_s02 --config config_s02.yaml
@@ -139,8 +138,11 @@ O fechamento da validação, seu contrato de proveniência e as pendências est�
 [docs/fechamento_s02.md](docs/fechamento_s02.md).
 
 A coleta real dos **300 repositórios terminou em 15/10/2026**. Amostra, dataset,
-manifestos e sorteio definitivo 60×5 estão versionados. O dataset ainda usa v1,
-sem consenso definitivo nem tipos imputados; a validação manual permanece pendente.
+manifestos e sorteio definitivo 60×5 estão disponíveis. A revisão local utiliza
+v3, com três avaliações humanas declaradas e consenso dos 60. Os outros 240 tipos
+foram revisados individualmente pelos integrantes após pré-classificação automática
+e integrados com proveniência separada, cobrindo os 300 projetos. Os 11 CFR (b)
+indisponíveis permanecem ausentes, não zeros. v1 e v2 foram preservadas para reprodução.
 Para restaurar as fontes publicadas e recalcular sem token ou nova mineração:
 
 ```bash
@@ -148,8 +150,8 @@ python -m scripts.fontes_s02 restaurar
 python -m pipeline.dataset --config config_s02.yaml
 ```
 
-As três planilhas definitivas em branco estão em `data/amostra_ouro_s02/rotulos/`.
-Cada integrante preenche apenas a própria, independentemente. O piloto anterior
+As três planilhas definitivas e seus manifestos estão em `data/amostra_ouro_s02/rotulos/`.
+Cada avaliação foi declarada individualmente pelos integrantes. O piloto anterior
 é preservado, mas não substitui automaticamente a validação desta nova amostra.
 
 ## Testes

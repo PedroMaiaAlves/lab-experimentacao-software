@@ -1,4 +1,6 @@
 import json
+import hashlib
+from pathlib import Path
 
 import pandas as pd
 import pytest
@@ -135,6 +137,24 @@ def test_tres_copias_da_mesma_avaliacao_nao_passam_por_independentes(avaliadas):
         fechamento.validar_avaliacoes(ouro)
 
 
+def test_v3_vincula_implementacao_e_preserva_avaliacao_registrada(avaliadas, tmp_path):
+    cfg, amostra, ouro = avaliadas
+    cfg["heuristica_release"]["versao"] = "v3"
+    artigo = tmp_path / "tabelas"
+    artigo.mkdir()
+    resultado = fechamento.consolidar_validacao(cfg, amostra, ouro, artigo, "adjudicacao_IA")
+    registro = ouro / "avaliacao_v3.manifest.json"
+    manifesto = json.loads(registro.read_text(encoding="utf-8"))
+    assert resultado["qualificada"]
+    fonte = (Path(fechamento.__file__).parents[1] / "metricas/cfr.py").read_text(encoding="utf-8")
+    assert manifesto["implementacao_sha256"] == hashlib.sha256(fonte.encode("utf-8")).hexdigest()
+    assert manifesto["implementacao_formato"] == "utf-8-lf"
+    manifesto["implementacao_sha256"] = "outra-implementacao"
+    registro.write_text(json.dumps(manifesto), encoding="utf-8")
+    with pytest.raises(ValueError, match="não sobrescreva uma avaliação"):
+        fechamento.consolidar_validacao(cfg, amostra, ouro, artigo, "adjudicacao_IA")
+
+
 def test_planilha_editada_depois_da_declaracao_nao_e_validada(avaliadas):
     cfg, amostra, ouro = avaliadas
     (ouro / "rotulos/rotulos_C.xlsx").write_bytes(b"outra avaliacao")
@@ -159,6 +179,29 @@ def test_cli_distingue_preparacao_de_fechamento_qualificado(execucao, monkeypatc
     assert fechamento.main(args) == (1 if modo == "f1_baixo" else 0)
     estado = json.loads((ouro / "fechamento.json").read_text(encoding="utf-8"))
     assert estado["concluido"] == (modo == "aprovada")
+    assert estado["validacao_concluida"] == estado["concluido"]
+    assert not estado["entrega_completa"]
+    assert any("300 projetos sem tipo" in p for p in estado["pendencias_entrega"])
     if modo == "aprovada":
         assert fechamento.main(args[:-1]) == 0
         assert json.loads((ouro / "fechamento.json").read_text(encoding="utf-8"))["concluido"]
+
+
+def test_cli_com_classificacao_complementar_fecha_entrega_completa(execucao, monkeypatch, tmp_path):
+    cfg, amostra, ouro = execucao
+    monkeypatch.setattr(fechamento, "carregar_config", lambda p: cfg)
+    monkeypatch.setattr(fechamento, "gerar_tabelas", lambda args: None)
+    monkeypatch.setattr(fechamento, "gerar_dataset", lambda *args, **kwargs: {
+        "repositorios": 300, "amostra_sha256": sha256(amostra), "dataset_sha256": "fixture",
+        "consenso_utilizado": True, "repositorios_sem_tipo": 0, "totais": {"cfr_b_indisponiveis": 11}})
+    monkeypatch.setattr(fechamento, "consolidar_validacao", lambda *args, **kwargs: {
+        "qualificada": True, "consenso_concluido": True, "pendencias": []})
+    args = ["--amostra", str(amostra), "--ouro", str(ouro), "--artigo", str(tmp_path / "tabelas"),
+            "--validar-avaliacoes", "--complementar", str(tmp_path / "complementar")]
+    assert fechamento.main(args) == 0
+    estado = json.loads((ouro / "fechamento.json").read_text(encoding="utf-8"))
+    assert estado["concluido"]
+    assert estado["validacao_concluida"]
+    assert estado["entrega_completa"]
+    assert estado["projetos_sem_tipo"] == 0
+    assert estado["pendencias_entrega"] == []

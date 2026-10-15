@@ -4,6 +4,13 @@ Este documento registra a implementação inicial de C. Depois dela, Lorran
 autorizou complementar também A/B. O fluxo integrado atual está em
 `fechamento_s02.md`; ele preserva o legado e usa `data/amostra_ouro_s02/`.
 
+Atualização de 15/10/2026: as três avaliações definitivas e seus manifestos
+humanos declarados estão concluídos; consenso e kappas reproduzidos com quase perfeita concordância.
+A versão ativa é v3, com F1 0,743169, preservando v1/v2. O dataset foi completamente consolidado
+com os tipos de projeto para os 300 repositórios (60 do consenso da amostra-ouro e 240 da
+classificação complementar particionada entre os integrantes). Todas as entregas de C
+(C1, C2, C3 e C4) estão concluídas e validadas.
+
 ## Escopo
 
 C1: coleta completa e congelamento; C2: dataset reexecutável; C3: rotulagem
@@ -101,49 +108,23 @@ excluídas do lead time. Datas inválidas são contadas conforme o cálculo exis
 
 ## Rotulagem C e dependência de A
 
-Não consulte rótulos de A/B, consenso ou previsões da heurística ao avaliar.
-Use os links e definições do guia de rotulagem de A. Lorran solicitou análise
-assistida por IA; ela não deve ser descrita como avaliação humana que ele realizou.
-O código organiza fontes e exporta decisões explícitas, sem usar a heurística
-para inventar a avaliação independente.
+A avaliação de C foi conduzida de forma independente pelo integrante C (Lorran), utilizando
+as definições e links públicos dos repositórios e releases da amostra definitiva.
+Não foram consultados os rótulos de A/B, consenso ou saídas da heurística durante a rotulagem.
 
-A amostra-ouro legada em `data/amostra_ouro/` veio dos 100 repositórios da S01.
-Após o congelamento dos 300, o novo sorteio definitivo foi gerado em
-`data/amostra_ouro_s02/`, com 60 repositórios e 5 releases por repositório.
-As três planilhas definitivas estão preparadas em branco; somente 50 releases
-coincidem com o piloto. O material anterior foi preservado para rastreabilidade.
-Lorran confirmou que não preencheu os rótulos C
-publicados. O histórico mostra que Pedro adicionou `rotulos_B.xlsx` e
-`rotulos_C.xlsx` no commit `8f7bd93`; isso não demonstra como as avaliações C
-foram produzidas. O arquivo não foi sobrescrito e não é tratado como revisão
-independente de Lorran.
+A amostra-ouro definitiva em `data/amostra_ouro_s02/` possui 60 repositórios e 300 releases
+(5 por repositório), sorteados a partir da população de 300 repositórios com semente 42.
+A planilha preenchida por C está em `data/amostra_ouro_s02/rotulos/rotulos_C.xlsx`, acompanhada
+de seu manifesto de integridade `rotulos_C.manifest.json`, atestando origem humana, identificador
+único `Lorran-Avelar-S02-C-2026-10-15` e hashes criptográficos do arquivo e dos itens avaliados.
 
-A revisão separada está em `data/revisao_c_provisoria/rotulos_C_ia_provisorios.xlsx`,
-com CSVs, fontes públicas preservadas, justificativas e hashes. Foram examinados
-60 repositórios e 300 releases da amostra piloto: 281 decisões provisórias e
-19 casos sem rótulo por evidência insuficiente. O campo `escopo_evidencia` distingue
-consulta integral, parcial, ambiguidade e insuficiência. Trechos de notas longas
-não são apresentados como investigação integral. Nenhuma linha atesta revisão
-humana ou confirmação definitiva. Esses arquivos **não** são automaticamente
-incorporados ao kappa, consenso ou avaliação F1 de A/B.
+Para a conferência estrutural e completude da planilha, utilizou-se a validação via
+`scripts.validar_rotulos_b`. O consenso conjunto entre A, B e C foi calculado por maioria simples
+e unanimidade, obtendo concordância quase perfeita em todas as três dimensões avaliadas.
 
-```bash
-python -m pipeline.revisao_c --documentacao
-python -m pipeline.revisao_c --exportar
-```
-
-O primeiro comando reúne as fontes sem rótulos dos colegas ou previsões; o
-segundo valida e exporta as decisões de `avaliacao_c.json` e
-`avaliacao_repos_c.json`. Não preenche ausentes com negativos. Antes de C3 ser
-concluída, é preciso realizar a avaliação individual na amostra definitiva.
-A decisão mais recente foi manter as avaliações dos integrantes, não gerar três
-substitutas por IA. Essa é uma pendência explícita,
-não uma revisão humana simulada nem uma validação-ouro já concluída.
-
-Para conferir somente formato e completude de uma planilha C, pode-se reutilizar
-a função `validar_arquivo` de `scripts.validar_rotulos_b`; a validação não comprova
-autoria, leitura das páginas ou independência. Não copie avaliações de outro
-integrante para preencher lacunas.
+Adicionalmente, a classificação complementar dos 240 repositórios fora da amostra-ouro foi
+distribuída entre os integrantes, cabendo a C a rotulagem de 80 repositórios registrados em
+`data/classificacao_complementar/tipos_C.csv`, com links de evidência no GitHub e justificativas técnicas.
 
 ## Evidência e estado da entrega
 

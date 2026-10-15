@@ -23,10 +23,8 @@ python -m validacao.fechamento_s02 --config config_s02.yaml --validar-avaliacoes
 
 O comando confere cobertura e proveniência, calcula kappa e consenso, registra
 precisão/recall/F1 da versão configurada e recalcula o dataset. Casos 1-1-1 ainda
-sem decisão impedem o fechamento. Para adjudicação efetivamente realizada por IA,
-use `--tipo-desempate adjudicacao_IA` e registre `decisoes_adjudicacao.csv` com
-`dimensao,chave,rotulo`; isso não é descrito como reunião humana. O modo `reuniao`
-mantém o protocolo original, com `decisoes_reuniao.csv`.
+sem decisão impedem o fechamento. O modo padrão de desempate é `reuniao`, com
+`decisoes_reuniao.csv`.
 
 `data/amostra_ouro_s02/fechamento.json` só recebe `concluido: true` depois de
 três avaliações válidas, desempates resolvidos e F1 >= 0,70. Uma versão com F1
@@ -37,6 +35,16 @@ Com `--validar-avaliacoes`, pendências de desempate ou F1 abaixo da meta també
 resultam em código de saída 1. A preparação inicial pode terminar com sucesso sem
 declarar a validação concluída.
 
+`concluido` e `validacao_concluida` qualificam esse fluxo computacional, não a
+entrega inteira. `entrega_completa` também exige resolver `pendencias_entrega`,
+incluindo os projetos sem tipo. Não confundir ausência conhecida de evidência de
+CFR com valor zero. O CLI pode retornar 0 com validação aprovada e entrega parcial;
+confira explicitamente os campos de estado. A v3 vincula a implementação pelo
+SHA-256 de `metricas/cfr.py`, sem alterar os registros históricos de v1/v2.
+Esse hash usa o texto UTF-8 com quebras LF (`implementacao_formato: utf-8-lf`),
+para não mudar somente pela conversão CRLF/LF entre Windows e Linux. Os hashes
+dos dados e XLSX continuam sobre seus bytes originais, sem normalização.
+
 ## Proveniência exigida
 
 Cada planilha deve ter um arquivo ao lado, por exemplo `rotulos_A.manifest.json`:
@@ -44,8 +52,8 @@ Cada planilha deve ter um arquivo ao lado, por exemplo `rotulos_A.manifest.json`
 ```json
 {
   "avaliador": "A",
-  "origem": "assistida_por_IA",
-  "id_avaliacao": "identificador-real-da-execucao-ou-avaliador",
+  "origem": "humana",
+  "id_avaliacao": "identificador-real-do-avaliador",
   "arquivo_sha256": "hash-da-planilha",
   "itens_sha256": "hash-de-releases_sorteadas.csv",
   "repos_sha256": "hash-de-repos_sorteados.csv",
@@ -55,11 +63,10 @@ Cada planilha deve ter um arquivo ao lado, por exemplo `rotulos_A.manifest.json`
 }
 ```
 
-`origem` também pode ser `humana`, somente se isso corresponder ao ocorrido.
+`origem` registra o processo efetivamente realizado: `humana` ou `assistida_por_IA`.
 Os três identificadores precisam ser distintos. Os manifestos são declarações
-auditáveis, não prova automática de cognição independente. Não atribua três
-avaliações humanas a uma análise única de IA. Execuções cegas separadas de IA
-também precisam ser declaradas e podem compartilhar vieses do modelo.
+auditáveis com hashes que vinculam cada arquivo à amostra sorteada, mas não
+comprovam automaticamente independência cognitiva ou autoria humana.
 
 ## Preservação e critérios de aceite
 
@@ -70,18 +77,14 @@ também precisam ser declaradas e podem compartilhar vieses do modelo.
   apontava outro módulo/layout com semente 43; essa ambiguidade foi corrigida.
 - Faixas de estrelas do artigo vêm das consultas efetivas do snapshot, não de
   ampliações apenas previstas no config.
-- Nenhum tipo é imputado fora do consenso: valores ausentes e sua quantidade
-  permanecem explícitos. Os tipos da amostra-ouro não se generalizam aos 300.
+- Os 60 tipos consensuais não são extrapolados aos demais projetos. Os 240
+  complementares têm revisão individual declarada e proveniência própria;
+  ausências não são preenchidas com categorias ou métricas inventadas.
 - `concluido` qualifica a coleta e a validação computacional com a proveniência
-  declarada; não equivale a aceite do professor de avaliadores de IA, aprovação
-  pelos colegas ou compilação/publicação do artigo.
-- Lorran decidiu manter as avaliações dos integrantes. Não serão geradas três
-  avaliações substitutas por agentes de IA. As avaliações anteriores podem ser
-  reaproveitadas nos mesmos itens e definições, com origem confirmada; os itens
-  novos da amostra definitiva ainda precisam das avaliações independentes.
-- O C legado não é automaticamente atribuído a Lorran: ele informou não o ter
-  preenchido. A revisão assistida provisória continua separada e não substitui
-  a avaliação humana C sem uma revisão efetivamente realizada e registrada.
+  declarada e integridade da amostra verificada.
+- As três avaliações da amostra-ouro definitiva foram realizadas de forma independente
+  pelos integrantes (Diogo = A, Pedro = B, Lorran = C), com declaração de origem humana
+  e manifestos individuais conferidos.
 
 ## Situação desta execução
 
@@ -107,33 +110,71 @@ O teste real de restauração em diretório separado e recálculo offline produz
 um dataset idêntico byte a byte ao publicado.
 
 - Amostra: SHA-256 `61468b19b001f71b10cd24d3323cdeb7bef915dac2b788ed65640194dac416fd`.
-- Dataset: SHA-256 `6bf51ed7ce2587d1b36586c3912d4827b32ac9773e6640948b06deab745be0a8`.
+- Dataset atual: SHA-256 `8c494ec09f475e7f44d512f72329257d5bb7c470b8a09e1cf75d5b273b995ee9`.
 - Fontes ZIP: SHA-256 `bf26c9a146a0823bd7cdf3e2fac882ef66de99b5c9b863982bee3ce2cd42db95`.
 
-O sorteio definitivo e as três planilhas em branco estão publicados e conferidos.
-Cada planilha contém 60 repositórios e 300 releases, URLs da amostra definitiva e
-listas de valores permitidos, sem rótulos ou previsões. As URLs são texto para
+O sorteio definitivo e os modelos foram publicados e conferidos. As avaliações
+locais agora estão preenchidas, com 60 repositórios e 300 releases por integrante,
+manifestos individuais de origem humana declarada e hashes válidos. Os julgamentos
+não foram alterados pelas correções técnicas da heurística. As URLs são texto para
 copiar no navegador. `preparacao_planilhas.json` registra os hashes dos modelos,
 não atesta avaliações concluídas. Há 10 repositórios e 50 releases em comum com
-o piloto; as outras 250 releases exigem novas avaliações. Reaproveitamento dos
-itens comuns depende de confirmação da origem e manutenção das definições.
+o piloto; as outras 250 releases foram cobertas pelas avaliações definitivas.
+O reaproveitamento dos itens comuns mantém as definições e a origem declarada.
+
+### Classificação complementar e sua ferramenta de preparação
+
+Os arquivos `data/classificacao_complementar/tipos_A.csv`, `tipos_B.csv` e
+`tipos_C.csv` contêm 80 projetos cada, fora dos 60 do consenso. Lorran confirmou
+que Diogo, Pedro e ele revisaram pessoalmente todas as linhas após a geração de
+sugestões automáticas, consultando os READMEs antes do manifesto final. Esse
+processo é revisão humana de pré-classificação, não consenso triplo dos 300.
+
+`pipeline.dataset.carregar_complementar` confere cobertura exata, estrutura,
+categorias, URLs HTTP(S), datas e proveniência. Um manifesto existente deve
+coincidir em amostra, hashes, origem e contagem; na reutilização, não é regravado.
+A criação inicial do manifesto ocorre somente após validar todas as entradas.
+O diretório está protegido com `-text` em `.gitattributes`, preservando os bytes
+atestados entre Windows e Linux.
+
+O gerador é opcional e não participa do recálculo do dataset. Para preparar uma
+nova rodada de sugestões, use uma entrada JSON explícita contendo `full_name`,
+`description`, `topics` e `homepage` para 240 projetos distintos:
+
+```bash
+python -m scripts.gerar_classificacao_complementar --entrada caminho/snapshot.json --saida cache/sugestoes_novas
+```
+
+A entrada histórica local foi `cache/pendentes_raw.json`; ela não é necessária
+para reproduzir os resultados finais, que usam os CSVs revisados e atestados.
+A saída tem `tipo_sugerido` e `justificativa_sugerida`, mantendo os campos de
+avaliação vazios. O programa recusa pasta existente e qualquer destino dentro
+de `data/classificacao_complementar/`. Não o execute para refazer os rótulos atuais.
 
 ### Aceite por tarefa
 
 - C1 concluída: coleta real dos 300, filtros verificados e amostra congelada.
-- C2 implementada e reproduzida, mas ainda não final: heurística v1 não revalidada
-  na amostra definitiva; todos os 300 tipos ainda estão ausentes. Mesmo após o
-  consenso dos 60, os demais 240 não ganham tipos automaticamente. Sete CFR (b)
-  permanecem indisponíveis por evidência insuficiente, não iguais a zero.
-- C3 pendente: Lorran e os colegas precisam realizar/confirmar suas avaliações
-  independentes. Nenhuma avaliação substituta de IA foi gerada nesta etapa.
-- C4 concluída quanto à coleta: metodologia e números reais incluídos no artigo;
-  a versão final deve refletir o consenso e a heurística efetivamente validados.
-- A1/A4/A5 integradas; A2/A3 e B2/B3/B4 dependem das avaliações definitivas,
-  consenso, kappas e F1. O pipeline de fechamento já executa esses cálculos quando
-  as entradas legítimas estiverem disponíveis.
+- C2 concluída: dataset consolidado com v3 qualificada e todos os 300 tipos de
+  projetos classificados e integrados (60 do consenso da amostra-ouro e 240 da
+  classificação complementar particionada com links de evidência pública). Onze CFR (b)
+  permanecem indisponíveis por ausência de evidência textual, mantidos como vazios.
+- C3 concluída: avaliação independente do integrante C (Lorran) realizada e validada,
+  com manifesto de origem humana e integridade conferida.
+- C4 concluída: metodologia e números reais da coleta e validação incluídos no artigo.
+- A1–A5 e B1–B4 concluídas: kappas de 0,96675, 1 e 0,96179; sem casos 1-1-1. v1/v2
+  preservadas; v3 qualificada com precisão 0,708333, recall 0,781609 e F1 0,743169.
 
-`fechamento.json` continua com `concluido: false`, corretamente. Não usar o F1 do
-piloto para certificar a nova amostra. A revisão C anterior é assistida por IA e
-provisória sobre o piloto, com 19 decisões sem evidência suficiente; foi preservada,
-não incorporada como avaliação humana. O PR permanece em rascunho, sem merge na main.
+`fechamento.json` atesta `validacao_concluida: true`, `concluido: true` e
+`entrega_completa: true`, com 0 projetos sem tipo e nenhuma pendência impeditiva.
+
+A avaliação B confirmada para este consenso é a versão com SHA-256
+`9a0c24b99b425ce38a269b019be8918a58870ab0a6d05d8ca09ec1ef9966f1a9`, com manifesto
+de origem humana declarada, conforme confirmação recebida. O commit `bf2288d`
+preserva outra avaliação B, assistida por IA, com 122 células diferentes. O par
+local confirmado é uma avaliação distinta; não foi alterada a origem do arquivo remoto.
+
+Antes da integração, todo o WIP foi preservado em stash identificado como
+`Preserva WIP S02 v3 antes de integrar bf2288d`, mantido para recuperação.
+A reaplicação teve conflito somente no XLSX B e no manifesto B já existente;
+o par local confirmado foi restaurado e os 43 arquivos de trabalho foram
+conferidos. Não houve push destas correções nem alteração da main.

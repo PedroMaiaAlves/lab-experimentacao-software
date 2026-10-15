@@ -2,6 +2,7 @@
 import argparse
 import csv
 from datetime import datetime, timezone
+import hashlib
 import json
 from pathlib import Path
 import re
@@ -131,6 +132,10 @@ def consolidar_validacao(cfg, amostra, ouro, artigo, tipo_desempate):
     if not re.fullmatch(r"[A-Za-z0-9_.-]+", versao):
         raise ValueError("versão da heurística inválida para o registro de artefatos")
     registro = {"regras": cfg["heuristica_release"], "consenso_sha256": sha256(ouro / "consenso_releases.csv")}
+    if versao == "v3":
+        fonte = (Path(__file__).parents[1] / "metricas/cfr.py").read_text(encoding="utf-8")
+        registro["implementacao_sha256"] = hashlib.sha256(fonte.encode("utf-8")).hexdigest()
+        registro["implementacao_formato"] = "utf-8-lf"
     caminho_registro = ouro / f"avaliacao_{versao}.manifest.json"
     if caminho_registro.exists() and json.loads(caminho_registro.read_text(encoding="utf-8")) != registro:
         raise ValueError("não sobrescreva uma avaliação com regras ou consenso diferentes; registre nova versão")
@@ -176,6 +181,8 @@ def main(argv=None):
     ap.add_argument("--artigo", default="docs/artigo/tabelas")
     ap.add_argument("--validar-avaliacoes", action="store_true")
     ap.add_argument("--tipo-desempate", choices=["reuniao", "adjudicacao_IA"], default="reuniao")
+    ap.add_argument("--complementar", default="data/classificacao_complementar",
+                    help="Pasta com classificação complementar dos 240 projetos fora da amostra-ouro")
     a = ap.parse_args(argv)
     cfg = carregar_config(a.config)
     ouro, artigo = Path(a.ouro), Path(a.artigo)
@@ -194,7 +201,7 @@ def main(argv=None):
         validacao = consolidar_validacao(cfg, a.amostra, ouro, artigo, tipo_desempate)
         consenso = ouro / "consenso_repos.csv" if validacao["consenso_concluido"] else None
         relatar_validacao(ouro, artigo, validacao)
-    resumo = gerar_dataset(cfg, a.amostra, consenso, a.dataset, artigo / "coleta_s02.tex")
+    resumo = gerar_dataset(cfg, a.amostra, consenso, a.dataset, artigo / "coleta_s02.tex", a.complementar)
     gerar_tabelas(["--config", a.config, "--dados", cfg["saida"]["dir_dados"], "--saida", str(artigo)])
     estado = {"atualizado_em": datetime.now(timezone.utc).isoformat(),
               "coleta_congelada": resumo["repositorios"], "amostra_sha256": resumo["amostra_sha256"],
@@ -202,6 +209,13 @@ def main(argv=None):
               "consenso_utilizado": resumo["consenso_utilizado"],
               "tipo_desempate": tipo_desempate,
               "validacao": validacao, "concluido": validacao["qualificada"], "pendencias": validacao["pendencias"]}
+    sem_tipo = resumo.get("repositorios_sem_tipo", resumo["repositorios"])
+    pendencias_entrega = list(validacao["pendencias"])
+    if sem_tipo:
+        pendencias_entrega.append(f"classificar {sem_tipo} projetos sem tipo e importar a classificação com proveniência")
+    estado.update(validacao_concluida=validacao["qualificada"], entrega_completa=not pendencias_entrega,
+                  projetos_sem_tipo=sem_tipo, cfr_b_indisponiveis=resumo.get("cfr_b_indisponiveis"),
+                  pendencias_entrega=pendencias_entrega)
     _salvar_json_atomico(ouro / "fechamento.json", estado)
     print(json.dumps(estado, ensure_ascii=False, indent=2))
     return 0 if not verificar or estado["concluido"] else 1

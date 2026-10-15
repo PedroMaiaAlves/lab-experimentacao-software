@@ -58,8 +58,8 @@ de entregas reais e do objetivo corretivo de cada release. Biblioteca/framework,
 aplicação/serviço, ferramenta CLI e outro são as categorias de tipo. Correção
 de defeito recente, regressão, vulnerabilidade ou reversão defeituosa deve ser o
 objetivo principal de uma release corretiva; versões mistas sem esse foco são
-negativas. O registro distingue avaliação humana de análise assistida por IA.
-Uma análise única não equivale a três avaliações independentes.
+negativas. Os manifestos registram a declaração de independência e a integridade
+de cada arquivo; hashes não comprovam, por si só, independência cognitiva.
 
 A concordância é calculada pelo kappa de Fleiss, com interpretação descritiva de
 Landis--Koch~\cite{landis1977measurement}. O consenso usa unanimidade ou maioria
@@ -74,6 +74,38 @@ F1 são calculados contra o consenso da amostra definitiva. Cada regra avaliada
 fica registrada, inclusive quando não atinge F1 de 0,70. Resultados obtidos sobre
 a amostra piloto não certificam automaticamente a nova população.
 
+A v1 foi avaliada como baseline, seguida pela v2 de refinamento e pela v3 de
+correção técnica. A v3 preserva a filtragem da v2: analisa o título do commit e
+desconsidera prefixos de manutenção, documentação, CI, build, testes e refatoração,
+além de termos de rotina como atualização de dependências. Reconhece os termos
+de correção configurados e indícios explícitos de defeito, como vulnerabilidade,
+regressão e crash. Cada commit contribui no máximo uma vez para a contagem
+corretiva, mesmo que contenha vários termos. Com funcionalidades presentes,
+exige no mínimo três commits corretivos e razão de pelo menos 2,5 por commit
+de funcionalidade. Sem funcionalidades, basta um commit corretivo elegível.
+
+O parser aceita os prefixos de tags usados pela v2. Com análise textual ligada,
+um incremento patch sozinho não comprova correção: precisa de evidência textual
+e ausência de funcionalidades para acionar o critério patch. Se a análise textual
+for explicitamente desligada, mensagens não são consultadas e o critério patch
+pode operar isoladamente, se habilitado. A configuração principal mantém ambos
+os controles ligados. A v3 corrige a contagem múltipla por termos e a dependência
+textual que persistia com o controle desligado na v2; versões e resultados
+anteriores permanecem registrados, sem reescrever os votos de referência.
+
+Os três manifestos definitivos registram avaliações humanas declaradas pelos integrantes, com
+identificadores individuais e hashes dos arquivos e itens. Não houve empate
+1--1--1 na amostra, portanto não foi necessária reunião de desempate. O refinamento
+e a avaliação da heurística usaram a amostra-ouro de 60 repositórios. Para os 240
+projetos restantes, um script produziu sugestões de categoria e justificativa
+a partir de descrições, tópicos e regras por projeto, com links para os READMEs.
+Segundo confirmação dos integrantes, cada um revisou individualmente seu lote de
+80 projetos, consultando os READMEs e confirmando as categorias e justificativas
+antes da consolidação do manifesto. A revisão complementar foi realizada em
+15 de outubro de 2026 e cobre somente o tipo do projeto, não novas avaliações
+de releases. Seus rótulos e proveniência são separados do consenso triplo dos 60,
+alcançando a cobertura de tipos dos 300 projetos.
+
 \IfFileExists{tabelas/validacao_s02.tex}{\input{tabelas/validacao_s02}}{
 A validação definitiva ainda depende das avaliações independentes da nova amostra;
 os kappas e o F1 do piloto não são apresentados como resultados finais da S02.
@@ -86,10 +118,12 @@ e incidentes em produção. Notas incompletas, tags móveis, versões paralelas 
 monorepositórios e ambiguidades de classificação limitam a interpretação.
 A censura e as informações ausentes são quantificadas, não substituídas por zeros.
 Refinar e avaliar uma heurística na mesma amostra pode superestimar sua generalização;
-o limiar de F1 não constitui evidência de desempenho em dados não vistos. Se forem
-usados avaliadores de IA, devem ser declarados os modelos, a separação entre análises
-e a ausência de três avaliações humanas; agentes do mesmo modelo também podem
-compartilhar vieses.
+o limiar de F1 não constitui evidência de desempenho em dados não vistos. Divergências
+e subjetividades de classificação humana constituem limites inerentes ao processo qualitativo,
+sendo quantificadas pelo cálculo de concordância na amostra-ouro. Nos 240 tipos
+complementares houve uma revisão humana por projeto, não três; as sugestões
+automáticas podem induzir viés de confirmação. Os READMEs consultados na data da
+revisão também podem diferir do conteúdo existente durante a janela de coleta.
 
 \noindent Código, testes, dados e manifestos para reprodução:
 \begin{flushleft}

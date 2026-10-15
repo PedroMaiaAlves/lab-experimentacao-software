@@ -2,10 +2,11 @@
 import argparse
 from collections import defaultdict
 import csv
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 import json
 import logging
 from pathlib import Path
+from urllib.parse import urlsplit
 
 from metricas.cfr import calcular_cfr_a, calcular_cfr_b, contar_conclusoes, explicar_release_corretiva
 from metricas.deployment_frequency import deployment_frequency
@@ -129,6 +130,120 @@ def carregar_rotulos(caminho, amostra_sha256):
     return mapa
 
 
+CATEGORIAS_VALIDAS = frozenset({"biblioteca/framework", "aplicação/serviço", "ferramenta CLI", "outro"})
+CAMPOS_COMPLEMENTARES = ("full_name", "tipo_projeto", "evidencia_url", "justificativa",
+                        "avaliador", "origem", "data_avaliacao")
+
+
+def carregar_complementar(pasta, amostra_sha256, repos_amostra, chaves_consenso):
+    """Carrega e valida a classificação complementar dos projetos fora do consenso."""
+    if pasta is None:
+        return {}, None
+    pasta = Path(pasta)
+    if not pasta.is_dir():
+        return {}, None
+
+    arquivos = sorted(pasta.glob("tipos_*.csv"))
+    if not arquivos:
+        return {}, None
+
+    caminho_manifesto = pasta / "manifesto.json"
+    hashes_arquivos = {arq.name: sha256(arq) for arq in arquivos}
+
+    manifesto = None
+    if caminho_manifesto.is_file():
+        manifesto = json.loads(caminho_manifesto.read_text(encoding="utf-8"))
+        if not isinstance(manifesto, dict):
+            raise ValueError("manifesto complementar deve ser um objeto JSON")
+        if manifesto.get("amostra_sha256") != amostra_sha256:
+            raise ValueError("classificação complementar sem vínculo com a amostra congelada")
+        if manifesto.get("arquivos_sha256") != hashes_arquivos:
+            raise ValueError("arquivos de classificação complementar alterados depois do manifesto")
+
+    esperados_complementares = set(repos_amostra) - set(chaves_consenso)
+    coletados = {}
+    origens = set()
+
+    for arq in arquivos:
+        with arq.open(encoding="utf-8-sig", newline="") as f:
+            leitor = csv.DictReader(f)
+            cabecalho = leitor.fieldnames or []
+            if len(cabecalho) != len(set(cabecalho)) or not set(CAMPOS_COMPLEMENTARES) <= set(cabecalho):
+                raise ValueError(f"{arq.name}: cabeçalho incompleto ou duplicado")
+            for numero, linha in enumerate(leitor, 2):
+                if None in linha or any(valor is None for valor in linha.values()):
+                    raise ValueError(f"{arq.name}, linha {numero}: quantidade de campos divergente do cabeçalho")
+                linha = {campo: linha[campo].strip() for campo in CAMPOS_COMPLEMENTARES}
+                for campo, valor in linha.items():
+                    if not valor:
+                        raise ValueError(f"{arq.name}, linha {numero}: {campo} ausente")
+                fn = linha["full_name"]
+                if fn in coletados:
+                    raise ValueError(f"{arq.name}: repositório duplicado: {fn}")
+                if fn in chaves_consenso:
+                    raise ValueError(f"{arq.name}: sobreposição com amostra de consenso: {fn}")
+                if fn not in esperados_complementares:
+                    raise ValueError(f"{arq.name}: repositório não pertence aos pendentes da amostra: {fn}")
+
+                cat = linha["tipo_projeto"]
+                if cat not in CATEGORIAS_VALIDAS:
+                    raise ValueError(f"{arq.name} ({fn}): tipo_projeto inválido: {cat!r}")
+
+                evid = linha["evidencia_url"]
+                try:
+                    url = urlsplit(evid)
+                    valida = (url.scheme in {"http", "https"} and bool(url.hostname)
+                              and not url.username and not url.password
+                              and not any(c.isspace() for c in evid))
+                    url.port
+                except ValueError:
+                    valida = False
+                if not valida:
+                    raise ValueError(f"{arq.name} ({fn}): evidencia_url deve ser uma URL HTTP(S) válida")
+
+                orig = linha["origem"]
+                if orig not in {"humana", "assistida_por_IA"}:
+                    raise ValueError(f"{arq.name} ({fn}): origem inválida: {orig!r}")
+                origens.add(orig)
+
+                data_av = linha["data_avaliacao"]
+                try:
+                    if date.fromisoformat(data_av).isoformat() != data_av:
+                        raise ValueError("formato diferente de AAAA-MM-DD")
+                except ValueError:
+                    raise ValueError(f"{arq.name} ({fn}): data_avaliacao inválida: {data_av!r}") from None
+
+                coletados[fn] = {
+                    "full_name": fn,
+                    "tipo_projeto": cat,
+                    "releases_sao_entregas": None,
+                    "evidencia_url": evid,
+                    "justificativa": linha["justificativa"],
+                    "avaliador": linha["avaliador"],
+                    "origem": orig,
+                    "data_avaliacao": data_av,
+                    "origem_classificacao": "complementar_individual",
+                }
+
+    if set(coletados) != esperados_complementares:
+        faltantes = len(esperados_complementares - set(coletados))
+        raise ValueError(f"classificação complementar incompleta; faltam {faltantes} repositórios")
+
+    origem_geral = "mista" if len(origens) > 1 else (next(iter(origens)) if origens else "humana")
+    registro_manifesto = {
+        "amostra_sha256": amostra_sha256,
+        "repositorios": len(coletados),
+        "origem": origem_geral,
+        "arquivos_sha256": hashes_arquivos,
+    }
+    if manifesto is None:
+        _salvar_json_atomico(caminho_manifesto, registro_manifesto)
+    elif (type(manifesto.get("repositorios")) is not int or
+          any(manifesto.get(campo) != valor for campo, valor in registro_manifesto.items())):
+        raise ValueError("metadados do manifesto complementar divergem da classificação; não sobrescreva o registro")
+    return coletados, registro_manifesto
+
+
 def grupos_csv(caminho, nomes):
     with Path(caminho).open(encoding="utf-8", newline="") as arquivo:
         leitor = csv.DictReader(arquivo)
@@ -143,7 +258,7 @@ def grupos_csv(caminho, nomes):
             raise ValueError(f"{caminho}: registros fora da ordem da amostra ou inesperados")
 
 
-def gerar_dataset(cfg, amostra, consenso, saida, relato=None):
+def gerar_dataset(cfg, amostra, consenso, saida, relato=None, complementar=None):
     amostra, saida = Path(amostra), Path(saida)
     manifesto = json.loads(amostra.with_suffix(".manifest.json").read_text(encoding="utf-8"))
     if manifesto["amostra_sha256"] != sha256(amostra):
@@ -159,6 +274,10 @@ def gerar_dataset(cfg, amostra, consenso, saida, relato=None):
     if len(repos) != manifesto["repositorios"] or len({r["full_name"] for r in repos}) != len(repos):
         raise ValueError("amostra duplicada ou divergente do manifesto")
     rotulos = carregar_rotulos(consenso, manifesto["amostra_sha256"])
+    rotulos_comp, manifesto_comp = carregar_complementar(
+        complementar, manifesto["amostra_sha256"], [r["full_name"] for r in repos], set(rotulos)
+    )
+    todos_rotulos = {**rotulos, **rotulos_comp}
     linhas = []
     nomes = [repo["full_name"] for repo in repos]
     arquivos = ["releases.csv", "comparacoes_releases.csv", "commits_entre_releases.csv", "tags.csv"]
@@ -172,13 +291,15 @@ def gerar_dataset(cfg, amostra, consenso, saida, relato=None):
             raise ValueError(f"workflow runs incompletos: {repo['full_name']}")
         fontes[0] = normalizar_releases(fontes[0])
         linhas.append(calcular_linha(repo, *fontes, origem_runs["workflow_runs"], cfg,
-                                    rotulos.get(repo["full_name"]), origem_runs["saturated_intervals"]))
+                                    todos_rotulos.get(repo["full_name"]), origem_runs["saturated_intervals"]))
     salvar_csv(saida, CAMPOS, linhas)
     resumo = {"gerado_em": datetime.now(timezone.utc).isoformat(), "repositorios": len(linhas),
               "dataset_sha256": sha256(saida), "amostra_sha256": sha256(amostra),
               "heuristica": cfg["heuristica_release"],
               "consenso_sha256": sha256(consenso) if rotulos else None,
               "consenso_utilizado": bool(rotulos),
+              "complementar_sha256": manifesto_comp.get("arquivos_sha256") if manifesto_comp else None,
+              "complementar_utilizado": bool(rotulos_comp),
               "repositorios_sem_tipo": sum(not r["rotulo_disponivel"] for r in linhas),
               "cfr_b_indisponiveis": sum(not r["cfr_b_disponivel"] for r in linhas),
               "totais": {c: sum(r[c] for r in linhas) for c in (
@@ -203,10 +324,15 @@ def gerar_relato(resumo, cfg, caminho):
              f"com data inválida. No CFR (b), {totais['releases_censuradas']} releases foram censuradas. "
              f"Dos {totais['episodios_total']} episódios de falha, {totais['episodios_censurados']} "
              f"permaneceram censurados. Foram registrados {totais['intervalos_saturados']} intervalos "
-             f"saturados (incluindo subdivisões), com {totais['intervalos_incompletos']} incompletos. "
-             f"O tipo do projeto permanece ausente em {resumo['repositorios_sem_tipo']} repositórios "
-             f"não cobertos pelo consenso, sem imputação automática. O CFR (b) ficou indisponível "
-             f"em {resumo['cfr_b_indisponiveis']} repositórios por evidência textual insuficiente.\n")
+             f"saturados (incluindo subdivisões), com {totais['intervalos_incompletos']} incompletos. ")
+    if resumo.get("repositorios_sem_tipo", 0) > 0:
+        texto += (f"O tipo do projeto permanece ausente em {resumo['repositorios_sem_tipo']} repositórios "
+                  f"não cobertos pelo consenso, sem imputação automática. ")
+    else:
+        texto += ("Todos os 300 repositórios possuem classificação de tipo de projeto atribuída "
+                  "(60 pela amostra-ouro com consenso triplo e 240 por avaliação complementar documentada). ")
+    texto += (f"O CFR (b) ficou indisponível em {resumo['cfr_b_indisponiveis']} repositórios "
+              f"por evidência textual insuficiente.\n")
     caminho = Path(caminho)
     caminho.parent.mkdir(parents=True, exist_ok=True)
     caminho.write_text(texto, encoding="utf-8")
@@ -217,11 +343,14 @@ def main(argv=None):
     parser.add_argument("--config", default="config_s02.yaml")
     parser.add_argument("--amostra", default="data/amostra_final.csv")
     parser.add_argument("--consenso", default="data/amostra_ouro_s02/consenso_repos.csv")
+    parser.add_argument("--complementar", default="data/classificacao_complementar",
+                        help="Pasta com arquivos tipos_*.csv da classificação complementar")
     parser.add_argument("--saida", default="data/dataset.csv")
     parser.add_argument("--relato", default="docs/artigo/tabelas/coleta_s02.tex")
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.INFO)
-    resumo = gerar_dataset(carregar_config(args.config), args.amostra, args.consenso, args.saida, args.relato)
+    resumo = gerar_dataset(carregar_config(args.config), args.amostra, args.consenso,
+                           args.saida, args.relato, args.complementar)
     print(json.dumps(resumo, ensure_ascii=False, indent=2))
 
 

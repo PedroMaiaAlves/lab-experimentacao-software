@@ -38,12 +38,20 @@ e censurados. O CFR de CI considera falhas sobre falhas mais sucessos. O CFR por
 release observa uma corretiva posterior em até sete dias, excluindo do denominador
 as releases das sete últimas datas da janela. Episódios de recuperação não
 encerrados são mantidos como censurados. Valores ausentes não são substituídos
-por zero, nem tipos de projeto são inferidos automaticamente fora do consenso.
+por zero. Tipos complementares só são incorporados com revisão declarada e
+proveniência separada do consenso.
 O consenso somente é incorporado quando seu manifesto confirma a origem da
 rotulagem e o vínculo, por hashes, com a amostra congelada. O consenso legado
-sem esse vínculo não é considerado validação da nova coleta. A revisão de C
-é assistida por IA e provisória sobre a amostra anterior; não equivale a uma
-avaliação humana nem substitui o fechamento da amostra-ouro pelos três avaliadores.
+do piloto sem esse vínculo não é considerado validação da nova coleta. A avaliação
+definitiva da amostra-ouro utiliza as três planilhas com origem humana declarada
+pelos integrantes, rigorosamente vinculadas à população congelada. O consenso
+fornece o tipo e a validação para os 60 projetos sorteados, e a classificação
+complementar dos outros 240 projetos foi revisada pelos integrantes após sugestões
+automáticas e integrada com proveniência e links de evidência, totalizando os 300
+projetos com tipo. O importador verifica cobertura exata, categorias, campos
+obrigatórios, formato das URLs e datas, hashes e metadados do manifesto. Ele não
+comprova automaticamente a realização da revisão humana ou a disponibilidade das
+páginas externas. Arquivos já atestados não são sobrescritos durante a conferência.
 
 \IfFileExists{tabelas/coleta_s02.tex}{\input{tabelas/coleta_s02}}{
 A coleta completa e seus números ainda aguardam o fechamento dos artefatos da S02.
