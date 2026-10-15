@@ -1,0 +1,2124 @@
+{
+  "congelado_em": "2026-10-15T05:15:05.844237+00:00",
+  "repositorios": 300,
+  "amostra_sha256": "61468b19b001f71b10cd24d3323cdeb7bef915dac2b788ed65640194dac416fd",
+  "janela_inicio": "2025-10-01",
+  "janela_fim": "2026-09-30",
+  "semente": 42,
+  "diretorio_dados": "C:\\Users\\BlueTape\\Documents\\lab-experimentacao-software\\Lab03\\data\\s02",
+  "fontes_sha256": {
+    "candidatos.csv": "199ebc7368be609b7d456ac99b9185c712e732e6ba1fb07652f2d23dd1cf390a",
+    "funil.csv": "6a5545893043e00865ea67be944e811a5b135afd3b27226a558daff8e423ace8",
+    "descartes.csv": "5bed803fa902c7efca875e7383a5eaa14455aee18eeee984b9a429a819a7c573",
+    "metadados.csv": "61468b19b001f71b10cd24d3323cdeb7bef915dac2b788ed65640194dac416fd",
+    "releases.csv": "1c594101a2edb06b904b65277312a265b148c78137ed930153f945a9be49e2de",
+    "tags.csv": "add00964eb49dfaf6f2a85879765b7d96c9d97c4ed3a7fef682dc1c150db0e25",
+    "comparacoes_releases.csv": "278d7bd8ef031f08bcf8d8605e0056098b535805dd0ba8be6f174587084b09f4",
+    "commits_entre_releases.csv": "90222ad53c135df81d9b9eda9a2764117648da6ff8e24f1edd20e9d9061a059e",
+    "lead_time.csv": "9efd8367a13ee912b5b71db7741dd25a0c40e99dc8f008baae1f6b7938fd9757",
+    "deployment_frequency.csv": "f9fdc3966cedbae0243bf0041be5964a59518b37f3cbdc30c8c105d1daf4c932",
+    "runs_saturados.csv": "8a975d8b3341a5b5c72faf047abba62d1772fd14b2def6b4aa71b7bdfa0fd068"
+  },
+  "fontes_repos_sha256": {
+    "typetools/checker-framework": {
+      "releases.csv": "11991f30ca6f31573fa925f4fdc535f01690fe2cdfe7bee3cc6af72efe1a84da",
+      "comparacoes_releases.csv": "a3c92e84f3278b0492e86ebef58c4dc0c54001d22fc8a234b4f806a1cf7a2f39",
+      "commits_entre_releases.csv": "cde42ec1ec05330070774f8bfa5d42abc037b2263ba15e4edd923e1d83a5a727",
+      "tags.csv": "0c04972c974dea6c1f1ae008dba46371d43a9d723d06ce6252eab5ddb287b645",
+      "workflow_runs/typetools__checker-framework.json": "7d2d3f8fe3c4922a0db8b8ff3fabffe166a5b06583549305f465e46052bf1282"
+    },
+    "dubzzz/fast-check": {
+      "releases.csv": "1546f46b5b14d0128accc8c74097d067a207c8cfae32d3456dc051a22f462d58",
+      "comparacoes_releases.csv": "36fffa9e6e1378732b8dbc4981db241f94abcb3d740b8a608df8096b699fd411",
+      "commits_entre_releases.csv": "584c91909e8c9f92d8dc297d71b31492e0679857b2289ce6c9909e4333d8e258",
+      "tags.csv": "c7f3b976bccfbf5648af41447db6311ad6d25f6c1c0fa4685e4f3dc23068b2db",
+      "workflow_runs/dubzzz__fast-check.json": "6637c106e3a5e82a97a1ee18f4d2442f3c62af01c2a5eb750cdee5b2a5776ebf"
+    },
+    "guohuiyuan/go-music-dl": {
+      "releases.csv": "efb259e5bea948aa2d3101e4f2c89f298d1b6fd4f79c66a3e801eb867c51397a",
+      "comparacoes_releases.csv": "1eb74fd6e10c8a63ed9b5eadcf0d666e0eb379a1260dcca753877265b2b353f9",
+      "commits_entre_releases.csv": "3fa6a5afa6b1ffc7f382ce6ec9b296608dfe6bd09127599c40bfdbe610c8155d",
+      "tags.csv": "cca82a5dbcce5bafb46f97683c363acb4aa890dda31a0e3edc038cb9e65e6efb",
+      "workflow_runs/guohuiyuan__go-music-dl.json": "f516b00e5b01fd58bd07795d8258e58fd1da22a4d8cb263e86b1e3458b9e8daa"
+    },
+    "googleapis/go-genai": {
+      "releases.csv": "a6ab501c1ee030da429e0765dd6efb1ad50480bb319dec9d682cb4e5a780e206",
+      "comparacoes_releases.csv": "ef8e239b20562b87e9358157138dadd55214ab360f4657233250041d478cfbbe",
+      "commits_entre_releases.csv": "7760825ea4213dfd4bc0cfd2202d74d66587a5ae8798fe07520637721448d8cd",
+      "tags.csv": "12598f6d0c03c33a32a94a8dbcb2666abba7150bcfc4ab3e01ae8cda3cc09a7b",
+      "workflow_runs/googleapis__go-genai.json": "87feb2d12b202f0fa8cbe61799531a53430da6c9d86a90015a7269cd50071af6"
+    },
+    "byJoey/ech-wk": {
+      "releases.csv": "e6a03e4119c5c925f1e1d50dbfc1201e0932fea7624496405e52b62e533bbcaf",
+      "comparacoes_releases.csv": "4513c2aa550b65ed32bab63f8e5b85bc1b1b662887ab53232fcba5fc9ece3d38",
+      "commits_entre_releases.csv": "ca301f4c2d6925cad76b984204a16112f39e79fd124994a3c935cda1392991ab",
+      "tags.csv": "d8b733db299d7e6fe42abe8ffd8ba37ee98873d369df7e03445f5a5fbd1824c9",
+      "workflow_runs/byJoey__ech-wk.json": "65b9b4c8887016c63caebe20a07faa4221f7d65ff61aaeee10f9a777d8ae38d8"
+    },
+    "carvel-dev/ytt": {
+      "releases.csv": "d6b83e646ecbfb5c38f69f2096e8931400fba354d10da50759612d2e14228930",
+      "comparacoes_releases.csv": "e1e2cb07094231947fbf2e86a51eda0a708c367f9b3ae3135982bd29e64c41d1",
+      "commits_entre_releases.csv": "0fb0660f8152ff17517d5a04da43ba9c89e9fad89b856043d44dddd6ab3bde9b",
+      "tags.csv": "6e3192c3f79b326690d98957505626a29b34c5cc39c98a8055b40f7160f226a0",
+      "workflow_runs/carvel-dev__ytt.json": "b0f708ce214b6afaa0f1dd660c975fe1af9967aaeb74a9ca102673c5fc11bbf6"
+    },
+    "nholthaus/units": {
+      "releases.csv": "730d599062f24efef3cd342649b5c36dddd19550ea5be7ffb8ceb06f7bdfdba8",
+      "comparacoes_releases.csv": "ba3a67d76a36efa9b9a7dc4f69cea10c013a10dc6fca6d3163a041f8049ad7fe",
+      "commits_entre_releases.csv": "b2aa4904b63d5257188d4c016d673548fbfc725a0becdd0813b5e7d3045152b9",
+      "tags.csv": "91587be60d458ad8495c0d1e0eae2e5f7c6aec81e70f87c697396a7bd6d79fac",
+      "workflow_runs/nholthaus__units.json": "e53c74ce859ff35218cfe2c94754c0ec24eaf37c39996679d31b36eeca43f5ff"
+    },
+    "Sync-in/server": {
+      "releases.csv": "c8ae3d102c7dec2f48dec4a59172836e6ae3065b72ca54a3b78331f236024fd6",
+      "comparacoes_releases.csv": "16d5a63eb6f90755518323a815a6a1b6ea861ff27b7e6cb24a19a5413c3be4cf",
+      "commits_entre_releases.csv": "c1a3a1c394dbdc9c61152b1a64d8ed7eaafc78d8c332dbccecb6d7a216772366",
+      "tags.csv": "b890ee9196ba41ca6be73b9aae05707505d0f5a353e15337cabb67922a1fb69f",
+      "workflow_runs/Sync-in__server.json": "34a62397bf42f7e7417f688a17084f8b604e37ce3810ffc1fd6512ad07b9576a"
+    },
+    "borgbase/vorta": {
+      "releases.csv": "7d9bdb051275084c7e43bad65528aa1b74b56533c063c36a90535133429e6c67",
+      "comparacoes_releases.csv": "e6f29446fbb3353f068cfe2ccc839e41e46d059cd699e6da4da41d0ef2ebec06",
+      "commits_entre_releases.csv": "179be43fb9029f0f41999723fc7f67af1236ff547eab72e8ca4ad15b2a3be7f4",
+      "tags.csv": "fe3d8c5aa4ac4eee491a38677137ad7525e4d9c3b45bab83582c6d13d913496d",
+      "workflow_runs/borgbase__vorta.json": "523cd7d0d87d4d819469a5b4dba03cb4b559123fa5fc2e7e865222457e6417d8"
+    },
+    "microsoft/retina": {
+      "releases.csv": "638e6c25a5d3aaa2d450910641ff6d999a9d9f42f95cc8f1c38d80388c9cea7b",
+      "comparacoes_releases.csv": "a58b8bb81d061b534200c09f4892558cb3a03a04756e0285cab36b0f4e093aa0",
+      "commits_entre_releases.csv": "cead64c9a7fed247d93fbb874e76739c45b26b441577da91f3f26a48bbfe9b6e",
+      "tags.csv": "83957e5feadad009a3e7edb92a9a8fa6ae96cc0f86c029c40d956aef3a14f29f",
+      "workflow_runs/microsoft__retina.json": "ca9f4d65fcf15021578da42c4fb5e1147df72148ff27c701dcf0a45bbf6a3fc9"
+    },
+    "mongodb/kingfisher": {
+      "releases.csv": "752f6c447c0827098be860cba3aae64ab39ea26499f88662e553dd7e1f7f0f0f",
+      "comparacoes_releases.csv": "b3adc1818475f720c9de344135e8428a66673769b8272e7aebac90a5f351f54f",
+      "commits_entre_releases.csv": "8ec914f16de6c49e6dbb8773fedb35efe3dcff0b6391fff3f854f23f54b19390",
+      "tags.csv": "74a5ff915fa6b00d3413ffba74aac238b31ae668690b755fefe9af09034c124b",
+      "workflow_runs/mongodb__kingfisher.json": "09229cd58542dc7ee791ae5f6f7959c1453c576e6eeb3e387c5c3123b49a4b33"
+    },
+    "lxml/lxml": {
+      "releases.csv": "d98445e258820d01b839a84d7bf0042501c72c76c0d5ed14ab702110c93083a1",
+      "comparacoes_releases.csv": "4896f1c0b9ca83bcf8bafb6d64d2bd7bd6080536651a0dbc6c75f34d992c2c1c",
+      "commits_entre_releases.csv": "18021ac28666555be3952859939c3457e2a5525a1aacfed2a51ef0993b77a629",
+      "tags.csv": "4a60f51603710a2cb93a4feb3f80f22aa1a4bc7ec11e12060b93ef60a0a40571",
+      "workflow_runs/lxml__lxml.json": "e77d8d666134c1bbf0dddf4741a9535fdee9608f096388a61f511f3cc8969f1c"
+    },
+    "caezium/burrow": {
+      "releases.csv": "78cef9572e6a75485c9eb01a024068c80b78575c49e8f8a9f76b67d899aaf460",
+      "comparacoes_releases.csv": "b035eaba2cc4983d1438c99a88acf94a43de48b3425af492966b9d93acc80106",
+      "commits_entre_releases.csv": "9544094f3922dad8a9c2407e9c09f729700e5443570a4dfcd79b008a7a540855",
+      "tags.csv": "a4c3e9e1665625073a1d15b6c3c46d417266e93e4fc19d46e503003a4df976b1",
+      "workflow_runs/caezium__burrow.json": "57390cd7e2902ccc866285dc93f31ce01165a1ed4e76f882b14c27739113f42d"
+    },
+    "waditu/czsc": {
+      "releases.csv": "f0ab80797cc4c7f9738000cd35dd0340ade0e211258fba634d2061a96448b12b",
+      "comparacoes_releases.csv": "87a6885d049a7835d00c76364f0a41b58b8362b3cb760b9697761486ea69f400",
+      "commits_entre_releases.csv": "cd3ad166ceff222e6fe5676bc1b29f1c79327227510383ca610b7267ff6d892b",
+      "tags.csv": "e13717aa162192e9b96ff254edc60017cc15df0e2df1e6f22e9efdfd51a9a6fc",
+      "workflow_runs/waditu__czsc.json": "7c1d91485a30b59f3b416d3360ade3badb176cb9960fe08c066fc1141ad619f8"
+    },
+    "privatenumber/pkgroll": {
+      "releases.csv": "ce7964bcba16031da5355451de1b885f01e05c2a3b605cc5efbb6723f011e621",
+      "comparacoes_releases.csv": "6beac85c04c3dc0aac53bb816d399509b2ffb5723fc4891295dd4ac53a0615c9",
+      "commits_entre_releases.csv": "edff8b360ae91926b032603c09cd1f9122a68ec3b89c9aa1096623a45523a160",
+      "tags.csv": "39e2ef07c3dec36e8965cb5f006f5b3e458b02f40081a4638be5e14aec1c3f41",
+      "workflow_runs/privatenumber__pkgroll.json": "617c2188e777f094ca340bc70521fd4e657a040152f645562fbcdc45a9d7e486"
+    },
+    "openai-php/laravel": {
+      "releases.csv": "0dc653ae281fb033bbf542398bc416a5b1bf0538082408a397e64f24eda1ac61",
+      "comparacoes_releases.csv": "b303e59c71218ad9273eabfba1025e930a1aeb0b02dbf04cda0fa81158dc9f3c",
+      "commits_entre_releases.csv": "5e22440412679eb9b4bc7336ea28fdc9c44f296c9414ab3710dcb4ecd0bd4157",
+      "tags.csv": "0764ab10be023e4be2f438d270ebb415a8ef8f664baefde8dc636b5ea1b7e832",
+      "workflow_runs/openai-php__laravel.json": "a2ef56a802e2078035e714d932b21c8abdfe00321feac5fa81d07bcb582d76b2"
+    },
+    "AnswerDotAI/fastcore": {
+      "releases.csv": "d861155deac29483b97a4e8572cccdcddba5bfb132a63d8977cb9a305cd79ae2",
+      "comparacoes_releases.csv": "e7ef7863d6c4fe7dc9e787f54b8a749f8cca4d561207d020f43956929b7a9c69",
+      "commits_entre_releases.csv": "2d9c27f5eb377c91c8f654d38474f31f139a6226ade1768a146c95d9395c5493",
+      "tags.csv": "441f9c3e723f8833af3bacaeb15323b52215dfdb58a864e830e7b5df2086180e",
+      "workflow_runs/AnswerDotAI__fastcore.json": "554004c4670af398fcc408720895fa4eaff37157818976bd4c0938e25916afcf"
+    },
+    "lumeland/lume": {
+      "releases.csv": "e1337083fe6bbf3559a78c9e78909b72423879aa6136ea6ba3ee5d7f73e3bb47",
+      "comparacoes_releases.csv": "ff1f3236ba13b5cfbb352f46533ec12cd4662945786a936f8e940f8780df1428",
+      "commits_entre_releases.csv": "996a8dd7a56257d7dc5d71ddca15e5519cb541ace4c3aebd1c0ab75a7388ad34",
+      "tags.csv": "b058a7857e6be185c9852150f19811d891fc3ab6315df15f63549b0f2f03c412",
+      "workflow_runs/lumeland__lume.json": "8c79eefe842d018961088cf7425760ffda5e76c3000414a8d90a41f11de8e61b"
+    },
+    "tikv/pd": {
+      "releases.csv": "fa4ce360dba887256867bd1ffb506a27b5e10e93ee97656af028120f6d11b367",
+      "comparacoes_releases.csv": "c247c0e3ba1c9e053e20138e35e212bdd6c725b2a3b57ba868a24c714b62975a",
+      "commits_entre_releases.csv": "e38ed922340ea798d0dec1bcfebf04cd725fb4a1f8fada0d4e59c6cf4001cc62",
+      "tags.csv": "e385f887d3ac8f44020800dc4c9b11cd64ff427608ce1a97cecc4ce96310643f",
+      "workflow_runs/tikv__pd.json": "c10fe2ee3da3278af408c412295a242de78a3ee2fbb09ede4e9b98e60718ac1c"
+    },
+    "GetStream/stream-chat-flutter": {
+      "releases.csv": "1bb1aac1889f15beed766c764c89be327155175a5173af5facb63a3e2be94443",
+      "comparacoes_releases.csv": "086a020be51e164c8e54130ad3754b5d4a89258c22188044dff6da602c75a141",
+      "commits_entre_releases.csv": "b8361e462ac80dcb53a4ba9bd367a3538e7fa12956c76f246d24448dbcee62f7",
+      "tags.csv": "f69bfa94c56ba5efa9618e7410ffa865ac20514e266b0d419249c5a1fc9102ff",
+      "workflow_runs/GetStream__stream-chat-flutter.json": "8924ad30848f3ec05128911d7ead18e83022ef39fc091640e58b6ee35e6f8cf8"
+    },
+    "subzeroid/instagrapi": {
+      "releases.csv": "943d22e5f2c81394afd3b688584cf1a8866ae36342ad5ce296ce9c1b35d3c9df",
+      "comparacoes_releases.csv": "6c94b8fe5772e5be5c7586c535799656742e830eae7b81c46eb1579baed396c2",
+      "commits_entre_releases.csv": "c36b3ae678b0655e2fd5c2f5593f5642bbacd208a0ceab4a7e59749407d50edb",
+      "tags.csv": "1b1cef070f35a6ba791e0a44893414d46b4d5d8e3daf54ee57431f0073e8784d",
+      "workflow_runs/subzeroid__instagrapi.json": "ddf0c00d5c20ebbeed77d258a67f061bb0ca2d18211d6dcccd4c29ed04baee25"
+    },
+    "VisActor/VChart": {
+      "releases.csv": "2030d315555aae21e8040daba307c6e2433fceb4009480e3e18d73c0269d924e",
+      "comparacoes_releases.csv": "d26a6ee38913f9194635a512e4e871b7549c80de61e1912b517877c07111dab4",
+      "commits_entre_releases.csv": "914703e0dd989afac23f82a5730f7cee3641e1b627a48c99211250d842685284",
+      "tags.csv": "73bba7a2bf28d19fd52c53721789a63023b47a7eeeb9103173d8f3a8c8f299c4",
+      "workflow_runs/VisActor__VChart.json": "94b1e3c180a86c223c3208c60303c971ea60aa43f73e3d3d889f8d4741319da8"
+    },
+    "cloudflare/kumo": {
+      "releases.csv": "fcdc8f640a4867ed67a433370ec0363c80b505a4258c54f9f590ab70fac97d8a",
+      "comparacoes_releases.csv": "7977d3fe6386325eab80b64e4fd8163fc986356a5333a5a997ade03ad87a5a37",
+      "commits_entre_releases.csv": "fa918156dc80ac1eb7ff0e9d00ae46e42ac5105aef01753f6081b4bd6bb087ba",
+      "tags.csv": "6ade60540762d78f51b65d656ea975d89f018b10c11a65b2b50616ddcf22698e",
+      "workflow_runs/cloudflare__kumo.json": "dc008a72fe8b2178cb8bdd87f5d35400086078a9e49080c5b1e82f25558dc60d"
+    },
+    "lk-geimfari/mimesis": {
+      "releases.csv": "9eeda101c40de38c32c70c6faca10634332d61b118ee7d9ad6b1fa4f91a10aa6",
+      "comparacoes_releases.csv": "fc28fbaac3071f8fe40c59311f5f40298daa83896c33db6f9fe6691b8115b0d2",
+      "commits_entre_releases.csv": "67c9296fec2c8bd62a638052ed3c5330cb651047c9a33dbb41c971e13e296e16",
+      "tags.csv": "31dd913f14239f5d5f7e4883dab7b2859e0f829e48318aacd374b6d1ff3efa14",
+      "workflow_runs/lk-geimfari__mimesis.json": "801ab178e687db8f8dfe887f83b27e4e8fa0f1f42c4ce37cdb4cec73f02e9ca4"
+    },
+    "TimelyDataflow/timely-dataflow": {
+      "releases.csv": "f3dc38d534f39859b558258cd16a0aa1503870de8bdada691d1c5fa58161d589",
+      "comparacoes_releases.csv": "bb3779f55ea4a5f187ed7823f230e463346b367a2a2bd8768c02f9689641651e",
+      "commits_entre_releases.csv": "d340b3a85aa3287833207f04d367c65257c32efd6f0fc66faf58c67399ac3f5a",
+      "tags.csv": "f12b02ca35c5f4f015c4046ca048740db3026ab22a9bed78869adfc724ddb431",
+      "workflow_runs/TimelyDataflow__timely-dataflow.json": "7fe3fb6e8419e7837071ee275ab59bc1b05d79b800d6de3933285edc6dee62bf"
+    },
+    "peetzweg/opendisplay": {
+      "releases.csv": "f7cb7caba3de34e0ee4c74d25d116c77ddaa6440a0c451cb3e9b570e6a989c29",
+      "comparacoes_releases.csv": "9a3ad008bd71b2c7e96bed162d44c1b66c04bf067f248764e70dea05f2d4022a",
+      "commits_entre_releases.csv": "155c2293c02438735f609c5a65e95cef6783f38e982af48d075721bb0f89a7de",
+      "tags.csv": "a02a18436f54918fb8f17d137882f46c7c96a22d6f65d8f257c7831d601c98fc",
+      "workflow_runs/peetzweg__opendisplay.json": "068f461820dfeac556e99cdb1539d5cc797990d4a2b27d0e0034aa303aef4c3c"
+    },
+    "puma/puma": {
+      "releases.csv": "dc9df9e40733615f0f90fb86affaab36e4efb9728fedcea99090e286cb06fc3a",
+      "comparacoes_releases.csv": "6246166a8315e7377a32c49e2e2690fcd16a2c12aa16a16c73421da311adb82e",
+      "commits_entre_releases.csv": "dffb380f828bf72c0ccf47f2dd56459ffab4f301d84fc375a1897fb0f22d330a",
+      "tags.csv": "f090752038a6786545b1d7962f60229305242a8000d39780f8538f6f53f8fabe",
+      "workflow_runs/puma__puma.json": "afd6e86028790c76f64b3559229f461feeeed93115f5bd1f096841d38a8c07c7"
+    },
+    "qiutongxue/oba-live-tool": {
+      "releases.csv": "f4d4056e70502283080fde25a688b9deaac5c8626cbb55102735071201c8f61f",
+      "comparacoes_releases.csv": "5348b248529e57d9934431a4b4adbcfbdff0c7a0cb43aad5c8b5236776945f57",
+      "commits_entre_releases.csv": "d9fd612e99aa696b1b8acd3e7f5b027f36825a2ddcd392ad648404810cf91f7c",
+      "tags.csv": "c9ee2b8af27bfd213f6701a3c6f76b8b8d31215bdeb9a36d030ab8e1daabdbbe",
+      "workflow_runs/qiutongxue__oba-live-tool.json": "b95f3a06ba76be73f13b5022459f78ae6d884af8e6992eb31794a23531f56cce"
+    },
+    "alainm23/planify": {
+      "releases.csv": "191eb65097caa0fc9005b3c4622643a513c88dc3c6d4cc1c1cdd2d06015d56de",
+      "comparacoes_releases.csv": "18ffe067c9f2c2ce42d0929cdc34b71c657a7bb05df08e38dbf1088535870787",
+      "commits_entre_releases.csv": "535c03f1032067f16a28258f17042f6ccec791b83ab08d5fde69a833fa6a704e",
+      "tags.csv": "26cb347ba6b9c0f292aeb358eb40612dfcca9d5495e3113d301e13c05d3d2eff",
+      "workflow_runs/alainm23__planify.json": "ba884a1abba9e082a0343c892882677854b390197dcc17f645eadaf1d734c452"
+    },
+    "apache/struts": {
+      "releases.csv": "b5f6e95b2a52b955c777ca093d46d4b5b9897010067e27cd22695554e61c4759",
+      "comparacoes_releases.csv": "ab7f20eb3a8579c7ee74a5b1ccf16de8e59409a71ed63134d536aa0305222adc",
+      "commits_entre_releases.csv": "f6ba20369a0381ba41e1ca3561d1a6e74d033e0effc9c3f7c6a65bdf5dd98852",
+      "tags.csv": "83ea7e7b9287407613ff9a1d0138ace767473c32b2e63dbed4e92d5ff93b36c8",
+      "workflow_runs/apache__struts.json": "a20c6acbc74c4ed5c346658cc22142b35f92c8ee48df9c8baebd5238dc35d6c2"
+    },
+    "JetBrains/intellij-platform-gradle-plugin": {
+      "releases.csv": "8a0cf3cc129cb02cf4d880b0058659ec89d07a0f985deafe791476758b15cc46",
+      "comparacoes_releases.csv": "815624782b36b5b65f9f8e51c7dc21095f8a0780cdd32e1853e7ec4f1fe2d97b",
+      "commits_entre_releases.csv": "ec56b40d8a3bfee413f15a135703924cc6af8d4d2325f5937e7089864d66e582",
+      "tags.csv": "96026869786ceb28faf134368c4449bf0638a004a64ed749f4f86b95fa62f4e2",
+      "workflow_runs/JetBrains__intellij-platform-gradle-plugin.json": "139f4770391ae38fc731f7cc6f6f0e3d896b2bf4694a1352dd790fd2cb3aa645"
+    },
+    "unicode-org/icu4x": {
+      "releases.csv": "8b53b208495ab2855866d3d9becb65ceeb578f5dc9f068658c0e18a7a6e153d0",
+      "comparacoes_releases.csv": "79be7ced47428609f021aadcec53b950eb41ba52d7692629d2a8434227372197",
+      "commits_entre_releases.csv": "5734ef4278375ae447b64b664634e1edec3b1e7361a1cf1ae9c2ff28b361ea26",
+      "tags.csv": "bc418cd126ca419aa22fd15ff3ba91c20f8d0207d9288a8e1d54029d8842f502",
+      "workflow_runs/unicode-org__icu4x.json": "735ca8e274f43fe9c473e82b5bad2f6842b893d4698e19a2e1571d390f8f9002"
+    },
+    "vllm-project/llm-compressor": {
+      "releases.csv": "ee37c20c619eb8aaea2a77f874dc3ea5281544b72ac016c7ced5585735a0e447",
+      "comparacoes_releases.csv": "a7ad1dc5a14be48e0551a0c1425a34e0932f805ae7479c1457433b85f9bb9704",
+      "commits_entre_releases.csv": "6b2663a8585142da4a77b6d91919fc7e08cb4c9a30f40e1463012a1b8c86a4be",
+      "tags.csv": "f04d85b441876f1082af017f37a54d1dcdd5afacba5a4ee3ac8b429e454ce84d",
+      "workflow_runs/vllm-project__llm-compressor.json": "7d2f755cb14d8c011ec98dc74974ca6d13024306c025b382aaa0efbeb3ff1d38"
+    },
+    "moraroy/NonSteamLaunchers-On-Steam-Deck": {
+      "releases.csv": "51356f9f8070de8c1c13475d72c26e4ebc386faea9e35ca1f0c94027d51cfcc7",
+      "comparacoes_releases.csv": "697e692ac8d1a24f9d8f3a237929c2dc8fe6651830e33d0ab907b3dc49e057e2",
+      "commits_entre_releases.csv": "7d53d1e2105b5d22f2cc55addb85eab8b69c56d7355bf19dd2ffc7d798acd987",
+      "tags.csv": "64ea91601fbc4ddc20c1d8d47eb635c715c89c5fe56a2d2e34adcc71aac346e5",
+      "workflow_runs/moraroy__NonSteamLaunchers-On-Steam-Deck.json": "6a9ba27ae2ce7591b97c1fb32be8aef041c89401ab561e7d69a7e84d2f6a281e"
+    },
+    "apache/servicecomb-java-chassis": {
+      "releases.csv": "380ec139a0d0eea0d5ccbb4731db383923293e8cc8b33ae8ffc6e02c1969c1a3",
+      "comparacoes_releases.csv": "5db83feaf691618c37fc390b59bcbb2dabb2e8f7bb695fc3e85c0166260ae0a1",
+      "commits_entre_releases.csv": "d14c1b24da629c8bd7f336fb90da36cb6f39e8a64067268581c0bd70cb9e4e4a",
+      "tags.csv": "038772a048a296913dbcd56c425c589fc50ba42ddcb076a08e3266be01524dd0",
+      "workflow_runs/apache__servicecomb-java-chassis.json": "ba49537838945ada9248bb7b2db4f7375cb0857bc29194f3677c95b5352ebf18"
+    },
+    "pierrecomputer/pierre": {
+      "releases.csv": "5d106d90b2374d2f68dad84b0f8caa26138f95df7074d8a27cfc1e8448b30729",
+      "comparacoes_releases.csv": "d1d88422d3c76a58551a4c470f3faaf62810edad48da67c43c9415b0d83e0386",
+      "commits_entre_releases.csv": "1c82d7a7ca2c7ff32a9869641c7de41f999d847c7b41a35600ae0e7125d27b9d",
+      "tags.csv": "e0717b08cfcea24edb14f0908029187b2860e2879a5cdaaf12d1ccbf06ea11fd",
+      "workflow_runs/pierrecomputer__pierre.json": "dd89c138e9f3d201926ef092c99d1acae959f144ad103d4ed593ad0c1b3bc934"
+    },
+    "CodeWithCJ/SparkyFitness": {
+      "releases.csv": "9ceebf6d1253638075711a230b5d3dacf8b6b364a6cf93282e680c7d231fc9c0",
+      "comparacoes_releases.csv": "a50c794d04b81a6e7a6841f91cb8e418f3aa19923de8ee5395171153670dfa35",
+      "commits_entre_releases.csv": "c47686ea3f40af9195e3c22f0de6248d9c6728e87f5c81f5fc86a5e0826c4710",
+      "tags.csv": "ab19f59b08bd2268f7768e65417143c4d08c8085340877376fad86b89a44999e",
+      "workflow_runs/CodeWithCJ__SparkyFitness.json": "c9e9c18cecce3d6ea0616dedc4f81be24617b5bd3d8cddce9eef62e2beadc640"
+    },
+    "cypress-io/github-action": {
+      "releases.csv": "5849396759b72e58af4c0713f98028577d7dc23ea7aa4beb36aaee427b30ebb4",
+      "comparacoes_releases.csv": "7157592bb00170f0afda81d0c8ca3e4244719c9a4d4e9f473916996b25f1ad26",
+      "commits_entre_releases.csv": "3a00fa9b8d85e0a7ee3c88f2a01a2c5a57f1e4815e6c86e7635cf68307b54520",
+      "tags.csv": "8875f1c62494dca7542e0a031b68e4b43199f7bed21d0871ece26f21611adc8d",
+      "workflow_runs/cypress-io__github-action.json": "8487dd4ee441354635839710581b292704cf0d99373115e60a01e8659667796c"
+    },
+    "PrismarineJS/mineflayer": {
+      "releases.csv": "cc8dc744835db977ff236024b96bf812583ed6eefbdae2d8f4a1d91cc22b71d8",
+      "comparacoes_releases.csv": "abef87afbf04e3eb5481693442db2007ecfaebfd1b1041396dcb8a8aae099a17",
+      "commits_entre_releases.csv": "3f5eb221769e50c6dfe9cf19df3ebddaa537eff971c3ba5f56f9755cd6546dcd",
+      "tags.csv": "5cc8bd466fe21a85cc1126576a0f953f0409bb9a5c6aaa207696300a53990107",
+      "workflow_runs/PrismarineJS__mineflayer.json": "224729d5b7073331cb80bb03d7222f034ef09bd7a4450146ccb3b8334d600ca2"
+    },
+    "opendatadiscovery/odd-platform": {
+      "releases.csv": "01a8abd7409303d3a785d2d7b75365f378771034ec7880ee1f9988a7f7fce9e0",
+      "comparacoes_releases.csv": "5add9ef9dbe363a59e111cf1b065562fa6eaf3f4a9f95d5e83dfe4dede4ead01",
+      "commits_entre_releases.csv": "61fd19608dbde413cfc3b44bbf31ba8beff248410bfcc886899e1d8c212dfb1e",
+      "tags.csv": "94514cf4aa3dc03159f63278392f19ab56866e6f80e6681cdf6438e21f4ccbb2",
+      "workflow_runs/opendatadiscovery__odd-platform.json": "c0355a778acf4208feac52948d27496d336cf42c557f28f0f8d2003d873ae21b"
+    },
+    "GoogleCloudPlatform/cloud-foundation-toolkit": {
+      "releases.csv": "9e0e9672d4095fab4526190608519953e396f4985fa9e94a351bd8b786063156",
+      "comparacoes_releases.csv": "b9ca0ce4c8e01a88202fefb93da0ca712b8f1ab2579e0e9942768b079af1c13d",
+      "commits_entre_releases.csv": "4e4e36e61bf554ca8b4cfac0cbf9a815b83953ac9dc45a8201fc0ff12625e5c8",
+      "tags.csv": "00ea709d9c346691baa42d371de92de733a8265e7a28cf6737ecb2273c80d47a",
+      "workflow_runs/GoogleCloudPlatform__cloud-foundation-toolkit.json": "62e0d60c4b8d1bd13a48616824e558d1470a522c9f29cc4cedf8cb72cec3f564"
+    },
+    "aeharding/voyager": {
+      "releases.csv": "2fb53594bdb7a2525b2597b068ee2017de58e281440b15343b382298800b5a58",
+      "comparacoes_releases.csv": "0543d52a991108f776533afbafe100531082f590e612a3923b2595b9fa58b4da",
+      "commits_entre_releases.csv": "20b414874a9874564e1fc23d23f149cdf48642537f73ed61d257618e834db597",
+      "tags.csv": "e2dc67f0ba818c230b3eb782c0a5a1c4b2d7ada2f91573cb32f1cb2ff9c2a47a",
+      "workflow_runs/aeharding__voyager.json": "db1589b04c4eb1daaf66ca71e87ff6662c09258bc78f563f1a901f42ad59872b"
+    },
+    "qiz029/dscode": {
+      "releases.csv": "03108392d2a6065fdd75344a03887c26eb6eb87f256df657795e6bc99d43b256",
+      "comparacoes_releases.csv": "cf47214a99c919693220818d81a0238ed0f6d2ecefbd405e1eff8158e98e51b3",
+      "commits_entre_releases.csv": "6b47ec2bc722f27f9d397898da8650c4a772369eba1966dbc5c9d98be3a58147",
+      "tags.csv": "b001d13758f0954f413f7922057daab098281ee6d08977769c9aa94e09477784",
+      "workflow_runs/qiz029__dscode.json": "59d867b04bad4dcff53a05116c9e154a13c55a4e118a09114fccdfa1060654eb"
+    },
+    "Mithril-mine/libmdbx": {
+      "releases.csv": "647f4743178df1f5c8a0f9a104f92c52e3a14311818ab807dbcfa15138219aad",
+      "comparacoes_releases.csv": "770cbf8f024b6255c571e757125f6041da004611ec18261f1b93e08aa41839a8",
+      "commits_entre_releases.csv": "ae77d09e93814f075afb7b60d8c06c2a89c3edff1f2e117d5aa0f813f2056f7b",
+      "tags.csv": "4a844c9328c421eee20b795323b40f8d508ba3db31a896ab246b4acada84b10f",
+      "workflow_runs/Mithril-mine__libmdbx.json": "071f8d9a50daf7e45c20a9a046219f02a7fff3793209da9bee93e0ce72ba140b"
+    },
+    "kanidm/kanidm": {
+      "releases.csv": "d3315a3040c289976f28d11c82995dd6f75df549324eabd70466843b149990cb",
+      "comparacoes_releases.csv": "6fcab117266e40c446b585fbf1a7014d6da4e7924b4ccae0167a4b8f52c9d7fa",
+      "commits_entre_releases.csv": "3b034aa0b54055e956c54689d31d2e171befca99e0ab915a25edb0d68af434d8",
+      "tags.csv": "3866265794fcd5b63621b375cece4d22d803b9946871481fef3e338390aae518",
+      "workflow_runs/kanidm__kanidm.json": "c6f4f9d0bb618ba9663e4449443e9f5c62addcebff887f109904887fb89976c7"
+    },
+    "wikimedia/wikipedia-ios": {
+      "releases.csv": "710c76f8bd0ed48402903d24c1520d40a348202d5d55c1de008941d32ae2322d",
+      "comparacoes_releases.csv": "fb8bee4bb40ff837a4fcd71c658ddcc39703f811332b6d56c4b8b439ea949e4e",
+      "commits_entre_releases.csv": "a16ac172bee178f84ce52eaeb7cdbbfe6677b7499e97f67af4e77780fdcf54c2",
+      "tags.csv": "aa8676a9f105f819fdabd364a0b9f10b7c845d5478746857cff14f3bce046197",
+      "workflow_runs/wikimedia__wikipedia-ios.json": "1aec29752bfa3a1dd328c7fddb6ee473997e5af435bf64da7d5eba8078164b96"
+    },
+    "yhan-sun/p2wlan": {
+      "releases.csv": "6319ff14cd51a901971ab7d88bbffd905ddb232c1981caee75ee65ec7f5e61ff",
+      "comparacoes_releases.csv": "e46c15478240de4b71e43eb7c4842176a672ce4dc5c04eb3a514a244a797ebbe",
+      "commits_entre_releases.csv": "13f93147ed307c35be2b9f3e2697dd0c81332e24c85e046a4eaa206b75a905a0",
+      "tags.csv": "e6a91cdf117a1a38d33748ba07b56c6608869cff7c8c447f9a6b519e82375773",
+      "workflow_runs/yhan-sun__p2wlan.json": "fa75af4af74dfc3151d1304343bd0114638b46a62f2c1cd1f90f362e05cbc026"
+    },
+    "bitcraze/crazyflie-firmware": {
+      "releases.csv": "c6c30c07dd76f1126d65a10cbae51b0b39898cab8e5b11ca8b96443bb778647a",
+      "comparacoes_releases.csv": "3705e23c49182ea29b09cc91c64850f92d3f7346db7da7a549bed45e974a8ccc",
+      "commits_entre_releases.csv": "5e9817ed6c5b2dae1acf8b058d87dab7528950ad4ef90be93afd8c6d04e07599",
+      "tags.csv": "8079fa43d4764e0f877747d1abc38b695bdeafb4a18ec9e8ffb6506c1f807db9",
+      "workflow_runs/bitcraze__crazyflie-firmware.json": "7cda78eba2c9d7a679b42d7ce0189fc6f9b3c86da6379f227a0be1fd811a0333"
+    },
+    "smapiot/piral": {
+      "releases.csv": "a673fb64b53140812bed7ad158d48e4a8a201ea43ed5dba10f2581edd7a19ca0",
+      "comparacoes_releases.csv": "93a1b69538bc2992de42638cebe797241ef5fc63ef4a95becf10fadced7007da",
+      "commits_entre_releases.csv": "a57c9d45e775d3f174645c0bb5b2d6de3912467221933ed2f33aebfacea8a15a",
+      "tags.csv": "93cfa025e96a1a780621d6e1ad0d918140a812056575768424d4cd2c69dd7eb8",
+      "workflow_runs/smapiot__piral.json": "92710fa667de42e17a89c7559ac624c758cf3f776d4d0fc651dd2b5d1737a21c"
+    },
+    "numba/llvmlite": {
+      "releases.csv": "3e4b76fe46708b0e6349dfe179bece4ae20cd13c11e21c7614eaedb6de2ff6f6",
+      "comparacoes_releases.csv": "bfa650d2591511bfeb3455314e84604fb905500bd8d2fe45c15dffffb0892311",
+      "commits_entre_releases.csv": "cd2c0989420e4239c29f97ef9930e9eef836d823dbde80d3ab6905c1d908a024",
+      "tags.csv": "14c43a7c4496e9a15c31257e288c4d1f02c505cd3fa7ed85ff2e9c265758de60",
+      "workflow_runs/numba__llvmlite.json": "f64fefbf1249266e4e0f3c477c7751d475bc6b832261f7d9eebdcbbbb934b32d"
+    },
+    "puppyone-ai/puppyone": {
+      "releases.csv": "fe4b28a80eefc51f213ea2aba7b9724c117fc8133ab285b4c21db44ee7649796",
+      "comparacoes_releases.csv": "b2af5c2c3b0bd1b72760dcf77220c7c20263f99262a3946f97c4d0509b614290",
+      "commits_entre_releases.csv": "6c3772f40caa9628da054bc705937a20a863af75dcb8ac0d88e8422037d0f849",
+      "tags.csv": "c6a43395d0d0eea1b7678f5c891de2bddc15f05956d81db2f32d0a03aa3447bf",
+      "workflow_runs/puppyone-ai__puppyone.json": "cf7c97ee977db029a7618c6c07deb85ea3709628f875d8d1ad89eecc265fba8c"
+    },
+    "vstorm-co/pydantic-deepagents": {
+      "releases.csv": "2f793481a5c3927c467e57c6124c478b5b215527272946c8d22941867684e2ff",
+      "comparacoes_releases.csv": "0b6de3e768052ff00616e4fa0551df8198a688d643b088bed86949930ba90abd",
+      "commits_entre_releases.csv": "268431203ffd90b8010beee4697100823369c4985dcee35b51b70b6d1c044f96",
+      "tags.csv": "46ac7f752568e481982c8780cd3c51796fd0564f84ca863cac578c96428a6d8b",
+      "workflow_runs/vstorm-co__pydantic-deepagents.json": "8400db2cc4961e1c120dbe448381a8e411566bc7576dd931abb8855cc4f0ae5d"
+    },
+    "s2b-dev/smart-second-brain": {
+      "releases.csv": "fb8c241bead5c61dd4a27311bd77107b87fac1404c0dfbe2b777bc836983c847",
+      "comparacoes_releases.csv": "91ff08605937cb5b1f014dea1147405e0fadb1d712cb7889606fbd3d6f214e2d",
+      "commits_entre_releases.csv": "d9d2811b908cb43104d084caa6b797a7319e910163873ab2cd0f38172629a415",
+      "tags.csv": "951b7a7965fa3b69e721704cc0323844ea7bd6f213044e56d136e84c9770e193",
+      "workflow_runs/s2b-dev__smart-second-brain.json": "943e30329885c9940fe59578d3e5cbdbdd28c1b4ed9c3b29eb87012d3cc2acc7"
+    },
+    "kizuna-ai-lab/sokuji": {
+      "releases.csv": "8cb1a7b3c7621128c3231fff732fab8de19972e78b37b94eb089d4ef3066bf64",
+      "comparacoes_releases.csv": "1edbfb8c4bd44605ddec7bd9f36f84ddb15e86ecfd43510d87b105a6770a9fa9",
+      "commits_entre_releases.csv": "5084322aa814795d4b2dffe730b82716286ac05a5337fc21cf30cca03e030527",
+      "tags.csv": "d33fe050615d9fd6508e3d3fafdd72a5c5ad21c3e06b7e8c0fc331317a68898d",
+      "workflow_runs/kizuna-ai-lab__sokuji.json": "c3c4c2cfffb3828a7432bc9aed607a991164ca9205be9a325efbd184919421db"
+    },
+    "antfu/node-modules-inspector": {
+      "releases.csv": "2bd7ad12f72c81a2c1b3d0f2b242f38e3f30d0de5fb4588334f4e3822e9644af",
+      "comparacoes_releases.csv": "5ac39f2c8782f9d5b39180c5a4ab3caf79f87e116f6950b56de63b4e656d2a20",
+      "commits_entre_releases.csv": "63522d88c06fb9e6a112a8424567ae2f118c0b047477002ba90c77e597f37b3e",
+      "tags.csv": "bea8e9c44cd0fc02cf42125cbcf91e3e01de9928a4ec191f8a03a1529903dd23",
+      "workflow_runs/antfu__node-modules-inspector.json": "53ecbd0f4f85fd3b50b55e77eb25d75bcfa208784a5c67f1a020e87f844a92a1"
+    },
+    "nginx-proxy/docker-gen": {
+      "releases.csv": "aadd694e9055e3ab76762f0db921dd4bdefe6b714f3385d3a8015c538ec4f842",
+      "comparacoes_releases.csv": "2eb6f37cdaef560f37023c86656dd255151031712509ce305062ed3a2dd5059d",
+      "commits_entre_releases.csv": "ca7198cbcb6d5b9a325893d5dc6ba52f81aadacfe96c083ac41ec1cfff40dadc",
+      "tags.csv": "37b80ddaa7fb6041ff8aa74a45f861df71ef7197e1318133a1500ddc75256978",
+      "workflow_runs/nginx-proxy__docker-gen.json": "059eafba4f9a7a758ec2dc4f84a7e3ece46ce605c7aebe241fba44e84e2c92fd"
+    },
+    "a2aproject/a2a-python": {
+      "releases.csv": "f15d5e4aad160570f8b8780fbdc02da99acaf82d46e463ff7192996562311aa4",
+      "comparacoes_releases.csv": "cd9da426c203c2a7d736742d8b9517338fa7bf2d4647127632bd915ac44e7b34",
+      "commits_entre_releases.csv": "fcc52df0d30418990b8373d5817c1c497aa160189ab2d3e9617a002d1d53cf68",
+      "tags.csv": "721605124ed603d67b26321b104b9159622a18fbdff18c7b39561267e9721899",
+      "workflow_runs/a2aproject__a2a-python.json": "719fc2ac6632fc671d31ff97b390398a451cb4fc263af8183e95fd8f64bba578"
+    },
+    "consuldemocracy/consuldemocracy": {
+      "releases.csv": "310302b151c1578c427fa8b896216f9fb15ae1e79c7b0dd45a745d441724623a",
+      "comparacoes_releases.csv": "b6983ca48fb136ce13f2506192f9807e397db8f56e89b4d754ebe8f286f9e609",
+      "commits_entre_releases.csv": "66e745f519ea4bad800fd3e35d33f7109fdbae10b5e789cfba4144323b3c20ef",
+      "tags.csv": "4251c0f04d454ec50980c365de3aa5426cfaa940e49457c9b5e20e65b4b1e60e",
+      "workflow_runs/consuldemocracy__consuldemocracy.json": "819c43b2cff6470dee061743b20bd2c3ee906dcd30615fd0c31de5531f6f7fb5"
+    },
+    "Qiskit/qiskit": {
+      "releases.csv": "1d961f746471f37f877ae47a885a524c2c729ef7c67ad722dc2598c665e2c5bb",
+      "comparacoes_releases.csv": "a6c9d08c31703da739eb698901eec3df6ffbad9bfaf8d3a6f576b560ae206fbb",
+      "commits_entre_releases.csv": "5350ad6a937ce6dfebd92a0d5b1204e2c71864accced076cd17defdce660f46f",
+      "tags.csv": "3862a029cd5f653e5daf2788379b7c5378623cdca7961f61e47ea35de9b49af6",
+      "workflow_runs/Qiskit__qiskit.json": "cea3d56b1a5a575bcb128d426b6d4b28d6c64c53cc6391a59c70fc54711b66e0"
+    },
+    "misaka10032w/Han1meViewer": {
+      "releases.csv": "829513446d7e7c3f34ecaaeb5d08e3efce958c9d0ecc4dc10aca68c4a54064d1",
+      "comparacoes_releases.csv": "18a476a30f6f7a5c78bc70cae7d6e0c68fc605f86a0dd69c3c37333799231f14",
+      "commits_entre_releases.csv": "4e186cf32b7701bb59177c0fe3ec6a36435d470b740bf4d41dbcc1f89929b0f3",
+      "tags.csv": "6b4c8b445225a251b4bec15196e0aa46e3292d95e60614cade426066814eb181",
+      "workflow_runs/misaka10032w__Han1meViewer.json": "576ad099b92fbb9b4f68a17ea3321b511431210757e3e8c6931333a8c0ad443c"
+    },
+    "jindrapetrik/jpexs-decompiler": {
+      "releases.csv": "09a10e6ea6aaf959fdac35e1e4a4ec6f8e6bd6ae9b520ea896dc80ffd5669f4d",
+      "comparacoes_releases.csv": "15178165286231ccbe17f6673a6731a21b4acac7e000492ce8357c019a670b39",
+      "commits_entre_releases.csv": "f4462cbe55db7275ce6080d6826ce7492e0b05ad786ff9d01db6987b0ddaffd8",
+      "tags.csv": "13b821ca52827f510ab99daa10791944e88dd9ad4be72de27d83fbf9f3c65a3d",
+      "workflow_runs/jindrapetrik__jpexs-decompiler.json": "9bd76683ea7fb40f8c0832230b67bd762725638daa6df5148f0a6e8456bb419c"
+    },
+    "debops/debops": {
+      "releases.csv": "c56fff081a3f483cf2799829e0c193336712f6b306a12a0bdd5b3784516e2eee",
+      "comparacoes_releases.csv": "e0a565548457a05e6749de6f2a934705d6343549dbb76455786be858b88f21c6",
+      "commits_entre_releases.csv": "28632daad485a0d9f948d1038e524d55df4b193ef4409274decfa1b0b3b85ea7",
+      "tags.csv": "f6acecd87bf1f7979f3b3fd43bf2e0c77f1fc3b20e80d3e6516e399a9f707b17",
+      "workflow_runs/debops__debops.json": "2c0a3d3b7d6216e08e515611c031f4179322d22746d9e9be2462ccc9801481f1"
+    },
+    "seancorfield/honeysql": {
+      "releases.csv": "0ec8f218b8d60be27c576639fdd2fad147e74c898b7360228d8b8c72dfa95f62",
+      "comparacoes_releases.csv": "1fd74b1abe89c30fbb4b7cba62febd7579ae5f8d522aa9f05e9d1edc8aed8c2f",
+      "commits_entre_releases.csv": "7a359fd12c39c7ab308bbeee06a17e3520880fddbbb1b24466256e6526ae4bfe",
+      "tags.csv": "baad253d27c702f310f5a1887985c991e6675227f29a69752fedabb575bd6cb5",
+      "workflow_runs/seancorfield__honeysql.json": "4b0a5adc82f456a5dbabdd8a3292acba2812b6f2dfe102b76d41d7101ba4a95f"
+    },
+    "MGdaasLab/WHartTest": {
+      "releases.csv": "4171fc93cac2df7e15decfe4b5ff86a9e05f0e56b9a569b0add1cd934c05d459",
+      "comparacoes_releases.csv": "9ac09f87e87c763a05252244ccc13cfdaa84cb2ef983500776261a04173cba0a",
+      "commits_entre_releases.csv": "918bf77cdaa78de9a0c52e6459ef69a0a3532d84cd960f4bf6f4a63182ea3520",
+      "tags.csv": "23eecefe2db3b0f0f713a16509f99904285f9da59a90e36e094015c1575baddd",
+      "workflow_runs/MGdaasLab__WHartTest.json": "335306a98398d1c036a965fa9561ea10d702b0a8fecde392167413cce339c6fe"
+    },
+    "tddworks/baguette": {
+      "releases.csv": "740b14e5c64323b3dd2d7e9669a3c1e95f42d8fe17b57e4e457a13dfe67551df",
+      "comparacoes_releases.csv": "4fed5250644bedf6ca9223bc7e5134c785cea93f31422d54695b6fb34661acaf",
+      "commits_entre_releases.csv": "f80f273da4fc11b5df0940f513c5fa10bc6851e99ef6510008df2a536bdf05c8",
+      "tags.csv": "0a4b972e7167fe3b5ad98df54f9f9c3da76c2c53b711a9270a64dfc423a8a7b4",
+      "workflow_runs/tddworks__baguette.json": "6db1eef068dabc54343b98d012159d662b9e4bccac817c9922574f7a56b46e21"
+    },
+    "crate/crate": {
+      "releases.csv": "91a76cb201e0f74fec4fe8adcccdb12bbb82be997ee6c4516d13a007caa5d410",
+      "comparacoes_releases.csv": "ac35e22121529a14cc87dbc6878e7e72b513bc9f09041aba92ed4d3c3f9d5303",
+      "commits_entre_releases.csv": "155e8ed568983c3379c338ba94a5e45ddcc1e8712c85a097b20425d4265082a5",
+      "tags.csv": "2990857e8006810544cf6b7f196e951d9500481b353221f9cc25f493c0e1056f",
+      "workflow_runs/crate__crate.json": "dea97f03d4736b26d7c830dbdd3218370051fcd51801236f21c596191355330f"
+    },
+    "andrii-kryvoviaz/slink": {
+      "releases.csv": "5683d93046a69d0e0e2fba840d3f50b8c2bdd2a5aa3a3ab2be5091051d075133",
+      "comparacoes_releases.csv": "e9106c6696f4ad9c249ad6105c5d109a2d7d42b70107d7cb9b94c98e078508d6",
+      "commits_entre_releases.csv": "0d4cb8604277a5075d41994fe7bcd246a183cb5dbf34b97ad0a9fd095b343b64",
+      "tags.csv": "86af57774c37a94cf92b0a14bb2a0646a1363c93da1c9f0156733ea4c0915004",
+      "workflow_runs/andrii-kryvoviaz__slink.json": "eaf91b534d6803cfddc32f116d717a288c958a0f418a4ca66ff2543befb52bfd"
+    },
+    "theotherp/nzbhydra2": {
+      "releases.csv": "78724b86d374fbcae48cdb890a6ef28d904f2e8bbb808e7ce64357396abe9983",
+      "comparacoes_releases.csv": "581c858cc6b05e5dc7672cd12464ef07f57e5cc0415aa7a7e2144ceb9642ede5",
+      "commits_entre_releases.csv": "d2a9d010e19d52d7f64f592065139f20804ddf5c34fd1a815d2241ba8ccf7e01",
+      "tags.csv": "36f544e9b4ebba3ead89a8dc124ac4bacebd68452cec302d2a7bb20dbc884fee",
+      "workflow_runs/theotherp__nzbhydra2.json": "5021288f25c096132f1067cd62a110212e625c4edef768122acf5ff5ee162240"
+    },
+    "dtcooper/raspotify": {
+      "releases.csv": "386b3846293d2af3869b4040f30447524149fc14225de002cd0474f67823b017",
+      "comparacoes_releases.csv": "fbe32c0ba226a5d0355e3707764ca47b107d431ad15736f11fdd3c2771bf1920",
+      "commits_entre_releases.csv": "434c39e0d243155dc0ea55008b0ac41d142794f41db5b2ea145564f9c93e706d",
+      "tags.csv": "d6896a8e76a356a6e47399ee231d13ad1aa86ad58980b39dfe0c0735b78b27cc",
+      "workflow_runs/dtcooper__raspotify.json": "6529c4a179b0912b3f0e514b6f9297b6ab95ccb1028bec3f5c720ac48f4afb39"
+    },
+    "copilot-emacs/copilot.el": {
+      "releases.csv": "09b09491358d5149ed6a58a07925e8a5439593d9bc8e93eac815c9c6146b2b20",
+      "comparacoes_releases.csv": "98901dc519364ddccfa74565f775ec8430325d5055781de25353d640f6cc740d",
+      "commits_entre_releases.csv": "5960563d2776f1aef5a7392212effd642a93b3aa844d56407a5b2a230fdaf02a",
+      "tags.csv": "00d0284a09bf335e3832d8d93f9c1cfce0bbed3d6d558c308fb8bc0efe2bdd3a",
+      "workflow_runs/copilot-emacs__copilot.el.json": "30e29ac90b2ebf989ecc305e47e03c81693d07db7be3c855ddb03e523bb1b6e3"
+    },
+    "arkime/arkime": {
+      "releases.csv": "6df976c641f8d3d2320fa1db3fab721269d4867b416ff5877565f32e1be81130",
+      "comparacoes_releases.csv": "c6595ae4c80575c1829a2b8d9fd15f03018c6df8c67384e58c87272e7dfffd8f",
+      "commits_entre_releases.csv": "1ba1c5194fadd993c4da4ce9157dcdfaf0999dd36100f1dc7ce9e9c7fe8520ef",
+      "tags.csv": "b8b8d69277e61910ff93f422fde794e2c53e23d112bc8239da3802e6a1c8f634",
+      "workflow_runs/arkime__arkime.json": "4edd797648e2e3c4bbc4cf3c00af214ae6a8e4e5b9d79ed08f6cd3ca8c6a8640"
+    },
+    "next-safe-action/next-safe-action": {
+      "releases.csv": "a2642a29e971ce11220ea129b069e2378131b98a3fe2c558c2cf165edc8596b8",
+      "comparacoes_releases.csv": "84f8da17bffa8109bee6b0673756f9a1aa9e12da4f2e21bac3705191dd1d7494",
+      "commits_entre_releases.csv": "41c0a2dd6cb845f2b6c213a3c5f2d34e7c6cb0e8f5f9dc146f2ce81b95a74dbf",
+      "tags.csv": "24f61ff082c6a72871852c3233c982df35dbea78f2d01bce77c3ea981416fb58",
+      "workflow_runs/next-safe-action__next-safe-action.json": "bd09912acdd1bd1641de12edb4625194fb9071414cd231f4ac1379d3f5c0103e"
+    },
+    "kubernetes-csi/csi-driver-nfs": {
+      "releases.csv": "8a6d8b3166407ac7e2e558caf1f6342b5aa528c4b5cbe6941edba6356c5dbe4e",
+      "comparacoes_releases.csv": "66104c4a760efd7b5242ba2ec8cdbe58a1adde5d2846b6ea58a23e1199ea3b76",
+      "commits_entre_releases.csv": "82822a45d1c49796de5fc2363acbf57feec9492e4aca33e3634d139355109ac3",
+      "tags.csv": "1b82e447e4bc554ecb5982d2cc684ae2d0dcd07c9d7cccfee9110d1710bd1c02",
+      "workflow_runs/kubernetes-csi__csi-driver-nfs.json": "d196640ec299601ab17a8ac9cca956b7bce1a4521241290158c700daefdfb29a"
+    },
+    "microsoft/mcp": {
+      "releases.csv": "f4e569c698b4d93e3f0f476f15b8d6893e7b05d5250afaf9e4a7f9c069492f0d",
+      "comparacoes_releases.csv": "2198f50aedd26e48283d5358cea196d6b48e4f4e57fde2e409665e77c9c696bf",
+      "commits_entre_releases.csv": "85c5eaa4061c3c1c1423d40ff208682f6a9e523a117bb6199275f2e3f0094097",
+      "tags.csv": "d59f1bcc5bada3411fdfba273b7706954fd51dcfc663581daebb6e7ed986628a",
+      "workflow_runs/microsoft__mcp.json": "3935da28409c4fe55d24adc2393c6ebf5312e39458a61b77d58f3c82142c28e3"
+    },
+    "Chorus-AIDLC/Chorus": {
+      "releases.csv": "2631d6b4f25a0a46e792d90161c26e63aba8f8a34c4872e0ffc529fa159d8904",
+      "comparacoes_releases.csv": "7619724f89be67fe8edebb772683b1c94618b4f0da40da1c9e39f6a198c2aa1e",
+      "commits_entre_releases.csv": "2f4f102648129998088cc91c6d38c5903b8977d4d09beba80098c3704b78baf2",
+      "tags.csv": "74f233b3aa3578e96a51b791ec05d5e026d94f45ae19b348f06f285158cc4390",
+      "workflow_runs/Chorus-AIDLC__Chorus.json": "6d5e3cbdd2c6ae52e05054096a06e23565de490625de4f3e1a5d54251ce416e0"
+    },
+    "jithin-sabu/purge-app": {
+      "releases.csv": "a7e1b15e71211c925a6b030c93dec7d798677029f10cd528ad7db00c57e7b56b",
+      "comparacoes_releases.csv": "e50526fc10fc1ed6d00733f61381b1b6a2b327e9c10872c6c1e5a35b3b64b0a4",
+      "commits_entre_releases.csv": "eaf64d1edacfe0541dddfe32040bc99f4a829ca822af8b907a0751bcc28f7681",
+      "tags.csv": "67a52e9795e35afed2f8f03142b050644874b2e8fed1c03938a2ba23a1d9408a",
+      "workflow_runs/jithin-sabu__purge-app.json": "57f1a76f15eacbbdec64157931db6cb71488e27c068baa763714981430f0d857"
+    },
+    "oshi/oshi": {
+      "releases.csv": "fedc18ab76da02cd12b37b8a99dd8de3349a6b86c14629d7531cd703fbad665e",
+      "comparacoes_releases.csv": "bfa5a7272b6055832674a352a1cec080aee18d01d0901fa48e7abc7f21ec2393",
+      "commits_entre_releases.csv": "bde41420c32777cd5d0ceba059a6f8781faf1f411c3e3cf6b2810e070c974635",
+      "tags.csv": "ae0015f13bd6cd0d5606dc74c76380a04e4ae51dd46537acb819cea2e4e6f607",
+      "workflow_runs/oshi__oshi.json": "ebf37392d4e7504d668ee078ae380ee2034e1c9cb44a56f1a73689438c834150"
+    },
+    "google/clusterfuzz": {
+      "releases.csv": "4ff5fcaf49f8afe9b1f0fdc2bfdc9209f6964720d8fc87f471d13a0478e9cd8f",
+      "comparacoes_releases.csv": "e4f7e654552b31b0b69c2d7d84bb048023ff62579ac046994c3072423d95c36e",
+      "commits_entre_releases.csv": "9361a99ec7443aa3bc79f0cb9b21314e6f94b0ac39da7ae69ddb754548ce091d",
+      "tags.csv": "ef1de21e07426f5cab0f0d5fbae9c1c2dd72139c4324156d9db8adc1d62b377a",
+      "workflow_runs/google__clusterfuzz.json": "29f556fbb70164c3d341e5b1377df2cfe40a204943819111a8468d3b26656e77"
+    },
+    "northword/zotero-format-metadata": {
+      "releases.csv": "4ea1b3ba12a3be172b421f0c2414598626052df3822a447ff29093384d919ae5",
+      "comparacoes_releases.csv": "c12f1d574a20634da9487e8e8404f9a7a0f91f04f43d7d6f2681d4d856761933",
+      "commits_entre_releases.csv": "538b4e99cdb92472f259db42846d2f7763d5ac4c468b54e4b25d6e9f26ac4813",
+      "tags.csv": "6c9c110ea39878044e0702f503a7a663ce7117f98f731249edf7155be195d5e6",
+      "workflow_runs/northword__zotero-format-metadata.json": "f9bf87ed9eb7193ad1cce3616896fb3df15c6de1de68e154027f63522e0b4a27"
+    },
+    "TableProApp/TablePro": {
+      "releases.csv": "fbc168b67b1a680e611c5e134caa4de51037ad6ef2b2e83c83c3154261c84124",
+      "comparacoes_releases.csv": "28e764a1f4b5be97beb4311cea4849f7e2b012208b539647d1fa0378c2118327",
+      "commits_entre_releases.csv": "1b77eb3760971724dd472d141bd6fcbe1bbc741695a39839bb8da0572a6df265",
+      "tags.csv": "4bb849f3f2d18a4f9a13ce4c97f3bba39a5ddf6294b8c987c1845ced435cd66c",
+      "workflow_runs/TableProApp__TablePro.json": "03baa291de1acefd7608826dd3c10e6421541f9eb7b10a64520e6c590a994a6a"
+    },
+    "mikumifa/biliTickerBuy": {
+      "releases.csv": "ef6570363d5cc34adeed642cfecc79b0f973dbb932dcae2d911d512eaa89dd1b",
+      "comparacoes_releases.csv": "08944c5801322d3d2a4365348a9bcde7b4acd02da40ea590a6fc147fe5bbfd41",
+      "commits_entre_releases.csv": "b63aca17cc9d2df82a945194f244ea8f49b23761b9bd46a60e9ea0f445e15978",
+      "tags.csv": "07d726f569fd5f0496962fcc33642ef89761f87403f5df1414777bdfdf5e91f7",
+      "workflow_runs/mikumifa__biliTickerBuy.json": "db377745f110f0eab9f339cb7b27827d5a4289b215f823cf23b961aa4cfb4ca6"
+    },
+    "massive-com/client-python": {
+      "releases.csv": "e5a0788c49746f884dd408e42f3adf1c49b23ed5dfc148f421c66a4bfab40c09",
+      "comparacoes_releases.csv": "6c1106eafa4248f52e0207f71223facb984941f36a9ca97fab42b0114736402c",
+      "commits_entre_releases.csv": "5a037c0b4f19efb01a9451262222876948f4a07556bd5fd49e74bba8baad1645",
+      "tags.csv": "6e15d0665f8aa3c63993d98a93a9865d4e074c5d7c7200196aee834e9e5867c7",
+      "workflow_runs/massive-com__client-python.json": "ce6b50622599e2644aeedf12aba0727e7034214d720059e264d9ba1f4276f334"
+    },
+    "vasu-devs/JustHireMe": {
+      "releases.csv": "93eb5c91aa02e553d2f045e55060d8ea1ff4ef011d98cce4ff88a7c39fbf1fc8",
+      "comparacoes_releases.csv": "37f8a9c6d47e2e0fe87e2683df5f8bab9e54770b83bd3cdd46b277dbf2b1d48a",
+      "commits_entre_releases.csv": "f32e4718f645a1401838f8b38ae7254e15a1dbe44a165603c78da6b1c1fda3b4",
+      "tags.csv": "9b15b8976c400f541be6fe17646ea1ff80ff043c5b0bb466910be420470c1a98",
+      "workflow_runs/vasu-devs__JustHireMe.json": "8c4a1abc5c47b7d0cb1079ee17b3c9da99ee69cbc7aa1c1258d662e3c553928a"
+    },
+    "superdoc/docx-editor": {
+      "releases.csv": "249be0bf2d65fddd074eeb9aa772fca5b7c9472e3c19e4abd5da5e92c98130af",
+      "comparacoes_releases.csv": "cfbf2a536d280d7e62fb4ec20f1b89c91312ad83031e952519a464607f1cbe7f",
+      "commits_entre_releases.csv": "01e4ad851fcaa55753aa8b8aa60ba371b302fa0c8ebe15db76fcaf3299b599e6",
+      "tags.csv": "35caf9228555ad0020acd3445e0fe0ad5d4e1f2a6c3a4cb77fc3c02e9848793d",
+      "workflow_runs/superdoc__docx-editor.json": "c41b5146115f347b6d6e3dce3edd0a5b0f1057a3da0cda10640ed116374fc9a0"
+    },
+    "RediSearch/RediSearch": {
+      "releases.csv": "d28d087ceb29f1da3a07f10af09dc1afe4d7dc49306ff8e5ca207bb4d2055d07",
+      "comparacoes_releases.csv": "2f27718d445963d544e4f4650d50df20b312cf0c8c1b938b44e84647fc541d72",
+      "commits_entre_releases.csv": "121b4a38a0f6d2e6574502fb450b240a8ece958eaa5ddb2e70b0d5f9406ad97c",
+      "tags.csv": "223c81b7d72d10583c768c92d057659dd16579a638f83e6ec5eca9d662941d51",
+      "workflow_runs/RediSearch__RediSearch.json": "a4d9e9d0e4dc4e9851698bbb546977585a3b5aa2d13e3a36a6911452c715ceff"
+    },
+    "pchalasani/claude-code-tools": {
+      "releases.csv": "d5814fe34ff009f8a8e0ce645c93c9ab22532c9426f590120129f0871ed0521e",
+      "comparacoes_releases.csv": "0fa65af7145e96d19ecc6cc9155c9a42b99fae3df575c63d66657670c9f99b19",
+      "commits_entre_releases.csv": "ae40dce4850238adc543314ee0b968ea816179715bb3c2b19bc70dd5d466a01e",
+      "tags.csv": "6db8fff061ec5bbb432dbdf4b0c4bd17b68a9d6f0300b56ae19df5863d458cdc",
+      "workflow_runs/pchalasani__claude-code-tools.json": "60a8f8541c409958428b3054e7a7571b8055e794de812a64aad65b00318365df"
+    },
+    "hyperium/h2": {
+      "releases.csv": "a971c23ad81419d0923f53df0da076cc018eb6b05dcfc89c6160bf79d7135846",
+      "comparacoes_releases.csv": "e22fa0522caf4483ccbf6a739f0056198a5086dfd018f49374d5f0cfa110c68c",
+      "commits_entre_releases.csv": "9ddfdf8ed0e763ed00ec7b6d5044501f3e0e272436fc2117433bee1c97c4d650",
+      "tags.csv": "6ec40862b4279442503d99a7c3cce4484af208d605875490208a3162de88b121",
+      "workflow_runs/hyperium__h2.json": "84672d8155a1087d56a0044958ef4416c3852a917896b3f4b9ce23e77e820190"
+    },
+    "jdx/hk": {
+      "releases.csv": "9750d2d422f89c4496a8285aba14cb4dde55eb8265a5b12bf33fdb36b4ea59c1",
+      "comparacoes_releases.csv": "8f830835d2842d3bfe516a640d0e8c73ff959784749000d45d25ed8df00f5e2b",
+      "commits_entre_releases.csv": "a51b8ebd1420d646f1dc0deea9893df2bbfcbae2ad01dd9ac71c9f0228dd339f",
+      "tags.csv": "5ef3c18afc0dc362ea1e48e9ceb96e2134894281ff6a07fb47f2295c39e3be8d",
+      "workflow_runs/jdx__hk.json": "4f3a6368116dcf9b8e7137da0b0e75ef974870fea240bfb54c8aa627b4661d7f"
+    },
+    "good-lly/s3mini": {
+      "releases.csv": "0d7b3512963684e132bce9a1e667b62a8b953ef18f3b2cef6cb8fa823fd30fec",
+      "comparacoes_releases.csv": "45864df2375dc6597a3c4a45b1c69a69f88105443e5c45197ecc0a728abddfc5",
+      "commits_entre_releases.csv": "0fc37957258165ba33e892e3d2eb6208dbb83412fbfc3b43e39b5dfab2978bcd",
+      "tags.csv": "401a1d372b40db756ffdd4aae2c6f154544c854ac5da08b6eb7a1490f08ab4a9",
+      "workflow_runs/good-lly__s3mini.json": "94b46dfdb3bd6a978eea3a63ff4f47ea85a68a4cc0b02742a6b549e3c980af16"
+    },
+    "stategraph/stategraph": {
+      "releases.csv": "3223aeac408e332463ad9118bf37385de918b178990753b3b3d9a3fa3d3ec6c3",
+      "comparacoes_releases.csv": "7fd3600e700b5133c16cea9e4db26f1691f13f87a1577a55954b697370241e69",
+      "commits_entre_releases.csv": "231e3384e2fae950e9cc850434c451fac5d4394e0adcb979686ac6773ba9d66c",
+      "tags.csv": "5ab62976fe9869d2f0d31d98c07709cefd891e438610bfccba83437134c8339e",
+      "workflow_runs/stategraph__stategraph.json": "6ebb41768cea3cf796fb0372e3e9ca26059008825216934835824cced6bee0f4"
+    },
+    "cheeaun/phanpy": {
+      "releases.csv": "ef1c6dd44cfabbe0a9896333b87cbda5a51559711bed8ce7a3706f8861e63732",
+      "comparacoes_releases.csv": "23a10af49de627957cbea87c2f2ed62d9519d8ed8e723ca50b33eb2732ceeead",
+      "commits_entre_releases.csv": "f0b7d652fdd76cce718956ab2aebc0a23beb1cd45092026692e115eb05e03b3d",
+      "tags.csv": "5c973e4041f3b51578bdd063b3a8e90790052db7e0ed4f9f5fe405828d672b0a",
+      "workflow_runs/cheeaun__phanpy.json": "2d9ebdb4ba74a675fb225cdcd8e82191b9290310606e1ad5399d92bf70ecc370"
+    },
+    "MaikuB/flutter_local_notifications": {
+      "releases.csv": "af75b857bb3a49317290981d073be7ad3d4bc02ac131ca11f59e7e96eb343484",
+      "comparacoes_releases.csv": "ef726e68dcf0f1c53e769400331e695abb3b6f6725f6117f1d0a8ae6132fcc04",
+      "commits_entre_releases.csv": "b85580c67e98ebb5cc0774a935eb384876e46ddc4bbfe24f6d3649e9024cc194",
+      "tags.csv": "37719a979ac32f959d47becc946c47ff6a5b8d158593b5cff99d10b252395695",
+      "workflow_runs/MaikuB__flutter_local_notifications.json": "2f138c90ea40bc2d1123bb7ef265cfb8b5ef85262a7cab8bfe5b0c9503578b10"
+    },
+    "google/dawn": {
+      "releases.csv": "8edc33561bfa775e18e366a22e0e49784c6ceed417558bd04c85a29325714d72",
+      "comparacoes_releases.csv": "849499ee093871a1e6a370d9267bb47283ab0bc09096c3f9f646167cad841fe9",
+      "commits_entre_releases.csv": "f12e6c581c7889b9c6238ae8fa8892f6f79732b5a9674feafee52d321c4f1e29",
+      "tags.csv": "ce4ebe070d8f808c56788cbefa6fccae81fbad83a57754f932f199a475080a25",
+      "workflow_runs/google__dawn.json": "ff03946fdbd93f1b9d0bcf66f54363d88e87b5b35aab1b160b4821e39a6e650a"
+    },
+    "certd/certd": {
+      "releases.csv": "bbde94867e1a74b9f347ceaccf237228b3b3ad3689eaeb30f8c9a3f70319b970",
+      "comparacoes_releases.csv": "efe2f5a0571ec39837a37e7456b903a4181045b0931ae6a52e403d64eb455e39",
+      "commits_entre_releases.csv": "7eb935d3b10292bed2d410468a655008b2a0fdb446d9ad62e2b38badb376f4d8",
+      "tags.csv": "42465ae2680299a33e571c15bdab581ef6926dbf6c6784b0c09b3f99db71465f",
+      "workflow_runs/certd__certd.json": "f93a477567e603fd2faed1617b3b3a19f658f8c2db5528d7a5ffb4558f38404f"
+    },
+    "TrackerControl/tracker-control-android": {
+      "releases.csv": "d13d5ede087a41134a72589da65210cad6f41a95eba45b21b2031669563368c0",
+      "comparacoes_releases.csv": "e87ecf2233af2c539ea3c3c4360554b1229f38e0f7c3162afacfde2e1c4b48f7",
+      "commits_entre_releases.csv": "4ba479b9c8b22fbafd1103fdb0dd259ceaa8331eb68653b8e89bcce5724bc9b4",
+      "tags.csv": "cbe97bf592bb569daa63d62e1fdbe217badf6b48ae25e4c7d481ca17a4b461db",
+      "workflow_runs/TrackerControl__tracker-control-android.json": "8fed6326b750f45dfedea40d0eefb0cb13e33771a2d48d1d2d4cc12599c93e8e"
+    },
+    "zerx-lab/FluxDown": {
+      "releases.csv": "8f57a5a70dbcb54caab758b0bfc166358ae28117a73b325bbf37a9d3e56e944e",
+      "comparacoes_releases.csv": "73a63573af28d40ee1346c9b9f6ed202dd2dbdeb158fe67a34f912b3e2fe5cd4",
+      "commits_entre_releases.csv": "78751ef0fca039e34ed028efc99bc9f2be0042212cadc6af087ffeb4261e8355",
+      "tags.csv": "d5e1d94d8371947341f725d44861dae91b8ab97634d6bf94f836774f7afb2ab9",
+      "workflow_runs/zerx-lab__FluxDown.json": "c8068f2d46a09cf5ea05b6591c1dc54e3cfd74f7e456a327063c5c1f1a9d258d"
+    },
+    "kvcache-ai/Mooncake": {
+      "releases.csv": "ff810c81d12496826f88ea7bd8e4a95e4c6b884c9fa7869d8fc20ef154e1c55c",
+      "comparacoes_releases.csv": "3619320c9563914067977cbf5008f862ef4de5af79871c127a6f3d2f6aa0ac77",
+      "commits_entre_releases.csv": "e892a8a7acd9aa98bdf619f7110b580ae8764c01e3795f09d6aefa9298e84eed",
+      "tags.csv": "c441c70cc66b32c22a0ed21622e263feaa1b1ac8cf8e37f3458f10808e4d08c4",
+      "workflow_runs/kvcache-ai__Mooncake.json": "5f1a30280603cf48bab7b213a8f15259d3254f5d4d064cfb0cbd34de3d0b7cc1"
+    },
+    "specstoryai/getspecstory": {
+      "releases.csv": "0e98dd7fa0e54e253d4f0c8eb66c4c0754dd649bee22507c8bb25da61a0d979c",
+      "comparacoes_releases.csv": "768d5b95c09f298b7157709ca54cbab2f5d7e7908a4ff4d81acbbf1694a9ee8c",
+      "commits_entre_releases.csv": "47e9ab5ba3f2ffb18e1706aa1b547a9ff332cd75213ad71f68d94fa536c6c58b",
+      "tags.csv": "7a7502a3cd4536ccdf85cef7c0dbcd66b1eb6135d5597f29431c05923c832336",
+      "workflow_runs/specstoryai__getspecstory.json": "85ac82de418cab0972e4f847acbe850bfeb5c668f4b510ab8dbdbbbebbc3a0ef"
+    },
+    "spike0en/nothing_archive": {
+      "releases.csv": "7345530a2d3fb67d0050a3fee41c12a089f7d8226c9fc032ae9283a982ef3506",
+      "comparacoes_releases.csv": "795f9c79b0657811d71ae8711f6c9356e99e5144a61e5c9681fac0c52bfdde29",
+      "commits_entre_releases.csv": "c988adb1419212d570ab648e311e49b334449fce6f6b962645407f42b1be363c",
+      "tags.csv": "9d93f93adf765c48436c74557efdccdf6d1595173a09280fbd6ebd644ff7a901",
+      "workflow_runs/spike0en__nothing_archive.json": "dac6e672bdd55d156f273df13f25cd339d9d0601044a37741795f879809f8efa"
+    },
+    "Dataojitori/nocturne_memory": {
+      "releases.csv": "3bd04be95f60da9680bfe312bc9d08772c1b9bd112bb56accb08b112ac9964e7",
+      "comparacoes_releases.csv": "a958579e8b24468f40955b6f237b5be37458563c8f3624e8e852c0d46b6009cf",
+      "commits_entre_releases.csv": "d3c7f5dd5a288834a8e28b1863e2f05734b9f766528a64ced46b77f0b6fc35d4",
+      "tags.csv": "96b240cbc9cf3e5e82daf020e299b89f1f15a41d1c3fb6d4b38f6fdef24a8ab1",
+      "workflow_runs/Dataojitori__nocturne_memory.json": "50ad85918a8862f36a374422bcccb1d9272a1707c960cf6b2b1d5eea637fe120"
+    },
+    "puemos/craftplan": {
+      "releases.csv": "eeb492ac4ee9d9caabddce7cf427bd15be6426ef05863ab58ab00881b67f9345",
+      "comparacoes_releases.csv": "fc07a49622eec6e9568b3f3261c6da73dda083eba1771ac6bdbf53117e7f955f",
+      "commits_entre_releases.csv": "21c2bef45442158940239395826eb783e291a0d68416d85fe9ccfdcdb7f77c46",
+      "tags.csv": "6e87193e5011ce12c729f3c6fd0adbdc9eb98a5be76662912cca8398dbd359ef",
+      "workflow_runs/puemos__craftplan.json": "fafe84994d696bfe61484e17c940a3ec3bb1cb1a5d12f71959a42dd9cebe21f8"
+    },
+    "mainmatter/ember-simple-auth": {
+      "releases.csv": "5521c0c91e97d671238a78a49ce5e6ae165570ea8c2bbfdbc7ff3c65069acc22",
+      "comparacoes_releases.csv": "8cb6ea7615702253bf4657c4cd6b0196a563fcf89b0ac767797a1fac0988653e",
+      "commits_entre_releases.csv": "66e801018722c289e51ccc7c9d9636b81ea30f4de619c335bffff281a3c028ff",
+      "tags.csv": "7f70813779c8a197f9bc515211991f8c652c59fa0b86d9488fe154e21f41c2e5",
+      "workflow_runs/mainmatter__ember-simple-auth.json": "1324220a105203950d2103744c0e4f466c443492ac620af660ceea1d5bd391d6"
+    },
+    "hardbeat920/monocode": {
+      "releases.csv": "8826c8d3da4ef8b02584d3fe0ba2947c0ff4469f411ef434bf3f0a474058eff7",
+      "comparacoes_releases.csv": "de92f51615f8594fc479c0a892b07e4a7a0743b6eed5424bb380eeb4cd0b0651",
+      "commits_entre_releases.csv": "accf66567816c628c208f14d5f9eda191cc4ba005b97c276f473e48d8dd91cc7",
+      "tags.csv": "9afd572dd9e0b87ee812b7acfc161a06cfee5604c3c4dbfa2ff531cb9082f192",
+      "workflow_runs/hardbeat920__monocode.json": "4d2c8040ea4b931b1368744267ff01113dd6ebcd4142fa57301bae4c2fd6abb9"
+    },
+    "obgnail/typora_plugin": {
+      "releases.csv": "dd983448ad7c560cef7a92861c435286c37cef3649812f30e631940990217528",
+      "comparacoes_releases.csv": "5fe0d0217b02975305451f2bea5afcc7b763de12242c69e15d6bd6dd2d385879",
+      "commits_entre_releases.csv": "ab18b5997fa09df12a5efee1cfe6c575f2cb87289b19d4fea9211fb820d040cd",
+      "tags.csv": "daebcde31ed8b093a090db405be543d01b0669a69c1173fbaac32d65908c2200",
+      "workflow_runs/obgnail__typora_plugin.json": "77129283dc34e39f56dbff570809c905760d0b1123a404301a59631b40d24513"
+    },
+    "h2zero/NimBLE-Arduino": {
+      "releases.csv": "6d1759d289071e72c4315e2667c6fb2c3d8c17e606a40a208f19051f269c9ba1",
+      "comparacoes_releases.csv": "eac37c511cd3e86911a28f4007116d05d2e63a84a6983d8c28c117366c1fbf0d",
+      "commits_entre_releases.csv": "2d8b6b736d7f96b76fea2c0b893899aca65ccd0965cd10fef12d5647718f006d",
+      "tags.csv": "812b041d029fded9038f834e97ba7cc78f16e74336277bf2044b3e67abf367b2",
+      "workflow_runs/h2zero__NimBLE-Arduino.json": "46d8c94c88cf79a7134ba3d4ee94db9c7b0a45edd675702943d1fc810741201a"
+    },
+    "amir20/dtop": {
+      "releases.csv": "cc1c401f298d4684feb4f3fd9f47dd501d53f4fb232aa25b731d632d5a285876",
+      "comparacoes_releases.csv": "161513cc6ccc63c9f7a3e6d4fa581b7012aad069764a5b5e047a7910cff75993",
+      "commits_entre_releases.csv": "aafdf77453ed2f5d04d5bb96ce7497ade44b1574e6308a7ff141ec44545de3bc",
+      "tags.csv": "e381999ad65a251b435b56aa9c73df97e53f9de4110c697817d77665ad86a61a",
+      "workflow_runs/amir20__dtop.json": "b0e108d1fc2ee589f9893a8dba374d6d545fb89ab78425d9e385823f6a91d6be"
+    },
+    "go-admin-team/go-admin-ui": {
+      "releases.csv": "11e7cba698f31d0467c386804dee70db8b336b9ec73f12dc2b29cfc478808386",
+      "comparacoes_releases.csv": "93534c8d73ac32736acb9b2e6ce27b4cac90cc68661441c96edc26324a859beb",
+      "commits_entre_releases.csv": "76eaba266b52b2ea17f2e481c1596c90051c4725ab135e71d11fbdda1cbc9a2f",
+      "tags.csv": "66aec5183139f034c3ab608bb0979ebd9a4efcf618b92514ffd3074872a78393",
+      "workflow_runs/go-admin-team__go-admin-ui.json": "c19bfa7ed9d12b52cf42299013c6104101e48f057a09e510440384d6ad0d533f"
+    },
+    "bghira/SimpleTuner": {
+      "releases.csv": "c31f7c1d5fe7c492499fc7c371917b7926ef78f6b97617f8b4b3e5acf9e281d4",
+      "comparacoes_releases.csv": "5134678fe4ba6378e647aca84cf01e39d58252a2199332d98ac08005461631eb",
+      "commits_entre_releases.csv": "5622f6ce31c26b0699c59467cfd2b8df8938adb9df78b3363cc2365970a430ca",
+      "tags.csv": "14fdd8b30207e521fa155a2387bf2499ba60a8608e29e55b11679cc87659a8b0",
+      "workflow_runs/bghira__SimpleTuner.json": "6af3f71ac4e1e5d47d4f23c70a2319d2410daedc59126de2123c35d67c7d7354"
+    },
+    "buresdv/Cork": {
+      "releases.csv": "44b125064dff6d2ce023d740913c38d9ed9582155a56d4c40619b9d9e38ebf04",
+      "comparacoes_releases.csv": "c1ac770f11bd17b1263d7d4485619319e4ba2ff00d072f39afdcdd8d8cc74678",
+      "commits_entre_releases.csv": "52f994af6f5b103fc8d77ede57703f86bec0bb0cfe622cf37e26ca79c5ac3914",
+      "tags.csv": "d5562f77a46f75e30401ef201a1a7ab66ede3e560d6fbe2116dad8f0b6cdb498",
+      "workflow_runs/buresdv__Cork.json": "e6507c6fc64b54037877307216991b2181218286922b917ed62250b52708513a"
+    },
+    "vergecurrency/verge": {
+      "releases.csv": "38263936fbcbcd5b14d8a9e6553535032689f9fee69258c538bcf0e47ae77ccb",
+      "comparacoes_releases.csv": "864766b582528452e3756f8941cf8bf2d0fd9ac4aab54cd97b77aa36cdcf5e05",
+      "commits_entre_releases.csv": "51cb880303e11ba7c6adeb786cf90a9c6a7222a6bf1f3d03365c35ad25176913",
+      "tags.csv": "fedc91f542f9c07e5e3e6668e38a2421ba414f43f95cf45fd9fc0d3da102b816",
+      "workflow_runs/vergecurrency__verge.json": "0b00e002d37b5c48e250c33aeb6b704a10c21dc33304c640b322881f21784b4b"
+    },
+    "enzomanuelmangano/demos": {
+      "releases.csv": "5bf7f140f6da836d891108e3e029a744db2ab67a2beaa74c71a9a470e54451f7",
+      "comparacoes_releases.csv": "de3b0f41d4be8ae4034b644ea69bfa6a8a21b4f9c91bfc916ba11c81fda1e2d4",
+      "commits_entre_releases.csv": "4dc63ca7e99a57d815fbb4948444cbedd09060bfa221229021c03664768d1a5a",
+      "tags.csv": "356ebc6fe2555e937c29531a75225a30c739a613d4c512e728d015cc0e12a8ac",
+      "workflow_runs/enzomanuelmangano__demos.json": "dc1d663638b58ea9e6a9c06b1ae676532de3fdbd3afdecd29d5296af9bcd5374"
+    },
+    "telemt/telemt": {
+      "releases.csv": "cf4722b7272bf9df1e364d6d427f42fb0d21a71e97e8c970e8e0a0cb5ddd7b05",
+      "comparacoes_releases.csv": "1460f52095cbf49c5f915e473bb746c785d8f5672ca0a48940301157b43cc538",
+      "commits_entre_releases.csv": "38e213999a7759ffce6617776efab00b0d5e6022b0114c1e64b6b4c0f3a89eb8",
+      "tags.csv": "d1650c6aa0d290c5bcde418863e14901f4b5a87f1e295663c516bfd85cf66f0e",
+      "workflow_runs/telemt__telemt.json": "6f40e97d8fe706701bf038e6c05cccc500c686631d70899fdaa08a51159890a3"
+    },
+    "laravel/passport": {
+      "releases.csv": "3171af3db987202e45b6d3cd2734e585bf2bded76bf9f72e5ede990ee716cd29",
+      "comparacoes_releases.csv": "a9bcc39cacd0ff48f4dde7809c4efa6bf55781385675043abee8c4189e0386ca",
+      "commits_entre_releases.csv": "3b3ee9c0cd23c52c6093be85002f66aa7fadd22a496d97848ff0954f673263af",
+      "tags.csv": "343063df1b8c9590230df24ca15ad82f7d85ee2e94dc3aab19b9f4507814e8a0",
+      "workflow_runs/laravel__passport.json": "ece77cdd2e17b69074c1ba5ae36339300f57162308ab9ed1446958d34708d7f9"
+    },
+    "jhomlala/betterplayer": {
+      "releases.csv": "05451f1211286a3f40dadb2d6b8f2e9edcf93b00df6a8678952f9d3c792821d3",
+      "comparacoes_releases.csv": "f3478e64d1776cc0d1ef4eddd4f92120261a0d34e7970ad978420cd08b39a52b",
+      "commits_entre_releases.csv": "754a646991ff02b7d985fb71c1653e0840b0451143808aa0362ad4f5685e8c8d",
+      "tags.csv": "10efe8ab23bd24b466162aab84dcbba39019dddaa7cabeb690f934d71b663d3b",
+      "workflow_runs/jhomlala__betterplayer.json": "94d009e650ac82ddba89b45805680b774feda4b17baebef47ad93e87b92de4e0"
+    },
+    "rage-rb/rage": {
+      "releases.csv": "0c11683e5a022a7d03d42d325d57675863ba8d12c4529bdd9555cc49d2c3be02",
+      "comparacoes_releases.csv": "b01e529b5158403a7c334745e0f6f63e7a155d7a94a0aa7357d7bb801122a912",
+      "commits_entre_releases.csv": "066b6b8d2e69ef0267a13778bd81f85a0b0abd85cc4f055f66519d3d0176f382",
+      "tags.csv": "e9dbed3ddd15cec7363e62d4aa77dad5a8aaf9fcf0e493efd078a51e8943f48c",
+      "workflow_runs/rage-rb__rage.json": "07cbde0aaa0a404b9d360e5cacea6fa66c37c68b79e4d79d2240444d47d6b915"
+    },
+    "flux-iac/tofu-controller": {
+      "releases.csv": "7974027f7f813962960691edbde5d3260567cc79bc62cb6635a135391ea2d60d",
+      "comparacoes_releases.csv": "6db59bf8e83a3b3f829a2916b3145c526c0b7c68c7e7b7c36fca1d9c08e563ba",
+      "commits_entre_releases.csv": "9f3dc5106bb47ce2105896332fdf93670244d7402bb6b3e99bebaab9a433c2de",
+      "tags.csv": "eb5204ef8706f4fa5eeeadea92457d6a0d500992f58c4244fd87c810b74a811b",
+      "workflow_runs/flux-iac__tofu-controller.json": "92917543750d143a36587c038f4e94456b8857a6638c5802bc4652a544e85a07"
+    },
+    "eljojo/rememory": {
+      "releases.csv": "e57fd3a346e4e7be59dc3c8f95af33d5064b4977397805b85f9ed33296607814",
+      "comparacoes_releases.csv": "edebe9376e22595c54c634ef03ccc3a604d8a10d7952673fc6e5bcca3e53f3d8",
+      "commits_entre_releases.csv": "312e2231a37e50f527b52dfbab8b38acd02896af7c4e9feb689e34c77d7a0c4d",
+      "tags.csv": "30f2a4d5e06d7f1b82ea23179963abeb095c660e7b64b074b6838398206723c8",
+      "workflow_runs/eljojo__rememory.json": "053612fcf4ab6560107b29a7473cc25c2b36855df12d79995d70d2761d4ee505"
+    },
+    "dapr/dotnet-sdk": {
+      "releases.csv": "97c71c8499c660a416ec910a02e47f2c7fe490bfc328aec34fb51dea68906ec2",
+      "comparacoes_releases.csv": "08a6da761591a850a72bfc774e88b00a87be2c29dcff0e6158d57f04b1f5448b",
+      "commits_entre_releases.csv": "35d407cc7d490a8af850bce36f550218f978a9a278f215194d22a96397ec5918",
+      "tags.csv": "2856cae8ed1f5c31a88b82d11e2047cb044dc87b184da6ba30aede49013eaf20",
+      "workflow_runs/dapr__dotnet-sdk.json": "477c996ba78a8ef88da2ed641bd05c1758ed075a0beccdbe35ec84f87cd6e183"
+    },
+    "mmastrac/linktime": {
+      "releases.csv": "6738e8c9534689b1ab567292363eed05205d5d551bfa0aa3f9e44400388a4d1c",
+      "comparacoes_releases.csv": "b8947126477b6c6e4511dbb97e1a5f56bddfac5ed3f45b1e3d9a3d1bb76e2f6a",
+      "commits_entre_releases.csv": "774bdcafde53fd3e060a8c828895906338ef93c5f39215d666734e9fa252f73b",
+      "tags.csv": "ae142bfd50f602166ef0c795ab6731637b52c5de284c7c67020f1f730c8f0d7c",
+      "workflow_runs/mmastrac__linktime.json": "eeda997acd2ae3d469f052ad43f101e7959552442b4375c39b8d969750044eca"
+    },
+    "apify/fingerprint-suite": {
+      "releases.csv": "7a7e1f36b943068b73f72485747b2fdb9b379a6bde88fb44abaf6b2cf3e05cbb",
+      "comparacoes_releases.csv": "aa6ce15497e7af8678d73bade1bb95dddfbfad1320492ae174488604cc0a322d",
+      "commits_entre_releases.csv": "c7c13d54c3fe73df434d34583be87f2fcf9057ff67aec173911242e767e5a10a",
+      "tags.csv": "e63f438380503c17126f9a8bdc2f15876ac8019a1132ab8012dcaf41ca1a0bac",
+      "workflow_runs/apify__fingerprint-suite.json": "3388d19c83b4e5a37a796a0c337be2a520b68325d8937f0f213da2e558bee31c"
+    },
+    "Arthur-Ficial/apfel": {
+      "releases.csv": "09a5549de2496a106227f427e43ae4a78a5ff664bf97676c0e5050160076c636",
+      "comparacoes_releases.csv": "fe9bde3908e2316976b1b447ef9185873c45c588e4fb59d74c6d49c57f3877e0",
+      "commits_entre_releases.csv": "2019d8d9e350a6570273362117fe7a69f4dede697cde16333c379a1c1e5aa215",
+      "tags.csv": "95973220394f4c9834478ff57c091260181364970c4d0a70be586cb9ca728196",
+      "workflow_runs/Arthur-Ficial__apfel.json": "65677dfbcd668ffa53ae86bc406249771c5fd16522ac666c019dcfbfad9aeb1c"
+    },
+    "aipoch/open-science": {
+      "releases.csv": "eae77bfc58b511947c480f55000596fc595a339b5e869cd1156315cdcda25426",
+      "comparacoes_releases.csv": "5d8c1b0155db6ee85be7fcea70a22125789e87824d6ea1521086e69f01893d5d",
+      "commits_entre_releases.csv": "57c2d3ddb5431ecf9040cdf3d9b2d74fb77611c65dbca2f492ba57aba0c5f877",
+      "tags.csv": "7221e141573044d5fc66aef36830ab92a00d21e2eefef5620e3284a7c8c48844",
+      "workflow_runs/aipoch__open-science.json": "2b43e51c2d2f8e2e6b6fd7c18e45fde8f6b4478963ea67647e3e3570b06c1abc"
+    },
+    "decoderesearch/SAELens": {
+      "releases.csv": "7299c52dc5ef9ee0a831a1a0e8f9c0eae05205628adf6a55c772d8fcb4a82994",
+      "comparacoes_releases.csv": "0002bb8409fae71f87d0a60dd56cf36e24242c896c196e41456988d7d03cde7c",
+      "commits_entre_releases.csv": "b3d2c36f5ab2de7f91c321ffab0f6ca47c8aee949f7b80b19a7a3dcbf62df533",
+      "tags.csv": "123172d036b52f0c4b9fecc90a659960d45412c0ff032511a9eb9e3dd0f68ca0",
+      "workflow_runs/decoderesearch__SAELens.json": "988ed86dc8dbb0ea90ecbc1c1281cd194204256e6faaabaf9eb70062b973bdef"
+    },
+    "docker/build-push-action": {
+      "releases.csv": "7cdfc2466383e0b5aaa12a5e2cdbb98f71a9765773b217779477ce9b422c2c26",
+      "comparacoes_releases.csv": "5dbf42aa167bdfda547e9d93b9e470f6a4b190e2a76d098d291d0e71d515dacd",
+      "commits_entre_releases.csv": "56a45a47c1a7ae2b6e2981a3068d7d4382f994e9e30aefbbc8dcba92ef0dc24a",
+      "tags.csv": "6e6703187eadf45030d788b917f3e0a08db1566a020fbc930ac28d938da26edf",
+      "workflow_runs/docker__build-push-action.json": "8051dd35a5f448336938dbcd1f9427aea4925906d3da1a497591a12c2aed8c98"
+    },
+    "thelastoutpostworkshop/ESPConnect": {
+      "releases.csv": "f72d75c52f2c7f3edafdb73824fe94d04ddf13edf622eeef9a69f243b248ce3a",
+      "comparacoes_releases.csv": "cb58ae0f842f76696da1b39f619918f701fbb5d737d4d8cf3aeb0dd28fa201d9",
+      "commits_entre_releases.csv": "aeb5fab0ad967ed208256350399c0a80a3efe08aec6f1496d773f34de3cc0ecc",
+      "tags.csv": "d5dc3f507d202b1263529c76223d99aa25732ee8dc45e529a6db416035c0582c",
+      "workflow_runs/thelastoutpostworkshop__ESPConnect.json": "87794fb4aac55e95a5eac9c43fcb6454da158ac9280f5d1974324ab851c5ac05"
+    },
+    "godzie44/BugStalker": {
+      "releases.csv": "ddbf1ded341c0b1425e1352a0e1c3855f2a4d14140d3c666e25eb730d746e5b5",
+      "comparacoes_releases.csv": "bac2360d2437953c572d3a71ad8aeab7d69e7f517fcfdf1fc09f120712a12ccd",
+      "commits_entre_releases.csv": "1373b06cf2f5641ab2703bbbab4baba4932e323276d6f8e1a1d7832a11022676",
+      "tags.csv": "16019ac3da168f0a9269f4af7128b71fc788c0cd80ab33b8398efeea7f2870a9",
+      "workflow_runs/godzie44__BugStalker.json": "565ad37836459a99819954eb090b4f7f01f1360caa371885ca260425757d7476"
+    },
+    "microsoft/Olive": {
+      "releases.csv": "a3482f641cd9e28660737d000e58b2194aa8bda9dceee076285bd9449d16cbde",
+      "comparacoes_releases.csv": "12e8cd9fa3c33131db1d720ee6526dc0f329104c0d8ebcd856f3d07aafa5d33d",
+      "commits_entre_releases.csv": "d2c715da8e7ae1548160c93ee06cdaba74f4e758fda19b3c8ecc7624103dfdd4",
+      "tags.csv": "21aa1369c64fc91d0b0cde90d4110edcc159d238708140a88249c4b56bdbd28d",
+      "workflow_runs/microsoft__Olive.json": "5079a9b71397e81c715d2f1c95e43d2ee2a966694d30718b510f2878bf683400"
+    },
+    "node-opcua/node-opcua": {
+      "releases.csv": "738645a370f2c36eeb4dd27c5346e95c013e3f675df08e3f209dc0ff6389a61f",
+      "comparacoes_releases.csv": "32b9f5a6b490dd250cc636bc5ef138436d5761f6a199e5a6ed3dbef21e8905ed",
+      "commits_entre_releases.csv": "24bad98dcc3f4d9855a0ff30741c651da3965bb778f54bb3a03971a5c02f47b0",
+      "tags.csv": "12a62da21c91394119f2d3c573632c6f4d00889e1a4a6ba2303d537ca3eb1c1a",
+      "workflow_runs/node-opcua__node-opcua.json": "cdbfa3c4ccfc1f647e288e0cf20efdbe8716b32e377e55106f99256ddd49adb4"
+    },
+    "FPGAwars/apio": {
+      "releases.csv": "34ed09c1211d5b9b299e7218bc6081890f314317d39ca7c733bcc4499cb08ace",
+      "comparacoes_releases.csv": "dc8e6f9ff17eb37ff5955c9ddd26581ea1a8df2ddf0b630506483d96a04e8e51",
+      "commits_entre_releases.csv": "5ba74ca359ed5d68aff3cc8d752e4ecdb256da0fe036858840a5afb7260b800b",
+      "tags.csv": "69d83a75943ad264d2cd1a1847e74d44aa1bd9dea72a84e60e1c8e350c7c00f8",
+      "workflow_runs/FPGAwars__apio.json": "f1cf0864a80e6146b530f3c150b5d8169659bb9d94802dc613a5729b956b3932"
+    },
+    "seek-oss/playroom": {
+      "releases.csv": "a3a90380856b8e91e26df002630624b6c9c63a85f54a9b0d2a2598c3b70ac1c1",
+      "comparacoes_releases.csv": "cd3544a7ffb026d3d2b9fdbbcd3ea7caade151b519145306cad441b84bc23860",
+      "commits_entre_releases.csv": "fb785fd10d669755ea3ae8c6090d3280283b8589fa4ab80639649337f40abf9d",
+      "tags.csv": "ced1a387b5e67a355a185f095d8a81215cc02c8cb3ab06d53cfc3b4512b38f71",
+      "workflow_runs/seek-oss__playroom.json": "ff092f74794f0b00eadf5581a8f2838031dbb3d1279f8c8bd3bd19feddbeae12"
+    },
+    "Star-Pie/StarPie": {
+      "releases.csv": "11db668f227a004f6c7eac7224e224068ea2aaed2be8a7c6200a2005aebd1523",
+      "comparacoes_releases.csv": "6a28bcb647b8d5cd0b0c604b907adbb975f1b9ab125557c09961a9635b7a3b7d",
+      "commits_entre_releases.csv": "50f4d22dc5aff492434917c8ccd4baa54d00ee8f5ad281708fb61a0c3dc0d6d9",
+      "tags.csv": "4fb77dee4f2a524057db46ae3b7dcb59395400ff8e3f7c7b330fd74280020591",
+      "workflow_runs/Star-Pie__StarPie.json": "d3113842ef5555249e1a6d109bcfe88150a632e062bfb02b90b09ed4ed7d7a8f"
+    },
+    "EpicenterHQ/epicenter": {
+      "releases.csv": "a4702ca4a496693dea534b2a5d24b52924fffbc49e96f46f3cc2e13136347771",
+      "comparacoes_releases.csv": "80af083899381f625b5556f34c9997aac76c22e9ce4b9fc2baec18c278d3be85",
+      "commits_entre_releases.csv": "cae13386c8510acfce8bb670a1c87e29440f0b4e78821e87728740ef73564135",
+      "tags.csv": "375055427abbe9d6ac0a46bbc1dc61d81443e2850515aec07f3c6db0ab46871f",
+      "workflow_runs/EpicenterHQ__epicenter.json": "35d0d24d7cdf8c76c15f86bc70665c74e71dfb7de3aa9b9f158dfe5e428e7fda"
+    },
+    "AGenUI/AGenUI": {
+      "releases.csv": "cbef3e5678e8a05e82512052e48fd0ed5ba054abb0cedfd7804acf1cbd35c4b1",
+      "comparacoes_releases.csv": "135ebeccb2489633cfec225cd45abd880671cf535f94c108c877cc92fe82e7a5",
+      "commits_entre_releases.csv": "e87f01f153db525b98511023e1b8a0c7c9a1d93e2a59b371ba835b9293ad033c",
+      "tags.csv": "f0d062ed656b9c0b83c4bdb2345b66a3d378926547aef63d4796b0e9bb1a6c06",
+      "workflow_runs/AGenUI__AGenUI.json": "a28101fb7a693cfc2d3df53670c26e9b0e6fdd481dcc020073ddeb535de598dc"
+    },
+    "getarcaneapp/arcane": {
+      "releases.csv": "968927ae0367b56b7edafcc9a22bbedffdcf6ff0314f019ef64a73cf53708a39",
+      "comparacoes_releases.csv": "3c12ba17595fa87ec57b2f91e871b3543837077ff3a892e84ff18515ab2712a8",
+      "commits_entre_releases.csv": "7e0878b26dbbde1a5dfa6d7727e2c52bffb0ef942976c44e4f31e68ee6b7e4d1",
+      "tags.csv": "dad836b9321b0b95546a842a25d13063d0cffdd2647bf3979ce91546fbb16104",
+      "workflow_runs/getarcaneapp__arcane.json": "126fc68cab50c0e53963e3c20771249bbb463e7e3c94f3cf2e2fa3aed44ef7f1"
+    },
+    "dotnetcore/BootstrapBlazor": {
+      "releases.csv": "c8451f53479607d83535360ecce09bc106318526b1d4dd14ed901af47fdb1c13",
+      "comparacoes_releases.csv": "a34469be86a277b549e440790bb5330b231e9bab384bc3f59f30e265306b774d",
+      "commits_entre_releases.csv": "99a44b169e8170708749d4b7bb2b20b509124a6e382d9ad23401b04ae9878a0c",
+      "tags.csv": "09ad23c377726b5c95e547fe0a101ae893a84575ac3ad7b771255825c7c74877",
+      "workflow_runs/dotnetcore__BootstrapBlazor.json": "2e07d3e0a9a0e90534ed2996377b7755d007299025be9270aad6bb301feda2f3"
+    },
+    "mesa/mesa": {
+      "releases.csv": "7063b6c188fe8606ada471b0f47f6fe2f7054bfd88214d9cca9be67d308d3d95",
+      "comparacoes_releases.csv": "a48638e90e6763085bd18020214c3d06cdffd8b4f008125e2a195bdb9b30b9ff",
+      "commits_entre_releases.csv": "2e698ed65ca363f654fd09bd43652d0ee35f9df4ba2b9c1ea38622cee810be41",
+      "tags.csv": "de9192e9bed0c05ad2dc6aefe919916bbcc2504c546ca5b1cdd6de0484b60769",
+      "workflow_runs/mesa__mesa.json": "ca4f8e9de7d75d1abe85cc455a6b50b4c3ebdd8f0fe5dbbc0fc2d0b02856f765"
+    },
+    "loro-dev/loro": {
+      "releases.csv": "001afd5450b051d83cf65bf257ecff55fb316b68894921b6c86051c78f7ec716",
+      "comparacoes_releases.csv": "3d169b5ed7a9647842a75bd13dd730961a502f13645086fa37d185a1a2a06168",
+      "commits_entre_releases.csv": "401041ababf93a9dca274ad595c1bf8ad44536cdf02c7c0455acf13b4da03779",
+      "tags.csv": "c42f2d8e06be8e5c504df4ee2a4ca734c9ab12aa14ec02899739629057c13bcb",
+      "workflow_runs/loro-dev__loro.json": "367cae4ebfcafd967ddd0ba79642ae2d454ca3cf69b3b87aad896b92b749640a"
+    },
+    "jenkinsci/docker": {
+      "releases.csv": "5fe4052d9e0a489ecd52df10c69ebfb5abf2f2d7e7f47209194a332cb2d34995",
+      "comparacoes_releases.csv": "2fe7ff143d966c7d5083d8a8c3381c01e6061a99596f0d66ca0fdbe9db650a9b",
+      "commits_entre_releases.csv": "f66ddb2489b9e723ab76e17cabdec4e60f57596d683fd2dbb0b4571303afd7a7",
+      "tags.csv": "86375a26fadf07c40ffb379bfefb0071841e07ad504267a4baded4add85a2427",
+      "workflow_runs/jenkinsci__docker.json": "f196412f3313e2cdcc2dc4388e6a191135afe8a090762ea25555c43c10eea079"
+    },
+    "edde746/plezy": {
+      "releases.csv": "737e1f44b5282bbca67732c4e967dc5331c185aa31e0996ed4031f0d1085f804",
+      "comparacoes_releases.csv": "bb9229d22aad68e54cb3f8551182c0afb918d15a31205a7e60d564be73d64e67",
+      "commits_entre_releases.csv": "6a036e48e172355e662d6dae61f0d1f39333f6364a6a477ff5d6e6a804ea5f4e",
+      "tags.csv": "2ad75589bd39f3ad7b97aaa4fb4fa83b111f97a6f782b9eb0cb5d2eeee8e2129",
+      "workflow_runs/edde746__plezy.json": "67895d4cfafd38b3cf1178dc029c418d3be31ef4bc39157fb2ebe38c5fafccc4"
+    },
+    "Monica-Pass/Monica": {
+      "releases.csv": "3edc4a9d36c113b8497637188e820126a6cfe6a6b1e2c0a10640ef10a080de61",
+      "comparacoes_releases.csv": "107a02edc1190c7a8f336955e554c363f9990660f35e2b98c680cb77cb0be37a",
+      "commits_entre_releases.csv": "459f162d38e263c3ab84644290414c8add7c8f422d56b1057a931a3f2186d913",
+      "tags.csv": "55e97823c40da382e6516bdbb67ba15d3517aa4663208f0404846464b72dbbb6",
+      "workflow_runs/Monica-Pass__Monica.json": "49a16efddcd6a4beb85ea8991ad1c2571ec504302c8454f56b210710363e7610"
+    },
+    "SwiftOldDriver/iOS-Weekly": {
+      "releases.csv": "ae3dfec6d0512c538e65ac0c644518a3c34f8153f49989668d1cc26d6bfb7eb8",
+      "comparacoes_releases.csv": "8682168bdc956b82726b7f8bf64fe7e37c2b99b2d3857cb0aee1158420ffdcd0",
+      "commits_entre_releases.csv": "b039be2bb5f67ee4277344882de8b72bb90dc00525d2216dc5ce65dc3eac40db",
+      "tags.csv": "eae9a3cee196a53b4627750f53154315ce741b6c6b73e52d15f6a110128f451d",
+      "workflow_runs/SwiftOldDriver__iOS-Weekly.json": "986cb238ace9b65998b6be23f75befee073c31d9fef790fa0c2089b4fb2bde06"
+    },
+    "Swetrix/swetrix": {
+      "releases.csv": "82068dd305da4a88fa1c987916ad3cea595281eec28b5b3b341232da56fc8d57",
+      "comparacoes_releases.csv": "c7d5d29c303f9ede0d8fdae1a4f09fb98af627c9b569508ce9a3d6420f3b6c92",
+      "commits_entre_releases.csv": "658cd62cdb1e88cfe54515d3965142351838cb0427da441e77b841110a256c2c",
+      "tags.csv": "2f28acd0c29e619cc994ea900ca22a1d70c8e642c29a53b057e8f2284a6d9793",
+      "workflow_runs/Swetrix__swetrix.json": "8ab271147391fdaac2e9127b59e04af74d59a09eac36397aa2250c0f4d589d4f"
+    },
+    "googleapis/release-please": {
+      "releases.csv": "ef7f2420f1a2b1dece783c23efcb4a96bd194e42778b95a1ce65c3418634ae93",
+      "comparacoes_releases.csv": "49a969b891e523d4aec2ae73de06b5ccf899fc0276ff6cfabcfcadf5f73ebab4",
+      "commits_entre_releases.csv": "e097db91b6119216049b484e6bce6cf61b4892388e4249994504ebf2de394bbe",
+      "tags.csv": "88641dbf52fb22781ec10331b5d0fed38158a968dd50796067c5af9c6c9d628f",
+      "workflow_runs/googleapis__release-please.json": "6c811f3f1d928cccbf1dbd51e3bcaa81d04452a5a129dac1bd403add7fad127e"
+    },
+    "prebid/Prebid.js": {
+      "releases.csv": "26bcfa8605d98df68a35039972094e87604a07e66916d9a0582f7dd863ac8fe5",
+      "comparacoes_releases.csv": "918c6d06bdcc9dd6af1ca360a27aa7fa729d950c01de194f2b77513ab120b274",
+      "commits_entre_releases.csv": "1a24e923c4b7d834351dc3249aca0dc94e754ec886e5dae823ae706772ba6e8a",
+      "tags.csv": "7e8f9f5fa1f1897d63eb02f4d9b90d3cd427e7e721d9dd34f97ac1948e4d530d",
+      "workflow_runs/prebid__Prebid.js.json": "ec109c807e4cb63619f4303efefa9426a3d19ef170960b454f1b52002ff5c343"
+    },
+    "mongodb/mongoid": {
+      "releases.csv": "68f2ab0012ff1701edd39b828a77aa05b0cf165f0c589e0f53966dd61b5404c1",
+      "comparacoes_releases.csv": "0ab95aa33fa7cdc2c725cddbe8e85c1e0d64eca8949945676dcc893f77f0ebeb",
+      "commits_entre_releases.csv": "5e2ea2c86469c85ec58e552f2cf1751c3e4ab07d133ff7ab0415ed988717764d",
+      "tags.csv": "39ea44bddc8ae8511aff8eefb33002ec6fe867092858f3b19996c1562952075a",
+      "workflow_runs/mongodb__mongoid.json": "2f87e4ead5abc457a43608dda8736ba372c46f72c23cb8e95792c24a91bc2d30"
+    },
+    "i365dev/free4chat": {
+      "releases.csv": "e1aa7bb4c7ae62f05a7c0d43af064bdfe322ebcfce77ff566909da459d4ac7fd",
+      "comparacoes_releases.csv": "9d5a5874e45c646f8efd554a20927f92b13bab2ff055b2fa2aeda4cb475d4048",
+      "commits_entre_releases.csv": "07038484d7a4d20d532a4664b90af3374a062dab82fb3e21ed2875403ebc5ad9",
+      "tags.csv": "187500840786c440449bb1969c6300110a5001737bcbcd43272e30e215975b3a",
+      "workflow_runs/i365dev__free4chat.json": "e4ac7891764e9e023efda35aa788e198a52b0b292c33b9e7c367aa84e1eea727"
+    },
+    "davidmonterocrespo24/velxio": {
+      "releases.csv": "716ae50070a95cd9e1a19daa31c4b4a5eb098f5c04ecfe9f70210b6c9244b6db",
+      "comparacoes_releases.csv": "7920fcc089c4d23745baedc101d00df865e99dc696f3b8dae63734ed14e4d521",
+      "commits_entre_releases.csv": "32cfd66fd9e668eabc8d502e0c702ffa93e92eeeb9e4a1171cb9a8074daca125",
+      "tags.csv": "b9d02ae5acef6fb4ef7bd4e806bec6e77bd568cb757b635e7fa3ba60adac8317",
+      "workflow_runs/davidmonterocrespo24__velxio.json": "5a68a8f58eacae95df91e2bd2c9774b4a247eae1e2e7dd648965e72544377894"
+    },
+    "WalletWasabi/WalletWasabi": {
+      "releases.csv": "0ebe95e0b1ec8df9a4d4098e4f6e9055a624d213820aedd5dfb35e8da271cde2",
+      "comparacoes_releases.csv": "28f9f67e507f71a6bc46249076984973d9c7e92e5640b74620e8ee876e6a0ad2",
+      "commits_entre_releases.csv": "1af9dec7928301a832271248d56891b816653e1882be46e8b1b27545708731b7",
+      "tags.csv": "5ebcdb05e2bc1e56f86fa7244e040cf37a0d7a617037cbd98a5f27359139e93d",
+      "workflow_runs/WalletWasabi__WalletWasabi.json": "36fe0b338f537e2340ee35ba78819d197ed0169c2c6cbc4e39f70386589bec9d"
+    },
+    "mozilla/pontoon": {
+      "releases.csv": "ce2cf9a8d778759245ba7b0bf247a8563da235dad43a3e906d1001b9f431683e",
+      "comparacoes_releases.csv": "217fdced71cef67aa0caa6a48526a25a1b9c438711eb0aea350ab7f3b04c7e4d",
+      "commits_entre_releases.csv": "416717307f8ad2831a40641ff608874398fac4cb8e80f0a71c37160c1c9774b4",
+      "tags.csv": "0f8e660fcb9f9fb1ec20dda79396decc5f1f902416f78286974985cfbb1c66f1",
+      "workflow_runs/mozilla__pontoon.json": "94991219df74f8198af4a3cac34a3fb4cc2683e8f3091f00118a7d4c7b33f49e"
+    },
+    "utkuozdemir/pv-migrate": {
+      "releases.csv": "0afe6612d7e6969b967bdc822c63a16d56d435169d9028378b7c9398b267d6a8",
+      "comparacoes_releases.csv": "0fcdc1b2459119912f6d598f63a3413c0b03e91cea2934eb3581d5e9eb46ce63",
+      "commits_entre_releases.csv": "46e123f0b5401140be960ade775d7fcc6d2f40b36697e2c09378758fb2624804",
+      "tags.csv": "fa833f2ab4f6e7dacf019e75fa5e4abc11365e8bb9a3a420f9830084145d15c9",
+      "workflow_runs/utkuozdemir__pv-migrate.json": "cef8d120ca2463c56b0081ac78f09d5431da176d87cd8820cb89b8642a8eb525"
+    },
+    "cooperspencer/gickup": {
+      "releases.csv": "983414e3cf5939b07615e3c847b92c30df1752566e2c0721621c87065a890800",
+      "comparacoes_releases.csv": "9c7d331267bf2454cb5ee118e870697f617f5ef9065d693c8a9e15d0203fd10c",
+      "commits_entre_releases.csv": "04ac57f5d570fd77311277023679a4c92ef7dd9ed00d791d32996ae7727d16d7",
+      "tags.csv": "dac1ab9ade55290d3ab14c8fc90713fca774d46b1a80e7fb66569e4bb9dd784e",
+      "workflow_runs/cooperspencer__gickup.json": "c05723b1ccea7569a8acde0f81578134db686e654c9e3155e8b4d7f5ef0f8a15"
+    },
+    "ev-flow/quark-engine": {
+      "releases.csv": "969135aeac19763f52a5d4a27008b2a16764d96f41c5bc45c39d0c319d196c66",
+      "comparacoes_releases.csv": "d30b2aa1903d14d0e513ffe5a15b858d250f1aa79f89ab75633a384b868d41c5",
+      "commits_entre_releases.csv": "cee2552bda91483a5644629e8cf9389ed21d954e74b3991bec501858c23c821b",
+      "tags.csv": "4f3d44d289a9c4112346d3954e4e785c5e190b00fc0ef13e22c33035640b6ca3",
+      "workflow_runs/ev-flow__quark-engine.json": "2a668fcb3b068b7ce3a807d37424d5dcf405f9a4f09479035d8859c0b32928dd"
+    },
+    "sysadminsmedia/homebox": {
+      "releases.csv": "15005fa564449b557844fd0aec49c07ea889f34b089f9b731989952bad820273",
+      "comparacoes_releases.csv": "1a2e6c15407d41c8a4a0ae3c0e711913fc6f78caa0f8bd0d40fe780e121b9577",
+      "commits_entre_releases.csv": "5a3bdec1b3891a915490753eb92bd893f329a00a0528d03ed54910a0292b9899",
+      "tags.csv": "923ed8d329d67d63453a7a51b1c05299ba9008d4393b94a0ca6f49e007e238d3",
+      "workflow_runs/sysadminsmedia__homebox.json": "6061d64fe1e166afc5a9c21ba947a05b1dd9920a3f198f2f25cb66acbfd296ce"
+    },
+    "nanostores/nanostores": {
+      "releases.csv": "34853b80aa34673bde6b6119375d5e1aea92e21b32145b8f7926cc96692d322c",
+      "comparacoes_releases.csv": "a9e7f64b1ca91616284ca7c8505b7240cf869203a6c69b30168b57843f6e38e2",
+      "commits_entre_releases.csv": "38266f33f7b0462abfcf172631ddf854438fb963c65b428ab8354a9dff97fa09",
+      "tags.csv": "8c9cd9a9a0a4af5bf0f19f778389632f530cced46cc3bf842c4afaa9e9fdc420",
+      "workflow_runs/nanostores__nanostores.json": "bd790373b116b23d0dfab5aaed86b7e872fd94ab0935c5a223cd982f1d958344"
+    },
+    "hydrusnetwork/hydrus": {
+      "releases.csv": "6602674424f2a43dd97798e49c8966a1ac2d1c0d59e27be47612ecea928eeacd",
+      "comparacoes_releases.csv": "c2350e9ae531557e8ba1321fb75259f9944e0044ea71b383a7191585a753eb71",
+      "commits_entre_releases.csv": "6e1e985a431257d81223389ea67ba878db6cb3a4edf6485f458fe9d86a998495",
+      "tags.csv": "147cd7e300aa8775b5f9ce6ef6ea3e693feef9776116877718f57d575077efcf",
+      "workflow_runs/hydrusnetwork__hydrus.json": "923872c96f124ae95569dfea8bcf92022ef99d17a0b65c1f2bdd2a68fed81218"
+    },
+    "mivano/azure-cost-cli": {
+      "releases.csv": "7880b0597204f181fe3da29f56f4504fbca4a072a75581c078b31bb6394a0b88",
+      "comparacoes_releases.csv": "7be1facaad78945c1356e7e802de9c5355d76a7d69db5bb62b751eb94ea05164",
+      "commits_entre_releases.csv": "bfcb2fee2435542c0e58bfa475a947eb140cf791f5d9da15452f8dc58d7f1a82",
+      "tags.csv": "71d60d53d5e07faef5b5d1ce724034e56341e7b476271790859202ecc4972612",
+      "workflow_runs/mivano__azure-cost-cli.json": "4c768ca56feec71b8783d5de5b2f13c9b6e54403ca3f7e464d80abfcbe2e3871"
+    },
+    "Darkatse/TauriTavern": {
+      "releases.csv": "b463de47eaeb2cb349b341d010e41c9856caec60ce600535d592123c74837e2f",
+      "comparacoes_releases.csv": "ab7a446f7e5fe20d29754552be6365a18b0c6bc9e9690c218672232573e9a9ec",
+      "commits_entre_releases.csv": "9adb020c040e1c280f904ea48e9f949ed981393cb8547602128d933e44f33c11",
+      "tags.csv": "0c135131efbb1df311a19d6de5a723e1ef0f8d701fe07a938284c9d8382a6522",
+      "workflow_runs/Darkatse__TauriTavern.json": "3ac8779c62fde6c539eb8d7e1ac1113e6d0f0a4b068445e2a1cee1e059a436c6"
+    },
+    "tamnd/kage": {
+      "releases.csv": "7c214dcd28a7d92fdb6d89cf39d1675e06c102bec995142a6dd3e7ee0806bfc6",
+      "comparacoes_releases.csv": "a6f7cf1b89716977cd76ac872deba6062885462983d9f655cacc2f0156fdbe86",
+      "commits_entre_releases.csv": "44df30933bec278d82fb143367522096fb9f83975215d0c2a39229dc9b143c28",
+      "tags.csv": "a4c50d02e952e074bf23520701b6f0206223719b19d0f95085ae83938b85cb01",
+      "workflow_runs/tamnd__kage.json": "1d83e955c28e894098abaa6d2247956c13a299146e846dfc39997324999dc2c8"
+    },
+    "MichaIng/DietPi": {
+      "releases.csv": "a9adb3668df24158251e37c430d140251e070fe06efb3322fc016a8c5be7a5ad",
+      "comparacoes_releases.csv": "2dc663915a29c4a747f4aac776ab46af2f96ac27fd1b7b27a35504f9d73628b4",
+      "commits_entre_releases.csv": "505c8bfd7d8b3f9ac877af9444f4cbd890e0d4479f3c75cf0faded7c11ddd1df",
+      "tags.csv": "51b16d30e35815e328b0705331bcccc9af46f8fe9a6f2a3a5c6e4fbb900fd8ac",
+      "workflow_runs/MichaIng__DietPi.json": "7933dc4af3e396543a30926a41bc79f3edcc9366d98c483dd12c6d4173cde2fe"
+    },
+    "htmlhint/HTMLHint": {
+      "releases.csv": "ce2f00fb8a1fd95a8628eb33289733aa6703bb0e105cfaa9cbda3b57d5ebd8e5",
+      "comparacoes_releases.csv": "2c78c1d139b7b2cbcd42d95fa18de99e39d16f1922fc724ca1ff7fa57000d94c",
+      "commits_entre_releases.csv": "c0341be06721dedc7d138adc533e473c45060191207053460a60e81c4c7bfbad",
+      "tags.csv": "d8c0f9eabe9d9dc9a8c1ced112a93633630eefc0ec4d9ec0ae7dbccc6bfb81f7",
+      "workflow_runs/htmlhint__HTMLHint.json": "09c791cf34c66b5d66101272e6cae3dfc6fd70a6415414fb022efd8e170091d7"
+    },
+    "inngest/inngest": {
+      "releases.csv": "ce7fdab492cfa21e723fc01f8fabd8e64eb6ffb794e41dbd0f9a5690325bb94f",
+      "comparacoes_releases.csv": "f23c4eb208c9e45dbf68cc392480e2989614a47ca95f14c980506d70bc7a2bc7",
+      "commits_entre_releases.csv": "361bf08abdaa5a58daa277fea5389e24208bb4bc6e3b6f325a55a12e9447bd4a",
+      "tags.csv": "6059b496544d0aa4072490c26e6dfbb53bfccac9a4081e4b1d59e212e760cd86",
+      "workflow_runs/inngest__inngest.json": "e20869eba6fc5ce3d246e869935b216bcaefd6687b6377be8e19f77a8920efcf"
+    },
+    "aidenybai/react-grab": {
+      "releases.csv": "36b7a7e108436b9f7c26f400238e3268e063b1ff7318bb0d1b06059d114777d2",
+      "comparacoes_releases.csv": "ca96b8d99a3756ae77c797fa15512d9ffd80a625243eda33736723b79afffe7e",
+      "commits_entre_releases.csv": "5592167f3b752f018afda4c0900ce4cf5c24f922f53537f7f27ef595be9f3bc7",
+      "tags.csv": "e264dac0e7bc20746ab9761dd6ab780ba03571cf02e5d73602d2ff7b93d18296",
+      "workflow_runs/aidenybai__react-grab.json": "eb75df2851d230ee33dd66b760ff87b32480851a8a49ba64f2bc8d2850595f13"
+    },
+    "usnistgov/macos_security": {
+      "releases.csv": "4feae245337a5147505885f20df397b94888658f0f7815e57654875b292b57c8",
+      "comparacoes_releases.csv": "2cf09dfecf26d59e7c7c833e9c9f5099c24cecefe3615e8289a4106dc229433d",
+      "commits_entre_releases.csv": "224e6d797ff442c192f7c937c1a1ea2f27f84aacc10e68733c9b7d80143c0789",
+      "tags.csv": "eef38fe4c9933b2d7ab8780615bf6d5046d8ecc6ab79073f61db4ba05667cb5d",
+      "workflow_runs/usnistgov__macos_security.json": "5daab5c9486b68bce3a790e4f0279384ddd1711394fe189b4fa6f5f011097efe"
+    },
+    "meta-pytorch/botorch": {
+      "releases.csv": "bfcdf895ec66a4b28145a3b96107fb1149c4758f6be1151e5a388e063708fd32",
+      "comparacoes_releases.csv": "bc0733b3852f0d47a7b457f26a7768f778fe3c16c913af24ccdb19380d4fbd2a",
+      "commits_entre_releases.csv": "4e70a3e5a317f93997180c65c1141c1ae068cdca4fec89951b535471f9fc43f1",
+      "tags.csv": "7348f4061831b73f6e5cf1b0a816f163933fac3910096d2a61f91f7a6552c08c",
+      "workflow_runs/meta-pytorch__botorch.json": "c6d66facb09a97709fe6f2377b6568119ac8f5cc270a304f2607e893f173ca1f"
+    },
+    "project-zot/zot": {
+      "releases.csv": "356535ecab88874818f93a6604bc84bbd21af18e14cedd70991ff24afc1a7746",
+      "comparacoes_releases.csv": "f04263a14c9dd4e1778ede180c559f723a935feed7df6643b558e1aa1da724ec",
+      "commits_entre_releases.csv": "8c4e9757edab81a1e2c5c3ed83a963f93a4ddaf8fb4fdbdd8b9507f7f7109dd5",
+      "tags.csv": "85f514040a88ebca563e78dd90cc16fc4ebf58cd0d4176ceb1dc3f02aecdbf47",
+      "workflow_runs/project-zot__zot.json": "802dbca6bee7bd7001b8653cfa8f292195bcecf6e737133a30f94fe84646a3e5"
+    },
+    "uber/kraken": {
+      "releases.csv": "81077df20616959424c1b4928839c1f3e17688e11d267253a9ef3f0ae2cc67a0",
+      "comparacoes_releases.csv": "6fb6330b4b0e5809fdb6bcd00074c589e068a9133cab7ac1c727172530f384cc",
+      "commits_entre_releases.csv": "c1648255526e12188b3e2ec837edcca157861c47a17dfe5f466945e93cc7fa65",
+      "tags.csv": "c8dccca46b963f088b249eb58dd22eeef4f21c0f28843972c414977fa585841e",
+      "workflow_runs/uber__kraken.json": "0ca928b40ce88096c9f14c61a43ac1c1289a93e1d04cd8ace3b4c7818f816571"
+    },
+    "awalol/DS5Dongle": {
+      "releases.csv": "518f9f37c39bc295ccc7ba9a7bb984f39a7a3175aa8f514c45867c1a72cf48a8",
+      "comparacoes_releases.csv": "a231799f910184d68dd13e54755e9bfc96f0b8a29982d12e2c27d08d9f1a8263",
+      "commits_entre_releases.csv": "59438943d21dc1c1b5bc0740222d9e1f8ccd636dde04f6280382a190c9962fc5",
+      "tags.csv": "5cb467f57e4d55ff3c842fab1c16b204708167586183c6477f1f640aa2fb8726",
+      "workflow_runs/awalol__DS5Dongle.json": "f373cefca52b00db788b766dae2314bbc90a2bd6662a42877795d0b220ac6eda"
+    },
+    "WiseLibs/better-sqlite3": {
+      "releases.csv": "3905545bda39adb0a844989e5a1518e12e9ac1fe6e0c1c7825fc5b416b9a5174",
+      "comparacoes_releases.csv": "cef83284df2fdbc09f6d5f1956b4eaaa50a75eed44b39f29e57d3fc2a554a4b9",
+      "commits_entre_releases.csv": "8e427ad025c42d3a38e22ab1724483f2ddef66b7ac615b9279e40024c08165aa",
+      "tags.csv": "b473551ce2faef5e11bca62424082626cd41688ac1549d55db21e1efeb99fc8f",
+      "workflow_runs/WiseLibs__better-sqlite3.json": "d5a2201f9c2e336a5e21fb3d8ea9868f5da7bba8299f5a1fb313b0de2110e8ec"
+    },
+    "Shopify/remote-dom": {
+      "releases.csv": "133e4019c76237381e1a894dd5d32e915ad7aea3e26641d03a2c59ef9549a29f",
+      "comparacoes_releases.csv": "6615c4ca765127d4d643cfdb03d7b79bd1333a57eddb8acd9cbd9f21bfd3ff41",
+      "commits_entre_releases.csv": "e08920d323080c2cbd25f55c2faae9b62d42a07384da5bd2200b44c0d536d123",
+      "tags.csv": "d994957aa79e78ee577499f4eb8365f2ee50d5b2b038705c90263df55417c5b8",
+      "workflow_runs/Shopify__remote-dom.json": "fef80a00a7c6b611c92f11faee622f2b007dcc3e0578808878a6b0fbb0bac626"
+    },
+    "ustctug/ustcthesis": {
+      "releases.csv": "e63aff63f51e5c6d0be2cb2346fd76486e9c4d011c64eb13a3c6ad637aa36549",
+      "comparacoes_releases.csv": "e8ee757c97a31da480d79c6f7a7b0a9aa34234abb8ef010c1fdb9ff905f97cba",
+      "commits_entre_releases.csv": "317362f053d335d111b4c297fc8ba17bec371325e1ed25108ea8b0e7471eec2f",
+      "tags.csv": "c287b62ee8ed54b2c7c7d26b8e7091288a4c9a11d68e1336121f8520a794f2b5",
+      "workflow_runs/ustctug__ustcthesis.json": "8c218a0341b6da75246b64d690004ef8800872c3d34c79027fc249501915f50f"
+    },
+    "vercel/ai-elements": {
+      "releases.csv": "df6db40683df5b6ae2c11f6f3343f5b832cd946515079622189d7b667e1815ce",
+      "comparacoes_releases.csv": "1185fb128881debf0225c603a07896f8294aeea8361fd48b94dbece6ebee350f",
+      "commits_entre_releases.csv": "79d59e56360e1636316a1db7fd73f5a6446440e5cad8b3e7206a8fb4fd4ae8fa",
+      "tags.csv": "7293905d4a93794f7b4e5e27a42d7e4fa6218c7401dd23b523c43cd2d93ed3ac",
+      "workflow_runs/vercel__ai-elements.json": "9ca6fa098b7245aa6fb78efc86dde8919aa7ad7d001eaf38cdcf1fbe8ebba67f"
+    },
+    "sgoudelis/ground-station": {
+      "releases.csv": "56d7b19f6da1c619979739518c7a8933de95ba10d2d2eee8e4dfc0fd53333b34",
+      "comparacoes_releases.csv": "eb82025d3b7c8995cf5a2772e74a814e1978c47050f4f9f20512f833458b3203",
+      "commits_entre_releases.csv": "709cb5aa549c77a7204f7fc1f3e5dacf034fe48d6a05534ad0271f9e0759130e",
+      "tags.csv": "666f2b0a92e947574b071d713c655a79ca78a16db0cd23db833290c587f44fcc",
+      "workflow_runs/sgoudelis__ground-station.json": "06256d93219dfa74160e61e9824fb5f14490ed7a8609b21ddb1d1990310182e6"
+    },
+    "actions/cache": {
+      "releases.csv": "b8c6e17b5ac784fa31b38591b5426eb54c3cd3db435f31dee87ff260cac600d2",
+      "comparacoes_releases.csv": "3f35a1f0e16760c998a549d262332cb1abf7cb6988a8e5a99906f89fb1200291",
+      "commits_entre_releases.csv": "045032079b30e4ee6e11e793e65b87e35d04d7eda11125d970610cd0becd9378",
+      "tags.csv": "15c873d4ec4c067a674e88b9db7810dc560b11f6d1ee4b8e35093104ee0f9c2a",
+      "workflow_runs/actions__cache.json": "ac586212dbbe3752064a8eed7d99e858dd9f20aa4f22a91826b9b2b59c7227be"
+    },
+    "pymc-labs/pymc-marketing": {
+      "releases.csv": "8911113fc7758d4ebda2aa16ad621fe9e33b649bcc8672e7779aeef94e85ded5",
+      "comparacoes_releases.csv": "430d16694238528d77c40f68164e4049ed08a0910a4903f27f54c71622a975e8",
+      "commits_entre_releases.csv": "22e2e9b011bc756d32de99d152747a5661752fbf8d14472e22b9430085875c22",
+      "tags.csv": "c500c652ee4f8769c5d16a1255a1412a2d4211dc7bbd02013bef09761e1da6e3",
+      "workflow_runs/pymc-labs__pymc-marketing.json": "7457f4c96c1b4b9768ff2c30a55864bf51b70610c1c4f452d120d72cbfd4df11"
+    },
+    "ghostery/adblocker": {
+      "releases.csv": "a1e12703aa4b348beddfc16897a90c8598607e1f36bf1a77c069f5d97a5dcdcf",
+      "comparacoes_releases.csv": "7a56d41053795cc5ca6478ae5badfa067ae24a232dcaa551c7008e4d5815591d",
+      "commits_entre_releases.csv": "dd3cc2b5f7e3c3500fad19dc7be7010962cdec077af11cae721e72c55adf0639",
+      "tags.csv": "c117c1869994f04705a2920da3e7e46b235218004a316809b5f39f98ac32df02",
+      "workflow_runs/ghostery__adblocker.json": "b717fa5701c1dbf57b5449caa84ae62071d56dfe35a51119d3daa9123f165ea0"
+    },
+    "omicverse/omicverse": {
+      "releases.csv": "07946dd7bf7073974f4586a92108fefaa2292306355023b86fb8f4aa65268d2f",
+      "comparacoes_releases.csv": "5b2a5fcf9c88d939923b2fe7bb16bf55ed7eeb73a5e0993fc784c02a59495a75",
+      "commits_entre_releases.csv": "5691455008a0365d209cfd25491f21dd04dbf90e9fb7ca05eb06d4b3036c8413",
+      "tags.csv": "eeb1bcd248e239cf50e5a6d89c837d99b9f4822edaae88ed86bb1970ee591d6b",
+      "workflow_runs/omicverse__omicverse.json": "3b117136716b0dac4c422e459e01a34da5a0f8d5d2e7f9522f69e668fb18551f"
+    },
+    "simonw/sqlite-utils": {
+      "releases.csv": "6e9518f569ec10e92ea034dd05fbd9bd49310efe199c917084ea89d04f3ae482",
+      "comparacoes_releases.csv": "8743af6cc2504120f14076d180ca595502f6ccc3aee7ddcef6799364833b1bb4",
+      "commits_entre_releases.csv": "050207664c4333d8b0211ecc197a4be68d8889ab61c5e0c5f9fa93ee84798acc",
+      "tags.csv": "035a3ef7dbe6521564f029743ad6b0f1904e53aa0d22b5c975334b0a48f26238",
+      "workflow_runs/simonw__sqlite-utils.json": "6483d0db9d7b25af3884a2f89e82888514d06c26681e1bf27fd779eec9d2034d"
+    },
+    "guhcostan/mac-cleaner-cli": {
+      "releases.csv": "695e20085dd90248cbbb5156a7323b0f7f622bbd5fa0af5c1e3d536e4def0bf6",
+      "comparacoes_releases.csv": "22932e3d99213c1eb0b5ab8c2213937be632d805f37d768a7a14c0e4470fd6e3",
+      "commits_entre_releases.csv": "5b40fbe98efad89f0fd8fe40dfe971c70d6443c5c57af3988f414bd6f6b83bf8",
+      "tags.csv": "aefacdc969f42e9638b7783ed37b8c23e121c5c91d09d24eee7f4761e0594733",
+      "workflow_runs/guhcostan__mac-cleaner-cli.json": "a4a7aef1b86d0916b8edabee000e735e6a84fb4cf182ae93e99414b3d86c2b8d"
+    },
+    "hlorenzi/customasm": {
+      "releases.csv": "c8ffadb4fb7d80ca4db615da816b15042a2ace7b5793f4dae3ab0c7d9b98dd55",
+      "comparacoes_releases.csv": "691a380c1808696299264273d76f540b1b9bfec9b2bb9faf49d4e8f646175e36",
+      "commits_entre_releases.csv": "86afc91d53a07655273998b439911631158ca6ca63b81d6e2a3fbe4f92174aa7",
+      "tags.csv": "19dc705c61c4223a8e02b02833450d6b81954821a92758c6daf995ec9ea0bd15",
+      "workflow_runs/hlorenzi__customasm.json": "b944048b06bda5e7913bc6f79ab1a7682de3507003461155f72415d58ae3f87e"
+    },
+    "zts212653/clowder-ai": {
+      "releases.csv": "f6f11d0fe2e4560ea672d93a76eb06cabb9d692c5d72756537c868dbb78eb655",
+      "comparacoes_releases.csv": "e7c56227015df05970652f03130dc6b198f6307535bf9a759a373c7d2b1a8c12",
+      "commits_entre_releases.csv": "9959b22a5beda0bee1c485a1c5b91fa04294482be2b119b84b6ae2f9163c5c3d",
+      "tags.csv": "596ee292fc248afa413cce3fde024928205a7adc801acd55542c87d5b97606f5",
+      "workflow_runs/zts212653__clowder-ai.json": "e09fe535c0fa3ac3f89c109c71366fdeaeca6cb3aad8d704bf6f3ca9ad3a6b1b"
+    },
+    "christiaangoossens/hass-oidc-auth": {
+      "releases.csv": "b86bf31596d75cd2f703b61159ce35b1df5194029a1b7622172815200a2157b8",
+      "comparacoes_releases.csv": "ec02d2d5927baac8ff56453ddac5708371da76667a8f4b378ab4b626d07f0a7d",
+      "commits_entre_releases.csv": "0c2e0ed0be72a054f3bf91aa7f62f66aed82ed6f4c008cf8b477b4f3a61e87d0",
+      "tags.csv": "04fc469614accc1890c929850cba8caa2306427f69e8db616bc279a9b78e1f7b",
+      "workflow_runs/christiaangoossens__hass-oidc-auth.json": "8070872013e87d08c92b2399631c3e44ab20ac23470c105680b6e4028a4c9ded"
+    },
+    "4thfever/cultivation-world-simulator": {
+      "releases.csv": "7f3f2cf3e449ebd950272dbcc5ab792687f6e2357c8f886fb42e10a26238bd50",
+      "comparacoes_releases.csv": "be224251a3a1513b2685e72c1e888f0d1e4d38bd2d36acc0b456d239f385f013",
+      "commits_entre_releases.csv": "4b451d648ac3ddb38a448fadead2373588fece5664cf87fe44c1976c1be60600",
+      "tags.csv": "10150d9e76461884ef4e99b11585fbd0572deb07220a7909d1f607e0d0ef8b67",
+      "workflow_runs/4thfever__cultivation-world-simulator.json": "0ad61c06bf59e8cc5ccaf1642c084e8ff0f6cd390199d5ecfa77aeba66db2cf1"
+    },
+    "rachelos/we-mp-rss": {
+      "releases.csv": "cdbda680e8386b4852319516d0c59c62b1775eace0fe5de5c610a2a02da2e762",
+      "comparacoes_releases.csv": "d9ad8b70932fd57b36719c60f89e56c47a757eefb8d4fbd00cef045e7d50e5a2",
+      "commits_entre_releases.csv": "b136640d74286c751c9e58350185f3ed464314ac1240ae649a0f10af13d6c2d4",
+      "tags.csv": "238bff4027129269cc538ade2751cd6787562779a1fc85f91a73780edd6403ee",
+      "workflow_runs/rachelos__we-mp-rss.json": "d0ec30eca93666cb5642b2b6480ac9c6798109485440dd6a2eeaaf6bdf46dd50"
+    },
+    "cozystack/cozystack": {
+      "releases.csv": "1d0ac030cb19126039d430d1e81fbc0a8aabeb3c1253a1a540b4b1a058e5db18",
+      "comparacoes_releases.csv": "c903ac1cc60c562c313f452dca2802f367768003bd32c43c9fdeab6d70e9d0ad",
+      "commits_entre_releases.csv": "01629c7ad3fbc466dbdaa6c6b849a3c1267e93bf12f8e70ffada91fc7fe3b2c8",
+      "tags.csv": "09473597e0c133cdca9b09a2bdcdf44a5bd43f8cb3c4709af8bbb3fcfbffc306",
+      "workflow_runs/cozystack__cozystack.json": "80cdc06c30c1f3379da83cbe5bdc35d14c00f9a03f9ede1d0dfc76d1594aa4fb"
+    },
+    "reactnativecn/react-native-update": {
+      "releases.csv": "4971d925b64e58b238252c372edde0675d1a40f8f0b7bac7f8d0024a719b0fce",
+      "comparacoes_releases.csv": "d2a7c28421d3bbc8f93516d1f8d302ec946e2a9348c5d8199469a70a4010a731",
+      "commits_entre_releases.csv": "4b1e3ef941e740b334e089d49fb23e3861fe00c368a60db22868d9c6ba249366",
+      "tags.csv": "7e6a6d40535597c01f2e7036fd464978473b3ed276a7f698a226195ae8acaf54",
+      "workflow_runs/reactnativecn__react-native-update.json": "f2899fdd46d78bc27d8ce9f38e68c2c662f7acb8968e71e382ab238ef96a58f2"
+    },
+    "scalameta/metals": {
+      "releases.csv": "d46d913ba7ec99ea3736fd2f15cc77977950cc794fd44856a963102074823c12",
+      "comparacoes_releases.csv": "cd7eb785342e6c1afcbe8c1590b215a7b263c1b8750ebaab683112da69cf3d5e",
+      "commits_entre_releases.csv": "9cd0a5ad8359e3c6ab8baaa026394dde6757d4db2f27b9dcca9f2dbf78097700",
+      "tags.csv": "bb4bd7efa32415f2cdf38b7371ddd35e8922a9a0dcdc0db63990f6c38fe8896c",
+      "workflow_runs/scalameta__metals.json": "27893eb49482a59df36c660a18306a18f2400b06a3028e1cee4d834ee073b13b"
+    },
+    "TomBursch/kitchenowl": {
+      "releases.csv": "9b946a955e17d9a75eee9ed35b122d40e136bd78797353680df4ccdc9c8f3b99",
+      "comparacoes_releases.csv": "fb0043e194f736be5ffb5484b6693a47779c448ff7d873ea8a9aa3adcb10f04e",
+      "commits_entre_releases.csv": "1b1ca4b8672fb5d00730daae0fe016875ea6aee81dc60563b86e9e79872858eb",
+      "tags.csv": "f9dd2339f102f46f2201157b0b585070f0d3a85e56a31845906dd6a531ae8997",
+      "workflow_runs/TomBursch__kitchenowl.json": "826001955fd292b3410c62d82d16eb1e36d299002b17ab05842d9bae36f1cdd5"
+    },
+    "googleads/googleads-mobile-ios-examples": {
+      "releases.csv": "4813a62058118ccf4db05a74428f084bfdbbd54e9d4d2faf61b45d1f5553d640",
+      "comparacoes_releases.csv": "539d40632338957e5e7596d246a01eb7cd270f13ec5f0b1c85d7ba5c2573b787",
+      "commits_entre_releases.csv": "7fdf587a6970b955e3254d9739b0427450f200d953cd4802179cdee420353454",
+      "tags.csv": "7d03fb12738634cda72f34cdfc87cf8305975d73bc9e8ec56b82f3467168db1a",
+      "workflow_runs/googleads__googleads-mobile-ios-examples.json": "1dbe254c90291dfecb45f787b56f5834039e952fc7bdf10dfb48bc365d2ea661"
+    },
+    "trifectatechfoundation/sudo-rs": {
+      "releases.csv": "9d6c79752b91a95e989a60e6d239d5f774f5f7114e56db5a8bb99b1fbc99d191",
+      "comparacoes_releases.csv": "27294a90a53844fc48c6ea9987f8524f82ee98d6fe2b8d6e72fc55384f3d513d",
+      "commits_entre_releases.csv": "1f89e0075765b844306176ff333ddf0c33c0fc4cbf52b2f13eda6214a6328119",
+      "tags.csv": "0c87e69b0a60b4a790478df8442a9e7387e112ecb3b406c7c245d81a997019a1",
+      "workflow_runs/trifectatechfoundation__sudo-rs.json": "e8fb82f8828cc2d472b35099d4b8a87f74c93f3332e409e5584126dacf2206d2"
+    },
+    "kubeshop/testkube": {
+      "releases.csv": "71611c3b57f7b6fc65987114d7f4e947171e7f6ebf14bb6957ca81357737b58b",
+      "comparacoes_releases.csv": "19a5c03c091a9de3cef67c294ba234d79594994fc1ddcb5131aed0e028e21ea2",
+      "commits_entre_releases.csv": "31bab5a34895d56327619ce11bfc8278e9493391e8d3e137512343a74cb0106f",
+      "tags.csv": "5dc06c244f16b49c34b0240c27cb1ecf5331217bdb7b6cf58e03ebd032b0d4ce",
+      "workflow_runs/kubeshop__testkube.json": "615e9ea430db19fc8a1c01b679865e23d99da583e057a1af413063f467de6fa6"
+    },
+    "SChernykh/p2pool": {
+      "releases.csv": "8fa1cc5082c3a8565a7c7f61c53137d9280af0a40f2a92827eb027245cdbc015",
+      "comparacoes_releases.csv": "064f9ed537ddb020048a41c01fe4014f441fdc41e6fb3afc74ac68207e731d76",
+      "commits_entre_releases.csv": "6e299ae78b9d4148b5dd1d3add732e54da8285c8c1b20d4a8278721788d86053",
+      "tags.csv": "836407aec5097b91ec7fef7f8acda66b9db46ae5ea7539e29ec4c80d6d00a52d",
+      "workflow_runs/SChernykh__p2pool.json": "7811382c00382b6ef753fd19ac849a6686414d320b5fe62b703b5421343fba7b"
+    },
+    "remnawave/panel": {
+      "releases.csv": "96e5f18afe1a99567931f4bdf9ac23d7b2f07e3d333f565e414fe92ffd217b7a",
+      "comparacoes_releases.csv": "beea5174687e774b539087750d5b1fd043d4db515b478959f25cb158f6708c3a",
+      "commits_entre_releases.csv": "0745c2da4cf914070561fdb1b83dc6630cdffe7fbfd835984a88a74a567affdd",
+      "tags.csv": "806e258eff340b13b7693d6b47293847f6b23759349ecb0f277e7b68dea20c7f",
+      "workflow_runs/remnawave__panel.json": "655c7175667c1b7a157116ecc002965c8f045af8bdd3a097edf7a89cce5248f5"
+    },
+    "murtaza-nasir/speakr": {
+      "releases.csv": "1919932f61bf103a9f5fb30130f384e66c25cab678d99c6b21a8a9fd5801fa13",
+      "comparacoes_releases.csv": "aa49fd09ab7e3598e4932104c9768acd80dd215f73a10c39e6431fc172e250a7",
+      "commits_entre_releases.csv": "783c9cef6600ab4d773b1da40877ab90971656de82613855430caa78df28a20c",
+      "tags.csv": "7a4120850760c8c219c4c035b2d77c50c1c9a727e4758807304f79ed7a562ad0",
+      "workflow_runs/murtaza-nasir__speakr.json": "2fb5315cc8bc2ca20b68c97bbecb92c0d11b85cb5e75ca71783fac7c1bcf363a"
+    },
+    "Ylianst/MeshCentral": {
+      "releases.csv": "95a61ccc5595b179d43a3c717dc35e4aade96b2bbf57d33f533d2e9249d43701",
+      "comparacoes_releases.csv": "0aa0621b135d900831d923f682c178840f275aa7570e0fc52b8f7030739f8c39",
+      "commits_entre_releases.csv": "af65c69e3ca1b7f51bc52d876871a0a74643e718f8d1a82b602c88470a3f45ba",
+      "tags.csv": "16d794125eb51559e164b0dbbbdf5ae7d2df66e9d24ba8468df2d7d79f88e130",
+      "workflow_runs/Ylianst__MeshCentral.json": "f1187e54ee5a78bc22ec38df7bea45c3f705f859e6b151b8de51ff163dc95f0d"
+    },
+    "MrLesk/Backlog.md": {
+      "releases.csv": "49f205846b50486fbd2348300428f310821c3806a73c6bf2b42a4abd7aff96b6",
+      "comparacoes_releases.csv": "0e6747562daa4051e0dc6d4bd36c5dae1e6e61b582d7f066a2f18c6e9687bdb4",
+      "commits_entre_releases.csv": "d793b8c98e688d8a7e6d27322fc4f60eb102614219f26b7fa7c46f3537352b1c",
+      "tags.csv": "572788b54d7d6eeb0e85eb2796144ece1d5246f0a56ef8c07bd8ff8de9b58bcb",
+      "workflow_runs/MrLesk__Backlog.md.json": "431228137b0c7b3e4f212fd48f0b2cf1ea1db33d6ce8af54de44604b42489522"
+    },
+    "oetiker/rrdtool-1.x": {
+      "releases.csv": "d10125542efdefc1459329d3ea1986e6962995ae9f120344bd4ff73d5c8e4cb7",
+      "comparacoes_releases.csv": "5425071f016b06185682f571c5ec1cae34a725984029dd738cd835db39707939",
+      "commits_entre_releases.csv": "d0d55e396c88ee3b30d1fa4fad462c9a177f5b253c7a362426bce2eba74eb53d",
+      "tags.csv": "7a7aafd89e6c5f5c46016017790e589edf66d4b1353582b5c996ffb8906e54ef",
+      "workflow_runs/oetiker__rrdtool-1.x.json": "61390c5457376857f38e4487b1dda79b709f932bce630a9aa433c25bc782d25f"
+    },
+    "citation-style-language/styles": {
+      "releases.csv": "0f48115757f0ae8cd85bd64642ab75ff6ca9b23c49f879d9c8ce5a282e21eae9",
+      "comparacoes_releases.csv": "5c0c09112939de4ec0437aaf0cdaf8b39e01f6a8928777808092485a8bc9aebb",
+      "commits_entre_releases.csv": "e050a41a87a8a46be6b853d9f2f2e9090e7ab947ee5cb7387e527d51edcaeb33",
+      "tags.csv": "7ffec6205af0d97d6b913ee2ba320138a3ffeddf306bffe50cc19ad9d7a369f6",
+      "workflow_runs/citation-style-language__styles.json": "6cca0d86dbcdcc9d05b72967dfe944b10573a4ff715901f28f4211191d06f61b"
+    },
+    "vas3k/TaxHacker": {
+      "releases.csv": "902980cbcb928093c193b8b271a59bff64e51812055c58aaba530eced4cf2fe8",
+      "comparacoes_releases.csv": "3ffd1ca9db168be9b413ae137b976a2b713b05c2af8e1f5f767a2dba8d093bc1",
+      "commits_entre_releases.csv": "a29b61c55a328527aead06ed07b71f46524ba2ab94e0d90bd067a53768464ad9",
+      "tags.csv": "913fca4350807f4e08b9f2b19bda9a1abb44e6e668ac9a4d4748ecac2f28bb6d",
+      "workflow_runs/vas3k__TaxHacker.json": "a94011a9159c73ddc01447ed6eb2145c841cd040848b8f81a1e8e8ca77881da8"
+    },
+    "software-mansion/react-native-screens": {
+      "releases.csv": "0cf272e9f195dde05d9e5a11e732cdbd8ad9d677d9fa44c5a469d37887d51f2b",
+      "comparacoes_releases.csv": "c96b95e8daed7b68e8e05862ecf1a2863e3f3ccbe34f23453679bf0175ff1b0f",
+      "commits_entre_releases.csv": "4f930c027715680eea24e09cbad63a152ccf289853a9b55cf27148f989d5275e",
+      "tags.csv": "6e0f13b2fda87f3e66ff2276d732247fc992932a76ca64e5f6c2388aad6c30f8",
+      "workflow_runs/software-mansion__react-native-screens.json": "fcc901998362e25bdcd66614e3b39bb0f2679d449af71b89db3e126eadde99b7"
+    },
+    "hoodie/notify-rust": {
+      "releases.csv": "4b81697fd5b9eb6c1b83dd73b2789a9ee39dcbdda97ec168a1d043214ce6aff5",
+      "comparacoes_releases.csv": "09ebd7d21b37a684887046c6ae997290c6d77d097d5fac7790bceff4c46753cc",
+      "commits_entre_releases.csv": "15ad3c019bba5dde002efba5d1aa2d8efcb49543494119583ef67c89cc2bd528",
+      "tags.csv": "ad14851d4978383e2879106e65b158c6e3b49541c6b9fea49fede3daf315e055",
+      "workflow_runs/hoodie__notify-rust.json": "257304411e938bf08f750f98e181994355f0dd05f9ea101b65cff85159070dcb"
+    },
+    "libp2p/go-libp2p": {
+      "releases.csv": "8b7426cc3ffa1f49fbad36e9a41b5d9d8c460dc4050df8d74f508e25f9b88093",
+      "comparacoes_releases.csv": "1e20ac9e06eade2c31003f8e4f107b37250fcc90a3f8768062f682af2632885a",
+      "commits_entre_releases.csv": "117c0568b16d17aa7af779f714b30c7eb976038e8ee611b039e3fa3661324206",
+      "tags.csv": "936cf20301c6432d452ccc2e0f2b71fdff69db08f78bce65dc91bc9d3419c170",
+      "workflow_runs/libp2p__go-libp2p.json": "eb94825b406cae3209dc8b89b7b437db1ea7fabf642e39cc948af8b043f9fd15"
+    },
+    "badabing2005/PixelFlasher": {
+      "releases.csv": "021f272aa89e4c3c47d831fc19055471185e262f78e01020597b71412affd604",
+      "comparacoes_releases.csv": "f4646a014a6da252184ea623f288c66e71ca8ea0464bd63a0703faf478d229bc",
+      "commits_entre_releases.csv": "74c465b4af549e5f742ba8336340e405aa4a766c0d81050defdb812d193983d5",
+      "tags.csv": "9f26be3005f3a10d7bc656725252ad669a273abac4149d44e570711a5ad38b7e",
+      "workflow_runs/badabing2005__PixelFlasher.json": "38d7c037721590324fb32192a5111e3093257b5b7ea654ced5abdd69e2cbb35e"
+    },
+    "scverse/gget": {
+      "releases.csv": "33cc9f38b525b033a9e6c11775533efbdcfae444df6f6c04366949b214d5c37a",
+      "comparacoes_releases.csv": "dd36af8c72d5c42f4ef7ea0676a3a363603348810f6a7aa9398457895f8970e1",
+      "commits_entre_releases.csv": "5f477dc8c7090bc1b8d1c53a5d8e2d86042ca9e4cb00c1fd15454c5a6a16b99a",
+      "tags.csv": "01c3647a1a01ab41e0544ccadb3b1f8358ba38e2db554c4a4fdfc558968f0f7a",
+      "workflow_runs/scverse__gget.json": "8cc9b86c58ac20133a26e0578abffedc6597eb4c855535cc68361b7379fc8374"
+    },
+    "flowershow/flowershow": {
+      "releases.csv": "48dca6763872faaeefed641ac90171288b180f688eefcf8cca8e64f7d0a1021a",
+      "comparacoes_releases.csv": "45da0263c13fb271819be4160fa72c0657cd728b8789bb468e6af6f138a43011",
+      "commits_entre_releases.csv": "4adf56556f73a2ecfa6d0ceb82e1b53d49a4d4e7af5bcca21471330788f7fcdc",
+      "tags.csv": "2fc3ad35f6b51eb5f0841c1cfa77bd0c280b8608b9663685b0f8f12d84123cc6",
+      "workflow_runs/flowershow__flowershow.json": "7ba74d23105b8c95423fd438d81479f12dcafdd420689aa78445c321232602a1"
+    },
+    "akitaonrails/ai-jail": {
+      "releases.csv": "e748f1a16aaf255cdc07a7a2913a2aefdd04de8a158ca1db1e8d175c317c97fd",
+      "comparacoes_releases.csv": "8794628c04faf510857bd0f5cc70a80e40a6e466e77503b0c1330ee8298c6e07",
+      "commits_entre_releases.csv": "e87fd965f28a879f1f6c27bb5fa2b75df32d6c4254ce1f3816fec827e3e4c120",
+      "tags.csv": "e5ef38707f439d4b4044b4d144785dbdfa2812e2d48c1cae37abaa176b98b595",
+      "workflow_runs/akitaonrails__ai-jail.json": "9cabb478f361a63e3e2ef479b2ae0ac5a1edea2cdc722e6a547d55c8fe770d77"
+    },
+    "ckan/ckan": {
+      "releases.csv": "167731128210f168a075d2fa7b26cf40d3ebe994dd9035f98f44a896b2d1e886",
+      "comparacoes_releases.csv": "86b886f32134fc696fae9cef92b5b44bbe36e1915d933ff959f8772ad1d56a31",
+      "commits_entre_releases.csv": "bad8a8bdcd52d622c42edae02bef1bae3977fccb0ee5afee74506b82cf56e213",
+      "tags.csv": "eb162303649d67412c418ee99e0a9ff4f2669d74ab6c5b8a0a090f1d43880015",
+      "workflow_runs/ckan__ckan.json": "ff708dec0b496c6bc887305998057897a38856db3e4509318d36ad071d67d928"
+    },
+    "jolicode/JoliNotif": {
+      "releases.csv": "2c3a9a3cdd5aad720445670f947cfe109e479b36efb3241c64d1c3a1b975a2d3",
+      "comparacoes_releases.csv": "83a2c19be78ba54c6b741e5f90ae98b67272b5cedbb6940c8d2b075e0da16d56",
+      "commits_entre_releases.csv": "cc935d678a1cf091bf1b13e1be731b7f90cc4df9faa148760dd7b3cfc3426c90",
+      "tags.csv": "7dccfb50cfbfe7ea229073057a62deb93c7c4385ad77717d09d8eaef00c6be58",
+      "workflow_runs/jolicode__JoliNotif.json": "3d458fe9ce6df0635fb012566cd840062c8b6424333cb02812ce6371cc290c36"
+    },
+    "nixopus/nixopus": {
+      "releases.csv": "ca1a928eb8f9e78ebcb26eea291670975059993a4b08b7c8fe6d7e7a0bc10b31",
+      "comparacoes_releases.csv": "dca147b5d35ef748d01fe9a6bc7b6f591df26e068e2807be905959bfbed8707d",
+      "commits_entre_releases.csv": "bba26293e2f37b2040dc21d52c3f887db119b4c841103631de94d9fded16c6de",
+      "tags.csv": "ac3eac96b89054de552ef1ddbc4e9e44efb7676fca6287913d0c4a3ae86bcde8",
+      "workflow_runs/nixopus__nixopus.json": "3e42a8bd662cacae746a43121bc2c3cad9a57b031f29108dc91b6bd1c6c7ba75"
+    },
+    "F0x1d/LogFox": {
+      "releases.csv": "2f421ed114c5240f3c8ea70396490246441720a3390701c079879df23cb707dd",
+      "comparacoes_releases.csv": "029d09bf54cd20674758cc69cf66d904d4ac2ac054207ceab1f2c09ab5cfb478",
+      "commits_entre_releases.csv": "184011dfaa38449bf9a4e249f9dbab82236567d5e0e997eabd502ae632ba113a",
+      "tags.csv": "1db6451da76fce716c8832408e3f23e178046837d4eb1e10784d7dd938451372",
+      "workflow_runs/F0x1d__LogFox.json": "0bcbdbfd691b08312868735fc2f55d135edef501bdbe654cd6f66047cc73c913"
+    },
+    "vinkla/wordplate": {
+      "releases.csv": "aa4624516016408160e14060c450bdc4e6449699db4ce0735501da1a8f42346b",
+      "comparacoes_releases.csv": "1d2a44eaf3d0e68778f867e769f70e9ca16bf204f7ea5884adeabdc19dc19e5b",
+      "commits_entre_releases.csv": "efaa91343d7247a0edf70373ac10a040a9a35970878c1540809fed99877c4e4f",
+      "tags.csv": "b62def1e24b5dff400c391f10355f97a1d0c313df9cc69fd2a80c3b525b0c423",
+      "workflow_runs/vinkla__wordplate.json": "8eadda352ff56862a833f9bfce93b11de568b6aaac0433fd10659ddcfc511c06"
+    },
+    "boxdot/gurk-rs": {
+      "releases.csv": "a07ae2c75645b65941105ddd07c36026ec569ea6137b1abf3ccf406e71f8c90f",
+      "comparacoes_releases.csv": "57b458783a292257fa6b022d797644242aa5713750e54409655c35d8938a6caa",
+      "commits_entre_releases.csv": "fcbb649aef8387bd9c4bdc556a3e2118327fce706a8d236ef00fbcda0cba050c",
+      "tags.csv": "58da7b175ad327ba30c6ebe412ebfe6820878b8ccc145fa036ce5de3894058d6",
+      "workflow_runs/boxdot__gurk-rs.json": "9f90ff7b8fd6ce3d720533bf8337aac9cf19338f6bea97c608da3d981dd9b616"
+    },
+    "hestiacp/hestiacp": {
+      "releases.csv": "cfb726967b30480724d77118bd347439a82a5c21121e44fcf9584a2e6040c1eb",
+      "comparacoes_releases.csv": "c5dc8c755d765c0621fa4c7b5f53675ce2b2e0f1e6e29005ea4685d12f531ba1",
+      "commits_entre_releases.csv": "2014eb37033b03a237c011f6c5a8e5fa0036e9180f8284fa2adf9a4bc2bbb0d6",
+      "tags.csv": "7bef36f631463fd108d8ce59102f1fc130e5a965cb7189cacedd521812fd210b",
+      "workflow_runs/hestiacp__hestiacp.json": "db44c1a0bf06ad216b74fc4dd8b0f0189ffbbc1b5e36431e93456a00c49da41b"
+    },
+    "github-aws-runners/terraform-aws-github-runner": {
+      "releases.csv": "048ad89276aa7f63eab03512e04f5c394e3fab5d261fa2eb4c4ce2ee2b925636",
+      "comparacoes_releases.csv": "c6fcd2779150f0a60e0b89e305569f3c53a16cd8f79f6dbd404f87b382edd003",
+      "commits_entre_releases.csv": "e3df005d67e810b0350d2bfd7ac8ae5aa478bc04cb2ef9cb4aadf0c63f433071",
+      "tags.csv": "bd639f0fc4f1dc0c4b0d16624970bc666ac83a239e94538d0f56797aa342bb70",
+      "workflow_runs/github-aws-runners__terraform-aws-github-runner.json": "201fded048849b4b8b830a49a800453451ac53f9366af12c973a916d2944def5"
+    },
+    "HelixDB/helix-db": {
+      "releases.csv": "1516ac23d2ae6bd88f52fa38a72893a0286a0496a55f5def94458ebe3378e8b6",
+      "comparacoes_releases.csv": "19981bb2affb3d3152958797604b4928a57204e244caabb141b74f1498669f0f",
+      "commits_entre_releases.csv": "3971d668f0df56875b206d655a33886e2098fcc8aad51a0d552fff37c9ace4f6",
+      "tags.csv": "2f2a46d6064fcf6738d3369f29644a7ddb21d53e317d2f3a4b6801247f99f1e1",
+      "workflow_runs/HelixDB__helix-db.json": "e6a44d7b63deea73ff91d35155ee9b8a05cf3e015876cd3d75e0cd8505c8c63c"
+    },
+    "wobsoriano/svelte-sonner": {
+      "releases.csv": "d86eb1728b320b07b7110a23ec1c672661641efd44b4cac886aad1ef356c6b3f",
+      "comparacoes_releases.csv": "4364fc21a93cf237fbe6e646d54f6fd28880d51126c1471f81a304bd8c57174a",
+      "commits_entre_releases.csv": "ccd916642be0c03442f1ec9c2b1171ca7697bfdffaeea3e70c412cd8c8991ead",
+      "tags.csv": "56745c718a844ec84048e1360ff8f81ccac5aa04697ace863bcb1389025d4fbc",
+      "workflow_runs/wobsoriano__svelte-sonner.json": "bf19e04c4615913994dadcf6d04e7343584a863a873a8efd86eff334126a0761"
+    },
+    "tafia/calamine": {
+      "releases.csv": "1e6f43beac66a1eb16a85a91b5ad6faa7b0a5811dc0a6faf0cf3f8c6e424f397",
+      "comparacoes_releases.csv": "52d499f9ebc421ed6b375b513d5b4b3cfd459339ab2dd19e18a0b169b005e578",
+      "commits_entre_releases.csv": "99907d143feace511107bc9cf1747a8a715438348996c2421f6a57ffb5255e66",
+      "tags.csv": "28ae4cee242713bc3011b28dcba44e398b510a466418e6168ee0088233d0550c",
+      "workflow_runs/tafia__calamine.json": "0d2f7d13f4ff9f7dd32e3aa2e96d4c8b2044ca4299dcbf3704cde0074f48d902"
+    },
+    "spiral/framework": {
+      "releases.csv": "64e92a1951a2851a6cbfe6bd4fc4406d1cd1fb4b84bc2e0e5148d61ed9eac2cf",
+      "comparacoes_releases.csv": "5097732cd682a9c559161e2b401f836012e84e579a594fa2f695f39415fdca86",
+      "commits_entre_releases.csv": "8d5662b1edc06088363b381dd753785ed1fb387eff6bade21bf7ad287e0eb960",
+      "tags.csv": "77d59210c85f9ce4d16e7095db9acd91c60fcce0fb890fdd48a3a6b4341a2826",
+      "workflow_runs/spiral__framework.json": "d84d2b57d177cb8c63a907d9ff9e663156ff5a30b63e6888cded015335e6298e"
+    },
+    "Jeric-X/SyncClipboard": {
+      "releases.csv": "caca218697b51fff50cf452105b3cbe825601ebfa4cb8ebeecd65930781e6337",
+      "comparacoes_releases.csv": "f801b80ba9403c33ce59a4b659785cc1744ab70a9d1ac5c7df863e1b01224ea7",
+      "commits_entre_releases.csv": "ae9f5fd4f308f09600f1735817580c9469de71b1f923db10fbe0d1b8a3c4ab8e",
+      "tags.csv": "bf4ee2e651010eaca8470dcf8aa7ebc4cbefc4576f70ad3638e4036ca504c839",
+      "workflow_runs/Jeric-X__SyncClipboard.json": "ddb7916ccb01e6e948ae80cfb6d35a40220d08818bc95f70f49f410a20bef504"
+    },
+    "PurpleDoubleD/locally-uncensored": {
+      "releases.csv": "3670c628e7455a806bcde45b9c0e33f81eb96b0bca251cc000fd480a01115a1e",
+      "comparacoes_releases.csv": "3bec2f74e25fa32107844706220de6d70fd6a6b289a4affd244fb733b8847319",
+      "commits_entre_releases.csv": "56be455c0439f6ec2c71b6dd113bcba0311da02574c34d165a1e982f6dd60c84",
+      "tags.csv": "c6154f65654aec8413d629839d4f2e4ff6c501252918b9f302d55530f07ba665",
+      "workflow_runs/PurpleDoubleD__locally-uncensored.json": "657e7be158a2026eef44dfaec766592e5df1d65a2130ea925a724c11b79ea985"
+    },
+    "kapicorp/kapitan": {
+      "releases.csv": "bcb3fad80a28942420a0cbd2abb00fb90b38ecd25a9c6bd778761e77b3a2f2f1",
+      "comparacoes_releases.csv": "cdb79367dd3d947380ba78ce7bf15d63e530b109782a3bef29cb12f98bbd2714",
+      "commits_entre_releases.csv": "0ab79151f7ec361fc2737c63e6f510d6105791cc21406ff93a786b100a390ff8",
+      "tags.csv": "99c4e6f8d639011c6ce0ca085a92998d15a78109b789c81b48e0cec54af0d2fc",
+      "workflow_runs/kapicorp__kapitan.json": "e2eab60541f5944a190ad57cdedc386e2026567c01c93d7323a550138a2f22a8"
+    },
+    "pacstall/pacstall": {
+      "releases.csv": "985c219ab98a95d78285f3001fdc42b30d04ede347af2501caa7d5d7c03a76f4",
+      "comparacoes_releases.csv": "430fa34e59feff68f141cc679c95fe117fafb34a46c53e97347eb982d1e586cd",
+      "commits_entre_releases.csv": "210f77ec6a0caad150d93b3ec55f8b0f906ff8c22ee1d72ca08bbf580d443a76",
+      "tags.csv": "64f8175bbec41786e8ec07da79aedf0d906b7eae257eac2a67dd34609c3792f6",
+      "workflow_runs/pacstall__pacstall.json": "5ff347d12b05d2c30011f630f96fc0c3c3a50608604b03029f91412b5cd702d5"
+    },
+    "moonrepo/moon": {
+      "releases.csv": "b95310ec865cbbe077709fd116fb7b56da64a8fe7e5feac6b4be9e7a2ffb47ea",
+      "comparacoes_releases.csv": "7c298639ce44cf97518ffe5532755654223f4e6dc88f0a361a1e7d09a3b90ad4",
+      "commits_entre_releases.csv": "e1c8baa11222d73dff3c2f741c6e1b11cfd3eb3c9b1bb5f5c6550d1017257378",
+      "tags.csv": "7addcfc9541dda7beda6fd0e2c06fbd98dad1882d65f691a1b0ceff8511ceabd",
+      "workflow_runs/moonrepo__moon.json": "214ec9f5308d32f2c69a6577593ec7956c4077e08c120aeec1d9a3794fcb13ca"
+    },
+    "zai-org/GLM-OCR": {
+      "releases.csv": "8e864c1cfc9a9a0e77e8de2b05377a114687c8a9e70ce981fb217944b58e4892",
+      "comparacoes_releases.csv": "42803c94e1eb6373c3efdb7efd822a27da7f3676132a63af68b17e8a42ccfb86",
+      "commits_entre_releases.csv": "0ee03c9ba66957cffc2e0df98b5b5ea5dca1db882000d32412732ad173377736",
+      "tags.csv": "e73dc4a54c3c6aae66588985f88c64d0b417f587f59c65b1cf87dbddb06c6dc6",
+      "workflow_runs/zai-org__GLM-OCR.json": "3ed2103bf8693f46c73f4f1a5bb3a205399f89b1745a1fd5d0d49ce2b9ea4b46"
+    },
+    "AltanS/collie": {
+      "releases.csv": "d93484cd70da6eaf512680e6bdb5d7971b96c60a3e4d816e021d1994ab5db38b",
+      "comparacoes_releases.csv": "cc4eaee7bc8c6c395109d2a69ae655c20877bab5934f9971924938bc420d53d1",
+      "commits_entre_releases.csv": "59353f1743b19f3ffe3f53a963e1696d74bcf25f242fc22bbb6ac30f05aec7b3",
+      "tags.csv": "42a7318b9386e93e4fd77832d782210cf168ba3724b761310ac7d12309a1b06d",
+      "workflow_runs/AltanS__collie.json": "5558648c5051e0daa083d35d51b5d8c6242e29437c146300975e7264716ed6fa"
+    },
+    "GetStream/stream-chat-android": {
+      "releases.csv": "194c7559126acb0a4810139b374789ad9461b926c48cedaa5dc39e3881c64a79",
+      "comparacoes_releases.csv": "00220d48eedfce772d5d7d612fe1634a227c8b22a82bae01d8317bd408d65ab6",
+      "commits_entre_releases.csv": "34bd8a28e1cfcef77412b0ce136925e0ddbb04e8a1e0acc83cf19a3c18a0f1e4",
+      "tags.csv": "ab71466477b3ef172e2b97fb7a2eed35831f9a3d1a5a501e117a1361d95ab7fd",
+      "workflow_runs/GetStream__stream-chat-android.json": "f68661345cb24c694952322039d0c9f0939de8f50756f92ef9ea4fe8a46f6de7"
+    },
+    "ada-url/ada": {
+      "releases.csv": "7d364f6c333ebaf92ec31317927a65c31e74f2d5617030eb37557ab2cff7e26f",
+      "comparacoes_releases.csv": "d5ccb87dffc79fe7e731751f34de2541521f0f0de126420de19913affd0b423a",
+      "commits_entre_releases.csv": "e8ea1cd5011a4aeeb7dfeeb69dd9842ef274eb33af2bd12604fd91b1e07d2fe1",
+      "tags.csv": "ccddae259a01544319ed51d71b2777672000314a3a49b57f80ed20c4ac6b9add",
+      "workflow_runs/ada-url__ada.json": "2ef4b6ac0bf09055cd5c61984f46f8f155a8c21e332b0fc42bd941508bbb411c"
+    },
+    "zylos-ai/zylos-core": {
+      "releases.csv": "718574c270e4eb51cb2285bc1333bb6a33b8d6f2d03b6543580a28d9c4f1e27e",
+      "comparacoes_releases.csv": "f448de2006d1081a7409b1dbca809f72962eac18bbaec979c63efdde72c006f9",
+      "commits_entre_releases.csv": "b84eed28ca11e7b0f34e2c98d1bd3ee0f1d4f8d94e5c04645f9242c5df00c69d",
+      "tags.csv": "1bb3ce2ad9d0a15a2fe4add4b45846cc2013850578eca4e609fcccac1af82234",
+      "workflow_runs/zylos-ai__zylos-core.json": "b37c006f1531382923adcb48d90fb9b6e7f0e4f9f029b12e26d7c10bfd1d43e8"
+    },
+    "ardatan/graphql-tools": {
+      "releases.csv": "c618a896afe1f60ec8802bb89243dad99398bea4030cb3911bd62184b02bfd6c",
+      "comparacoes_releases.csv": "6c37b256aeb8af7b8c06d73c046bc2a58d167c2b3e5cd97396a11ccf15485e36",
+      "commits_entre_releases.csv": "7b351dc2c06a3456fed834fe2b430a62083dce66c3cb993e431d7459c05319bc",
+      "tags.csv": "2a0e5ff73a98c1b7ea6560c3869439c9a77b72c5c3080ea8263fb098baf00884",
+      "workflow_runs/ardatan__graphql-tools.json": "6e8224cfa52298bf0004aded5f6d700bcfca835f06b9fa5423e5fd1af48a903f"
+    },
+    "pydantic/httpx2": {
+      "releases.csv": "25059282b1ac007018d2c0782e71222d7122802abb8cac00a9c8042d22e952a2",
+      "comparacoes_releases.csv": "199fe3b858a3bdfc2745d7feaf7fe95ba9cadbb25cfaa3f3ca395db7564029f9",
+      "commits_entre_releases.csv": "06e991b70998489a9f1efa493cd7b25d1a0675ea11cba1a5f9b0f33ad25d02b2",
+      "tags.csv": "837e035c240b570bc7902cdcebc8c4e9ba5cec799ae59c081ad76126d1f60305",
+      "workflow_runs/pydantic__httpx2.json": "bfd97b7b71ddf9d34daf239c7f259e351f3341f641a368c56a2f4f95edb0694b"
+    },
+    "ant-media/Ant-Media-Server": {
+      "releases.csv": "8814384afbea787bea237b0eaf5b2171a6107a502dcadd436158bf3642baf933",
+      "comparacoes_releases.csv": "cc0202287ed3a5ddf7222cd321b558c73039288895f545f43ef091e03c8eb57b",
+      "commits_entre_releases.csv": "1abec69d8204d58cf574772b337bcd348856d402242e60bc2d79f3b734b0b65f",
+      "tags.csv": "045f1504e7c6b2fea3a471854160ec213a0c60027b26280348c3247329228eee",
+      "workflow_runs/ant-media__Ant-Media-Server.json": "82ae61a0a3b6dc3c32582af253371c56f947e0b5df8fda79f2ebe11842c6e710"
+    },
+    "YumeYucca/YumeBox": {
+      "releases.csv": "204cdc061784d49d5415f3cf749db0a0349412915f476cba166b8b3899697ab3",
+      "comparacoes_releases.csv": "94b749bc891151d6a2ee109f34f4da958d02b9e8e1845f24b130910276b8df05",
+      "commits_entre_releases.csv": "c3115b49fcdef9f105dad4cab4ab64cd827af81f731b496d206ca2571ada1046",
+      "tags.csv": "10021ca1ebf17ec69fb59e44f5974eb86bba4229ef956a135fd8206e2b0916d9",
+      "workflow_runs/YumeYucca__YumeBox.json": "29e3811da5108c5d8ec1d645ae9562ae2e792605db4951e6a1bb21743beaad31"
+    },
+    "josh-project/josh": {
+      "releases.csv": "47311403842bfa606247b01b1ba40421121b48c2a83c2ba027eee66bc0a26d3f",
+      "comparacoes_releases.csv": "b642e2a1ef374a2bc86816b4090122298d5f5e9c2c8519760974e2bec1566656",
+      "commits_entre_releases.csv": "d41d4358e62cdf7986fe12be09532541348355800a4d1345733f36f176cbe87c",
+      "tags.csv": "e32fb02442c6492927dd3234d46e9f075f36ffde84bdc2888cdaa0db7256426d",
+      "workflow_runs/josh-project__josh.json": "00ac37802bb421607859469fe8daae4561aa2d52d010b3ed09fa845c97725627"
+    },
+    "webrtc-rs/webrtc": {
+      "releases.csv": "d3eccbd891fc1d5ce2f55b34917aae76f126f52a381a1d9406dab8ad3747aada",
+      "comparacoes_releases.csv": "b013125d1f8b4e468d76fb2f1c26a2f1b9cfc9d35f0cc634255195d2d0f70b39",
+      "commits_entre_releases.csv": "d79b5bf553672ba589999ab40ac0b020c8e6376468c4c4425dc02b50c61ae498",
+      "tags.csv": "24a0e0c8398d33037d963837c3a98f7534e657731894f0dc7eb4610e2f6285f4",
+      "workflow_runs/webrtc-rs__webrtc.json": "ca6fe6f26bf70d01d2019fb392698c5939b286d4e40cf8e900338ef5fc70468d"
+    },
+    "rafatosta/zapzap": {
+      "releases.csv": "aa71b91bd39ad00afbe0e6e1a7a67cdf85cec0b2338888835907be360f0a41dd",
+      "comparacoes_releases.csv": "8218e60abf9ced4bbe73400296a2e1a63fa38518579b8fb0de8956aa78fe1eec",
+      "commits_entre_releases.csv": "c022e27ebd7bed02130f0bd68d63e42dcebc0f381aa49c3c6819192acaa6a0f6",
+      "tags.csv": "1fd6b6b8f6e1b9e362d68e4ededbe88a45228c5046d53a31d62f1b2288444938",
+      "workflow_runs/rafatosta__zapzap.json": "58876c52d0ea776393d06c066178ab57f6c3abce5f203e08fe7e075dcc98ae15"
+    },
+    "Mangi-11/Eta": {
+      "releases.csv": "b99199a6f64b0b92d5cef0e74f996cdab019012d21840ff28833c9f47634b2a3",
+      "comparacoes_releases.csv": "09e0b6602b47b9c11945268936d148b1883efdc64ff3dd70b7d1083a065a0dc4",
+      "commits_entre_releases.csv": "b93551a3caaef67a5fa5c1311b2d7a50710dc7563fb0c0dc2bd16d113374b058",
+      "tags.csv": "f8fbe9a3a1a687b316013d384a3767115b31fd4ca1ec79d1284bad44b88527b4",
+      "workflow_runs/Mangi-11__Eta.json": "1ce4bf8ab466b9ca640429c394c29befddb1008461988d87ac732e6a69bbb0c8"
+    },
+    "artsy/eigen": {
+      "releases.csv": "1438aa30bce329291eb81132b5c8d7e1cbdf28f3ef096812067c0fdaf109159f",
+      "comparacoes_releases.csv": "1de1a6bb5d53174b99db4a7bc158ec8f6c70f945de9019cbdde539e042b12519",
+      "commits_entre_releases.csv": "a1e657331c8bc162b9f93ac189d37a237bd2d83ed9edc9561ac1b921e539eaa7",
+      "tags.csv": "00f6114bf6c094dcc53d085117c2d3c61011c253d18f9b51ffce12766fad4ebf",
+      "workflow_runs/artsy__eigen.json": "2e4bc7f5bb6b4b96b831f0558b6d8a430b522ef3951ee56eee37598ec036955a"
+    },
+    "ariebovenberg/whenever": {
+      "releases.csv": "ce8aa8d5e1e4a56c662813f5320314f83263931c5281a897260cb91c5b4c50d5",
+      "comparacoes_releases.csv": "969c929383eb14fb3f2691d7b2be932efb7dbd8a04344c7f75bac8354127e0ec",
+      "commits_entre_releases.csv": "59b557bc425e17f546af54f8b3e8167685b8073de3de8813a0b086a8a4befeab",
+      "tags.csv": "b41a1070dcd45fa4504d282f506ef8eada2c5b75712a947b152df31318251fa0",
+      "workflow_runs/ariebovenberg__whenever.json": "4f633e20b474c846aa010e1075e35d313775abaa58637a558585fb4b706c8580"
+    },
+    "GoogleCloudPlatform/DataflowTemplates": {
+      "releases.csv": "3202d34bb05cb459b6471980b3682d67f5d0879693f8730407020e53dab3e82c",
+      "comparacoes_releases.csv": "3f7115c935faf3f522ea138d97ff42ed85722948337520cb10c172e1a83ead19",
+      "commits_entre_releases.csv": "0254560fca7d5402c93ed50be973e11796d63042818b1cc3779b8f90d96e2995",
+      "tags.csv": "ee3b8122f9b2f1a67fa5d53855f4335cd1a6c8c86c9868b786d7c96cf1cd6a7f",
+      "workflow_runs/GoogleCloudPlatform__DataflowTemplates.json": "e8a19287092c162bd296a8766973900927df5c142743661af3470271f3267abd"
+    },
+    "graphprotocol/graph-node": {
+      "releases.csv": "57f78601c1cffd63871e1bffd1907ed27266b87d99cadad0327ba7f4f1c2694b",
+      "comparacoes_releases.csv": "d3ad26f5672c6b36f06a0740f410aeff380225deb5ee5819fd7ca6345a7d77e2",
+      "commits_entre_releases.csv": "40907e0f7dd9f0916fbe4c3597221c9aa8577ab5afe5ec173c9ed8cc6596f851",
+      "tags.csv": "e26618f58289af2b05e44504b266e1cd2fc545f7670dbd6c703714b8002463ad",
+      "workflow_runs/graphprotocol__graph-node.json": "bcc2fe7fed93f9239d52e708e8566a42c6be02c78ffb14d4fc29908e2ec8c3fe"
+    },
+    "XuehaiPan/nvitop": {
+      "releases.csv": "339fe89d251705475bc4af0bcdf0c676cc937e657844a82546a988fb94a80a3a",
+      "comparacoes_releases.csv": "e115eeece8ae059fcad38bb139534110eb00ee1ad36bc1aa543ad185a2db8680",
+      "commits_entre_releases.csv": "3160c67ca884ca231beb7f23c00fb907c0cd1686cceee1ee6d750b3a2bb82040",
+      "tags.csv": "6a680015c98aa71275cd099dd2659b599e78f3032da2afb7bcabdce39bbbe0d6",
+      "workflow_runs/XuehaiPan__nvitop.json": "02b3255fdc7aab0077b6f676b4f2bf70a120f173143bb1a19f55a431617a4496"
+    },
+    "git-town/git-town": {
+      "releases.csv": "37dbb4802401ccaf3576a94dc17800241d6f9ab30a3611eb11d9bf5b88b1c883",
+      "comparacoes_releases.csv": "8fbcd8573a8295583dc79164aec83055771ec29f86794e9327a88d7b7579fc00",
+      "commits_entre_releases.csv": "8a22e3073fbf4d4c37bf7d205b52f3af09327609fb72e5b78e3424da4bffb6f7",
+      "tags.csv": "2053ce5a618b84ef89f704681d457e0b45f5729822b05dad9226ad00b939f8e0",
+      "workflow_runs/git-town__git-town.json": "fea2f8d3001d59d4a9ae05583c32049b5f4c7d5c27aee8f1092c6497657de6e0"
+    },
+    "StuffAnThings/qbit_manage": {
+      "releases.csv": "ba8582754d15f52547be708cda7f4b989e58b5a540130b6ce02d8e99089417fb",
+      "comparacoes_releases.csv": "777cd52e2390f7520d24d22077e2b85b470c76aa4443db5df32e3f0ea537235f",
+      "commits_entre_releases.csv": "99ebc66686361990366c1042b0f9267fbcf85a63550185927897ea6d46cb4a88",
+      "tags.csv": "183dbef377098c3cd6db3985fd1953b6c3d113851d528210c210cf9717a89d13",
+      "workflow_runs/StuffAnThings__qbit_manage.json": "d010c0feada16648ec545efa34d8a5c451ae1b431961bb72ff2254e64eb98a36"
+    },
+    "meltano/meltano": {
+      "releases.csv": "193b6e2a270740b1ee2caf9b807bb2936ee1e45612de4379495dbd39c21f615c",
+      "comparacoes_releases.csv": "29e71e6a1f51ee5f8aef64299e39865b19ba0b06a5c5a22496db41c0e68c2abb",
+      "commits_entre_releases.csv": "bc89addb2cb2cb1f38510db1e72b7f6bd2c516d8edc3da5535cf23feee5d4538",
+      "tags.csv": "e5d228ab29a5b249de38aff8cd6bd1bf72b82ac0f02ebd19ea27f836d7a0ac7a",
+      "workflow_runs/meltano__meltano.json": "bde8844e5778d861bc06c9e3de6f5a4187253d87258f8af7eafb8d876f76b624"
+    },
+    "baresip/baresip": {
+      "releases.csv": "d211d634a52a12e187a3ec1cddc02c80c8cae88c67d6bd389d9627ef9843a169",
+      "comparacoes_releases.csv": "2bf5dc1181ba2aacc82c75aeaf51dfa8dfd05cb586d5224f8f40eea597d7d1da",
+      "commits_entre_releases.csv": "facac988247642a69e2bb14553816e6bdc89193e083ba37fa554fc5587abb56f",
+      "tags.csv": "743f18bf85072e009a7e6dbcef269644b9cd6fd9cf356d365393266d5905122e",
+      "workflow_runs/baresip__baresip.json": "462c8149d5cb0c3541878d3937a155de636726b531b7976b48af8fa20a915493"
+    },
+    "NVIDIA-NeMo/Guardrails": {
+      "releases.csv": "848ecf1f6debcafba13a2cc407fa05e6bc5981f82f13e70bfd25adda41bcac12",
+      "comparacoes_releases.csv": "83daa8d7144edb76b4c957345719fdb55e65b983f00ea46afa8caf2eb6d25fe2",
+      "commits_entre_releases.csv": "30fdabf5ac1623055bf8bdb53e66694aa3f95bf7279b4cb12398950b70b0cd60",
+      "tags.csv": "439baf3916e004681e4afbe5f789e4ea6d3c89ed89b87c6794e5d7dcbae8beb8",
+      "workflow_runs/NVIDIA-NeMo__Guardrails.json": "3fe122b2b401f43e144ecc1c7398e45145944e61cbe1146bb4be0af7ac07b7c9"
+    },
+    "Yazelix/nova": {
+      "releases.csv": "6b8c931c5b2f407c5566943d57abdd7a07378f2f0e5cdd27d250259d2bdd1761",
+      "comparacoes_releases.csv": "ec135b1d940ae51f67ebfa221fd33fc1c1cbd5e0a052825f48096ce5aaf7e1ba",
+      "commits_entre_releases.csv": "31ff954f905c81f8d7012cf07f65d0a1558a7c64b08e803e33d4e5761d2e9a5c",
+      "tags.csv": "d242e3468a2b45c1166ce37c3f07e255bf69fe65692605ad9224625795d8bb1b",
+      "workflow_runs/Yazelix__nova.json": "714d57d249c4868623c4f175b7cf8d59d83fddaae79347b895031266438c6d13"
+    },
+    "basecamp/once-campfire": {
+      "releases.csv": "679da1e8543e485d322ec9cccc15078d9194b6e8d590be585d0dfe5de8fe230a",
+      "comparacoes_releases.csv": "ed483d894024d537d6a2a339fdee2b52d14e69462145afa24b1b15420fa5dabd",
+      "commits_entre_releases.csv": "49a6d8484605506103ae5309d124c6fb43d7740e7496a2719c2543f0d89e2aec",
+      "tags.csv": "855d3edd2bc4fc565cf3225403502fa58ead7ce4761ddc98c9979b08c107f97c",
+      "workflow_runs/basecamp__once-campfire.json": "0cce30516835da993c7af19ab70bd097e0007b672d3cdfeaf22468e58d019d16"
+    },
+    "axoviq-ai/synthadoc": {
+      "releases.csv": "0507042d182ada89be8186258e72c1b6b16a0acfa3cac0081223f43b29f54f88",
+      "comparacoes_releases.csv": "1c3420f18b514106cfe0ce3f98b03c8e7008ed717a9e5ec1046f42630ea9d3f6",
+      "commits_entre_releases.csv": "dd50a09b1b358bc481fb9d436628f9bdc8465f87c1dea7512243ebea62d0cbda",
+      "tags.csv": "995c7bf89ae53391c4d829e327f986be422bb536754f2a6ad37ce2de94bfaeec",
+      "workflow_runs/axoviq-ai__synthadoc.json": "9f6b1ae4b6b07f047685664416e412a3fd14b64a069f0a8970dda1126a82e74d"
+    },
+    "bpg/terraform-provider-proxmox": {
+      "releases.csv": "76a5e9efe35d529a159f98f5519c83ca8b29813adfafd54dd99352f8f9e14315",
+      "comparacoes_releases.csv": "c23fba9b0099268629ab3dc1e08e175c2d0abc5b7a71c900973131a477de0c57",
+      "commits_entre_releases.csv": "720bdab0bfa5de797be05159b4e2002b4738b06d226ee4ce24b75670b3380923",
+      "tags.csv": "27eeb9fb0a7c670357644787e599f054c9bff3aa335b68c079104d873ecf8f4b",
+      "workflow_runs/bpg__terraform-provider-proxmox.json": "3a9a221dc70c832aaa7c17d512117eb547cba104610591d9e83bc57f4084e170"
+    },
+    "entireio/cli": {
+      "releases.csv": "72e86f4824c62b5c99539518d053b339a99691dba5b82b04992a700ef061b8b4",
+      "comparacoes_releases.csv": "43b9f06522da73d97b0f2447fd20d83504da395c4a44dad91ba9ff9fbd9538c0",
+      "commits_entre_releases.csv": "0e3cc3c807b8b5d44dc43edc0b16642c214215efa85900d9ae7bbad459abd590",
+      "tags.csv": "78c641856c79d44f18c7f25caeefe46bd451f665a476b2f71d23cf7d00337f5e",
+      "workflow_runs/entireio__cli.json": "22e845600d957f41cd3cc7f48442d2151fad0e2b4c74572dd716a68eff1db8c3"
+    },
+    "react-component/tree": {
+      "releases.csv": "db83bd85bc8fbd8c3e9ce0f8a6120aad567b9427b40678c7042ef9cc795f8ee9",
+      "comparacoes_releases.csv": "c7a378f09aac559826223371f229a94997e7ccedabe71cd0acef4c2068da2da5",
+      "commits_entre_releases.csv": "158953d593ef899a17a7b44517eb92e721f830f6e02af431cbeb7adace9b6f47",
+      "tags.csv": "efa9e0680ec69fc3f39ba423e9610631a565f5e41d2ef2033319488d03c7c087",
+      "workflow_runs/react-component__tree.json": "3d88dfebdef3f644f6680842b4caedc3f06775b90d8a2e75a40e8672ca37ac24"
+    },
+    "aws/s2n-quic": {
+      "releases.csv": "0bc5fd0980f55a5a4f36dd1ffa1d4863b5427ca9c3cc83396f92f02e58dba71f",
+      "comparacoes_releases.csv": "742b826d65159d696bfe812819fa0e72f9c8e4d48bf0a20f965a9cdb6845c8f6",
+      "commits_entre_releases.csv": "b6b17ad3ab1325c1f13e4625ef0b403283533f35ac7ec1c11770eab939528869",
+      "tags.csv": "4291318d35ff34fd915a9d20e49459432e437d76dd54a0f40ac5873dd26f576c",
+      "workflow_runs/aws__s2n-quic.json": "4e9a312617f34dd4f8bfee27ab5185e6a1ed84ea0a009ad74a9b74d4bea9ac79"
+    },
+    "Maxteabag/sqlit": {
+      "releases.csv": "ef8a6afe93b50a8fc4a93ef77f2691649f749c88c2289681ba50ce62ff8f4470",
+      "comparacoes_releases.csv": "f995a272be380414c2dab9fb0363257f75ea60cc63714c70814b93f540672667",
+      "commits_entre_releases.csv": "bd12a8f736edf38caf614b1c957315ee710b4d0c9f666d34a2d9e90151f177e7",
+      "tags.csv": "7fe9ba7cc0bb205fd62aa32d4fa1635c87ed724ace45239ae79d8c98543fe286",
+      "workflow_runs/Maxteabag__sqlit.json": "0f2e86cff929b76e1287ed1f474be938f98f08143d69e3df315e8e8f3f2b5cea"
+    },
+    "rhysd/actionlint": {
+      "releases.csv": "575ca35ac8cd484bfbe05919908490c8a0aabecfd668c42b9a17c61e3f2f42f9",
+      "comparacoes_releases.csv": "7733f2db28b31ba95605e41be5a435270a3b6be171b8183f3b902e20cb54672c",
+      "commits_entre_releases.csv": "d4ae64a9b787d281432b1784a872288934a1b20017ac8e5f560eeef5b94a2f99",
+      "tags.csv": "5e4f27f9fa2b89a4463e753ead5f8a15f5a68ef352e921c0e7a09be1901ee04b",
+      "workflow_runs/rhysd__actionlint.json": "f0357d47155c37d779e0c4a4ea192438e2f8c4bf741de4638b808d86c12dd8f0"
+    },
+    "hanshuaikang/nezha": {
+      "releases.csv": "ce7821a2766cf8f12540d4c10fe419e74f5cdf4d7239ba7590cc51e5bf04f32f",
+      "comparacoes_releases.csv": "3b5262e61937adfcaf9b5ef7350dc73402ccba3d26159f0ef2d5eecf9d9d8620",
+      "commits_entre_releases.csv": "7809e334d3a4e1c8864fb206f56d16d0bb3fd88bd20fb72d6e4f8333abb9a48f",
+      "tags.csv": "3d39e7adbb24d2f2430ec00c47e950d702ee0d878358c0e3a1bff21fe9205579",
+      "workflow_runs/hanshuaikang__nezha.json": "5fa7f11ee8a6872228cae51b66a0bfa6cdd5b07c28602cafbc69ad37444073cb"
+    },
+    "projectsend/projectsend": {
+      "releases.csv": "da8993867909b630549f545512c3440b2e66d894c98650fc911c5fbd9187ecad",
+      "comparacoes_releases.csv": "8f26fb5c9795a040848499fcd28220e3ac8257a8a707b3c3f5dd7365371dd913",
+      "commits_entre_releases.csv": "4fb9c7f58351f8697b1d74150c60006364bd8bd2b10906055408b5040c618ce8",
+      "tags.csv": "b10e683ce2f0cd54e49977e77d229ea36515a382c363e6faa174b5790c3e695f",
+      "workflow_runs/projectsend__projectsend.json": "a7065991474a14bfebcf1c239e064529db2dc5fde610041a836b7f369733930b"
+    },
+    "cucumber/cucumber-ruby": {
+      "releases.csv": "f051bdf6ca99b8aaaad914cb7c303cd02213adb112fff79ae00c4629a86728e7",
+      "comparacoes_releases.csv": "af3249dd1202d59b82598216b246691c209c7bb814e8bebac2daa936f8ad459d",
+      "commits_entre_releases.csv": "54456d8032f4d82ec108d538af2bfec91ea6f2613b3b7a50d7443665f7791a37",
+      "tags.csv": "0565deaf7a61e2c1de7c79445b9d7defcec267c6e727f435cd1c39732e005b52",
+      "workflow_runs/cucumber__cucumber-ruby.json": "a0e59f234e9eb2808e7568dddf0c8de048e8cc479ba6d2f0d5e7d682a4278b34"
+    },
+    "jupyterlab/jupyter-ai": {
+      "releases.csv": "88fd8de9f9a09ad4d3af14f9ab43442d7cf6f500dc1d663181a474e9bc663d9d",
+      "comparacoes_releases.csv": "1c0e2ba38940084ad23f9a60180fd76ec426ff19df8f441df7a6d1c2d62f5547",
+      "commits_entre_releases.csv": "c162ed912cd43beb4d92aca20728a3c05aea2529e9806519e6ab1da3f31490c0",
+      "tags.csv": "41aa3c8a8868db75169692c3f1eee62b855a9aadb5fbf5e66b11d85e6e4fae60",
+      "workflow_runs/jupyterlab__jupyter-ai.json": "aa7a7f234880d801658a3a128f18304ff541da9176bea27fee25374419b57574"
+    },
+    "MystenLabs/sui": {
+      "releases.csv": "bfba2d7ce529aaa653a088e8d9d3da5bcd0c32a30cb9ed36765e7b7518538bd2",
+      "comparacoes_releases.csv": "557212085c60efbe13f8ba25001b9f94c674d1120558653ae09e2b451326539d",
+      "commits_entre_releases.csv": "490da3ca78a1ce302b6903bada308f00a2f5fc5223e4b681304c03e6ce81f88b",
+      "tags.csv": "18f7f167ed4f62f4fef4607c14598ff860c0ae55f1f90d41dac8d69bca73a223",
+      "workflow_runs/MystenLabs__sui.json": "8efc2837b28b2c7afd4e67c42b0fde4fc5dbc1b0da689d59ca6012062af42826"
+    },
+    "farmOS/farmOS": {
+      "releases.csv": "a7bb5fe0ae07efe4ba7a4539e2520bad5c2dd97f12b03eda6cc359f097288053",
+      "comparacoes_releases.csv": "3c0da49f07085e7a1ca79b75ee418490c91f735993ddcf23c8089248610b20d0",
+      "commits_entre_releases.csv": "19a69d530fcd74db348df779cf12f10f0052dfa5eca8839f15a2f9b435baffe3",
+      "tags.csv": "3d8a6b6f59abd2790d07780494de3f19ab4dcbee50746e76856b9c912720bf25",
+      "workflow_runs/farmOS__farmOS.json": "3155a74032a137aa9df433408170ca6cf866a070b4058c56d8c55d14d504a008"
+    },
+    "nacos-group/r-nacos": {
+      "releases.csv": "85e5646e46cc3afff3fcd68afd74a6a9ecffd0311dce983c7af289c400073478",
+      "comparacoes_releases.csv": "5058f9af43322dbf78642ed615fdfdc210a68ad2e8d44d33a337e4e853bcb444",
+      "commits_entre_releases.csv": "71beef47592dc5175c364e5a9a8ce888960d5fb7e1a7d15e89f888410c3fac74",
+      "tags.csv": "59591e551858e409c83a75d2c252b6b6e6281e3bd60cea911c26de08e6d37c48",
+      "workflow_runs/nacos-group__r-nacos.json": "99b33dd078b7f6e844f5337a572f1ef6d8bf096b9b1a092ee569dc2db46414c8"
+    },
+    "TNG/ArchUnitNET": {
+      "releases.csv": "34bc8eb423f7c0da9e0fc213f4fdc5433555d0faf070016353a92af03d60e15e",
+      "comparacoes_releases.csv": "d9738b1c8829ee5d26d40bed682dde9b45554b3bb127e9690e0efb3b0da9137b",
+      "commits_entre_releases.csv": "31cf9865aa218aa05959d0d7c614531ba575eb68a68ea717347a67cda9462652",
+      "tags.csv": "ae2dab68b43d13b421646c5e0cecb0cd0283ad54dd46d7af1a0d852e2810f073",
+      "workflow_runs/TNG__ArchUnitNET.json": "37dce4585108c7ec4bd9581260669270c65b90d33225986195dfbbbf4a6957ec"
+    },
+    "mixelpixx/KiCAD-MCP-Server": {
+      "releases.csv": "2c3a434dc44e17f5eb528f01661a3fde7e0cccd4f83cb99dcd8cb0c6c986fd04",
+      "comparacoes_releases.csv": "8de05e12b0f9333c3e2f8f9665796ee0e27dfd3036908c682b1f8a73ec9d6459",
+      "commits_entre_releases.csv": "175cf6d5ed85b1442cfcab2f904b9b8278084ef2a78d702026f2ab832ab0a9ca",
+      "tags.csv": "4fd9bc0578edca3580f3cbad443b05a909c5e1e5e5296769a6a974a251d28f99",
+      "workflow_runs/mixelpixx__KiCAD-MCP-Server.json": "ea533c922547384dbe5abb90ce9d5ca3c655770d5ba14166d90e5cdfdcee2709"
+    },
+    "open-logic/open-logic": {
+      "releases.csv": "308f742c69e3ec6b72739fa995d18d22806f3ebf924bc981d3cd58569c9f6e8e",
+      "comparacoes_releases.csv": "c1a6d18bb7490147ef7f4f07b160de55f135f0868fe80e79f241f440b4fbeca3",
+      "commits_entre_releases.csv": "11a872257e3f6f080244b199de804a01c56c8b03da5f7ae13b76f58d42ce6d13",
+      "tags.csv": "394156c6b8a1622261d8081c7ae9ef9c53fa21d65f7c69f1109d3dfba7a1483c",
+      "workflow_runs/open-logic__open-logic.json": "268d328ba8fb46f17bde642812385016191de51cc5ef3bb61a97b5168733aab4"
+    },
+    "internetarchive/heritrix3": {
+      "releases.csv": "9530d12f70c892a95ca560c583587eef7bcefbabbcc745411010de724ecd57c5",
+      "comparacoes_releases.csv": "22f766b7f1435b36ae856a7db1a05b51cbe6fa985699e532a3c09617d6b980c6",
+      "commits_entre_releases.csv": "933036d95a18f397da4a2dcdc9784673515b2ba17bb421203f3d242ab3550926",
+      "tags.csv": "f9b5d26f6f1d9b66ab12933a6764e180850ffccb074b2ca5083489100ae5a3b2",
+      "workflow_runs/internetarchive__heritrix3.json": "494f89d93da2e7b58a49e3eed8da355e6733b5984ecb563c3d75bd662a5dce2e"
+    },
+    "react-component/field-form": {
+      "releases.csv": "2354254b8a2656a1e0ae1d846e784d3e90877cdca943d6e778cae79d78a742a8",
+      "comparacoes_releases.csv": "b4b5c06fce26e46d698b51d585ebbb7217724cee689a964b23bba1df2ba5d627",
+      "commits_entre_releases.csv": "fbecc398a4b684d1ffb4a96c6d6607af6ed06f4e57924aad523a51f641f880e5",
+      "tags.csv": "a9f90c8a96bdfa0b1d6e90480fbffc57aa1481e13d014768f08a1b5c51426e1b",
+      "workflow_runs/react-component__field-form.json": "0c3f82432fa96cd80efcb4b197a43e7e3793154e4ef3d1ca753119bc47b1bc1e"
+    },
+    "Azure/AKS": {
+      "releases.csv": "5a1e19e7875419631f29d14c58b8c91b63fe264c920b5817dd1896ee9311a392",
+      "comparacoes_releases.csv": "943886421aad0b6383a370dec4b9b31fde6ab34d1d84b064598906281e20e1de",
+      "commits_entre_releases.csv": "953b71ae4bcefb5224665f8f1252f93a890519064541a7ec35f7424128d5dd13",
+      "tags.csv": "5c17f738e3c9b7c51dcc52e0619fe806952e286e950be32a0275a6072d31be64",
+      "workflow_runs/Azure__AKS.json": "48bce617bf112673ba5fcaeaf9d978357b97c82dc8002a04517667eabded8e86"
+    },
+    "bensheldon/good_job": {
+      "releases.csv": "b2de558d8ff7fdb9192129152a5ad0619f1dfb81f22c8ea172306fb7797e0cc0",
+      "comparacoes_releases.csv": "ca539562a2e0081dcae7c56e02174d965c5b9babf530ff9b283ed3d891723f98",
+      "commits_entre_releases.csv": "a62de8ca7dc058767632739c0742467a50745a6adba739b2653f62876e55ad7c",
+      "tags.csv": "8ab5d788d2dbb8451b151890894920284619191cfc8890b8ed44a49f92c0411d",
+      "workflow_runs/bensheldon__good_job.json": "b16f6ff40b71117d8993d74df0d8e750d9dd33f33ff7b366171fb4354dc108a7"
+    },
+    "Ericsson/codechecker": {
+      "releases.csv": "939946ca30267ace5c9df820a538dae1c863c7b7ee252f5b81334df28ea6fae4",
+      "comparacoes_releases.csv": "1ff47d9ff9ec85eb952877a82d00ba454a9fd3f741256a5031c8113b31c7ef90",
+      "commits_entre_releases.csv": "dc092387b623201030c69fe0c693ba3552380bf5dbeb490a0673ca3c39f383d4",
+      "tags.csv": "e2ca32a7102fdfdf88b28136eb87f1ffa8c7e43437c6fefe17b61a8c18050f35",
+      "workflow_runs/Ericsson__codechecker.json": "b6c3d8c6833c7c391a2b7acb64c204cc3b6f6371d14ceafd908d535b7eb1599b"
+    },
+    "coollabsio/jean": {
+      "releases.csv": "78ecb6468b8f878007745dd18edcc23bed9ec422199c793db2032e89968f31b3",
+      "comparacoes_releases.csv": "2af706641d75fe10070390f26ecf2c51f7c6532b3300b989340b1ab4255f6b84",
+      "commits_entre_releases.csv": "fcd98f40d85e56a1fd916dac6ba8649dca078058a5fbdaaee86c0f250b27ffba",
+      "tags.csv": "de1ccf6679a8cfa1f459c50080ad50fbb7e8050e85841815338b3ba5b478a7a8",
+      "workflow_runs/coollabsio__jean.json": "07c0a411f0f99a076aa7532dbefaacc84a1532aa5956af4bee7d4b293ace897d"
+    },
+    "pgjdbc/pgjdbc": {
+      "releases.csv": "34455194524c8ae8926265f22aae10cacbf8235b2fa96dfa49f0174abbf31a7a",
+      "comparacoes_releases.csv": "9c3c017157ff89d3a263c82ec14a4daeea14f58612d0b74cae3e4c0ed5334426",
+      "commits_entre_releases.csv": "e2183293ece2606939ef08dc84bf6a1e553f80845fea180acad14795fcbdb105",
+      "tags.csv": "7b163dafa133530516cf2d99bf879bab14662819ce0e0ab8031ca3d92feaac8a",
+      "workflow_runs/pgjdbc__pgjdbc.json": "f22e091d7aa37a91a7b6f9cc19c679523373f710a9a772e8643cb38f755824b8"
+    },
+    "vercel/chat": {
+      "releases.csv": "eb5b5cee5c7a8e43b71b2b89928977283cde9f3758ba69b2890da5d65d89e0c7",
+      "comparacoes_releases.csv": "3fd2556134abf5e082a5b8091dfcf85a924a28c6989d97dab5ead623c79b6fb8",
+      "commits_entre_releases.csv": "f13eeec46c5daad2c6bbda74240cfe331f43b18d76c1726f765ed931f5ef2d18",
+      "tags.csv": "77b8c3cb8bd50be3fc74a20fc7ab4e2fa914b314da2a1d17decc5293a6e85a6c",
+      "workflow_runs/vercel__chat.json": "111df870e4163202e0a47c41f31ecbb822111d7c145f753641fe11e8fcf95fb8"
+    },
+    "chrisleekr/binance-trading-bot": {
+      "releases.csv": "ffb9edd4abc4a9009fe89b270bd5b8529bdd7c7472ff8d8d8c744d9d9979de0b",
+      "comparacoes_releases.csv": "ac45aa76a11e35feba0b43f20f4cd78302ecbe88814b9531425cd3a56a56f5de",
+      "commits_entre_releases.csv": "02c874f6cd994d02246975545187a191471a5aedc1ad8b72952b0c3b5e823a0a",
+      "tags.csv": "650976c4cb1cca0fadb34feb420f8dcb7b14f3ff45dd45dba1f7a3995fe61c24",
+      "workflow_runs/chrisleekr__binance-trading-bot.json": "a6d1918691b2f1dcf75d0c531f5d761faf05e74589aebf13df3a212efdd03e3d"
+    },
+    "daangn/seed-design": {
+      "releases.csv": "e658e4c511c26e7f5075a956441850e37af2bbf7a0a409ed688f4338641a38a4",
+      "comparacoes_releases.csv": "7b32742208afb7c42a7467bf2ed40a7d63c8ae847b491067e6992efc5fa955fc",
+      "commits_entre_releases.csv": "43d4abe52523c9d0e256f216b23f2c80f7a703f90a07ee835c0fef4bf0410b14",
+      "tags.csv": "3b89fa01983ffbb173cdf0f06f286f7fb5f7b74f2911ccbd6564c7eec4e18fd7",
+      "workflow_runs/daangn__seed-design.json": "101474d49a092680150e2a3096913e453653adabd774258141b7c6d3f1688251"
+    },
+    "autobrr/netronome": {
+      "releases.csv": "d8fafb5e67a351817131d59c3165de2bf7d27f99bbd8ef0db793a857a54daedf",
+      "comparacoes_releases.csv": "1d09542382c218653b13528332cc1592d59a20fa928781227f4fe0d7308e2be7",
+      "commits_entre_releases.csv": "2033f8e78a3129a4880e61bedc9de6147e02719746825810b0c5992b4936ac86",
+      "tags.csv": "cb3101d143a2fd270d3f7b73c8b5ba73c4beb846cb531695713b266525eb3989",
+      "workflow_runs/autobrr__netronome.json": "0f5e5eba72282253ae9cf074eb9078c2865cf3b9c9bf44ed3f54786ff238d06e"
+    },
+    "odygrd/quill": {
+      "releases.csv": "1a3072aaad00c765abb6d249ced10e285d2e40b0701ab452b7ba52504df3b165",
+      "comparacoes_releases.csv": "1985c1b494a75643273d047f40946dabd6ad41a38a620dbbf103080ef70f18ec",
+      "commits_entre_releases.csv": "eb46e601cceb0262fc34335c42879d54adb1f37e0ab393be97689d401c8054e0",
+      "tags.csv": "31ee8f490af180dfd02c7fd607e53b6c6d08695366dc5e739462482dc4064849",
+      "workflow_runs/odygrd__quill.json": "d167dce9003bd24ade04c41b278277f652d3ab8f0fe711df8910c6217fb5e062"
+    },
+    "agavra/tuicr": {
+      "releases.csv": "0255c315ba09cc32b40b8abfb24df1fd447021a9dbc2366ee1ddc71ccab0a33f",
+      "comparacoes_releases.csv": "fa261fbac2b248dcece3cf77f94fab589209b0ab52a26ba08aca03e4f76c9670",
+      "commits_entre_releases.csv": "c2c85da32bd0978ae09a1104bdff50b2a42b0a50edbdf9ea3c75a9513cb38781",
+      "tags.csv": "080513cb4c5af342cbe0669326e95586eabccf7f4d6ee31b4727142a7080835d",
+      "workflow_runs/agavra__tuicr.json": "f55d573a8fd67d56319cdfab2f487207c225d83afd33579eca8405be9d281df2"
+    },
+    "opengeos/geoai": {
+      "releases.csv": "d320348aa0b6787a5eb2c14c74fc04fe05c02cb83df00902d6068d1ac57fe405",
+      "comparacoes_releases.csv": "488a280b9e0411d151fe3cd3ccd8a1b47c3d5000834d330ecf87a8d855965718",
+      "commits_entre_releases.csv": "de4c7dd316a8efcd486f9a3444ae084079cd18a0e9d3b61c996b3eb626d03403",
+      "tags.csv": "e1f0c9bf2ee0cf43517342926df4b75b6a51eceeaacb2f32912e45a208a2926c",
+      "workflow_runs/opengeos__geoai.json": "83ac88afb071b3d50e1effa5f8b363aeb220c37e6cb860117ec1bc6a409a8acf"
+    },
+    "remorses/playwriter": {
+      "releases.csv": "f6411d841e0ec750f73994b56638046a35290b4278a8b93a34cab779affa5aef",
+      "comparacoes_releases.csv": "004d196b29101540482d19d179d758ef0929fc8d1fdcc5cc666ab90d6c3aabae",
+      "commits_entre_releases.csv": "6b83b0a54ed4c086172c97425c9f9489aaecb5a43cb16c42c434c5b4cdd2ab0d",
+      "tags.csv": "b26bd4267ce1f766b8dda39d191b9f2d56911d0f89744d33306ca6c5496d1475",
+      "workflow_runs/remorses__playwriter.json": "2fa8e0dcfb07cfe616c3f5c432dcfb6361400bdd089065483c2317e7e209ff56"
+    },
+    "lerd-env/lerd": {
+      "releases.csv": "f52c52365077d2f0251a4cdcee0f20f72200a1ac7b48813179da5248f9fd79ab",
+      "comparacoes_releases.csv": "e103bd7c95fd5b3bf58c54073bf5329928de14bc3ec24f0517e511eb6534c130",
+      "commits_entre_releases.csv": "3daf6c1ab59357548993f2101d00fceccb0ce2f8ee6e5ea4e8ade8c8d87da108",
+      "tags.csv": "0d8b1eb5ea849b5cc4422e7bbae4f13791b398c975b64aaadd48a7c81c29f329",
+      "workflow_runs/lerd-env__lerd.json": "190fcb04dca6b11decc7b1cc68f7f2525e6b2839a92ac863d29da8c9dbada076"
+    },
+    "google/timesketch": {
+      "releases.csv": "aff40a769cb12976510fd1dcc36818460d84f91dea00cac55a39e57f586c1786",
+      "comparacoes_releases.csv": "476355ae6e02ff0fe3f24dfcf93c51e38acf8eaabbcf7b9a0562a0bc40a4def9",
+      "commits_entre_releases.csv": "f7ac0e0d141c3ee562b296dff5face1de0f01240ec0b9292ad6c493d520b2fdd",
+      "tags.csv": "c0af192c25024a5c302b4ca1b69b4916e3d43345feeb6195779673f92526df0c",
+      "workflow_runs/google__timesketch.json": "ec26e76e2d9f7169d6cf69f3daf29da98b253a4d12d22d546c90d281af68f595"
+    },
+    "he-yufeng/CoreCoder": {
+      "releases.csv": "b7fe91dca8af4ad6f0ebade425c56a902ec2377c699b8f6f67fdd3d229acd327",
+      "comparacoes_releases.csv": "4644ff62238e1683a63aec916129c3dcb742b07dc6129ea5463ed39952170921",
+      "commits_entre_releases.csv": "3d1fc5ce86dee2132b93c62ac42a8497a490d36cb038f09a1a407120b983e330",
+      "tags.csv": "01c356733cf9ee4f6002805b47c1725c7531079bdc12d29f114bb83eee2458c9",
+      "workflow_runs/he-yufeng__CoreCoder.json": "3dd2f9992055c4f675a6651e452738d9a87a800a87c7d1e12bb69d26261e07b1"
+    },
+    "pipeshub-ai/pipeshub-ai": {
+      "releases.csv": "db21e4cc90c064fd3a67576b222ce78bc3009505a368cef0c2f409cc9c0a34eb",
+      "comparacoes_releases.csv": "e01674a61c2ab21ae754f69a4fdfe5bde41e4acef17e81823b8c166162de15f3",
+      "commits_entre_releases.csv": "c7f23601fe79d3bdb315c2cad178760c64f1f920e90d4a4b08eea1486e7debbd",
+      "tags.csv": "749cc4ac5c6af10f1baba02f0dbb38856baf95de0c04d415f04341c712369819",
+      "workflow_runs/pipeshub-ai__pipeshub-ai.json": "4608cc4fc303029f7da0311bc24f53824017e97dadbd51714f8191ca4ba39561"
+    },
+    "qt-creator/qt-creator": {
+      "releases.csv": "c0bfb63710a6cc6790e4ff183100557523c251e142f00388507c4f5f9c9f4623",
+      "comparacoes_releases.csv": "900c7701a7768418adf9a74fdb90cd4490e884fe27d97dab151e008cbaaa5bcf",
+      "commits_entre_releases.csv": "ea6c3ee5d7d3c748ef25200119bef2b68a7627a47d669acf86f972dd068dc9bb",
+      "tags.csv": "ce2ec3039b65a27b551832d7e129642611f7f598b285ee8b065f655e0fd8d64d",
+      "workflow_runs/qt-creator__qt-creator.json": "5049b974dada3d76fac4a1decfa799aa1e73df55e88cca26cfbeb9c4ff8071b6"
+    },
+    "bubbuild/bub": {
+      "releases.csv": "f5013ba7481ea12f073ab8e90f6008f891a4e4460a334b4184a93c5d7367c272",
+      "comparacoes_releases.csv": "bfe86b191c2021f28242425e6b69e4f0e6e69f8e14868a1d2ef5e3a37a967a12",
+      "commits_entre_releases.csv": "46718adce87ba36b5ae163be9d2f398119d090c62ef7509f0fef37f40809ee57",
+      "tags.csv": "ea44596c18363b465d011fa8d52ff9250c9700e7e2a080ae41af4e1ef5eb372d",
+      "workflow_runs/bubbuild__bub.json": "60708561e4d00b4d33a25938e916fd0889622ad9b28a1a56f4929de3f0339430"
+    },
+    "gomuks/gomuks": {
+      "releases.csv": "bc1c3ae3323b8c54b8c2e4caa8582ad2b455a75051753be5c2cda1e9620d8bc8",
+      "comparacoes_releases.csv": "8d9f1406094f54c909774d40b38854e809d6a51af62ed82c331b695e65562e5c",
+      "commits_entre_releases.csv": "ce03fc3ce7e15cff322042a890da7add0939728e24998c2cd330014a6693b208",
+      "tags.csv": "4501c42403d5e71982c69ebfb7c79c81ed190c5825eaa9d64212c8ad91c81bfc",
+      "workflow_runs/gomuks__gomuks.json": "1b7d6ce14e3bc89ccd5d8cd91e03002bfc57113d9b2f81356d1ffab686f9d732"
+    },
+    "Badgerati/Pode": {
+      "releases.csv": "054af69d4ffbded4934b892683522a8cb892c91958be7e535b99598320284996",
+      "comparacoes_releases.csv": "bb15f3cced0a11376fa3953eda1b80da8ee775aaae2eba4958aeac22330c17f5",
+      "commits_entre_releases.csv": "1e2084367e05067bf495d13d625615084395900907eee1f2ade408073201699e",
+      "tags.csv": "dc91904ecaf83b24d621dac5c9135562aba1810ce743de8e8d4a55554eff7a9f",
+      "workflow_runs/Badgerati__Pode.json": "f3f96c4c8fe731b0443afd827ebd8214b307bfc35d2f99524ee16f3c97e8efd1"
+    },
+    "microlinkhq/unavatar": {
+      "releases.csv": "0808a0b620280bae74c737c1c45404fda33cc7065688d4aa8f58ffd1637a396f",
+      "comparacoes_releases.csv": "01d0edcfeddad13e9e95cc393a7ab1827811648a5d4444cd410d01c77f34db0a",
+      "commits_entre_releases.csv": "c34f05b71380884bbd0941817a6b802ac70c7de383383b76e20d33532351f215",
+      "tags.csv": "ad840b05cb9452003d9f9e802a06f2f105e72c7587ba3c1f269a10b44c1a2a21",
+      "workflow_runs/microlinkhq__unavatar.json": "9141bfa5a8651a7196d44ef10f295ce7ffdae978d20f55217919bef5beaf764f"
+    },
+    "WenjieDu/PyPOTS": {
+      "releases.csv": "616a2ee81e1cad807ae262808a5950c2aab794d6d3a6073777bead407bbaefad",
+      "comparacoes_releases.csv": "5b06ec94d49364911e69251be79eccb0b70296523d388c68607e4469998e35d0",
+      "commits_entre_releases.csv": "5b17e321d15acf3e33eecd12a4d904a5e2cbf701857cd3ff1410f44c8f87a0ce",
+      "tags.csv": "074d5cade6c8db08511552470ed6fbb53490f6f35d08bbc1a340d0749327bc54",
+      "workflow_runs/WenjieDu__PyPOTS.json": "c3f78e21db0d850019838293ea1f8112b0cc20c027feef3266892e8bcc91ee5a"
+    },
+    "getsentry/sentry-java": {
+      "releases.csv": "ed457dbe7fb8b8d606cd9d8cb5053f863556b8ded1f85f6a6cd0341d06f4877e",
+      "comparacoes_releases.csv": "7119046312100ce083735d80592c1ad5d07d5c575f46b9692f933d4b787fa4ed",
+      "commits_entre_releases.csv": "b563454b41300488c2b671919eebc41b5388213c970bd6df8a64367606487aa6",
+      "tags.csv": "6be6e22a72a42316d13cfe5d295f97b1ee08a126363bbe1d3a8e31fe01613df7",
+      "workflow_runs/getsentry__sentry-java.json": "7e05b31f34cde5018c759b8a5824270e5fc5f7ec9c5cc6b5f69660be41ccfae9"
+    },
+    "liveblocks/liveblocks": {
+      "releases.csv": "d8550036d8d6d2fa99054fd92bc263933ef5567811a103146f0b01ce32af9c7a",
+      "comparacoes_releases.csv": "6643f0b92b3b746604c033f198faa0d9b73f1063a93e3da3a433afcb333f33c1",
+      "commits_entre_releases.csv": "54cbded2c329e1751b61a088b65515c2e551f1e3814535644ccd95523b5d5d91",
+      "tags.csv": "fa4524125018375c0669db5e4cdc4a5e2bb8ffe1010d3791bd936769c3a97688",
+      "workflow_runs/liveblocks__liveblocks.json": "f1caf66edf0681461e8533a34ee19523e79cc121348642495c3152c16f1a3d27"
+    },
+    "rapidsai/cugraph": {
+      "releases.csv": "fedad00935587c71784364e7051c7e3d6b6d81c07a4e09d4ea446f3ddc20b5f1",
+      "comparacoes_releases.csv": "af6ccbd517295c286590f580fbfc56ac8b40187e4f90dcd93b45c0a906a7fb2b",
+      "commits_entre_releases.csv": "3be8cc3d0674aa3f654273c9f51aac94e6ec9631fed091953b96757754c4d060",
+      "tags.csv": "e9bcb6f840add1e4d9cdb21691c805aee2360f295620577ee8d57f2d4c3eaac1",
+      "workflow_runs/rapidsai__cugraph.json": "5f09aece3992ab6656c237051043da31172ddadf6cf1eb5de573eda91f1ca8f3"
+    },
+    "deer-flow/llm-space": {
+      "releases.csv": "768423fbf1ee1a34292cb8611301746559b3478a85100934c6e78e93f11a2972",
+      "comparacoes_releases.csv": "b573b2bd8e8d5ab62973a435c5c77d383cb3ed95c99b313879aaef779c14ff44",
+      "commits_entre_releases.csv": "805fa83fd61885503f3557770c9bcfff2940a2af44fb120a7b3c8105bfb08d80",
+      "tags.csv": "8e67a56acc8df4fb1b1272126bb4d591eea061eb3349001afab1a75dba8b3ef6",
+      "workflow_runs/deer-flow__llm-space.json": "677a1aa4f5b95ff6c53107e193a954d8c058f38f4c6d93ed935322c19c940739"
+    },
+    "vincentlaucsb/csv-parser": {
+      "releases.csv": "f69a20184af353b0b6a77a006f847d66ea73175403c00ad17f84c6bf1762b73c",
+      "comparacoes_releases.csv": "dc781e34031af89ae78461c1081d08c88f71650bb35e000ed66c78e9475c0db8",
+      "commits_entre_releases.csv": "e65a9c8c4dd1d0bb821f1528d40612e255e4ebde5c11d2024e17cee27cc0f683",
+      "tags.csv": "ea19ad3054cdcf34ee40bfa22bb8dd497a2af2b2ba4f57511321245f69bad636",
+      "workflow_runs/vincentlaucsb__csv-parser.json": "fc8998fa87f740b7b9ab6e725f5dbee32ab9931fc3f1bee1f2bf6a2c0cb3c3ef"
+    },
+    "JasperFx/marten": {
+      "releases.csv": "7fdb137f782d907076d92fd0928c51aadb2d5b2073d481d1ad72a0c4e5e7d346",
+      "comparacoes_releases.csv": "5aad0b2fe3e9226dde26bc56f6703b9d7ea61c5045688399df712fb3e7ab5c90",
+      "commits_entre_releases.csv": "a2d868168323191afaeeb9a8c37cff9cb1e60f483237ba4d1b016d8ba232e096",
+      "tags.csv": "9eddb1e2c65131b50a676c0918e46c11e33c13ecfd35b7f4abd0c2e9d823588e",
+      "workflow_runs/JasperFx__marten.json": "b4e0e05b8065094b5446a3e9ce2d57e20c51e8258ba493460adcc97f3f11ef23"
+    },
+    "builderz-labs/mission-control": {
+      "releases.csv": "485769e0c392f54b02bde2e872b120405b9abe8c4fa9f06967dbd4816711ea64",
+      "comparacoes_releases.csv": "fd00f35b65240f99616027e27918d5f9073c9ab892103bf18c6d65d1d8acae7a",
+      "commits_entre_releases.csv": "39f6aca3cf601b03d9e234fe06fb48f745c47fa8fe76edf2cf1e343ca9a3365e",
+      "tags.csv": "d70789f2b5fcef62053cd18c3ed8fc1eb9d3e5ab0bcb00b662c8a9e2c4cccdcf",
+      "workflow_runs/builderz-labs__mission-control.json": "277e33ec7c62282e84aad8cfc1f3136d1b800200d49ba8b558422e0444eef526"
+    },
+    "GENEXIS-AI/chromex": {
+      "releases.csv": "26d36690269e8353d26d0ca233e112ce5ed2d9b62c7fef1fe66c242ef6eac686",
+      "comparacoes_releases.csv": "2968ccbe17f2eb6aee7143593455b4c7df1fa3c2f09fa4915e15c42bbbfc2acc",
+      "commits_entre_releases.csv": "e74a379b15c213ce527243b4797d0ba847554b37ebccebc1d895d378579966b3",
+      "tags.csv": "b952189b986c8b01362dd99715697d5a086e489b896247da0d5432e9c6b0e29d",
+      "workflow_runs/GENEXIS-AI__chromex.json": "677a06c005e3d0e7aa292b06e3f75f584898eb131ac38a469645e6de71a5593e"
+    },
+    "sarensw/MacPacker": {
+      "releases.csv": "2ddec5656299706e0c495ad8ee417af7be1ee2241e3c00a72c802da9122c6742",
+      "comparacoes_releases.csv": "17c226fb6155c4e9dc214cee84e3ea9ae990890a7b7f38266733ea282952e056",
+      "commits_entre_releases.csv": "28ad0e47646dcb2f505d94d8ea186f0348914aafcaeb46613e4ccb03ca4abf0c",
+      "tags.csv": "becb792427ebee6a1b8c4cef831d13a2e13f1b3dd565148e91364e3ca7859a25",
+      "workflow_runs/sarensw__MacPacker.json": "41ea3340df1ad96ac83a6be5480b7232d846db690f17e16b006d48a317d926dd"
+    },
+    "OPCFoundation/UA-.NETStandard": {
+      "releases.csv": "56c2a255c132269642c5d4c7b71cfb4efc880a10636c5d94a8f4339382e2da37",
+      "comparacoes_releases.csv": "f34931d03c5df5aa0f979724a2c9aeafda0938806d21bb54f0c121de409e0cb6",
+      "commits_entre_releases.csv": "8e968713b920d1202508f44436481ec39dc4380497b930a613bca3cf3eaa4caa",
+      "tags.csv": "f61d58a1f92c92c3e2a822c29511eeb54a3dda9a2cbfbb241cc031ea36fe9a60",
+      "workflow_runs/OPCFoundation__UA-.NETStandard.json": "486db214308a2dae620629e4a3c06883aad7c8136d5d974ebfd0c2fe0819029a"
+    },
+    "analogjs/analog": {
+      "releases.csv": "1cc3bace16a4ee1322913361986c601fbe860f75775507f267695044d047e94a",
+      "comparacoes_releases.csv": "77a12ec1b29121a9330a708c9ac98d9ab59433c6fb32515322145c4e1f62c7b3",
+      "commits_entre_releases.csv": "0f437945e5aaebe8bd907819152210adab4c80774508ce611b4ec422bece5e7f",
+      "tags.csv": "05a11a85e46b898eec8496f973850e9e501abbe95c032ed75fbbd298f3c1c2c5",
+      "workflow_runs/analogjs__analog.json": "78e466197436d688fa53cb8482eba002d2f0780a854c775ce788267f24e29604"
+    }
+  }
+}

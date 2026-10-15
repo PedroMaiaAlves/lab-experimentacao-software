@@ -1,0 +1,79 @@
+{
+  "gerado_em": "2026-10-15T05:15:34.819864+00:00",
+  "repositorios": 300,
+  "dataset_sha256": "6bf51ed7ce2587d1b36586c3912d4827b32ac9773e6640948b06deab745be0a8",
+  "amostra_sha256": "61468b19b001f71b10cd24d3323cdeb7bef915dac2b788ed65640194dac416fd",
+  "heuristica": {
+    "versao": "v1",
+    "janela_dias": 7,
+    "usar_patch_semver": true,
+    "usar_palavras_commits": true,
+    "palavras_chave": [
+      "fix",
+      "hotfix",
+      "revert"
+    ],
+    "politica_tag_nao_semver": "fallback_textual"
+  },
+  "consenso_sha256": null,
+  "consenso_utilizado": false,
+  "repositorios_sem_tipo": 300,
+  "cfr_b_indisponiveis": 7,
+  "totais": {
+    "releases_principais": 11453,
+    "releases_erro_404": 9,
+    "commits_data_invalida": 561,
+    "releases_censuradas": 274,
+    "runs_total": 314276,
+    "runs_validos": 291405,
+    "runs_ignorados": 22871,
+    "episodios_total": 7861,
+    "episodios_censurados": 90,
+    "intervalos_saturados": 56,
+    "intervalos_incompletos": 0
+  },
+  "funil": [
+    {
+      "etapa": "candidatos_na_busca",
+      "entraram": "53143",
+      "descartados": "",
+      "restaram": "53143",
+      "motivo_descarte": ""
+    },
+    {
+      "etapa": "candidatos_avaliados",
+      "entraram": "2644",
+      "descartados": "",
+      "restaram": "2644",
+      "motivo_descarte": "parou ao atingir a meta"
+    },
+    {
+      "etapa": "actions",
+      "entraram": "2644",
+      "descartados": "1149",
+      "restaram": "1495",
+      "motivo_descarte": "ver descartes.csv"
+    },
+    {
+      "etapa": "releases",
+      "entraram": "1495",
+      "descartados": "1082",
+      "restaram": "413",
+      "motivo_descarte": "ver descartes.csv"
+    },
+    {
+      "etapa": "runs",
+      "entraram": "413",
+      "descartados": "113",
+      "restaram": "300",
+      "motivo_descarte": "ver descartes.csv"
+    },
+    {
+      "etapa": "amostra_final",
+      "entraram": "",
+      "descartados": "",
+      "restaram": "300",
+      "motivo_descarte": ""
+    }
+  ]
+}

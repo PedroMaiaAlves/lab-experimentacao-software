@@ -107,11 +107,12 @@ assistida por IA; ela não deve ser descrita como avaliação humana que ele rea
 O código organiza fontes e exporta decisões explícitas, sem usar a heurística
 para inventar a avaliação independente.
 
-A amostra-ouro atualmente versionada veio dos 100 repositórios da S01, antes do
-congelamento de C1. Ela não é automaticamente a amostra-ouro definitiva da S02.
-Depois do congelamento dos 300, A precisa conferir/refazer seu sorteio de 60
-repositórios e 5 releases por repositório, com as fontes S02. Preserve o material
-anterior para rastreabilidade. Lorran confirmou que não preencheu os rótulos C
+A amostra-ouro legada em `data/amostra_ouro/` veio dos 100 repositórios da S01.
+Após o congelamento dos 300, o novo sorteio definitivo foi gerado em
+`data/amostra_ouro_s02/`, com 60 repositórios e 5 releases por repositório.
+As três planilhas definitivas estão preparadas em branco; somente 50 releases
+coincidem com o piloto. O material anterior foi preservado para rastreabilidade.
+Lorran confirmou que não preencheu os rótulos C
 publicados. O histórico mostra que Pedro adicionou `rotulos_B.xlsx` e
 `rotulos_C.xlsx` no commit `8f7bd93`; isso não demonstra como as avaliações C
 foram produzidas. O arquivo não foi sobrescrito e não é tratado como revisão
@@ -119,7 +120,7 @@ independente de Lorran.
 
 A revisão separada está em `data/revisao_c_provisoria/rotulos_C_ia_provisorios.xlsx`,
 com CSVs, fontes públicas preservadas, justificativas e hashes. Foram examinados
-60 repositórios e 300 releases da amostra atual: 281 decisões provisórias e
+60 repositórios e 300 releases da amostra piloto: 281 decisões provisórias e
 19 casos sem rótulo por evidência insuficiente. O campo `escopo_evidencia` distingue
 consulta integral, parcial, ambiguidade e insuficiência. Trechos de notas longas
 não são apresentados como investigação integral. Nenhuma linha atesta revisão
@@ -134,8 +135,9 @@ python -m pipeline.revisao_c --exportar
 O primeiro comando reúne as fontes sem rótulos dos colegas ou previsões; o
 segundo valida e exporta as decisões de `avaliacao_c.json` e
 `avaliacao_repos_c.json`. Não preenche ausentes com negativos. Antes de C3 ser
-concluída, é preciso alinhar a amostra com A, complementar evidências insuficientes
-e fechar a revisão assistida na amostra definitiva. Essa é uma pendência explícita,
+concluída, é preciso realizar a avaliação individual na amostra definitiva.
+A decisão mais recente foi manter as avaliações dos integrantes, não gerar três
+substitutas por IA. Essa é uma pendência explícita,
 não uma revisão humana simulada nem uma validação-ouro já concluída.
 
 Para conferir somente formato e completude de uma planilha C, pode-se reutilizar
@@ -145,12 +147,12 @@ integrante para preencher lacunas.
 
 ## Evidência e estado da entrega
 
-O piloto real consultou `dtcooper/raspotify`: histórico de releases/tags, cinco
-comparações e coleta de runs concluíram. Isso não comprova a coleta de 300.
-A execução completa só está concluída quando o manifesto de congelamento e o
-dataset existirem e forem validados. Os logs locais e o checkpoint mostram o
-andamento; não substitua esses resultados por dados simulados.
-Depois da retomada para aplicar o fechamento integrado, o log ativo é
+O piloto real consultou `dtcooper/raspotify`; posteriormente, a coleta completa
+terminou em 15/10/2026, às 05:15 UTC, com 300 repositórios validados e congelados,
+dataset reproduzido offline e fontes publicadas em `data/fontes_s02.zip`.
+Consulte `fechamento_s02.md` para hashes, comandos de restauração e pendências.
+A coleta terminou, mas a validação manual e o refinamento da heurística não.
+Após a retomada para aplicar o fechamento integrado, o log final é
 `cache/s02/fechamento.stderr.log`; `retomada.stderr.log` preserva a execução anterior.
 
 `python -m pipeline.dataset` também gera `docs/artigo/tabelas/coleta_s02.tex`, com

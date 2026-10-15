@@ -51,7 +51,7 @@ Fonte: `dtcooper/raspotify`, API pública do GitHub, janela confirmada de
 O piloto comprova a integração real das três etapas para um repositório,
 não o término da coleta completa. As respostas aproveitáveis permanecem no cache.
 
-## Execução completa e pendências
+## Execução completa e pendências — registro inicial, superado abaixo
 
 A coleta real está em execução separada da S01, com checkpoint em
 `data/s02/checkpoint.json` e log em `cache/s02/retomada.stderr.log`. Os contadores
@@ -80,3 +80,38 @@ Essa amostra veio da S01; a revisão definitiva depende do alinhamento da
 amostra-ouro por A após o congelamento. A consolidação C agora exige vínculo
 explícito e proveniência do consenso antes de incorporá-lo ao dataset. Dados
 insuficientes não são convertidos em negativos, nem em tipos imputados.
+
+## Fechamento real de coleta — 15/10/2026
+
+O registro de andamento acima é histórico. A execução completa terminou às
+05:15 UTC com 300 repositórios coletados e congelados, após avaliar 2.644 dos
+53.143 candidatos do snapshot. A validação estrutural passou para os 11 CSVs
+e todos os arquivos de runs. O ZIP publicado contém exatamente as 311 fontes
+congeladas, sem cache ou arquivos pessoais. A restauração em diretório separado
+e o recálculo offline produziram bytes idênticos ao dataset publicado.
+
+A suite local atual passou com **258 testes e 95,83% de cobertura em `metricas`**.
+Seis casos novos cobrem o empacotamento, restauração idempotente, preservação de
+arquivos locais diferentes, recusa de adulteração, arquivos extras e caminhos
+inseguros. Essas verificações não equivalem à validação científica da heurística.
+
+Resultados reais: 11.453 releases principais, 314.276 runs totais, 291.405 válidos,
+22.871 ignorados, nove comparações 404, 561 relações com data inválida,
+274 releases censuradas no CFR (b), 7.861 episódios de recuperação e 90 censurados.
+Houve 56 intervalos saturados, incluindo subdivisões, e nenhum incompleto.
+
+A telemetria parcial, preservada em `data/http_metricas_s02.json`, registrou 25.634 respostas
+HTTP, dez delas 404, e três segundos solicitados em três esperas. O contador começou
+após o início da execução; não representa todo o histórico nem comprova rate limit.
+Os dez 404 HTTP não são os nove 404 de comparações: são unidades diferentes.
+
+As três novas planilhas estão vazias, com 60 repositórios/300 releases cada,
+URLs e IDs conferidos, listas suspensas preservadas e inspeção visual das três abas.
+Há somente 50 releases em comum com o piloto. Não foram copiados votos de colegas.
+Os hashes dos modelos estão em `data/amostra_ouro_s02/preparacao_planilhas.json`;
+não são manifestos de avaliações humanas concluídas.
+
+C1 e a metodologia de coleta de C4 estão concluídas; C2 ainda depende da heurística
+qualificada e dos tipos, e C3 depende da avaliação independente real de Lorran.
+O dataset mantém 300 tipos ausentes e sete CFR (b) indisponíveis. As dependências
+de A/B, hashes e instruções de fechamento estão em `fechamento_s02.md`.

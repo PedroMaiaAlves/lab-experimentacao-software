@@ -138,6 +138,20 @@ O mesmo comando prepara depois o sorteio definitivo e os números do artigo.
 O fechamento da validação, seu contrato de proveniência e as pendências estão em
 [docs/fechamento_s02.md](docs/fechamento_s02.md).
 
+A coleta real dos **300 repositórios terminou em 15/10/2026**. Amostra, dataset,
+manifestos e sorteio definitivo 60×5 estão versionados. O dataset ainda usa v1,
+sem consenso definitivo nem tipos imputados; a validação manual permanece pendente.
+Para restaurar as fontes publicadas e recalcular sem token ou nova mineração:
+
+```bash
+python -m scripts.fontes_s02 restaurar
+python -m pipeline.dataset --config config_s02.yaml
+```
+
+As três planilhas definitivas em branco estão em `data/amostra_ouro_s02/rotulos/`.
+Cada integrante preenche apenas a própria, independentemente. O piloto anterior
+é preservado, mas não substitui automaticamente a validação desta nova amostra.
+
 ## Testes
 
 ```bash

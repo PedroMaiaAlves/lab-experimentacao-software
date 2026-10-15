@@ -1,0 +1,27 @@
+{
+  "atualizado_em": "2026-10-15T05:15:34.956949+00:00",
+  "coleta_congelada": 300,
+  "amostra_sha256": "61468b19b001f71b10cd24d3323cdeb7bef915dac2b788ed65640194dac416fd",
+  "dataset_sha256": "6bf51ed7ce2587d1b36586c3912d4827b32ac9773e6640948b06deab745be0a8",
+  "amostra_ouro": {
+    "repos_sorteados.csv": "1dc69d0ec77fe66f0e59188ee84c2bc97d93abd9d55f67b56f14f91c2c5ae608",
+    "releases_sorteadas.csv": "03200644a32c2624e133b5f0129013905ea3d4b2a54f29ee98323f1bf607529f",
+    "fontes_releases.json": "3c0be570c42b9d8c9934bb55c85c9c9ae61d4256f968828838f494105489920b"
+  },
+  "consenso_utilizado": false,
+  "tipo_desempate": "reuniao",
+  "validacao": {
+    "qualificada": false,
+    "pendencias": [
+      "validar três avaliações independentes da amostra definitiva",
+      "gerar consenso e kappas com proveniência",
+      "avaliar/refinar heurística até F1 >= 0,70"
+    ]
+  },
+  "concluido": false,
+  "pendencias": [
+    "validar três avaliações independentes da amostra definitiva",
+    "gerar consenso e kappas com proveniência",
+    "avaliar/refinar heurística até F1 >= 0,70"
+  ]
+}

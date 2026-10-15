@@ -28,3 +28,8 @@ pdflatex artigo.tex
 
 Na ausência de uma distribuição LaTeX local, defina `artigo.tex` como documento principal
 no Overleaf e confirme que a compilação termina sem erros.
+
+Verificação local da S02: Tectonic 0.17.0 compilou o documento completo, com
+conferência visual das seis páginas. O PDF é uma versão de acompanhamento,
+explicitamente sem resultados definitivos de kappa/F1. Para reproduzir com esse
+compilador, execute `tectonic artigo.tex`; não é necessário instalá-lo no projeto.
