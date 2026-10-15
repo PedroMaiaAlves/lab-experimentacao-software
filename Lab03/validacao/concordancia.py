@@ -57,6 +57,8 @@ def tabela_dimensao(dados, dim):
     for av in AVALIADORES:
         df = dados[av][aba].copy()
         df["_chave"] = _normalizar_chave(df, chaves)
+        if df["_chave"].duplicated().any() or df["_chave"].eq("").any():
+            raise ErroRotulos(f"{av}: chaves vazias ou duplicadas na dimensão {dim}.")
         df["_linha"] = df.index + 2  # linha no Excel (cabeçalho = 1)
         bruto = df[coluna].fillna("").astype(str).str.strip().str.lower()
         for chave, linha, valor in zip(df["_chave"], df["_linha"], bruto):
@@ -101,7 +103,7 @@ def interpretar_kappa(k):
     return "quase perfeita"
 
 
-def consenso(tab, dim, decisoes):
+def consenso(tab, dim, decisoes, tipo_desempate="reuniao"):
     """Maioria simples; 1-1-1 usa as decisões da reunião (decisoes[(dim, chave)])."""
     linhas = []
     for chave, row in tab.iterrows():
@@ -112,7 +114,7 @@ def consenso(tab, dim, decisoes):
         elif n == 2:
             tipo = "maioria"
         else:
-            tipo, rotulo = "reuniao", decisoes.get((dim, chave), "")
+            tipo, rotulo = tipo_desempate, decisoes.get((dim, chave), "")
         linhas.append({"chave": chave, "rotulo": rotulo, "decisao": tipo})
     return pd.DataFrame(linhas).set_index("chave")
 
@@ -150,15 +152,18 @@ def tabela_tex(linhas_kappa):
             f"{corpo}\\hline\n\\end{{tabular}}\n\\end{{table}}\n")
 
 
-def executar(pasta="data/amostra_ouro", tex=None):
+def executar(pasta="data/amostra_ouro", tex=None, tipo_desempate="reuniao"):
+    if tipo_desempate not in {"reuniao", "adjudicacao_IA"}:
+        raise ErroRotulos("método de desempate desconhecido")
     pasta = Path(pasta)
     dados = ler_rotulos(pasta / "rotulos")
-    decisoes = ler_decisoes(pasta / "decisoes_reuniao.csv")
+    arquivo_decisoes = pasta / ("decisoes_reuniao.csv" if tipo_desempate == "reuniao" else "decisoes_adjudicacao.csv")
+    decisoes = ler_decisoes(arquivo_decisoes)
 
     tabs, cons, linhas_kappa, divergentes = {}, {}, [], []
     for dim, (_, _, _, _, nome) in DIMENSOES.items():
         tabs[dim] = tabela_dimensao(dados, dim)
-        cons[dim] = consenso(tabs[dim], dim, decisoes)
+        cons[dim] = consenso(tabs[dim], dim, decisoes, tipo_desempate)
         k = calcular_kappa(tabs[dim])
         c = cons[dim]
         linhas_kappa.append({
@@ -166,7 +171,8 @@ def executar(pasta="data/amostra_ouro", tex=None):
             "interpretacao": interpretar_kappa(k),
             "concordancia_unanime_pct": round(100 * (c["decisao"] == "unanime").mean(), 1),
             "n_maioria": int((c["decisao"] == "maioria").sum()),
-            "n_reuniao": int((c["decisao"] == "reuniao").sum())})
+            "n_reuniao": int((c["decisao"] == "reuniao").sum()),
+            "n_adjudicacao_IA": int((c["decisao"] == "adjudicacao_IA").sum())})
         for chave, row in c[c["decisao"] != "unanime"].iterrows():
             divergentes.append({"dimensao": dim, "chave": chave, **{av: tabs[dim].loc[chave, av] for av in AVALIADORES},
                                 "desempate": row["decisao"], "rotulo_final": row["rotulo"]})
@@ -192,7 +198,7 @@ def executar(pasta="data/amostra_ouro", tex=None):
     rel["corretiva_decisao"] = cons["corretiva"]["decisao"]
     rel.reset_index(drop=True).to_csv(pasta / "consenso_releases.csv", index=False, encoding="utf-8")
 
-    cols = ["dimensao", "n_itens", "kappa", "interpretacao", "concordancia_unanime_pct", "n_maioria", "n_reuniao"]
+    cols = ["dimensao", "n_itens", "kappa", "interpretacao", "concordancia_unanime_pct", "n_maioria", "n_reuniao", "n_adjudicacao_IA"]
     pd.DataFrame(linhas_kappa)[cols].to_csv(pasta / "kappa_fleiss.csv", index=False, encoding="utf-8")
     pd.DataFrame(divergentes, columns=["dimensao", "chave", *AVALIADORES, "desempate", "rotulo_final"]).to_csv(
         pasta / "casos_divergentes.csv", index=False, encoding="utf-8")
@@ -202,11 +208,12 @@ def executar(pasta="data/amostra_ouro", tex=None):
 
     for r in linhas_kappa:
         print(f"{r['nome']}: kappa = {_num(r['kappa'])} ({r['interpretacao']}); "
-              f"unânime {r['concordancia_unanime_pct']}%; {r['n_reuniao']} caso(s) 1-1-1")
-    pendentes = sum(r["n_reuniao"] for r in linhas_kappa) - sum(1 for d in divergentes if d["desempate"] == "reuniao" and d["rotulo_final"])
+              f"unânime {r['concordancia_unanime_pct']}%; {r['n_reuniao'] + r['n_adjudicacao_IA']} caso(s) 1-1-1")
+    pendentes = sum(r["n_reuniao"] + r["n_adjudicacao_IA"] for r in linhas_kappa) - sum(
+        1 for d in divergentes if d["desempate"] == tipo_desempate and d["rotulo_final"])
     if pendentes:
-        print(f"\nATENÇÃO: {pendentes} caso(s) 1-1-1 sem decisão. Veja casos_divergentes.csv, decida em reunião e "
-              f"registre em {pasta / 'decisoes_reuniao.csv'} (colunas: dimensao,chave,rotulo); depois rode de novo.")
+        print(f"\nATENÇÃO: {pendentes} caso(s) 1-1-1 sem decisão. Veja casos_divergentes.csv e "
+              f"registre em {arquivo_decisoes} (colunas: dimensao,chave,rotulo); depois rode de novo.")
         return 1
     return 0
 
@@ -215,9 +222,10 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description="Kappa de Fleiss e consenso da amostra-ouro.")
     ap.add_argument("--pasta", default="data/amostra_ouro")
     ap.add_argument("--tex", default="docs/artigo/tabelas/kappa.tex", help="tabela LaTeX do artigo")
+    ap.add_argument("--tipo-desempate", choices=["reuniao", "adjudicacao_IA"], default="reuniao")
     a = ap.parse_args(argv)
     try:
-        return executar(a.pasta, a.tex)
+        return executar(a.pasta, a.tex, a.tipo_desempate)
     except ErroRotulos as e:
         print(f"ERRO: {e}")
         return 2

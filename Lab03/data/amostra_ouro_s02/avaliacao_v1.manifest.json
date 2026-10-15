@@ -1,0 +1,15 @@
+{
+  "regras": {
+    "versao": "v1",
+    "janela_dias": 7,
+    "usar_patch_semver": true,
+    "usar_palavras_commits": true,
+    "palavras_chave": [
+      "fix",
+      "hotfix",
+      "revert"
+    ],
+    "politica_tag_nao_semver": "fallback_textual"
+  },
+  "consenso_sha256": "e05a41e8d8f031f18cf188997eb8a131e61d7dec780c5e717303fd5ed28d3214"
+}

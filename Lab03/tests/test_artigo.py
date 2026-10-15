@@ -31,3 +31,11 @@ def test_todas_as_citacoes_da_introducao_existem_na_bibliografia():
 def test_arquivos_do_template_foram_versionados():
     for nome in ("sbc-template.sty", "sbc.bst", "caption2.sty"):
         assert (ARTIGO / nome).stat().st_size > 1000
+
+
+def test_resumos_refletem_classificacao_complementar_concluida():
+    texto = (ARTIGO / "artigo.tex").read_text(encoding="utf-8")
+    assert "remain incomplete" not in texto
+    assert "permanecem pendentes" not in texto
+    assert "automatic pre-classification" in texto
+    assert "pré-classificação automática" in texto

@@ -56,6 +56,51 @@ def _versao_semver(tag: str | None) -> tuple[int, int, int] | None:
     return tuple(map(int, correspondencia.groups()[:3]))
 
 
+def _versao_semver_v2(tag: str | None) -> tuple[int, int, int] | None:
+    if not isinstance(tag, str):
+        return None
+    m = re.search(r"(?:^|[@/v_])(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:[-+][0-9A-Za-z.-]+)?$", tag.strip())
+    if not m:
+        return None
+    return tuple(map(int, m.groups()[:3]))
+
+
+def _explicar_release_v3(tag_anterior, tag_atual, mensagens, regras):
+    anterior, atual = _versao_semver_v2(tag_anterior), _versao_semver_v2(tag_atual)
+    palavras = regras.get("palavras_chave", ())
+    if isinstance(palavras, (str, bytes)) or not palavras or not all(
+        isinstance(palavra, str) and palavra.strip() for palavra in palavras
+    ):
+        raise ValueError("palavras_chave deve ser uma coleção de textos não vazios")
+    usar_texto = regras.get("usar_palavras_commits") is True
+    patch = bool(regras.get("usar_patch_semver") is True and anterior is not None
+                 and atual is not None and atual[:2] == anterior[:2] and atual[2] > anterior[2])
+    correcoes, funcionalidades, encontradas = 0, 0, set()
+    padroes = {p: re.compile(rf"\b{re.escape(p)}\b", re.I) for p in palavras}
+    for mensagem in mensagens if usar_texto else ():
+        if not isinstance(mensagem, str) or not mensagem.strip():
+            continue
+        titulo = mensagem.strip().split("\n", 1)[0]
+        if re.search(r"^(?:feat|add|feature)\b", titulo, re.I):
+            funcionalidades += 1
+            continue
+        if re.search(r"^(?:chore|docs?|ci|build|test|refactor)\b", titulo, re.I):
+            continue
+        if re.search(r"\b(?:typo|readme|bump|deps?|dependency|dependencies)\b", titulo, re.I):
+            continue
+        termos = {p for p, padrao in padroes.items() if padrao.search(titulo)}
+        if re.search(r"\b(?:cve|vulnerability|panic|crash|leak|regression|bugfix)\b", titulo, re.I):
+            termos.add("fix")
+        correcoes += bool(termos)
+        encontradas.update(termos)
+    criterio_texto = bool(usar_texto and correcoes and (
+        funcionalidades == 0 or (correcoes >= 3 and 2 * correcoes >= 5 * funcionalidades)))
+    criterio_patch = bool(patch and (not usar_texto or (funcionalidades == 0 and correcoes >= 1)))
+    return {"tag_anterior_semver": anterior is not None, "tag_atual_semver": atual is not None,
+            "criterio_patch": criterio_patch, "criterio_texto": criterio_texto,
+            "palavras_encontradas": sorted(encontradas), "corretiva": criterio_patch or criterio_texto}
+
+
 def explicar_release_corretiva(
     tag_anterior: str | None,
     tag_atual: str | None,
@@ -63,6 +108,64 @@ def explicar_release_corretiva(
     regras: Mapping[str, Any],
 ) -> dict[str, Any]:
     """Aplica a heurística e expõe quais evidências acionaram a decisão."""
+    versao = str(regras.get("versao", "v1")).strip().lower()
+    if versao == "v3":
+        return _explicar_release_v3(tag_anterior, tag_atual, mensagens_commits, regras)
+
+    if versao == "v2":
+        anterior = _versao_semver_v2(tag_anterior)
+        atual = _versao_semver_v2(tag_atual)
+        usar_patch = regras.get("usar_patch_semver") is True
+        usar_texto = regras.get("usar_palavras_commits") is True
+        palavras = regras.get("palavras_chave", ("fix", "hotfix", "revert"))
+
+        is_patch = bool(
+            usar_patch
+            and anterior is not None
+            and atual is not None
+            and atual[:2] == anterior[:2]
+            and atual[2] > anterior[2]
+        )
+
+        real_fixes = 0
+        feat_count = 0
+        encontradas = set()
+
+        for m in mensagens_commits:
+            if not m or not isinstance(m, str):
+                continue
+            first_line = m.strip().split("\n")[0]
+            if re.search(r'^(?:feat|add|feature)\b', first_line, re.I):
+                feat_count += 1
+                continue
+            if re.search(r'^(?:chore|docs?|ci|build|test|refactor)\b', first_line, re.I):
+                continue
+            if re.search(r'\b(?:typo|readme|bump|deps?|dependency|dependencies)\b', first_line, re.I):
+                continue
+            for palavra in palavras:
+                if re.search(rf"\b{re.escape(palavra)}\b", first_line, re.IGNORECASE):
+                    real_fixes += 1
+                    encontradas.add(palavra)
+            if re.search(r'\b(?:cve|vulnerability|panic|crash|leak|regression|bugfix)\b', first_line, re.I):
+                real_fixes += 1
+                encontradas.add("fix")
+
+        criterio_texto = bool(
+            usar_texto and real_fixes >= 1 and (
+                feat_count == 0 or (real_fixes >= 3 and real_fixes >= 2.5 * feat_count)
+            )
+        )
+        criterio_patch = bool(is_patch and feat_count == 0 and real_fixes >= 1)
+        corretiva = criterio_patch or criterio_texto
+        return {
+            "tag_anterior_semver": anterior is not None,
+            "tag_atual_semver": atual is not None,
+            "criterio_patch": criterio_patch,
+            "criterio_texto": criterio_texto,
+            "palavras_encontradas": sorted(encontradas),
+            "corretiva": corretiva,
+        }
+
     anterior = _versao_semver(tag_anterior)
     atual = _versao_semver(tag_atual)
     usar_patch = regras.get("usar_patch_semver") is True
@@ -108,7 +211,7 @@ def classificar_release_corretiva(
     mensagens_commits: Iterable[str | None],
     regras: Mapping[str, Any],
 ) -> bool:
-    """Retorna ``True`` quando patch SemVer ou texto indicam correção."""
+    """Classifica conforme a versão e os controles configurados."""
     return explicar_release_corretiva(
         tag_anterior, tag_atual, mensagens_commits, regras
     )["corretiva"]

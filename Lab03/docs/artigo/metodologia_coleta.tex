@@ -1,0 +1,58 @@
+\subsection{Coleta completa e consolidação do dataset}
+
+A coleta da Sprint 2 utiliza a janela de 1 de outubro de 2025 a 30 de setembro
+de 2026, semente 42 e meta mínima de 300 repositórios após os filtros de inclusão.
+O comando de coleta permite reaproveitar um snapshot versionado de candidatos;
+nesse caso, sua ordem e consultas de origem são preservadas. Uma nova busca pode
+ampliar as faixas de estrelas, com subdivisão para respeitar o teto da Search API.
+Não se considera a amostra final congelada antes da coleta e validação completas.
+
+O pipeline utiliza Python e \texttt{requests}, sem bibliotecas que encapsulem a
+API do GitHub. São consultados os endpoints de workflows, releases, comparações
+entre tags, commits, contribuidores e execuções do GitHub Actions. As tags podem
+ser recuperadas em lotes por GraphQL. Releases e comparações são paginadas; a
+data de autoria do commit é utilizada nos cálculos de lead time e nas datas das
+tags. Os runs são restritos ao default branch, ao evento push e à janela do estudo.
+Consultas mensais com pelo menos mil resultados são subdivididas; intervalos
+diários ainda saturados são registrados como incompletos e impedem o congelamento.
+
+O cache em disco permite reutilizar respostas, enquanto checkpoints registram o
+avanço da seleção e as coletas completas por repositório. O cliente respeita os
+limites indicados nos cabeçalhos e aplica novas tentativas com espera crescente
+em falhas temporárias. Erros transitórios não constituem evidência de exclusão.
+Comparações com erro 404 são contabilizadas e excluídas do lead time; datas
+inválidas de commits também são registradas e excluídas das medianas.
+
+A execução completa terminou em 15 de outubro de 2026, às 05:15 UTC. O ambiente
+de execução utilizou Python 3.12.14. A instrumentação parcial, iniciada após o
+começo da coleta, registrou 25.634 respostas HTTP (25.624 com status 200 e dez
+com status 404) e três esperas, somando três segundos solicitados. Esses valores
+não incluem acertos de cache nem representam todas as requisições desde a seleção
+inicial. As esperas registradas não comprovam, isoladamente, ocorrência de rate limit.
+As 311 fontes congeladas são distribuídas em arquivo ZIP, com verificação SHA-256;
+a restauração e o recálculo sem acesso à API reproduziram exatamente o dataset.
+
+O dataset reutiliza as funções de cálculo do grupo, mantém uma linha por
+repositório e registra métricas, versão da heurística e contagens de ignorados
+e censurados. O CFR de CI considera falhas sobre falhas mais sucessos. O CFR por
+release observa uma corretiva posterior em até sete dias, excluindo do denominador
+as releases das sete últimas datas da janela. Episódios de recuperação não
+encerrados são mantidos como censurados. Valores ausentes não são substituídos
+por zero. Tipos complementares só são incorporados com revisão declarada e
+proveniência separada do consenso.
+O consenso somente é incorporado quando seu manifesto confirma a origem da
+rotulagem e o vínculo, por hashes, com a amostra congelada. O consenso legado
+do piloto sem esse vínculo não é considerado validação da nova coleta. A avaliação
+definitiva da amostra-ouro utiliza as três planilhas com origem humana declarada
+pelos integrantes, rigorosamente vinculadas à população congelada. O consenso
+fornece o tipo e a validação para os 60 projetos sorteados, e a classificação
+complementar dos outros 240 projetos foi revisada pelos integrantes após sugestões
+automáticas e integrada com proveniência e links de evidência, totalizando os 300
+projetos com tipo. O importador verifica cobertura exata, categorias, campos
+obrigatórios, formato das URLs e datas, hashes e metadados do manifesto. Ele não
+comprova automaticamente a realização da revisão humana ou a disponibilidade das
+páginas externas. Arquivos já atestados não são sobrescritos durante a conferência.
+
+\IfFileExists{tabelas/coleta_s02.tex}{\input{tabelas/coleta_s02}}{
+A coleta completa e seus números ainda aguardam o fechamento dos artefatos da S02.
+}

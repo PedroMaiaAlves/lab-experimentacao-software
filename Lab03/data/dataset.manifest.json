@@ -1,0 +1,85 @@
+{
+  "gerado_em": "2026-10-15T15:50:42.285141+00:00",
+  "repositorios": 300,
+  "dataset_sha256": "8c494ec09f475e7f44d512f72329257d5bb7c470b8a09e1cf75d5b273b995ee9",
+  "amostra_sha256": "61468b19b001f71b10cd24d3323cdeb7bef915dac2b788ed65640194dac416fd",
+  "heuristica": {
+    "versao": "v3",
+    "janela_dias": 7,
+    "usar_patch_semver": true,
+    "usar_palavras_commits": true,
+    "palavras_chave": [
+      "fix",
+      "hotfix",
+      "revert"
+    ],
+    "politica_tag_nao_semver": "fallback_textual"
+  },
+  "consenso_sha256": "9874950dd8813152031699620e13babb27145a0f207f9b38bc8ee590ecdde37f",
+  "consenso_utilizado": true,
+  "complementar_sha256": {
+    "tipos_A.csv": "2cc3ce27d524b5e4128a16c7ff615a21d488728f78678b29e2d308c1da42f797",
+    "tipos_B.csv": "83f5abac7e9efd494a84a3f73dcc6efce4a59f178b57b36765d62fe2ad25a307",
+    "tipos_C.csv": "91ce45dc77fdf0fc1f7507ff4a0ed7998ba024af7350d792da858a1771629275"
+  },
+  "complementar_utilizado": true,
+  "repositorios_sem_tipo": 0,
+  "cfr_b_indisponiveis": 11,
+  "totais": {
+    "releases_principais": 11453,
+    "releases_erro_404": 9,
+    "commits_data_invalida": 561,
+    "releases_censuradas": 274,
+    "runs_total": 314276,
+    "runs_validos": 291405,
+    "runs_ignorados": 22871,
+    "episodios_total": 7861,
+    "episodios_censurados": 90,
+    "intervalos_saturados": 56,
+    "intervalos_incompletos": 0
+  },
+  "funil": [
+    {
+      "etapa": "candidatos_na_busca",
+      "entraram": "53143",
+      "descartados": "",
+      "restaram": "53143",
+      "motivo_descarte": ""
+    },
+    {
+      "etapa": "candidatos_avaliados",
+      "entraram": "2644",
+      "descartados": "",
+      "restaram": "2644",
+      "motivo_descarte": "parou ao atingir a meta"
+    },
+    {
+      "etapa": "actions",
+      "entraram": "2644",
+      "descartados": "1149",
+      "restaram": "1495",
+      "motivo_descarte": "ver descartes.csv"
+    },
+    {
+      "etapa": "releases",
+      "entraram": "1495",
+      "descartados": "1082",
+      "restaram": "413",
+      "motivo_descarte": "ver descartes.csv"
+    },
+    {
+      "etapa": "runs",
+      "entraram": "413",
+      "descartados": "113",
+      "restaram": "300",
+      "motivo_descarte": "ver descartes.csv"
+    },
+    {
+      "etapa": "amostra_final",
+      "entraram": "",
+      "descartados": "",
+      "restaram": "300",
+      "motivo_descarte": ""
+    }
+  ]
+}

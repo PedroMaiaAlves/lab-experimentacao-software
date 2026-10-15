@@ -1,0 +1,27 @@
+{
+  "gerado_em": "2026-10-15T05:15:24.702560+00:00",
+  "amostra_sha256": "61468b19b001f71b10cd24d3323cdeb7bef915dac2b788ed65640194dac416fd",
+  "repositorios": 60,
+  "releases": 300,
+  "semente_repos": 42,
+  "semente_releases": 42,
+  "avaliacoes_preenchidas": false,
+  "fontes_sha256": {
+    "candidatos.csv": "199ebc7368be609b7d456ac99b9185c712e732e6ba1fb07652f2d23dd1cf390a",
+    "funil.csv": "6a5545893043e00865ea67be944e811a5b135afd3b27226a558daff8e423ace8",
+    "descartes.csv": "5bed803fa902c7efca875e7383a5eaa14455aee18eeee984b9a429a819a7c573",
+    "metadados.csv": "61468b19b001f71b10cd24d3323cdeb7bef915dac2b788ed65640194dac416fd",
+    "releases.csv": "1c594101a2edb06b904b65277312a265b148c78137ed930153f945a9be49e2de",
+    "tags.csv": "add00964eb49dfaf6f2a85879765b7d96c9d97c4ed3a7fef682dc1c150db0e25",
+    "comparacoes_releases.csv": "278d7bd8ef031f08bcf8d8605e0056098b535805dd0ba8be6f174587084b09f4",
+    "commits_entre_releases.csv": "90222ad53c135df81d9b9eda9a2764117648da6ff8e24f1edd20e9d9061a059e",
+    "lead_time.csv": "9efd8367a13ee912b5b71db7741dd25a0c40e99dc8f008baae1f6b7938fd9757",
+    "deployment_frequency.csv": "f9fdc3966cedbae0243bf0041be5964a59518b37f3cbdc30c8c105d1daf4c932",
+    "runs_saturados.csv": "8a975d8b3341a5b5c72faf047abba62d1772fd14b2def6b4aa71b7bdfa0fd068"
+  },
+  "artefatos_sha256": {
+    "repos_sorteados.csv": "1dc69d0ec77fe66f0e59188ee84c2bc97d93abd9d55f67b56f14f91c2c5ae608",
+    "releases_sorteadas.csv": "03200644a32c2624e133b5f0129013905ea3d4b2a54f29ee98323f1bf607529f",
+    "fontes_releases.json": "3c0be570c42b9d8c9934bb55c85c9c9ae61d4256f968828838f494105489920b"
+  }
+}
