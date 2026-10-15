@@ -102,10 +102,20 @@ def calcular_linha(repo, releases, comparacoes, commits, tags, runs, cfg, rotulo
             "intervalos_incompletos": sum(s["status"] == "incompleto" for s in saturados)}
 
 
-def carregar_rotulos(caminho):
+def carregar_rotulos(caminho, amostra_sha256):
     if not Path(caminho).is_file():
         log.warning("consenso ainda indisponível; tipo_projeto ficará ausente")
         return {}
+    atestado = Path(caminho).with_suffix(".manifest.json")
+    if not atestado.is_file():
+        log.warning("consenso sem vínculo com a amostra congelada; rótulos não serão utilizados")
+        return {}
+    origem = json.loads(atestado.read_text(encoding="utf-8"))
+    if (origem.get("amostra_sha256") != amostra_sha256 or
+            origem.get("consenso_sha256") != sha256(caminho) or
+            origem.get("rotulagem_independente_confirmada") is not True or
+            origem.get("origem_rotulagem") not in {"humana", "assistida_por_IA", "mista"}):
+        raise ValueError("consenso sem integridade, proveniência ou vínculo válido com esta amostra")
     linhas = ler_csv(caminho)
     if any(not r.get("full_name") or not r.get("tipo_projeto") for r in linhas):
         raise ValueError("consenso possui chave ou tipo_projeto vazio")
@@ -144,7 +154,7 @@ def gerar_dataset(cfg, amostra, consenso, saida, relato=None):
     repos = ler_csv(amostra)
     if len(repos) != manifesto["repositorios"] or len({r["full_name"] for r in repos}) != len(repos):
         raise ValueError("amostra duplicada ou divergente do manifesto")
-    rotulos = carregar_rotulos(consenso)
+    rotulos = carregar_rotulos(consenso, manifesto["amostra_sha256"])
     linhas = []
     nomes = [repo["full_name"] for repo in repos]
     arquivos = ["releases.csv", "comparacoes_releases.csv", "commits_entre_releases.csv", "tags.csv"]
@@ -163,7 +173,8 @@ def gerar_dataset(cfg, amostra, consenso, saida, relato=None):
     resumo = {"gerado_em": datetime.now(timezone.utc).isoformat(), "repositorios": len(linhas),
               "dataset_sha256": sha256(saida), "amostra_sha256": sha256(amostra),
               "heuristica": cfg["heuristica_release"],
-              "consenso_sha256": sha256(consenso) if Path(consenso).is_file() else None,
+              "consenso_sha256": sha256(consenso) if rotulos else None,
+              "consenso_utilizado": bool(rotulos),
               "repositorios_sem_tipo": sum(not r["rotulo_disponivel"] for r in linhas),
               "cfr_b_indisponiveis": sum(not r["cfr_b_disponivel"] for r in linhas),
               "totais": {c: sum(r[c] for r in linhas) for c in (

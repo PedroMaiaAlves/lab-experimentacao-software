@@ -81,8 +81,15 @@ As colunas estáveis estão em `pipeline.dataset.CAMPOS`:
   releases avaliadas/com falha/censuradas, runs válidos/sucessos/falhas/ignorados,
   episódios concluídos/censurados e intervalos saturados/incompletos.
 
-Valores ausentes ficam vazios, não zero. O tipo vem exclusivamente do consenso;
-os demais repositórios permanecem sem classificação humana. No CFR (b), uma
+Valores ausentes ficam vazios, não zero. O tipo vem exclusivamente do consenso
+validado para a amostra congelada; os demais repositórios permanecem sem tipo.
+O arquivo `consenso_repos.manifest.json`, ao lado do CSV, precisa registrar
+`amostra_sha256`, `consenso_sha256`, `rotulagem_independente_confirmada: true`
+e `origem_rotulagem` (`humana`, `assistida_por_IA` ou `mista`). Esses campos
+atestam o vínculo e a origem, não autorizam fabricar confirmação. Sem manifesto,
+o consenso legado não é utilizado; com manifesto inconsistente, o cálculo falha.
+O manifesto do dataset registra se houve consenso efetivamente utilizado.
+No CFR (b), uma
 comparação indisponível ou mensagem ausente que não seja suprida pelo critério
 SemVer impede afirmar a ausência de correção: o indicador fica indisponível e
 `releases_sem_evidencia_textual` registra a limitação. Comparações 404 continuam
@@ -91,15 +98,41 @@ excluídas do lead time. Datas inválidas são contadas conforme o cálculo exis
 ## Rotulagem C e dependência de A
 
 Não consulte rótulos de A/B, consenso ou previsões da heurística ao avaliar.
-Use apenas os links e definições do guia de rotulagem de A. A avaliação precisa
-ser realizada individualmente pelo integrante; o pipeline não cria rótulos.
+Use os links e definições do guia de rotulagem de A. Lorran solicitou análise
+assistida por IA; ela não deve ser descrita como avaliação humana que ele realizou.
+O código organiza fontes e exporta decisões explícitas, sem usar a heurística
+para inventar a avaliação independente.
 
 A amostra-ouro atualmente versionada veio dos 100 repositórios da S01, antes do
 congelamento de C1. Ela não é automaticamente a amostra-ouro definitiva da S02.
 Depois do congelamento dos 300, A precisa conferir/refazer seu sorteio de 60
 repositórios e 5 releases por repositório, com as fontes S02. Preserve o material
-anterior para rastreabilidade. O grupo precisa confirmar a autoria dos rótulos C
-já publicados antes de considerá-los avaliações independentes de Lorran.
+anterior para rastreabilidade. Lorran confirmou que não preencheu os rótulos C
+publicados. O histórico mostra que Pedro adicionou `rotulos_B.xlsx` e
+`rotulos_C.xlsx` no commit `8f7bd93`; isso não demonstra como as avaliações C
+foram produzidas. O arquivo não foi sobrescrito e não é tratado como revisão
+independente de Lorran.
+
+A revisão separada está em `data/revisao_c_provisoria/rotulos_C_ia_provisorios.xlsx`,
+com CSVs, fontes públicas preservadas, justificativas e hashes. Foram examinados
+60 repositórios e 300 releases da amostra atual: 281 decisões provisórias e
+19 casos sem rótulo por evidência insuficiente. O campo `escopo_evidencia` distingue
+consulta integral, parcial, ambiguidade e insuficiência. Trechos de notas longas
+não são apresentados como investigação integral. Nenhuma linha atesta revisão
+humana ou confirmação definitiva. Esses arquivos **não** são automaticamente
+incorporados ao kappa, consenso ou avaliação F1 de A/B.
+
+```bash
+python -m pipeline.revisao_c --documentacao
+python -m pipeline.revisao_c --exportar
+```
+
+O primeiro comando reúne as fontes sem rótulos dos colegas ou previsões; o
+segundo valida e exporta as decisões de `avaliacao_c.json` e
+`avaliacao_repos_c.json`. Não preenche ausentes com negativos. Antes de C3 ser
+concluída, é preciso alinhar a amostra com A, complementar evidências insuficientes
+e fechar a revisão assistida na amostra definitiva. Essa é uma pendência explícita,
+não uma revisão humana simulada nem uma validação-ouro já concluída.
 
 Para conferir somente formato e completude de uma planilha C, pode-se reutilizar
 a função `validar_arquivo` de `scripts.validar_rotulos_b`; a validação não comprova

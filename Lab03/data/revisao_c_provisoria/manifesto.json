@@ -1,0 +1,35 @@
+{
+  "gerado_em": "2026-10-15T00:29:29.075543+00:00",
+  "avaliador": "C",
+  "origem_avaliacao": "assistida_por_IA",
+  "avaliacao_humana_declarada": false,
+  "estado": "provisoria_aguarda_amostra_definitiva",
+  "repositorios": 60,
+  "releases": 300,
+  "fontes": {
+    "amostra": "data/amostra_ouro/releases_sorteadas.csv",
+    "amostra_sha256": "4517f204e5b64c4df6ed5788cafdb7011bf6fa2c0f361e942d356cc5f25b3095",
+    "releases": "data/releases.csv",
+    "releases_sha256": "bca8db5eee7cc8597494696f9f6de402088aadfbc3b56ce808c1cf2115c7b13d",
+    "commits": "data/commits_entre_releases_s02.csv",
+    "commits_sha256": "3a703d5c3d96e804c5cfba6efa705142aec078bb26e08cb9d3316fad378a4184"
+  },
+  "rotulos_de_outros_avaliadores_lidos": false,
+  "saida_heuristica_lida": false,
+  "releases_examinadas": 300,
+  "releases_sem_rotulo": 19,
+  "escopos": {
+    "ambigua": 27,
+    "completa": 145,
+    "insuficiente": 19,
+    "parcial": 109
+  },
+  "revisao_independente_definitiva": false,
+  "artefatos_sha256": {
+    "fontes_releases.json": "6831b691a1e139da4bd70771e40974d833527e6904f95bff4e2f62291970013c",
+    "avaliacao_c.json": "da94d2dac3889447c101d184bff2a7403454cd3b4d17a5fc74a8b7e6cbf33201",
+    "avaliacao_repos_c.json": "3efd7f0bd9b853c2831fc7a217affbb3de9978fd9563a627bec4fd3ba42b8352",
+    "rotulos_repos_C.csv": "be2a1fa4ff39933a41b339018d1aaac29d7521abbeb1b78e663f3bc741603e9b",
+    "rotulos_releases_C.csv": "c48b6a4884e947054bfe50013ff9ccb48bd3ed656a83c637a5dcaf637bcd7b5c"
+  }
+}

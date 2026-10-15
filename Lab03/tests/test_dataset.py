@@ -5,7 +5,7 @@ import shutil
 import pytest
 
 from pipeline.config import carregar_config
-from pipeline.dataset import CAMPOS, calcular_linha, gerar_dataset
+from pipeline.dataset import CAMPOS, calcular_linha, carregar_rotulos, gerar_dataset
 from pipeline.sprint2 import fontes_repo, ler_csv, pasta_repo, salvar_csv, sha256
 
 
@@ -74,6 +74,28 @@ def test_sem_runs_ou_episodios_nao_inventa_zero(fontes):
     resultado = calcular_linha(*valores)
     assert resultado["cfr_a"] is None and resultado["tempo_recuperacao_horas"] is None
     assert resultado["proporcao_censurados"] is None and resultado["runs_validos"] == 0
+
+
+def test_consenso_antigo_nao_e_reutilizado_sem_proveniencia(tmp_path, caplog):
+    caminho = tmp_path / "consenso_repos.csv"
+    salvar_csv(caminho, ["full_name", "tipo_projeto"], [{"full_name": "o/r", "tipo_projeto": "outro"}])
+    assert carregar_rotulos(caminho, "amostra") == {}
+    assert "sem vínculo" in caplog.text
+
+
+def test_consenso_exige_hashes_vinculo_e_origem_declarada(tmp_path):
+    caminho = tmp_path / "consenso_repos.csv"
+    salvar_csv(caminho, ["full_name", "tipo_projeto"], [{"full_name": "o/r", "tipo_projeto": "outro"}])
+    manifesto = {"amostra_sha256": "amostra", "consenso_sha256": sha256(caminho),
+                 "rotulagem_independente_confirmada": True, "origem_rotulagem": "assistida_por_IA"}
+    atestado = caminho.with_suffix(".manifest.json")
+    atestado.write_text(json.dumps(manifesto), encoding="utf-8")
+    assert carregar_rotulos(caminho, "amostra")["o/r"]["tipo_projeto"] == "outro"
+    for campo, errado in [("amostra_sha256", "outra"), ("consenso_sha256", "outro"),
+                          ("rotulagem_independente_confirmada", False), ("origem_rotulagem", "desconhecida")]:
+        atestado.write_text(json.dumps({**manifesto, campo: errado}), encoding="utf-8")
+        with pytest.raises(ValueError, match="consenso sem integridade"):
+            carregar_rotulos(caminho, "amostra")
 
 
 def test_comparacoes_ausentes_duplicadas_e_contagens_erradas_falham(fontes):

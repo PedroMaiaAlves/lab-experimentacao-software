@@ -12,11 +12,14 @@ Ambiente local: Python 3.12.14, pytest 9.1.1 e pytest-cov 7.1.0.
 python -m pytest --cov=metricas --cov-report=term-missing --cov-fail-under=80 -p no:cacheprovider
 ```
 
-Resultado: 223 testes passaram, com cobertura de 95,45% em `metricas`.
+Resultado: 232 testes passaram, com cobertura de 95,45% em `metricas`.
 O teste integrado usa 300 repositórios **simulados** e percorre os coletores
 existentes, o congelamento, a consolidação e o recálculo offline da heurística.
 Não é evidência de coleta real dos 300. Há testes para concorrência, retomada,
 integridade dos hashes, 404, propagação de erros transitórios, ausentes e censura.
+Também foram testadas a exportação das decisões de C, a preservação de ausentes
+e a recusa de fontes trocadas, avaliações duplicadas, declaração humana falsa e
+consenso sem vínculo íntegro com a amostra.
 
 ## Piloto real
 
@@ -38,7 +41,25 @@ A coleta real está em execução separada da S01, com checkpoint em
 de andamento não são resultados finais; consulte o checkpoint atual.
 
 C1 somente fecha depois de validar e congelar pelo menos 300 repositórios.
-C2 e os números de C4 dependem desse congelamento. A rotulagem C não foi
-preenchida por IA: faltam confirmar a autoria do arquivo já existente e alinhar
-com A a amostra-ouro posterior ao congelamento. Não foram alterados rótulos,
-consensos ou resultados de validação dos colegas.
+C2 e os números de C4 dependem desse congelamento. Lorran confirmou não ter
+preenchido o arquivo C legado; Pedro o adicionou no commit `8f7bd93`, junto do B.
+O histórico não estabelece a origem de seus rótulos. Não foram alterados esses
+arquivos, consensos ou resultados de validação dos colegas.
+
+## Revisão C assistida por IA
+
+`data/revisao_c_provisoria/` preserva notas, mensagens de commits, descrições e
+README públicos, sem ler avaliações A/B ou previsões da heurística. Foram
+examinadas 300 releases e classificados os 60 repositórios da amostra atual.
+Há 281 rótulos provisórios e 19 ausentes; 109 análises usam evidência parcial
+e 27 registram ambiguidade. São 145 consultas completas e 19 insuficientes.
+Consulta completa descreve o material de evidência examinado, não auditoria de
+todo o código do repositório. As justificativas e hashes acompanham as decisões.
+O arquivo Excel identifica a origem por IA e não atesta avaliação humana.
+Sua exportação foi reimportada e conferida; identificadores e listas suspensas
+do modelo foram preservados, e as três abas foram inspecionadas visualmente.
+
+Essa amostra veio da S01; a revisão definitiva depende do alinhamento da
+amostra-ouro por A após o congelamento. A consolidação C agora exige vínculo
+explícito e proveniência do consenso antes de incorporá-lo ao dataset. Dados
+insuficientes não são convertidos em negativos, nem em tipos imputados.
