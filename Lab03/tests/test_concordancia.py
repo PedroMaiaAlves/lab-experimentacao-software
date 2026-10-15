@@ -6,7 +6,7 @@ from openpyxl import load_workbook
 
 from validacao.amostra_ouro import escrever_modelo
 from validacao.concordancia import (
-    ErroRotulos, calcular_kappa, consenso, executar, interpretar_kappa, ler_decisoes, main)
+    ErroRotulos, calcular_kappa, consenso, executar, interpretar_kappa, ler_decisoes, main, tabela_dimensao)
 
 
 def tab(linhas):
@@ -41,6 +41,19 @@ def test_consenso_maioria_unanime_e_reuniao():
     assert c["rotulo"].tolist() == ["sim", "sim", ""]
     c2 = consenso(t, "releases_sao_entregas", {("releases_sao_entregas", "r2"): "incerto"})
     assert c2.loc["r2", "rotulo"] == "incerto"
+
+
+def test_adjudicacao_por_ia_nao_e_descrita_como_reuniao():
+    t = tab([["sim", "não", "incerto"]])
+    c = consenso(t, "releases_sao_entregas", {("releases_sao_entregas", "r0"): "incerto"}, "adjudicacao_IA")
+    assert c.loc["r0", "decisao"] == "adjudicacao_IA"
+
+
+def test_chaves_duplicadas_nao_sao_silenciosamente_removidas():
+    d = {av: {"repositorios": pd.DataFrame({"full_name": ["o/r", "o/r"], "tipo_projeto": ["outro", "outro"]})}
+         for av in "ABC"}
+    with pytest.raises(ErroRotulos, match="duplicadas"):
+        tabela_dimensao(d, "tipo_projeto")
 
 
 def test_decisoes_com_rotulo_invalido_levantam_erro(tmp_path):

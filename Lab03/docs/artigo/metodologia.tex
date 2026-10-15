@@ -1,61 +1,95 @@
 \section{Metodologia}
 \label{sec:metodologia}
 
-Foi utilizada a amostra congelada da S02, gerada com a semente definida em
-\texttt{config.yaml}, contendo 60 repositórios e cinco releases principais por
-repositório (300 releases). Rascunhos e pré-releases foram excluídos. Os tipos de
-projeto foram classificados como biblioteca/framework, aplicação/serviço, ferramenta
-CLI ou outro. Também se registrou se as releases representam entregas reais.
+\subsection{Desenho e população}
 
-Três avaliadores (A, B e C) realizaram a rotulagem manual e independente da
-amostra, sem consultar os rótulos dos demais avaliadores nem a saída da heurística
-avaliada. Para cada release, os avaliadores consultaram as notas de lançamento e,
-quando necessário, os commits associados, classificando-a como corretiva quando a
-correção de defeitos, regressões, vulnerabilidades ou a reversão de uma mudança
-defeituosa constituía seu objetivo principal. As divergências foram resolvidas por
-maioria simples e os casos sem maioria seriam discutidos em reunião de consenso.
+O estudo é observacional e utiliza dados públicos do GitHub. A janela oficial é
+de 1 de outubro de 2025 a 30 de setembro de 2026. A amostra completa deve conter
+pelo menos 300 repositórios não arquivados e não derivados de forks, com GitHub
+Actions, no mínimo cinco releases principais e 50 execuções válidas de CI na janela.
+Os candidatos são embaralhados com semente 42 e avaliados em ordem até atingir a
+meta. O funil diferencia a população retornada pela busca dos candidatos efetivamente
+avaliados. O snapshot reutilizado mantém as consultas de origem; faixas adicionais
+previstas no config não são apresentadas como consultas que já ocorreram.
 
-A concordância foi medida pelo kappa de Fleiss e interpretada pelas faixas de
-Landis--Koch~\cite{landis1977measurement}. O kappa foi 1,00 para tipo de projeto e
-entregas reais e 0,742 para release corretiva, correspondente a concordância
-substancial. Para releases corretivas, 80,7\% dos 300 casos foram unânimes e os 58
-restantes foram decididos por maioria.
+\IfFileExists{tabelas/numeros.tex}{
+Foram retornados \labCandidatosBusca\ candidatos e avaliados
+\labCandidatosAvaliados, chegando a \labReposAmostra\ repositórios.
+As consultas do snapshot abrangem \labFaixaEstrelas.
+\input{tabelas/funil}
+}{Os números definitivos do funil dependem do congelamento validado da coleta.}
 
-A heurística v1 classifica uma release como corretiva quando: (i) as tags atual e
-anterior são SemVer estrito, admitindo apenas o prefixo \texttt{v}, possuem os mesmos
-major e minor e apresentam patch crescente; ou (ii) algum assunto de commit contém o
-token completo \texttt{fix}, \texttt{hotfix} ou \texttt{revert}, sem distinção entre
-maiúsculas e minúsculas. Tags não-SemVer não acionam o primeiro critério, mas continuam
-elegíveis ao critério textual. Foram recuperados 19.836 assuntos dos patches públicos
-de 294 comparações; cinco releases não possuíam URL de comparação e uma coleta falhou.
+\subsection{Definições operacionais}
 
-Em relação ao consenso, a v1 obteve precisão 0,589, recall 0,906 e F1 0,714 para a
-classe positiva, ultrapassando a meta de 0,70 sem refinamento adicional. A matriz de
-confusão apresentou 145 verdadeiros positivos, 101 falsos positivos, 15 falsos
-negativos e 39 verdadeiros negativos, com suporte positivo de 160 releases.
+CI corresponde às execuções disparadas por \texttt{push} no default branch.
+Sucesso é a conclusão \texttt{success}; falha inclui \texttt{failure},
+\texttt{timed\_out} e \texttt{startup\_failure}. Os demais estados são ignorados
+e contabilizados separadamente. Releases não draft e não pré-release, publicadas
+na janela, representam entregas; essa aproximação não comprova implantação em produção.
 
-\begin{table}[ht]
-  \centering
-  \caption{Desempenho da heurística de release corretiva.}
-  \label{tab:heuristica-corretiva}
-  \begin{tabular}{lrrrrrrrr}
-    \hline
-    Versão & Precisão & Recall & F1 & Suporte & VP & FP & FN & VN \\
-    \hline
-    v1 & 0,589 & 0,906 & 0,714 & 160 & 145 & 101 & 15 & 39 \\
-    \hline
-  \end{tabular}
-\end{table}
+A frequência de entrega é o número de releases principais dividido pela duração
+inclusiva da janela em semanas. As variantes incluem pré-releases ou utilizam
+tags, cuja data é a autoria do commit apontado, e não uma data de criação da tag.
+O lead time utiliza \texttt{commit.author.date}: na variante (a), calcula-se a
+mediana do maior tempo de cada release; na variante (b), a mediana das relações
+release/commit válidas. Ambas são expressas em horas. Commits inválidos, comparações
+indisponíveis e releases sem commits não são convertidos em tempos iguais a zero.
 
-No CFR (b), uma release avaliada falha quando existe uma release classificada como
-corretiva publicada em intervalo inclusivo de até sete dias. Releases publicadas nos
-últimos sete dias da janela são censuradas e não integram o denominador. Assim,
-$CFR_b = N_{releases\ com\ falha}/N_{releases\ avaliadas}$.
+O CFR (a) é a quantidade de runs com falha dividida por falhas mais sucessos.
+O CFR (b) identifica uma release com falha quando outra release corretiva é
+publicada posteriormente, em até sete dias, inclusive. As sete últimas datas da
+janela ficam fora do denominador por censura à direita. O tempo de recuperação
+é medido por workflow, do início da primeira falha após um sucesso ao término
+do próximo sucesso; falhas consecutivas pertencem ao mesmo episódio. Episódios
+sem sucesso posterior permanecem censurados, e falhas iniciais sem sucesso
+anterior não abrem um episódio observável.
 
-A rotulagem manual está sujeita à interpretação dos avaliadores, especialmente em
-releases mistas ou com notas incompletas. Para reduzir essa ameaça, foram adotadas
-definições comuns, avaliações independentes e um protocolo de consenso. Ainda assim,
-o consenso não elimina completamente a subjetividade dos rótulos. O refinamento e a
-avaliação da heurística sobre a mesma amostra também podem superestimar sua capacidade
-de generalização. A ausência de seis comparações completas constitui uma limitação
-adicional.
+\subsection{Amostra-ouro e validação da heurística}
+
+O sorteio canônico usa \texttt{validacao.amostra\_ouro}: a população é ordenada
+por nome antes de selecionar 60 repositórios com semente 42; as releases principais
+de cada repositório são ordenadas por identificador antes de selecionar cinco,
+também com semente 42. A população de origem é a amostra completa congelada,
+não o piloto de 100 repositórios. As três planilhas têm os mesmos identificadores
+e links, sem previsões da heurística.
+
+O protocolo prevê três avaliações independentes do tipo do projeto, da existência
+de entregas reais e do objetivo corretivo de cada release. Biblioteca/framework,
+aplicação/serviço, ferramenta CLI e outro são as categorias de tipo. Correção
+de defeito recente, regressão, vulnerabilidade ou reversão defeituosa deve ser o
+objetivo principal de uma release corretiva; versões mistas sem esse foco são
+negativas. O registro distingue avaliação humana de análise assistida por IA.
+Uma análise única não equivale a três avaliações independentes.
+
+A concordância é calculada pelo kappa de Fleiss, com interpretação descritiva de
+Landis--Koch~\cite{landis1977measurement}. O consenso usa unanimidade ou maioria
+simples; os casos 1--1--1 exigem decisão adicional identificada e justificada,
+sem declarar uma reunião que não ocorreu. A origem, os hashes e a cobertura dos
+rótulos devem corresponder à amostra-ouro antes de incorporar o consenso ao dataset.
+
+A heurística v1 combina patch SemVer crescente, mantendo major/minor, com a
+presença dos tokens completos \texttt{fix}, \texttt{hotfix} ou \texttt{revert}
+nos commits. Tags não-SemVer usam apenas o critério textual. Precisão, recall e
+F1 são calculados contra o consenso da amostra definitiva. Cada regra avaliada
+fica registrada, inclusive quando não atinge F1 de 0,70. Resultados obtidos sobre
+a amostra piloto não certificam automaticamente a nova população.
+
+\IfFileExists{tabelas/validacao_s02.tex}{\input{tabelas/validacao_s02}}{
+A validação definitiva ainda depende das avaliações independentes da nova amostra;
+os kappas e o F1 do piloto não são apresentados como resultados finais da S02.
+}
+
+\subsection{Ameaças à validade e reprodução}
+
+Releases, workflows e recuperação de CI são proxies e podem divergir de entregas
+e incidentes em produção. Notas incompletas, tags móveis, versões paralelas de
+monorepositórios e ambiguidades de classificação limitam a interpretação.
+A censura e as informações ausentes são quantificadas, não substituídas por zeros.
+Refinar e avaliar uma heurística na mesma amostra pode superestimar sua generalização;
+o limiar de F1 não constitui evidência de desempenho em dados não vistos. Se forem
+usados avaliadores de IA, devem ser declarados os modelos, a separação entre análises
+e a ausência de três avaliações humanas; agentes do mesmo modelo também podem
+compartilhar vieses.
+
+O código, os contratos, os testes, os dados e os manifestos estão no repositório
+\url{https://github.com/PedroMaiaAlves/lab-experimentacao-software}.

@@ -103,7 +103,7 @@ def calcular_linha(repo, releases, comparacoes, commits, tags, runs, cfg, rotulo
 
 
 def carregar_rotulos(caminho, amostra_sha256):
-    if not Path(caminho).is_file():
+    if caminho is None or not Path(caminho).is_file():
         log.warning("consenso ainda indisponível; tipo_projeto ficará ausente")
         return {}
     atestado = Path(caminho).with_suffix(".manifest.json")
@@ -116,6 +116,10 @@ def carregar_rotulos(caminho, amostra_sha256):
             origem.get("rotulagem_independente_confirmada") is not True or
             origem.get("origem_rotulagem") not in {"humana", "assistida_por_IA", "mista"}):
         raise ValueError("consenso sem integridade, proveniência ou vínculo válido com esta amostra")
+    for avaliador, esperado in origem.get("avaliacoes_sha256", {}).items():
+        planilha = Path(caminho).parent / "rotulos" / f"rotulos_{avaliador}.xlsx"
+        if not planilha.is_file() or sha256(planilha) != esperado:
+            raise ValueError("avaliações foram alteradas depois do consenso")
     linhas = ler_csv(caminho)
     if any(not r.get("full_name") or not r.get("tipo_projeto") for r in linhas):
         raise ValueError("consenso possui chave ou tipo_projeto vazio")
@@ -212,7 +216,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", default="config_s02.yaml")
     parser.add_argument("--amostra", default="data/amostra_final.csv")
-    parser.add_argument("--consenso", default="data/amostra_ouro/consenso_repos.csv")
+    parser.add_argument("--consenso", default="data/amostra_ouro_s02/consenso_repos.csv")
     parser.add_argument("--saida", default="data/dataset.csv")
     parser.add_argument("--relato", default="docs/artigo/tabelas/coleta_s02.tex")
     args = parser.parse_args(argv)

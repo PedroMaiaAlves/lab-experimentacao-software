@@ -1,4 +1,5 @@
 import pytest
+import pandas as pd
 
 from validacao.artefatos_artigo import (
     calcular_macros, escapar, fmt_int, limites_estrelas, main, tabela_funil, texto_faixa)
@@ -63,3 +64,14 @@ def test_arquivos_ausentes_viram_pendencia(tmp_path, capsys):
     assert "[PREENCHER]" in (tmp_path / "t" / "numeros.tex").read_text(encoding="utf-8")
     assert not (tmp_path / "t" / "funil.tex").exists()
     assert "Macros pendentes" in capsys.readouterr().out
+
+
+def test_faixa_do_snapshot_prevalece_sobre_expansao_nao_executada():
+    cfg = {"janela_inicio": "2025-10-01", "janela_fim": "2026-09-30", "semente": 42,
+           "criterios": {"min_releases": 5, "min_runs": 50},
+           "selecao": {"faixas_estrelas": ["1000..1500", ">30000"]}}
+    candidatos = pd.DataFrame({"consulta": ["stars:1000..1500 fork:false", "stars:5000..8000 fork:false"]})
+    macros = calcular_macros(cfg, None, None, None, candidatos)
+    assert macros["FaixaEstrelas"] == "1.000 a 8.000 estrelas"
+    with pytest.raises(ValueError, match="sem faixas"):
+        calcular_macros(cfg, None, None, None, pd.DataFrame({"consulta": ["fork:false"]}))

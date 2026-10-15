@@ -265,7 +265,8 @@ def main(argv=None):
     parser.add_argument("--config", default="config_s02.yaml")
     parser.add_argument("--candidatos", help="reutiliza um snapshot de busca, preservando ordem e proveniência")
     parser.add_argument("--congelada", default="data/amostra_final.csv")
-    parser.add_argument("--consenso", default="data/amostra_ouro/consenso_repos.csv")
+    parser.add_argument("--consenso", help="consenso com manifesto; por padrão, usa o diretório da amostra-ouro")
+    parser.add_argument("--ouro", default="data/amostra_ouro_s02")
     parser.add_argument("--dataset", default="data/dataset.csv")
     parser.add_argument("--limite-coletas", type=int, help="piloto: para após N coletas, sem congelar")
     args = parser.parse_args(argv)
@@ -283,8 +284,12 @@ def main(argv=None):
     observar_http(client, Path(cfg["saida"]["dir_cache"]) / "http_metricas.json")
     executar(client, cfg, args.candidatos, args.congelada, args.limite_coletas)
     if Path(args.congelada).exists() and not args.limite_coletas:
-        from pipeline.dataset import gerar_dataset
-        gerar_dataset(cfg, args.congelada, args.consenso, args.dataset)
+        from validacao.fechamento_s02 import main as fechar
+        argumentos = ["--config", args.config, "--amostra", args.congelada,
+                      "--ouro", args.ouro, "--dataset", args.dataset]
+        if args.consenso:
+            argumentos.extend(["--consenso", args.consenso])
+        fechar(argumentos)
 
 
 if __name__ == "__main__":

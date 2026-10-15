@@ -132,3 +132,23 @@ def test_congelamento_300_e_idempotente_sem_sobrescrever(cfg_s02, monkeypatch, t
     destino.write_text("full_name\no/trocado\n", encoding="utf-8")
     with pytest.raises(ValueError, match="sobrescrita"):
         sprint.congelar(cfg_s02, repos, destino)
+
+
+@pytest.mark.parametrize("consenso", [None, "consenso-validado.csv"])
+def test_cli_encaminha_fechamento_sem_reutilizar_consenso_legado(monkeypatch, tmp_path, consenso):
+    import pipeline.observabilidade_s02 as observabilidade
+    import validacao.fechamento_s02 as fechamento
+    monkeypatch.setenv("GITHUB_TOKEN", "token-fixture-offline")
+    monkeypatch.setattr(sprint, "GitHubClient", lambda *args, **kwargs: object())
+    monkeypatch.setattr(observabilidade, "observar_http", lambda *args: None)
+    amostra = tmp_path / "amostra.csv"
+    monkeypatch.setattr(sprint, "executar", lambda *args: amostra.write_text("fixture", encoding="utf-8"))
+    chamadas = []
+    monkeypatch.setattr(fechamento, "main", lambda args: chamadas.append(args))
+    args = ["--congelada", str(amostra), "--ouro", "ouro-definitivo"]
+    if consenso:
+        args.extend(["--consenso", consenso])
+    sprint.main(args)
+    assert len(chamadas) == 1 and "ouro-definitivo" in chamadas[0]
+    assert ("--consenso" in chamadas[0]) == bool(consenso)
+    assert "data/amostra_ouro/consenso_repos.csv" not in chamadas[0]

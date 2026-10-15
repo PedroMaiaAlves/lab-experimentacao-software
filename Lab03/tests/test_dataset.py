@@ -1,5 +1,6 @@
 from copy import deepcopy
 import json
+from pathlib import Path
 import shutil
 
 import pytest
@@ -81,6 +82,11 @@ def test_consenso_antigo_nao_e_reutilizado_sem_proveniencia(tmp_path, caplog):
     salvar_csv(caminho, ["full_name", "tipo_projeto"], [{"full_name": "o/r", "tipo_projeto": "outro"}])
     assert carregar_rotulos(caminho, "amostra") == {}
     assert "sem vínculo" in caplog.text
+
+
+def test_dicionario_cobre_todas_as_colunas_do_dataset():
+    texto = (Path(__file__).parents[1] / "docs/dicionario_dados.md").read_text(encoding="utf-8")
+    assert all(f"`{campo}`" in texto for campo in CAMPOS)
 
 
 def test_consenso_exige_hashes_vinculo_e_origem_declarada(tmp_path):

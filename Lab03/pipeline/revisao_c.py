@@ -30,10 +30,11 @@ def preparar_casos(amostra, releases, commits):
     if set(notas) != esperadas:
         raise ValueError("há release sorteada sem notas na fonte fornecida")
     if commits and Path(commits).exists():
-        for commit in ler_csv(commits):
-            chave = commit["full_name"], str(commit["release_id"])
-            if chave in esperadas and commit.get("message"):
-                mensagens[chave].append(commit["message"])
+        with Path(commits).open(encoding="utf-8", newline="") as arquivo:
+            for commit in csv.DictReader(arquivo):
+                chave = commit["full_name"], str(commit["release_id"])
+                if chave in esperadas and commit.get("message"):
+                    mensagens[chave].append(commit["message"])
     return [{**item, "name": notas[chave].get("name", ""),
              "body": notas[chave].get("body", ""), "mensagens_commits": mensagens[chave],
              "origem_notas": f"https://api.github.com/repos/{item['full_name']}/releases/{item['release_id']}"}

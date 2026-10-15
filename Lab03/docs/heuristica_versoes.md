@@ -19,6 +19,12 @@ essa limitação deve ser reportada no artigo.
 
 ## Resultados
 
+Este histórico pertence à amostra-ouro obtida no piloto de 100 repositórios.
+O F1 abaixo não certifica a população definitiva da S02 nem a independência dos
+rótulos C, cuja autoria Lorran informou não ser sua. O fechamento definitivo usa
+`data/amostra_ouro_s02/heuristica_metricas.csv`, mantém cada versão e recalcula o
+dataset. Os resultados anteriores são preservados, não promovidos automaticamente.
+
 Os resultados abaixo usam `data/amostra_ouro/consenso_releases.csv`. Para a v1,
 19.836 assuntos de commits foram recuperados dos patches públicos de 294 das 300
 comparações; cinco releases não tinham `compare_url` e uma comparação retornou erro HTTP.

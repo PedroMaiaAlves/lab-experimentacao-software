@@ -8,6 +8,7 @@ Uso (na raiz do projeto):
 import argparse
 from datetime import date
 from pathlib import Path
+import re
 
 import pandas as pd
 import yaml
@@ -61,8 +62,15 @@ def _soma(df, coluna):
     return fmt_int(pd.to_numeric(df[coluna]).sum())
 
 
-def calcular_macros(cfg, funil, saturados, lead):
-    lo, hi = limites_estrelas(cfg["selecao"]["faixas_estrelas"])
+def calcular_macros(cfg, funil, saturados, lead, candidatos=None):
+    faixas = cfg["selecao"]["faixas_estrelas"]
+    if candidatos is not None:
+        consultas = candidatos["consulta"].drop_duplicates()
+        limites = [re.search(r"(?:^|\s)stars:([^\s]+)", q) for q in consultas]
+        if not all(limites):
+            raise ValueError("snapshot de candidatos sem faixas de estrelas auditáveis")
+        faixas = [m.group(1) for m in limites]
+    lo, hi = limites_estrelas(faixas)
     m = {
         "JanelaInicio": fmt_data(cfg["janela_inicio"]),
         "JanelaFim": fmt_data(cfg["janela_fim"]),
@@ -136,7 +144,8 @@ def main(argv=None):
     saida.mkdir(parents=True, exist_ok=True)
 
     funil = ler_csv(dados / "funil.csv")
-    macros = calcular_macros(cfg, funil, ler_csv(dados / "runs_saturados.csv"), ler_csv(dados / "lead_time.csv"))
+    macros = calcular_macros(cfg, funil, ler_csv(dados / "runs_saturados.csv"), ler_csv(dados / "lead_time.csv"),
+                             ler_csv(dados / "candidatos.csv"))
     escrever_macros(macros, saida / "numeros.tex")
     if funil is None:
         print(f"AVISO: {dados / 'funil.csv'} não encontrado; tabela do funil não gerada.")

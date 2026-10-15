@@ -1,5 +1,9 @@
 # Sprint 2 — integrante C (Lorran)
 
+Este documento registra a implementação inicial de C. Depois dela, Lorran
+autorizou complementar também A/B. O fluxo integrado atual está em
+`fechamento_s02.md`; ele preserva o legado e usa `data/amostra_ouro_s02/`.
+
 ## Escopo
 
 C1: coleta completa e congelamento; C2: dataset reexecutável; C3: rotulagem
@@ -146,6 +150,8 @@ comparações e coleta de runs concluíram. Isso não comprova a coleta de 300.
 A execução completa só está concluída quando o manifesto de congelamento e o
 dataset existirem e forem validados. Os logs locais e o checkpoint mostram o
 andamento; não substitua esses resultados por dados simulados.
+Depois da retomada para aplicar o fechamento integrado, o log ativo é
+`cache/s02/fechamento.stderr.log`; `retomada.stderr.log` preserva a execução anterior.
 
 `python -m pipeline.dataset` também gera `docs/artigo/tabelas/coleta_s02.tex`, com
 os números efetivos. A subseção `docs/artigo/metodologia_coleta.tex` pode ser

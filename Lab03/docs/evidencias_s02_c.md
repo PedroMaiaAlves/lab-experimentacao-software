@@ -1,5 +1,19 @@
 # Evidências da implementação de C — 14/10/2026
 
+## Complementação autorizada de A/B
+
+Lorran autorizou o fechamento das três partes. A branch integrou o código do PR
+#153, com autoria de A preservada, e acrescentou o fluxo canônico de
+`validacao.fechamento_s02`. A main não foi mesclada diretamente. O artigo não
+apresenta mais os kappas e o F1 do piloto como validação definitiva, e o dicionário
+agora cobre todas as colunas do dataset.
+
+A coleta foi retomada com 65 repositórios completos preservados para aplicar a
+preparação automática do novo sorteio e das tabelas. O log ativo é
+`cache/s02/fechamento.stderr.log`; cache, checkpoint e log anterior foram mantidos.
+A coleta, a decisão sobre avaliadores independentes e os resultados definitivos
+ainda não estão concluídos. O contrato e as pendências estão em `fechamento_s02.md`.
+
 Base: `main@fdfac27`. Implementação de C na branch
 `codex/lab03-s02-lorran-parte-c`; sem alterações nos coletores, cálculos ou
 rótulos de A/B. A integração do artigo acrescenta apenas a subseção de C.

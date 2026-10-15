@@ -1,3 +1,64 @@
+# Dicionário de dados — LAB03
+
+## Dataset consolidado da Sprint 2
+
+`data/dataset.csv` contém uma linha por repositório da amostra congelada. Números
+ausentes ficam vazios; zero é um resultado observado. Datas são UTC. A duração
+da janela é inclusiva: `W = (fim - início + 1 dia) / 7`. Releases principais não
+são draft nem pré-release e têm `published_at` na janela. CI é `event=push` no
+default branch. O manifesto identifica fontes, versão da heurística e consenso
+efetivamente utilizado; não se misturam amostra-ouro piloto e definitiva.
+
+| Coluna | Tipo | Unidade | Definição ou fórmula |
+|---|---|---|---|
+| `full_name` | texto | owner/repo | Chave única da amostra |
+| `stars` | inteiro | estrelas | Contagem de estrelas coletada nos metadados |
+| `language` | texto/vazio | linguagem | Linguagem principal informada pelo GitHub |
+| `default_branch` | texto | branch | Branch padrão consultado na coleta |
+| `created_at` | timestamp | ISO 8601 UTC | Criação do repositório |
+| `idade_dias` | inteiro | dias | Diferença entre criação e fim da janela, conforme coletor de metadados |
+| `contribuidores` | inteiro/vazio | entradas | Contagem fornecida pelo coletor de contribuidores; vazio se indisponível |
+| `tipo_projeto` | categoria/vazio | categoria | Consenso validado: biblioteca/framework, aplicação/serviço, ferramenta CLI ou outro |
+| `releases_sao_entregas` | categoria/vazio | sim/não/incerto | Consenso sobre releases representarem entregas consumíveis |
+| `rotulo_disponivel` | booleano | lógico | Há tipo do projeto no consenso utilizado; não comprova avaliação humana |
+| `heuristica_versao` | texto | versão | Regra efetivamente utilizada no CFR (b) |
+| `deployment_frequency` | real | entregas/semana | Releases principais / W |
+| `deployment_frequency_prereleases` | real | entregas/semana | Releases não draft, incluindo pré-releases, na janela / W |
+| `deployment_frequency_tags` | real | tags/semana | Tags cuja autoria do commit está na janela / W; não é data de criação da tag |
+| `lead_time_a_horas` | real/vazio | horas | Mediana por release do maior tempo válido entre autoria do commit e publicação |
+| `lead_time_b_horas` | real/vazio | horas | Mediana de todas as relações release/commit válidas até a publicação |
+| `cfr_a` | real/vazio | proporção 0–1 | runs_falhas / runs_validos; ausente se denominador zero |
+| `cfr_b` | real/vazio | proporção 0–1 | releases_falharam / releases_avaliadas; ausente sem denominador ou evidência suficiente |
+| `tempo_recuperacao_horas` | real/vazio | horas | Mediana dos episódios concluídos: início da primeira falha após sucesso até término do próximo sucesso, por workflow |
+| `releases_principais` | inteiro | releases | Número de releases principais na janela |
+| `releases_com_prereleases` | inteiro | releases | Releases não draft na janela, incluindo pré-releases |
+| `tags_na_janela` | inteiro | tags | Tags com data de autoria válida na janela |
+| `tags_sem_data` | inteiro | tags | Tags sem status ok ou sem data de autoria disponível |
+| `releases_comparadas` | inteiro | comparações | Comparações com status ok, inclusive vazias |
+| `releases_sem_anterior` | inteiro | releases | Primeira release do histórico principal, sem antecessora |
+| `releases_erro_404` | inteiro | comparações | Comparações indisponíveis com erro HTTP 404 |
+| `releases_sem_commits` | inteiro | comparações | Comparações ok com zero commits retornados |
+| `commits_data_invalida` | inteiro | relações release/commit | Data inválida, sem fuso ou posterior à publicação; excluída do lead time |
+| `releases_sem_evidencia_textual` | inteiro | releases | Comparação 404 ou mensagem ausente sem evidência positiva alternativa; impede afirmar CFR (b) |
+| `cfr_b_disponivel` | booleano | lógico | Não há lacunas textuais impeditivas; ainda pode faltar denominador válido |
+| `releases_avaliadas` | inteiro | releases | Releases principais até fim da janela menos sete dias, inclusive |
+| `releases_falharam` | inteiro/vazio | releases | Avaliadas com alguma corretiva posterior em até sete dias; ausente se há lacuna impeditiva |
+| `releases_censuradas` | inteiro | releases | Releases das sete últimas datas da janela, fora do denominador |
+| `runs_total` | inteiro | runs | Todas as execuções coletadas na janela, evento e branch definidos |
+| `runs_validos` | inteiro | runs | runs_sucessos + runs_falhas |
+| `runs_sucessos` | inteiro | runs | conclusion=success |
+| `runs_falhas` | inteiro | runs | conclusion=failure, timed_out ou startup_failure |
+| `runs_ignorados` | inteiro | runs | runs_total - runs_validos; cancelados, pulados e demais estados |
+| `episodios_total` | inteiro | episódios | Episódios concluídos + censurados; não inclui falhas iniciais sem sucesso anterior |
+| `episodios_concluidos` | inteiro | episódios | Falhas observadas após um sucesso e encerradas por outro sucesso do workflow |
+| `episodios_censurados` | inteiro | episódios | Falhas abertas após sucesso sem recuperação observada até o fim |
+| `proporcao_censurados` | real/vazio | proporção 0–1 | episodios_censurados / episodios_total; ausente sem episódios |
+| `intervalos_saturados` | inteiro | intervalos | Consultas com teto atingido, incluindo intervalos posteriormente subdivididos |
+| `intervalos_incompletos` | inteiro | intervalos | Intervalos diários ainda saturados; qualquer ocorrência impede congelamento |
+
+O tipo não é imputado aos repositórios não cobertos pelo consenso. Classificações
+adicionais, se produzidas, devem ser identificadas como tal e não confundidas com
+a amostra-ouro. As datas e contagens detalhadas da mineração permanecem nas fontes.
 
 ## Amostra-ouro e validação manual (Sprint 2)
 
@@ -56,6 +117,7 @@ Decisões do grupo para os casos em que os três avaliadores discordaram entre s
 | `concordancia_unanime_pct` | real | % | Itens em que os três avaliadores concordaram |
 | `n_maioria` | inteiro | itens | Itens decididos por maioria 2-1 |
 | `n_reuniao` | inteiro | itens | Itens 1-1-1, decididos em reunião |
+| `n_adjudicacao_IA` | inteiro | itens | Itens 1-1-1 submetidos a adjudicação por IA; não são reuniões humanas |
 
 ### `consenso_repos.csv`
 

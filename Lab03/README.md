@@ -100,16 +100,21 @@ Se esse arquivo ainda não existir, o script usa `data/metadados.csv` e avisa no
 rode de novo depois do congelamento.
 
 ```bash
-python -m pipeline.amostra_ouro --config config.yaml
+python -m validacao.fechamento_s02 --config config_s02.yaml
 ```
 
 Sementes documentadas (não altere sem registrar no artigo):
 
 - 60 repositórios: `DataFrame.sample(n=60, random_state=42)`
-- 5 releases por repositório: `sample(n=5, random_state=43)`, entre as releases
+- 5 releases por repositório: `sample(n=5, random_state=42)`, entre as releases
   da definição principal (não draft, não pré-release, `published_at` na janela)
 
-Saídas em `data/rotulos/`:
+O comando canônico usa `data/amostra_final.csv`, depois da coleta e validação,
+e publica o sorteio e as fontes em `data/amostra_ouro_s02/`. O comando antigo
+`pipeline.amostra_ouro` é legado: usava outro layout e a semente 43 para releases;
+não deve ser misturado à concordância baseada no modelo XLSX de `validacao`.
+
+Saídas legadas da S01, preservadas em `data/rotulos/`:
 
 | Arquivo | Conteúdo |
 |---|---|
@@ -119,8 +124,8 @@ Saídas em `data/rotulos/`:
 As planilhas **não** incluem a classificação automática de release corretiva. Cada
 avaliador preenche só o próprio arquivo, sem consultar os outros.
 
-> **Janela provisória:** confirme com o professor as datas de `janela_inicio` e
-> `janela_fim` antes de executar a coleta definitiva dos 100 repositórios.
+> **Janela oficial confirmada:** 01/10/2025 a 30/09/2026. Os 100 repositórios
+> anteriores são o piloto; a S02 exige pelo menos 300 após os filtros.
 
 ## Sprint 2 — coleta completa e dataset (integrante C)
 
@@ -129,6 +134,9 @@ da rotulagem estão em [docs/entrega_s02_c.md](docs/entrega_s02_c.md).
 Use `config_s02.yaml`; as saídas ficam separadas da S01 em `data/s02/`.
 O congelamento exige 300 repositórios validados e publica `data/amostra_final.csv`.
 O dataset só é gerado depois desse congelamento; execução iniciada não é entrega concluída.
+O mesmo comando prepara depois o sorteio definitivo e os números do artigo.
+O fechamento da validação, seu contrato de proveniência e as pendências estão em
+[docs/fechamento_s02.md](docs/fechamento_s02.md).
 
 ## Testes
 
@@ -147,13 +155,13 @@ rotular manualmente sem consultar os demais avaliadores nem a heurística. Depoi
 valide a estrutura:
 
 ```bash
-python scripts/validar_rotulos_b.py data/amostra_ouro/rotulos/rotulos_B.xlsx
+python scripts/validar_rotulos_b.py data/amostra_ouro_s02/rotulos/rotulos_B.xlsx
 ```
 
 Com o consenso produzido, avalie a versão ativa e registre precisão, recall e F1:
 
 ```bash
-python scripts/avaliar_heuristica.py --commits data/commits_entre_releases_s02.csv
+python -m validacao.fechamento_s02 --config config_s02.yaml --validar-avaliacoes
 ```
 
 ### Validação final da execução
@@ -167,7 +175,7 @@ de runs está incompleto. A mensagem `concluído` só é exibida depois dessa va
 
 O documento principal está em `docs/artigo/artigo.tex`, acompanhado do estilo e da
 bibliografia SBC. Veja `docs/artigo/README.md` para atribuição CC BY 4.0 e instruções de
-compilação. Os campos `PREENCHER` devem ser completados antes da submissão.
+compilação. Os números da S02 só entram a partir dos artefatos da execução definitiva.
 
 ## Estrutura
 
