@@ -1,0 +1,70 @@
+{
+  "origens": {
+    "dataset_sha256": "8c494ec09f475e7f44d512f72329257d5bb7c470b8a09e1cf75d5b273b995ee9",
+    "amostra_sha256": "61468b19b001f71b10cd24d3323cdeb7bef915dac2b788ed65640194dac416fd",
+    "dataset_manifest_sha256": "06aa13e74e1c1c7a2a3cbd306dd4444d034c8483446993e1d9dae64a6957e743",
+    "amostra_manifest_sha256": "7b453bdcae9ee26b3fc79025975b37ad1611ff5dd88fc87b74085847552836e5",
+    "janela_inicio": "2025-10-01",
+    "janela_fim": "2026-09-30",
+    "heuristica": {
+      "versao": "v3",
+      "janela_dias": 7,
+      "usar_patch_semver": true,
+      "usar_palavras_commits": true,
+      "palavras_chave": [
+        "fix",
+        "hotfix",
+        "revert"
+      ],
+      "politica_tag_nao_semver": "fallback_textual"
+    },
+    "repositorios": 300
+  },
+  "parametros": {
+    "semente": 42,
+    "reamostragens": 9999,
+    "alpha": 0.05,
+    "bootstrap": "BCa pareado; IC95%; batch=256",
+    "permutacao": "pairings bilateral; batch=256",
+    "familia_rq05": "2 p-valores por permutação",
+    "metricas": [
+      "deployment_frequency",
+      "lead_time_a_horas",
+      "lead_time_b_horas",
+      "cfr_a",
+      "cfr_b",
+      "tempo_recuperacao_horas"
+    ]
+  },
+  "ambiente": {
+    "python": "3.13.5",
+    "sistema": "Windows",
+    "pacotes": {
+      "numpy": "2.5.4",
+      "pandas": "3.0.6",
+      "scipy": "1.18.1",
+      "statsmodels": "0.15.0",
+      "matplotlib": "3.11.2",
+      "nbformat": "5.11.1",
+      "nbclient": "0.11.0",
+      "ipykernel": "7.4.0"
+    }
+  },
+  "codigo_sha256": {
+    "__init__.py": "205903ccd075f9fe19f85465a4c6bb425d54e1d765832395214d07b12b3cb803",
+    "artefatos.py": "b59f87b85b37d4585b576b53d5c76ab1ef32c1c2dd0030d6da35efe1d16a7e74",
+    "comum.py": "78b26aea62ac230450a98b819ea7cc697f5f8fc3a1bc8c15d0fd34cc266dd17a",
+    "notebooks.py": "616a62ac97cbbcb6e97cb509884faf00696fc9ae39101570fa3fa5b740e964a3",
+    "rq05.py": "465876f1110a16104a8b29e6ffef9f73677c32d09ebe5a7e13972f9cc5019a9c"
+  },
+  "artefatos_sha256": {
+    "ausencias.csv": "8e29c67edd4515cbeb6051a9a48a68513b8780a5a816495636e33e90d2e3b0f2",
+    "cobertura.csv": "2ebc73c1cc40b3138761baafeb18c80a21a77b372b6b425e29bd32c21b5e9576",
+    "exclusoes.csv": "a42cee461e8c9e1e7f5212c76ddf298daaee6d907efa3aef18051236f6199c59",
+    "rq05_correlacoes.csv": "f4a9c8092f9087921b49c471dcf208f0ca5ece369fc4e4bdd50dbb1fba4d18bc",
+    "rq05_dispersao.pdf": "26efbd4dca1fd56b7026b59fa029137973dd3dd0f68bab587631d9222650cfd3",
+    "rq05_dispersao.png": "225c82efc166e1a090af884d6a7f353dfb0cd65b87cdf962455ba8b3ba8f6f46",
+    "rq05_influencia.csv": "a0138d1230e2d6a5db022cd6916f38c8eda566cdd84da0fa6c36ddd53f9e32f2",
+    "rq05_tabela.tex": "052067cbe776233ad792bac71d284101f98418b27cd8d513ba0379920f6ea6e8"
+  }
+}
