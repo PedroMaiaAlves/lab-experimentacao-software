@@ -1,0 +1,5 @@
+rq,hipotese,x,y,n,n_ausentes,n_x_maior,n_iguais,n_x_menor,mediana_diferenca,q1_diferenca,q3_diferenca,mediana_razao,teste,estatistica,p,efeito_rank_biserial,p_holm,p_holm_familia_n
+RQ01,,deployment_frequency_prereleases,deployment_frequency,300,0,87,213,0,0,0,0.019178082191780799,1,,,,,,2
+RQ01,,deployment_frequency_tags,deployment_frequency,300,0,162,135,3,0.019178082191780799,0,0.1150684931506849,1.0223647604327666,,,,,,2
+RQ02,H2,lead_time_a_horas,lead_time_b_horas,300,0,191,2,107,24.841249999999995,-24.183055555555558,292.24409722222219,1.491627880817104,wilcoxon_pareado,15026,1.1189105758934714e-06,0.32544724024152094,1.1189105758934714e-06,2
+RQ03,H3,cfr_a,cfr_b,289,11,101,2,186,-0.10860849056603772,-0.33331663661256927,0.028806584362139901,,wilcoxon_pareado,9214,4.0671491899917992e-16,-0.5541037553232675,8.1342983799835984e-16,2

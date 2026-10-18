@@ -1,0 +1,49 @@
+{
+  "origens": {
+    "dataset_sha256": "8c494ec09f475e7f44d512f72329257d5bb7c470b8a09e1cf75d5b273b995ee9",
+    "dataset_manifest_sha256": "06aa13e74e1c1c7a2a3cbd306dd4444d034c8483446993e1d9dae64a6957e743",
+    "amostra_sha256": "61468b19b001f71b10cd24d3323cdeb7bef915dac2b788ed65640194dac416fd",
+    "amostra_manifest_sha256": "7b453bdcae9ee26b3fc79025975b37ad1611ff5dd88fc87b74085847552836e5",
+    "janela_inicio": "2025-10-01",
+    "janela_fim": "2026-09-30",
+    "repositorios": 300,
+    "fontes_s02_zip_sha256": "bf26c9a146a0823bd7cdf3e2fac882ef66de99b5c9b863982bee3ce2cd42db95"
+  },
+  "parametros": {
+    "quartis": "interpolação linear; IQR = Q3 - Q1",
+    "unidade_analise": "repositório; episódios apenas no indicador agregado da RQ04",
+    "comparacoes_pareadas": "Wilcoxon bilateral, zero_method=wilcox, só H2 e H3",
+    "familia_holm": "2 p-valores (H2, H3)",
+    "efeito": "rank-biserial pareado",
+    "semente_jitter_figura": 42
+  },
+  "ambiente": {
+    "python": "3.13.1",
+    "sistema": "Windows",
+    "pacotes": {
+      "numpy": "2.5.4",
+      "pandas": "3.0.6",
+      "scipy": "1.18.1",
+      "statsmodels": "0.15.0",
+      "matplotlib": "3.11.2"
+    }
+  },
+  "codigo_sha256": {
+    "__init__.py": "205903ccd075f9fe19f85465a4c6bb425d54e1d765832395214d07b12b3cb803",
+    "entrada.py": "034fd50c98a588adefe05eee73dd3985ae7fb6682519d6be81db8672a0f2940a",
+    "rq01_04.py": "2e69b1e26047935011524305c6e1ce825a3ed537fbdff1a938d8022c736f586e",
+    "graficos_a.py": "8ee874b03785aadcaf678bcbe380a77792622ae9893863f182ed511e3e06a049",
+    "sprint3_a.py": "7ecd8a320062731ed928e4abe730090582c64cd507a9b7e4c016276c8a87932a"
+  },
+  "artefatos_sha256": {
+    "numeros_a.tex": "cdc52ba4575c17ecd6e19155d92f2f4960d72b7fbb8f8356e3a5a71cda4f278a",
+    "rq01_04_descritivas.csv": "f6a2dd2603895572cc9272c016afcba747c6e5cc0808c29b5f91cd3f9c859ecc",
+    "rq01_04_distribuicoes.pdf": "0e4b22526f232dc85dc0b5cfc79314a71b7458fd35385a6875b9c53c7429b534",
+    "rq01_04_distribuicoes.png": "1535641146ceefde1a4e61895feb8a31b3e3ceb3ebac697894bcc9c71af30ccc",
+    "rq01_04_pareadas.csv": "07a5d3830506fb2289b5a71434c18eeaa011fc0b455c8f158392aa8403891ee5",
+    "rq01_04_pareadas.tex": "04d8059314400c55970e072bcd0d44b51ed319fb664133e245293d36d46d08a7",
+    "rq01_04_tabela.tex": "dfc8d303b59ccd8023a28488792d0f012f7af3f4b4cf02014cf1fcce14fc6ec3",
+    "rq04_censura.csv": "4602183e0c1e9fe4e5affa5b9558e969b2d5add26fe4a8182276968db5b163f1",
+    "rq04_episodios.csv": "752f84b273c237c647f809bdab856dfa8ae953dfa5bf7fe51977ddd0e7bebb13"
+  }
+}

@@ -187,6 +187,22 @@ artefatos obrigatórios existem, se os CSVs-resumo cobrem exatamente a amostra, 
 repositório mantém pelo menos 5 releases principais e 50 runs válidos e se nenhum arquivo
 de runs está incompleto. A mensagem `concluído` só é exibida depois dessa validação.
 
+## Sprint 3 — parte A: RQ01 a RQ04
+
+As análises usam o dataset congelado e os runs de `data/fontes_s02.zip`, sem token
+ou nova coleta. O notebook exige `nbformat`, `nbclient` e `ipykernel`:
+
+```bash
+python -m analises.sprint3_a
+python -m analises.notebooks_a
+```
+
+O primeiro comando confere os hashes das fontes, recalcula os episódios de recuperação
+(que precisam reproduzir o dataset) e grava CSVs, figura, tabelas LaTeX e manifesto em
+`results/s03_a/`. O segundo executa `notebooks/rq01_04_s03_a.ipynb` em kernel novo,
+conferindo os CSVs publicados; `--atualizar` grava as saídas no próprio notebook.
+As colunas estão no [dicionário da parte A](docs/dicionario_s03_a.md).
+
 ## Artigo
 
 O documento principal está em `docs/artigo/artigo.tex`, acompanhado do estilo e da
