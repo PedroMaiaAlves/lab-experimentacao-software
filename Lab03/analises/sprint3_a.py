@@ -8,13 +8,35 @@ from pathlib import Path
 
 import pandas as pd
 
-from analises import rq01_04
+from analises import classificacao_c1, rq01_04
 from analises.entrada import carregar_dataset, carregar_episodios, sha256
-from analises.graficos_a import (distribuicoes, inteiro, numero, p_formatado, por_unidade, salvar_figura,
-                                 tabela_descritivas, tabela_numeros, tabela_pareadas)
+from analises.graficos_a import (distribuicao_c1, distribuicoes, inteiro, numero, p_formatado, por_unidade,
+                                 salvar_figura, tabela_c1, tabela_descritivas, tabela_numeros, tabela_pareadas)
 
-MODULOS = ("__init__.py", "entrada.py", "rq01_04.py", "graficos_a.py", "sprint3_a.py")
+MODULOS = ("__init__.py", "entrada.py", "rq01_04.py", "classificacao_c1.py", "graficos_a.py", "sprint3_a.py")
 PACOTES = ("numpy", "pandas", "scipy", "statsmodels", "matplotlib")
+DIMENSOES_TEX = {"deployment_frequency": "Freq", "lead_time": "Lead", "cfr": "Cfr", "tempo_recuperacao": "Rec",
+                 "geral": "Geral", "geral_minimo_3": "GeralTres"}
+CATEGORIAS_TEX = {"Elite": "Elite", "High": "High", "Medium": "Medium", "Low": "Low", "sem_categoria": "Sem"}
+
+
+def numeros_c1(c1):
+    """Macros da classificação C1: contagem e porcentagem por dimensão e categoria."""
+    pct = lambda v: numero(100 * v, 1)
+    numeros = {}
+    for _, r in c1["c1_distribuicao"].iterrows():
+        nome = f"labACOne{DIMENSOES_TEX[r.dimensao]}{CATEGORIAS_TEX[r.categoria]}"
+        numeros[nome], numeros[nome + "Pct"] = inteiro(r.n), pct(r.proporcao_total)
+    tabela = c1["classificacao_C1"]
+    completos = tabela.mediana_notas.dropna()
+    sem_geral = tabela[tabela.categoria_geral.isna()].categoria_geral_minimo_3
+    numeros.update({
+        "labACOneClassificados": inteiro(len(completos)),
+        "labACOneFracionarias": inteiro((completos % 1 != 0).sum()),
+        "labACOneFracionariasPct": pct((completos % 1 != 0).mean()),
+        **{f"labACOneSemGeral{c}": inteiro((sem_geral == c).sum()) for c in classificacao_c1.CATEGORIAS},
+    })
+    return numeros
 
 
 def numeros_texto(df, tabelas):
@@ -92,28 +114,45 @@ def validar_saida(saida, dataset):
     return saida
 
 
-def executar(dataset="data/dataset.csv", amostra=None, pacote=None, saida="results/s03_a"):
+def _csv(tabela, destino):
+    tabela.to_csv(destino, index=False, float_format="%.17g", lineterminator="\n")
+
+
+def executar(dataset="data/dataset.csv", amostra=None, pacote=None, saida="results/s03_a",
+             classificacao="data/classificacao_C1.csv"):
     saida = validar_saida(saida, dataset)
     df, origens = carregar_dataset(dataset, amostra)
     episodios, pacote_sha = carregar_episodios(df, dataset, amostra, pacote)
     tabelas = rq01_04.analisar(df, episodios)
+    c1 = classificacao_c1.analisar(df)
     saida.mkdir(parents=True, exist_ok=True)
     for nome, tabela in tabelas.items():
-        tabela.to_csv(saida / f"{nome}.csv", index=False, float_format="%.17g", lineterminator="\n")
+        _csv(tabela, saida / f"{nome}.csv")
+    for nome in ("c1_distribuicao", "c1_ausencias"):
+        _csv(c1[nome], saida / f"{nome}.csv")
+    # A tabela por projeto é a entrada de C1 para a RQ07 e fica com os dados (critério da S03-A2).
+    classificacao = Path(classificacao)
+    classificacao.parent.mkdir(parents=True, exist_ok=True)
+    _csv(c1["classificacao_C1"], classificacao)
     salvar_figura(distribuicoes(df, episodios), saida / "rq01_04_distribuicoes")
+    salvar_figura(distribuicao_c1(c1["c1_distribuicao"]), saida / "c1_distribuicao")
     tabela_descritivas(tabelas["rq01_04_descritivas"], saida / "rq01_04_tabela.tex")
     tabela_pareadas(tabelas["rq01_04_pareadas"], saida / "rq01_04_pareadas.tex")
-    tabela_numeros(numeros_texto(df, tabelas), saida / "numeros_a.tex")
+    tabela_c1(c1["c1_distribuicao"], saida / "c1_tabela.tex")
+    tabela_numeros({**numeros_texto(df, tabelas), **numeros_c1(c1)}, saida / "numeros_a.tex")
     escrever_manifesto(saida, {**origens, "fontes_s02_zip_sha256": pacote_sha},
                        {"quartis": "interpolação linear; IQR = Q3 - Q1",
                         "unidade_analise": "repositório; episódios apenas no indicador agregado da RQ04",
                         "comparacoes_pareadas": "Wilcoxon bilateral, zero_method=wilcox, só H2 e H3",
                         "familia_holm": "2 p-valores (H2, H3)", "efeito": "rank-biserial pareado",
-                        "semente_jitter_figura": 42})
-    return tabelas
+                        "semente_jitter_figura": 42,
+                        "combinacao_C1": classificacao_c1.COMBINACAO_C1,
+                        "classificacao_geral": "mediana das 4 notas arredondada para baixo; exige as 4 métricas"},
+                       {classificacao.name: sha256(classificacao)})
+    return {**tabelas, **c1}
 
 
-def escrever_manifesto(saida, origens, parametros):
+def escrever_manifesto(saida, origens, parametros, externos=None):
     base = Path(__file__).parent
     manifesto = {
         "origens": origens, "parametros": parametros,
@@ -122,6 +161,7 @@ def escrever_manifesto(saida, origens, parametros):
         "codigo_sha256": {nome: sha256(base / nome) for nome in MODULOS if (base / nome).exists()},
         "artefatos_sha256": {p.name: sha256(p) for p in sorted(saida.iterdir())
                              if p.is_file() and p.suffix in {".csv", ".tex", ".png", ".pdf"}},
+        "artefatos_fora_da_saida_sha256": externos or {},
     }
     (saida / "manifesto.json").write_text(json.dumps(manifesto, ensure_ascii=False, indent=2) + "\n",
                                           encoding="utf-8", newline="\n")
@@ -133,11 +173,15 @@ def main(argv=None):
     parser.add_argument("--amostra", help="padrão: amostra_final.csv ao lado do dataset")
     parser.add_argument("--pacote", help="padrão: fontes_s02.zip ao lado do dataset")
     parser.add_argument("--saida", default="results/s03_a")
+    parser.add_argument("--classificacao", default="data/classificacao_C1.csv",
+                        help="tabela C1 por projeto, usada também pela RQ07")
     args = parser.parse_args(argv)
     tabelas = executar(**vars(args))
     colunas = ["rq", "metrica", "n", "mediana", "q1", "q3", "iqr"]
     print(tabelas["rq01_04_descritivas"][colunas].to_string(index=False))
-    print(f"artefatos em {args.saida}")
+    geral = tabelas["c1_distribuicao"].query("dimensao == 'geral'")
+    print("C1 geral:", ", ".join(f"{r.categoria}={r.n}" for _, r in geral.iterrows()))
+    print(f"artefatos em {args.saida} e {args.classificacao}")
 
 
 if __name__ == "__main__":

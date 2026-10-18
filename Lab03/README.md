@@ -187,10 +187,10 @@ artefatos obrigatórios existem, se os CSVs-resumo cobrem exatamente a amostra, 
 repositório mantém pelo menos 5 releases principais e 50 runs válidos e se nenhum arquivo
 de runs está incompleto. A mensagem `concluído` só é exibida depois dessa validação.
 
-## Sprint 3 — parte A: RQ01 a RQ04
+## Sprint 3 — parte A: RQ01 a RQ04 e classificação C1
 
 As análises usam o dataset congelado e os runs de `data/fontes_s02.zip`, sem token
-ou nova coleta. O notebook exige `nbformat`, `nbclient` e `ipykernel`:
+ou nova coleta. Os notebooks exigem `nbformat`, `nbclient` e `ipykernel`:
 
 ```bash
 python -m analises.sprint3_a
@@ -198,10 +198,15 @@ python -m analises.notebooks_a
 ```
 
 O primeiro comando confere os hashes das fontes, recalcula os episódios de recuperação
-(que precisam reproduzir o dataset) e grava CSVs, figura, tabelas LaTeX e manifesto em
-`results/s03_a/`. O segundo executa `notebooks/rq01_04_s03_a.ipynb` em kernel novo,
-conferindo os CSVs publicados; `--atualizar` grava as saídas no próprio notebook.
+(que precisam reproduzir o dataset) e grava CSVs, figuras, tabelas LaTeX e manifesto em
+`results/s03_a/`. Também grava `data/classificacao_C1.csv`: categoria DORA de cada
+projeto por métrica e geral na combinação de referência C1, entrada da RQ07.
+O segundo executa `notebooks/rq01_04_s03_a.ipynb` e `notebooks/classificacao_c1_s03_a.ipynb`
+em kernels novos, conferindo os CSVs publicados; `--atualizar` grava as saídas nos notebooks.
 As colunas estão no [dicionário da parte A](docs/dicionario_s03_a.md).
+
+Para C2 e C3, `analises.classificacao_c1.classificar(df, combinacao)` aplica as mesmas
+faixas trocando apenas as colunas de cada métrica.
 
 ## Artigo
 
