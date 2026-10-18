@@ -1,0 +1,22 @@
+indicador,valor,descricao
+episodios_total,7861,Episódios de falha abertos após um sucesso
+episodios_concluidos,7771,Episódios encerrados por um sucesso posterior
+episodios_censurados,90,Episódios sem sucesso posterior até o fim dos runs
+proporcao_episodios_censurados,0.01144892507314591,episodios_censurados / episodios_total
+repositorios,300,Projetos da amostra
+repositorios_com_episodios,278,Projetos com ao menos um episódio
+repositorios_sem_episodios,22,"Projetos sem episódio observável; recuperação ausente, não zero"
+repositorios_somente_censurados,0,Projetos cujos episódios estão todos censurados
+repositorios_com_censura,61,Projetos com ao menos um episódio censurado
+proporcao_repositorios_com_censura,0.21942446043165467,repositorios_com_censura / repositorios_com_episodios
+mediana_proporcao_censurados,0,Mediana por projeto com episódios
+q3_proporcao_censurados,0,Terceiro quartil por projeto com episódios
+maximo_proporcao_censurados,0.5,Maior proporção de censura de um projeto
+mediana_proporcao_censurados_com_censura,0.040000000000000001,Mediana entre os projetos com ao menos um censurado
+mediana_episodios_horas,3.5666666666666669,Mediana dos episódios concluídos de todos os projetos
+mediana_episodios_pior_caso_horas,3.6594444444444445,Mediana dos episódios supondo cada censurado mais longo que todos os concluídos
+p90_episodios_horas,73.373888888888885,Percentil 90 dos episódios concluídos
+proporcao_episodios_24h_ou_mais,0.21258525286320937,Episódios concluídos com 24 horas ou mais
+proporcao_episodios_168h_ou_mais,0.042079526444473041,Episódios concluídos com uma semana ou mais
+mediana_repositorios_horas,3.2018055555555556,Mediana das medianas por projeto (episódios concluídos)
+mediana_repositorios_pior_caso_horas,3.3325694444444443,Mediana das medianas por projeto no pior caso de censura
