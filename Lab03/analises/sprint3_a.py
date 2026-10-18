@@ -9,7 +9,7 @@ from pathlib import Path
 import pandas as pd
 
 from analises import classificacao_c1, rq01_04
-from analises.entrada import carregar_dataset, carregar_episodios, sha256
+from analises.entrada import carregar_commits, carregar_dataset, carregar_episodios, sha256
 from analises.graficos_a import (distribuicao_c1, distribuicoes, inteiro, numero, p_formatado, por_unidade,
                                  salvar_figura, tabela_c1, tabela_descritivas, tabela_numeros, tabela_pareadas)
 
@@ -97,6 +97,20 @@ def numeros_texto(df, tabelas):
         "labARepoCensuraPct": pct(c.proporcao_repositorios_com_censura),
         "labARepoSemEpisodios": inteiro(c.repositorios_sem_episodios),
     }
+    if "rq02_ponderacao" in tabelas:
+        w = tabelas["rq02_ponderacao"].set_index("indicador").valor
+        numeros.update({
+            "labALeadReleases": inteiro(w.releases_com_commits),
+            "labALeadCommitsMediana": inteiro(w.mediana_commits_por_release),
+            "labALeadCommitsQUm": inteiro(w.q1_commits_por_release),
+            "labALeadCommitsQTres": inteiro(w.q3_commits_por_release),
+            "labALeadUmCommitPct": pct(w.proporcao_releases_um_commit),
+            "labALeadRhoAgregado": numero(w.rho_agregado, 2),
+            "labALeadProjetosRho": inteiro(w.projetos_avaliados),
+            "labALeadRhoMediano": numero(w.rho_mediano_projetos, 2),
+            "labALeadRhoPositivosPct": pct(w.proporcao_projetos_rho_positivo),
+            "labALeadRhoContribuidores": numero(w.rho_contribuidores_commits_por_release, 2),
+        })
     return numeros
 
 
@@ -123,7 +137,8 @@ def executar(dataset="data/dataset.csv", amostra=None, pacote=None, saida="resul
     saida = validar_saida(saida, dataset)
     df, origens = carregar_dataset(dataset, amostra)
     episodios, pacote_sha = carregar_episodios(df, dataset, amostra, pacote)
-    tabelas = rq01_04.analisar(df, episodios)
+    commits, _ = carregar_commits(df, dataset, amostra, pacote)
+    tabelas = rq01_04.analisar(df, episodios, commits)
     c1 = classificacao_c1.analisar(df)
     saida.mkdir(parents=True, exist_ok=True)
     for nome, tabela in tabelas.items():
@@ -145,6 +160,7 @@ def executar(dataset="data/dataset.csv", amostra=None, pacote=None, saida="resul
                         "unidade_analise": "repositório; episódios apenas no indicador agregado da RQ04",
                         "comparacoes_pareadas": "Wilcoxon bilateral, zero_method=wilcox, só H2 e H3",
                         "familia_holm": "2 p-valores (H2, H3)", "efeito": "rank-biserial pareado",
+                        "ponderacao_lead_time": "Spearman commits x lead time máximo; projetos com >= 5 releases",
                         "semente_jitter_figura": 42,
                         "combinacao_C1": classificacao_c1.COMBINACAO_C1,
                         "classificacao_geral": "mediana das 4 notas arredondada para baixo; exige as 4 métricas"},

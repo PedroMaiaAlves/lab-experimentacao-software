@@ -1,0 +1,83 @@
+\section{Discussão}
+\label{sec:discussao}
+
+A Tabela~\ref{tab:hipoteses} confronta cada hipótese, registrada antes da análise
+(Seção~\ref{sec:hipoteses}), com o resultado observado. Os números das RQ05 e RQ06 vêm
+das análises da parte~B (\texttt{results/s03\_b/}).
+
+\begin{table}[htbp]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Hipóteses e resultados observados.}
+\label{tab:hipoteses}
+\begin{tabular}{>{\raggedright\arraybackslash}p{.04\textwidth}
+                >{\raggedright\arraybackslash}p{.32\textwidth}
+                >{\raggedright\arraybackslash}p{.41\textwidth}
+                >{\raggedright\arraybackslash}p{.13\textwidth}}
+\hline
+ & Esperado & Observado & Situação \\
+\hline
+H1 & Mediana abaixo de 1 release/semana, com cauda longa &
+  Mediana de \labAFreqMediana; \labAFreqDiarios\ projetos com 7 ou mais por semana &
+  Sustentada \\
+H2 & Lead time~(a) bem maior que~(b) &
+  (a) maior em \labALeadXMaior\ de \labALeadAN\ projetos; razão mediana de \labALeadRazao &
+  Parcial \\
+H3 & CFR~(a), de CI, maior que CFR~(b), de releases &
+  (b) maior em \labACfrXMenor\ de \labACfrBN; medianas de \labACfrAMediana\ e \labACfrBMediana &
+  Não sustentada \\
+H4 & Poucas horas, cauda pesada e censura não desprezível &
+  Mediana de \labARecMediana~h; P90 dos episódios de \labAEpPNoventa~h;
+  \labAEpCensuradosPct\% de episódios censurados & Parcial \\
+H5 & Correlação fraca e negativa entre frequência e CFR &
+  $\rho$ próximo de zero no CFR~(a) e positivo, de 0,660, no CFR~(b) & Não sustentada \\
+H6 & Tipo e contribuidores mais associados ao desempenho que a linguagem &
+  Contribuidores e linguagem associam-se aos lead times; tipo, só à recuperação;
+  nenhum fator à frequência ou ao CFR & Parcial \\
+H7 & Concordância moderada ou alta entre combinações, com mudanças perto dos limites &
+  Depende da análise de sensibilidade das combinações C1, C2 e C3 & Pendente \\
+\hline
+\end{tabular}
+\end{table}
+
+\textbf{Velocidade.} Os projetos populares publicam por ciclos: a mediana é de uma
+release a cada três semanas, e só um em cada cinco publica semanalmente. A H6 esperava
+que aplicações e serviços publicassem com mais frequência que bibliotecas, mas a RQ06 não
+encontrou diferença ajustada de frequência por tipo; a cadência espaçada é comum aos tipos.
+O lead time segue a mesma lógica: com mediana de cerca de oito dias, mede tanto o
+intervalo entre releases quanto a velocidade de desenvolvimento. Isso ajuda a interpretar
+a associação, contrária à H6, entre comunidades maiores e lead times mais longos na RQ06:
+projetos com mais contribuidores publicam releases com mais commits (Spearman de
+\labALeadRhoContribuidores), e releases com mais commits têm ciclos mais longos, como
+mostrou a RQ02.
+
+\textbf{Estabilidade depende do proxy.} A principal surpresa é a divergência entre os dois
+CFR. O de CI é baixo, concentrado na faixa Elite e independente da frequência (RQ05). O de
+entrega é maior, mais disperso e associado positivamente à frequência. A regra de sete dias
+acopla o CFR~(b) à cadência: quem publica com frequência tem mais chances de que uma
+corretiva siga qualquer release, e versões de correção são, elas mesmas, releases. Pelo
+CFR~(a), \labACOneCfrElitePct\% dos projetos seriam Elite; a mediana do CFR~(b), de
+\labACfrBMediana, já cairia na faixa High. Conclusões sobre estabilidade, portanto, não se
+separam da escolha do proxy, e nenhum dos dois observa incidentes em produção.
+
+\textbf{Recuperação.} A recuperação típica de uma falha de CI é rápida, de poucas horas,
+mas uma minoria de episódios dura semanas, compatível com workflows quebrados que deixam
+de receber atenção. A censura, que a H4 previa relevante, é pequena na janela observada,
+e o limite de pior caso mostra que ela quase não altera as medianas. A RQ06 associou a
+recuperação ao tipo e ao tamanho da comunidade, com tempos maiores nos projetos com mais
+contribuidores; essas diferenças são descritivas e podem refletir composições distintas
+dos grupos.
+
+\textbf{Classificação.} Na combinação de referência, a maioria dos projetos é High ou
+Medium. Elite geral exige ao menos três métricas Elite, e a frequência quase nunca chega a
+uma release por dia; sem ela, o projeto precisa ser Elite ao mesmo tempo em lead time, CFR
+e recuperação. A categoria geral combina dimensões que caminham em direções diferentes: a
+frequência puxa para baixo e o CFR de CI, para cima. Como quase metade dos projetos classificados depende
+do arredondamento da mediana das notas, mudanças pequenas em uma única métrica podem
+mudar a categoria. Isso torna plausível a H7, cujo teste cabe à análise de sensibilidade
+da RQ07.
+
+Em conjunto, os resultados indicam que as métricas DORA mineradas do GitHub descrevem
+bem a cadência de entrega e a recuperação de CI, mas que \textit{change failure rate}
+depende fortemente da definição operacional. Comparações entre projetos ou com os
+benchmarks DORA devem explicitar o proxy usado.

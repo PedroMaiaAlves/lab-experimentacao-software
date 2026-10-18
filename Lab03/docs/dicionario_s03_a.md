@@ -50,6 +50,18 @@ horas e frequências em entregas por semana, na janela inclusiva de 01/10/2025 a
 | `p_holm` | real/vazio | P-valor ajustado por Holm na família das comparações testadas |
 | `p_holm_familia_n` | inteiro | Tamanho da família de Holm; 2 (H2 e H3) |
 
+### `rq02_ponderacao.csv`
+
+Explica a divergência entre os lead times: a variante (b) pondera cada release
+pelo número de commits. Usa os pares release/commit válidos de
+`commits_entre_releases.csv` (em `fontes_s02.zip`), que reproduzem (a) e (b) do dataset.
+
+| Coluna | Tipo | Unidade / definição |
+|---|---|---|
+| `indicador` | texto | Nome do indicador |
+| `valor` | real | Contagem, quartil de commits por release, proporção ou Spearman |
+| `descricao` | texto | Fórmula ou significado do indicador |
+
 ### `rq04_censura.csv`
 
 | Coluna | Tipo | Unidade / definição |

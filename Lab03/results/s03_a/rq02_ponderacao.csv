@@ -1,0 +1,14 @@
+indicador,valor,descricao
+releases_com_commits,9551,Releases com ao menos um commit válido
+commits_validos,291792,Pares release/commit usados no lead time
+mediana_commits_por_release,7,Commits válidos por release
+q1_commits_por_release,3,Primeiro quartil de commits por release
+q3_commits_por_release,21,Terceiro quartil de commits por release
+proporcao_releases_um_commit,0.094649774892681393,"Releases com um único commit, em que a = b"
+rho_agregado,0.76348013949130689,"Spearman entre commits e lead time máximo, todas as releases juntas"
+projetos_avaliados,296,Projetos com ao menos 5 releases e variação
+rho_mediano_projetos,0.75387679832535603,Mediana do Spearman por projeto
+q1_rho_projetos,0.59381032297743108,Primeiro quartil do Spearman
+q3_rho_projetos,0.8567352684089049,Terceiro quartil do Spearman
+proporcao_projetos_rho_positivo,0.98310810810810811,Projetos em que releases maiores têm lead time máximo maior
+rho_contribuidores_commits_por_release,0.33335820401738941,Spearman entre contribuidores e mediana de commits por release do projeto
