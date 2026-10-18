@@ -1,5 +1,14 @@
 # Artigo no formato SBC
 
+A versão da Sprint 3, parte B, acrescenta resultados e discussão de RQ05/RQ06
+em `resultados_b.tex`. O PDF atualizado é `artigo_s03_b.pdf`; o PDF da S02 foi
+preservado como histórico. A, C e a replicação cruzada ainda precisam ser integradas.
+
+Antes de compilar, execute `python -m analises.sprint3_b` dentro de `Lab03/`.
+Tabelas e figuras são importadas de `Lab03/results/s03_b/`. Para usar Overleaf,
+envie a árvore de `Lab03` mantendo os caminhos relativos, incluindo essa pasta;
+não basta enviar apenas `docs/artigo/` na versão S03.
+
 O arquivo principal é `artigo.tex`. Os arquivos `sbc-template.sty`, `sbc.bst` e
 `caption2.sty` acompanham o projeto para que ele possa ser importado e compilado no
 Overleaf sem depender de arquivos externos.
