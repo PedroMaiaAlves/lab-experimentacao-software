@@ -88,6 +88,49 @@ def comparar_pares(df):
     return tabela
 
 
+def ponderacao_lead_time(commits, df=None, minimo_releases=5):
+    """Quanto o tamanho de uma release acompanha o seu lead time (a).
+
+    A variante (b) pondera cada release pelo número de commits; se releases com mais
+    commits também têm o commit mais antigo mais distante, (b) se aproxima de (a).
+    Mede-se o Spearman entre commits por release e lead time máximo da release, no
+    conjunto e dentro de cada projeto com variação suficiente.
+    """
+    releases = commits.groupby(["full_name", "release_id"]).horas.agg(n="size", maximo="max").reset_index()
+    rhos = []
+    for _, grupo in releases.groupby("full_name"):
+        if len(grupo) >= minimo_releases and grupo.n.nunique() > 1 and grupo.maximo.nunique() > 1:
+            rhos.append(stats.spearmanr(grupo.n, grupo.maximo).statistic)
+    rhos = np.asarray(rhos, dtype=float)
+    indicadores = [
+        ("releases_com_commits", len(releases), "Releases com ao menos um commit válido"),
+        ("commits_validos", len(commits), "Pares release/commit usados no lead time"),
+        ("mediana_commits_por_release", releases.n.median(), "Commits válidos por release"),
+        ("q1_commits_por_release", releases.n.quantile(.25), "Primeiro quartil de commits por release"),
+        ("q3_commits_por_release", releases.n.quantile(.75), "Terceiro quartil de commits por release"),
+        ("proporcao_releases_um_commit", (releases.n == 1).mean(), "Releases com um único commit, em que a = b"),
+        ("rho_agregado", stats.spearmanr(releases.n, releases.maximo).statistic if len(releases) > 2 else np.nan,
+         "Spearman entre commits e lead time máximo, todas as releases juntas"),
+        ("projetos_avaliados", len(rhos), f"Projetos com ao menos {minimo_releases} releases e variação"),
+        ("rho_mediano_projetos", np.median(rhos) if rhos.size else np.nan, "Mediana do Spearman por projeto"),
+        ("q1_rho_projetos", np.quantile(rhos, .25) if rhos.size else np.nan, "Primeiro quartil do Spearman"),
+        ("q3_rho_projetos", np.quantile(rhos, .75) if rhos.size else np.nan, "Terceiro quartil do Spearman"),
+        ("proporcao_projetos_rho_positivo", (rhos > 0).mean() if rhos.size else np.nan,
+         "Projetos em que releases maiores têm lead time máximo maior"),
+    ]
+    if df is not None:
+        # Liga o tamanho das releases à comunidade, para interpretar a RQ06.
+        por_projeto = releases.groupby("full_name").n.median().rename("commits")
+        pares = df.set_index("full_name").join(por_projeto, how="inner")
+        pares = pares.assign(contribuidores=pd.to_numeric(pares.contribuidores)).dropna(
+            subset=["contribuidores", "commits"])
+        indicadores.append(("rho_contribuidores_commits_por_release",
+                            stats.spearmanr(pares.contribuidores, pares.commits).statistic
+                            if len(pares) > 2 else np.nan,
+                            "Spearman entre contribuidores e mediana de commits por release do projeto"))
+    return pd.DataFrame(indicadores, columns=["indicador", "valor", "descricao"])
+
+
 def mediana_pior_caso(concluidos, censurados):
     """Mediana se cada episódio censurado durasse mais que todos os concluídos.
 
@@ -153,9 +196,12 @@ def censura(df, episodios):
     return pd.DataFrame(indicadores, columns=["indicador", "valor", "descricao"])
 
 
-def analisar(df, episodios):
+def analisar(df, episodios, commits=None):
     df = df.sort_values("full_name").reset_index(drop=True)
-    return {"rq01_04_descritivas": descritivas(df, episodios),
-            "rq01_04_pareadas": comparar_pares(df),
-            "rq04_censura": censura(df, episodios),
-            "rq04_episodios": episodios.sort_values(["full_name", "ordem"]).reset_index(drop=True)}
+    tabelas = {"rq01_04_descritivas": descritivas(df, episodios),
+               "rq01_04_pareadas": comparar_pares(df),
+               "rq04_censura": censura(df, episodios),
+               "rq04_episodios": episodios.sort_values(["full_name", "ordem"]).reset_index(drop=True)}
+    if commits is not None:
+        tabelas["rq02_ponderacao"] = ponderacao_lead_time(commits, df)
+    return tabelas

@@ -1,5 +1,6 @@
 """Entradas congeladas da S02 para a parte A, conferidas por hash antes do uso."""
 import hashlib
+import io
 import json
 from pathlib import Path
 from zipfile import ZipFile
@@ -7,6 +8,7 @@ from zipfile import ZipFile
 import numpy as np
 import pandas as pd
 
+from metricas.lead_time import data_commit_valida
 from metricas.recuperacao import calcular_tempo_recuperacao
 
 NUMERICAS = (
@@ -94,3 +96,34 @@ def carregar_episodios(df, dataset="data/dataset.csv", amostra=None, pacote=None
             linhas += [dict(full_name=repo.full_name, ordem=i, horas=horas)
                        for i, horas in enumerate(resultado.episodios_horas, start=1)]
     return pd.DataFrame(linhas, columns=["full_name", "ordem", "horas"]), sha256(pacote)
+
+
+def carregar_commits(df, dataset="data/dataset.csv", amostra=None, pacote=None):
+    """Pares release/commit válidos do lead time, conferidos contra o dataset.
+
+    Usa a mesma regra de `metricas.lead_time`: commits com data inválida ou posterior
+    à publicação ficam de fora. As medianas (a) e (b) recalculadas precisam coincidir
+    com o dataset em todos os projetos.
+    """
+    _, amostra, pacote = caminhos(dataset, amostra, pacote)
+    esperado = ler_json(amostra.with_suffix(".manifest.json"))["fontes_sha256"]["commits_entre_releases.csv"]
+    with ZipFile(pacote) as arquivo:
+        bruto = arquivo.read("commits_entre_releases.csv")
+    if hashlib.sha256(bruto).hexdigest() != esperado:
+        raise ValueError("hash divergente em commits_entre_releases.csv")
+    commits = pd.read_csv(io.BytesIO(bruto), dtype=str, keep_default_na=False)
+    commits = commits[commits.full_name.isin(df.full_name)]
+    validos = [data_commit_valida(p, a) for p, a in zip(commits.published_at, commits.author_date)]
+    commits = commits.loc[pd.Series(validos, index=commits.index, dtype=bool)].assign(horas=lambda c: (
+        pd.to_datetime(c.published_at, utc=True) - pd.to_datetime(c.author_date, utc=True)
+    ).dt.total_seconds() / 3600)
+    por_release = commits.groupby(["full_name", "release_id"]).horas.max()
+    recalculado = pd.DataFrame({"a": por_release.groupby(level=0).median(),
+                                "b": commits.groupby("full_name").horas.median()})
+    dados = df.set_index("full_name").reindex(recalculado.index)
+    if (len(recalculado) != df.lead_time_a_horas.notna().sum()
+            or not np.allclose(recalculado.a, dados.lead_time_a_horas, rtol=1e-12, atol=1e-6)
+            or not np.allclose(recalculado.b, dados.lead_time_b_horas, rtol=1e-12, atol=1e-6)):
+        raise ValueError("lead times recalculados divergem do dataset")
+    tabela = commits[["full_name", "release_id", "horas"]].reset_index(drop=True)
+    return tabela, len(validos) - int(sum(validos))

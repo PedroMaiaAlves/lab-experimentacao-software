@@ -1,0 +1,139 @@
+\section{Resultados: RQ01 a RQ04}
+\label{sec:resultados-a}
+
+\input{../../results/s03_a/numeros_a}
+
+Cada projeto contribui com uma observação por métrica; as distribuições são resumidas
+por mediana e intervalo interquartil (IQR), sem médias. Ausências não são imputadas: o
+CFR~(b) existe para \labACfrBN\ projetos e o tempo de recuperação para \labARecN.
+A Tabela~\ref{tab:rq01-04} reúne todas as variantes, e a Figura~\ref{fig:rq01-04} mostra
+as distribuições com os cortes da classificação DORA de referência.
+
+\begin{table}[htbp]
+\centering\footnotesize
+\caption{RQ01 a RQ04: mediana e quartis de cada variante. Uma observação por projeto,
+exceto na última linha, que reúne os episódios concluídos.}
+\label{tab:rq01-04}
+\input{../../results/s03_a/rq01_04_tabela}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{../../results/s03_a/rq01_04_distribuicoes.pdf}
+\caption{Distribuições das RQ01 a RQ04. Caixas: Q1, mediana e Q3; bigodes nos percentis
+5 e 95; pontos são projetos (nos episódios, apenas valores fora de P5--P95). Linhas
+tracejadas marcam os cortes da classificação DORA. Escala logarítmica, exceto no CFR.}
+\label{fig:rq01-04}
+\end{figure}
+
+\subsection{RQ01: frequência de entrega}
+
+A mediana é de \labAFreqMediana\ release principal por semana (Q1--Q3:
+\labAFreqQUm--\labAFreqQTres), cerca de uma release a cada três semanas. Somente
+\labAFreqSemanais\ projetos (\labAFreqSemanaisPct\%) publicam ao menos uma por semana,
+e apenas \labAFreqDiarios\ chegam a sete ou mais; o máximo é \labAFreqMaximo. Incluir
+pré-releases altera a frequência de \labAFreqPreXMaior\ projetos, mas pouco a mediana
+(\labAFreqPreMediana). Contar tags aumenta a frequência de \labAFreqTagsXMaior\ projetos
+(mediana \labAFreqTagsMediana): parte das versões é marcada sem release publicada.
+\textbf{H1 é sustentada}: a mediana fica abaixo de uma release por semana, com cauda
+longa à direita.
+
+\subsection{RQ02: lead time}
+
+O lead time mediano é de \labALeadAMediana\ horas na variante~(a), cerca de oito dias,
+e de \labALeadBMediana\ horas na~(b). A Tabela~\ref{tab:rq01-04-pares} compara as
+variantes no mesmo projeto: (a) supera (b) em \labALeadXMaior\ de \labALeadAN\ projetos
+(Wilcoxon pareado; $p$ ajustado por Holm de \labALeadPHolm; correlação rank-biserial
+$r$ = \labALeadR), com razão mediana de \labALeadRazao. A diferença mediana, porém, é de
+\labALeadDifMediana\ horas, e em \labALeadXMenor\ projetos a variante~(b) é a maior.
+
+\begin{table}[htbp]
+\centering\footnotesize
+\caption{Variantes no mesmo projeto. $r$: correlação rank-biserial pareada; Wilcoxon e
+Holm só nas comparações das hipóteses H2 e H3.}
+\label{tab:rq01-04-pares}
+\input{../../results/s03_a/rq01_04_pareadas}
+\end{table}
+
+A H2 supunha que a variante~(b) seria dominada por commits escritos perto da publicação.
+Isso não ocorre porque (b) pondera cada release pelo número de commits, enquanto (a) dá
+o mesmo peso a todas. Nas \labALeadReleases\ releases com commits válidos, quanto mais
+commits, mais antigo é o primeiro deles: o Spearman entre as duas grandezas tem mediana de
+\labALeadRhoMediano\ nos \labALeadProjetosRho\ projetos avaliáveis e é positivo em
+\labALeadRhoPositivosPct\% deles. As releases longas, que acumulam muitas mudanças,
+contribuem com a maior parte dos pares de~(b) e a aproximam de~(a). Em
+\labALeadUmCommitPct\% das releases há um único commit, e as duas medidas coincidem.
+\textbf{H2 é parcialmente sustentada}: (a) tende a ser maior, mas não muito maior.
+
+\subsection{RQ03: taxa de falha das mudanças}
+
+O CFR~(a) mediano é \labACfrAMediana\ (Q1--Q3: \labACfrAQUm--\labACfrAQTres): na maioria
+dos projetos, poucos runs de CI do default branch falham. O CFR~(b) mediano é
+\labACfrBMediana\ (\labACfrBQUm--\labACfrBQTres) e é mais disperso: \labACfrBZeros\ projetos
+(\labACfrBZerosPct\%) não têm release seguida de corretiva, e um quarto dos projetos
+passa de \labACfrBQTres. No mesmo projeto, (b) supera (a) em \labACfrXMenor\ de \labACfrBN\ casos
+($p$ ajustado de \labACfrPHolm; $r$ = \labACfrR). \textbf{H3 não é sustentada; ocorre o
+inverso.}
+
+Os dois proxies observam falhas diferentes. Uma falha de CI no default branch interrompe
+a integração, mas não chega ao usuário, e parte dos problemas já é barrada nas revisões
+de pull request antes do merge. Uma release corretiva em até sete dias indica que uma
+versão entregue precisou de conserto, o que está mais próximo da noção DORA de falha em
+produção. Ainda assim, ela depende da heurística e de um denominador pequeno: com poucas
+releases por projeto, cada corretiva move muito a taxa. Nenhum dos dois mede incidentes
+em produção.
+
+\subsection{RQ04: tempo de recuperação}
+
+A mediana por projeto é de \labARecMediana\ horas (Q1--Q3: \labARecQUm--\labARecQTres),
+e a dos \labAEpN\ episódios concluídos, de \labAEpMediana\ horas. A cauda é pesada: o
+percentil 90 dos episódios é \labAEpPNoventa\ horas, \labAEpDiaPct\% duram um dia ou
+mais, \labAEpSemanaPct\% uma semana ou mais, e o mais longo chega a \labAEpMaximo\ horas.
+Apenas \labAEpCensurados\ dos \labAEpTotal\ episódios (\labAEpCensuradosPct\%) estão
+censurados, distribuídos em \labARepoCensura\ projetos (\labARepoCensuraPct\% dos que
+têm episódios). Mesmo supondo que cada episódio censurado dure mais que todos os
+concluídos, a mediana dos episódios passaria a \labAEpPiorCaso\ horas, e a mediana por
+projeto, a \labARecPiorCaso\ horas. Os \labARepoSemEpisodios\ projetos sem episódio
+observável não têm tempo de recuperação, o que não equivale a recuperação instantânea.
+\textbf{H4 é parcialmente sustentada}: a recuperação típica leva poucas horas e tem cauda
+pesada, mas a censura é pequena e quase não afeta a mediana.
+
+\subsection{Classificação de referência (C1)}
+
+A combinação C1 usa releases principais, lead time~(a), CFR~(a) e tempo de recuperação,
+com as faixas da tabela de referência; a categoria geral é a mediana das quatro notas
+(Elite = 4 a Low = 1), arredondada para baixo. A Tabela~\ref{tab:c1} e a
+Figura~\ref{fig:c1} apresentam a distribuição.
+
+\begin{table}[htbp]
+\centering\footnotesize
+\caption{Classificação C1 por métrica e geral (porcentagem sobre 300 projetos). A última
+linha é uma sensibilidade que aceita três métricas.}
+\label{tab:c1}
+\input{../../results/s03_a/c1_tabela}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{../../results/s03_a/c1_distribuicao.pdf}
+\caption{Classificação C1. Segmentos sem rótulo têm menos de 14 projetos; os valores
+estão na Tabela~\ref{tab:c1}.}
+\label{fig:c1}
+\end{figure}
+
+A frequência é a dimensão mais fraca: \labACOneFreqElite\ projetos são Elite, e
+\labACOneFreqMediumPct\% e \labACOneFreqLowPct\% ficam em Medium e Low, respectivamente.
+O CFR~(a) é a mais favorável, com \labACOneCfrElitePct\% em Elite. O lead time~(a)
+se distribui pelas quatro categorias, e a recuperação se concentra em High
+(\labACOneRecHighPct\%). Na classificação geral predominam High (\labACOneGeralHigh) e
+Medium (\labACOneGeralMedium); \labACOneGeralElite\ projetos são Elite e
+\labACOneGeralLow\ são Low.
+
+Os \labACOneGeralSem\ projetos sem episódio de recuperação ficam sem categoria geral,
+pois a definição principal exige as quatro métricas. Classificados com as três
+disponíveis, eles se distribuiriam entre Elite (\labACOneSemGeralElite), High
+(\labACOneSemGeralHigh), Medium (\labACOneSemGeralMedium) e Low (\labACOneSemGeralLow),
+sem concentrar a exclusão em uma categoria. Em \labACOneFracionarias\ dos
+\labACOneClassificados\ projetos classificados (\labACOneFracionariasPct\%), as duas
+notas centrais diferem e o arredondamento decide a categoria: são casos próximos de um
+limite, sensíveis à definição operacional avaliada na RQ07.

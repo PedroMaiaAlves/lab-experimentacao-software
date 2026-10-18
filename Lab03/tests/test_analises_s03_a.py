@@ -7,10 +7,10 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from analises.entrada import NUMERICAS, carregar_dataset, carregar_episodios
+from analises.entrada import NUMERICAS, carregar_commits, carregar_dataset, carregar_episodios
 from analises.graficos_a import numero, p_formatado, sinal_tex
 from analises.rq01_04 import (censura, comparar_pares, descrever, descritivas, mediana_pior_caso,
-                              rank_biserial_pareado)
+                              ponderacao_lead_time, rank_biserial_pareado)
 from analises.sprint3_a import conferir_publicado, executar
 
 BASE = Path(__file__).resolve().parents[1]
@@ -101,7 +101,7 @@ def test_censura_por_episodio_e_por_projeto():
 
 def test_formatacao_brasileira_e_sinal_em_modo_matematico():
     assert numero(12345.678, 2) == "12.345,68" and numero(np.nan) == "--"
-    assert p_formatado(1.118e-6) == r"$1,12\times 10^{-6}$"
+    assert p_formatado(1.118e-6) == r"$1{,}12\times 10^{-6}$"
     assert sinal_tex("CFR & -0,109 & 0,1--0,2 & -- & pré-releases") == \
         "CFR & $-$0,109 & 0,1--0,2 & -- & pré-releases"
 
@@ -117,16 +117,25 @@ def fontes(tmp_path):
                  updated_at=f"2025-10-01T{h + 1:02d}:00:00Z")
             for c, h in (("success", 0), ("failure", 1), ("success", 2), ("failure", 4))]
     bruto = json.dumps({"workflow_runs": runs}).encode()
+    # Uma release com commits de 24 h e 12 h (a = 24, b = 18) e um commit posterior, inválido.
+    commits = ("full_name,release_id,published_at,author_date\n"
+               "org/a,1,2025-10-02T00:00:00Z,2025-10-01T00:00:00Z\n"
+               "org/a,1,2025-10-02T00:00:00Z,2025-10-01T12:00:00Z\n"
+               "org/a,1,2025-10-02T00:00:00Z,2025-10-03T00:00:00Z\n"
+               "org/fora,9,2025-10-02T00:00:00Z,2025-09-01T00:00:00Z\n").encode()
     with ZipFile(tmp_path / "fontes_s02.zip", "w") as pacote:
         pacote.writestr("workflow_runs/org__a.json", bruto)
+        pacote.writestr("commits_entre_releases.csv", commits)
     pd.DataFrame({"full_name": ["org/a"]}).to_csv(tmp_path / "amostra_final.csv", index=False)
     linha = {c: 1 for c in NUMERICAS}
     linha.update(full_name="org/a", episodios_total=2, episodios_concluidos=1, episodios_censurados=1,
-                 proporcao_censurados=.5, tempo_recuperacao_horas=2.0)
+                 proporcao_censurados=.5, tempo_recuperacao_horas=2.0, lead_time_a_horas=24.0,
+                 lead_time_b_horas=18.0)
     pd.DataFrame([linha]).to_csv(tmp_path / "dataset.csv", index=False)
     amostra_sha = _sha(tmp_path / "amostra_final.csv")
     (tmp_path / "amostra_final.manifest.json").write_text(json.dumps({
         "amostra_sha256": amostra_sha, "janela_inicio": "2025-10-01", "janela_fim": "2026-09-30",
+        "fontes_sha256": {"commits_entre_releases.csv": hashlib.sha256(commits).hexdigest()},
         "fontes_repos_sha256": {"org/a": {"workflow_runs/org__a.json": hashlib.sha256(bruto).hexdigest()}}}))
     (tmp_path / "dataset.manifest.json").write_text(json.dumps({
         "dataset_sha256": _sha(tmp_path / "dataset.csv"), "amostra_sha256": amostra_sha, "repositorios": 1}))
@@ -140,6 +149,30 @@ def test_episodios_recalculados_conferem_com_o_dataset(fontes):
     df.loc[0, "tempo_recuperacao_horas"] = 3.0
     with pytest.raises(ValueError, match="divergem"):
         carregar_episodios(df, fontes / "dataset.csv")
+
+
+def test_commits_validos_reproduzem_os_lead_times_do_dataset(fontes):
+    df, _ = carregar_dataset(fontes / "dataset.csv")
+    commits, invalidos = carregar_commits(df, fontes / "dataset.csv")
+    assert sorted(commits.horas) == [12.0, 24.0] and invalidos == 1
+    sem_commits = pd.concat([df, df.assign(full_name="org/sem-commits")], ignore_index=True)
+    with pytest.raises(ValueError, match="lead times"):
+        carregar_commits(sem_commits, fontes / "dataset.csv")
+    df.loc[0, "lead_time_b_horas"] = 24.0
+    with pytest.raises(ValueError, match="lead times"):
+        carregar_commits(df, fontes / "dataset.csv")
+
+
+def test_ponderacao_mede_releases_maiores_com_lead_time_maior():
+    linhas = [dict(full_name=f"org/{p}", release_id=r, horas=float(h))
+              for p in ("x", "y") for r in range(1, 6) for h in range(1, r + 1)]
+    w = ponderacao_lead_time(pd.DataFrame(linhas)).set_index("indicador").valor
+    # Em cada projeto a release r tem r commits e lead time máximo r: Spearman = 1.
+    assert w.releases_com_commits == 10 and w.commits_validos == 30
+    assert w.projetos_avaliados == 2 and w.rho_mediano_projetos == pytest.approx(1)
+    assert w.proporcao_releases_um_commit == pytest.approx(.2)
+    assert ponderacao_lead_time(pd.DataFrame(linhas), minimo_releases=6).set_index(
+        "indicador").valor.projetos_avaliados == 0
 
 
 def test_fonte_alterada_interrompe_a_analise(fontes):

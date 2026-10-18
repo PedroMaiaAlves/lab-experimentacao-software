@@ -40,3 +40,9 @@ O nome do PDF foi mantido por compatibilidade com os links existentes; seu conte
 inclui a revisão dos 240 tipos complementares e não anuncia essa etapa como pendente.
 O método distingue a pré-classificação automática da revisão humana posterior,
 confirmada pelos integrantes, sem atribuir consenso triplo aos 240 projetos.
+
+A Sprint 3, parte A, acrescenta `resultados_a.tex` (RQ01 a RQ04 e classificação C1) e
+`discussao.tex` (hipóteses × resultados). Antes de compilar, execute
+`python -m analises.sprint3_a` dentro de `Lab03/`: tabelas, figuras e as macros dos números
+do texto são importadas de `Lab03/results/s03_a/`. No Overleaf, envie a árvore de `Lab03`
+mantendo os caminhos relativos. O PDF desta versão é `artigo_s03_a.pdf`.

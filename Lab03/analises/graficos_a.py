@@ -23,10 +23,10 @@ PAINEIS = (
      ("Releases", "Com pré-\nreleases", "Tags"), "Entregas por semana", "log",
      ((7, "Elite ≥ 7"), (1, "High ≥ 1"), (UM_POR_MES_EM_SEMANAS, "Medium ≥ 1/mês"))),
     ("RQ02 · Lead time", ("lead_time_a_horas", "lead_time_b_horas"),
-     ("(a) por release", "(b) por commit"), "Horas", "log",
+     ("(a) por\nrelease", "(b) por\ncommit"), "Horas", "log",
      ((HORAS_DIA, "Elite < 1 dia"), (HORAS_SEMANA, "High < 1 semana"), (DIAS_MES * HORAS_DIA, "Medium < 30 dias"))),
     ("RQ03 · Taxa de falha das mudanças", ("cfr_a", "cfr_b"),
-     ("(a) runs de CI", "(b) releases"), "Proporção", "linear",
+     ("(a) runs\nde CI", "(b)\nreleases"), "Proporção", "linear",
      ((.15, "Elite ≤ 0,15"), (.30, "High ≤ 0,30"), (.45, "Medium ≤ 0,45"))),
     ("RQ04 · Tempo de recuperação", ("tempo_recuperacao_horas", "episodios"),
      ("Mediana por\nprojeto", "Episódios\nconcluídos"), "Horas", "log",
@@ -56,7 +56,8 @@ def p_formatado(valor):
         return "--"
     if 0 < valor < 1e-4:
         mantissa, expoente = f"{valor:.2e}".split("e")
-        return "$" + mantissa.replace(".", ",") + r"\times 10^{" + str(int(expoente)) + "}$"
+        # {,} evita o espaço que o modo matemático põe depois da vírgula decimal.
+        return "$" + mantissa.replace(".", "{,}") + r"\times 10^{" + str(int(expoente)) + "}$"
     return numero(valor, 4)
 
 
@@ -74,7 +75,7 @@ def _estilo(eixo):
     for lado in ("left", "bottom"):
         eixo.spines[lado].set_color(EIXO)
         eixo.spines[lado].set_linewidth(.8)
-    eixo.tick_params(colors=TINTA_SECUNDARIA, labelsize=8, length=3, width=.6)
+    eixo.tick_params(colors=TINTA_SECUNDARIA, labelsize=8.5, length=3, width=.6)
     eixo.grid(axis="y", color=GRADE, linewidth=.6)
     eixo.set_axisbelow(True)
 
@@ -103,14 +104,14 @@ def _cortes(eixo, cortes):
     for valor, texto in cortes:
         eixo.axhline(valor, color=TINTA_MUDA, linewidth=.7, linestyle=(0, (4, 3)), zorder=1)
         eixo.annotate(texto, xy=(1, valor), xycoords=("axes fraction", "data"), xytext=(3, 0),
-                      textcoords="offset points", va="center", ha="left", fontsize=6.5,
+                      textcoords="offset points", va="center", ha="left", fontsize=7.5,
                       color=TINTA_SECUNDARIA)
 
 
 def distribuicoes(df, episodios, semente=42):
     """Boxplots das RQ01 a RQ04 com os cortes da classificação DORA de referência."""
     rng = np.random.default_rng(semente)
-    figura, eixos = plt.subplots(2, 2, figsize=(9, 6.6), layout="constrained")
+    figura, eixos = plt.subplots(2, 2, figsize=(7.2, 6.4), layout="constrained")
     figura.get_layout_engine().set(w_pad=.12, h_pad=.08)
     for eixo, (titulo, colunas, rotulos, nome_eixo, escala, cortes) in zip(eixos.flat, PAINEIS):
         _estilo(eixo)
@@ -128,8 +129,8 @@ def distribuicoes(df, episodios, semente=42):
         _cortes(eixo, cortes)
         ns = [f"n={inteiro(len(s))}" for s in series]
         eixo.set_xticks(range(1, len(rotulos) + 1), [f"{r}\n{n}" for r, n in zip(rotulos, ns)])
-        eixo.set_title(titulo, loc="left", fontsize=9.5, color=TINTA, pad=6)
-        eixo.set_ylabel(nome_eixo, fontsize=8, color=TINTA_SECUNDARIA)
+        eixo.set_title(titulo, loc="left", fontsize=10, color=TINTA, pad=6)
+        eixo.set_ylabel(nome_eixo, fontsize=9, color=TINTA_SECUNDARIA)
     return figura
 
 
@@ -199,7 +200,7 @@ def distribuicao_c1(distribuicao):
     dimensoes = ["deployment_frequency", "lead_time", "cfr", "tempo_recuperacao", "geral"]
     tabela = distribuicao.pivot(index="dimensao", columns="categoria", values="n").loc[dimensoes]
     total = int(distribuicao.n_total.iloc[0])
-    figura, eixo = plt.subplots(figsize=(9, 3.3), layout="constrained")
+    figura, eixo = plt.subplots(figsize=(7.2, 3.1), layout="constrained")
     _estilo(eixo)
     eixo.grid(axis="y", visible=False)
     eixo.grid(axis="x", color=GRADE, linewidth=.6)
@@ -219,8 +220,8 @@ def distribuicao_c1(distribuicao):
     eixo.set_yticks(posicoes, [ROTULOS_DIMENSOES[d] for d in dimensoes], fontsize=8.5, color=TINTA)
     eixo.set_xlim(0, 1)
     eixo.xaxis.set_major_formatter(FuncFormatter(lambda v, _: f"{v:.0%}".replace(".", ",")))
-    eixo.set_xlabel(f"Projetos (n = {total})", fontsize=8, color=TINTA_SECUNDARIA)
-    eixo.legend(ncols=5, loc="lower left", bbox_to_anchor=(0, 1.02), frameon=False, fontsize=8,
+    eixo.set_xlabel(f"Projetos (n = {total})", fontsize=9, color=TINTA_SECUNDARIA)
+    eixo.legend(ncols=5, loc="lower left", bbox_to_anchor=(0, 1.02), frameon=False, fontsize=8.5,
                 handlelength=1.2, columnspacing=1.4, borderaxespad=0)
     return figura
 
