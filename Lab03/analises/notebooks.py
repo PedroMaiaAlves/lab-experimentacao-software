@@ -1,4 +1,4 @@
-"""Executa o notebook de RQ05 em kernels novos, conferindo CSVs publicados."""
+"""Executa os dois notebooks em kernels novos, conferindo CSVs publicados."""
 import argparse
 from pathlib import Path
 
@@ -10,7 +10,7 @@ def executar_notebooks(saida="cache/notebooks_s03"):
     base = Path(__file__).resolve().parents[1]
     saida = Path(saida).resolve()
     saida.mkdir(parents=True, exist_ok=True)
-    for rq in ("rq05",):
+    for rq in ("rq05", "rq06"):
         origem = base / "notebooks" / f"{rq}_s03_b.ipynb"
         notebook = nbformat.read(origem, as_version=4)
         for celula in notebook.cells:
