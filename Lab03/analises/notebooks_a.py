@@ -5,7 +5,7 @@ from pathlib import Path
 import nbformat
 from nbclient import NotebookClient
 
-NOTEBOOKS = ("rq01_04_s03_a.ipynb",)
+NOTEBOOKS = ("rq01_04_s03_a.ipynb", "classificacao_c1_s03_a.ipynb")
 
 
 def executar_notebooks(saida="cache/notebooks_s03", atualizar=False):
@@ -18,7 +18,8 @@ def executar_notebooks(saida="cache/notebooks_s03", atualizar=False):
         for celula in notebook.cells:
             if celula.cell_type == "code":
                 celula.outputs, celula.execution_count = [], None
-        NotebookClient(notebook, timeout=300, kernel_name="python3",
+        # Sem horários de execução nos metadados: o notebook só muda quando o resultado muda.
+        NotebookClient(notebook, timeout=300, kernel_name="python3", record_timing=False,
                        resources={"metadata": {"path": str(base)}}).execute()
         # A versão apresentada em notebooks/ só é sobrescrita quando pedido.
         nbformat.write(notebook, origem if atualizar else saida / nome)

@@ -163,13 +163,18 @@ def test_saida_nao_pode_ficar_nos_dados(fontes):
 
 
 def test_artefatos_publicados_reproduzem_a_partir_das_fontes(tmp_path):
-    tabelas = executar(dataset=BASE / "data/dataset.csv", saida=tmp_path)
+    saida = tmp_path / "saida"
+    tabelas = executar(dataset=BASE / "data/dataset.csv", saida=saida,
+                       classificacao=tmp_path / "classificacao_C1.csv")
     publicados = BASE / "results/s03_a"
     for nome, tabela in tabelas.items():
-        conferir_publicado(tabela, publicados / f"{nome}.csv")
-    for tex in ("rq01_04_tabela.tex", "rq01_04_pareadas.tex", "numeros_a.tex"):
-        assert (tmp_path / tex).read_text(encoding="utf-8") == (publicados / tex).read_text(encoding="utf-8")
+        destino = BASE / "data" if nome == "classificacao_C1" else publicados
+        conferir_publicado(tabela, destino / f"{nome}.csv")
+    for tex in ("rq01_04_tabela.tex", "rq01_04_pareadas.tex", "c1_tabela.tex", "numeros_a.tex"):
+        assert (saida / tex).read_text(encoding="utf-8") == (publicados / tex).read_text(encoding="utf-8")
     manifesto = json.loads((publicados / "manifesto.json").read_text(encoding="utf-8"))
     for nome, esperado in manifesto["artefatos_sha256"].items():
         if nome.endswith((".csv", ".tex")):
             assert _sha(publicados / nome) == esperado, nome
+    for nome, esperado in manifesto["artefatos_fora_da_saida_sha256"].items():
+        assert _sha(BASE / "data" / nome) == esperado, nome

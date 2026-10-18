@@ -69,3 +69,52 @@ limite superior simples para o efeito da censura sobre a mediana, não uma estim
 | `full_name` | texto | Projeto do episódio |
 | `ordem` | inteiro | Posição do episódio na saída de `metricas.recuperacao`, por projeto |
 | `horas` | real | Do início da primeira falha após um sucesso ao término do sucesso seguinte |
+
+## Classificação de referência (C1)
+
+C1 = frequência de releases principais (`deployment_frequency`), lead time (a)
+(`lead_time_a_horas`), CFR (a) (`cfr_a`) e tempo de recuperação
+(`tempo_recuperacao_horas`). Faixas de `metricas/classificacao.py`. A categoria
+geral é a mediana das quatro notas (Elite = 4 … Low = 1) arredondada para baixo e
+exige as quatro métricas; categoria ausente é célula vazia.
+
+### `classificacao_C1.csv`
+
+Publicado em `data/classificacao_C1.csv`, uma linha por projeto da amostra.
+
+| Coluna | Tipo | Unidade / definição |
+|---|---|---|
+| `full_name` | texto | Projeto |
+| `deployment_frequency` | real | Releases principais por semana, copiado do dataset |
+| `lead_time_a_horas` | real | Lead time (a) em horas, copiado do dataset |
+| `cfr_a` | real | CFR (a), proporção de 0 a 1, copiado do dataset |
+| `tempo_recuperacao_horas` | real/vazio | Mediana da recuperação em horas; vazio sem episódio concluído |
+| `categoria_deployment_frequency` | categoria | Elite (≥ 7/semana), High (≥ 1), Medium (≥ 7/30) ou Low |
+| `categoria_lead_time` | categoria | Elite (< 24 h), High (< 168 h), Medium (< 720 h) ou Low |
+| `categoria_cfr` | categoria | Elite (≤ 0,15), High (≤ 0,30), Medium (≤ 0,45) ou Low |
+| `categoria_tempo_recuperacao` | categoria/vazio | Elite (< 1 h), High (< 24 h), Medium (< 168 h) ou Low; vazio se ausente |
+| `metricas_disponiveis` | inteiro | Quantas das quatro métricas existem para o projeto |
+| `metricas_ausentes` | texto/vazio | Métricas ausentes separadas por `;` |
+| `mediana_notas` | real/vazio | Mediana das quatro notas antes do arredondamento; vazio se faltar métrica |
+| `categoria_geral` | categoria/vazio | Categoria da mediana arredondada para baixo; vazio se faltar métrica |
+| `categoria_geral_minimo_3` | categoria/vazio | Sensibilidade: mesma regra com pelo menos três métricas |
+
+### `c1_distribuicao.csv`
+
+| Coluna | Tipo | Unidade / definição |
+|---|---|---|
+| `dimensao` | texto | deployment_frequency, lead_time, cfr, tempo_recuperacao, geral ou geral_minimo_3 |
+| `categoria` | texto | Elite, High, Medium, Low ou sem_categoria |
+| `n` | inteiro | Projetos na categoria |
+| `n_total` | inteiro | Projetos da amostra |
+| `n_classificados` | inteiro | Projetos com categoria nessa dimensão |
+| `proporcao_total` | real | n / n_total |
+| `proporcao_classificados` | real/vazio | n / n_classificados; vazio para sem_categoria |
+
+### `c1_ausencias.csv`
+
+| Coluna | Tipo | Unidade / definição |
+|---|---|---|
+| `full_name` | texto | Projeto sem alguma métrica de C1 |
+| `metrica` | texto | Métrica ausente |
+| `motivo` | texto | sem_episodios, somente_episodios_censurados ou valor_ausente |

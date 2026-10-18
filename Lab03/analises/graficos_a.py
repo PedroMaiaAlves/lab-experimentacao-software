@@ -186,6 +186,57 @@ def tabela_pareadas(pareadas, destino):
     _escrever(destino, linhas)
 
 
+# Rampa ordinal validada (Low claro -> Elite escuro); ausência em cinza neutro.
+CORES_CATEGORIAS = {"Elite": "#0d366b", "High": "#1c5cab", "Medium": "#3987e5", "Low": "#86b6ef",
+                    "sem_categoria": "#d9d8d2"}
+ROTULOS_DIMENSOES = {"deployment_frequency": "Frequência", "lead_time": "Lead time (a)", "cfr": "CFR (a)",
+                     "tempo_recuperacao": "Recuperação", "geral": "Geral",
+                     "geral_minimo_3": r"Geral ($\geq$ 3 métricas)"}
+
+
+def distribuicao_c1(distribuicao):
+    """Barras empilhadas de 100%: uma por métrica de C1 e a geral."""
+    dimensoes = ["deployment_frequency", "lead_time", "cfr", "tempo_recuperacao", "geral"]
+    tabela = distribuicao.pivot(index="dimensao", columns="categoria", values="n").loc[dimensoes]
+    total = int(distribuicao.n_total.iloc[0])
+    figura, eixo = plt.subplots(figsize=(9, 3.3), layout="constrained")
+    _estilo(eixo)
+    eixo.grid(axis="y", visible=False)
+    eixo.grid(axis="x", color=GRADE, linewidth=.6)
+    posicoes = np.arange(len(dimensoes))[::-1]
+    inicio = np.zeros(len(dimensoes))
+    for categoria, cor in CORES_CATEGORIAS.items():
+        valores = tabela[categoria].to_numpy(float)
+        eixo.barh(posicoes, valores / total, left=inicio / total, height=.58, color=cor,
+                  edgecolor=SUPERFICIE, linewidth=1.5, label="Sem categoria" if categoria == "sem_categoria"
+                  else categoria)
+        escuro = categoria in ("Elite", "High", "Medium")
+        for y, x0, n in zip(posicoes, inicio, valores):
+            if n / total >= .045:  # rótulo só onde cabe; o valor completo está na tabela
+                eixo.text((x0 + n / 2) / total, y, inteiro(n), ha="center", va="center", fontsize=7.5,
+                          color=SUPERFICIE if escuro else TINTA)
+        inicio += valores
+    eixo.set_yticks(posicoes, [ROTULOS_DIMENSOES[d] for d in dimensoes], fontsize=8.5, color=TINTA)
+    eixo.set_xlim(0, 1)
+    eixo.xaxis.set_major_formatter(FuncFormatter(lambda v, _: f"{v:.0%}".replace(".", ",")))
+    eixo.set_xlabel(f"Projetos (n = {total})", fontsize=8, color=TINTA_SECUNDARIA)
+    eixo.legend(ncols=5, loc="lower left", bbox_to_anchor=(0, 1.02), frameon=False, fontsize=8,
+                handlelength=1.2, columnspacing=1.4, borderaxespad=0)
+    return figura
+
+
+def tabela_c1(distribuicao, destino):
+    linhas = [r"% Gerado por analises.sprint3_a; não edite à mão.", r"\begin{tabular}{lrrrrr}", r"\hline",
+              r"Dimensão & Elite & High & Medium & Low & Sem categoria \\", r"\hline"]
+    for dimensao, grupo in distribuicao.groupby("dimensao", sort=False):
+        if dimensao == "geral_minimo_3":
+            linhas.append(r"\hline")
+        celulas = [f"{inteiro(r.n)} ({numero(100 * r.proporcao_total, 1)}\\%)" for _, r in grupo.iterrows()]
+        linhas.append(f"{ROTULOS_DIMENSOES[dimensao]} & " + " & ".join(celulas) + r" \\")
+    linhas += [r"\hline", r"\end{tabular}"]
+    _escrever(destino, linhas)
+
+
 def tabela_numeros(numeros, destino):
     """Macros LaTeX para os números citados no texto, sempre a partir dos CSVs."""
     linhas = [r"% Gerado por analises.sprint3_a; não edite à mão."]
