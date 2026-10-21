@@ -208,6 +208,20 @@ As colunas estão no [dicionário da parte A](docs/dicionario_s03_a.md).
 Para C2 e C3, `analises.classificacao_c1.classificar(df, combinacao)` aplica as mesmas
 faixas trocando apenas as colunas de cada métrica.
 
+## Sprint 3 — parte C: RQ08 bônus (rework rate)
+
+```bash
+python -m analises.sprint3_c
+python -m analises.notebooks_c --atualizar
+```
+
+A RQ08 reutiliza a heurística v3 e as fontes congeladas, sem token ou nova coleta.
+Publica cinco CSVs, figura PNG/PDF, tabela LaTeX e manifesto em `results/s03_c/`.
+Reproduz o CFR (b) dos 300 projetos antes de comparar os indicadores. A definição
+principal mantém as regras da RQ03 (b); uma sensibilidade separada exige evidência
+completa. Veja [execução e decisões](docs/entrega_s03_c.md) e
+[dicionário das saídas](docs/dicionario_s03_c.md).
+
 ## Artigo
 
 O documento principal está em `docs/artigo/artigo.tex`, acompanhado do estilo e da

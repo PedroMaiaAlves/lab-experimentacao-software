@@ -1,0 +1,66 @@
+{
+  "origens": {
+    "dataset_sha256": "8c494ec09f475e7f44d512f72329257d5bb7c470b8a09e1cf75d5b273b995ee9",
+    "dataset_manifest_sha256": "06aa13e74e1c1c7a2a3cbd306dd4444d034c8483446993e1d9dae64a6957e743",
+    "amostra_sha256": "61468b19b001f71b10cd24d3323cdeb7bef915dac2b788ed65640194dac416fd",
+    "amostra_manifest_sha256": "7b453bdcae9ee26b3fc79025975b37ad1611ff5dd88fc87b74085847552836e5",
+    "janela_inicio": "2025-10-01",
+    "janela_fim": "2026-09-30",
+    "repositorios": 300,
+    "fontes_s02_zip_sha256": "bf26c9a146a0823bd7cdf3e2fac882ef66de99b5c9b863982bee3ce2cd42db95",
+    "avaliacao_v3_manifest_sha256": "149e102ff05ee4d7bfe8ec34375dccf63b17b9db49990048d3c2d180d308d977"
+  },
+  "parametros": {
+    "rq08_opcao": "rework_rate",
+    "heuristica": {
+      "versao": "v3",
+      "janela_dias": 7,
+      "usar_patch_semver": true,
+      "usar_palavras_commits": true,
+      "palavras_chave": [
+        "fix",
+        "hotfix",
+        "revert"
+      ],
+      "politica_tag_nao_semver": "fallback_textual"
+    },
+    "denominador": "todas as releases principais na janela, sem censura de sete dias",
+    "ausencias": "mesma regra da RQ03 (b) congelada: lacuna textual sem classificação positiva",
+    "sensibilidade": "evidência completa: exclui sem_anterior, 404, sem commits ou mensagem ausente",
+    "limites": "limites de identificação: desconhecidas todas negativas/todas positivas; não são IC",
+    "comparacao_cfr_b": "reprodução das regras da S02, sem modificar o dataset"
+  },
+  "ambiente": {
+    "python": "3.12.14",
+    "sistema": "Windows",
+    "pacotes": {
+      "pandas": "3.0.6",
+      "numpy": "2.5.3",
+      "matplotlib": "3.11.2"
+    }
+  },
+  "codigo_sha256": {
+    "analises/rq08.py": "7e26937e7d55a9b60a1e7c199c77b928dbcf98db1dd1895b643de4717c9c0ca7",
+    "analises/artefatos_c.py": "0a5d951bb482041a67132b03c516d67eadb9f40f6ef795a2f4e315482d3cdb74",
+    "analises/sprint3_c.py": "0e37ea4cf45bbac411baf7fc86a60431bf40ff88bdabf8f97d8f61136c799675",
+    "analises/entrada.py": "4fbe2877d6e8bdb793694c63f66ccfe48ec2d522c352cfaeb49da0ae9a303c07",
+    "analises/rq01_04.py": "1488583be31da7a41058db0c62c2e53908f3b45ce9fc3a05731cdee47834cb4b",
+    "analises/graficos_a.py": "0bc09f73cc5bcf4f39ad404c6865ca7aa7615c00bb68bbbe5e3b90c4184a438b",
+    "analises/sprint3_a.py": "21f3b8825078afbed57dc7b3e4252249659747a5fec5d787e54439de2ce79298",
+    "metricas/cfr.py": "722934ddddd772b532893c614677106cbb61ff5aaa7c82e02343c6abb9afc48b",
+    "metricas/rework.py": "303291309dd49e35c9f30308d316d07cdf9b08a222bb097303dabdba258d8ba6",
+    "pipeline/coleta_releases.py": "78231e2f5fd8c566aaddb915a0f42b7338b0736782f4f55cc5773bf646fbf290",
+    "pipeline/dataset.py": "b277c454dae9565f31812f364a552665fbb4aa198591503ba2b627dc5253f36e"
+  },
+  "artefatos_sha256": {
+    "numeros_c.tex": "27a3e6685498e310545ad9278ab506e452a32e1229780e21dd46a3a15463511b",
+    "rq08_cobertura.csv": "019fb7c27f5d3219b6f974d81e75bfbc79062b4d888ca8b59f92d6bc38a1872a",
+    "rq08_comparacao.csv": "0f9f749edd89752295a0a9ddef337d72c5e17d347e9631b3661fcc5550db26dc",
+    "rq08_releases.csv": "3e97816bd4106ff338a6a5f40c5f7b38e760b52fbbe4a3ff7a0a480b34636b94",
+    "rq08_repositorios.csv": "d4a65a151f5d446495deee22a88c8a71ed60904cfe2fe6a84804541870883a7d",
+    "rq08_resumo.csv": "c6be9b2ce6392ad51654f07df49779404c169b3f0d4c472af96ed33b4c2d7835",
+    "rq08_rework_cfr.pdf": "68091564a20ac30cb81d1b5c62c2517472885538e0ae2754818d353d0a77cc5b",
+    "rq08_rework_cfr.png": "a64f7b1c9ee95d7fa4d60cda4e81ec77ef7fefed7542c7229a17d7e10503412e",
+    "rq08_tabela.tex": "174e24375bb2f0a3369396de38b941866b5b94374a8aedc7f61a4d65a12a4b6d"
+  }
+}

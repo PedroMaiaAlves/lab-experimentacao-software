@@ -46,3 +46,9 @@ A Sprint 3, parte A, acrescenta `resultados_a.tex` (RQ01 a RQ04 e classificaçã
 `python -m analises.sprint3_a` dentro de `Lab03/`: tabelas, figuras e as macros dos números
 do texto são importadas de `Lab03/results/s03_a/`. No Overleaf, envie a árvore de `Lab03`
 mantendo os caminhos relativos. O PDF desta versão é `artigo_s03_a.pdf`.
+
+A RQ08 bônus usa rework rate em `resultados_c.tex`, já incluído no artigo principal.
+Execute também `python -m analises.sprint3_c` antes de compilar. A prévia local com
+essa seção é `artigo_s03_c.pdf`, sem sobrescrever os PDFs históricos de A/S02.
+A integração de B, a RQ07 e a adequação do artigo ao limite de 10 páginas não são
+declaradas concluídas por essa prévia; veja `../entrega_s03_c.md`.
