@@ -1,0 +1,44 @@
+{
+  "contribuidores_limites": [
+    1.0,
+    23.0,
+    55.5,
+    125.5,
+    1963.0
+  ],
+  "quartis_metodo": "quantis lineares; intervalos fechados à direita, primeiro inclui mínimo; limites repetidos removidos",
+  "linguagens_minimo": 10,
+  "linguagens_agrupadas": [
+    "C",
+    "Clojure",
+    "Cuda",
+    "Dart",
+    "Elixir",
+    "Emacs Lisp",
+    "Gherkin",
+    "HTML",
+    "Jinja",
+    "Jupyter Notebook",
+    "Kotlin",
+    "OCaml",
+    "Objective-C",
+    "PHP",
+    "PowerShell",
+    "Ruby",
+    "Scala",
+    "Shell",
+    "Svelte",
+    "Swift",
+    "TeX",
+    "VHDL",
+    "Vala",
+    "YAML"
+  ],
+  "tipos_ordem": [
+    "biblioteca/framework",
+    "aplicação/serviço",
+    "ferramenta CLI",
+    "outro"
+  ],
+  "grupos_definidos_sobre": "amostra completa antes de excluir métricas ausentes"
+}

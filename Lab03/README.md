@@ -154,6 +154,27 @@ As três planilhas definitivas e seus manifestos estão em `data/amostra_ouro_s0
 Cada avaliação foi declarada individualmente pelos integrantes. O piloto anterior
 é preservado, mas não substitui automaticamente a validação desta nova amostra.
 
+## Sprint 3 — parte B: RQ05 e RQ06
+
+As análises usam o dataset congelado, sem token ou nova coleta:
+
+```bash
+python -m analises.sprint3_b
+python -m analises.notebooks
+```
+
+O primeiro comando gera CSVs, gráficos, tabelas LaTeX e manifesto em
+`results/s03_b/`. O segundo reexecuta os dois notebooks em kernels novos e
+confere seus resultados com os CSVs, salvando cópias em `cache/notebooks_s03/`.
+Os notebooks apresentados estão em `notebooks/rq05_s03_b.ipynb` e
+`notebooks/rq06_s03_b.ipynb`.
+
+RQ05 inclui IC95% por bootstrap BCa pareado, permutação e influência individual.
+RQ06 contempla tipo, contribuidores e linguagem em 18 comparações com Holm.
+Ausências permanecem ausentes. Instruções, resultados e limites estão na
+[entrega S03-B](docs/entrega_s03_b.md); as colunas estão no
+[dicionário das análises](docs/dicionario_s03_b.md).
+
 ## Testes
 
 ```bash

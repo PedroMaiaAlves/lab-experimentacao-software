@@ -2,6 +2,8 @@
 
 ## Dataset consolidado da Sprint 2
 
+### `dataset.csv`
+
 `data/dataset.csv` contém uma linha por repositório da amostra congelada. Números
 ausentes ficam vazios; zero é um resultado observado. Datas são UTC. A duração
 da janela é inclusiva: `W = (fim - início + 1 dia) / 7`. Releases principais não
@@ -15,7 +17,7 @@ efetivamente utilizado; não se misturam amostra-ouro piloto e definitiva.
 | `stars` | inteiro | estrelas | Contagem de estrelas coletada nos metadados |
 | `language` | texto/vazio | linguagem | Linguagem principal informada pelo GitHub |
 | `default_branch` | texto | branch | Branch padrão consultado na coleta |
-| `created_at` | timestamp | ISO 8601 UTC | Criação do repositório |
+| `created_at` | data | AAAA-MM-DD | Data de criação do repositório, truncada pelo coletor de metadados |
 | `idade_dias` | inteiro | dias | Diferença entre criação e fim da janela, conforme coletor de metadados |
 | `contribuidores` | inteiro/vazio | entradas | Contagem fornecida pelo coletor de contribuidores; vazio se indisponível |
 | `tipo_projeto` | categoria/vazio | categoria | Consenso validado (60 da amostra-ouro) ou classificação complementar validada (240 restantes): biblioteca/framework, aplicação/serviço, ferramenta CLI ou outro |
