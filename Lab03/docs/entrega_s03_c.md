@@ -1,4 +1,4 @@
-# Sprint 3 — RQ08 bônus: rework rate
+# Sprint 3 — parte C: RQ07 e RQ08
 
 ## Escopo e escolha
 
@@ -10,9 +10,37 @@ tem p bilateral exato mínimo de 2/24 = 0,0833 no Mann–Kendall sem empates; n�
 possível obter significância de 5% nessa configuração. Essa é uma justificativa
 matemática da escolha, não um teste executado sobre os dados.
 
-Não foram inventadas combinações C2/C3 para a RQ07. A documentação de A indica essa
-análise para C, mas o único trecho do enunciado fornecido nesta etapa descreve a
-RQ08; a atribuição e as combinações precisam ser confirmadas antes de ampliar o escopo.
+A orientação em `scripts/issues.csv` (S03-C1–C4) permite ao grupo definir ao menos
+três combinações. Após autorização de Lorran para concluir toda a entrega,
+implementamos C2/C3 e a integração das partes A/B/C, sem atribuir essas escolhas
+a uma tabela obrigatória do professor.
+
+## RQ07 — combinações e concordância
+
+| Combinação | Frequência | Lead time | CFR | Recuperação |
+|---|---|---|---|---|
+| C1 | Releases principais | a | CI (a) | CI |
+| C2 | Principais + pré-releases | b | Releases (b) | CI |
+| C3 | Tags | b | Releases (b) | CI |
+
+Lead time e CFR por releases continuam sobre as principais: não alegamos ter
+coletado novos pares entre tags/pré-releases. As notas/cortes são os de A, sem
+reestimativa. A categoria geral exige quatro métricas. C1 precisa coincidir com
+`data/classificacao_C1.csv`, que é preservado.
+
+Em 269 projetos comparáveis, C1–C2 muda 39,4% (κ linear 0,455); C1–C3, 40,1%
+(κ 0,437); C2–C3, 4,5% (κ 0,931). Nove projetos perdem classificação por CFR (b)
+ausente; os outros 22 já não tinham recuperação. Ausência não é quinta categoria
+nem troca. Os denominadores por par e comuns às três são registrados separadamente
+e coincidem nesta amostra. Kappa indefinido permanece ausente, não recebe 1.
+
+A robustez preserva as análises originais de B e usa famílias exploratórias próprias:
+seis correlações (três frequências × dois CFR), e 24 testes fator × métrica únicos
+(18 originais + seis para as duas frequências adicionais). Não duplicamos os testes
+invariantes. CI continua sem evidência de associação; CFR (b) permanece positivo
+(rho 0,599–0,660, p Holm 0,0012). Nenhuma frequência tem associação com os fatores
+após Holm. Cinco associações de B persistem; tipo–recuperação cruza o limiar de 5%
+na família ampliada, sem invalidar retrospectivamente seu teste original.
 
 ## Reprodução
 
@@ -21,6 +49,7 @@ Na raiz `Lab03/`, com Python e as dependências de `requirements.txt`:
 ```bash
 python -m analises.sprint3_c
 python -m analises.notebooks_c --atualizar
+python -m validacao.entrega_s03 --reproduzir
 python -m pytest --cov=metricas --cov-report=term-missing --cov-fail-under=80
 ```
 
@@ -36,10 +65,11 @@ conferidas contra seus hashes; o código v3 precisa coincidir com o da avaliaç�
 O processamento valida cobertura exata de releases, contagens de commits e reprodução
 do CFR (b), inclusive suas ausências, antes de publicar resultados.
 
-`results/s03_c/` contém cinco CSVs, figura PNG/PDF, tabela LaTeX, macros do texto e
+`results/s03_c/` contém 13 CSVs, duas figuras PNG/PDF, tabelas LaTeX, macros do texto e
 manifesto com hashes de entradas, código e saídas e versões do ambiente. O notebook
-`notebooks/rq08_s03_c.ipynb` recalcula a análise em um kernel novo, sem rede, e exige
-igualdade exata das cinco tabelas publicadas. Sem `--atualizar`, só grava em `cache/`.
+`notebooks/rq07_s03_c.ipynb` e `notebooks/rq08_s03_c.ipynb` recalculam a análise em
+kernels novos, sem rede, exigindo igualdade exata das 13 tabelas publicadas.
+Sem `--atualizar`, só gravam em `cache/`.
 
 ## Definições e ausências
 
@@ -90,23 +120,20 @@ Restam 201 projetos completos, com mediana de 40,00%. Os limites conservadores
 agregados são 32,07%–48,65%, sem pressupor que as desconhecidas sejam negativas.
 Não representam incerteza amostral, nem autorizam generalização causal.
 
-A suíte local passou com **368 testes**, cobertura de **95,59% em `metricas`**
-e 100% em `metricas/rework.py`. Inclui exemplos conhecidos, censura de fronteira,
-ausências, fontes adulteradas, contagens inconsistentes e divergência do CFR.
-O notebook foi executado em kernel novo e reproduziu exatamente os cinco CSVs.
-O artigo foi compilado com Tectonic 0.17.0 e as 13 páginas renderizadas foram
-inspecionadas. Isso valida a prévia, mas **não** o limite final de 10 páginas.
+A validação abrange exemplos conhecidos, censura de fronteira, ausências, fontes
+adulteradas, contagens inconsistentes, divergência do CFR, kappa manual, famílias
+de Holm e reprodução das 13 tabelas. O resultado integrado está documentado em
+`entrega_s03_integrada.md`; a versão preliminar do bônus tinha 368 testes.
+O artigo consolidado foi compilado com Tectonic 0.17.0: 9 páginas no SBC, incluindo
+referências. As nove páginas renderizadas foram inspecionadas.
 
 ## Integração e limites da entrega
 
-`docs/artigo/resultados_c.tex` é incluído pelo artigo principal e importa os números
-gerados, sem transcrevê-los manualmente. Não substitui as análises de A/B nem o
-dataset da S02. `artigo_s03_c.pdf` é uma prévia integrada do estado local, não uma
-declaração de fechamento do artigo final do grupo.
+Os quatro commits de Pedro até `f69b2ab` foram integrados por merge local,
+preservando autoria e A. O artigo principal usa as seções compactas `*_final.tex`
+e os artefatos das três partes; os textos extensos e PDFs anteriores são históricos.
+`artigo_final.pdf` é a versão consolidada de 9 páginas, com RQ01–08 e resumo atualizado.
 
-Na sincronização desta entrega, `main@f6441c3` já continha A; a parte B estava em
-branches remotas, culminando em `166-lab03-s03---b4-validar-a-entrega`, ainda sem
-integração à main. A RQ07 continuava pendente. A documentação de A também registra
-12 páginas antes de B/C, acima do limite final de 10, e resumo ainda sem os
-resultados finais. Esses pontos são de integração do grupo e não são apresentados
-como resolvidos pelo bônus. Nenhum merge, push ou republicação foi feito nesta etapa.
+A Sprint 3 técnica não equivale à etapa FIN de replicação cruzada ou à publicação
+na main. Não foram fabricados repositório sorteado, execução externa, Issues ou
+atualização de Projects. Consulte `entrega_s03_integrada.md`.

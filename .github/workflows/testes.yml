@@ -20,15 +20,25 @@ jobs:
           cache-dependency-path: Lab03/requirements.txt
       - run: python -m pip install -r requirements.txt
       - run: python -m pytest --cov=metricas --cov-report=term-missing --cov-fail-under=80
+      - name: Reproduzir RQ01 a RQ04 e C1 offline
+        run: python -m analises.sprint3_a
       - name: Reproduzir RQ05 e RQ06 offline
         run: python -m analises.sprint3_b
+      - name: Reproduzir RQ07 e RQ08 offline
+        run: python -m analises.sprint3_c
       - name: Conferir dicionário das análises
         run: python -m validacao.dicionario --dicionario docs/dicionario_s03_b.md --dados results/s03_b
       - name: Executar notebooks em kernels novos
-        run: python -m analises.notebooks
+        run: |
+          python -m analises.notebooks_a
+          python -m analises.notebooks
+          python -m analises.notebooks_c
+      - name: Conferir integração, hashes e artigo
+        run: python -m validacao.entrega_s03
       - uses: actions/upload-artifact@v4
         with:
-          name: lab03-s03-b
+          name: lab03-s03-integrada
           path: |
-            Lab03/results/s03_b/
+            Lab03/results/
             Lab03/cache/notebooks_s03/
+            Lab03/docs/artigo/artigo_final.pdf

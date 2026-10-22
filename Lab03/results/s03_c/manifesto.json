@@ -8,7 +8,8 @@
     "janela_fim": "2026-09-30",
     "repositorios": 300,
     "fontes_s02_zip_sha256": "bf26c9a146a0823bd7cdf3e2fac882ef66de99b5c9b863982bee3ce2cd42db95",
-    "avaliacao_v3_manifest_sha256": "149e102ff05ee4d7bfe8ec34375dccf63b17b9db49990048d3c2d180d308d977"
+    "avaliacao_v3_manifest_sha256": "149e102ff05ee4d7bfe8ec34375dccf63b17b9db49990048d3c2d180d308d977",
+    "classificacao_C1_sha256": "63a3cc9101be011f79aef3d2e3c3f9d84e06f1eed3828e19d5d37d84c0745378"
   },
   "parametros": {
     "rq08_opcao": "rework_rate",
@@ -28,7 +29,31 @@
     "ausencias": "mesma regra da RQ03 (b) congelada: lacuna textual sem classificação positiva",
     "sensibilidade": "evidência completa: exclui sem_anterior, 404, sem commits ou mensagem ausente",
     "limites": "limites de identificação: desconhecidas todas negativas/todas positivas; não são IC",
-    "comparacao_cfr_b": "reprodução das regras da S02, sem modificar o dataset"
+    "comparacao_cfr_b": "reprodução das regras da S02, sem modificar o dataset",
+    "combinacoes": {
+      "C1": {
+        "deployment_frequency": "deployment_frequency",
+        "lead_time": "lead_time_a_horas",
+        "cfr": "cfr_a",
+        "tempo_recuperacao": "tempo_recuperacao_horas"
+      },
+      "C2": {
+        "deployment_frequency": "deployment_frequency_prereleases",
+        "lead_time": "lead_time_b_horas",
+        "cfr": "cfr_b",
+        "tempo_recuperacao": "tempo_recuperacao_horas"
+      },
+      "C3": {
+        "deployment_frequency": "deployment_frequency_tags",
+        "lead_time": "lead_time_b_horas",
+        "cfr": "cfr_b",
+        "tempo_recuperacao": "tempo_recuperacao_horas"
+      }
+    },
+    "semente": 42,
+    "reamostragens": 9999,
+    "familias_robustez": "Holm: 6 correlações por permutação; 24 testes fator x métrica únicos",
+    "concordancia": "Cohen linear Low=1..Elite=4; ausências excluídas, n por par e comuns às três"
   },
   "ambiente": {
     "python": "3.12.14",
@@ -36,24 +61,44 @@
     "pacotes": {
       "pandas": "3.0.6",
       "numpy": "2.5.3",
-      "matplotlib": "3.11.2"
+      "matplotlib": "3.11.2",
+      "scipy": "1.18.1",
+      "statsmodels": "0.15.0",
+      "scikit-learn": "1.9.1"
     }
   },
   "codigo_sha256": {
     "analises/rq08.py": "7e26937e7d55a9b60a1e7c199c77b928dbcf98db1dd1895b643de4717c9c0ca7",
-    "analises/artefatos_c.py": "0a5d951bb482041a67132b03c516d67eadb9f40f6ef795a2f4e315482d3cdb74",
-    "analises/sprint3_c.py": "0e37ea4cf45bbac411baf7fc86a60431bf40ff88bdabf8f97d8f61136c799675",
+    "analises/artefatos_c.py": "9b8fc0604eb2fba718cbab02262fa05745cd627bd8529ccd85c9a1f5ae0f3610",
+    "analises/sprint3_c.py": "52a518374999122ca05bffed5d27e0654629513e54404ab41da22a6850a9c06b",
     "analises/entrada.py": "4fbe2877d6e8bdb793694c63f66ccfe48ec2d522c352cfaeb49da0ae9a303c07",
     "analises/rq01_04.py": "1488583be31da7a41058db0c62c2e53908f3b45ce9fc3a05731cdee47834cb4b",
     "analises/graficos_a.py": "0bc09f73cc5bcf4f39ad404c6865ca7aa7615c00bb68bbbe5e3b90c4184a438b",
     "analises/sprint3_a.py": "21f3b8825078afbed57dc7b3e4252249659747a5fec5d787e54439de2ce79298",
+    "analises/rq07.py": "928ec0be2f25b1a97b581ae729500ccb2383708a03fadfacf5f4c1c8cb3b6e20",
+    "analises/rq05.py": "465876f1110a16104a8b29e6ffef9f73677c32d09ebe5a7e13972f9cc5019a9c",
+    "analises/rq06.py": "2f3a251aedc00f12798f10f755e4094286ea0be3517f49580ea210cd826c3524",
+    "analises/comum.py": "78b26aea62ac230450a98b819ea7cc697f5f8fc3a1bc8c15d0fd34cc266dd17a",
+    "analises/classificacao_c1.py": "aed5f5003741eb709d7d5ab8d1ef8b53a24eb1aecbb83f3885d0ae4ef180a341",
+    "metricas/classificacao.py": "c72ec86929a54ac64b6c45051864725e5e7833460a9cbc67d90a9226dfb37acb",
     "metricas/cfr.py": "722934ddddd772b532893c614677106cbb61ff5aaa7c82e02343c6abb9afc48b",
     "metricas/rework.py": "303291309dd49e35c9f30308d316d07cdf9b08a222bb097303dabdba258d8ba6",
     "pipeline/coleta_releases.py": "78231e2f5fd8c566aaddb915a0f42b7338b0736782f4f55cc5773bf646fbf290",
     "pipeline/dataset.py": "b277c454dae9565f31812f364a552665fbb4aa198591503ba2b627dc5253f36e"
   },
   "artefatos_sha256": {
-    "numeros_c.tex": "27a3e6685498e310545ad9278ab506e452a32e1229780e21dd46a3a15463511b",
+    "metricas_combinacoes.csv": "cec5be2e0b702ee2b16ea55d9f44077161815b9d470b196cd338116df34fa0cd",
+    "numeros_c.tex": "8384b297af7be675cf8d9e44e864916652530e8d0de920a497a03414ffa89e5a",
+    "rq07_classificacoes.csv": "acec82d01c479f2ca6cd218a78d81c7b379f903b5dfbb0c6eb94993833c3adf9",
+    "rq07_concordancia.csv": "3920214db95151961d7e10a2e7ca6196f7f74e91b73a79cb95f7321deac29381",
+    "rq07_distribuicao.csv": "e14991cc9699ef3613ddfb27a6cf5dc0cb239d814d41a047c5e260ffa562f2bb",
+    "rq07_matrizes.csv": "44836f39bf373e4d034f1e1062208b3714a6510071b6cbead01424f24d11397d",
+    "rq07_resumo_metricas.csv": "ab1ed68ec5d11387c5451a82f5faa0a9ae3d00e6807dd2acd26c63ed98b163d2",
+    "rq07_robustez_rq05.csv": "eaf142813ea6c5da5ec24c28171305e92fec0690d9b214d247bb115840076eea",
+    "rq07_robustez_rq06.csv": "7b7a1196cffe2519c8271d215811241ffd4497dc09bc4a87f09b68fc22a606f2",
+    "rq07_tabela.tex": "779b12087d44671f543435ce5d4be307a798f5e5bbcadf3f2a63c05a008a0006",
+    "rq07_transicoes.pdf": "49051a660767bfba7bb8960dd61a4a977e2311429c6388931d6ae400e93b885d",
+    "rq07_transicoes.png": "ba487c31d39d35ab2a88bf48a6442fabe32bf9d464f0c2f98fb03b0f7a72877d",
     "rq08_cobertura.csv": "019fb7c27f5d3219b6f974d81e75bfbc79062b4d888ca8b59f92d6bc38a1872a",
     "rq08_comparacao.csv": "0f9f749edd89752295a0a9ddef337d72c5e17d347e9631b3661fcc5550db26dc",
     "rq08_releases.csv": "3e97816bd4106ff338a6a5f40c5f7b38e760b52fbbe4a3ff7a0a480b34636b94",

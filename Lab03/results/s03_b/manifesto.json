@@ -44,10 +44,10 @@
     ]
   },
   "ambiente": {
-    "python": "3.13.5",
+    "python": "3.12.14",
     "sistema": "Windows",
     "pacotes": {
-      "numpy": "2.5.4",
+      "numpy": "2.5.3",
       "pandas": "3.0.6",
       "scipy": "1.18.1",
       "statsmodels": "0.15.0",
@@ -60,11 +60,22 @@
   "codigo_sha256": {
     "__init__.py": "205903ccd075f9fe19f85465a4c6bb425d54e1d765832395214d07b12b3cb803",
     "artefatos.py": "330889d1f4da5d5871b0e15fb63c00b02306502d883585671c96002d11f5037d",
+    "artefatos_c.py": "9b8fc0604eb2fba718cbab02262fa05745cd627bd8529ccd85c9a1f5ae0f3610",
+    "classificacao_c1.py": "aed5f5003741eb709d7d5ab8d1ef8b53a24eb1aecbb83f3885d0ae4ef180a341",
     "comum.py": "78b26aea62ac230450a98b819ea7cc697f5f8fc3a1bc8c15d0fd34cc266dd17a",
+    "entrada.py": "4fbe2877d6e8bdb793694c63f66ccfe48ec2d522c352cfaeb49da0ae9a303c07",
+    "graficos_a.py": "0bc09f73cc5bcf4f39ad404c6865ca7aa7615c00bb68bbbe5e3b90c4184a438b",
     "notebooks.py": "4d04a04b1ca9c3b1954e59601d12ae2b774b3df085634b15c94dd718bac945fb",
+    "notebooks_a.py": "bc3df0820ee2a1e610222306936331004b294b9529e3c8d1f497f2efa462c6e8",
+    "notebooks_c.py": "dbe34284dbd153d7e8effe8fb35f754a5ef2df34273d87b32555622011a53afd",
+    "rq01_04.py": "1488583be31da7a41058db0c62c2e53908f3b45ce9fc3a05731cdee47834cb4b",
     "rq05.py": "465876f1110a16104a8b29e6ffef9f73677c32d09ebe5a7e13972f9cc5019a9c",
     "rq06.py": "2f3a251aedc00f12798f10f755e4094286ea0be3517f49580ea210cd826c3524",
-    "sprint3_b.py": "f4cf75a211762c69b8b349867fe468ca885f28989bf892aae46f96cd52bd45ec"
+    "rq07.py": "928ec0be2f25b1a97b581ae729500ccb2383708a03fadfacf5f4c1c8cb3b6e20",
+    "rq08.py": "7e26937e7d55a9b60a1e7c199c77b928dbcf98db1dd1895b643de4717c9c0ca7",
+    "sprint3_a.py": "21f3b8825078afbed57dc7b3e4252249659747a5fec5d787e54439de2ce79298",
+    "sprint3_b.py": "f4cf75a211762c69b8b349867fe468ca885f28989bf892aae46f96cd52bd45ec",
+    "sprint3_c.py": "52a518374999122ca05bffed5d27e0654629513e54404ab41da22a6850a9c06b"
   },
   "artefatos_sha256": {
     "ausencias.csv": "8e29c67edd4515cbeb6051a9a48a68513b8780a5a816495636e33e90d2e3b0f2",

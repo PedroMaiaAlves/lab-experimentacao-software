@@ -8,6 +8,46 @@ from matplotlib.ticker import PercentFormatter
 import numpy as np
 
 from analises.graficos_a import inteiro, numero, salvar_figura
+from analises.rq07 import NOTAS
+
+
+def artefatos_rq07(tabelas, saida):
+    pares = tabelas["rq07_concordancia"]
+    pares = pares[pares.populacao == "pares_disponiveis"]
+    dados = tabelas["rq07_matrizes"]
+    figura, eixos = plt.subplots(1, 3, figsize=(8.2, 2.7), layout="constrained")
+    maximo = max(int(dados.n.max()), 1)
+    for eixo, (_, r) in zip(eixos, pares.iterrows()):
+        m = dados[(dados.combinacao_a == r.combinacao_a) & (dados.combinacao_b == r.combinacao_b)]
+        matriz = m.pivot(index="categoria_a", columns="categoria_b", values="n").reindex(
+            index=NOTAS, columns=NOTAS).to_numpy()
+        desenho = eixo.imshow(matriz, cmap="Blues", vmin=0, vmax=maximo)
+        for i in range(4):
+            for j in range(4):
+                eixo.text(j, i, str(matriz[i, j]), ha="center", va="center", fontsize=9,
+                          color="white" if matriz[i, j] > maximo / 2 else "#0b0b0b")
+        eixo.set(xticks=range(4), yticks=range(4), xticklabels=list(NOTAS), yticklabels=list(NOTAS),
+                 xlabel=r.combinacao_b, ylabel=r.combinacao_a,
+                 title=f"n={r.n}; κ={numero(r.kappa_linear, 3)}")
+        eixo.tick_params(labelsize=8)
+        eixo.set_title(eixo.get_title(), fontsize=9)
+    figura.colorbar(desenho, ax=list(eixos), shrink=.7, label="Projetos")
+    salvar_figura(figura, saida / "rq07_transicoes")
+    linhas = [r"% Gerado por analises.sprint3_c.", r"\begin{tabular}{llrrrrr}", r"\hline",
+              r"Par & População & $n$ & Mudaram & \% & $\kappa_w$ & Sem par \\", r"\hline"]
+    for _, r in tabelas["rq07_concordancia"].iterrows():
+        populacao = "Por par" if r.populacao == "pares_disponiveis" else "Comum às três"
+        linhas.append(f"{r.combinacao_a}--{r.combinacao_b} & {populacao} & {r.n} & {r.mudou} & "
+                      f"{numero(100 * r.proporcao_mudou, 1)} & {numero(r.kappa_linear, 3)} & {r.n_excluidos} " + r"\\")
+    linhas += [r"\hline", r"\end{tabular}"]
+    (saida / "rq07_tabela.tex").write_text("\n".join(linhas) + "\n", encoding="utf-8", newline="\n")
+    numeros = {}
+    for _, r in pares.iterrows():
+        prefixo = "labC" + r.combinacao_a.replace("1", "Um").replace("2", "Dois").replace("3", "Tres")
+        prefixo += r.combinacao_b.replace("1", "Um").replace("2", "Dois").replace("3", "Tres")
+        numeros.update({prefixo + "N": inteiro(r.n), prefixo + "Mudou": numero(100 * r.proporcao_mudou, 1),
+                        prefixo + "Kappa": numero(r.kappa_linear, 3)})
+    return numeros
 
 
 def figura_rework(tabelas):
@@ -63,6 +103,8 @@ def escrever_artefatos(tabelas, saida):
                "labCReworkPareados": inteiro(len(pares)),
                "labCReworkDifMediana": numero(100 * pares.diferenca_rework_menos_cfr_b.median(), 1),
                "labCReworkMaior": inteiro((pares.rework_rate > pares.cfr_b).sum())}
+    if "rq07_concordancia" in tabelas:
+        numeros.update(artefatos_rq07(tabelas, saida))
     texto = "% Gerado por analises.sprint3_c; não edite à mão.\n"
     texto += "".join(f"\\newcommand{{\\{nome}}}{{{valor}}}\n" for nome, valor in numeros.items())
     (saida / "numeros_c.tex").write_text(texto, encoding="utf-8", newline="\n")

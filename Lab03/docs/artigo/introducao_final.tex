@@ -1,0 +1,35 @@
+\section{Introdução}
+
+As métricas DORA descrevem velocidade e estabilidade da entrega de software
+\cite{forsgren2018accelerate,dora}. Em projetos open-source, porém, uma release não
+comprova implantação em produção e uma falha de CI não comprova incidente. O objetivo
+deste estudo é medir proxies explícitos a partir do GitHub e avaliar quanto os
+resultados dependem da definição operacional, sem interpretar associação como causa.
+Investigamos sete questões e um bônus (Tabela~\ref{tab:questoes}).
+
+\begin{table}[htbp]
+\centering\footnotesize
+\caption{Questões e expectativas registradas antes da análise (H1--H7).}
+\label{tab:questoes}
+\begin{tabular}{p{.07\textwidth}p{.43\textwidth}p{.40\textwidth}}
+\hline
+RQ & Questão & Hipótese informal \\
+\hline
+01 & Qual a frequência das entregas? & H1: mediana menor que uma release/semana, com cauda longa. \\
+02 & Qual o tempo entre commit e entrega? & H2: lead time por release bem maior que por commit. \\
+03 & Qual a taxa de falha? & H3: CFR de CI maior que CFR por releases corretivas. \\
+04 & Qual o tempo de recuperação? & H4: poucas horas, cauda pesada e censura não desprezível. \\
+05 & Frequência associa-se a falhas? & H5: associação fraca e negativa. \\
+06 & Quais características se associam às métricas? & H6: tipo e contribuidores mais associados que linguagem. \\
+07 & A classificação depende da definição? & H7: concordância moderada/alta, com trocas próximas aos cortes. \\
+08 & Qual a proporção de releases corretivas? & Bônus descritivo: rework rate, sem nova hipótese prévia. \\
+\hline
+\end{tabular}
+\end{table}
+
+A H2 supõe commits concentrados perto da publicação. A H3 antecipa que CI bloqueie
+problemas antes de uma entrega. H5 acompanha a ideia de que velocidade e estabilidade
+não são necessariamente um trade-off~\cite{doraMetricas}; H6 considera a capacidade
+de manutenção das comunidades. H7 antecipa que proxies diferentes possam alterar as
+categorias. As formulações completas anteriores aos resultados permanecem no
+histórico do repositório; não foram reescritas para concordar com os achados.

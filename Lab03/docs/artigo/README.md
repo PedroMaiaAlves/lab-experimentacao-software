@@ -9,7 +9,10 @@ Tabelas e figuras são importadas de `Lab03/results/s03_b/`. Para usar Overleaf,
 envie a árvore de `Lab03` mantendo os caminhos relativos, incluindo essa pasta;
 não basta enviar apenas `docs/artigo/` na versão S03.
 
-O arquivo principal é `artigo.tex`. Os arquivos `sbc-template.sty`, `sbc.bst` e
+O arquivo principal é `artigo.tex`; o PDF consolidado atual é `artigo_final.pdf`,
+com 9 páginas incluindo referências. As seções são `introducao_final.tex`,
+`metodologia_final.tex`, `resultados_final.tex` e `discussao_final.tex`.
+Os arquivos `sbc-template.sty`, `sbc.bst` e
 `caption2.sty` acompanham o projeto para que ele possa ser importado e compilado no
 Overleaf sem depender de arquivos externos.
 
@@ -38,7 +41,9 @@ pdflatex artigo.tex
 Na ausência de uma distribuição LaTeX local, defina `artigo.tex` como documento principal
 no Overleaf e confirme que a compilação termina sem erros.
 
-O documento foi atualizado com a validação da amostra definitiva, a heurística
+### Versões anteriores (histórico)
+
+O documento foi atualizado na S02 com a validação da amostra definitiva, a heurística
 v3 (F1 >= 0,70) e a consolidação dos 300 tipos de projetos (amostra-ouro e
 classificação complementar com proveniência). Os valores ausentes de CFR permanecem
 documentados como não observados por insuficiência textual. Tectonic 0.17.0 permite
@@ -56,8 +61,20 @@ A Sprint 3, parte A, acrescenta `resultados_a.tex` (RQ01 a RQ04 e classificaçã
 do texto são importadas de `Lab03/results/s03_a/`. No Overleaf, envie a árvore de `Lab03`
 mantendo os caminhos relativos. O PDF desta versão é `artigo_s03_a.pdf`.
 
-A RQ08 bônus usa rework rate em `resultados_c.tex`, já incluído no artigo principal.
-Execute também `python -m analises.sprint3_c` antes de compilar. A prévia local com
-essa seção é `artigo_s03_c.pdf`, sem sobrescrever os PDFs históricos de A/S02.
-A integração de B, a RQ07 e a adequação do artigo ao limite de 10 páginas não são
-declaradas concluídas por essa prévia; veja `../entrega_s03_c.md`.
+A prévia inicial de C, `artigo_s03_c.pdf`, continha só o bônus, antes da integração
+de B/RQ07. Esses PDFs históricos não são a versão consolidada atual.
+
+### Reprodução da versão consolidada
+
+Dentro de `Lab03/`, execute `python -m validacao.entrega_s03 --reproduzir` para
+conferir entradas, artefatos e números; os comandos `analises.sprint3_a`,
+`analises.sprint3_b` e `analises.sprint3_c` regeneram as saídas publicadas.
+Compile `artigo.tex` com os comandos acima ou Tectonic 0.17.0, e copie o PDF
+gerado para `artigo_final.pdf`. O código de validação verifica até 10 páginas
+e a presença das oito RQ, mas não substitui inspeção visual.
+
+Os resultados numéricos completos permanecem em `results/` e nos seis notebooks;
+a concisão do artigo não remove resultados não significativos dos artefatos.
+Os textos extensos de A/B/C são preservados como material suplementar, não usados
+simultaneamente no artigo compacto. O estado da etapa FIN de replicação cruzada
+é separado em `../entrega_s03_integrada.md`.

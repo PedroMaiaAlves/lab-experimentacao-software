@@ -26,10 +26,10 @@
     "classificacao_geral": "mediana das 4 notas arredondada para baixo; exige as 4 métricas"
   },
   "ambiente": {
-    "python": "3.13.1",
+    "python": "3.12.14",
     "sistema": "Windows",
     "pacotes": {
-      "numpy": "2.5.4",
+      "numpy": "2.5.3",
       "pandas": "3.0.6",
       "scipy": "1.18.1",
       "statsmodels": "0.15.0",

@@ -99,3 +99,10 @@ da RQ07 de C, a discussão consolidada e a entrega final de replicação cruzada
 respostas às Issues recebidas e revisão final do artigo. Cada integrante continua
 responsável por contribuição de código atribuível e acompanhamento no Projects;
 arquivos locais não comprovam, sozinhos, atualização do quadro ou avaliação docente.
+
+Atualização de integração local (21/10/2026): os quatro commits de B, até `f69b2ab`,
+foram incorporados por merge, preservando autoria. A já estava na main; C acrescentou
+RQ07/RQ08 e a versão compacta do artigo, com 9 páginas. As análises originais e suas
+famílias de testes não foram substituídas pelas sensibilidades ampliadas. As
+pendências de A/C e do tamanho do artigo acima são históricas; a etapa FIN de
+replicação cruzada continua distinta. Veja `entrega_s03_integrada.md`.

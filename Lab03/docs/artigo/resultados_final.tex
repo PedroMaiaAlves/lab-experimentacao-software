@@ -1,0 +1,150 @@
+\section{Resultados}
+\label{sec:resultados}
+
+\subsection{RQ01--RQ04: métricas e referência C1}
+
+A Tabela~\ref{tab:metricas-final} reúne as variantes. O CFR~(b) tem
+\labACfrBN\ observações e a recuperação, \labARecN; as ausências não são imputadas.
+
+\begin{table}[htbp]
+\centering\footnotesize
+\caption{Medianas e quartis; peso igual por projeto, exceto episódios na última linha.}
+\label{tab:metricas-final}
+\input{../../results/s03_a/rq01_04_tabela}
+\end{table}
+
+\textbf{RQ01.} A frequência mediana de \labAFreqMediana\ release/semana equivale
+a aproximadamente uma a cada três semanas. Só \labAFreqSemanais\ projetos
+(\labAFreqSemanaisPct\%) chegam a uma por semana e \labAFreqDiarios\ a sete.
+Incluir pré-releases eleva a mediana a \labAFreqPreMediana; tags, a
+\labAFreqTagsMediana. A cauda à direita e a baixa mediana sustentam H1.
+
+\textbf{RQ02.} Lead time~(a) é \labALeadAMediana~h e~(b), \labALeadBMediana~h.
+(a) supera (b) em \labALeadXMaior/\labALeadAN\ projetos (Wilcoxon/Holm:
+$p$ = \labALeadPHolm, $r=\labALeadR$), com razão mediana \labALeadRazao.
+H2 é parcial: a diferença é menor que a esperada. Dentro dos projetos, releases
+com mais commits têm o primeiro commit mais antigo (Spearman mediano
+\labALeadRhoMediano\ nos \labALeadProjetosRho\ projetos avaliáveis), aproximando
+as medidas. (b) pondera pelo número de commits; (a), igualmente por release.
+
+\textbf{RQ03.} O CFR~(b) mediano de \labACfrBMediana\ supera o CFR~(a),
+\labACfrAMediana, e é maior em \labACfrXMenor/\labACfrBN\ pares
+($p$ Holm = \labACfrPHolm; $r=\labACfrR$). H3 não é sustentada: ocorre o inverso.
+Falhas de CI e corretivas observam problemas diferentes; nenhuma mede diretamente
+incidentes em produção. Em \labACfrBZeros\ projetos, CFR~(b) é legitimamente zero.
+
+\textbf{RQ04.} A recuperação mediana por projeto é \labARecMediana~h.
+Nos \labAEpN\ episódios concluídos, P90 é \labAEpPNoventa~h; a cauda é longa,
+mas só \labAEpCensuradosPct\% dos episódios são censurados. Se todos os censurados
+durassem mais que os concluídos, a mediana por projeto passaria para
+\labARecPiorCaso~h. H4 é parcial: poucas horas e cauda pesada, mas pouca censura.
+
+Em C1, a classificação geral é Elite em \labACOneGeralElite\ projetos, High em
+\labACOneGeralHigh, Medium em \labACOneGeralMedium\ e Low em \labACOneGeralLow;
+\labACOneGeralSem\ ficam sem categoria. A frequência é a dimensão mais fraca:
+\labACOneFreqMediumPct\% e \labACOneFreqLowPct\% ficam em Medium e Low.
+Já o CFR de CI classifica \labACOneCfrElitePct\% como Elite.
+
+\subsection{RQ05: frequência e taxa de falha}
+
+O rho de CI é próximo de zero e seu IC inclui zero; em entregas, a associação é
+positiva, não a fraca associação negativa prevista por H5 (Tabela~\ref{tab:rq05-final}).
+Não rejeitar a hipótese nula em CI não comprova independência. A influência
+leave-one-out não muda o sinal de nenhum rho: as maiores variações são 0,0093
+(CI) e 0,0076 (entregas). Esse diagnóstico não elimina confundimento.
+
+\begin{table}[htbp]
+\centering\footnotesize
+\caption{RQ05: Spearman, IC95\% BCa e permutação com Holm (família de dois).}
+\label{tab:rq05-final}
+\input{../../results/s03_b/rq05_tabela}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{../../results/s03_b/rq05_dispersao.pdf}
+\caption{RQ05: os mesmos projetos, mas proxies distintos de falha. Só a frequência
+usa escala logarítmica; taxas zero são preservadas.}
+\label{fig:rq05-final}
+\end{figure}
+
+\subsection{RQ06: fatores associados}
+
+Seis dos 18 testes permanecem significativos após Holm (Tabela~\ref{tab:rq06-final}).
+Contribuidores e linguagem associam-se aos lead times; contribuidores também à
+recuperação, e tipo apenas à recuperação. Não há evidência após Holm para
+frequência ou CFR em nenhum fator. H6 é parcial: linguagem não é menos relevante
+que tipo, e associações não demonstram capacidade causal das comunidades.
+Testes globais não identificam pares específicos; não executamos post-hoc.
+Os 18 resultados e os tamanhos de cada grupo permanecem nos CSVs suplementares.
+
+\begin{table}[htbp]
+\centering\footnotesize
+\caption{RQ06: testes que sobrevivem a Holm; todos são Kruskal--Wallis nesta amostra.}
+\label{tab:rq06-final}
+\input{../../results/s03_b/rq06_significativos}
+\end{table}
+
+\subsection{RQ07: sensibilidade das classificações}
+
+C1 é reproduzida exatamente antes das comparações. C1 possui 278 classificações;
+C2/C3, 269. Nove projetos perdem classificação porque trocar CI por CFR~(b)
+introduz uma métrica ausente; isso não é contado como troca de categoria.
+A Tabela~\ref{tab:rq07-final} separa populações por par e comum às três
+(coincidentes nesta amostra). As matrizes da Figura~\ref{fig:rq07-final} mostram
+inclusive os zeros e a direção das trocas.
+
+\begin{table}[htbp]
+\centering\footnotesize
+\caption{RQ07: mudanças de categoria e Cohen linear; sem par = excluídos do cálculo.}
+\label{tab:rq07-final}
+\input{../../results/s03_c/rq07_tabela}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{../../results/s03_c/rq07_transicoes.pdf}
+\caption{Categorias gerais, de Low a Elite. Linha: combinação de origem;
+coluna: destino. Ausências não entram como categoria.}
+\label{fig:rq07-final}
+\end{figure}
+
+C1--C2 muda \labCCUmCDoisMudou\% dos \labCCUmCDoisN\ projetos
+($\kappa_w=\labCCUmCDoisKappa$); C1--C3, \labCCUmCTresMudou\%
+($\kappa_w=\labCCUmCTresKappa$). C2--C3 muda só \labCCDoisCTresMudou\%
+($\kappa_w=\labCCDoisCTresKappa$). H7 é parcialmente sustentada: há concordância
+moderada a alta, mas trocar conjuntamente lead time e CFR reclassifica cerca de
+quatro em dez projetos. Essas comparações não isolam o efeito de cada mudança.
+
+As conclusões de RQ01--RQ04 mantêm baixa frequência, lead time de vários dias,
+diferença entre proxies de falha e recuperação tipicamente curta. A recuperação
+é invariável por construção nas três combinações, não uma nova confirmação empírica.
+Na RQ05, trocar a fonte da frequência mantém CI sem evidência após Holm e CFR~(b)
+positivo ($\rho$ entre 0,599 e 0,660; $p$ ajustado 0,0012 na família de seis).
+Na RQ06 ampliada, nenhuma frequência se associa aos fatores após Holm.
+As associações de contribuidores/linguagem aos lead times e de contribuidores à
+recuperação persistem; tipo--recuperação deixa de atingir 5\% na família de 24.
+Isso mostra sensibilidade à multiplicidade, sem apagar o teste original de H6.
+
+\subsection{RQ08 bônus: rework rate}
+
+Escolhemos uma opção: releases principais corretivas divididas pelo total de
+principais na janela, usando a v3 e a disponibilidade da RQ03~(b). Não censuramos
+os últimos sete dias, pois não é preciso observar uma release futura para contar
+a própria corretiva. A mediana é \labCReworkMediana\%, com \labCReworkN\ projetos
+e \labCReworkAusentes\ ausentes. Nos mesmos projetos, rework supera CFR~(b) em
+\labCReworkMaior\ casos; diferença pareada mediana de \labCReworkDifMediana\ pontos
+percentuais. Não é a mesma medida: CFR conta as releases anteriores seguidas de
+corretiva em sete dias. Uma corretiva pode marcar várias anteriores como falhas,
+mas é contada uma vez em rework. Quatro releases em dias consecutivos, apenas a
+última corretiva, dão 25\% de rework e 75\% de CFR, fora da fronteira censurada.
+
+A regra herdada pode produzir negativos sem antecessora/commits. A sensibilidade
+de evidência completa torna desconhecidas \labCReworkSemEvidencia\ de
+\labCReworkTotal\ releases e deixa \labCReworkConservadorN\ projetos avaliáveis,
+com mediana \labCReworkConservadorMediana\%. Tratar todas as desconhecidas como
+negativas/positivas delimita a proporção agregada por release entre
+\labCReworkLimInf\% e \labCReworkLimSup\%. Não são intervalos de confiança nem
+medianas por projeto, e não incluem erros da heurística. O DORA observa implantações
+não planejadas por incidentes em produção~\cite{doraMetricas}; nosso proxy de releases
+corretivas não comprova essas condições.

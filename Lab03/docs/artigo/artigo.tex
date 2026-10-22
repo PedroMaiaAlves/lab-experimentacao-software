@@ -17,46 +17,39 @@
   Pontifícia Universidade Católica de Minas Gerais (PUC Minas)}
 
 \IfFileExists{tabelas/numeros.tex}{\input{tabelas/numeros}}{}
+\input{../../results/s03_a/numeros_a}
+\input{../../results/s03_c/numeros_c}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-  This study investigates delivery performance in popular open-source repositories
-  that use GitHub Actions. Releases, commits, and workflow runs are adopted as
-  explicit operational proxies for the four DORA metrics. The study also evaluates
-  how alternative definitions affect repository classification. This document
-  presents the research questions, hypotheses, collection protocol, and the frozen
-  sample of 300 repositories. Three declared independent human assessments cover
-  60 projects and 300 releases. The revised heuristic meets the F1 threshold of
-  0.70 on that sample. Project types cover all 300 repositories: the remaining
-  240 were individually reviewed after automatic pre-classification.
-  RQ05 and RQ06 are analyzed with rank-based tests, multiplicity correction,
-  bootstrap confidence intervals, permutation tests, and influence analysis.
+  We study DORA proxies in 300 open-source repositories using GitHub Actions,
+  from October 2025 to September 2026. Median release frequency is 0.326 per week
+  and recovery takes 3.20 hours. Delivery frequency correlates with release-based
+  failures but not CI failures. Changing operational definitions reclassifies
+  about 40\% of 269 comparable projects. The corrective-release ratio has a median
+  of 37.3\%. These results describe GitHub artifacts, not observed production
+  deployments or incidents. Frozen data, code, and executable notebooks support
+  offline reproduction.
 \end{abstract}
 
 \begin{resumo}
-  Este estudo investiga o desempenho de entrega em repositórios open-source populares
-  que utilizam GitHub Actions. Releases, commits e execuções de workflows são adotados
-  como proxies operacionais explícitos para as quatro métricas DORA. O estudo também
-  avalia como definições alternativas afetam a classificação dos repositórios. Este
-  documento apresenta as questões de pesquisa, hipóteses, protocolo de coleta e
-  a amostra congelada de 300 repositórios. Três avaliações declaradas humanas e
-  independentes cobrem 60 projetos e 300 releases. A heurística revisada atinge
-  F1 de pelo menos 0,70 nessa amostra. Os tipos cobrem os 300 repositórios: os
-  240 restantes passaram por revisão individual após pré-classificação automática.
-  RQ05 e RQ06 são analisadas com testes de postos, correção de multiplicidade,
-  intervalos bootstrap, permutação e análise de influência.
+  Estudamos proxies DORA em 300 repositórios open-source com GitHub Actions,
+  entre outubro de 2025 e setembro de 2026. A frequência mediana é de
+  \labAFreqMediana\ release por semana e a recuperação leva \labARecMediana~horas.
+  Frequência associa-se às falhas por release, mas não às de CI. Mudar as definições
+  reclassifica cerca de 40\% dos 269 projetos comparáveis. A proporção mediana de
+  releases corretivas é \labCReworkMediana\%. Os resultados descrevem artefatos
+  do GitHub, não implantações ou incidentes observados em produção. Dados congelados,
+  código e notebooks executáveis permitem reprodução offline.
 \end{resumo}
 
-\input{introducao}
-\input{metodologia}
-\input{metodologia_coleta}
-\input{resultados_a}
-\input{resultados_b}
-\input{resultados_c}
-\input{discussao}
+\input{introducao_final}
+\input{metodologia_final}
+\input{resultados_final}
+\input{discussao_final}
 
 \bibliographystyle{sbc}
 \bibliography{referencias}

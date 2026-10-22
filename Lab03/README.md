@@ -11,7 +11,7 @@ Disciplina: Laboratório de Experimentação de Software — PUC Minas.
 ## Requisitos
 
 - Python 3.12 (ou superior)
-- Um *personal access token* do GitHub (sem escopos especiais para repositórios públicos)
+- Token do GitHub somente para uma nova coleta; a reprodução da Sprint 3 é offline e não precisa de token.
 
 ## Instalação
 
@@ -229,19 +229,40 @@ As colunas estão no [dicionário da parte A](docs/dicionario_s03_a.md).
 Para C2 e C3, `analises.classificacao_c1.classificar(df, combinacao)` aplica as mesmas
 faixas trocando apenas as colunas de cada métrica.
 
-## Sprint 3 — parte C: RQ08 bônus (rework rate)
+## Sprint 3 — parte C: RQ07 e RQ08 bônus
 
 ```bash
 python -m analises.sprint3_c
 python -m analises.notebooks_c --atualizar
 ```
 
-A RQ08 reutiliza a heurística v3 e as fontes congeladas, sem token ou nova coleta.
-Publica cinco CSVs, figura PNG/PDF, tabela LaTeX e manifesto em `results/s03_c/`.
-Reproduz o CFR (b) dos 300 projetos antes de comparar os indicadores. A definição
-principal mantém as regras da RQ03 (b); uma sensibilidade separada exige evidência
-completa. Veja [execução e decisões](docs/entrega_s03_c.md) e
+A RQ07 compara C1 (principais/a/CI), C2 (com pré-releases/b/releases) e
+C3 (tags/b/releases), com Cohen linear, mudanças de categoria, ausências e
+robustez das RQ01–06. Só a fonte de frequência muda para pré-releases/tags;
+lead time e CFR por releases continuam baseados nas principais.
+A RQ08 reutiliza a heurística v3 sem nova coleta e compara rework rate com CFR (b).
+Publica 13 CSVs, duas figuras PNG/PDF, tabelas LaTeX e manifesto em `results/s03_c/`.
+C1 e o CFR (b) precisam reproduzir o dataset antes da comparação; ausências não
+viram zero. Veja [execução e decisões](docs/entrega_s03_c.md) e
 [dicionário das saídas](docs/dicionario_s03_c.md).
+
+## Conferência integrada da Sprint 3
+
+Depois da instalação, dentro de `Lab03/`:
+
+```bash
+python -m validacao.entrega_s03 --reproduzir
+python -m pytest --cov=metricas --cov-report=term-missing --cov-fail-under=80
+```
+
+O primeiro valida os manifestos de A/B/C e o artigo, recalcula as três partes em
+`cache/entrega_s03/reproducao/` e compara as tabelas com as publicadas. Não faz nova
+mineração. O PDF consolidado é [artigo_final.pdf](docs/artigo/artigo_final.pdf), com
+9 páginas no template SBC. Veja [estado da entrega e limites](docs/entrega_s03_integrada.md).
+
+Os seis notebooks podem ser reexecutados com `analises.notebooks_a`,
+`analises.notebooks` e `analises.notebooks_c`, cada comando via `python -m`.
+O CI foi ampliado para a integração; execução local não é prova de CI remoto verde.
 
 ## Artigo
 

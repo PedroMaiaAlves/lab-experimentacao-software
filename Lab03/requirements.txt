@@ -12,6 +12,8 @@ matplotlib>=3.8
 nbformat>=5.10
 nbclient>=0.10
 ipykernel>=6.29
+# conferência do artigo
+pypdf>=5.0
 # testes
 pytest>=8.0
 pytest-cov>=5.0

@@ -1,0 +1,123 @@
+\section{Metodologia}
+\label{sec:metodologia}
+
+\textbf{População e coleta.} O estudo observacional usa a janela oficial inclusiva
+\labJanelaInicio--\labJanelaFim. Os candidatos do snapshot de busca, com
+\labFaixaEstrelas, foram embaralhados com semente \labSemente. Exigimos repositório
+não arquivado, não fork, com Actions, pelo menos \labMinReleases\ releases principais
+e \labMinRuns\ runs válidos. A amostra congelada tem \labReposAmostra\ projetos;
+a Tabela~\ref{tab:funil-final} distingue os candidatos retornados dos avaliados.
+
+\begin{table}[htbp]
+\centering\footnotesize
+\caption{Funil: snapshot de busca reutilizado, sem alegar consultas adicionais.}
+\label{tab:funil-final}
+\begin{tabular}{lr}
+\hline
+Etapa & Repositórios restantes \\
+\hline
+Candidatos retornados & \labCandidatosBusca \\
+Candidatos efetivamente avaliados & \labCandidatosAvaliados \\
+Com GitHub Actions & 1.495 \\
+Com cinco releases principais & 413 \\
+Com cinquenta runs válidos / amostra congelada & \labReposAmostra \\
+\hline
+\end{tabular}
+\end{table}
+
+O pipeline Python usa \texttt{requests} na API REST para releases, comparações,
+commits, contribuidores e runs; tags também podem ser consultadas em lotes por
+GraphQL. Paginação inclui comparações com mais de 250 commits. Runs são do evento
+push no default branch. Consultas mensais saturadas são subdivididas; dias ainda
+saturados impedem o congelamento. Cache e checkpoints permitem retomada, com espera
+pelos cabeçalhos de rate limit e backoff em falhas transitórias. A coleta terminou
+em 15/10/2026, 05:15 UTC. A instrumentação parcial registrou 25.634 respostas HTTP e
+três segundos de espera solicitada, sem cobrir o início nem os acertos de cache.
+Não usamos esses registros para estimar a duração integral da coleta.
+
+\textbf{Definições.} Frequência é o número de releases principais dividido pelas
+semanas da janela inclusiva. Drafts e pré-releases ficam fora da referência; as
+variantes incluem pré-releases ou usam tags datadas pela autoria do commit apontado,
+não pela criação da tag. Lead time usa \texttt{commit.author.date}, em horas:
+(a) mediana entre releases do tempo até o commit mais antigo; (b) mediana de todos
+os pares release/commit. Comparações 404, datas inválidas e releases sem commits
+não viram tempos zero. São nove comparações 404 e 561 pares com datas inválidas.
+
+CFR~(a) é falhas/(falhas+sucessos) de CI: sucesso = \texttt{success}; falhas =
+\texttt{failure}, \texttt{timed\_out}, \texttt{startup\_failure}; outros estados são
+ignorados e contados. No CFR~(b), uma release falha se uma corretiva posterior sai
+em até sete dias, inclusive. As datas 24--30/09/2026 ficam fora do denominador
+(274 releases censuradas), mas suas corretivas podem identificar falhas anteriores.
+Lacunas textuais não positivas pela v3 tornam o CFR~(b) indisponível em 11 projetos.
+
+Recuperação é medida por workflow: do início da primeira falha depois de sucesso
+até o término do sucesso seguinte. Falhas consecutivas formam um episódio; sem
+sucesso posterior há censura. Falhas iniciais sem sucesso anterior não iniciam
+episódio observável. Dos 7.861 episódios, 90 são censurados; 22 projetos não têm
+episódio observável e ficam sem tempo de recuperação, não com recuperação zero.
+
+\textbf{Validação manual.} Sorteamos 60 projetos e cinco releases por projeto, com
+semente 42 e ordenações estáveis, para três avaliações declaradas humanas e
+independentes, sem previsões da heurística. Julgaram tipo, se releases são entregas
+reais e objetivo corretivo. O consenso é unanimidade/maioria; não houve empate
+1--1--1. Kappa de Fleiss foi 0,97, 1,00 e 0,96 nessas dimensões. Os outros 240 tipos
+foram revisados individualmente, 80 por integrante, após sugestões automáticas,
+com evidências e proveniência separadas do consenso triplo.
+
+A heurística v3 aceita tags SemVer com escopo e analisa títulos dos commits.
+Ignora manutenção, documentação, CI e dependências; identifica correções e
+funcionalidades, contando cada commit no máximo uma vez. Havendo funcionalidades,
+exige ao menos três commits corretivos e razão correções/funcionalidades de pelo
+menos 2,5. Sem funcionalidades, basta um corretivo elegível. Com texto ligado,
+patch sozinho não basta. Contra o consenso, obteve precisão 0,708, recall 0,782
+e F1 0,743 (68 VP, 28 FP, 19 FN, 185 VN). Refinamento e avaliação usaram a mesma
+amostra: não é uma estimativa de generalização para dados não vistos.
+
+\textbf{Análise e sensibilidade.} Cada projeto pesa igualmente; reportamos mediana
+e quartis lineares. H2/H3 usam Wilcoxon bilateral pareado, efeito rank-biserial e
+Holm em dois testes. RQ05 usa Spearman, IC95\% BCa pareado e permutação bilateral
+(9.999 reamostragens, semente 42), com Holm nos dois proxies~\cite{scipySpearman,scipyBootstrap}.
+RQ06 usa tipo, contribuidores em quartis e linguagem (frequência menor que dez
+agrupada em Outras). Grupos são definidos nos 300 antes das exclusões; mínimo
+cinco por grupo. Kruskal--Wallis usa $\varepsilon^2=H/(n-1)$; havendo dois grupos,
+Mann--Whitney usa $\delta=2U/(n_1n_2)-1$. Holm corrige juntos os 18 testes.
+
+Na RQ07, usamos os cortes fixos da disciplina, não novos benchmarks DORA:
+frequência $\geq7$, $\geq1$, $\geq7/30$ por semana; lead time $<24$, $<168$,
+$<720$ h; CFR $\leq0,15$, $\leq0,30$, $\leq0,45$; recuperação $<1$, $<24$,
+$<168$ h (Elite, High, Medium; demais Low). Categoria geral é a mediana das quatro
+notas (Low=1 a Elite=4), arredondada para baixo, exigindo todas as métricas.
+As combinações da Tabela~\ref{tab:combinacoes} foram adotadas nesta integração,
+conforme permitido no planejamento, sem alterar rótulos ou a heurística.
+
+\begin{table}[htbp]
+\centering\footnotesize
+\caption{Combinações da RQ07. Só a fonte da frequência muda com pré-releases/tags;
+lead times e CFR~(b) continuam baseados nas releases principais congeladas.}
+\label{tab:combinacoes}
+\begin{tabular}{lllll}
+\hline
+ & Frequência & Lead time & CFR & Recuperação \\
+\hline
+C1 & Releases principais & (a) & CI (a) & CI \\
+C2 & Principais + pré-releases & (b) & Releases (b) & CI \\
+C3 & Tags & (b) & Releases (b) & CI \\
+\hline
+\end{tabular}
+\end{table}
+
+Calculamos proporção de trocas e kappa de Cohen com pesos lineares na ordem das
+categorias~\cite{sklearnKappa}. Ausência não é categoria: informamos n por par,
+ganhos/perdas de classificação e interseção tripla. A robustez exploratória repete
+as correlações para as três frequências (Holm em seis testes) e acrescenta as duas
+frequências à RQ06 (24 testes únicos, sem duplicar métricas invariantes).
+Essas famílias ampliadas não substituem os testes originais de H5/H6.
+
+\textbf{Reprodução.} Python 3.12.14, Pandas/NumPy, SciPy, Statsmodels,
+scikit-learn e Matplotlib executam offline sobre 311 fontes congeladas em ZIP.
+Os manifestos registram versões exatas, parâmetros e hashes SHA-256 das entradas,
+código e saídas. Os módulos \texttt{analises.sprint3\_a},
+\texttt{analises.sprint3\_b} e \texttt{analises.sprint3\_c}, executados com
+\texttt{python -m} a partir de \texttt{Lab03/}, geram as análises; os seis notebooks
+conferem os CSVs em kernels novos. Testes usam fixtures
+e resultados conhecidos, sem API real. O dataset da S02 não é alterado pelas análises.

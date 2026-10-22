@@ -56,7 +56,7 @@ positivo em 98,3% dos 296 projetos avaliáveis), o que aproxima (b) de (a).
 - C1 exige as quatro métricas para a categoria geral, como em `metricas/classificacao.py`;
   a regra com três métricas é registrada só como sensibilidade.
 
-## Pendências para a integração
+## Pendências registradas originalmente (superadas na integração local de 21/10)
 
 - **H7**: a linha da RQ07 na tabela de hipóteses está como pendente até a sensibilidade
   C1 × C2 × C3 de C. `classificacao_c1.classificar(df, combinacao)` já aceita C2 e C3.
@@ -64,3 +64,9 @@ positivo em 98,3% dos 296 projetos avaliáveis), o que aproxima (b) de (a).
   `\input{resultados_b}` deve entrar entre `resultados_a` e `discussao` em `artigo.tex`.
 - **Tamanho**: com a parte A, o artigo compilado tem 12 páginas antes da parte B; o limite
   final é 10. O resumo ainda não menciona resultados. Ambos ficam para a revisão final.
+
+Atualização: RQ07 e bônus foram concluídos em C; os commits de B foram integrados
+localmente preservando autoria. O artigo consolidado usa `*_final.tex`, atualiza
+os resumos e tem 9 páginas, sem alterar fonte/margens SBC. As análises e os textos
+extensos de A continuam disponíveis. Veja `entrega_s03_integrada.md`; publicação
+na main e replicação cruzada não são comprovadas por essa integração local.

@@ -1,0 +1,56 @@
+\section{Discussão e ameaças à validade}
+
+\textbf{Síntese das hipóteses.} H1 é sustentada; H2, H4, H6 e H7, parcialmente;
+H3 e H5 não são sustentadas. A frequência típica é baixa, enquanto recuperação de
+CI é rápida. Comunidades maiores associam-se a lead times maiores, contrariando
+uma interpretação simplista de que mais contribuidores garantem velocidade.
+A divergência mais importante é de construto: trocar falhas de CI por releases
+corretivas altera tanto a relação com frequência quanto a classificação geral.
+É plausível que publicar frequentemente aumente a oportunidade de observar outra
+release em sete dias, mas o estudo não identifica esse mecanismo causalmente.
+
+\textbf{Construto.} Releases e tags não equivalem a deploys; CI não é produção.
+Tags usam autoria do commit, suscetível a rebase/squash, e podem não representar
+a criação da versão. O CFR~(b) depende de heurística imperfeita, de versões
+paralelas e da janela de sete dias. Rework também não demonstra retrabalho causado
+por incidente. Faixas fixas da disciplina não são benchmarks universais atuais.
+O arredondamento da mediana afeta \labACOneFracionarias\ classificações de C1:
+notas centrais diferentes deixam projetos próximos a um corte.
+
+\textbf{Interna e de conclusão.} Idade, domínio, popularidade, governança e tamanho
+dos projetos não foram controlados causalmente. Compartilhar ecossistema pode
+introduzir dependência entre repositórios. Subgrupos desiguais (tipo outro tem só
+seis recuperações disponíveis), ausências informativas e muitos testes limitam
+inferências. Reportamos n, efeitos, intervalos e Holm, preservando testes não
+significativos e resultados não estimáveis. As famílias exploratórias maiores
+alteram a significância de tipo--recuperação, embora os dados não tenham mudado.
+
+\textbf{Validação e validade externa.} Três avaliações humanas foram declaradas
+pelos integrantes; hashes verificam integridade, não independência cognitiva.
+Os 240 tipos complementares tiveram uma avaliação por projeto após sugestões
+automáticas, com possível ancoragem. Refinar e avaliar a v3 na mesma amostra pode
+superestimar F1; não houve teste separado de generalização. Seleção por popularidade,
+uso de Actions e mínimo de releases/runs exclui projetos menores, inativos,
+corporativos e outros sistemas de CI. A janela de um ano não permite extrapolar
+para toda a história dos projetos. Reprodutibilidade offline não elimina essas
+limitações e não equivale à replicação independente por outro grupo.
+
+\section{Conclusão e material de reprodução}
+
+Os proxies permitem estudar a cadência e a recuperação de CI, mas conclusões sobre
+estabilidade dependem da definição. As categorias mudam em cerca de 40\% dos pares
+C1--C2/C3, apesar de os dados serem os mesmos. Recomendamos reportar variantes,
+ausências e denominadores, evitando rótulos de desempenho sem explicitar os proxies.
+O bônus complementa CFR~(b) ao contar corretivas, não as versões que as precedem.
+
+Código, dataset congelado, fontes, testes, notebooks, dicionários e comandos de
+reprodução estão no repositório do grupo:
+\begin{flushleft}\footnotesize
+\url{https://github.com/PedroMaiaAlves/lab-experimentacao-software}
+\end{flushleft}
+O índice de projetos associado ao repositório está em
+\url{https://github.com/PedroMaiaAlves/lab-experimentacao-software/projects}.
+A execução local não comprova publicação na main, atualização do quadro ou
+replicação cruzada. Sem repositório sorteado, dataset comparável e registros de
+execução externa, não declaramos essa etapa concluída nem inventamos Issues ou
+respostas de outros grupos.
