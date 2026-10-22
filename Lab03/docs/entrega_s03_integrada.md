@@ -39,6 +39,24 @@ um manifesto antigo deve falhar, não atestar resultados posteriores à sua gera
 
 ## Resultados novos de C
 
+### Evidências da revisão local de 21/10/2026
+
+- Suíte completa: **420 testes aprovados**, **95,88% de cobertura em `metricas`**;
+  `metricas/rework.py` com 100%. Execução final em 196,92 segundos.
+- Os seis notebooks foram executados em kernels novos, conferindo as tabelas
+  publicadas; C confere seus 13 CSVs exatamente.
+- A/B/C foram reproduzidas por `validacao.entrega_s03 --reproduzir`. Um clone local
+  limpo do commit `bcdf306`, sem caches de coleta e usando o ambiente Python já
+  instalado, também passou nessa reprodução, sem nova mineração ou token.
+- Artigo compilado com Tectonic 0.17.0; nove páginas incluindo referências,
+  renderizadas e inspecionadas, sem alterar fonte/margens do template SBC.
+- Dataset e amostra continuam com os hashes congelados. Os artefatos numéricos,
+  tabelas e figuras de A/B permaneceram idênticos; só seus manifestos registram
+  o ambiente/código integrado. Os commits originais de Pedro são ancestrais da branch.
+
+Essas são evidências locais, não uma execução de CI remoto ou replicação por
+outro grupo. O diagnóstico em cache é regenerável e não é um atestado docente.
+
 | Comparação | Projetos | Mudaram de categoria | Kappa linear |
 |---|---:|---:|---:|
 | C1–C2 | 269 | 39,4% | 0,455 |
