@@ -2,8 +2,9 @@ import hashlib
 import json
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
-from pandas.testing import assert_frame_equal
+from pandas.testing import assert_frame_equal, assert_index_equal
 from pypdf import PdfWriter
 import pytest
 
@@ -12,6 +13,44 @@ from validacao.dicionario import verificar
 from validacao.entrega_s03 import conferir_manifesto, conferir_pdf
 
 BASE = Path(__file__).resolve().parents[1]
+
+
+def conferir_reproducao(gerada, publicada):
+    assert_index_equal(gerada.columns, publicada.columns)
+    exatas = [c for c in gerada if not pd.api.types.is_float_dtype(gerada[c])
+              or c.startswith("releases_") or c in {"release_id", "mediana_notas"}]
+    assert_frame_equal(gerada[exatas], publicada[exatas], check_exact=True)
+    reais = gerada.columns.difference(exatas, sort=False)
+    assert_frame_equal(gerada[reais], publicada[reais], check_exact=False, rtol=1e-12, atol=0)
+
+
+@pytest.fixture
+def tabela_reproducao():
+    return pd.DataFrame({"full_name": ["org/repo"], "release_id": [10**12],
+                         "releases_falharam_cfr_b": [2.0], "p_spearman": [.2105778740472281]})
+
+
+def test_arredondamento_entre_plataformas_nao_muda_o_resultado(tabela_reproducao):
+    gerada = tabela_reproducao.copy()
+    gerada.loc[0, "p_spearman"] = .2105778740472282
+    conferir_reproducao(gerada, tabela_reproducao)
+
+
+@pytest.mark.parametrize("coluna,valor", [("full_name", "org/outro"), ("release_id", 10**12 + 1),
+    ("releases_falharam_cfr_b", np.nextafter(2., 3.)), ("p_spearman", .21057787)])
+def test_tolerancia_nao_esconde_mudancas_reais(tabela_reproducao, coluna, valor):
+    gerada = tabela_reproducao.copy()
+    gerada.loc[0, coluna] = valor
+    with pytest.raises(AssertionError):
+        conferir_reproducao(gerada, tabela_reproducao)
+
+
+def test_p_valor_muito_pequeno_nao_pode_ser_trocado_por_zero(tabela_reproducao):
+    tabela_reproducao.loc[0, "p_spearman"] = 1e-37
+    gerada = tabela_reproducao.copy()
+    gerada.loc[0, "p_spearman"] = 0.
+    with pytest.raises(AssertionError):
+        conferir_reproducao(gerada, tabela_reproducao)
 
 
 @pytest.mark.parametrize("alvo", [None, "artefato", "codigo", "fonte"])
@@ -55,5 +94,5 @@ def test_analises_c_reproduzem_as_treze_tabelas_publicadas(tmp_path):
     tabelas = executar(saida=tmp_path)
     assert len(tabelas) == 13
     for nome in tabelas:
-        assert_frame_equal(pd.read_csv(tmp_path / f"{nome}.csv"),
-                           pd.read_csv(BASE / "results/s03_c" / f"{nome}.csv"), check_exact=True)
+        conferir_reproducao(pd.read_csv(tmp_path / f"{nome}.csv"),
+                           pd.read_csv(BASE / "results/s03_c" / f"{nome}.csv"))

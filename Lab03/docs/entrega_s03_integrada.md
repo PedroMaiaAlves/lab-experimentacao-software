@@ -91,8 +91,21 @@ Não inventamos replicação, publicação na main, fechamento de Issues ou apro
 docente. Para essa etapa externa, faltam o repositório sorteado e o CSV original;
 o link específico do board Projects também não está registrado. O índice público
 `https://github.com/PedroMaiaAlves/lab-experimentacao-software/projects` não é tratado
-como link verificado de um board. A conta disponível não tem escopo `read:project`.
+como link verificado de um board. Na revisão inicial, a conta ativa `LorranX`
+não tinha escopo `read:project`.
 
-Os commits são locais nesta branch de integração. Nenhum push/merge na main foi
-efetuado nesta revisão. A autorização desta execução foi usada para concluir o
-código e os documentos; operações de publicação devem preservar o trabalho remoto.
+## Publicação
+
+Em 21/10/2026, Lorran autorizou o push. A branch
+`codex/lab03-s03-lorran-parte-c` foi publicada pela conta `lorranpuc`, sem mudar a
+conta ativa do aplicativo. A main permaneceu em `f6441c3`; nenhum merge foi feito.
+A questão do outro grupo foi adiada por Lorran para o dia seguinte.
+
+O primeiro CI Linux passou em 419 testes e encontrou uma diferença de última casa
+decimal em um p-valor (0,2105778740472281 versus 0,2105778740472282). O teste de
+reprodução foi corrigido para usar tolerância relativa de 1e-12 somente em reais,
+sem tolerância absoluta. Identificadores, contagens, categorias e hashes continuam
+exatos. Regressões verificam que diferenças reais e a troca de p pequeno por zero
+continuam sendo rejeitadas; cálculos e dataset não foram alterados.
+O estado remoto atual é consultável no
+[workflow da branch](https://github.com/PedroMaiaAlves/lab-experimentacao-software/actions?query=branch%3Acodex%2Flab03-s03-lorran-parte-c).
