@@ -22,6 +22,7 @@ escopo correto de cada uma está em `docs/issues_s01.md`.
 - [Protocolo de coleta](docs/protocolo_coleta.md).
 - [Interfaces e instruções para Diogo e Lorran](docs/contratos.md).
 - [Evidências da entrega P1/P2](docs/entrega_pedro.md).
+- [Evidências da entrega D1/D2](docs/entrega_diogo.md).
 
 ## Ambiente isolado
 
@@ -89,6 +90,30 @@ incompleta, sem fabricar as observações restantes.
 
 Atributos Git locais preservam os bytes dos dados, inclusive quebras de linha,
 para que os hashes permaneçam válidos após checkout.
+
+## Testes estatísticos e G2: entrega de Diogo
+
+D1 (#175) implementa `experimento/analise.py`: t pareado sobre os log-tempos e
+Wilcoxon pareado sobre `log(sem) − log(com)`, bicaudais, alpha 0,05. D2 (#176)
+implementa `experimento/g2.py`: distribuição sob H0, região de rejeição e p-valor
+dos dois testes, em figura Plotly. Ver o resultado na amostra simulada:
+
+```powershell
+cd Lab04; .\.venv\Scripts\python.exe analisar.py; cd ..
+```
+
+Uso no dashboard:
+
+```python
+from experimento.analise import analisar_pares
+from experimento.g2 import figura_g2, texto_g2
+
+resultados = analisar_pares(simulados)
+fig = figura_g2(simulados, resultados)   # gera erro se o p-valor desenhado divergir de D1
+texto = texto_g2(simulados, resultados)  # 4 frases para acompanhar o G2
+```
+
+Evidências em [docs/entrega_diogo.md](docs/entrega_diogo.md).
 
 ## Dashboard: entrega de Lorran
 
