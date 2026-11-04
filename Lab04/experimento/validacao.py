@@ -6,6 +6,8 @@ import csv
 import json
 from pathlib import Path
 
+import numpy as np
+
 from .dados import ROOT, ler_json, ler_pares, sha256
 
 
@@ -59,8 +61,25 @@ def validar_coleta(diretorio: Path) -> dict:
     return manifest
 
 
+def validar_entrega(real: Path = ROOT / "data/real", simulado: Path = ROOT / "data/simulado") -> dict:
+    from .simulacao import calibrar, gerar_pares
+
+    manifest = validar_coleta(real)
+    params = ler_json(simulado / "parametros.json")
+    sim_manifest = ler_json(simulado / "manifesto.json")
+    validar_hashes(simulado, sim_manifest["artefatos_sha256"])
+    exigir(params["fonte"]["sha256"] == sha256(real / "pares_reais.csv"), "Simulação usa outra coleta.")
+    exigir(params["fonte"]["manifesto_sha256"] == sha256(real / "manifesto.json"), "Manifesto da coleta mudou.")
+    exigir(params["numpy"] == np.__version__, "Reprodução exata exige a versão registrada do NumPy.")
+    calibrated = calibrar(ler_pares(real / "pares_reais.csv"))
+    exigir(all(params[k] == v for k, v in calibrated.items()), "Calibração difere dos dados reais.")
+    actual = ler_pares(simulado / "pares_simulados.csv")
+    expected = gerar_pares(params, params["n_simulado"], params["semente"], params["delta_log_aplicado"])
+    exigir(np.array_equal(actual, expected), "Simulação não reproduz exatamente os pares preservados.")
+    exigir(sha256(ROOT / "docs/cenario.md") == params["cenario_previo_sha256"], "Cenário prévio foi modificado.")
+    return {"status": "ok", "pares_reais": manifest["pares_validos"], "pares_simulados": len(actual),
+            "aquecimento_separado": manifest["aquecimento_pares"], "reproducao_exata": True}
+
+
 def main() -> None:
-    manifest = validar_coleta(ROOT / "data/real")
-    print(json.dumps({"status": "ok", "pares_reais": manifest["pares_validos"],
-                      "aquecimento_separado": manifest["aquecimento_pares"]},
-                     ensure_ascii=False, indent=2))
+    print(json.dumps(validar_entrega(), ensure_ascii=False, indent=2))
