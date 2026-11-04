@@ -3,6 +3,7 @@ import plotly.graph_objects as go
 import pytest
 from scipy import stats
 
+from experimento.analise import analisar_pares
 from experimento.dados import ROOT, ler_pares
 from experimento.g2 import (
     COR_T,
@@ -16,7 +17,7 @@ from experimento.g2 import (
 
 
 def referencia_scipy(pares, alpha=0.05):
-    # Substitui D1 nos testes: resultados calculados diretamente no SciPy.
+    # Referência independente de D1: resultados calculados diretamente no SciPy.
     logs = np.log(pares)
     d = logs[:, 0] - logs[:, 1]
     t = stats.ttest_rel(logs[:, 0], logs[:, 1], alternative="two-sided")
@@ -55,6 +56,9 @@ def test_p_valores_coincidem_com_scipy(d):
     assert w["metodo"] == "exato"
     assert w["estatistica"] == pytest.approx(ref["wilcoxon"]["estatistica"])
     assert w["p_valor"] == pytest.approx(ref["wilcoxon"]["p_valor"], rel=1e-9)
+    d1 = analisar_pares(pares)
+    assert d1["t_pareado"]["p_valor"] == pytest.approx(t["p_valor"], rel=1e-9)
+    assert d1["wilcoxon"]["p_valor"] == pytest.approx(w["p_valor"], rel=1e-9)
 
 
 def test_massa_exata_de_min_w_soma_um_e_e_simetrica():
@@ -73,7 +77,7 @@ def test_empates_e_zeros_usam_aproximacao_explicita():
     assert w["zeros"] == 1 and w["empates"]
     ref = stats.wilcoxon(np.log(pares[:, 0]), method="approx", correction=False)
     assert w["p_valor"] == pytest.approx(ref.pvalue, rel=1e-9)
-    fig = figura_g2(pares, referencia_scipy(pares))
+    fig = figura_g2(pares, analisar_pares(pares))
     assert any("NÃO é a distribuição exata" in (tr.name or "") for tr in fig.data)
 
 
@@ -87,7 +91,7 @@ def test_diferencas_constantes_e_dados_invalidos():
 
 
 def test_figura_na_amostra_simulada(simulados):
-    resultados = referencia_scipy(simulados)
+    resultados = analisar_pares(simulados)
     fig = figura_g2(simulados, resultados)
     assert isinstance(fig, go.Figure)
     assert "G2" in fig.layout.title.text
@@ -101,10 +105,10 @@ def test_figura_na_amostra_simulada(simulados):
 
 def test_area_desenhada_e_igual_ao_p_valor(simulados):
     pares = pares_de_diferencas([0.3, -0.1, 0.25, 0.4, -0.05, 0.12, 0.33, -0.2, 0.07, 0.18])
-    fig = figura_g2(pares, referencia_scipy(pares))
+    fig = figura_g2(pares, analisar_pares(pares))
     barras_p = [tr for tr in fig.data if tr.name == "Massa = p-valor do Wilcoxon" and tr.xaxis == "x2"]
     massa = sum(float(np.sum(tr.y)) for tr in barras_p)
-    assert massa == pytest.approx(referencia_scipy(pares)["wilcoxon"]["p_valor"], rel=1e-9)
+    assert massa == pytest.approx(analisar_pares(pares)["wilcoxon"]["p_valor"], rel=1e-9)
     # Área integrada das caudas t coincide com o p-valor (tolerância da integração numérica).
     t = distribuicao_t(pares)
     area = 2 * stats.t.sf(abs(t["estatistica"]), t["gl"])
@@ -112,14 +116,14 @@ def test_area_desenhada_e_igual_ao_p_valor(simulados):
 
 
 def test_divergencia_com_d1_e_rejeitada(simulados):
-    resultados = referencia_scipy(simulados)
+    resultados = analisar_pares(simulados)
     resultados["wilcoxon"]["p_valor"] = 0.5
     with pytest.raises(ValueError, match="diverge"):
         figura_g2(simulados, resultados)
 
 
 def test_texto_tem_duas_a_quatro_frases_e_interpretacao_correta(simulados):
-    texto = texto_g2(simulados, referencia_scipy(simulados))
+    texto = texto_g2(simulados, analisar_pares(simulados))
     frases = [f for f in texto.split(". ") if f.strip()]
     assert 2 <= len(frases) <= 4
     assert "não é a probabilidade de H0" in texto
