@@ -1,0 +1,41 @@
+{
+  "versao": 1,
+  "modelo": "lognormal_bivariada",
+  "colunas": [
+    "sem_cache_s",
+    "com_cache_s"
+  ],
+  "unidade_tempos": "segundos",
+  "transformacao": "log natural",
+  "n_pares_reais": 30,
+  "medias_log": [
+    1.748562089288608,
+    0.3762657828471741
+  ],
+  "covariancia_log": [
+    [
+      0.01682414153489459,
+      -0.003923782386226294
+    ],
+    [
+      -0.003923782386226294,
+      0.00885089832872303
+    ]
+  ],
+  "covariancia_ddof": 1,
+  "delta_observado_log": 1.372296306441434,
+  "razao_geometrica_observada": 3.944397850166098,
+  "fonte": {
+    "arquivo": "pares_reais.csv",
+    "sha256": "205af2f581924402fb23a4ce60744de3199324a79fc2e52c04acc76d76c46586",
+    "manifesto_sha256": "11016941719c133548fd5cc5c8c362a10a95a74bcc77e28d64c5c89598efa667",
+    "django": "5.2.8",
+    "arquivo_django_sha256": "23254866a5bb9a2cfa6004e8b809ec6246eba4b58a7589bc2772f1bcc8456c7f"
+  },
+  "cenario_previo_sha256": "cea9ebedfe62f44bf6113df31f74f2f065dd7489e3e043efb73f84d061811a29",
+  "semente": 42,
+  "n_simulado": 30,
+  "delta_log_aplicado": null,
+  "numpy": "2.2.6",
+  "gerador": "numpy.random.default_rng / PCG64 / multivariate_normal(method=svd)"
+}

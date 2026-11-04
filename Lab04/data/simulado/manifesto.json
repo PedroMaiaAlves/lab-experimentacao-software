@@ -1,0 +1,12 @@
+{
+  "tipo": "dados_simulados_nao_sao_medicoes_reais",
+  "semente": 42,
+  "artefatos_sha256": {
+    "parametros.json": "25b967131f517943bba2ec75654d5e941afe1c3a9564c5eff21b0298876de0d4",
+    "pares_simulados.csv": "e7e48207fd683ec96456734bc45d131e5cea640d643c198e41a74f418d77ba21"
+  },
+  "codigo_sha256": {
+    "experimento/simulacao.py": "169508750ff43b500ed133b71142147917f9a1a975aa5945438b37ef5406f8d6",
+    "experimento/dados.py": "11167545bb5df6963b40a98c7eef375527602a64cb7824917faa9088d2ef283e"
+  }
+}

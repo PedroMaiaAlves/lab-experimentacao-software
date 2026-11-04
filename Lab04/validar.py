@@ -1,4 +1,4 @@
-"""Confere a coleta P1 offline, sem modificar os dados."""
+"""Confere a entrega P1/P2 offline, sem modificar os dados."""
 
 from experimento.validacao import main
 

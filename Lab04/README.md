@@ -1,54 +1,121 @@
-# Lab04 — P1: estrutura e coleta pareada
+# Lab04 — Testes de hipótese: compilação com e sem cache
 
-Entrega de Pedro vinculada à [issue #173](https://github.com/PedroMaiaAlves/lab-experimentacao-software/issues/173).
-O cenário compara a compilação de bytecode do Django 5.2.8 com cache vazio e
-preenchido, para o par t pareado × Wilcoxon pareado da Lab04S01.
+Par P2: **t pareado × Wilcoxon pareado**, usando tempos de compilação de
+bytecode do Django 5.2.8. A sprint 1 vale 7 pontos.
 
-Esta etapa entrega o coletor, **30 pares reais**, três pares de aquecimento
-separados, logs, origem e hashes. A simulação é a etapa P2, vinculada à #174;
-testes estatísticos/G2 ficam com Diogo e dashboard/G1/integração com Lorran.
+Esta entrega implementa a parte de **Pedro: P1 + P2** (coleta, cenário e
+simulação). Os testes estatísticos e G2 são de Diogo; Streamlit, G1 e integração
+são de Lorran. A sprint inteira só estará concluída depois dessas integrações.
+Não há reutilização de dados ou resultados de outros laboratórios.
 
-## Ambiente e conferência
+Issues de Pedro: [P1 — #173](https://github.com/PedroMaiaAlves/lab-experimentacao-software/issues/173)
+e [P2 — #174](https://github.com/PedroMaiaAlves/lab-experimentacao-software/issues/174).
+A branch da #174 inclui a coleta da #173 e acrescenta a simulação. Integrar
+primeiro a PR da #173; depois, direcionar a PR da #174 para `main`, se necessário,
+e integrar a simulação. As issues foram cadastradas com títulos iguais; o
+escopo correto de cada uma está em `docs/issues_s01.md`.
 
-Na raiz do repositório, em PowerShell:
+## Por onde começar
+
+- [Issues prontas para copiar no Projects](docs/issues_s01.md).
+- [Cenário, hipóteses e expectativa anterior à simulação](docs/cenario.md).
+- [Protocolo de coleta](docs/protocolo_coleta.md).
+- [Interfaces e instruções para Diogo e Lorran](docs/contratos.md).
+- [Evidências da entrega P1/P2](docs/entrega_pedro.md).
+
+## Ambiente isolado
+
+Comandos no PowerShell, a partir da raiz do repositório. A coleta oficial usa
+CPython **3.13.5**, disponível nesta máquina pelo launcher `py -3.13`.
+Não é preciso ativar o ambiente nem alterar os ambientes dos laboratórios anteriores.
 
 ```powershell
 py -3.13 -m venv Lab04/.venv
 .\Lab04\.venv\Scripts\python.exe -m pip install -r Lab04/requirements.lock.txt
+```
+
+`requirements.txt` contém as dependências diretas de P1/P2. O lock registra as
+versões efetivamente instaladas para reprodução. Diogo e Lorran acrescentarão
+SciPy, Plotly e Streamlit nas respectivas entregas e atualizarão o lock integrado.
+
+## Reproduzir sua parte, sem coletar novamente
+
+O comando abaixo lê a coleta preservada, confere os hashes, recalibra o modelo
+e gera a mesma amostra simulada com semente 42. Funciona offline:
+
+```powershell
+.\Lab04\.venv\Scripts\python.exe Lab04/simular.py
+```
+
+Conferir os artefatos e a reprodução exata, sem modificá-los:
+
+```powershell
 .\Lab04\.venv\Scripts\python.exe Lab04/validar.py
 .\Lab04\.venv\Scripts\python.exe -m pytest -c Lab04/pytest.ini Lab04/tests -q
 ```
 
-A coleta oficial usa CPython 3.13.5. A validação usa os dados preservados e
-funciona offline; não executa uma nova coleta. Ambiente, fontes extraídos e
-caches estão ignorados pelo Git. Os bytes dos dados são preservados pelos
-atributos Git para manter os hashes após checkout.
+Reprodutibilidade significa reconstruir a análise e a simulação a partir dos
+tempos preservados. **Uma nova medição real não terá tempos idênticos.**
 
-## Nova coleta
+## Nova coleta — somente quando desejado
 
-Somente para realizar outra sessão, preservando a original:
+Uma coleta executa três pares de aquecimento e 30 pares oficiais. O coletor
+recusa sobrescrever um diretório existente. Para realizar outra sessão, use um
+nome novo e preserve a coleta original:
 
 ```powershell
 .\Lab04\.venv\Scripts\python.exe Lab04/coletar.py --saida Lab04/data/nova_sessao
 ```
 
-O destino deve ser novo. A fonte oficial é verificada por SHA-256. Cache vazio
-e preenchido são preparados fora da medição; falhas técnicas repetem o par
-inteiro e são preservadas em log. Novas medições terão tempos diferentes.
+O download oficial é verificado por SHA-256. A fonte extraída fica em `.cache/`,
+fora do versionamento. Não são necessários token GitHub, instalação do Django
+ou execução de uma aplicação Django. Falhas técnicas são registradas; o par
+inteiro é repetido, até três tentativas. Falha persistente encerra a sessão como
+incompleta, sem fabricar as observações restantes.
 
-## Documentação e dados
+## Dados e saídas
 
-- [Divisão das tarefas e critérios de aceite de cada integrante](docs/issues_s01.md).
-- [Protocolo de coleta e limitações](docs/protocolo_coleta.md).
-- [Cenário e expectativa registrados antes da simulação](docs/cenario.md).
-- `data/real/pares_reais.csv`: os 30 pares oficiais.
-- `data/real/aquecimento.csv`: três pares excluídos da análise.
-- `data/real/medicoes.jsonl` e `falhas.jsonl`: evidências individuais.
-- `data/real/arquivos_fonte.csv` e `manifesto.json`: fonte, ambiente, comando e hashes.
+| Local | Conteúdo |
+| --- | --- |
+| `data/real/pares_reais.csv` | 30 pares oficiais, ordem, tentativa e horários |
+| `data/real/aquecimento.csv` | Três pares excluídos da análise |
+| `data/real/medicoes.jsonl` | Log individual das execuções e estados do cache |
+| `data/real/falhas.jsonl` | Falhas técnicas; vazio significa nenhuma falha |
+| `data/real/arquivos_fonte.csv` | Caminho e hash de cada arquivo Python compilado |
+| `data/real/manifesto.json` | Fonte, ambiente, comando, protocolo e hashes |
+| `data/simulado/parametros.json` | Médias e covariância dos log-tempos, origem e semente |
+| `data/simulado/pares_simulados.csv` | Amostra simulada; não são medições reais |
+| `data/simulado/manifesto.json` | Hashes dos resultados e do gerador |
 
-O registro prévio do manifesto é o snapshot da preparação local completa;
-também registra hashes de módulos da etapa P2, que serão publicados na branch
-da #174. Não reescrever esse histórico para simular uma coleta posterior aos commits.
+Atributos Git locais preservam os bytes dos dados, inclusive quebras de linha,
+para que os hashes permaneçam válidos após checkout.
 
-O dashboard Streamlit e a comparação dos testes ainda não estão implementados.
-Esta branch é a base da entrega P2; integrar primeiro a PR da #173 e depois a da #174.
+## Dashboard: entrega de Lorran
+
+**Ainda não implementado nesta parte.** O comando previsto após L1/L2 é:
+
+```powershell
+.\Lab04\.venv\Scripts\python.exe -m streamlit run Lab04/app.py
+```
+
+O aplicativo deve carregar os dados preservados e usar as funções científicas,
+sem iniciar uma coleta. As sete seções serão: cenário; dados/G1; funcionamento
+dos testes/G2; erro tipo I/G3; poder/G4; dados reais; conclusão. Na S01, as três
+primeiras ficam completas e as demais sinalizam sua sprint de entrega.
+
+Repositório: https://github.com/PedroMaiaAlves/lab-experimentacao-software
+
+O link do Projects ainda deve ser preenchido em `protocolo.json` quando Pedro
+cadastrar as issues. Não foi assumido que o Projects histórico seja o do Lab04.
+Como o protocolo foi preservado no manifesto da coleta, futuras alterações
+administrativas não devem reescrever o manifesto histórico.
+
+## GitHub Projects e entrega acadêmica
+
+Use milestone `Lab04S01`, labels `lab04` / `sprint-01`, responsável individual e
+WIP de uma issue por pessoa. Cada integrante deve produzir código e ter pelo
+menos uma issue com commit que a referencie. Quando autorizado, use o número
+real: `feat(lab04): descrição #NUMERO`.
+
+As implementações locais não substituem commits vinculados, revisão ou atualização
+dos cartões. Nenhuma issue, commit, pull ou push é realizado pelos scripts deste Lab.
