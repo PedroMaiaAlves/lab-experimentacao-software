@@ -1,0 +1,35 @@
+{
+  "versao": 1,
+  "pergunta": "Q1",
+  "descricao": "Erro tipo I sob diferenças logarítmicas normais com média zero.",
+  "configuracao": {
+    "alpha": 0.05,
+    "alternativa": "two-sided",
+    "repeticoes": 10000,
+    "tamanhos": [
+      10,
+      20,
+      30,
+      50,
+      100
+    ],
+    "semente_base": 42,
+    "distribuicao": "normal",
+    "delta_log": 0.0,
+    "sigma_d": 0.18309179292385067
+  },
+  "origem": {
+    "parametros": "data/simulado/parametros.json",
+    "parametros_sha256": "25b967131f517943bba2ec75654d5e941afe1c3a9564c5eff21b0298876de0d4"
+  },
+  "ambiente": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1"
+  },
+  "artefatos_sha256": {
+    "q1_resultados.csv": "8cd73a683a9fb7bae1fd953cc41440b525345c8811ae345a8418814aa0170a20"
+  },
+  "codigo_sha256": {
+    "experimento/monte_carlo.py": "97c2a17aea324141f7bf4ff042c19e9168e50628fd75022910aa4f26153b49e5"
+  }
+}
