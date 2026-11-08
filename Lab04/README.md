@@ -3,10 +3,11 @@
 Par P2: **t pareado × Wilcoxon pareado**, usando tempos de compilação de
 bytecode do Django 5.2.8. A sprint 1 vale 7 pontos.
 
-Esta entrega implementa a parte de **Pedro: P1 + P2** (coleta, cenário e
-simulação). Os testes estatísticos e G2 são de Diogo; Streamlit, G1 e integração
-são de Lorran. A sprint inteira só estará concluída depois dessas integrações.
-Não há reutilização de dados ou resultados de outros laboratórios.
+Esta entrega reúne a base da Sprint 1 e a parte independente de Pedro na Sprint 2.
+Pedro implementou coleta, calibração, simulação e Q1/G3; Diogo implementou os
+testes estatísticos e G2. O dashboard e G1, que não haviam sido entregues na
+Sprint 1, foram recuperados nesta integração. Q2, Q3 e G4 continuam atribuídos
+às issues #186–#189. Não há reutilização de dados ou resultados de outros laboratórios.
 
 Issues de Pedro: [P1 — #173](https://github.com/PedroMaiaAlves/lab-experimentacao-software/issues/173)
 e [P2 — #174](https://github.com/PedroMaiaAlves/lab-experimentacao-software/issues/174).
@@ -35,9 +36,9 @@ py -3.13 -m venv Lab04/.venv
 .\Lab04\.venv\Scripts\python.exe -m pip install -r Lab04/requirements.lock.txt
 ```
 
-`requirements.txt` contém as dependências diretas de P1/P2. O lock registra as
-versões efetivamente instaladas para reprodução. Diogo e Lorran acrescentarão
-SciPy, Plotly e Streamlit nas respectivas entregas e atualizarão o lock integrado.
+`requirements.txt` contém as dependências diretas da entrega integrada. O lock
+registra as versões completas efetivamente usadas, incluindo SciPy, Plotly e
+Streamlit.
 
 ## Reproduzir sua parte, sem coletar novamente
 
@@ -115,18 +116,41 @@ texto = texto_g2(simulados, resultados)  # 4 frases para acompanhar o G2
 
 Evidências em [docs/entrega_diogo.md](docs/entrega_diogo.md).
 
-## Dashboard: entrega de Lorran
+## Dashboard integrado
 
-**Ainda não implementado nesta parte.** O comando previsto após L1/L2 é:
+Instale as dependências e abra o dashboard local:
 
 ```powershell
 .\Lab04\.venv\Scripts\python.exe -m streamlit run Lab04/app.py
 ```
 
-O aplicativo deve carregar os dados preservados e usar as funções científicas,
-sem iniciar uma coleta. As sete seções serão: cenário; dados/G1; funcionamento
-dos testes/G2; erro tipo I/G3; poder/G4; dados reais; conclusão. Na S01, as três
-primeiras ficam completas e as demais sinalizam sua sprint de entrega.
+O aplicativo carrega os dados preservados e usa as funções científicas sem
+iniciar uma coleta. As sete seções são: cenário; dados/G1; funcionamento dos
+testes/G2; erro tipo I/G3; poder/G4; dados reais; conclusão. G1, G2 e G3 estão
+integrados; Q2, Q3, G4 e a recomendação final permanecem explicitamente pendentes.
+
+## Sprint 2 — Q1 e G3 (Pedro)
+
+Q1 estima o erro tipo I sob diferenças logarítmicas normais com média zero.
+São 10.000 repetições para cada tamanho `n = 10, 20, 30, 50, 100`, com alpha
+0,05, testes bicaudais e semente-base 42. O desvio das diferenças vem da
+covariância calibrada nos dados reais.
+
+Gerar e validar os resultados agregados:
+
+```powershell
+.\Lab04\.venv\Scripts\python.exe Lab04/simular_s02.py
+.\Lab04\.venv\Scripts\python.exe Lab04/simular_s02.py --validar
+```
+
+Os artefatos ficam em `data/s02/`: somente dez linhas agregadas e um manifesto
+de proveniência são versionados; as 50.000 amostras Monte Carlo não são salvas.
+G3 mostra a taxa empírica de rejeição, intervalo de Wilson de 95% e a referência
+nominal de 5%.
+
+A API `experimento.monte_carlo.simular_grade` é o contrato compartilhado para
+Q2 e Q3. Q2 usará diferenças normais com efeitos não nulos; Q3 usará Student t
+com três graus de liberdade, padronizada para a mesma variância.
 
 Repositório: https://github.com/PedroMaiaAlves/lab-experimentacao-software
 
