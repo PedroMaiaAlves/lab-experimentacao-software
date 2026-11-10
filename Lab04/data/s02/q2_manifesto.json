@@ -1,0 +1,49 @@
+{
+  "versao": 1,
+  "pergunta": "Q2",
+  "descricao": "Poder sob diferenças logarítmicas normais, 30 pares e razões definidas na issue #186.",
+  "configuracao": {
+    "alpha": 0.05,
+    "alternativa": "two-sided",
+    "repeticoes": 10000,
+    "n": 30,
+    "razoes": [
+      1.0,
+      1.02,
+      1.05,
+      1.1,
+      1.15,
+      1.2,
+      1.25
+    ],
+    "deltas_log": [
+      0.0,
+      0.01980262729617973,
+      0.04879016416943204,
+      0.09531017980432493,
+      0.13976194237515863,
+      0.1823215567939546,
+      0.22314355131420976
+    ],
+    "distribuicao": "normal",
+    "sigma_d": 0.18309179292385067,
+    "semente_base": 42,
+    "politica_semente": "SeedSequence([42, 2]).generate_state(1)[0]",
+    "semente_q2": 955475868
+  },
+  "origem": {
+    "parametros": "data/simulado/parametros.json",
+    "parametros_sha256": "25b967131f517943bba2ec75654d5e941afe1c3a9564c5eff21b0298876de0d4"
+  },
+  "ambiente": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1"
+  },
+  "artefatos_sha256": {
+    "q2_resultados.csv": "cfb700d130f2e57e7fb8d58cc5c70508b60a14ac94bb1251188411900b9acc15"
+  },
+  "codigo_sha256": {
+    "experimento/q2.py": "8018838220b568a1f2a2064523d2742080d6e53dfa007e51fe24d1e0496245a9",
+    "experimento/monte_carlo.py": "97c2a17aea324141f7bf4ff042c19e9168e50628fd75022910aa4f26153b49e5"
+  }
+}
