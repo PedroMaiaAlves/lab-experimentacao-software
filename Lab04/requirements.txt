@@ -1,6 +1,9 @@
-# Dependências da entrega P1/P2; dashboard e testes estatísticos ficam com Lorran/Diogo.
+# Dependências diretas da entrega integrada e das simulações Monte Carlo.
 numpy==2.2.6
 pytest==8.3.5
+scipy==1.18.1
+plotly==7.1.0
+streamlit==1.67.0
 # Diogo (D1/D2): testes estatísticos e G2.
 scipy==1.18.1
 plotly==7.1.0
