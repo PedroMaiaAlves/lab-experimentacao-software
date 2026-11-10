@@ -1,0 +1,148 @@
+{
+  "versao": 1,
+  "pergunta": "Q2",
+  "comparacao": [
+    {
+      "razao": 1.0,
+      "poder_t": 0.0498,
+      "ic95_t": [
+        0.04570665130975951,
+        0.054239100823197675
+      ],
+      "poder_wilcoxon": 0.0497,
+      "ic95_wilcoxon": [
+        0.04561074273117131,
+        0.05413508620146002
+      ],
+      "diferenca_pp": 0.01,
+      "so_t_rejeita": 92,
+      "so_wilcoxon_rejeita": 91,
+      "p_mcnemar": 1.0,
+      "maior_poder": "sem diferença detectável"
+    },
+    {
+      "razao": 1.02,
+      "poder_t": 0.0852,
+      "ic95_t": [
+        0.0798862054580565,
+        0.09083235959025679
+      ],
+      "poder_wilcoxon": 0.0816,
+      "ic95_wilcoxon": [
+        0.0763938032587989,
+        0.08712752657778329
+      ],
+      "diferenca_pp": 0.36,
+      "so_t_rejeita": 146,
+      "so_wilcoxon_rejeita": 110,
+      "p_mcnemar": 0.028508923906997975,
+      "maior_poder": "t_pareado"
+    },
+    {
+      "razao": 1.05,
+      "poder_t": 0.2951,
+      "ic95_t": [
+        0.28624089675452213,
+        0.30411646577778095
+      ],
+      "poder_wilcoxon": 0.2804,
+      "ic95_wilcoxon": [
+        0.2716815591656273,
+        0.28928709291877375
+      ],
+      "diferenca_pp": 1.47,
+      "so_t_rejeita": 362,
+      "so_wilcoxon_rejeita": 215,
+      "p_mcnemar": 9.9403721265791e-10,
+      "maior_poder": "t_pareado"
+    },
+    {
+      "razao": 1.1,
+      "poder_t": 0.7873,
+      "ic95_t": [
+        0.7791699489123074,
+        0.7952094056239019
+      ],
+      "poder_wilcoxon": 0.775,
+      "ic95_wilcoxon": [
+        0.7667108274416015,
+        0.7830779734545263
+      ],
+      "diferenca_pp": 1.23,
+      "so_t_rejeita": 291,
+      "so_wilcoxon_rejeita": 168,
+      "p_mcnemar": 1.0172753154340203e-08,
+      "maior_poder": "t_pareado"
+    },
+    {
+      "razao": 1.15,
+      "poder_t": 0.9806,
+      "ic95_t": [
+        0.9777063720664563,
+        0.9831245286996493
+      ],
+      "poder_wilcoxon": 0.9767,
+      "ic95_wilcoxon": [
+        0.9735551577740434,
+        0.9794787381793534
+      ],
+      "diferenca_pp": 0.39,
+      "so_t_rejeita": 57,
+      "so_wilcoxon_rejeita": 18,
+      "p_mcnemar": 7.244156513774457e-06,
+      "maior_poder": "t_pareado"
+    },
+    {
+      "razao": 1.2,
+      "poder_t": 0.9997,
+      "ic95_t": [
+        0.9991182642277636,
+        0.9998979678005822
+      ],
+      "poder_wilcoxon": 0.9995,
+      "ic95_wilcoxon": [
+        0.998829974053858,
+        0.9997864115738362
+      ],
+      "diferenca_pp": 0.02,
+      "so_t_rejeita": 3,
+      "so_wilcoxon_rejeita": 1,
+      "p_mcnemar": 0.625,
+      "maior_poder": "sem diferença detectável"
+    },
+    {
+      "razao": 1.25,
+      "poder_t": 1.0,
+      "ic95_t": [
+        0.9996160016293234,
+        1.0
+      ],
+      "poder_wilcoxon": 1.0,
+      "ic95_wilcoxon": [
+        0.9996160016293234,
+        1.0
+      ],
+      "diferenca_pp": 0.0,
+      "so_t_rejeita": 0,
+      "so_wilcoxon_rejeita": 0,
+      "p_mcnemar": 1.0,
+      "maior_poder": "sem diferença detectável"
+    }
+  ],
+  "texto_dashboard": "Poder é a proporção das 10.000 amostras simuladas, com 30 pares de diferenças normais, em que o teste rejeitou H0 quando a razão sem/com cache era de fato maior que 1; não é um p-valor, que se refere a uma única amostra, nem o tamanho do efeito, que é a própria razão no eixo horizontal. Na razão 1,00, em que H0 é verdadeira, as taxas ficaram em 5,0% (t) e 5,0% (Wilcoxon), próximas do α de 5%, e o poder cresce com o efeito, passando de 80% a partir da razão 1,15. Sob normalidade, o t pareado teve poder maior que o Wilcoxon nas razões 1,02; 1,05; 1,10; 1,15 (McNemar nas mesmas amostras, α = 0,05), com diferença de no máximo 1,5 pontos percentuais, o que é esperado porque o t é o teste ótimo nesse cenário. Os intervalos de Wilson de 95% medem só a incerteza da simulação: os resultados valem para diferenças normais com o desvio calibrado e 30 pares, e não garantem o mesmo comportamento com caudas pesadas (Q3).",
+  "limitacoes": [
+    "Incerteza de Monte Carlo: com 10.000 repetições, o erro padrão de uma taxa p é sqrt(p(1−p)/10.000), no máximo 0,5 ponto percentual (p = 50%); os intervalos de Wilson de 95% têm meia-largura de até ~1 p.p.",
+    "Intervalos de Wilson de cada teste podem se sobrepor mesmo quando a diferença é real, porque os dois testes são aplicados às mesmas amostras; por isso a comparação usa McNemar sobre as amostras discordantes.",
+    "O cenário supõe diferenças logarítmicas normais, independentes, com o desvio calibrado nos dados reais da S01 e n = 30; outros n, desvios ou distribuições (ex.: caudas pesadas, Q3) podem mudar a ordem dos testes.",
+    "Poder próximo de 100% nas razões maiores satura: nelas a comparação entre testes perde informação.",
+    "Os resultados descrevem o comportamento dos testes, não o efeito real do cache, que é estimado nos dados reais."
+  ],
+  "origem": {
+    "q2_resultados.csv": "cfb700d130f2e57e7fb8d58cc5c70508b60a14ac94bb1251188411900b9acc15"
+  },
+  "codigo_sha256": {
+    "experimento/q2_interpretacao.py": "a55f728c86522d75bb2a2062d624038dc59a03147a70549aa284a8cb91b8e939",
+    "experimento/q2.py": "8018838220b568a1f2a2064523d2742080d6e53dfa007e51fe24d1e0496245a9",
+    "experimento/monte_carlo.py": "97c2a17aea324141f7bf4ff042c19e9168e50628fd75022910aa4f26153b49e5"
+  }
+}
