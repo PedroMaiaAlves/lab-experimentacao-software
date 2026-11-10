@@ -115,3 +115,18 @@ Lorran integra somente após conferir o contrato e a saída de `validar.py`.
 O aceite final requer G1/G2 visíveis, p-valores consistentes com G2, execução pelo
 README e ausência de coleta involuntária. Dados reais, simulados e exemplos de
 teste devem ser identificados claramente em toda a apresentação.
+
+## API compartilhada da S02
+
+Pedro mantém `experimento/monte_carlo.py`. A função pública
+`simular_grade(...) -> list[dict]` opera diretamente sobre as diferenças
+logarítmicas, pois os dois testes dependem somente delas. Cada linha agregada
+contém pergunta, cenário, distribuição, teste, tamanho, delta, razão geométrica,
+repetições, rejeições, taxa, intervalo de Wilson, alpha e sementes.
+
+- Q1: normal, `delta_log=0`, tamanhos 10/20/30/50/100 e 10.000 repetições.
+- Q2: normal, 30 pares e a grade de razões definida na issue #186.
+- Q3: t de Student com 3 graus de liberdade, padronizada para a mesma variância,
+  30 pares e a mesma grade de Q2.
+- G3 consome somente resultados de Q1; G4 deverá combinar Q2 e Q3 sem alterar
+  os artefatos preservados.
