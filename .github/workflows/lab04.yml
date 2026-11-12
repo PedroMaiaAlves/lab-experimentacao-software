@@ -13,7 +13,7 @@ jobs:
   testes:
     runs-on: windows-latest
     env:
-      NPY_DISABLE_CPU_FEATURES: AVX512F
+      NPY_DISABLE_CPU_FEATURES: AVX512F,AVX512CD,AVX512_SKX,AVX512_CLX,AVX512_CNL,AVX512_ICL
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

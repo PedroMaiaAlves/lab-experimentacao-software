@@ -107,9 +107,11 @@ O resultado descreve compilação local de bytecode, não desempenho universal.
 - A execução de `f6a7205` revelou variação de último dígito na exponenciação
   da simulação bivariada S01 em outro runner: 101 testes passaram, e os dois
   testes estritos dessa reprodução falharam. Os testes de Q1/Q2/Q3 e G4
-  passaram. A integração fixa `NPY_DISABLE_CPU_FEATURES=AVX512F` no ambiente
-  de referência e registra `numpy.show_runtime()` no CI para conferir essa
-  hipótese de despacho numérico. Não altera geradores, validadores dos colegas,
+  passaram. O primeiro bloqueio de `AVX512F` isolado não desativou os grupos
+  `AVX512_SKX/CLX/CNL/ICL`, ainda listados como ativos no runner, e manteve
+  a falha. A integração desativa todos os seis alvos AVX-512 compilados no
+  NumPy fixado e registra `numpy.show_runtime()` no CI para conferir o
+  despacho numérico. Não altera geradores, validadores dos colegas,
   dados, hashes, tolerâncias ou critérios de aprovação. O README registra
   esse requisito; igualdade bit a bit em ambientes arbitrários não é prometida.
 - Publicação: branch `lorran-q3-g4`, [PR #194](https://github.com/PedroMaiaAlves/lab-experimentacao-software/pull/194)

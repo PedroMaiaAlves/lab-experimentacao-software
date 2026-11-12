@@ -43,7 +43,7 @@ Para reprodução bit a bit da simulação bivariada da S01, o CI também fixa
 o despacho de CPU do NumPy sem AVX-512. Antes das validações em outra CPU:
 
 ```powershell
-$env:NPY_DISABLE_CPU_FEATURES = 'AVX512F'
+$env:NPY_DISABLE_CPU_FEATURES = 'AVX512F,AVX512CD,AVX512_SKX,AVX512_CLX,AVX512_CNL,AVX512_ICL'
 ```
 
 O ambiente vale para novos processos Python. Sem esse ajuste, CPUs diferentes
