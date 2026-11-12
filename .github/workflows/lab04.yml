@@ -12,6 +12,8 @@ permissions:
 jobs:
   testes:
     runs-on: windows-latest
+    env:
+      NPY_DISABLE_CPU_FEATURES: AVX512F
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -21,6 +23,7 @@ jobs:
           cache-dependency-path: Lab04/requirements.lock.txt
       - run: python -m pip install -r Lab04/requirements.lock.txt
       - run: python -m pip check
+      - run: python -c "import numpy as np; np.show_runtime()"
       - run: python -m pytest -c Lab04/pytest.ini Lab04/tests -q
       - run: python Lab04/validar.py
       - run: python Lab04/simular_s02.py --validar

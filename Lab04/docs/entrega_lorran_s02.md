@@ -104,6 +104,14 @@ O resultado descreve compilação local de bytecode, não desempenho universal.
   e [Testes LAB03 aprovados](https://github.com/PedroMaiaAlves/lab-experimentacao-software/actions/runs/43146783720).
   Lab04 executou os 103 testes e todas as reproduções offline, com instalação
   limpa no Windows/Python 3.12. As revisões seguintes reexecutam os checks.
+- A execução de `f6a7205` revelou variação de último dígito na exponenciação
+  da simulação bivariada S01 em outro runner: 101 testes passaram, e os dois
+  testes estritos dessa reprodução falharam. Os testes de Q1/Q2/Q3 e G4
+  passaram. A integração fixa `NPY_DISABLE_CPU_FEATURES=AVX512F` no ambiente
+  de referência e registra `numpy.show_runtime()` no CI para conferir essa
+  hipótese de despacho numérico. Não altera geradores, validadores dos colegas,
+  dados, hashes, tolerâncias ou critérios de aprovação. O README registra
+  esse requisito; igualdade bit a bit em ambientes arbitrários não é prometida.
 - Publicação: branch `lorran-q3-g4`, [PR #194](https://github.com/PedroMaiaAlves/lab-experimentacao-software/pull/194)
   para main, com `Closes #188` e `Closes #189`. A main não foi alterada por
   esta execução; o fechamento das issues ocorre no merge da PR.

@@ -39,6 +39,18 @@ py -3.12 -m venv Lab04/.venv
 .\Lab04\.venv\Scripts\python.exe -m pip install -r Lab04/requirements.lock.txt
 ```
 
+Para reprodução bit a bit da simulação bivariada da S01, o CI também fixa
+o despacho de CPU do NumPy sem AVX-512. Antes das validações em outra CPU:
+
+```powershell
+$env:NPY_DISABLE_CPU_FEATURES = 'AVX512F'
+```
+
+O ambiente vale para novos processos Python. Sem esse ajuste, CPUs diferentes
+podem produzir diferenças no último dígito de `exp`, apesar das mesmas versões
+e semente. Os hashes dos artefatos e a validação estrita continuam obrigatórios;
+não regravamos os dados oficiais nem afrouxamos suas comparações para passar o CI.
+
 `requirements.txt` contém as dependências diretas da entrega integrada. O lock
 registra as versões completas efetivamente usadas, incluindo SciPy, Plotly e
 Streamlit.
