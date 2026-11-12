@@ -1,0 +1,66 @@
+{
+  "status": "ok",
+  "decisoes_conferidas": 140000,
+  "comparacao": [
+    {
+      "razao": 1.0,
+      "repeticoes": 10000,
+      "divergencias_t": 0,
+      "divergencias_wilcoxon": 0,
+      "rejeicoes_t": 419,
+      "rejeicoes_wilcoxon": 459
+    },
+    {
+      "razao": 1.02,
+      "repeticoes": 10000,
+      "divergencias_t": 0,
+      "divergencias_wilcoxon": 0,
+      "rejeicoes_t": 1005,
+      "rejeicoes_wilcoxon": 1275
+    },
+    {
+      "razao": 1.05,
+      "repeticoes": 10000,
+      "divergencias_t": 0,
+      "divergencias_wilcoxon": 0,
+      "rejeicoes_t": 3839,
+      "rejeicoes_wilcoxon": 4883
+    },
+    {
+      "razao": 1.1,
+      "repeticoes": 10000,
+      "divergencias_t": 0,
+      "divergencias_wilcoxon": 0,
+      "rejeicoes_t": 8407,
+      "rejeicoes_wilcoxon": 9393
+    },
+    {
+      "razao": 1.15,
+      "repeticoes": 10000,
+      "divergencias_t": 0,
+      "divergencias_wilcoxon": 0,
+      "rejeicoes_t": 9655,
+      "rejeicoes_wilcoxon": 9963
+    },
+    {
+      "razao": 1.2,
+      "repeticoes": 10000,
+      "divergencias_t": 0,
+      "divergencias_wilcoxon": 0,
+      "rejeicoes_t": 9884,
+      "rejeicoes_wilcoxon": 9999
+    },
+    {
+      "razao": 1.25,
+      "repeticoes": 10000,
+      "divergencias_t": 0,
+      "divergencias_wilcoxon": 0,
+      "rejeicoes_t": 9953,
+      "rejeicoes_wilcoxon": 10000
+    }
+  ],
+  "origem_sha256": {
+    "q3_resultados.csv": "75756b1bcb4ca22c0575f294bebc4c3103b78f10b73fc91542ab98c2016b0e19",
+    "q3_manifesto.json": "339ebfa161a1a696a5dab20ff00152de056da070127b56768ff4135b38db97fe"
+  }
+}

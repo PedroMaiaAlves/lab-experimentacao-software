@@ -1,0 +1,32 @@
+name: Testes LAB04
+
+on:
+  push:
+    paths: ['Lab04/**', '.github/workflows/lab04.yml']
+  pull_request:
+    paths: ['Lab04/**', '.github/workflows/lab04.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  testes:
+    runs-on: windows-latest
+    env:
+      NPY_DISABLE_CPU_FEATURES: AVX512F,AVX512CD,AVX512_SKX,AVX512_CLX,AVX512_CNL,AVX512_ICL
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: Lab04/requirements.lock.txt
+      - run: python -m pip install -r Lab04/requirements.lock.txt
+      - run: python -m pip check
+      - run: python -c "import numpy as np; np.show_runtime()"
+      - run: python -m pytest -c Lab04/pytest.ini Lab04/tests -q
+      - run: python Lab04/validar.py
+      - run: python Lab04/simular_s02.py --validar
+      - run: python Lab04/simular_q2.py --validar
+      - run: python Lab04/interpretar_q2.py --validar
+      - run: python Lab04/simular_q3.py --validar
