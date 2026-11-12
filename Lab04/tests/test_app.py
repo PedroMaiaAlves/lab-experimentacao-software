@@ -33,6 +33,8 @@ def test_quatro_graficos_dados_reais_e_conclusao_sem_pendencias(monkeypatch):
 
     monkeypatch.setattr("urllib.request.urlopen", proibido)
     monkeypatch.setattr("experimento.monte_carlo.simular_grade", proibido)
+    monkeypatch.setattr("experimento.q2.simular_grade", proibido)
+    monkeypatch.setattr("experimento.q3.simular_grade", proibido)
     monkeypatch.setattr("experimento.coleta.coletar", proibido)
     app = AppTest.from_file(str(APP)).run(timeout=45)
     assert not app.exception

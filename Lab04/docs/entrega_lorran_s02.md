@@ -100,7 +100,13 @@ O resultado descreve compilação local de bytecode, não desempenho universal.
   pequenos são exibidos em notação científica, sem arredondá-los para zero.
 - O AppTest bloqueia coleta, Monte Carlo e `urlopen` durante a abertura;
   as quatro figuras e as sete seções permanecem disponíveis offline.
-- CI remoto: será registrado após o push desta implementação.
+- CI remoto da implementação `764a3b3`: [Testes LAB04 aprovados](https://github.com/PedroMaiaAlves/lab-experimentacao-software/actions/runs/43146783845)
+  e [Testes LAB03 aprovados](https://github.com/PedroMaiaAlves/lab-experimentacao-software/actions/runs/43146783720).
+  Lab04 executou os 103 testes e todas as reproduções offline, com instalação
+  limpa no Windows/Python 3.12. As revisões seguintes reexecutam os checks.
+- Publicação: branch `lorran-q3-g4`, [PR #194](https://github.com/PedroMaiaAlves/lab-experimentacao-software/pull/194)
+  para main, com `Closes #188` e `Closes #189`. A main não foi alterada por
+  esta execução; o fechamento das issues ocorre no merge da PR.
 
 ### Fontes metodológicas
 
