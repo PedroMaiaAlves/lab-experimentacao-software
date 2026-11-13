@@ -241,3 +241,46 @@ real: `feat(lab04): descrição #NUMERO`.
 
 As implementações locais não substituem commits vinculados, revisão ou atualização
 dos cartões. Nenhuma issue, commit, pull ou push é realizado pelos scripts deste Lab.
+
+## Como executar o projeto (Lab04)
+
+### Pré-requisitos
+- Python 3.12 ou superior
+- Git
+
+### 1. Clonar o repositório
+```bash
+git clone <URL_DO_REPOSITORIO>
+cd lab-experimentacao-software
+```
+
+### 2. Criar o ambiente virtual e instalar as dependências
+
+**Windows (PowerShell):**
+```powershell
+py -3.12 -m venv Lab04\.env
+.\Lab04\.env\Scripts\python.exe -m pip install -r Lab04/requirements.lock.txt
+```
+
+**Linux / macOS:**
+```bash
+python3 -m venv Lab04/.env
+Lab04/.env/bin/python -m pip install -r Lab04/requirements.lock.txt
+```
+
+> Se o `pip` estiver configurado para um repositório privado e falhar, use o PyPI público:
+> adicione `--isolated --index-url https://pypi.org/simple` ao comando de instalação.
+
+### 3. Executar a aplicação
+
+**Windows (PowerShell):**
+```powershell
+.\Lab04\.env\Scripts\python.exe -m streamlit run Lab04/app.py
+```
+
+**Linux / macOS:**
+```bash
+Lab04/.env/bin/python -m streamlit run Lab04/app.py
+```
+
+A aplicação abrirá no navegador em `http://localhost:8501`.
