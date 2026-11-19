@@ -244,14 +244,17 @@ class DockerExecutor:
         memorias: list[float] = []
         with stdout.open("w", encoding="utf-8") as out, stderr.open("w", encoding="utf-8") as err:
             proc = subprocess.Popen(comando, cwd=RAIZ.parent, stdout=out, stderr=err, text=True)
-            limite = time.monotonic() + execucao.aquecimento_s + execucao.medicao_s + 240
+            inicio_benchmark = time.monotonic()
+            limite = inicio_benchmark + execucao.aquecimento_s + execucao.medicao_s + 240
             while proc.poll() is None:
-                if time.monotonic() > limite:
+                agora = time.monotonic()
+                if agora > limite:
                     proc.kill()
                     err.write("\nColetor: tempo limite excedido.\n")
                     break
                 amostra = self._stats(execucao.broker)
-                if amostra:
+                # O aquecimento também é descartado das métricas de recursos.
+                if amostra and agora - inicio_benchmark >= execucao.aquecimento_s:
                     cpus.append(amostra[0])
                     memorias.append(amostra[1])
                 time.sleep(1)
