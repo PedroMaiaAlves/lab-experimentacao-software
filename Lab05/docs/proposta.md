@@ -10,6 +10,16 @@ Os números foram consultados em **18/11/2026**.
 | **Em operação** | Versão **4.4.0**, imagem oficial `apache/kafka` atualizada em 22/10/2026 ([Docker Hub](https://hub.docker.com/r/apache/kafka)); 4.3.0 lançada em 22/05/2026 ([blog Apache](https://kafka.apache.org/blog/)) | Versão **4.4.1**, imagem oficial `rabbitmq` atualizada em 17/11/2026 ([Docker Hub](https://hub.docker.com/_/rabbitmq)); série 4.3 com suporte até 2028 ([changelog](https://rabbitmq.com/changelog.html)) |
 | **Alto impacto** | "Mais de 80% das empresas da Fortune 100 confiam no Kafka e o usam" ([kafka.apache.org](https://kafka.apache.org/)). Pulls no Docker Hub: `confluentinc/cp-kafka` com 376,7 milhões, `bitnami/kafka` com 331,4 milhões e `apache/kafka` com 57,2 milhões | Imagem oficial `rabbitmq` com **3,92 bilhões** de pulls ([API Docker Hub](https://hub.docker.com/v2/repositories/library/rabbitmq/)). Oferecido como serviço gerenciado pela AWS (Amazon MQ, que adotou o RabbitMQ 4 em 05/2026, [AWS](https://aws.amazon.com/about-aws/whats-new/2026/05/amazon-mq-inplace-upgrades-rabbitmq4/)) |
 
+A página do Kafka também lista a adoção entre as 10 maiores empresas de cada setor: 10 de
+10 em manufatura, seguros e energia; 8 de 10 em telecom e transporte; 7 de 10 em bancos.
+
+**Reprodutibilidade.** Os números vêm de `python Lab05/evidencias.py`, que consulta a API do
+Docker Hub e o site do Kafka (1 requisição por segundo) e salva um snapshot datado em
+[`data/evidencias/`](../data/evidencias/), sem sobrescrever snapshots anteriores. O snapshot
+de referência é `impacto_2026-11-19.json` (UTC): 3.922.921.733 pulls do RabbitMQ e
+765.293.734 pulls somados das três imagens do Kafka. As tags `4.4.1` e `4.4.0` existem nas
+imagens oficiais. Para atualizar os números na entrega final, basta rodar o script de novo.
+
 O objeto de pesquisa é o **software em funcionamento** (o broker sob carga), não o
 repositório. Nenhum dado de GitHub é minerado.
 

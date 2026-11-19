@@ -1,0 +1,42 @@
+{
+  "coletado_em_utc": "2026-11-19T00:02:50+00:00",
+  "imagens": {
+    "rabbitmq": {
+      "fonte": "https://hub.docker.com/v2/repositories/library/rabbitmq/",
+      "pull_count": 3922921733,
+      "last_updated": "2026-11-17T23:56:27.242673Z",
+      "versao_proposta": "4.4.1",
+      "versao_publicada_em": "2026-11-17T23:56:02.72506Z"
+    },
+    "kafka_apache": {
+      "fonte": "https://hub.docker.com/v2/repositories/apache/kafka/",
+      "pull_count": 57176674,
+      "last_updated": "2026-10-22T09:48:05.326078Z",
+      "versao_proposta": "4.4.0",
+      "versao_publicada_em": "2026-10-22T09:48:04.779457Z"
+    },
+    "kafka_confluent": {
+      "fonte": "https://hub.docker.com/v2/repositories/confluentinc/cp-kafka/",
+      "pull_count": 376742166,
+      "last_updated": "2026-11-10T01:04:19.610629Z"
+    },
+    "kafka_bitnami": {
+      "fonte": "https://hub.docker.com/v2/repositories/bitnami/kafka/",
+      "pull_count": 331374894,
+      "last_updated": "2025-08-29T08:37:59.1399Z"
+    }
+  },
+  "kafka_fortune100": {
+    "fonte": "https://kafka.apache.org/",
+    "texto": "More than 80% of all Fortune 100 companies trust, and use Apache Kafka.",
+    "setores_top10": {
+      "Manufacturing": "10 OUT OF 10",
+      "Banks": "7 OUT OF 10",
+      "Insurance": "10 OUT OF 10",
+      "Telecom": "8 OUT OF 10",
+      "Transportation": "8 OUT OF 10",
+      "Energy and Utilities": "10 OUT OF 10"
+    }
+  },
+  "kafka_pulls_somados": 765293734
+}
