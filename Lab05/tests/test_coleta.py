@@ -11,6 +11,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from experimento import plano  # noqa: E402
 from experimento.coleta import (  # noqa: E402
     Coletor,
+    DockerExecutor,
     criar_diretorio_coleta,
     interpretar_resultado_omb,
     interpretar_stats,
@@ -66,6 +67,17 @@ def test_diretorio_nao_sobrescreve(tmp_path):
     assert criado.exists()
     with pytest.raises(FileExistsError):
         criar_diretorio_coleta(tmp_path, instante)
+
+
+def test_limpeza_ativa_todos_os_perfis_do_compose(tmp_path, monkeypatch):
+    executor = DockerExecutor(tmp_path)
+    chamadas = []
+    monkeypatch.setattr(executor, "_run", lambda args, **kwargs: chamadas.append(args))
+    executor.limpar()
+    comando = chamadas[0]
+    assert comando.count("--profile") == 3
+    assert all(perfil in comando for perfil in ("kafka", "rabbitmq", "benchmark"))
+    assert "--volumes" in comando
 
 
 def test_workload_tem_duracoes_e_durabilidade(tmp_path):

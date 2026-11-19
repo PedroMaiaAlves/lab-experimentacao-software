@@ -204,6 +204,7 @@ class DockerExecutor:
     def __init__(self, diretorio_coleta: Path):
         self.diretorio_coleta = diretorio_coleta
         self.base = ["docker", "compose", "-f", str(COMPOSE)]
+        self.todos_perfis = ["--profile", "kafka", "--profile", "rabbitmq", "--profile", "benchmark"]
 
     def _run(self, args: list[str], *, timeout: int = 180, check: bool = True) -> subprocess.CompletedProcess[str]:
         return subprocess.run(
@@ -211,7 +212,12 @@ class DockerExecutor:
         )
 
     def limpar(self) -> None:
-        self._run(self.base + ["down", "--volumes", "--remove-orphans", "--timeout", "10"], check=False)
+        # O Compose ignora serviços de perfis inativos até mesmo no `down`.
+        self._run(
+            self.base + self.todos_perfis
+            + ["down", "--volumes", "--remove-orphans", "--timeout", "10"],
+            check=False,
+        )
 
     def _subir(self, broker: str) -> None:
         self._run(self.base + ["--profile", broker, "up", "-d", "--wait", broker], timeout=240)
