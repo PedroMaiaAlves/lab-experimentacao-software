@@ -1,0 +1,12 @@
+name: RabbitMQ 4.4.1 - duravel
+driverClass: io.openmessaging.benchmark.driver.rabbitmq.RabbitMqBenchmarkDriver
+
+producerCreationDelay: 100
+producerCreationBatchSize: 1
+consumerCreationDelay: 100
+consumerCreationBatchSize: 1
+
+amqpUris:
+  - amqp://lab05:lab05@rabbitmq:5672
+messagePersistence: true
+queueType: QUORUM

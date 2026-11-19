@@ -1,0 +1,78 @@
+name: lab05-brokers
+
+services:
+  kafka:
+    image: apache/kafka:4.4.0
+    container_name: lab05-kafka
+    profiles: ["kafka"]
+    cpus: 4.0
+    mem_limit: 4g
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_MIN_INSYNC_REPLICAS: 1
+      KAFKA_NUM_PARTITIONS: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+    volumes:
+      - kafka-data:/var/lib/kafka/data
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list >/dev/null 2>&1"]
+      interval: 5s
+      timeout: 5s
+      retries: 24
+      start_period: 20s
+    networks: [lab05]
+
+  rabbitmq:
+    image: rabbitmq:4.4.1-management
+    container_name: lab05-rabbitmq
+    hostname: rabbitmq
+    profiles: ["rabbitmq"]
+    cpus: 4.0
+    mem_limit: 4g
+    environment:
+      RABBITMQ_DEFAULT_USER: lab05
+      RABBITMQ_DEFAULT_PASS: lab05
+      RABBITMQ_DEFAULT_VHOST: /
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 24
+      start_period: 20s
+    networks: [lab05]
+
+  omb:
+    build:
+      context: ./benchmark
+      args:
+        OMB_REVISION: 5b1fa70951a323da26bd587174b58bb2c65b0b5c
+    image: lab05/openmessaging-benchmark:5b1fa709
+    profiles: ["benchmark"]
+    cpus: 2.0
+    mem_limit: 2g
+    volumes:
+      - ./benchmark:/workspace:ro
+      - ./data/piloto:/resultados
+    working_dir: /benchmark
+    networks: [lab05]
+
+networks:
+  lab05:
+    name: lab05-brokers
+
+volumes:
+  kafka-data:
+  rabbitmq-data:
