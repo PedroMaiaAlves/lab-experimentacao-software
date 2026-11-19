@@ -1,0 +1,46 @@
+diff --git a/benchmark-framework/src/main/java/io/openmessaging/benchmark/Workload.java b/benchmark-framework/src/main/java/io/openmessaging/benchmark/Workload.java
+index bb869c4..d72a5bf 100644
+--- a/benchmark-framework/src/main/java/io/openmessaging/benchmark/Workload.java
++++ b/benchmark-framework/src/main/java/io/openmessaging/benchmark/Workload.java
+@@ -82,4 +82,8 @@ public class Workload {
+     public int testDurationMinutes;
+ 
+     public int warmupDurationMinutes = 1;
++
++    public int testDurationSeconds = 0;
++
++    public int warmupDurationSeconds = 0;
+ }
+diff --git a/benchmark-framework/src/main/java/io/openmessaging/benchmark/WorkloadGenerator.java b/benchmark-framework/src/main/java/io/openmessaging/benchmark/WorkloadGenerator.java
+index 8ff8e17..fc76e95 100644
+--- a/benchmark-framework/src/main/java/io/openmessaging/benchmark/WorkloadGenerator.java
++++ b/benchmark-framework/src/main/java/io/openmessaging/benchmark/WorkloadGenerator.java
+@@ -147,9 +147,11 @@ public class WorkloadGenerator {
+ 
+         worker.startLoad(producerWorkAssignment);
+ 
+-        if (workload.warmupDurationMinutes > 0) {
+-            log.info("----- Starting warm-up traffic ({}m) ------", workload.warmupDurationMinutes);
+-            printAndCollectStats(workload.warmupDurationMinutes, TimeUnit.MINUTES);
++        long warmupSeconds = workload.warmupDurationSeconds > 0
++                ? workload.warmupDurationSeconds : TimeUnit.MINUTES.toSeconds(workload.warmupDurationMinutes);
++        if (warmupSeconds > 0) {
++            log.info("----- Starting warm-up traffic ({}s) ------", warmupSeconds);
++            printAndCollectStats(warmupSeconds, TimeUnit.SECONDS);
+         }
+ 
+         if (workload.consumerBacklogSizeGB > 0) {
+@@ -163,9 +165,11 @@ public class WorkloadGenerator {
+         }
+ 
+         worker.resetStats();
+-        log.info("----- Starting benchmark traffic ({}m)------", workload.testDurationMinutes);
++        long testSeconds = workload.testDurationSeconds > 0
++                ? workload.testDurationSeconds : TimeUnit.MINUTES.toSeconds(workload.testDurationMinutes);
++        log.info("----- Starting benchmark traffic ({}s)------", testSeconds);
+ 
+-        TestResult result = printAndCollectStats(workload.testDurationMinutes, TimeUnit.MINUTES);
++        TestResult result = printAndCollectStats(testSeconds, TimeUnit.SECONDS);
+         runCompleted = true;
+ 
+         worker.stopAll();
