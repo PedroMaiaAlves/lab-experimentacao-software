@@ -7,6 +7,6 @@ consumerCreationDelay: 100
 consumerCreationBatchSize: 1
 
 amqpUris:
-  - amqp://guest:guest@rabbitmq:5672
+  - amqp://lab05:lab05@rabbitmq:5672
 messagePersistence: true
 queueType: QUORUM
