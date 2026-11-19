@@ -47,7 +47,8 @@ ferramentas nativas. O driver RabbitMQ habilita *publisher confirms* e suporta f
 Como o OMB original expressa duração apenas em minutos, a imagem aplica o patch versionado
 `benchmark/omb-seconds.patch`. Ele acrescenta campos em segundos sem mudar o comportamento
 dos campos originais. Assim são cumpridos exatamente 30 s de aquecimento descartado e 60 s
-de medição.
+de medição. O mesmo patch encerra explicitamente a JVM depois de `worker.close()`, evitando
+que threads não daemon da revisão fixada mantenham o container ativo após o JSON ser gravado.
 
 ## Comandos
 

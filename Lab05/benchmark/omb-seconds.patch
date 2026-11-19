@@ -44,3 +44,13 @@ index 8ff8e17..fc76e95 100644
          runCompleted = true;
  
          worker.stopAll();
+diff --git a/benchmark-framework/src/main/java/io/openmessaging/benchmark/Benchmark.java b/benchmark-framework/src/main/java/io/openmessaging/benchmark/Benchmark.java
+--- a/benchmark-framework/src/main/java/io/openmessaging/benchmark/Benchmark.java
++++ b/benchmark-framework/src/main/java/io/openmessaging/benchmark/Benchmark.java
+@@ -199,5 +199,6 @@ public class Benchmark {
+                             });
+                 });
+
+         worker.close();
++        System.exit(0);
+     }
