@@ -110,8 +110,9 @@ efeito de ordem. São dois experimentos:
 - **E1 (saturação):** mede M1 e M4.
 - **E2 (taxa fixa):** usa 50% do menor throughput medido no E1 e mede M2 e M4.
 
-O tamanho amostral (10 execuções) será revisto depois do piloto, com uma simulação de poder
-reaproveitando `simular.py` do Lab04 e a variância observada.
+O tamanho amostral (10 execuções) tem justificativa provisória numa simulação de poder a priori e
+será revisto com a variância do piloto. O detalhamento, o plano randomizado e a regra de
+revisão estão em [metodo.md](metodo.md).
 
 ## 7. Ameaças à validade (versão inicial)
 
