@@ -1,0 +1,2 @@
+colecao_id,ordem,id_execucao,experimento,broker,versao,tamanho_bytes,repeticao,status,inicio_utc,fim_utc,duracao_s,aquecimento_s,medicao_s,taxa_alvo_msg_s,throughput_msg_s,throughput_mib_s,latencia_p50_ms,latencia_p99_ms,cpu_percent_medio,memoria_mib_media,codigo_saida,erro,resultado_bruto,stdout,stderr,comando
+20261119T024846.897068Z,1,E1-kafka-1k-r01,E1,kafka,4.4.0,1024,1,interrompida,2026-11-19T02:48:48.148Z,2026-11-19T02:50:25.024Z,96.876,30,60,,,,,,,,,coleta interrompida pelo usuário,,logs\E1-kafka-1k-r01.stdout.log,logs\E1-kafka-1k-r01.stderr.log,

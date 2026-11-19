@@ -1,0 +1,47 @@
+03:52:17.589 [main] INFO Benchmark - Starting benchmark with config: {
+  "drivers" : [ "/workspace/drivers/rabbitmq.yaml" ],
+  "workers" : null,
+  "workersFile" : null,
+  "workloads" : [ "/resultados/20261119T034450.198429Z/workloads/E1-rabbitmq-16k-r03.yaml" ],
+  "output" : "/resultados/20261119T034450.198429Z/raw/E1-rabbitmq-16k-r03.json"
+}
+03:52:17.660 [main] INFO Benchmark - Workloads: {
+  "E1-rabbitmq-16k-r03" : {
+    "name" : "lab05-E1-rabbitmq-16384",
+    "topics" : 1,
+    "partitionsPerTopic" : 1,
+    "keyDistributor" : "NO_KEY",
+    "messageSize" : 16384,
+    "messageSizeDistribution" : null,
+    "useRandomizedPayloads" : true,
+    "randomBytesRatio" : 1.0,
+    "randomizedPayloadPoolSize" : 1000,
+    "payloadFile" : null,
+    "subscriptionsPerTopic" : 1,
+    "producersPerTopic" : 1,
+    "consumerPerSubscription" : 1,
+    "producerRate" : 0,
+    "consumerBacklogSizeGB" : 0,
+    "backlogDrainRatio" : 1.0,
+    "testDurationMinutes" : 0,
+    "warmupDurationMinutes" : 0,
+    "testDurationSeconds" : 60,
+    "warmupDurationSeconds" : 30
+  }
+}
+03:52:17.758 [main] INFO Benchmark - --------------- WORKLOAD : lab05-E1-rabbitmq-16384 --- DRIVER : RabbitMQ 4.4.1 - duravel---------------
+03:52:18.372 [main] INFO LocalWorker - Driver: {
+  "name" : "RabbitMQ 4.4.1 - duravel",
+  "driverClass" : "io.openmessaging.benchmark.driver.rabbitmq.RabbitMqBenchmarkDriver"
+}
+03:52:18.392 [main] INFO LocalWorker - Created 1 topics in 7.850047 ms
+03:52:18.393 [main] INFO WorkloadGenerator - Created 1 topics in 8.454773 ms
+03:52:18.766 [main] INFO LocalWorker - Created 1 consumers in 372.610945 ms
+03:52:18.766 [main] INFO WorkloadGenerator - Created 1 consumers in 373.016961 ms
+03:52:18.873 [main] INFO LocalWorker - Created 1 producers in 106.219635 ms
+03:52:18.873 [main] INFO WorkloadGenerator - Created 1 producers in 106.652052 ms
+03:52:18.874 [main] INFO WorkloadGenerator - Waiting for consumers to be ready
+03:52:18.877 [main] INFO WorkloadGenerator - Waiting for topics to be ready -- Sent: 0, Received: 0
+03:52:20.877 [main] INFO WorkloadGenerator - Waiting for topics to be ready -- Sent: 1, Received: 1
+03:52:20.878 [main] INFO WorkloadGenerator - All consumers are ready
+03:52:21.027 [main] INFO WorkloadGenerator - ----- Starting warm-up traffic (30s) ------
