@@ -28,7 +28,9 @@ broker é iniciado por execução. O coletor sempre executa `docker compose down
 - Kafka roda em nó único KRaft, uma partição, fator de replicação 1,
   `min.insync.replicas=1`, `acks=all` e produtor idempotente.
 - RabbitMQ usa uma fila durável do tipo *quorum*, mensagens persistentes, confirmações do
-  publicador e confirmação manual do consumidor pelo driver.
+  publicador e confirmação manual do consumidor pelo driver. O usuário isolado `lab05`
+  é criado no início de cada execução; a conta `guest`, restrita a conexões locais pelo
+  RabbitMQ, não é usada entre containers.
 
 Em nó único nenhuma das tecnologias tolera a perda do nó; a equalização representa a
 confirmação após persistência local. O experimento não afirma equivalência com clusters
