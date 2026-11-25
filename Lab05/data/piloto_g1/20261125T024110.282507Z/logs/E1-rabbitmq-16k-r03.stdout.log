@@ -1,0 +1,60 @@
+03:15:19.979 [main] INFO Benchmark - Starting benchmark with config: {
+  "drivers" : [ "/workspace/drivers/rabbitmq.yaml" ],
+  "workers" : null,
+  "workersFile" : null,
+  "workloads" : [ "/resultados/20261125T024110.282507Z/workloads/E1-rabbitmq-16k-r03.yaml" ],
+  "output" : "/resultados/20261125T024110.282507Z/raw/E1-rabbitmq-16k-r03.json"
+}
+03:15:20.021 [main] INFO Benchmark - Workloads: {
+  "E1-rabbitmq-16k-r03" : {
+    "name" : "lab05-E1-rabbitmq-16384",
+    "topics" : 1,
+    "partitionsPerTopic" : 1,
+    "keyDistributor" : "NO_KEY",
+    "messageSize" : 16384,
+    "messageSizeDistribution" : null,
+    "useRandomizedPayloads" : true,
+    "randomBytesRatio" : 1.0,
+    "randomizedPayloadPoolSize" : 1000,
+    "payloadFile" : null,
+    "subscriptionsPerTopic" : 1,
+    "producersPerTopic" : 1,
+    "consumerPerSubscription" : 1,
+    "producerRate" : 1000000,
+    "consumerBacklogSizeGB" : 0,
+    "backlogDrainRatio" : 1.0,
+    "testDurationMinutes" : 0,
+    "warmupDurationMinutes" : 0,
+    "testDurationSeconds" : 60,
+    "warmupDurationSeconds" : 30
+  }
+}
+03:15:20.087 [main] INFO Benchmark - --------------- WORKLOAD : lab05-E1-rabbitmq-16384 --- DRIVER : RabbitMQ 4.4.1 - duravel---------------
+03:15:20.416 [main] INFO LocalWorker - Driver: {
+  "name" : "RabbitMQ 4.4.1 - duravel",
+  "driverClass" : "io.openmessaging.benchmark.driver.rabbitmq.RabbitMqBenchmarkDriver"
+}
+03:15:20.470 [main] INFO LocalWorker - Created 1 topics in 15.612526 ms
+03:15:20.470 [main] INFO WorkloadGenerator - Created 1 topics in 16.461145 ms
+03:15:20.870 [main] INFO LocalWorker - Created 1 consumers in 399.070499 ms
+03:15:20.871 [main] INFO WorkloadGenerator - Created 1 consumers in 399.893184 ms
+03:15:20.983 [main] INFO LocalWorker - Created 1 producers in 111.253824 ms
+03:15:20.983 [main] INFO WorkloadGenerator - Created 1 producers in 111.502447 ms
+03:15:20.984 [main] INFO WorkloadGenerator - Waiting for consumers to be ready
+03:15:20.986 [main] INFO WorkloadGenerator - Waiting for topics to be ready -- Sent: 0, Received: 0
+03:15:22.987 [main] INFO WorkloadGenerator - Waiting for topics to be ready -- Sent: 1, Received: 1
+03:15:22.987 [main] INFO WorkloadGenerator - All consumers are ready
+03:15:23.050 [main] INFO WorkloadGenerator - ----- Starting warm-up traffic (30s) ------
+03:15:33.156 [main] INFO WorkloadGenerator - Pub rate  2399.0 msg/s / 37.5 MB/s | Pub err     0.0 err/s | Cons rate  2399.1 msg/s / 37.5 MB/s | Backlog:  0.0 K | Pub Latency (ms) avg: 301.4 - 50%: 314.0 - 99%: 502.0 - 99.9%: 544.5 - Max: 544.8 | Pub Delay Latency (us) avg: 4358796.3 - 50%: 4328351.0 - 99%: 9613567.0 - 99.9%: 9779711.0 - Max: 9780543.0
+03:15:43.228 [main] INFO WorkloadGenerator - Pub rate  4346.6 msg/s / 67.9 MB/s | Pub err     0.0 err/s | Cons rate  4346.6 msg/s / 67.9 MB/s | Backlog:  0.0 K | Pub Latency (ms) avg: 173.8 - 50%: 161.1 - 99%: 404.4 - 99.9%: 442.3 - Max: 489.9 | Pub Delay Latency (us) avg: 14417769.1 - 50%: 14076927.0 - 99%: 19841919.0 - 99.9%: 19915263.0 - Max: 19917055.0
+03:15:53.281 [main] INFO WorkloadGenerator - Pub rate  3459.3 msg/s / 54.1 MB/s | Pub err     0.0 err/s | Cons rate  3459.3 msg/s / 54.1 MB/s | Backlog:  0.0 K | Pub Latency (ms) avg: 194.7 - 50%: 166.1 - 99%: 1111.7 - 99.9%: 1684.4 - Max: 2055.6 | Pub Delay Latency (us) avg: 23838874.2 - 50%: 23750015.0 - 99%: 27891455.0 - 99.9%: 27963903.0 - Max: 27964799.0
+03:15:53.340 [main] INFO WorkloadGenerator - ----- Aggregated Pub Latency (ms) avg: 210.9 - 50%: 181.0 - 95%: 391.7 - 99%: 500.6 - 99.9%: 1682.5 - 99.99%: 2055.2 - Max: 2055.6 | Pub Delay (us)  avg: 15227711.9 - 50%: 15278207.0 - 95%: 26678399.0 - 99%: 27792895.0 - 99.9%: 27963007.0 - 99.99%: 27964415.0 - Max: 27964799.0
+03:15:53.448 [main] INFO WorkloadGenerator - ----- Starting benchmark traffic (60s)------
+03:16:03.482 [main] INFO WorkloadGenerator - Pub rate  2875.2 msg/s / 44.9 MB/s | Pub err     0.0 err/s | Cons rate  2875.2 msg/s / 44.9 MB/s | Backlog:  0.0 K | Pub Latency (ms) avg: 312.3 - 50%: 175.2 - 99%: 2703.9 - 99.9%: 3333.8 - Max: 3334.1 | Pub Delay Latency (us) avg: 36628079.6 - 50%: 36748543.0 - 99%: 40144383.0 - 99.9%: 40149503.0 - Max: 40189951.0
+03:16:13.578 [main] INFO WorkloadGenerator - Pub rate  4697.6 msg/s / 73.4 MB/s | Pub err     0.0 err/s | Cons rate  4697.6 msg/s / 73.4 MB/s | Backlog:  0.0 K | Pub Latency (ms) avg: 163.8 - 50%: 147.0 - 99%: 535.5 - 99.9%: 672.3 - Max: 672.8 | Pub Delay Latency (us) avg: 44349234.6 - 50%: 43540479.0 - 99%: 50029055.0 - 99.9%: 50066687.0 - Max: 50067199.0
+03:16:23.685 [main] INFO WorkloadGenerator - Pub rate  5298.5 msg/s / 82.8 MB/s | Pub err     0.0 err/s | Cons rate  5298.5 msg/s / 82.8 MB/s | Backlog:  0.0 K | Pub Latency (ms) avg: 143.6 - 50%: 121.4 - 99%: 364.5 - 99.9%: 509.7 - Max: 510.3 | Pub Delay Latency (us) avg: 55852905.9 - 50%: 55990271.0 - 99%: 60000255.0 - 99.9%: 60000255.0 - Max: 60000255.0
+03:16:33.750 [main] INFO WorkloadGenerator - Pub rate  6339.8 msg/s / 99.1 MB/s | Pub err     0.0 err/s | Cons rate  6339.8 msg/s / 99.1 MB/s | Backlog:  0.0 K | Pub Latency (ms) avg: 118.2 - 50%: 113.1 - 99%: 274.2 - 99.9%: 383.4 - Max: 387.0 | Pub Delay Latency (us) avg: 60000128.0 - 50%: 60000255.0 - 99%: 60000255.0 - 99.9%: 60000255.0 - Max: 60000255.0
+03:16:43.830 [main] INFO WorkloadGenerator - Pub rate  2545.8 msg/s / 39.8 MB/s | Pub err     0.0 err/s | Cons rate  2545.8 msg/s / 39.8 MB/s | Backlog:  0.0 K | Pub Latency (ms) avg: 297.4 - 50%: 135.2 - 99%: 1984.7 - 99.9%: 2271.8 - Max: 2272.0 | Pub Delay Latency (us) avg: 60000128.0 - 50%: 60000255.0 - 99%: 60000255.0 - 99.9%: 60000255.0 - Max: 60000255.0
+03:16:53.903 [main] INFO WorkloadGenerator - Pub rate  6559.2 msg/s / 102.5 MB/s | Pub err     0.0 err/s | Cons rate  6559.2 msg/s / 102.5 MB/s | Backlog:  0.0 K | Pub Latency (ms) avg: 116.2 - 50%: 107.2 - 99%: 343.5 - 99.9%: 386.9 - Max: 389.0 | Pub Delay Latency (us) avg: 60000128.0 - 50%: 60000255.0 - 99%: 60000255.0 - 99.9%: 60000255.0 - Max: 60000255.0
+03:16:54.037 [main] INFO WorkloadGenerator - ----- Aggregated Pub Latency (ms) avg: 165.8 - 50%: 121.6 - 95%: 296.5 - 99%: 1648.7 - 99.9%: 2704.0 - 99.99%: 3333.8 - Max: 3334.1 | Pub Delay (us)  avg: 54272704.5 - 50%: 60000255.0 - 95%: 60000255.0 - 99%: 60000255.0 - 99.9%: 60000255.0 - 99.99%: 60000255.0 - Max: 60000255.0
+03:16:54.230 [main] INFO Benchmark - Writing test result into /resultados/20261125T024110.282507Z/raw/E1-rabbitmq-16k-r03.json

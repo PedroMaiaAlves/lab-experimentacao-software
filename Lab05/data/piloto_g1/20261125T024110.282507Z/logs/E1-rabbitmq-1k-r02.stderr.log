@@ -1,0 +1,29 @@
+Exception in thread "ForkJoinPool.commonPool-worker-1" java.lang.RuntimeException: Couldn't establish connection to: amqp://lab05:lab05@rabbitmq:5672
+	at io.openmessaging.benchmark.driver.rabbitmq.RabbitMqBenchmarkDriver.lambda$getOrCreateConnection$13(RabbitMqBenchmarkDriver.java:239)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(Unknown Source)
+	at io.openmessaging.benchmark.driver.rabbitmq.RabbitMqBenchmarkDriver.getOrCreateConnection(RabbitMqBenchmarkDriver.java:218)
+	at io.openmessaging.benchmark.driver.rabbitmq.RabbitMqBenchmarkDriver.lambda$createConsumer$9(RabbitMqBenchmarkDriver.java:188)
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(Unknown Source)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(Unknown Source)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(Unknown Source)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(Unknown Source)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(Unknown Source)
+Caused by: java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(Unknown Source)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(Unknown Source)
+	at java.base/java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.base/java.net.Socket.connect(Unknown Source)
+	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:61)
+	at com.rabbitmq.client.impl.recovery.RecoveryAwareAMQConnectionFactory.newConnection(RecoveryAwareAMQConnectionFactory.java:63)
+	at com.rabbitmq.client.impl.recovery.AutorecoveringConnection.init(AutorecoveringConnection.java:160)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1227)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1184)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1061)
+	at io.openmessaging.benchmark.driver.rabbitmq.RabbitMqBenchmarkDriver.lambda$getOrCreateConnection$13(RabbitMqBenchmarkDriver.java:237)
+	... 9 more
+
+Coletor: tempo limite excedido.
+

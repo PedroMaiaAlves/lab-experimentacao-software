@@ -76,3 +76,100 @@ São 24 tentativas: 2 experimentos × 2 brokers × 2 tamanhos × 3 repetições.
 máxima. Para cada tamanho, E2 usa 50% do menor throughput mediano observado entre os dois
 brokers em E1. Cada tentativa recria containers e volumes, descarta o aquecimento e grava
 resultado, recursos, metadados e logs, inclusive quando falha.
+
+## Estabilização do E1 — portão G1 (#209)
+
+Responsável: Diogo. Relatórios do portão em `data/analise/g1_*.json`, gerados por
+`python Lab05/portao_g1.py <resultados.csv> [<repetições.csv>]`.
+
+**Critério (definido antes, em `planejamento_s02.md`):** em cada célula do E1, CV do throughput
+entre execuções ≤ 20%; nenhuma execução com colapso (intervalo de 10 s abaixo de 10% do maior
+intervalo da própria execução); nenhuma execução abaixo de 10% da mediana da célula; pelo menos
+3 sucessos por célula.
+
+### Diagnóstico
+
+O piloto de 19/11 (`data/piloto/20261119T030115.153119Z`) reprovou nas 4 células, com CV de
+52% a 128%. Pelos JSON brutos do OMB, as execuções do Kafka publicavam dezenas de milhares de
+msg/s e, depois de um pico de latência de publicação (13,6 s no `E1-kafka-1k-r02`), caíam para
+cerca de 1 msg/s até o fim da medição.
+
+**Causa:** `producerRate: 0` no workload. Na revisão do OMB usada
+(`5b1fa70951a323da26bd587174b58bb2c65b0b5c`), esse valor liga `findMaximumSustainableRate`,
+que roda durante **toda** a medição e chama o `RateController` a cada 3 s. Quando o atraso
+passa de 1.000 mensagens, a nova taxa é `min(taxa real, esperado − atraso)`, que vai a quase
+zero depois de um único pico, e o fator de rampa cai para 1%. O E1 media a dinâmica do
+controlador, não o broker. Isso é uma ameaça de **construto**, não só de variância.
+
+### Correções aplicadas (uma de cada vez)
+
+| # | Correção | Arquivo |
+| --- | --- | --- |
+| 1 | E1 com taxa-alvo **fixa e inalcançável** (`TAXA_E1_ABERTA = 1.000.000` msg/s): sem controlador adaptativo; o limite vem da contrapressão do broker | `experimento/plano.py`, `experimento/coleta.py` |
+| 2 | Métricas de estabilidade por execução (`cv_intervalos`, `intervalo_min_rel`, `colapso`) e `throughput_consumo_msg_s` | `experimento/coleta.py` |
+| 3 | Patch e arquivos do OMB forçados a LF (`.gitattributes`): com `core.autocrlf=true`, o `git apply` do build falhava com "corrupt patch" | `.gitattributes` |
+| 4 | Healthcheck do RabbitMQ: `check_port_connectivity` no lugar de `ping`, que responde antes de o listener AMQP abrir (causa das duas falhas de `E1-rabbitmq-1k-r02`) | `docker-compose.yml` |
+| 5 | O coletor impede a suspensão do Windows durante a coleta (`SetThreadExecutionState`) | `experimento/coleta.py`, `coletar.py` |
+| 6 | Modo `--repetir-falhas`: repete a execução inteira numa coleta nova ligada à original (`origem.json`), sem sobrescrever | `coletar.py` |
+| 7 | Mini-pilotos do G1 gravados em `data/piloto_g1/`, para não serem lidos como piloto completo pelo `analisar.py` | `coletar.py` |
+
+### Ciclos do mini-piloto (5 execuções por célula, só E1)
+
+Máquina dos ciclos: Windows 11 Home, 16 processadores lógicos, Docker Desktop 28.4.0 com
+7,6 GiB para a VM. **Não é a máquina do piloto de 19/11** (ver "Ambiente de referência"). A
+coleta oficial precisa rodar inteira numa única máquina.
+
+| Célula E1 | Piloto 19/11 (`producerRate: 0`, 60 s) | Ciclo 1 (taxa aberta, 60 s) | Ciclo 2 (taxa aberta, 120 s) |
+| --- | --- | --- | --- |
+| Kafka 1 KiB | 22.381 msg/s · CV 128% · 2 colapsos | 129.146 msg/s · CV **16%** | 125.147 msg/s · CV **20,3%** |
+| Kafka 16 KiB | 2.129 msg/s · CV 98% · 2 colapsos | 8.509 msg/s · CV **27%** | 7.508 msg/s · CV **30%** |
+| RabbitMQ 1 KiB | 12.572 msg/s · n = 2 | 8.913 msg/s · CV **15%** (n = 4) | 8.665 msg/s · CV **4%** |
+| RabbitMQ 16 KiB | 2.701 msg/s · CV 52% | 4.284 msg/s · CV **20,4%** | 3.411 msg/s · CV **11%** |
+| **Portão G1** | reprovado (4/4) | reprovado (2/4) | **reprovado (2/4, só Kafka)** |
+
+Coletas: ciclo 1 em `data/piloto_g1/20261125T024110.282507Z` (1 falha de partida do RabbitMQ,
+antes da correção 4); ciclo 2 em `data/piloto_g1/20261125T032412.920068Z`, mais as repetições
+em `data/piloto_g1/20261125T105810.056929Z`. No ciclo 2, a máquina **suspendeu** durante a
+execução 12. As execuções 12 a 14 falharam com timeout negativo (salto de relógio), foram
+preservadas como falha e repetidas com sucesso (correções 5 e 6).
+
+### O que resta e interpretação
+
+- **Nenhum colapso** em nenhuma execução depois da correção 1. O problema do piloto está
+  resolvido.
+- O controlador do OMB **escondia** cerca de 6× do throughput do Kafka 1 KiB (22 mil → cerca
+  de 125 mil msg/s).
+- **RabbitMQ estável** com 120 s (CV de 4% e 11%).
+- O **Kafka** continua oscilando dentro de cada execução (CV entre intervalos de 20% a 43%) e
+  entre execuções. Dobrar a medição não reduziu o CV (16% → 20%; 27% → 30%), então não é ruído
+  que se resolve medindo mais. A CPU do broker fica em 90–150% de um teto de 400%, ou seja, o
+  Kafka **não está limitado por CPU**. As hipóteses que sobram são I/O de disco (cerca de
+  178 MB/s no 16 KiB, sobre o disco virtual do WSL2 e a *page cache* da VM) e o cliente OMB
+  (limitado a 2 vCPU) como teto no 1 KiB. A medição está *correta* (sem artefato do
+  controlador); o que varia é o ambiente sob o Kafka.
+
+### Poder com o CV observado (Mann-Whitney, α = 0,0125, Holm)
+
+| CV | razão 1,2 | razão 1,5 | razão 2,0 |
+| --- | --- | --- | --- |
+| 20% | n = 20: 60% | n = 10: 93% | n = 5: 88% |
+| 30% | n = 20: 27% | n = 15: 84% | n = 10: 98% |
+
+As razões Kafka/RabbitMQ observadas no E1 são cerca de **14×** (1 KiB) e cerca de **2,2×**
+(16 KiB). Com CV de 30%, **n = 10–15 por célula** detecta razões a partir de 1,5–2,0 com
+poder ≥ 84%, mas não detecta diferenças de 20%.
+
+### Decisão para a #207 (portão G1 reprovado para o Kafka)
+
+O critério de 20% **não foi alterado** depois de ver os dados. As opções para o protocolo
+final são:
+
+1. **Manter o E1 com taxa aberta e 120 s**, aceitar o desvio do G1 para o Kafka como
+   limitação de conclusão declarada e fixar **n = 15** (poder ≥ 84% para razão 1,5 com
+   CV de 30%). *Recomendação desta issue*: o artefato foi eliminado e os efeitos esperados são
+   muito maiores que a variância.
+2. **Plano B** do planejamento: substituir a saturação por degraus de taxa fixa, que no E2 do
+   piloto deram CV de 0%. Isso troca a métrica (taxa máxima sustentável por degrau) e exige
+   atualizar o design em `metodo.md`.
+3. Investigar mais o I/O (volume em tmpfs ou outro disco, mais CPU para o OMB). Isso consome a
+   sprint e muda o construto (sem disco real, deixa de ser "durável").
