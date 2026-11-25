@@ -1,0 +1,548 @@
+03:41:33.854 [main] INFO Benchmark - Starting benchmark with config: {
+  "drivers" : [ "/workspace/drivers/kafka.yaml" ],
+  "workers" : null,
+  "workersFile" : null,
+  "workloads" : [ "/resultados/20261125T032412.920068Z/workloads/E1-kafka-16k-r02.yaml" ],
+  "output" : "/resultados/20261125T032412.920068Z/raw/E1-kafka-16k-r02.json"
+}
+03:41:33.897 [main] INFO Benchmark - Workloads: {
+  "E1-kafka-16k-r02" : {
+    "name" : "lab05-E1-kafka-16384",
+    "topics" : 1,
+    "partitionsPerTopic" : 1,
+    "keyDistributor" : "NO_KEY",
+    "messageSize" : 16384,
+    "messageSizeDistribution" : null,
+    "useRandomizedPayloads" : true,
+    "randomBytesRatio" : 1.0,
+    "randomizedPayloadPoolSize" : 1000,
+    "payloadFile" : null,
+    "subscriptionsPerTopic" : 1,
+    "producersPerTopic" : 1,
+    "consumerPerSubscription" : 1,
+    "producerRate" : 1000000,
+    "consumerBacklogSizeGB" : 0,
+    "backlogDrainRatio" : 1.0,
+    "testDurationMinutes" : 0,
+    "warmupDurationMinutes" : 0,
+    "testDurationSeconds" : 120,
+    "warmupDurationSeconds" : 30
+  }
+}
+03:41:33.954 [main] INFO Benchmark - --------------- WORKLOAD : lab05-E1-kafka-16384 --- DRIVER : Kafka 4.4.0 - duravel---------------
+03:41:34.237 [main] INFO LocalWorker - Driver: {
+  "name" : "Kafka 4.4.0 - duravel",
+  "driverClass" : "io.openmessaging.benchmark.driver.kafka.KafkaBenchmarkDriver"
+}
+03:41:34.267 [main] INFO AdminClientConfig - AdminClientConfig values: 
+	auto.include.jmx.reporter = true
+	bootstrap.servers = [kafka:9092]
+	client.dns.lookup = use_all_dns_ips
+	client.id = 
+	connections.max.idle.ms = 300000
+	default.api.timeout.ms = 120000
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 120000
+	retries = 2147483647
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+
+03:41:34.343 [main] INFO AppInfoParser - Kafka version: 3.6.1
+03:41:34.343 [main] INFO AppInfoParser - Kafka commitId: 5e3c2b738d253ff5
+03:41:34.343 [main] INFO AppInfoParser - Kafka startTimeMs: 1795578094341
+03:41:34.621 [main] INFO LocalWorker - Created 1 topics in 275.048559 ms
+03:41:34.621 [main] INFO WorkloadGenerator - Created 1 topics in 275.52693 ms
+03:41:34.634 [main] INFO ConsumerConfig - ConsumerConfig values: 
+	allow.auto.create.topics = true
+	auto.commit.interval.ms = 5000
+	auto.include.jmx.reporter = true
+	auto.offset.reset = earliest
+	bootstrap.servers = [kafka:9092]
+	check.crcs = true
+	client.dns.lookup = use_all_dns_ips
+	client.id = consumer-sub-000-oFS_4vs-1
+	client.rack = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 120000
+	enable.auto.commit = false
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = sub-000-oFS_4vs
+	group.instance.id = null
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	internal.throw.on.fetch.stable.offset.unsupported = false
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 16777216
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 120000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	session.timeout.ms = 45000
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.ByteArrayDeserializer
+
+03:41:34.670 [main] INFO AppInfoParser - Kafka version: 3.6.1
+03:41:34.671 [main] INFO AppInfoParser - Kafka commitId: 5e3c2b738d253ff5
+03:41:34.671 [main] INFO AppInfoParser - Kafka startTimeMs: 1795578094670
+03:41:34.672 [main] INFO KafkaConsumer - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Subscribed to topic(s): test-topic-0000000-vQMjq30
+03:41:34.676 [main] INFO LocalWorker - Created 1 consumers in 54.166788 ms
+03:41:34.676 [main] INFO WorkloadGenerator - Created 1 consumers in 54.519064 ms
+03:41:34.685 [main] INFO ProducerConfig - ProducerConfig values: 
+	acks = -1
+	auto.include.jmx.reporter = true
+	batch.size = 1048576
+	bootstrap.servers = [kafka:9092]
+	buffer.memory = 33554432
+	client.dns.lookup = use_all_dns_ips
+	client.id = producer-1
+	compression.type = none
+	connections.max.idle.ms = 540000
+	delivery.timeout.ms = 120000
+	enable.idempotence = true
+	interceptor.classes = []
+	key.serializer = class org.apache.kafka.common.serialization.StringSerializer
+	linger.ms = 1
+	max.block.ms = 60000
+	max.in.flight.requests.per.connection = 5
+	max.request.size = 1048576
+	metadata.max.age.ms = 300000
+	metadata.max.idle.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partitioner.adaptive.partitioning.enable = true
+	partitioner.availability.timeout.ms = 0
+	partitioner.class = null
+	partitioner.ignore.keys = false
+	receive.buffer.bytes = 32768
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 120000
+	retries = 2147483647
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	transaction.timeout.ms = 60000
+	transactional.id = null
+	value.serializer = class org.apache.kafka.common.serialization.ByteArraySerializer
+
+03:41:34.689 [main] WARN KafkaProducer - [Producer clientId=producer-1] delivery.timeout.ms should be equal to or larger than linger.ms + request.timeout.ms. Setting it to 120001.
+03:41:34.694 [pool-3-thread-1] INFO Metadata - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Cluster ID: 5L6g3nShT-eMCtK--X86sw
+03:41:34.695 [main] INFO KafkaProducer - [Producer clientId=producer-1] Instantiated an idempotent producer.
+03:41:34.709 [main] INFO ProducerConfig - These configurations '[default.api.timeout.ms]' were supplied but are not used yet.
+03:41:34.709 [main] INFO AppInfoParser - Kafka version: 3.6.1
+03:41:34.709 [main] INFO AppInfoParser - Kafka commitId: 5e3c2b738d253ff5
+03:41:34.709 [main] INFO AppInfoParser - Kafka startTimeMs: 1795578094709
+03:41:34.711 [main] INFO LocalWorker - Created 1 producers in 34.060181 ms
+03:41:34.711 [main] INFO WorkloadGenerator - Created 1 producers in 34.304406 ms
+03:41:34.711 [main] INFO WorkloadGenerator - Waiting for consumers to be ready
+03:41:34.716 [kafka-producer-network-thread | producer-1] INFO Metadata - [Producer clientId=producer-1] Cluster ID: 5L6g3nShT-eMCtK--X86sw
+03:41:34.728 [main] INFO WorkloadGenerator - Waiting for topics to be ready -- Sent: 0, Received: 0
+03:41:34.787 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:34.789 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] (Re-)joining group
+03:41:34.802 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: error response NOT_COORDINATOR. isDisconnected: false. Rediscovery will be attempted.
+03:41:34.803 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:34.803 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] JoinGroup failed: This is not the correct coordinator. Marking coordinator unknown. Sent generation was Generation{generationId=-1, memberId='', protocol='null'}
+03:41:34.803 [pool-3-thread-1] INFO NetworkClient - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Client requested disconnect from node 2147483646
+03:41:34.807 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:34.807 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: coordinator unavailable. isDisconnected: false. Rediscovery will be attempted.
+03:41:34.807 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:34.825 [kafka-producer-network-thread | producer-1] INFO TransactionManager - [Producer clientId=producer-1] ProducerId set to 0 with epoch 0
+03:41:34.882 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:34.883 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Request joining group due to: rebalance failed due to 'This is not the correct coordinator.' (NotCoordinatorException)
+03:41:34.884 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] (Re-)joining group
+03:41:34.888 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: error response NOT_COORDINATOR. isDisconnected: false. Rediscovery will be attempted.
+03:41:34.888 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:34.889 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] JoinGroup failed: This is not the correct coordinator. Marking coordinator unknown. Sent generation was Generation{generationId=-1, memberId='', protocol='null'}
+03:41:34.889 [pool-3-thread-1] INFO NetworkClient - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Client requested disconnect from node 2147483646
+03:41:34.892 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:34.892 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: coordinator unavailable. isDisconnected: false. Rediscovery will be attempted.
+03:41:34.892 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:34.985 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:34.988 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Request joining group due to: rebalance failed due to 'This is not the correct coordinator.' (NotCoordinatorException)
+03:41:34.992 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] (Re-)joining group
+03:41:35.004 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: error response NOT_COORDINATOR. isDisconnected: false. Rediscovery will be attempted.
+03:41:35.004 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.005 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] JoinGroup failed: This is not the correct coordinator. Marking coordinator unknown. Sent generation was Generation{generationId=-1, memberId='', protocol='null'}
+03:41:35.006 [pool-3-thread-1] INFO NetworkClient - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Client requested disconnect from node 2147483646
+03:41:35.013 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.014 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: coordinator unavailable. isDisconnected: false. Rediscovery will be attempted.
+03:41:35.015 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.085 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.086 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Request joining group due to: rebalance failed due to 'This is not the correct coordinator.' (NotCoordinatorException)
+03:41:35.087 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] (Re-)joining group
+03:41:35.094 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: error response NOT_COORDINATOR. isDisconnected: false. Rediscovery will be attempted.
+03:41:35.095 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.095 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] JoinGroup failed: This is not the correct coordinator. Marking coordinator unknown. Sent generation was Generation{generationId=-1, memberId='', protocol='null'}
+03:41:35.096 [pool-3-thread-1] INFO NetworkClient - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Client requested disconnect from node 2147483646
+03:41:35.102 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.103 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: coordinator unavailable. isDisconnected: false. Rediscovery will be attempted.
+03:41:35.103 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.189 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.191 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Request joining group due to: rebalance failed due to 'This is not the correct coordinator.' (NotCoordinatorException)
+03:41:35.193 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] (Re-)joining group
+03:41:35.199 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: error response NOT_COORDINATOR. isDisconnected: false. Rediscovery will be attempted.
+03:41:35.200 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.200 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] JoinGroup failed: This is not the correct coordinator. Marking coordinator unknown. Sent generation was Generation{generationId=-1, memberId='', protocol='null'}
+03:41:35.201 [pool-3-thread-1] INFO NetworkClient - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Client requested disconnect from node 2147483646
+03:41:35.206 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.207 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: coordinator unavailable. isDisconnected: false. Rediscovery will be attempted.
+03:41:35.207 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.293 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.295 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Request joining group due to: rebalance failed due to 'This is not the correct coordinator.' (NotCoordinatorException)
+03:41:35.297 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] (Re-)joining group
+03:41:35.305 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: error response NOT_COORDINATOR. isDisconnected: false. Rediscovery will be attempted.
+03:41:35.305 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.306 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] JoinGroup failed: This is not the correct coordinator. Marking coordinator unknown. Sent generation was Generation{generationId=-1, memberId='', protocol='null'}
+03:41:35.307 [pool-3-thread-1] INFO NetworkClient - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Client requested disconnect from node 2147483646
+03:41:35.314 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.315 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: coordinator unavailable. isDisconnected: false. Rediscovery will be attempted.
+03:41:35.315 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.394 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.396 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Request joining group due to: rebalance failed due to 'This is not the correct coordinator.' (NotCoordinatorException)
+03:41:35.398 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] (Re-)joining group
+03:41:35.409 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: error response NOT_COORDINATOR. isDisconnected: false. Rediscovery will be attempted.
+03:41:35.410 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.411 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] JoinGroup failed: This is not the correct coordinator. Marking coordinator unknown. Sent generation was Generation{generationId=-1, memberId='', protocol='null'}
+03:41:35.411 [pool-3-thread-1] INFO NetworkClient - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Client requested disconnect from node 2147483646
+03:41:35.417 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.417 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: coordinator unavailable. isDisconnected: false. Rediscovery will be attempted.
+03:41:35.417 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.496 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.498 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Request joining group due to: rebalance failed due to 'This is not the correct coordinator.' (NotCoordinatorException)
+03:41:35.499 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] (Re-)joining group
+03:41:35.508 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: error response NOT_COORDINATOR. isDisconnected: false. Rediscovery will be attempted.
+03:41:35.508 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.509 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] JoinGroup failed: This is not the correct coordinator. Marking coordinator unknown. Sent generation was Generation{generationId=-1, memberId='', protocol='null'}
+03:41:35.509 [pool-3-thread-1] INFO NetworkClient - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Client requested disconnect from node 2147483646
+03:41:35.515 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.516 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: coordinator unavailable. isDisconnected: false. Rediscovery will be attempted.
+03:41:35.516 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.597 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.598 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Request joining group due to: rebalance failed due to 'This is not the correct coordinator.' (NotCoordinatorException)
+03:41:35.599 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] (Re-)joining group
+03:41:35.607 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: error response NOT_COORDINATOR. isDisconnected: false. Rediscovery will be attempted.
+03:41:35.608 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.608 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] JoinGroup failed: This is not the correct coordinator. Marking coordinator unknown. Sent generation was Generation{generationId=-1, memberId='', protocol='null'}
+03:41:35.609 [pool-3-thread-1] INFO NetworkClient - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Client requested disconnect from node 2147483646
+03:41:35.613 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.614 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: coordinator unavailable. isDisconnected: false. Rediscovery will be attempted.
+03:41:35.614 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.698 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.700 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Request joining group due to: rebalance failed due to 'This is not the correct coordinator.' (NotCoordinatorException)
+03:41:35.701 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] (Re-)joining group
+03:41:35.705 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: error response NOT_COORDINATOR. isDisconnected: false. Rediscovery will be attempted.
+03:41:35.706 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.706 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] JoinGroup failed: This is not the correct coordinator. Marking coordinator unknown. Sent generation was Generation{generationId=-1, memberId='', protocol='null'}
+03:41:35.706 [pool-3-thread-1] INFO NetworkClient - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Client requested disconnect from node 2147483646
+03:41:35.710 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.713 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: coordinator unavailable. isDisconnected: false. Rediscovery will be attempted.
+03:41:35.714 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.805 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.807 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Request joining group due to: rebalance failed due to 'This is not the correct coordinator.' (NotCoordinatorException)
+03:41:35.809 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] (Re-)joining group
+03:41:35.819 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: error response NOT_COORDINATOR. isDisconnected: false. Rediscovery will be attempted.
+03:41:35.820 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.820 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] JoinGroup failed: This is not the correct coordinator. Marking coordinator unknown. Sent generation was Generation{generationId=-1, memberId='', protocol='null'}
+03:41:35.821 [pool-3-thread-1] INFO NetworkClient - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Client requested disconnect from node 2147483646
+03:41:35.827 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.827 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: coordinator unavailable. isDisconnected: false. Rediscovery will be attempted.
+03:41:35.828 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.903 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.905 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Request joining group due to: rebalance failed due to 'This is not the correct coordinator.' (NotCoordinatorException)
+03:41:35.906 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] (Re-)joining group
+03:41:35.912 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: error response NOT_COORDINATOR. isDisconnected: false. Rediscovery will be attempted.
+03:41:35.912 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.913 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] JoinGroup failed: This is not the correct coordinator. Marking coordinator unknown. Sent generation was Generation{generationId=-1, memberId='', protocol='null'}
+03:41:35.913 [pool-3-thread-1] INFO NetworkClient - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Client requested disconnect from node 2147483646
+03:41:35.918 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:35.919 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: coordinator unavailable. isDisconnected: false. Rediscovery will be attempted.
+03:41:35.919 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:36.007 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:36.009 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Request joining group due to: rebalance failed due to 'This is not the correct coordinator.' (NotCoordinatorException)
+03:41:36.010 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] (Re-)joining group
+03:41:36.018 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: error response NOT_COORDINATOR. isDisconnected: false. Rediscovery will be attempted.
+03:41:36.018 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:36.018 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] JoinGroup failed: This is not the correct coordinator. Marking coordinator unknown. Sent generation was Generation{generationId=-1, memberId='', protocol='null'}
+03:41:36.019 [pool-3-thread-1] INFO NetworkClient - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Client requested disconnect from node 2147483646
+03:41:36.025 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:36.026 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: coordinator unavailable. isDisconnected: false. Rediscovery will be attempted.
+03:41:36.026 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:36.109 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:36.111 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Request joining group due to: rebalance failed due to 'This is not the correct coordinator.' (NotCoordinatorException)
+03:41:36.112 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] (Re-)joining group
+03:41:36.121 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: error response NOT_COORDINATOR. isDisconnected: false. Rediscovery will be attempted.
+03:41:36.121 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:36.121 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] JoinGroup failed: This is not the correct coordinator. Marking coordinator unknown. Sent generation was Generation{generationId=-1, memberId='', protocol='null'}
+03:41:36.123 [pool-3-thread-1] INFO NetworkClient - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Client requested disconnect from node 2147483646
+03:41:36.132 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:36.133 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: coordinator unavailable. isDisconnected: false. Rediscovery will be attempted.
+03:41:36.133 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:36.210 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:36.213 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Request joining group due to: rebalance failed due to 'This is not the correct coordinator.' (NotCoordinatorException)
+03:41:36.214 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] (Re-)joining group
+03:41:36.224 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: error response NOT_COORDINATOR. isDisconnected: false. Rediscovery will be attempted.
+03:41:36.224 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:36.224 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] JoinGroup failed: This is not the correct coordinator. Marking coordinator unknown. Sent generation was Generation{generationId=-1, memberId='', protocol='null'}
+03:41:36.225 [pool-3-thread-1] INFO NetworkClient - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Client requested disconnect from node 2147483646
+03:41:36.230 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:36.230 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: coordinator unavailable. isDisconnected: false. Rediscovery will be attempted.
+03:41:36.230 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:36.312 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:36.314 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Request joining group due to: rebalance failed due to 'This is not the correct coordinator.' (NotCoordinatorException)
+03:41:36.315 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] (Re-)joining group
+03:41:36.323 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: error response NOT_COORDINATOR. isDisconnected: false. Rediscovery will be attempted.
+03:41:36.323 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:36.324 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] JoinGroup failed: This is not the correct coordinator. Marking coordinator unknown. Sent generation was Generation{generationId=-1, memberId='', protocol='null'}
+03:41:36.324 [pool-3-thread-1] INFO NetworkClient - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Client requested disconnect from node 2147483646
+03:41:36.329 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:36.331 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Group coordinator kafka:9092 (id: 2147483646 rack: null) is unavailable or invalid due to cause: coordinator unavailable. isDisconnected: false. Rediscovery will be attempted.
+03:41:36.332 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Requesting disconnect from last known coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:36.418 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Discovered group coordinator kafka:9092 (id: 2147483646 rack: null)
+03:41:36.425 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Request joining group due to: rebalance failed due to 'This is not the correct coordinator.' (NotCoordinatorException)
+03:41:36.427 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] (Re-)joining group
+03:41:36.440 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Request joining group due to: need to re-join with the given member-id: consumer-sub-000-oFS_4vs-1-740b2b83-c90d-4948-a644-149f7adc9fe8
+03:41:36.441 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Request joining group due to: rebalance failed due to 'The group member needs to have a valid member id before actually entering a consumer group.' (MemberIdRequiredException)
+03:41:36.442 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] (Re-)joining group
+03:41:36.499 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Successfully joined group with generation Generation{generationId=1, memberId='consumer-sub-000-oFS_4vs-1-740b2b83-c90d-4948-a644-149f7adc9fe8', protocol='range'}
+03:41:36.516 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Finished assignment for group at generation 1: {consumer-sub-000-oFS_4vs-1-740b2b83-c90d-4948-a644-149f7adc9fe8=Assignment(partitions=[test-topic-0000000-vQMjq30-0])}
+03:41:36.528 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Successfully synced group in generation Generation{generationId=1, memberId='consumer-sub-000-oFS_4vs-1-740b2b83-c90d-4948-a644-149f7adc9fe8', protocol='range'}
+03:41:36.530 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Notifying assignor about the new Assignment(partitions=[test-topic-0000000-vQMjq30-0])
+03:41:36.535 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Adding newly assigned partitions: test-topic-0000000-vQMjq30-0
+03:41:36.568 [pool-3-thread-1] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Found no committed offset for partition test-topic-0000000-vQMjq30-0
+03:41:36.603 [pool-3-thread-1] INFO SubscriptionState - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Resetting offset for partition test-topic-0000000-vQMjq30-0 to position FetchPosition{offset=0, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[kafka:9092 (id: 1 rack: null)], epoch=0}}.
+03:41:36.729 [main] INFO WorkloadGenerator - Waiting for topics to be ready -- Sent: 1, Received: 1
+03:41:36.729 [main] INFO WorkloadGenerator - All consumers are ready
+03:41:36.801 [main] INFO WorkloadGenerator - ----- Starting warm-up traffic (30s) ------
+03:41:47.003 [main] INFO WorkloadGenerator - Pub rate 11626.0 msg/s / 181.7 MB/s | Pub err     0.0 err/s | Cons rate 11613.5 msg/s / 181.5 MB/s | Backlog:  0.1 K | Pub Latency (ms) avg: 170.6 - 50%: 161.4 - 99%: 388.7 - 99.9%: 408.4 - Max: 414.0 | Pub Delay Latency (us) avg: 5646306.2 - 50%: 6250911.0 - 99%: 9759999.0 - 99.9%: 9813311.0 - Max: 9816703.0
+03:41:57.107 [main] INFO WorkloadGenerator - Pub rate 14038.7 msg/s / 219.4 MB/s | Pub err     0.0 err/s | Cons rate 14044.8 msg/s / 219.5 MB/s | Backlog:  0.1 K | Pub Latency (ms) avg: 143.4 - 50%: 75.1 - 99%: 971.1 - 99.9%: 1042.3 - Max: 1263.2 | Pub Delay Latency (us) avg: 15245273.0 - 50%: 16509631.0 - 99%: 19849215.0 - 99.9%: 19884415.0 - Max: 19887359.0
+03:42:07.185 [main] INFO WorkloadGenerator - Pub rate  8750.7 msg/s / 136.7 MB/s | Pub err     0.0 err/s | Cons rate  8750.7 msg/s / 136.7 MB/s | Backlog:  0.1 K | Pub Latency (ms) avg: 227.1 - 50%: 95.2 - 99%: 4045.4 - 99.9%: 5078.7 - Max: 5091.1 | Pub Delay Latency (us) avg: 23505132.5 - 50%: 21904127.0 - 99%: 29682559.0 - 99.9%: 29756031.0 - Max: 29758847.0
+03:42:07.304 [main] INFO WorkloadGenerator - ----- Aggregated Pub Latency (ms) avg: 174.1 - 50%: 104.2 - 95%: 355.5 - 99%: 1042.5 - 99.9%: 5018.9 - 99.99%: 5084.1 - Max: 5091.1 | Pub Delay (us)  avg: 14177542.4 - 50%: 13410751.0 - 95%: 28513663.0 - 99%: 29406335.0 - 99.9%: 29798271.0 - 99.99%: 29806847.0 - Max: 29806847.0
+03:42:07.713 [main] INFO WorkloadGenerator - ----- Starting benchmark traffic (120s)------
+03:42:17.798 [main] INFO WorkloadGenerator - Pub rate  6681.9 msg/s / 104.4 MB/s | Pub err     0.0 err/s | Cons rate  6669.4 msg/s / 104.2 MB/s | Backlog:  0.2 K | Pub Latency (ms) avg: 318.4 - 50%: 132.9 - 99%: 3789.2 - 99.9%: 4817.3 - Max: 4827.1 | Pub Delay Latency (us) avg: 33722104.0 - 50%: 32351487.0 - 99%: 39790079.0 - 99.9%: 39856895.0 - Max: 39857151.0
+03:42:27.870 [main] INFO WorkloadGenerator - Pub rate  8286.2 msg/s / 129.5 MB/s | Pub err     0.0 err/s | Cons rate  8298.7 msg/s / 129.7 MB/s | Backlog:  0.1 K | Pub Latency (ms) avg: 254.9 - 50%: 126.7 - 99%: 1511.3 - 99.9%: 1704.1 - Max: 1844.6 | Pub Delay Latency (us) avg: 47731198.8 - 50%: 48225535.0 - 99%: 50447871.0 - 99.9%: 50468607.0 - Max: 50470143.0
+03:42:37.987 [main] INFO WorkloadGenerator - Pub rate  5285.6 msg/s / 82.6 MB/s | Pub err     0.0 err/s | Cons rate  5273.1 msg/s / 82.4 MB/s | Backlog:  0.2 K | Pub Latency (ms) avg: 375.1 - 50%: 188.6 - 99%: 1875.8 - 99.9%: 1932.9 - Max: 1939.3 | Pub Delay Latency (us) avg: 57187470.1 - 50%: 57899263.0 - 99%: 60000255.0 - 99.9%: 60000255.0 - Max: 60000255.0
+03:42:48.090 [main] INFO WorkloadGenerator - Pub rate  7278.1 msg/s / 113.7 MB/s | Pub err     0.0 err/s | Cons rate  7290.5 msg/s / 113.9 MB/s | Backlog:  0.1 K | Pub Latency (ms) avg: 215.3 - 50%: 146.2 - 99%: 3408.8 - 99.9%: 4382.6 - Max: 4390.6 | Pub Delay Latency (us) avg: 60000128.0 - 50%: 60000255.0 - 99%: 60000255.0 - 99.9%: 60000255.0 - Max: 60000255.0
+03:42:58.181 [main] INFO WorkloadGenerator - Pub rate  7395.0 msg/s / 115.5 MB/s | Pub err     0.0 err/s | Cons rate  7388.7 msg/s / 115.4 MB/s | Backlog:  0.1 K | Pub Latency (ms) avg: 269.8 - 50%: 114.1 - 99%: 3450.6 - 99.9%: 5092.8 - Max: 5095.1 | Pub Delay Latency (us) avg: 60000128.0 - 50%: 60000255.0 - 99%: 60000255.0 - 99.9%: 60000255.0 - Max: 60000255.0
+03:43:08.282 [main] INFO WorkloadGenerator - Pub rate  7455.2 msg/s / 116.5 MB/s | Pub err     0.0 err/s | Cons rate  7448.9 msg/s / 116.4 MB/s | Backlog:  0.2 K | Pub Latency (ms) avg: 287.7 - 50%: 164.5 - 99%: 4266.8 - 99.9%: 5315.4 - Max: 5319.4 | Pub Delay Latency (us) avg: 60000128.0 - 50%: 60000255.0 - 99%: 60000255.0 - 99.9%: 60000255.0 - Max: 60000255.0
+03:43:18.373 [main] INFO WorkloadGenerator - Pub rate  7357.9 msg/s / 115.0 MB/s | Pub err     0.0 err/s | Cons rate  7364.1 msg/s / 115.1 MB/s | Backlog:  0.1 K | Pub Latency (ms) avg: 288.6 - 50%: 146.0 - 99%: 4411.8 - 99.9%: 5242.6 - Max: 5245.5 | Pub Delay Latency (us) avg: 60000128.0 - 50%: 60000255.0 - 99%: 60000255.0 - 99.9%: 60000255.0 - Max: 60000255.0
+03:43:28.456 [main] INFO WorkloadGenerator - Pub rate  7445.4 msg/s / 116.3 MB/s | Pub err     0.0 err/s | Cons rate  7445.4 msg/s / 116.3 MB/s | Backlog:  0.1 K | Pub Latency (ms) avg: 284.1 - 50%: 141.0 - 99%: 4452.3 - 99.9%: 4550.8 - Max: 4554.9 | Pub Delay Latency (us) avg: 60000128.0 - 50%: 60000255.0 - 99%: 60000255.0 - 99.9%: 60000255.0 - Max: 60000255.0
+03:43:38.537 [main] INFO WorkloadGenerator - Pub rate  7406.9 msg/s / 115.7 MB/s | Pub err     0.0 err/s | Cons rate  7406.9 msg/s / 115.7 MB/s | Backlog:  0.1 K | Pub Latency (ms) avg: 261.8 - 50%: 113.4 - 99%: 4639.1 - 99.9%: 5286.5 - Max: 5337.5 | Pub Delay Latency (us) avg: 60000128.0 - 50%: 60000255.0 - 99%: 60000255.0 - 99.9%: 60000255.0 - Max: 60000255.0
+03:43:48.621 [main] INFO WorkloadGenerator - Pub rate  7538.7 msg/s / 117.8 MB/s | Pub err     0.0 err/s | Cons rate  7538.7 msg/s / 117.8 MB/s | Backlog:  0.1 K | Pub Latency (ms) avg: 262.5 - 50%: 94.6 - 99%: 4240.2 - 99.9%: 5122.3 - Max: 5139.9 | Pub Delay Latency (us) avg: 60000128.0 - 50%: 60000255.0 - 99%: 60000255.0 - 99.9%: 60000255.0 - Max: 60000255.0
+03:43:58.666 [main] INFO WorkloadGenerator - Pub rate  7618.9 msg/s / 119.0 MB/s | Pub err     0.0 err/s | Cons rate  7618.9 msg/s / 119.0 MB/s | Backlog:  0.1 K | Pub Latency (ms) avg: 231.2 - 50%: 64.7 - 99%: 3815.4 - 99.9%: 4464.2 - Max: 4467.2 | Pub Delay Latency (us) avg: 60000128.0 - 50%: 60000255.0 - 99%: 60000255.0 - 99.9%: 60000255.0 - Max: 60000255.0
+03:44:08.758 [main] INFO WorkloadGenerator - Pub rate  7507.1 msg/s / 117.3 MB/s | Pub err     0.0 err/s | Cons rate  7519.6 msg/s / 117.5 MB/s | Backlog:  0.0 K | Pub Latency (ms) avg: 268.5 - 50%: 80.7 - 99%: 4534.4 - 99.9%: 4914.2 - Max: 4943.0 | Pub Delay Latency (us) avg: 60000128.0 - 50%: 60000255.0 - 99%: 60000255.0 - 99.9%: 60000255.0 - Max: 60000255.0
+03:44:08.875 [main] INFO WorkloadGenerator - ----- Aggregated Pub Latency (ms) avg: 273.2 - 50%: 127.8 - 95%: 1107.2 - 99%: 3889.2 - 99.9%: 5230.4 - 99.99%: 5315.4 - Max: 5337.5 | Pub Delay (us)  avg: 56805222.6 - 50%: 60000255.0 - 95%: 60000255.0 - 99%: 60000255.0 - 99.9%: 60000255.0 - 99.99%: 60000255.0 - Max: 60000255.0
+03:44:09.042 [main] INFO KafkaProducer - [Producer clientId=producer-1] Closing the Kafka producer with timeoutMillis = 9223372036854775807 ms.
+03:44:09.044 [local-worker-1-1] ERROR LocalWorker - Got error
+org.apache.kafka.common.KafkaException: Producer closed while allocating memory
+	at org.apache.kafka.clients.producer.internals.BufferPool.allocate(BufferPool.java:161) ~[kafka-clients-3.6.1.jar:?]
+	at org.apache.kafka.clients.producer.internals.RecordAccumulator.append(RecordAccumulator.java:339) ~[kafka-clients-3.6.1.jar:?]
+	at org.apache.kafka.clients.producer.KafkaProducer.doSend(KafkaProducer.java:1025) ~[kafka-clients-3.6.1.jar:?]
+	at org.apache.kafka.clients.producer.KafkaProducer.send(KafkaProducer.java:947) ~[kafka-clients-3.6.1.jar:?]
+	at io.openmessaging.benchmark.driver.kafka.KafkaBenchmarkProducer.sendAsync(KafkaBenchmarkProducer.java:52) ~[driver-kafka-0.0.1-SNAPSHOT.jar:?]
+	at io.openmessaging.benchmark.worker.MessageProducer.sendMessage(MessageProducer.java:46) ~[benchmark-framework-0.0.1-SNAPSHOT.jar:?]
+	at io.openmessaging.benchmark.worker.LocalWorker.lambda$submitProducersToExecutor$6(LocalWorker.java:242) ~[benchmark-framework-0.0.1-SNAPSHOT.jar:?]
+	at java.util.ArrayList.forEach(Unknown Source) ~[?:?]
+	at io.openmessaging.benchmark.worker.LocalWorker.lambda$submitProducersToExecutor$7(LocalWorker.java:227) ~[benchmark-framework-0.0.1-SNAPSHOT.jar:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source) [?:?]
+	at java.util.concurrent.FutureTask.run(Unknown Source) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) [?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) [?:?]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [netty-all-4.1.65.Final.jar:4.1.65.Final]
+	at java.lang.Thread.run(Unknown Source) [?:?]
+03:44:09.826 [main] INFO Metrics - Metrics scheduler closed
+03:44:09.826 [main] INFO Metrics - Closing reporter org.apache.kafka.common.metrics.JmxReporter
+03:44:09.826 [main] INFO Metrics - Metrics reporters closed
+03:44:09.827 [main] INFO AppInfoParser - App info kafka.producer for producer-1 unregistered
+03:44:09.928 [main] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Revoke previously assigned partitions test-topic-0000000-vQMjq30-0
+03:44:09.930 [main] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Member consumer-sub-000-oFS_4vs-1-740b2b83-c90d-4948-a644-149f7adc9fe8 sending LeaveGroup request to coordinator kafka:9092 (id: 2147483646 rack: null) due to the consumer is being closed
+03:44:09.932 [main] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Resetting generation and member id due to: consumer pro-actively leaving the group
+03:44:09.932 [main] INFO ConsumerCoordinator - [Consumer clientId=consumer-sub-000-oFS_4vs-1, groupId=sub-000-oFS_4vs] Request joining group due to: consumer pro-actively leaving the group
+03:44:10.327 [main] INFO Metrics - Metrics scheduler closed
+03:44:10.327 [main] INFO Metrics - Closing reporter org.apache.kafka.common.metrics.JmxReporter
+03:44:10.327 [main] INFO Metrics - Metrics reporters closed
+03:44:10.329 [main] INFO AppInfoParser - App info kafka.consumer for consumer-sub-000-oFS_4vs-1 unregistered
+03:44:10.329 [main] INFO KafkaProducer - [Producer clientId=producer-1] Closing the Kafka producer with timeoutMillis = 9223372036854775807 ms.
+03:44:10.329 [main] INFO Metrics - Metrics scheduler closed
+03:44:10.329 [main] INFO Metrics - Closing reporter org.apache.kafka.common.metrics.JmxReporter
+03:44:10.329 [main] INFO Metrics - Metrics reporters closed
+03:44:10.330 [main] INFO AppInfoParser - App info kafka.producer for producer-1 unregistered
+03:44:10.331 [kafka-admin-client-thread | adminclient-1] INFO AppInfoParser - App info kafka.admin.client for adminclient-1 unregistered
+03:44:10.333 [kafka-admin-client-thread | adminclient-1] INFO Metrics - Metrics scheduler closed
+03:44:10.333 [kafka-admin-client-thread | adminclient-1] INFO Metrics - Closing reporter org.apache.kafka.common.metrics.JmxReporter
+03:44:10.333 [kafka-admin-client-thread | adminclient-1] INFO Metrics - Metrics reporters closed
+03:44:10.334 [main] INFO Benchmark - Writing test result into /resultados/20261125T032412.920068Z/raw/E1-kafka-16k-r02.json

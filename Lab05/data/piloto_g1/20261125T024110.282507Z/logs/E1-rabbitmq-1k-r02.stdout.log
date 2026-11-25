@@ -1,0 +1,71 @@
+03:03:57.428 [main] INFO Benchmark - Starting benchmark with config: {
+  "drivers" : [ "/workspace/drivers/rabbitmq.yaml" ],
+  "workers" : null,
+  "workersFile" : null,
+  "workloads" : [ "/resultados/20261125T024110.282507Z/workloads/E1-rabbitmq-1k-r02.yaml" ],
+  "output" : "/resultados/20261125T024110.282507Z/raw/E1-rabbitmq-1k-r02.json"
+}
+03:03:57.468 [main] INFO Benchmark - Workloads: {
+  "E1-rabbitmq-1k-r02" : {
+    "name" : "lab05-E1-rabbitmq-1024",
+    "topics" : 1,
+    "partitionsPerTopic" : 1,
+    "keyDistributor" : "NO_KEY",
+    "messageSize" : 1024,
+    "messageSizeDistribution" : null,
+    "useRandomizedPayloads" : true,
+    "randomBytesRatio" : 1.0,
+    "randomizedPayloadPoolSize" : 1000,
+    "payloadFile" : null,
+    "subscriptionsPerTopic" : 1,
+    "producersPerTopic" : 1,
+    "consumerPerSubscription" : 1,
+    "producerRate" : 1000000,
+    "consumerBacklogSizeGB" : 0,
+    "backlogDrainRatio" : 1.0,
+    "testDurationMinutes" : 0,
+    "warmupDurationMinutes" : 0,
+    "testDurationSeconds" : 60,
+    "warmupDurationSeconds" : 30
+  }
+}
+03:03:57.530 [main] INFO Benchmark - --------------- WORKLOAD : lab05-E1-rabbitmq-1024 --- DRIVER : RabbitMQ 4.4.1 - duravel---------------
+03:03:57.871 [main] INFO LocalWorker - Driver: {
+  "name" : "RabbitMQ 4.4.1 - duravel",
+  "driverClass" : "io.openmessaging.benchmark.driver.rabbitmq.RabbitMqBenchmarkDriver"
+}
+03:03:57.898 [main] INFO LocalWorker - Created 1 topics in 13.720444 ms
+03:03:57.899 [main] INFO WorkloadGenerator - Created 1 topics in 14.960668 ms
+03:04:07.910 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:04:17.903 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:04:27.899 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:04:37.899 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:04:47.900 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:04:57.900 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:05:07.901 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:05:17.900 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:05:27.899 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:05:37.899 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:05:47.899 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:05:57.897 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:06:07.897 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:06:17.897 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:06:27.896 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:06:37.896 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:06:47.896 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:06:57.893 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:07:07.893 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:07:17.893 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:07:27.892 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:07:37.892 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:07:47.893 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:07:57.891 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:08:07.891 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:08:17.891 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:08:27.889 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:08:37.889 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:08:47.889 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:08:57.888 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:09:07.887 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:09:17.888 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1
+03:09:27.886 [pool-2-thread-1] INFO ResourceCreator - Created consumers 0/1

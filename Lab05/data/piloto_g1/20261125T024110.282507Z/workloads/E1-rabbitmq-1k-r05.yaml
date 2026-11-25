@@ -1,0 +1,19 @@
+name: lab05-E1-rabbitmq-1024
+
+topics: 1
+partitionsPerTopic: 1
+subscriptionsPerTopic: 1
+consumerPerSubscription: 1
+producersPerTopic: 1
+
+messageSize: 1024
+useRandomizedPayloads: true
+randomBytesRatio: 1.0
+randomizedPayloadPoolSize: 1000
+producerRate: 1000000
+consumerBacklogSizeGB: 0
+
+warmupDurationMinutes: 0
+testDurationMinutes: 0
+warmupDurationSeconds: 30
+testDurationSeconds: 60

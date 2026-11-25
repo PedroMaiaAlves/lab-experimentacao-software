@@ -28,6 +28,19 @@ EXPERIMENTOS = ("E1", "E2")
 AQUECIMENTO_S = 30
 MEDICAO_S = 60
 
+# E1 (saturação) usa uma taxa-alvo FIXA e inalcançável, não `producerRate: 0`.
+# No OMB, `producerRate: 0` liga o RateController adaptativo, que roda durante a
+# medição inteira e, após um único pico de backlog, derruba a taxa para ~1 msg/s
+# sem recuperar (causa do CV de 50–130% no piloto; ver protocolo_coleta.md, #209).
+# Com taxa fixa alta, o produtor publica o mais rápido que o broker aceita e o
+# limite vem da contrapressão do próprio broker (buffer do produtor Kafka /
+# controle de fluxo da conexão RabbitMQ), que é o que E1 pretende medir.
+TAXA_E1_ABERTA = 1_000_000
+
+# Critérios do portão G1 (planejamento_s02.md).
+G1_CV_MAXIMO = 0.20  # CV entre execuções da mesma célula
+G1_FRACAO_COLAPSO = 0.10  # intervalo abaixo de 10% do maior intervalo da execução = colapso
+
 FIXAS = {
     "cpus": 4,
     "memoria_gib": 4,

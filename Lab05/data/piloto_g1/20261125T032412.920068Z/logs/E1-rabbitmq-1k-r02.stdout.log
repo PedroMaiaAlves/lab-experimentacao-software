@@ -1,0 +1,48 @@
+05:53:54.974 [main] INFO Benchmark - Starting benchmark with config: {
+  "drivers" : [ "/workspace/drivers/rabbitmq.yaml" ],
+  "workers" : null,
+  "workersFile" : null,
+  "workloads" : [ "/resultados/20261125T032412.920068Z/workloads/E1-rabbitmq-1k-r02.yaml" ],
+  "output" : "/resultados/20261125T032412.920068Z/raw/E1-rabbitmq-1k-r02.json"
+}
+05:53:55.189 [main] INFO Benchmark - Workloads: {
+  "E1-rabbitmq-1k-r02" : {
+    "name" : "lab05-E1-rabbitmq-1024",
+    "topics" : 1,
+    "partitionsPerTopic" : 1,
+    "keyDistributor" : "NO_KEY",
+    "messageSize" : 1024,
+    "messageSizeDistribution" : null,
+    "useRandomizedPayloads" : true,
+    "randomBytesRatio" : 1.0,
+    "randomizedPayloadPoolSize" : 1000,
+    "payloadFile" : null,
+    "subscriptionsPerTopic" : 1,
+    "producersPerTopic" : 1,
+    "consumerPerSubscription" : 1,
+    "producerRate" : 1000000,
+    "consumerBacklogSizeGB" : 0,
+    "backlogDrainRatio" : 1.0,
+    "testDurationMinutes" : 0,
+    "warmupDurationMinutes" : 0,
+    "testDurationSeconds" : 120,
+    "warmupDurationSeconds" : 30
+  }
+}
+05:53:55.501 [main] INFO Benchmark - --------------- WORKLOAD : lab05-E1-rabbitmq-1024 --- DRIVER : RabbitMQ 4.4.1 - duravel---------------
+05:53:55.885 [main] INFO LocalWorker - Driver: {
+  "name" : "RabbitMQ 4.4.1 - duravel",
+  "driverClass" : "io.openmessaging.benchmark.driver.rabbitmq.RabbitMqBenchmarkDriver"
+}
+05:53:56.023 [main] INFO LocalWorker - Created 1 topics in 11.776399 ms
+05:53:56.024 [main] INFO WorkloadGenerator - Created 1 topics in 12.644266 ms
+05:53:56.293 [main] INFO LocalWorker - Created 1 consumers in 268.457716 ms
+05:53:56.294 [main] INFO WorkloadGenerator - Created 1 consumers in 268.786213 ms
+05:53:56.399 [main] INFO LocalWorker - Created 1 producers in 105.159495 ms
+05:53:56.399 [main] INFO WorkloadGenerator - Created 1 producers in 105.402423 ms
+05:53:56.399 [main] INFO WorkloadGenerator - Waiting for consumers to be ready
+05:53:56.401 [main] INFO WorkloadGenerator - Waiting for topics to be ready -- Sent: 0, Received: 0
+05:53:58.402 [main] INFO WorkloadGenerator - Waiting for topics to be ready -- Sent: 1, Received: 1
+05:53:58.403 [main] INFO WorkloadGenerator - All consumers are ready
+05:53:58.451 [main] INFO WorkloadGenerator - ----- Starting warm-up traffic (30s) ------
+05:54:08.547 [main] INFO WorkloadGenerator - Pub rate 27463.6 msg/s / 26.8 MB/s | Pub err     0.0 err/s | Cons rate 27463.7 msg/s / 26.8 MB/s | Backlog:  0.0 K | Pub Latency (ms) avg: 210.1 - 50%: 211.4 - 99%: 299.0 - 99.9%: 316.2 - Max: 326.2 | Pub Delay Latency (us) avg: 4691072.3 - 50%: 4627423.0 - 99%: 9406207.0 - 99.9%: 9519615.0 - Max: 9519871.0

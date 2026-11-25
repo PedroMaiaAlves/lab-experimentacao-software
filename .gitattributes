@@ -11,3 +11,7 @@ Lab03/results/s03_a/** -text
 Lab03/data/classificacao_C1.csv -text
 Lab03/analises/*.py text eol=lf
 Lab03/notebooks/*_s03_a.ipynb text eol=lf
+
+# Lab05: arquivos consumidos dentro de containers Linux (git apply, awk, YAML) precisam de LF
+Lab05/benchmark/** text eol=lf
+Lab05/docker-compose.yml text eol=lf

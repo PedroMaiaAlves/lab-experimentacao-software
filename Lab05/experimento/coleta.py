@@ -12,7 +12,8 @@ import statistics
 import subprocess
 import threading
 import time
-from dataclasses import asdict, dataclass
+from contextlib import contextmanager
+from dataclasses import asdict, dataclass, replace
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Protocol
@@ -50,6 +51,10 @@ class Resultado:
     throughput_mib_s: float | None = None
     latencia_p50_ms: float | None = None
     latencia_p99_ms: float | None = None
+    throughput_consumo_msg_s: float | None = None
+    cv_intervalos: float | None = None
+    intervalo_min_rel: float | None = None
+    colapso: bool | None = None
     cpu_percent_medio: float | None = None
     memoria_mib_media: float | None = None
     codigo_saida: int | None = None
@@ -68,6 +73,26 @@ class Executor(Protocol):
     def limpar(self) -> None: ...
 
     def metadados(self) -> dict[str, Any]: ...
+
+
+@contextmanager
+def sem_suspensao():
+    """Impede que o Windows suspenda durante a coleta (#209).
+
+    No mini-piloto de 25/11 a máquina suspendeu no meio da execução 12; três
+    execuções ficaram horas paradas e falharam com timeout negativo (salto de
+    relógio). SetThreadExecutionState vale só enquanto o processo roda.
+    """
+    if os.name != "nt":
+        yield
+        return
+    ES_CONTINUOUS, ES_SYSTEM_REQUIRED = 0x80000000, 0x00000001
+    kernel = ctypes.windll.kernel32
+    kernel.SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRED)
+    try:
+        yield
+    finally:
+        kernel.SetThreadExecutionState(ES_CONTINUOUS)
 
 
 def agora_utc() -> datetime:
@@ -112,11 +137,34 @@ def interpretar_resultado_omb(caminho: Path, tamanho_bytes: int) -> dict[str, fl
     if not taxas:
         raise ValueError("OMB não produziu amostras de publishRate")
     throughput = statistics.fmean(taxas)
+    consumo = [float(v) for v in dados.get("consumeRate", [])]
     return {
         "throughput_msg_s": round(throughput, 6),
         "throughput_mib_s": round(throughput * tamanho_bytes / 1024**2, 6),
         "latencia_p50_ms": float(dados.get("aggregatedEndToEndLatency50pct", 0.0)),
         "latencia_p99_ms": float(dados.get("aggregatedEndToEndLatency99pct", 0.0)),
+        "throughput_consumo_msg_s": round(statistics.fmean(consumo), 6) if consumo else None,
+        **estabilidade_intervalos(taxas),
+    }
+
+
+def estabilidade_intervalos(taxas: list[float]) -> dict[str, Any]:
+    """Estabilidade dentro de uma execução, a partir das taxas por intervalo (10 s no OMB).
+
+    `colapso` marca a assinatura do problema do piloto: algum intervalo abaixo de
+    G1_FRACAO_COLAPSO do MAIOR intervalo da própria execução (ex.: 50k msg/s caindo
+    a 1 msg/s). A referência é o máximo, e não a mediana, porque quando a execução
+    passa mais da metade do tempo colapsada a mediana já é o valor colapsado.
+    """
+    referencia = max(taxas)
+    if referencia <= 0:
+        return {"cv_intervalos": None, "intervalo_min_rel": 0.0, "colapso": True}
+    cv = statistics.pstdev(taxas) / statistics.fmean(taxas) if len(taxas) > 1 else 0.0
+    minimo_rel = min(taxas) / referencia
+    return {
+        "cv_intervalos": round(cv, 6),
+        "intervalo_min_rel": round(minimo_rel, 6),
+        "colapso": minimo_rel < plano.G1_FRACAO_COLAPSO,
     }
 
 
@@ -393,7 +441,7 @@ class Coletor:
         interrompida = False
         try:
             for execucao in plano.gerar_plano("E1", 3):
-                self.executar_uma(execucao, 0)
+                self.executar_uma(execucao, plano.TAXA_E1_ABERTA)
             alvos = taxas_e2(self.resultados)
             for execucao in plano.gerar_plano("E2", 3):
                 if execucao.tamanho_bytes not in alvos:
@@ -406,3 +454,66 @@ class Coletor:
             self.executor.limpar()
             self._manifesto("interrompida" if interrompida else "concluida")
         return self.resultados
+
+    def repetir(self, execucoes: list[plano.Execucao], origem: str) -> list[Resultado]:
+        """Repete execuções que falharam numa coleta anterior, sem tocar nela."""
+        (self.diretorio / "origem.json").write_text(
+            json.dumps({"repete_falhas_de": origem, "ids": [e.id_execucao for e in execucoes]},
+                       ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+        self._manifesto("em_andamento")
+        interrompida = False
+        try:
+            for execucao in execucoes:
+                taxa = plano.TAXA_E1_ABERTA if execucao.experimento == "E1" else 0
+                if execucao.experimento != "E1":
+                    raise ValueError("repetição automática só cobre E1; E2 depende da taxa calculada")
+                self.executar_uma(execucao, taxa)
+        except KeyboardInterrupt:
+            interrompida = True
+        finally:
+            self.executor.limpar()
+            self._manifesto("interrompida" if interrompida else "concluida")
+        return self.resultados
+
+    def mini_piloto_e1(self, repeticoes: int = 5, medicao_s: int | None = None) -> list[Resultado]:
+        """Só E1, com taxa aberta, para verificar o portão G1 (#209).
+
+        `medicao_s` permite testar outra duração sem mudar o plano oficial.
+        """
+        self._manifesto("em_andamento")
+        interrompida = False
+        try:
+            for execucao in plano.gerar_plano("E1", repeticoes):
+                if medicao_s is not None:
+                    execucao = replace(execucao, medicao_s=medicao_s)
+                self.executar_uma(execucao, plano.TAXA_E1_ABERTA)
+        except KeyboardInterrupt:
+            interrompida = True
+        finally:
+            self.executor.limpar()
+            self._manifesto("interrompida" if interrompida else "concluida")
+        return self.resultados
+
+
+def execucoes_a_repetir(caminho_csv: Path) -> list[plano.Execucao]:
+    """Execuções cujas tentativas falharam todas (regra: repetir a execução inteira)."""
+    por_id: dict[str, list[dict]] = {}
+    with caminho_csv.open(encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            por_id.setdefault(r["id_execucao"], []).append(r)
+    repetir = []
+    for ident, tentativas in por_id.items():
+        if any(t["status"] == "sucesso" for t in tentativas):
+            continue
+        r = tentativas[0]
+        repetir.append(
+            plano.Execucao(
+                ordem=int(r["ordem"]), id_execucao=ident, experimento=r["experimento"],
+                broker=r["broker"], versao=r["versao"], tamanho_bytes=int(r["tamanho_bytes"]),
+                repeticao=int(r["repeticao"]), aquecimento_s=int(r["aquecimento_s"]),
+                medicao_s=int(r["medicao_s"]),
+            )
+        )
+    return sorted(repetir, key=lambda e: e.ordem)
