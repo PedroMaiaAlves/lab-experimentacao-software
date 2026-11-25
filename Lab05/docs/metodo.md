@@ -110,3 +110,80 @@ final é registrado aqui **antes** da coleta completa.
 | **Externa** | Nó único em notebook × cluster replicado em servidor | Não extrapolar valores absolutos; reportar só razões e direção; discutir no impacto | Lorran |
 | **Externa** | Só dois tamanhos e um padrão de carga (1 produtor e 1 consumidor) | Declarar o escopo; listar como trabalho futuro mais partições e mais consumidores | Diogo |
 | **Externa** | Versões específicas (4.4.x) | Usar as versões mantidas atuais e registrar os hashes das imagens no protocolo | Pedro |
+
+## 4. Revisão das ameaças com evidência (S02, #208)
+
+A tabela da seção 3 foi escrita antes de qualquer dado. Esta seção registra o que o piloto
+(19/11), os mini-pilotos do portão G1 (25/11) e a verificação do E2 mostraram de fato. Cada
+linha traz a **evidência**, a **mitigação aplicada** e o **risco residual**.
+
+> **Situação:** esta é a revisão parcial. A coleta oficial (#210) e a análise (#211) ainda não
+> existem. As linhas marcadas com ⏳ dependem delas e serão completadas quando forem entregues.
+
+### 4.1 Ameaças confirmadas pela evidência
+
+| Tipo | Ameaça | Evidência observada | Mitigação aplicada | Risco residual |
+| --- | --- | --- | --- | --- |
+| **Construto** | O E1 não media o throughput máximo do broker | `producerRate: 0` ligava o `RateController` adaptativo do OMB; no piloto, 4 execuções do Kafka caíram a cerca de 1 msg/s e o CV foi de 52% a 128% (`protocolo_coleta.md`, #209) | Taxa fixa aberta (`TAXA_E1_ABERTA`); zero colapsos nos mini-pilotos; o Kafka 1 KiB passou de 22 mil para cerca de 125 mil msg/s | Baixo para o artefato. **Os resultados de E1 do piloto de 19/11 não devem ser usados como estimativa**: subestimam o Kafka em cerca de 6× |
+| **Construto** | A latência ponta a ponta do RabbitMQ era medida com erro sistemático | No piloto, o p50 do RabbitMQ no E2 ficou em cerca de 500 ms e o p99 em cerca de 995 ms em **todas** as execuções, com latência de publicação de 10–20 ms. O driver do OMB grava o tempo na propriedade `timestamp` do AMQP 0-9-1, que tem resolução de **segundos**: o erro é uniforme entre 0 e 1000 ms. O Kafka usa timestamp em ms | Patch `benchmark/omb-rabbitmq-timestamp-ms.patch`: tempo em ms no header `omb-ts-ms`; imagem renomeada para `5b1fa709-ts-ms`, para não usar a antiga por engano. Verificação em `data/verificacao_e2/` (seção 4.3) | Baixo depois da correção (confirmado na seção 4.3). **A latência do RabbitMQ no piloto de 19/11 é inválida**, e a comparação da H2 feita com ela favoreceria o Kafka por construção |
+| **Construto** | A taxa do E2 ("50% do menor throughput do E1") não representa a mesma carga relativa para os dois brokers | A taxa do piloto (6.285 msg/s em 1 KiB) veio do E1 com o artefato. No RabbitMQ 1 KiB (cerca de 8,7 mil msg/s nos mini-pilotos) isso é cerca de 72% da capacidade, não 50%. Nas execuções `E2-rabbitmq-1k-r01` e `r03`, a taxa de publicação caiu abaixo do alvo e a latência de publicação subiu para 1,6–2,5 s, sinal de carga perto da saturação | A taxa do E2 **precisa** ser recalculada a partir do E1 oficial, já corrigido (a regra do coletor `taxas_e2` continua valendo). Registrar a carga relativa de cada broker (taxa ÷ throughput mediano do E1) | Médio: a 50% do *menor* throughput, o Kafka roda bem abaixo de 50% da sua capacidade. Isso é intencional (mesma carga absoluta) e precisa ser dito na interpretação |
+| **Conclusão** | A variância do Kafka no E1 é alta | Portão G1 reprovado para o Kafka: CV de 20,3% (1 KiB) e 30% (16 KiB), com CV de 20–43% entre intervalos de cada execução. A CPU do broker fica em 90–150% de 400%, então o limite não é CPU | Medição de 120 s (estabilizou o RabbitMQ: CV de 4% e 11%); n revisado na #207 com o CV observado (n = 15 dá poder ≥ 84% para razão 1,5) | Médio: diferenças menores que cerca de 1,5× entre os brokers no E1 não serão detectáveis. As razões observadas (cerca de 14× e 2,2×) estão muito acima disso |
+| **Interna** | Interrupção da máquina durante a coleta | No mini-piloto de 25/11 a máquina suspendeu: 3 execuções ficaram horas paradas e falharam com timeout negativo (salto de relógio) | O coletor bloqueia a suspensão (`sem_suspensao`); as falhas foram preservadas e repetidas com `--repetir-falhas` | Baixo. Fechar a tampa do notebook ainda suspende: está no protocolo |
+| **Interna** | Falha de partida do broker confundida com desempenho | `E1-rabbitmq-1k-r02` falhou duas vezes, em coletas diferentes: o healthcheck `ping` aprovava o container antes de a porta AMQP abrir | Healthcheck `check_port_connectivity` | Baixo; as falhas são registradas e não entram na análise |
+| **Interna** | Mudança de máquina entre as fases | O piloto de 19/11 rodou na máquina do Pedro (Ryzen 5 5600, 16 GiB); os mini-pilotos do G1, na do Diogo (16 processadores lógicos, 7,6 GiB para a VM Docker). O throughput absoluto difere entre máquinas | Coleta oficial inteira numa só máquina, registrada no manifesto; o G1 deve ser reconferido nessa máquina antes da coleta (#207) | ⏳ Confirmar que a #210 foi coletada numa única máquina |
+| **Conclusão** | Reprodutibilidade quebrada por fim de linha | Com `core.autocrlf=true`, o patch do OMB virava CRLF e o build falhava ("corrupt patch") | `.gitattributes` força LF em `Lab05/benchmark/**` | Baixo |
+
+### 4.2 Ameaças previstas que ainda dependem da coleta oficial ⏳
+
+| Tipo | Ameaça | O que verificar quando a #210/#211 forem entregues |
+| --- | --- | --- |
+| Interna | Efeito de ordem e deriva da máquina | Regressão do log do throughput na posição de execução (`ordem`) e por bloco; inclinação com IC contendo 0 |
+| Interna | Efeito de bloco (sessões em dias diferentes) | Mediana por bloco em cada célula; incluir o bloco como covariável se houver diferença |
+| Conclusão | Normalidade do log para escolher entre Welch e Mann-Whitney | Shapiro por célula; a escolha segue a regra pré-registrada no `plano_analise.md`, sem trocar de teste depois de ver p-valores |
+| Conclusão | Execuções repetidas alteram o resultado | Análise de sensibilidade com e sem as execuções que precisaram de repetição |
+| Construto | Latência do E2 sob a mesma carga relativa | Reportar a carga relativa (taxa ÷ capacidade) de cada broker junto da latência |
+
+### 4.3 Verificação da correção do timestamp do RabbitMQ
+
+Coleta `data/verificacao_e2/20261125T113906.033745Z`, com a imagem `5b1fa709-ts-ms`, 60 s
+medidos e taxa fixa. A taxa de 1.069 msg/s é **a mesma do E2 16 KiB do piloto**, o que
+permite comparar antes e depois diretamente.
+
+| Execução | Taxa | p50 ponta a ponta | p99 ponta a ponta | p99 de publicação |
+| --- | ---: | ---: | ---: | ---: |
+| Piloto 19/11, RabbitMQ 16 KiB (r01–r03, imagem antiga) | 1.069 | **503–506 ms** | **994–998 ms** | 10–117 ms |
+| `E2-rabbitmq-16k-v01` (corrigida) | 1.069 | 7 ms | 48 ms | 46 ms |
+| `E2-rabbitmq-16k-v02` (corrigida) | 1.069 | 18 ms | 115 ms | 111 ms |
+| `E2-rabbitmq-1k-v01` (corrigida) | 3.000 | 4 ms | 38 ms | 35 ms |
+| `E2-rabbitmq-1k-v02` (corrigida) | 3.000 | 4 ms | 37 ms | 35 ms |
+| `E2-kafka-1k-v01` (referência) | 3.000 | 2 ms | 4 ms | 3 ms |
+
+**Conclusão:** confirmado. Com o tempo em milissegundos, o p50 do RabbitMQ caiu de cerca de
+500 ms para 4–18 ms, e o p99 ponta a ponta passou a acompanhar o p99 de publicação, o que é
+coerente porque o consumidor não acumula atraso (backlog de cerca de 0). No piloto, os cerca de
+500 ms de p50 e os cerca de 995 ms de p99 eram **só o erro de arredondamento para o segundo**.
+A diferença entre os brokers continua existindo (p99 de 4 ms no Kafka contra 37–115 ms no
+RabbitMQ nestas execuções), mas agora é medida e cerca de 10–25× menor que a do piloto. Isto é
+uma verificação de instrumento (n = 1–2, sem inferência), não um resultado da H2.
+
+### 4.4 Revisão das 7 categorias e do GQM
+
+- **7 categorias:** nenhuma mudança de classificação. O estudo continua aplicado, explicativo,
+  quantitativo, experimental, transversal e controlado em laboratório. O **nível de evidência**
+  recebe uma ressalva: a validade interna é alta *para o E1 corrigido e para a latência
+  corrigida*; os dados do piloto de 19/11 não servem como evidência de nenhuma das duas.
+- **GQM, Q1/M1 (throughput):** o construto agora corresponde à definição, ou seja, a
+  contrapressão do broker, não a do controlador. Sugere-se reportar também
+  `throughput_consumo_msg_s`, que mede o que de fato foi entregue.
+- **GQM, Q2/M2 (latência):** a métrica só mede o que diz medir com o patch de timestamp em ms.
+  Fica proibido comparar latência entre os brokers com dados coletados com a imagem
+  `5b1fa709` (sem `-ts-ms`). O `manifesto.json` registra o ID da imagem usada.
+- **Goodhart, na prática:** os dois defeitos (controlador adaptativo e timestamp em segundos)
+  produziam números plausíveis e "limpos" (o E2 do RabbitMQ teve CV de 0% no p99). Uma métrica
+  estável não é uma métrica válida, e por isso a revisão verificou o que gera cada número no
+  código da ferramenta.
+
+### 4.5 Revisão da análise (a fazer na PR da #211)
+
+O checklist está em [`revisao_analise.md`](revisao_analise.md) e é preenchido na revisão da PR
+do Lorran.
