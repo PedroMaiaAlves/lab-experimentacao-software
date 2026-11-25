@@ -1,0 +1,60 @@
+11:41:01.705 [main] INFO Benchmark - Starting benchmark with config: {
+  "drivers" : [ "/workspace/drivers/rabbitmq.yaml" ],
+  "workers" : null,
+  "workersFile" : null,
+  "workloads" : [ "/resultados/20261125T113906.033745Z/workloads/E2-rabbitmq-16k-v02.yaml" ],
+  "output" : "/resultados/20261125T113906.033745Z/raw/E2-rabbitmq-16k-v02.json"
+}
+11:41:01.752 [main] INFO Benchmark - Workloads: {
+  "E2-rabbitmq-16k-v02" : {
+    "name" : "lab05-E2-rabbitmq-16384",
+    "topics" : 1,
+    "partitionsPerTopic" : 1,
+    "keyDistributor" : "NO_KEY",
+    "messageSize" : 16384,
+    "messageSizeDistribution" : null,
+    "useRandomizedPayloads" : true,
+    "randomBytesRatio" : 1.0,
+    "randomizedPayloadPoolSize" : 1000,
+    "payloadFile" : null,
+    "subscriptionsPerTopic" : 1,
+    "producersPerTopic" : 1,
+    "consumerPerSubscription" : 1,
+    "producerRate" : 1069,
+    "consumerBacklogSizeGB" : 0,
+    "backlogDrainRatio" : 1.0,
+    "testDurationMinutes" : 0,
+    "warmupDurationMinutes" : 0,
+    "testDurationSeconds" : 60,
+    "warmupDurationSeconds" : 30
+  }
+}
+11:41:01.828 [main] INFO Benchmark - --------------- WORKLOAD : lab05-E2-rabbitmq-16384 --- DRIVER : RabbitMQ 4.4.1 - duravel---------------
+11:41:02.118 [main] INFO LocalWorker - Driver: {
+  "name" : "RabbitMQ 4.4.1 - duravel",
+  "driverClass" : "io.openmessaging.benchmark.driver.rabbitmq.RabbitMqBenchmarkDriver"
+}
+11:41:02.160 [main] INFO LocalWorker - Created 1 topics in 15.47679 ms
+11:41:02.161 [main] INFO WorkloadGenerator - Created 1 topics in 16.685122 ms
+11:41:02.493 [main] INFO LocalWorker - Created 1 consumers in 330.617843 ms
+11:41:02.494 [main] INFO WorkloadGenerator - Created 1 consumers in 331.441101 ms
+11:41:02.608 [main] INFO LocalWorker - Created 1 producers in 114.534152 ms
+11:41:02.609 [main] INFO WorkloadGenerator - Created 1 producers in 115.329931 ms
+11:41:02.610 [main] INFO WorkloadGenerator - Waiting for consumers to be ready
+11:41:02.612 [main] INFO WorkloadGenerator - Waiting for topics to be ready -- Sent: 0, Received: 0
+11:41:04.613 [main] INFO WorkloadGenerator - Waiting for topics to be ready -- Sent: 1, Received: 1
+11:41:04.614 [main] INFO WorkloadGenerator - All consumers are ready
+11:41:04.757 [main] INFO WorkloadGenerator - ----- Starting warm-up traffic (30s) ------
+11:41:14.910 [main] INFO WorkloadGenerator - Pub rate  1062.0 msg/s / 16.6 MB/s | Pub err     0.0 err/s | Cons rate  1062.1 msg/s / 16.6 MB/s | Backlog:  0.0 K | Pub Latency (ms) avg: 18.2 - 50%: 15.2 - 99%: 127.7 - 99.9%: 176.3 - Max: 183.6 | Pub Delay Latency (us) avg: 158.6 - 50%: 128.0 - 99%: 432.0 - 99.9%: 3796.0 - Max: 8027.0
+11:41:24.959 [main] INFO WorkloadGenerator - Pub rate  1071.2 msg/s / 16.7 MB/s | Pub err     0.0 err/s | Cons rate  1071.2 msg/s / 16.7 MB/s | Backlog:  0.0 K | Pub Latency (ms) avg: 16.0 - 50%: 15.4 - 99%: 32.6 - 99.9%: 48.5 - Max: 54.1 | Pub Delay Latency (us) avg: 143.5 - 50%: 124.0 - 99%: 343.0 - 99.9%: 2355.0 - Max: 6126.0
+11:41:35.008 [main] INFO WorkloadGenerator - Pub rate  1069.5 msg/s / 16.7 MB/s | Pub err     0.0 err/s | Cons rate  1069.5 msg/s / 16.7 MB/s | Backlog:  0.0 K | Pub Latency (ms) avg: 19.7 - 50%: 16.5 - 99%: 121.9 - 99.9%: 177.7 - Max: 187.0 | Pub Delay Latency (us) avg: 161.7 - 50%: 133.0 - 99%: 429.0 - 99.9%: 5421.0 - Max: 8149.0
+11:41:35.065 [main] INFO WorkloadGenerator - ----- Aggregated Pub Latency (ms) avg: 18.0 - 50%: 15.7 - 95%: 29.9 - 99%: 100.4 - 99.9%: 173.3 - 99.99%: 184.2 - Max: 187.0 | Pub Delay (us)  avg: 155.4 - 50%: 128.0 - 95%: 269.0 - 99%: 391.0 - 99.9%: 3937.0 - 99.99%: 7467.0 - Max: 8149.0
+11:41:35.256 [main] INFO WorkloadGenerator - ----- Starting benchmark traffic (60s)------
+11:41:45.290 [main] INFO WorkloadGenerator - Pub rate  1097.9 msg/s / 17.2 MB/s | Pub err     0.0 err/s | Cons rate  1097.9 msg/s / 17.2 MB/s | Backlog:  0.0 K | Pub Latency (ms) avg: 17.0 - 50%: 16.0 - 99%: 43.4 - 99.9%: 69.4 - Max: 76.0 | Pub Delay Latency (us) avg: 168.9 - 50%: 139.0 - 99%: 435.0 - 99.9%: 6084.0 - Max: 8628.0
+11:41:55.339 [main] INFO WorkloadGenerator - Pub rate  1067.0 msg/s / 16.7 MB/s | Pub err     0.0 err/s | Cons rate  1067.0 msg/s / 16.7 MB/s | Backlog:  0.0 K | Pub Latency (ms) avg: 19.5 - 50%: 16.7 - 99%: 123.4 - 99.9%: 162.5 - Max: 168.3 | Pub Delay Latency (us) avg: 157.5 - 50%: 135.0 - 99%: 473.0 - 99.9%: 1855.0 - Max: 5520.0
+11:42:05.366 [main] INFO WorkloadGenerator - Pub rate  1070.5 msg/s / 16.7 MB/s | Pub err     0.0 err/s | Cons rate  1070.5 msg/s / 16.7 MB/s | Backlog:  0.0 K | Pub Latency (ms) avg: 19.7 - 50%: 17.2 - 99%: 104.0 - 99.9%: 145.8 - Max: 155.1 | Pub Delay Latency (us) avg: 156.7 - 50%: 133.0 - 99%: 447.0 - 99.9%: 1570.0 - Max: 4296.0
+11:42:15.378 [main] INFO WorkloadGenerator - Pub rate  1068.6 msg/s / 16.7 MB/s | Pub err     0.0 err/s | Cons rate  1068.6 msg/s / 16.7 MB/s | Backlog:  0.0 K | Pub Latency (ms) avg: 18.8 - 50%: 16.2 - 99%: 130.8 - 99.9%: 182.3 - Max: 189.3 | Pub Delay Latency (us) avg: 146.9 - 50%: 132.0 - 99%: 357.0 - 99.9%: 990.0 - Max: 2907.0
+11:42:25.398 [main] INFO WorkloadGenerator - Pub rate  1068.9 msg/s / 16.7 MB/s | Pub err     0.0 err/s | Cons rate  1068.9 msg/s / 16.7 MB/s | Backlog:  0.0 K | Pub Latency (ms) avg: 19.6 - 50%: 16.4 - 99%: 136.3 - 99.9%: 192.5 - Max: 200.0 | Pub Delay Latency (us) avg: 149.2 - 50%: 130.0 - 99%: 376.0 - 99.9%: 1178.0 - Max: 4068.0
+11:42:35.424 [main] INFO WorkloadGenerator - Pub rate  1070.2 msg/s / 16.7 MB/s | Pub err     0.0 err/s | Cons rate  1070.2 msg/s / 16.7 MB/s | Backlog:  0.0 K | Pub Latency (ms) avg: 21.4 - 50%: 17.6 - 99%: 155.6 - 99.9%: 206.1 - Max: 212.9 | Pub Delay Latency (us) avg: 142.5 - 50%: 124.0 - 99%: 369.0 - 99.9%: 1085.0 - Max: 3874.0
+11:42:35.462 [main] INFO WorkloadGenerator - ----- Aggregated Pub Latency (ms) avg: 19.3 - 50%: 16.6 - 95%: 33.4 - 99%: 110.6 - 99.9%: 189.3 - 99.99%: 207.9 - Max: 212.9 | Pub Delay (us)  avg: 153.6 - 50%: 132.0 - 95%: 270.0 - 99%: 397.0 - 99.9%: 1753.0 - 99.99%: 7080.0 - Max: 8628.0
+11:42:35.640 [main] INFO Benchmark - Writing test result into /resultados/20261125T113906.033745Z/raw/E2-rabbitmq-16k-v02.json

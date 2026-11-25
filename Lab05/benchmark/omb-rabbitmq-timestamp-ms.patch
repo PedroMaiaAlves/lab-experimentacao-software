@@ -1,0 +1,49 @@
+diff --git a/driver-rabbitmq/src/main/java/io/openmessaging/benchmark/driver/rabbitmq/RabbitMqBenchmarkConsumer.java b/driver-rabbitmq/src/main/java/io/openmessaging/benchmark/driver/rabbitmq/RabbitMqBenchmarkConsumer.java
+index 27f87d3..677835d 100644
+--- a/driver-rabbitmq/src/main/java/io/openmessaging/benchmark/driver/rabbitmq/RabbitMqBenchmarkConsumer.java
++++ b/driver-rabbitmq/src/main/java/io/openmessaging/benchmark/driver/rabbitmq/RabbitMqBenchmarkConsumer.java
+@@ -44,7 +44,19 @@ public class RabbitMqBenchmarkConsumer extends DefaultConsumer implements Benchm
+     @Override
+     public void handleDelivery(
+             String consumerTag, Envelope envelope, BasicProperties properties, byte[] body) {
+-        callback.messageReceived(body, properties.getTimestamp().getTime());
++        callback.messageReceived(body, publishTimeMs(properties));
++    }
++
++    /** Lab05 (#208): usa o header em ms; `timestamp` do AMQP so tem resolucao de segundos. */
++    static long publishTimeMs(BasicProperties properties) {
++        java.util.Map<String, Object> headers = properties.getHeaders();
++        if (headers != null) {
++            Object value = headers.get(RabbitMqBenchmarkProducer.TIMESTAMP_MS_HEADER);
++            if (value instanceof Number) {
++                return ((Number) value).longValue();
++            }
++        }
++        return properties.getTimestamp().getTime();
+     }
+ 
+     @Override
+diff --git a/driver-rabbitmq/src/main/java/io/openmessaging/benchmark/driver/rabbitmq/RabbitMqBenchmarkProducer.java b/driver-rabbitmq/src/main/java/io/openmessaging/benchmark/driver/rabbitmq/RabbitMqBenchmarkProducer.java
+index d7d3841..7bbc9a1 100644
+--- a/driver-rabbitmq/src/main/java/io/openmessaging/benchmark/driver/rabbitmq/RabbitMqBenchmarkProducer.java
++++ b/driver-rabbitmq/src/main/java/io/openmessaging/benchmark/driver/rabbitmq/RabbitMqBenchmarkProducer.java
+@@ -118,9 +118,18 @@ public class RabbitMqBenchmarkProducer implements BenchmarkProducer {
+ 
+     private static final BasicProperties defaultProperties = new BasicProperties();
+ 
++    static final String TIMESTAMP_MS_HEADER = "omb-ts-ms";
++
+     @Override
+     public CompletableFuture<Void> sendAsync(Optional<String> key, byte[] payload) {
+-        BasicProperties.Builder builder = defaultProperties.builder().timestamp(new Date());
++        // Lab05 (#208): a propriedade AMQP `timestamp` tem resolucao de segundos; o tempo
++        // de publicacao em milissegundos vai no header TIMESTAMP_MS_HEADER.
++        long publishTimeMs = System.currentTimeMillis();
++        BasicProperties.Builder builder =
++                defaultProperties
++                        .builder()
++                        .timestamp(new Date(publishTimeMs))
++                        .headers(java.util.Collections.singletonMap(TIMESTAMP_MS_HEADER, publishTimeMs));
+         if (messagePersistence) {
+             builder.deliveryMode(2);
+         }

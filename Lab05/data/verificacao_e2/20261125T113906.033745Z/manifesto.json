@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "colecao_id": "20261125T113906.033745Z",
+  "status": "em_andamento",
+  "semente": 42,
+  "execucoes_por_celula": 3,
+  "planejadas": 24,
+  "registradas": 5,
+  "contagens": {
+    "sucesso": 5
+  },
+  "fixas": {
+    "cpus": 4,
+    "memoria_gib": 4,
+    "produtores": 1,
+    "consumidores": 1,
+    "particoes_ou_filas": 1,
+    "durabilidade_kafka": "acks=all",
+    "durabilidade_rabbitmq": "publisher confirms + quorum queue",
+    "containers": "recriados (com volumes) a cada execução"
+  },
+  "ambiente": {
+    "so": "Windows-11-10.0.26300-SP0",
+    "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "processadores_logicos": 16,
+    "memoria_total_bytes": 16849256448,
+    "python": "3.13.1",
+    "docker": "{\"Client\":{\"Version\":\"28.4.0\",\"ApiVersion\":\"1.51\",\"DefaultAPIVersion\":\"1.51\",\"GitCommit\":\"d8eb465\",\"GoVersion\":\"go1.24.7\",\"Os\":\"windows\",\"Arch\":\"amd64\",\"BuildTime\":\"Wed Sep  3 20:59:40 2025\",\"Context\":\"desktop-linux\"},\"Server\":{\"Platform\":{\"Name\":\"Docker Desktop 4.47.0 (206054)\"},\"Components\":[{\"Name\":\"Engine\",\"Version\":\"28.4.0\",\"Details\":{\"ApiVersion\":\"1.51\",\"Arch\":\"amd64\",\"BuildTime\":\"Wed Sep  3 20:57:37 2025\",\"Experimental\":\"false\",\"GitCommit\":\"249d679\",\"GoVersion\":\"go1.24.7\",\"KernelVersion\":\"6.6.87.2-microsoft-standard-WSL2\",\"MinAPIVersion\":\"1.24\",\"Os\":\"linux\"}},{\"Name\":\"containerd\",\"Version\":\"1.7.27\",\"Details\":{\"GitCommit\":\"05044ec0a9a75232cad458027ca83437aae3f4da\"}},{\"Name\":\"runc\",\"Version\":\"1.2.5\",\"Details\":{\"GitCommit\":\"v1.2.5-0-g59923ef\"}},{\"Name\":\"docker-init\",\"Version\":\"0.19.0\",\"Details\":{\"GitCommit\":\"de40ad0\"}}],\"Version\":\"28.4.0\",\"ApiVersion\":\"1.51\",\"MinAPIVersion\":\"1.24\",\"GitCommit\":\"249d679\",\"GoVersion\":\"go1.24.7\",\"Os\":\"linux\",\"Arch\":\"amd64\",\"KernelVersion\":\"6.6.87.2-microsoft-standard-WSL2\",\"BuildTime\":\"2025-09-03T20:57:37.000000000+00:00\"}}",
+    "docker_compose": "2.39.4-desktop.1",
+    "git_commit": "40d9055b7311f5f28a8b5106826ddc8fd6c7e5cd"
+  },
+  "imagens": {
+    "kafka": "apache/kafka@sha256:833b867a9585a141da455dc2b57431c65cbccb27f11c91f694444cca9f777e0f",
+    "rabbitmq": "rabbitmq@sha256:096d7dbf919aa460f19c26ae553e2fd970cc3f468710402a4a980a8944de6173",
+    "omb": "sha256:1d4b45e1a069a02baf7e5c6b5933105188b7a613320c2c34083580397fbe0129"
+  }
+}

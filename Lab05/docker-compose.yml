@@ -60,7 +60,8 @@ services:
       context: ./benchmark
       args:
         OMB_REVISION: 5b1fa70951a323da26bd587174b58bb2c65b0b5c
-    image: lab05/openmessaging-benchmark:5b1fa709
+    # tag -ts-ms: inclui omb-rabbitmq-timestamp-ms.patch (#208); a imagem antiga mede latência RabbitMQ errada
+    image: lab05/openmessaging-benchmark:5b1fa709-ts-ms
     profiles: ["benchmark"]
     cpus: 2.0
     mem_limit: 2g

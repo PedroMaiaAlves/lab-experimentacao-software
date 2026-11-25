@@ -322,7 +322,7 @@ class DockerExecutor:
                 ["docker", "image", "inspect", imagem, "--format", "{{index .RepoDigests 0}}"]
             )
         digests["omb"] = _comando_curto(
-            ["docker", "image", "inspect", "lab05/openmessaging-benchmark:5b1fa709", "--format", "{{.Id}}"]
+            ["docker", "image", "inspect", "lab05/openmessaging-benchmark:5b1fa709-ts-ms", "--format", "{{.Id}}"]
         )
         return {"ambiente": metadados_ambiente(), "imagens": digests}
 
