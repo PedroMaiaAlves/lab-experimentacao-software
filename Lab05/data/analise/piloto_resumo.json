@@ -1,5 +1,26 @@
 {
   "arquivo": "data/piloto/20261119T030115.153119Z/resultados.csv",
+  "metadados_coleta": {
+    "colecao_id": "20261119T030115.153119Z",
+    "origem": "piloto",
+    "schema": 1,
+    "valido_g3": null,
+    "avisos_g3": [],
+    "omb_referencia_esperada": "lab05/openmessaging-benchmark:5b1fa709-ts-ms",
+    "omb_fingerprint_esperado": "sha256:b8475ccc9922bc4f60049271e2d1de9b3bccbb3622f13aaac593e12339999fd6",
+    "omb_imagem": "sha256:9a27bd46b992006e2c2a309d17312e1fc0433aa95796d262000a0822f4131c9c",
+    "omb_timestamp_ms_valido": false,
+    "maquina_unica": true,
+    "ambiente": {
+      "so": "Windows-11-10.0.26300-SP0",
+      "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+      "processadores_logicos": 12,
+      "memoria_total_bytes": 17097408512,
+      "git_commit": "36f24df604ea25e2a632a897c3b1f5b980bed7f5"
+    },
+    "taxas_e2": {},
+    "blocos_registrados": []
+  },
   "contagens_status": {
     "sucesso": 23,
     "falha": 1
@@ -895,6 +916,327 @@
       "permutacao_p": 0.7108578284343131,
       "permutacoes": 5000
     }
+  },
+  "checagens": {
+    "efeito_ordem": [
+      {
+        "experimento": "E1",
+        "metrica": "throughput_msg_s",
+        "broker": "kafka",
+        "tamanho_bytes": 1024,
+        "disponivel": true,
+        "n": 3,
+        "inclinacao_log": -0.7629648871706152,
+        "intercepto_log": 12.35431763502957,
+        "erro_padrao": 0.9095592989222807,
+        "ic95_inclinacao": [
+          -12.320011558968632,
+          10.794081784627403
+        ],
+        "ic95_contem_zero": true,
+        "p_valor": 0.5556566026090255,
+        "r2": 0.4130196025829096,
+        "variacao_pct_por_posicao": -53.37180976856779
+      },
+      {
+        "experimento": "E1",
+        "metrica": "throughput_msg_s",
+        "broker": "rabbitmq",
+        "tamanho_bytes": 1024,
+        "disponivel": false,
+        "n": 2
+      },
+      {
+        "experimento": "E1",
+        "metrica": "throughput_msg_s",
+        "broker": "kafka",
+        "tamanho_bytes": 16384,
+        "disponivel": true,
+        "n": 3,
+        "inclinacao_log": -1.6666763120053483,
+        "intercepto_log": 18.735110192080075,
+        "erro_padrao": 0.3436299004002581,
+        "ic95_inclinacao": [
+          -6.032908179962346,
+          2.6995555559516493
+        ],
+        "ic95_contem_zero": true,
+        "p_valor": 0.12944238553157333,
+        "r2": 0.9592244699086109,
+        "variacao_pct_por_posicao": -81.11262189228104
+      },
+      {
+        "experimento": "E1",
+        "metrica": "throughput_msg_s",
+        "broker": "rabbitmq",
+        "tamanho_bytes": 16384,
+        "disponivel": true,
+        "n": 3,
+        "inclinacao_log": 0.15387875559336064,
+        "intercepto_log": 6.713030406494186,
+        "erro_padrao": 0.12088541111318726,
+        "ic95_inclinacao": [
+          -1.3821160276274442,
+          1.6898735388141657
+        ],
+        "ic95_contem_zero": true,
+        "p_valor": 0.42391974711100405,
+        "r2": 0.6183719795650163,
+        "variacao_pct_por_posicao": 16.63494648565036
+      },
+      {
+        "experimento": "E2",
+        "metrica": "latencia_p99_ms",
+        "broker": "kafka",
+        "tamanho_bytes": 1024,
+        "disponivel": true,
+        "n": 3,
+        "inclinacao_log": 0.038699729764086824,
+        "intercepto_log": 1.9346837624360438,
+        "erro_padrao": 0.04758522618059726,
+        "ic95_inclinacao": [
+          -0.5659278965037621,
+          0.6433273560319358
+        ],
+        "ic95_contem_zero": true,
+        "p_valor": 0.5653278818424495,
+        "r2": 0.3981020716009468,
+        "variacao_pct_por_posicao": 3.9458318391050184
+      },
+      {
+        "experimento": "E2",
+        "metrica": "latencia_p99_ms",
+        "broker": "rabbitmq",
+        "tamanho_bytes": 1024,
+        "disponivel": true,
+        "n": 3,
+        "inclinacao_log": 0.12637650892261174,
+        "intercepto_log": 6.910349372831442,
+        "erro_padrao": 0.07420184962915498,
+        "ic95_inclinacao": [
+          -0.8164473842682797,
+          1.069200402113503
+        ],
+        "ic95_contem_zero": true,
+        "p_valor": 0.33799206534370524,
+        "r2": 0.743635946893523,
+        "variacao_pct_por_posicao": 13.47093160475692
+      },
+      {
+        "experimento": "E2",
+        "metrica": "latencia_p99_ms",
+        "broker": "kafka",
+        "tamanho_bytes": 16384,
+        "disponivel": true,
+        "n": 3,
+        "inclinacao_log": -0.22364012052645174,
+        "intercepto_log": 3.2536898137411905,
+        "erro_padrao": 0.17607093243756447,
+        "ic95_inclinacao": [
+          -2.4608334361673276,
+          2.0135531951144245
+        ],
+        "ic95_contem_zero": true,
+        "p_valor": 0.4245912300193132,
+        "r2": 0.6173469387755102,
+        "variacao_pct_por_posicao": -20.03971567537245
+      },
+      {
+        "experimento": "E2",
+        "metrica": "latencia_p99_ms",
+        "broker": "rabbitmq",
+        "tamanho_bytes": 16384,
+        "disponivel": true,
+        "n": 3,
+        "inclinacao_log": -0.0005122213604120095,
+        "intercepto_log": 6.907682597773122,
+        "erro_padrao": 7.076581527551611e-05,
+        "ic95_inclinacao": [
+          -0.0014113862976250359,
+          0.00038694357680101694
+        ],
+        "ic95_contem_zero": true,
+        "p_valor": 0.0873987967589272,
+        "r2": 0.9812707447048192,
+        "variacao_pct_por_posicao": -0.05120901974468017
+      }
+    ],
+    "efeito_bloco": [
+      {
+        "experimento": "E1",
+        "metrica": "throughput_msg_s",
+        "tamanho_bytes": 1024,
+        "disponivel": false,
+        "motivo": "menos de dois blocos registrados"
+      },
+      {
+        "experimento": "E1",
+        "metrica": "throughput_msg_s",
+        "tamanho_bytes": 16384,
+        "disponivel": false,
+        "motivo": "menos de dois blocos registrados"
+      },
+      {
+        "experimento": "E2",
+        "metrica": "latencia_p99_ms",
+        "tamanho_bytes": 1024,
+        "disponivel": false,
+        "motivo": "menos de dois blocos registrados"
+      },
+      {
+        "experimento": "E2",
+        "metrica": "latencia_p99_ms",
+        "tamanho_bytes": 16384,
+        "disponivel": false,
+        "motivo": "menos de dois blocos registrados"
+      }
+    ],
+    "sensibilidade_repeticoes": {
+      "ha_repeticoes": false,
+      "n_ids_repetidos": 0,
+      "ids_repetidos": [],
+      "altera_conclusao": false,
+      "diferencas": {},
+      "comparacoes_sem_repeticoes": null,
+      "interacoes_sem_repeticoes": null
+    },
+    "carga_relativa_e2": [
+      {
+        "broker": "kafka",
+        "tamanho_bytes": 1024,
+        "taxa_alvo_e2_msg_s": 6285.0,
+        "throughput_e1_mediano_msg_s": 22380.600861,
+        "throughput_e2_mediano_msg_s": 6319.550602,
+        "carga_relativa_alvo": 0.28082355961014965,
+        "carga_relativa_efetiva": 0.28236733415912557
+      },
+      {
+        "broker": "rabbitmq",
+        "tamanho_bytes": 1024,
+        "taxa_alvo_e2_msg_s": 6285.0,
+        "throughput_e1_mediano_msg_s": 12571.683572,
+        "throughput_e2_mediano_msg_s": 6315.335852,
+        "carga_relativa_alvo": 0.4999330411082033,
+        "carga_relativa_efetiva": 0.5023460712983335
+      },
+      {
+        "broker": "kafka",
+        "tamanho_bytes": 16384,
+        "taxa_alvo_e2_msg_s": 1064.0,
+        "throughput_e1_mediano_msg_s": 2129.325314,
+        "throughput_e2_mediano_msg_s": 1068.480932,
+        "carga_relativa_alvo": 0.4996887948517574,
+        "carga_relativa_efetiva": 0.5017931853695137
+      },
+      {
+        "broker": "rabbitmq",
+        "tamanho_bytes": 16384,
+        "taxa_alvo_e2_msg_s": 1064.0,
+        "throughput_e1_mediano_msg_s": 2700.476539,
+        "throughput_e2_mediano_msg_s": 1069.666637,
+        "carga_relativa_alvo": 0.3940045338790481,
+        "carga_relativa_efetiva": 0.39610291796725
+      }
+    ],
+    "comparacao_cv_protocolo": [
+      {
+        "experimento": "E1",
+        "metrica": "throughput_msg_s",
+        "broker": "kafka",
+        "tamanho_bytes": 1024,
+        "n": 3,
+        "cv_observado": 1.2828313778901794,
+        "cv_protocolo_g1": 0.201,
+        "status_protocolo": "calculado",
+        "diferenca_pp": 108.18313778901793,
+        "atende_g1_20pct": false
+      },
+      {
+        "experimento": "E1",
+        "metrica": "throughput_msg_s",
+        "broker": "rabbitmq",
+        "tamanho_bytes": 1024,
+        "n": 2,
+        "cv_observado": 0.01872704784387578,
+        "cv_protocolo_g1": 0.0374,
+        "status_protocolo": "calculado",
+        "diferenca_pp": -1.8672952156124225,
+        "atende_g1_20pct": true
+      },
+      {
+        "experimento": "E1",
+        "metrica": "throughput_msg_s",
+        "broker": "kafka",
+        "tamanho_bytes": 16384,
+        "n": 3,
+        "cv_observado": 0.9803485436335151,
+        "cv_protocolo_g1": 0.3034,
+        "status_protocolo": "calculado",
+        "diferenca_pp": 67.69485436335151,
+        "atende_g1_20pct": false
+      },
+      {
+        "experimento": "E1",
+        "metrica": "throughput_msg_s",
+        "broker": "rabbitmq",
+        "tamanho_bytes": 16384,
+        "n": 3,
+        "cv_observado": 0.5180620664822827,
+        "cv_protocolo_g1": 0.1118,
+        "status_protocolo": "calculado",
+        "diferenca_pp": 40.62620664822827,
+        "atende_g1_20pct": false
+      },
+      {
+        "experimento": "E2",
+        "metrica": "latencia_p99_ms",
+        "broker": "kafka",
+        "tamanho_bytes": 1024,
+        "n": 3,
+        "cv_observado": 0.2401922307076307,
+        "cv_protocolo_g1": null,
+        "status_protocolo": "cv_indisponivel",
+        "diferenca_pp": null,
+        "atende_g1_20pct": null
+      },
+      {
+        "experimento": "E2",
+        "metrica": "latencia_p99_ms",
+        "broker": "rabbitmq",
+        "tamanho_bytes": 1024,
+        "n": 3,
+        "cv_observado": 0.47994912739051554,
+        "cv_protocolo_g1": null,
+        "status_protocolo": "cv_indisponivel",
+        "diferenca_pp": null,
+        "atende_g1_20pct": null
+      },
+      {
+        "experimento": "E2",
+        "metrica": "latencia_p99_ms",
+        "broker": "kafka",
+        "tamanho_bytes": 16384,
+        "n": 3,
+        "cv_observado": 1.1753201908503095,
+        "cv_protocolo_g1": null,
+        "status_protocolo": "cv_indisponivel",
+        "diferenca_pp": null,
+        "atende_g1_20pct": null
+      },
+      {
+        "experimento": "E2",
+        "metrica": "latencia_p99_ms",
+        "broker": "rabbitmq",
+        "tamanho_bytes": 16384,
+        "n": 3,
+        "cv_observado": 0.0020907195118589866,
+        "cv_protocolo_g1": null,
+        "status_protocolo": "cv_indisponivel",
+        "diferenca_pp": null,
+        "atende_g1_20pct": null
+      }
+    ],
+    "outliers": []
   },
   "poder_piloto": [
     {
