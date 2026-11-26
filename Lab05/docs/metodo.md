@@ -52,45 +52,65 @@ discutido na proposta.
 
 ### 2.3 Randomização
 
-- `gerar_plano` monta as 4 células × n repetições e embaralha a ordem com
-  `numpy.random.default_rng([42, índice_do_experimento])`. A ordem é reprodutível e diferente
-  entre E1 e E2.
+- `gerar_plano` monta as 4 células × n repetições em dois blocos balanceados por experimento
+  e embaralha cada bloco com `numpy.random.default_rng([42, índice_do_experimento,
+  índice_do_bloco])`. A ordem é reprodutível e diferente entre E1 e E2.
 - **Objetivo:** distribuir entre as células os efeitos de ordem (cache de disco, temperatura
   da CPU, atualizações do SO durante a coleta). Sem isso, rodar todas as execuções do Kafka
   antes das do RabbitMQ confundiria o broker com o momento da coleta.
 - **Saídas:** [`data/plano/plano_E1.csv`](../data/plano/plano_E1.csv) e
-  [`plano_E2.csv`](../data/plano/plano_E2.csv), com 40 linhas cada. O coletor de Pedro (#199)
+  [`plano_E2.csv`](../data/plano/plano_E2.csv), com 80 linhas cada. O coletor de Pedro (#199)
   executa as linhas na ordem da coluna `ordem` e grava o resultado com o mesmo
   `id_execucao`.
 - **Testes:** verificam o balanceamento (n por célula), os IDs únicos, a reprodutibilidade,
   que a ordem não é a das células e as versões da proposta.
 
-### 2.4 Tamanho amostral: poder a priori
+### 2.4 Tamanho amostral: revisão com o CV observado
 
-Ainda não temos o piloto, então não conhecemos a variabilidade entre execuções. Simulamos
-(`experimento/poder.py`, 2000 repetições por cenário, semente 42) uma métrica log-normal com
-coeficiente de variação (CV) de 5%, 10% e 20%, testada com Welch sobre o log e com
-Mann-Whitney. O nível usado é **α/4 = 0,0125**, o pior caso de Holm para as 4 comparações
-principais (H1 e H2 × 2 tamanhos).
+O pré-registro original simulou uma métrica log-normal, com Welch sobre o log e
+Mann-Whitney bicaudal, usando **α/4 = 0,0125** (pior caso de Holm para H1 e H2 nos dois
+tamanhos). A revisão da #207 executa a mesma simulação com 10.000 repetições, semente 42 e os
+CVs do mini-piloto estabilizado do E1. A tabela completa está em
+[`data/plano/poder_observado.csv`](../data/plano/poder_observado.csv).
 
-Menor n por célula para atingir 80% de poder (os dois testes coincidiram):
+| Célula E1 | CV observado | Poder MW, n=20, razão 1,20 | Poder Welch-log, n=20, razão 1,20 |
+| --- | ---: | ---: | ---: |
+| Kafka 1 KiB | 20,10% | 58,0% | 60,5% |
+| Kafka 16 KiB | 30,34% | 24,1% | 25,4% |
+| RabbitMQ 1 KiB | 3,74% | 100,0% | 100,0% |
+| RabbitMQ 16 KiB | 11,18% | 99,1% | 99,4% |
 
-| CV entre execuções | razão 1,05 | razão 1,10 | razão 1,20 | razão 1,50 |
-| --- | --- | --- | --- | --- |
-| 5% | > 20 | 10 | 5 | 5 |
-| 10% | > 20 | > 20 | 10 | 5 |
-| 20% | > 20 | > 20 | > 20 | 8 |
+O portão G1 **reprovou** nas duas células Kafka (limite pré-registrado: CV ≤ 20%). Mesmo no
+teto de 20 execuções, não é possível obter 80% de poder para uma razão 1,20 no pior caso:
+o Kafka 16 KiB alcança somente cerca de 24–25%. O critério não foi alterado depois de ver os
+dados e esta limitação deve acompanhar qualquer conclusão sobre efeitos pequenos.
 
-**Decisão provisória: n = 10 por célula** (40 execuções e cerca de 1 h de coleta por
-experimento). Com esse n, detectamos uma diferença de 10% se o CV for de até 5%, ou de 20%
-se o CV for de até 10%. Benchmarks publicados de Kafka e RabbitMQ costumam mostrar
-diferenças bem maiores que 20%. Diferenças menores que 10% teriam pouco efeito prático na
-escolha do broker.
+O p99 do piloto de 19/11 é inválido para dimensionamento porque o timestamp do driver
+RabbitMQ tinha resolução de segundos. A verificação corrigida tem somente 1–2 observações
+por célula e nenhuma observação de Kafka 16 KiB; portanto **não existe CV estabilizado de
+p99**. O arquivo de poder registra `cv_indisponivel`, em vez de estimar poder com evidência
+insuficiente.
 
-**Regra de revisão (fecha a pendência da #197 depois do piloto):** se o CV observado no
-piloto (#199) passar de 10% em alguma célula, Lorran (#201) roda a mesma simulação com o CV
-observado e aumentamos n até 80% de poder para razão 1,20, com limite de 20 por célula. O n
-final é registrado aqui **antes** da coleta completa.
+**Decisão final antes da coleta: n = 20 por célula**, o teto pré-registrado. São 80 execuções
+por experimento e 160 no total, além de repetições exclusivamente técnicas. O n não é
+apresentado como suficiente para razão 1,20 no Kafka; é a maior amostra permitida pelo
+protocolo e reduz a incerteza dentro do tempo disponível.
+
+Cada experimento é dividido em dois blocos balanceados de 40 execuções (10 por célula):
+`E1-B1`, `E1-B2`, `E2-B1` e `E2-B2`. Todo o E1 precede o E2. O E1 mede por 120 s; o E2,
+por 60 s. As colunas `bloco`, `ordem` e `ordem_no_bloco` ficam congeladas nos planos.
+
+### 2.5 Falhas, repetições, exclusões e outliers
+
+- **Falha técnica:** erro ao iniciar broker ou ferramenta, timeout, código de saída diferente
+  de zero, interrupção, JSON bruto ausente ou JSON que não pode ser interpretado.
+- **Repetição:** somente um ID sem tentativa bem-sucedida pode ser repetido. Repete-se a
+  execução inteira, mantendo bloco, `ordem` e `ordem_no_bloco`; cada tentativa recebe número
+  e arquivos próprios. Nenhuma tentativa é sobrescrita.
+- **Exclusão:** somente a tentativa com falha técnica registrada fica fora das métricas. Um
+  ID com mais de uma tentativa bem-sucedida é erro de protocolo, não amostra adicional.
+- **Outliers:** valores extremos, mas tecnicamente válidos, são mantidos, marcados e
+  reportados. Nunca são removidos por parecerem “estranhos”.
 
 ## 3. Ameaças à validade
 

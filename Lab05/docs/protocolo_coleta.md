@@ -159,17 +159,53 @@ As razões Kafka/RabbitMQ observadas no E1 são cerca de **14×** (1 KiB) e cerc
 (16 KiB). Com CV de 30%, **n = 10–15 por célula** detecta razões a partir de 1,5–2,0 com
 poder ≥ 84%, mas não detecta diferenças de 20%.
 
-### Decisão para a #207 (portão G1 reprovado para o Kafka)
+### Decisão final da #207 (desvio do G1)
 
-O critério de 20% **não foi alterado** depois de ver os dados. As opções para o protocolo
-final são:
+O critério de 20% **não foi alterado** depois de ver os dados. O protocolo mantém E1 com taxa
+aberta e 120 s, aceita a reprovação do G1 nas células Kafka como limitação e fixa **n = 20**,
+o teto previsto. No pior caso observado (Kafka 16 KiB, CV 30,34%), n=20 fornece somente cerca
+de 24–25% de poder para razão 1,20; não se afirma que o alvo de 80% foi alcançado. A decisão e
+a ausência de CV estabilizado do p99 estão detalhadas em `metodo.md`, seção 2.4.
 
-1. **Manter o E1 com taxa aberta e 120 s**, aceitar o desvio do G1 para o Kafka como
-   limitação de conclusão declarada e fixar **n = 15** (poder ≥ 84% para razão 1,5 com
-   CV de 30%). *Recomendação desta issue*: o artefato foi eliminado e os efeitos esperados são
-   muito maiores que a variância.
-2. **Plano B** do planejamento: substituir a saturação por degraus de taxa fixa, que no E2 do
-   piloto deram CV de 0%. Isso troca a métrica (taxa máxima sustentável por degrau) e exige
-   atualizar o design em `metodo.md`.
-3. Investigar mais o I/O (volume em tmpfs ou outro disco, mais CPU para o OMB). Isso consome a
-   sprint e muda o construto (sem disco real, deixa de ser "durável").
+## Pré-registro da coleta oficial — portão G2 (#207)
+
+A fonte estruturada do protocolo é `data/plano/protocolo_oficial.json`. Ela congela n,
+sementes, blocos, durações, tolerâncias de integridade e fingerprints de imagens. Os CSVs
+`plano_E1.csv` e `plano_E2.csv` são as listas executáveis.
+
+| Imagem | Fingerprint congelado |
+| --- | --- |
+| `apache/kafka:4.4.0` | `apache/kafka@sha256:833b867a9585a141da455dc2b57431c65cbccb27f11c91f694444cca9f777e0f` |
+| `rabbitmq:4.4.1-management` | `rabbitmq@sha256:61f90c401a5b5ed2486771973ea92ad66046471eacab9c9149f1a6e091c91677` |
+| `lab05/openmessaging-benchmark:5b1fa709-ts-ms` | `sha256:b8475ccc9922bc4f60049271e2d1de9b3bccbb3622f13aaac593e12339999fd6` |
+
+### Ordem e blocos
+
+1. Executar `E1-B1` e `E1-B2`, nessa ordem, com 40 IDs por bloco e 120 s medidos.
+2. Validar todos os 80 IDs de E1 e calcular, por tamanho, 50% do menor throughput mediano
+   entre os brokers. Congelar essas duas taxas no manifesto oficial.
+3. Executar `E2-B1` e `E2-B2`, nessa ordem, com 40 IDs por bloco e 60 s medidos.
+
+Cada bloco contém exatamente 10 execuções de cada combinação broker × tamanho. A ordem
+global e a posição dentro do bloco não podem ser alteradas durante a coleta.
+
+### Falhas, repetições, exclusões e outliers
+
+- Falha técnica é erro de inicialização, timeout, código de saída não zero, interrupção, bruto
+  ausente ou bruto inválido. A causa deve constar no resultado e no manifesto.
+- Somente IDs sem tentativa bem-sucedida são repetidos. A execução inteira volta na mesma
+  posição lógica (`bloco`, `ordem`, `ordem_no_bloco`), com novo número de tentativa e novos
+  arquivos. Tentativas anteriores nunca são apagadas ou sobrescritas.
+- Somente tentativas com falha técnica registrada são excluídas das métricas. Mais de um
+  sucesso para o mesmo ID reprova a validação.
+- Valores extremos tecnicamente válidos são preservados e reportados; “valor estranho” não é
+  critério de exclusão nem de repetição.
+
+### Registro obrigatório por bloco
+
+O início e o fim, a identificação da máquina, o plano de energia/estado AC, a temperatura
+quando disponível e qualquer desvio devem ser registrados. A execução futura acrescentará
+uma linha por bloco nesta seção; declarar explicitamente `nenhum` quando não houver desvio.
+
+| Coleta | Bloco | Início/fim (America/Sao_Paulo) | Máquina | Energia/temperatura | Desvio |
+| --- | --- | --- | --- | --- | --- |

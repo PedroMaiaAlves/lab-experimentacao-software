@@ -16,6 +16,12 @@ def test_plano_balanceado_e_completo():
     assert set(contagem.values()) == {plano.EXECUCOES_POR_CELULA}
     assert len({e.id_execucao for e in execs}) == len(execs)
     assert [e.ordem for e in execs] == list(range(1, len(execs) + 1))
+    assert {e.bloco for e in execs} == {"E1-B1", "E1-B2"}
+    for bloco in ("E1-B1", "E1-B2"):
+        do_bloco = [e for e in execs if e.bloco == bloco]
+        assert len(do_bloco) == 40
+        assert set(Counter((e.broker, e.tamanho_bytes) for e in do_bloco).values()) == {10}
+        assert [e.ordem_no_bloco for e in do_bloco] == list(range(1, 41))
 
 
 def test_plano_reprodutivel_e_aleatorio():
@@ -30,6 +36,8 @@ def test_plano_reprodutivel_e_aleatorio():
 def test_versoes_da_proposta():
     execs = plano.gerar_plano("E2")
     assert {(e.broker, e.versao) for e in execs} == {("kafka", "4.4.0"), ("rabbitmq", "4.4.1")}
+    assert {e.medicao_s for e in plano.gerar_plano("E1")} == {120}
+    assert {e.medicao_s for e in execs} == {60}
 
 
 @pytest.mark.parametrize("exp,n", [("E3", 10), ("E1", 1)])
@@ -41,7 +49,7 @@ def test_entradas_invalidas(exp, n):
 def test_salvar_plano(tmp_path):
     destino = plano.salvar_plano(plano.gerar_plano("E1", 3), tmp_path / "p.csv")
     linhas = destino.read_text(encoding="utf-8").splitlines()
-    assert linhas[0].startswith("ordem,id_execucao,experimento,broker")
+    assert linhas[0].startswith("bloco,ordem,ordem_no_bloco,id_execucao,experimento,broker")
     assert len(linhas) == 1 + 12
 
 
@@ -56,3 +64,13 @@ def test_poder_cresce_com_n_e_efeito():
     grande_n = poder.poder(20, 1.10, 0.10)["welch_log"]
     grande_r = poder.poder(5, 1.50, 0.10)["welch_log"]
     assert grande_n > pequeno and grande_r > pequeno
+
+
+def test_poder_observado_registra_teto_e_ausencia_do_p99():
+    linhas = poder.tabela_observada(repeticoes=500)
+    throughput = [l for l in linhas if l["metrica"] == "throughput_msg_s"]
+    p99 = [l for l in linhas if l["metrica"] == "latencia_p99_ms"]
+    assert len(throughput) == 4 * 5
+    assert {l["n"] for l in throughput} == {5, 8, 10, 15, 20}
+    assert len(p99) == 4
+    assert {l["status"] for l in p99} == {"cv_indisponivel"}

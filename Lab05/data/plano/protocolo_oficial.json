@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "semente": 42,
+  "execucoes_por_celula": 20,
+  "blocos_por_experimento": 2,
+  "execucoes_por_bloco": 40,
+  "ordem_experimentos": [
+    "E1",
+    "E2"
+  ],
+  "blocos": [
+    "E1-B1",
+    "E1-B2",
+    "E2-B1",
+    "E2-B2"
+  ],
+  "aquecimento_s": 30,
+  "medicao_s": {
+    "E1": 120,
+    "E2": 60
+  },
+  "taxa_e1_aberta_msg_s": 1000000,
+  "fracao_e2": 0.5,
+  "alfa": 0.05,
+  "comparacoes_holm": 4,
+  "razao_alvo": 1.2,
+  "poder_alvo": 0.8,
+  "decisao_poder": "teto_n20; alvo de 80% não alcançado no pior CV observado",
+  "faixas_integridade": {
+    "throughput_msg_s_min_exclusivo": 0,
+    "latencia_ms_min": 0,
+    "cpu_percent_min": 0,
+    "cpu_percent_max": 400,
+    "memoria_mib_min": 0,
+    "memoria_mib_max": 4096,
+    "tolerancia_taxa_e2_fracao": 0.1
+  },
+  "imagens": {
+    "kafka": {
+      "referencia": "apache/kafka:4.4.0",
+      "fingerprint": "apache/kafka@sha256:833b867a9585a141da455dc2b57431c65cbccb27f11c91f694444cca9f777e0f"
+    },
+    "rabbitmq": {
+      "referencia": "rabbitmq:4.4.1-management",
+      "fingerprint": "rabbitmq@sha256:61f90c401a5b5ed2486771973ea92ad66046471eacab9c9149f1a6e091c91677"
+    },
+    "omb": {
+      "referencia": "lab05/openmessaging-benchmark:5b1fa709-ts-ms",
+      "fingerprint": "sha256:b8475ccc9922bc4f60049271e2d1de9b3bccbb3622f13aaac593e12339999fd6"
+    }
+  }
+}

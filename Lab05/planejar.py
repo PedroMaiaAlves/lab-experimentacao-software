@@ -4,6 +4,7 @@ Uso: python Lab05/planejar.py
 Saídas:
   Lab05/data/plano/plano_E1.csv e plano_E2.csv  — ordem das execuções (semente 42)
   Lab05/data/plano/poder_a_priori.csv          — poder por n, razão e CV
+  Lab05/data/plano/poder_observado.csv          — CVs do mini-piloto estabilizado
 """
 
 from __future__ import annotations
@@ -33,6 +34,14 @@ def main() -> None:
         w.writeheader()
         w.writerows(linhas)
     print(f"poder -> {destino.relative_to(RAIZ)} (alfa efetivo {poder.ALFA_HOLM_PIOR_CASO})")
+
+    observadas = poder.tabela_observada()
+    destino_observado = SAIDA / "poder_observado.csv"
+    with destino_observado.open("w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=list(observadas[0].keys()))
+        w.writeheader()
+        w.writerows(observadas)
+    print(f"poder observado -> {destino_observado.relative_to(RAIZ)}")
 
     print("\nMenor n por célula para poder >= 80% (Mann-Whitney | Welch-log):")
     print("  CV    " + "  ".join(f"r={r:<5}" for r in (1.05, 1.10, 1.20, 1.50)))

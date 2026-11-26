@@ -20,13 +20,14 @@ from pathlib import Path
 import numpy as np
 
 SEMENTE = 42
-EXECUCOES_POR_CELULA = 10  # provisório: revisar após o piloto (#199) e o poder (#201)
+EXECUCOES_POR_CELULA = 20  # decisão final da #207: teto pré-registrado
+BLOCOS_POR_EXPERIMENTO = 2
 BROKERS = ("kafka", "rabbitmq")
 VERSOES = {"kafka": "4.4.0", "rabbitmq": "4.4.1"}
 TAMANHOS_BYTES = (1024, 16384)
 EXPERIMENTOS = ("E1", "E2")
 AQUECIMENTO_S = 30
-MEDICAO_S = 60
+MEDICAO_S_POR_EXPERIMENTO = {"E1": 120, "E2": 60}
 
 # E1 (saturação) usa uma taxa-alvo FIXA e inalcançável, não `producerRate: 0`.
 # No OMB, `producerRate: 0` liga o RateController adaptativo, que roda durante a
@@ -55,7 +56,9 @@ FIXAS = {
 
 @dataclass(frozen=True)
 class Execucao:
+    bloco: str
     ordem: int
+    ordem_no_bloco: int
     id_execucao: str
     experimento: str
     broker: str
@@ -63,7 +66,7 @@ class Execucao:
     tamanho_bytes: int
     repeticao: int
     aquecimento_s: int = AQUECIMENTO_S
-    medicao_s: int = MEDICAO_S
+    medicao_s: int = 60
 
 
 def celulas() -> list[tuple[str, int]]:
@@ -74,33 +77,58 @@ def gerar_plano(
     experimento: str,
     execucoes_por_celula: int = EXECUCOES_POR_CELULA,
     semente: int = SEMENTE,
+    blocos_por_experimento: int | None = None,
 ) -> list[Execucao]:
     if experimento not in EXPERIMENTOS:
         raise ValueError(f"experimento inválido: {experimento}")
     if execucoes_por_celula < 2:
         raise ValueError("são necessárias ao menos 2 execuções por célula")
-    base = [
-        (broker, tamanho, rep)
-        for broker, tamanho in celulas()
-        for rep in range(1, execucoes_por_celula + 1)
-    ]
-    # Semente distinta e determinística por experimento: E1 e E2 não repetem a ordem.
-    rng = np.random.default_rng([semente, EXPERIMENTOS.index(experimento)])
-    ordem = rng.permutation(len(base))
-    plano = []
-    for pos, idx in enumerate(ordem, start=1):
-        broker, tamanho, rep = base[idx]
-        plano.append(
-            Execucao(
-                ordem=pos,
-                id_execucao=f"{experimento}-{broker}-{tamanho // 1024}k-r{rep:02d}",
-                experimento=experimento,
-                broker=broker,
-                versao=VERSOES[broker],
-                tamanho_bytes=tamanho,
-                repeticao=rep,
-            )
+    if blocos_por_experimento is None:
+        # Os planos oficiais têm dois blocos. Pilotos históricos com n=3/5
+        # continuam em um bloco e não são confundidos com o plano oficial.
+        blocos_por_experimento = (
+            BLOCOS_POR_EXPERIMENTO
+            if execucoes_por_celula == EXECUCOES_POR_CELULA
+            else 1
         )
+    if blocos_por_experimento < 1:
+        raise ValueError("é necessário ao menos um bloco")
+    if execucoes_por_celula % blocos_por_experimento:
+        raise ValueError("n por célula deve ser divisível pelo número de blocos")
+
+    repeticoes_por_bloco = execucoes_por_celula // blocos_por_experimento
+    plano = []
+    ordem_global = 0
+    for indice_bloco in range(blocos_por_experimento):
+        inicio = indice_bloco * repeticoes_por_bloco + 1
+        fim = inicio + repeticoes_por_bloco
+        base = [
+            (broker, tamanho, rep)
+            for broker, tamanho in celulas()
+            for rep in range(inicio, fim)
+        ]
+        # Cada bloco é balanceado e recebe uma sequência determinística própria.
+        rng = np.random.default_rng(
+            [semente, EXPERIMENTOS.index(experimento), indice_bloco]
+        )
+        permutacao = rng.permutation(len(base))
+        for ordem_no_bloco, idx in enumerate(permutacao, start=1):
+            broker, tamanho, rep = base[idx]
+            ordem_global += 1
+            plano.append(
+                Execucao(
+                    bloco=f"{experimento}-B{indice_bloco + 1}",
+                    ordem=ordem_global,
+                    ordem_no_bloco=ordem_no_bloco,
+                    id_execucao=f"{experimento}-{broker}-{tamanho // 1024}k-r{rep:02d}",
+                    experimento=experimento,
+                    broker=broker,
+                    versao=VERSOES[broker],
+                    tamanho_bytes=tamanho,
+                    repeticao=rep,
+                    medicao_s=MEDICAO_S_POR_EXPERIMENTO[experimento],
+                )
+            )
     return plano
 
 

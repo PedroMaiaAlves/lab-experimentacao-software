@@ -85,7 +85,7 @@ def test_workload_tem_duracoes_e_durabilidade(tmp_path):
     caminho = renderizar_workload(execucao, 0, tmp_path / "w.yaml")
     texto = caminho.read_text(encoding="utf-8")
     assert "warmupDurationSeconds: 30" in texto
-    assert "testDurationSeconds: 60" in texto
+    assert "testDurationSeconds: 120" in texto
     assert f"messageSize: {execucao.tamanho_bytes}" in texto
     assert "producerRate: 0" in texto
 

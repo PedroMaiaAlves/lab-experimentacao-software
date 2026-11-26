@@ -510,7 +510,9 @@ def execucoes_a_repetir(caminho_csv: Path) -> list[plano.Execucao]:
         r = tentativas[0]
         repetir.append(
             plano.Execucao(
-                ordem=int(r["ordem"]), id_execucao=ident, experimento=r["experimento"],
+                bloco=r.get("bloco", ""), ordem=int(r["ordem"]),
+                ordem_no_bloco=int(r.get("ordem_no_bloco", r["ordem"])),
+                id_execucao=ident, experimento=r["experimento"],
                 broker=r["broker"], versao=r["versao"], tamanho_bytes=int(r["tamanho_bytes"]),
                 repeticao=int(r["repeticao"]), aquecimento_s=int(r["aquecimento_s"]),
                 medicao_s=int(r["medicao_s"]),
