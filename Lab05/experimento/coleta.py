@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import csv
 import ctypes
+import hashlib
 import json
 import os
 import platform
@@ -17,12 +18,15 @@ from dataclasses import asdict, dataclass, replace
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Protocol
+from zoneinfo import ZoneInfo
 
 from . import plano
 
 RAIZ = Path(__file__).resolve().parents[1]
 COMPOSE = RAIZ / "docker-compose.yml"
 TEMPLATE = RAIZ / "benchmark" / "workloads" / "template.yaml"
+PROTOCOLO_OFICIAL = RAIZ / "data" / "plano" / "protocolo_oficial.json"
+PROTOCOLO_COLETA_MD = RAIZ / "docs" / "protocolo_coleta.md"
 IMAGENS = {
     "kafka": "apache/kafka:4.4.0",
     "rabbitmq": "rabbitmq:4.4.1-management",
@@ -40,6 +44,9 @@ class Resultado:
     versao: str
     tamanho_bytes: int
     repeticao: int
+    bloco: str
+    ordem_no_bloco: int
+    tentativa: int
     status: str
     inicio_utc: str
     fim_utc: str
@@ -112,6 +119,51 @@ def criar_diretorio_coleta(raiz: Path, instante: datetime | None = None) -> Path
     for nome in ("raw", "logs", "workloads"):
         (destino / nome).mkdir()
     return destino
+
+
+def sha256_arquivo(caminho: Path) -> str:
+    digest = hashlib.sha256()
+    with caminho.open("rb") as arquivo:
+        for bloco in iter(lambda: arquivo.read(1024 * 1024), b""):
+            digest.update(bloco)
+    return digest.hexdigest()
+
+
+def _opcional(texto: str, conversor):
+    return conversor(texto) if texto not in ("", None) else None
+
+
+def carregar_resultados(caminho: Path) -> list[Resultado]:
+    if not caminho.exists():
+        return []
+    inteiros = {
+        "ordem", "tamanho_bytes", "repeticao", "ordem_no_bloco", "tentativa",
+        "aquecimento_s", "medicao_s", "taxa_alvo_msg_s", "codigo_saida",
+    }
+    flutuantes = {
+        "duracao_s", "throughput_msg_s", "throughput_mib_s", "latencia_p50_ms",
+        "latencia_p99_ms", "throughput_consumo_msg_s", "cv_intervalos",
+        "intervalo_min_rel", "cpu_percent_medio", "memoria_mib_media",
+    }
+    saida = []
+    with caminho.open(encoding="utf-8") as arquivo:
+        for linha in csv.DictReader(arquivo):
+            dados: dict[str, Any] = {}
+            for campo in Resultado.__dataclass_fields__:
+                texto = linha.get(campo, "")
+                if campo in inteiros:
+                    dados[campo] = _opcional(texto, int)
+                elif campo in flutuantes:
+                    dados[campo] = _opcional(texto, float)
+                elif campo == "colapso":
+                    dados[campo] = None if texto == "" else texto.lower() == "true"
+                else:
+                    dados[campo] = texto or None
+            dados["bloco"] = dados["bloco"] or f"{dados['experimento']}-B1"
+            dados["ordem_no_bloco"] = dados["ordem_no_bloco"] or dados["ordem"]
+            dados["tentativa"] = dados["tentativa"] or 1
+            saida.append(Resultado(**dados))
+    return saida
 
 
 def renderizar_workload(execucao: plano.Execucao, taxa_produtor: int, destino: Path) -> Path:
@@ -229,6 +281,50 @@ def metadados_ambiente() -> dict[str, Any]:
         "docker_compose": _comando_curto(["docker", "compose", "version", "--short"]),
         "git_commit": _comando_curto(["git", "rev-parse", "HEAD"]),
     }
+
+
+def metadados_energia() -> dict[str, Any]:
+    dados: dict[str, Any] = {
+        "plano_energia": _comando_curto(["powercfg", "/getactivescheme"]) if os.name == "nt" else None,
+        "fonte": None,
+        "bateria_percentual": None,
+    }
+    if os.name != "nt":
+        return dados
+
+    class EstadoEnergia(ctypes.Structure):
+        _fields_ = [
+            ("ACLineStatus", ctypes.c_ubyte),
+            ("BatteryFlag", ctypes.c_ubyte),
+            ("BatteryLifePercent", ctypes.c_ubyte),
+            ("SystemStatusFlag", ctypes.c_ubyte),
+            ("BatteryLifeTime", ctypes.c_ulong),
+            ("BatteryFullLifeTime", ctypes.c_ulong),
+        ]
+
+    estado = EstadoEnergia()
+    if ctypes.windll.kernel32.GetSystemPowerStatus(ctypes.byref(estado)):
+        dados["fonte"] = {0: "bateria", 1: "tomada"}.get(estado.ACLineStatus, "desconhecida")
+        if estado.BatteryLifePercent != 255:
+            dados["bateria_percentual"] = int(estado.BatteryLifePercent)
+    return dados
+
+
+def carregar_plano_oficial(experimento: str) -> list[plano.Execucao]:
+    caminho = RAIZ / "data" / "plano" / f"plano_{experimento}.csv"
+    execucoes = []
+    with caminho.open(encoding="utf-8") as arquivo:
+        for r in csv.DictReader(arquivo):
+            execucoes.append(
+                plano.Execucao(
+                    bloco=r["bloco"], ordem=int(r["ordem"]),
+                    ordem_no_bloco=int(r["ordem_no_bloco"]), id_execucao=r["id_execucao"],
+                    experimento=r["experimento"], broker=r["broker"], versao=r["versao"],
+                    tamanho_bytes=int(r["tamanho_bytes"]), repeticao=int(r["repeticao"]),
+                    aquecimento_s=int(r["aquecimento_s"]), medicao_s=int(r["medicao_s"]),
+                )
+            )
+    return execucoes
 
 
 def _converter_mib(valor: str) -> float:
@@ -375,18 +471,26 @@ class Coletor:
             versao=execucao.versao,
             tamanho_bytes=execucao.tamanho_bytes,
             repeticao=execucao.repeticao,
+            bloco=execucao.bloco,
+            ordem_no_bloco=execucao.ordem_no_bloco,
+            tentativa=1,
             status="bloqueada",
             inicio_utc=iso(instante), fim_utc=iso(instante), duracao_s=0.0,
             aquecimento_s=execucao.aquecimento_s, medicao_s=execucao.medicao_s, erro=motivo,
         )
 
-    def executar_uma(self, execucao: plano.Execucao, taxa: int) -> Resultado:
+    def executar_uma(
+        self, execucao: plano.Execucao, taxa: int, tentativa: int = 1,
+        nomear_tentativa: bool = False,
+    ) -> Resultado:
         inicio = agora_utc()
-        bruto = self.diretorio / "raw" / f"{execucao.id_execucao}.json"
-        stdout = self.diretorio / "logs" / f"{execucao.id_execucao}.stdout.log"
-        stderr = self.diretorio / "logs" / f"{execucao.id_execucao}.stderr.log"
+        sufixo = f"-t{tentativa:02d}" if nomear_tentativa or tentativa > 1 else ""
+        nome_tentativa = f"{execucao.id_execucao}{sufixo}"
+        bruto = self.diretorio / "raw" / f"{nome_tentativa}.json"
+        stdout = self.diretorio / "logs" / f"{nome_tentativa}.stdout.log"
+        stderr = self.diretorio / "logs" / f"{nome_tentativa}.stderr.log"
         workload = renderizar_workload(
-            execucao, taxa, self.diretorio / "workloads" / f"{execucao.id_execucao}.yaml"
+            execucao, taxa, self.diretorio / "workloads" / f"{nome_tentativa}.yaml"
         )
         status, erro, codigo = "falha", None, None
         cpus: list[float] = []
@@ -420,6 +524,9 @@ class Coletor:
                 versao=execucao.versao,
                 tamanho_bytes=execucao.tamanho_bytes,
                 repeticao=execucao.repeticao,
+                bloco=execucao.bloco,
+                ordem_no_bloco=execucao.ordem_no_bloco,
+                tentativa=tentativa,
                 status=status,
                 inicio_utc=iso(inicio), fim_utc=iso(fim),
                 duracao_s=round((fim - inicio).total_seconds(), 3),
@@ -495,6 +602,241 @@ class Coletor:
             self.executor.limpar()
             self._manifesto("interrompida" if interrompida else "concluida")
         return self.resultados
+
+
+class ColetorOficial(Coletor):
+    """Coleta oficial retomável, orientada pelos CSVs congelados no portão G2."""
+
+    def __init__(
+        self,
+        diretorio: Path,
+        executor: Executor,
+        protocolo: Path = PROTOCOLO_OFICIAL,
+        documento_protocolo: Path = PROTOCOLO_COLETA_MD,
+    ):
+        self.diretorio = diretorio
+        self.executor = executor
+        self.csv = diretorio / "resultados.csv"
+        self.manifesto = diretorio / "manifesto.json"
+        self.documento_protocolo = documento_protocolo
+        self.protocolo = json.loads(protocolo.read_text(encoding="utf-8"))
+        self.execucoes = {
+            e.id_execucao: e
+            for exp in plano.EXPERIMENTOS
+            for e in carregar_plano_oficial(exp)
+        }
+        if len(self.execucoes) != 160:
+            raise ValueError("os planos oficiais devem conter 160 IDs únicos")
+
+        for nome in ("raw", "logs", "workloads"):
+            (diretorio / nome).mkdir(parents=True, exist_ok=True)
+        if self.csv.exists():
+            self.resultados = carregar_resultados(self.csv)
+        else:
+            self.resultados = []
+            with self.csv.open("x", newline="", encoding="utf-8") as arquivo:
+                csv.DictWriter(arquivo, fieldnames=list(Resultado.__dataclass_fields__)).writeheader()
+
+        anterior = {}
+        if self.manifesto.exists():
+            anterior = json.loads(self.manifesto.read_text(encoding="utf-8"))
+            if anterior.get("schema") != 2:
+                raise ValueError("manifesto existente não usa o schema oficial 2")
+        self.sessoes: list[dict[str, Any]] = list(anterior.get("blocos", []))
+        self.taxas_oficiais_e2: dict[int, int] = {
+            int(k): int(v) for k, v in anterior.get("taxas_e2", {}).items()
+        }
+        self.metadados = executor.metadados()
+        self._validar_ambiente(anterior)
+        self._manifesto(anterior.get("status", "iniciada"))
+
+    def _validar_ambiente(self, anterior: dict[str, Any]) -> None:
+        esperadas = {
+            nome: dados["fingerprint"]
+            for nome, dados in self.protocolo["imagens"].items()
+        }
+        atuais = self.metadados.get("imagens", {})
+        divergencias = [
+            f"{nome}: esperado {esperado}, obtido {atuais.get(nome)}"
+            for nome, esperado in esperadas.items()
+            if atuais.get(nome) != esperado
+        ]
+        if divergencias:
+            raise RuntimeError("fingerprint de imagem divergente: " + "; ".join(divergencias))
+
+        ambiente_anterior = anterior.get("ambiente")
+        if ambiente_anterior:
+            atual = self.metadados.get("ambiente", {})
+            chaves = ("so", "cpu", "processadores_logicos", "memoria_total_bytes")
+            diferentes = [c for c in chaves if ambiente_anterior.get(c) != atual.get(c)]
+            if diferentes:
+                raise RuntimeError("a coleta oficial deve permanecer na mesma máquina: " + ", ".join(diferentes))
+
+    def _hashes(self) -> dict[str, Any]:
+        brutos = {
+            str(caminho.relative_to(self.diretorio)).replace("\\", "/"): sha256_arquivo(caminho)
+            for caminho in sorted((self.diretorio / "raw").glob("*.json"))
+        }
+        return {"resultados.csv": sha256_arquivo(self.csv), "brutos": brutos}
+
+    def _manifesto(self, status: str) -> None:
+        contagens: dict[str, int] = {}
+        for resultado in self.resultados:
+            contagens[resultado.status] = contagens.get(resultado.status, 0) + 1
+        dados = {
+            "schema": 2,
+            "colecao_id": self.diretorio.name,
+            "status": status,
+            "semente": self.protocolo["semente"],
+            "execucoes_por_celula": self.protocolo["execucoes_por_celula"],
+            "planejadas": len(self.execucoes),
+            "registradas": len(self.resultados),
+            "contagens": contagens,
+            "taxas_e2": {str(k): v for k, v in sorted(self.taxas_oficiais_e2.items())},
+            "blocos": self.sessoes,
+            "fixas": plano.FIXAS,
+            "hashes": self._hashes(),
+            **self.metadados,
+        }
+        temporario = self.manifesto.with_suffix(".json.tmp")
+        temporario.write_text(json.dumps(dados, ensure_ascii=False, indent=2), encoding="utf-8")
+        temporario.replace(self.manifesto)
+
+    def _sucessos_por_id(self) -> dict[str, list[Resultado]]:
+        saida: dict[str, list[Resultado]] = {}
+        for r in self.resultados:
+            if r.status == "sucesso":
+                saida.setdefault(r.id_execucao, []).append(r)
+        duplicados = [ident for ident, sucessos in saida.items() if len(sucessos) > 1]
+        if duplicados:
+            raise RuntimeError("mais de um sucesso para o mesmo ID: " + ", ".join(sorted(duplicados)))
+        return saida
+
+    def _validar_predecessores(self, bloco: str) -> None:
+        blocos = self.protocolo["blocos"]
+        if bloco not in blocos:
+            raise ValueError(f"bloco inválido: {bloco}")
+        sucessos = self._sucessos_por_id()
+        anteriores = set(blocos[:blocos.index(bloco)])
+        faltantes = [
+            e.id_execucao for e in self.execucoes.values()
+            if e.bloco in anteriores and e.id_execucao not in sucessos
+        ]
+        if faltantes:
+            raise RuntimeError(
+                f"{bloco} bloqueado: {len(faltantes)} IDs de blocos anteriores sem sucesso"
+            )
+
+    def _garantir_taxas_e2(self) -> None:
+        if self.taxas_oficiais_e2:
+            if set(self.taxas_oficiais_e2) != set(plano.TAMANHOS_BYTES):
+                raise RuntimeError("manifesto contém taxas E2 incompletas")
+            return
+        sucessos = self._sucessos_por_id()
+        ids_e1 = {e.id_execucao for e in self.execucoes.values() if e.experimento == "E1"}
+        if not ids_e1.issubset(sucessos):
+            raise RuntimeError("E2 bloqueado até todos os 80 IDs do E1 terem sucesso")
+        calculadas = taxas_e2([sucessos[ident][0] for ident in ids_e1])
+        if set(calculadas) != set(plano.TAMANHOS_BYTES):
+            raise RuntimeError("não foi possível calcular as duas taxas oficiais do E2")
+        self.taxas_oficiais_e2 = calculadas
+        self._manifesto("e1_concluido")
+
+    def _registrar_sessao_no_documento(self, sessao: dict[str, Any]) -> None:
+        fuso = ZoneInfo("America/Sao_Paulo")
+        inicio = datetime.fromisoformat(sessao["inicio_utc"].replace("Z", "+00:00")).astimezone(fuso)
+        fim = datetime.fromisoformat(sessao["fim_utc"].replace("Z", "+00:00")).astimezone(fuso)
+        ambiente = self.metadados.get("ambiente", {})
+        maquina = ambiente.get("cpu") or ambiente.get("so") or "não identificado"
+        energia = sessao["energia"].get("fonte") or "desconhecida"
+        plano_energia = sessao["energia"].get("plano_energia") or "não disponível"
+        temperatura = sessao.get("temperatura_c")
+        energia_temperatura = f"{energia}; {plano_energia}"
+        if temperatura is not None:
+            energia_temperatura += f"; {temperatura:g} °C"
+
+        def celula(valor: Any) -> str:
+            return str(valor).replace("|", "/").replace("\r", " ").replace("\n", " ")
+
+        linha = (
+            f"| {celula(self.diretorio.name)} | {celula(sessao['bloco'])} "
+            f"| {inicio:%d/%m/%Y %H:%M:%S}–{fim:%H:%M:%S} "
+            f"| {celula(maquina)} | {celula(energia_temperatura)} | {celula(sessao['desvio'])} |\n"
+        )
+        with self.documento_protocolo.open("a", encoding="utf-8") as arquivo:
+            arquivo.write(linha)
+
+    def executar_bloco(
+        self,
+        bloco: str,
+        desvio: str,
+        temperatura_c: float | None = None,
+        repetir_falhas: bool = False,
+    ) -> list[Resultado]:
+        if not desvio.strip():
+            raise ValueError("informe o desvio do protocolo ou declare 'nenhum'")
+        self._validar_predecessores(bloco)
+        if bloco.startswith("E2-"):
+            self._garantir_taxas_e2()
+
+        do_bloco = sorted(
+            (e for e in self.execucoes.values() if e.bloco == bloco),
+            key=lambda e: e.ordem_no_bloco,
+        )
+        por_id: dict[str, list[Resultado]] = {}
+        for resultado in self.resultados:
+            por_id.setdefault(resultado.id_execucao, []).append(resultado)
+        if repetir_falhas:
+            executar = [
+                e for e in do_bloco
+                if por_id.get(e.id_execucao)
+                and not any(r.status == "sucesso" for r in por_id[e.id_execucao])
+            ]
+        else:
+            executar = [e for e in do_bloco if not por_id.get(e.id_execucao)]
+
+        inicio = agora_utc()
+        sessao = {
+            "bloco": bloco,
+            "tipo": "repeticao" if repetir_falhas else "primaria_ou_retomada",
+            "inicio_utc": iso(inicio),
+            "fim_utc": None,
+            "status": "em_andamento",
+            "ids_executados": [],
+            "energia": metadados_energia(),
+            "temperatura_c": temperatura_c,
+            "desvio": desvio.strip(),
+        }
+        interrompida = False
+        novos: list[Resultado] = []
+        try:
+            for execucao in executar:
+                tentativas = por_id.get(execucao.id_execucao, [])
+                tentativa = len(tentativas) + 1
+                taxa = (
+                    plano.TAXA_E1_ABERTA
+                    if execucao.experimento == "E1"
+                    else self.taxas_oficiais_e2[execucao.tamanho_bytes]
+                )
+                sessao["ids_executados"].append(execucao.id_execucao)
+                resultado = self.executar_uma(
+                    execucao, taxa, tentativa=tentativa, nomear_tentativa=True
+                )
+                novos.append(resultado)
+        except KeyboardInterrupt:
+            interrompida = True
+        finally:
+            self.executor.limpar()
+            sessao["fim_utc"] = iso(agora_utc())
+            sessao["status"] = "interrompida" if interrompida else "concluida"
+            self.sessoes.append(sessao)
+            sucessos = self._sucessos_por_id()
+            status = "concluida" if set(self.execucoes).issubset(sucessos) else "parcial"
+            if interrompida:
+                status = "interrompida"
+            self._manifesto(status)
+            self._registrar_sessao_no_documento(sessao)
+        return novos
 
 
 def execucoes_a_repetir(caminho_csv: Path) -> list[plano.Execucao]:

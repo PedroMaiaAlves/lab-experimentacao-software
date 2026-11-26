@@ -189,6 +189,36 @@ sementes, blocos, durações, tolerâncias de integridade e fingerprints de imag
 Cada bloco contém exatamente 10 execuções de cada combinação broker × tamanho. A ordem
 global e a posição dentro do bloco não podem ser alteradas durante a coleta.
 
+### Comandos da coleta oficial
+
+Criar a raiz da coleta, sem executar medições:
+
+```powershell
+python Lab05/coletar.py --oficial --iniciar
+```
+
+Executar cada bloco na ordem pré-registrada, sempre informando o caminho impresso pelo
+comando anterior e declarando o desvio explicitamente:
+
+```powershell
+python Lab05/coletar.py --oficial --coleta Lab05/data/oficial/<coleta> --bloco E1-B1 --desvio "nenhum"
+python Lab05/coletar.py --oficial --coleta Lab05/data/oficial/<coleta> --bloco E1-B2 --desvio "nenhum"
+python Lab05/validar.py Lab05/data/oficial/<coleta> --fase E1
+python Lab05/coletar.py --oficial --coleta Lab05/data/oficial/<coleta> --bloco E2-B1 --desvio "nenhum"
+python Lab05/coletar.py --oficial --coleta Lab05/data/oficial/<coleta> --bloco E2-B2 --desvio "nenhum"
+python Lab05/validar.py Lab05/data/oficial/<coleta>
+```
+
+Se um bloco terminar com falha técnica, repetir somente os IDs ainda sem sucesso:
+
+```powershell
+python Lab05/coletar.py --oficial --coleta Lab05/data/oficial/<coleta> --bloco E1-B1 --desvio "repetição de falha técnica registrada" --repetir-falhas-oficial
+```
+
+O coletor recusa blocos fora de ordem, mudança de máquina ou imagem e E2 antes de todos os
+80 IDs de E1 terem sucesso. Uma interrupção pode ser retomada repetindo o comando do bloco;
+IDs já tentados não são executados novamente sem `--repetir-falhas-oficial`.
+
 ### Falhas, repetições, exclusões e outliers
 
 - Falha técnica é erro de inicialização, timeout, código de saída não zero, interrupção, bruto

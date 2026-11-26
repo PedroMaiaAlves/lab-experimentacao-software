@@ -12,12 +12,29 @@ RAIZ = Path(__file__).resolve().parent
 sys.path.insert(0, str(RAIZ))
 
 from experimento import plano  # noqa: E402
-from experimento.coleta import Coletor, DockerExecutor, criar_diretorio_coleta, execucoes_a_repetir, sem_suspensao  # noqa: E402
+from experimento.coleta import (  # noqa: E402
+    Coletor,
+    ColetorOficial,
+    DockerExecutor,
+    criar_diretorio_coleta,
+    execucoes_a_repetir,
+    sem_suspensao,
+)
 
 
 def argumentos() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Coleta reproduzível Kafka × RabbitMQ")
     parser.add_argument("--piloto", action="store_true", help="executa 3 repetições por célula em E1 e E2")
+    parser.add_argument("--oficial", action="store_true", help="usa o plano oficial congelado no portão G2")
+    parser.add_argument("--iniciar", action="store_true", help="com --oficial, cria a raiz data/oficial/<coleta>")
+    parser.add_argument("--coleta", type=Path, help="raiz de uma coleta oficial já iniciada")
+    parser.add_argument("--bloco", choices=("E1-B1", "E1-B2", "E2-B1", "E2-B2"))
+    parser.add_argument("--desvio", help="desvio observado no bloco; use 'nenhum' explicitamente")
+    parser.add_argument("--temperatura-c", type=float, default=None)
+    parser.add_argument(
+        "--repetir-falhas-oficial", action="store_true",
+        help="repete somente IDs do bloco oficial sem tentativa bem-sucedida",
+    )
     parser.add_argument(
         "--mini-piloto-e1", type=int, metavar="N", default=None,
         help="só E1 com taxa aberta, N repetições por célula (portão G1, #209)",
@@ -37,6 +54,32 @@ def argumentos() -> argparse.Namespace:
 
 def main() -> int:
     args = argumentos()
+    if args.oficial:
+        if args.iniciar:
+            if args.coleta or args.bloco or args.repetir_falhas_oficial:
+                print("--iniciar não aceita --coleta, --bloco ou repetição", file=sys.stderr)
+                return 2
+            diretorio = criar_diretorio_coleta(RAIZ / "data" / "oficial")
+            ColetorOficial(diretorio, DockerExecutor(diretorio))
+            print(f"Coleta oficial iniciada: {diretorio}")
+            return 0
+        if not args.coleta or not args.bloco or args.desvio is None:
+            print("--oficial exige --coleta, --bloco e --desvio (ou use --iniciar)", file=sys.stderr)
+            return 2
+        diretorio = args.coleta.resolve()
+        if not diretorio.is_dir():
+            print(f"coleta oficial inexistente: {diretorio}", file=sys.stderr)
+            return 2
+        coletor = ColetorOficial(diretorio, DockerExecutor(diretorio))
+        resultados = coletor.executar_bloco(
+            args.bloco,
+            args.desvio,
+            temperatura_c=args.temperatura_c,
+            repetir_falhas=args.repetir_falhas_oficial,
+        )
+        falhas = sum(r.status != "sucesso" for r in resultados)
+        print(f"Sessão finalizada: {len(resultados)} tentativas, {falhas} falhas")
+        return 0 if falhas == 0 else 1
     if args.repetir_falhas is not None:
         origem = args.repetir_falhas.resolve()
         execucoes = execucoes_a_repetir(origem / "resultados.csv")

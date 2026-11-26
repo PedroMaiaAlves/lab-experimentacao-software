@@ -15,7 +15,7 @@ diferença depende do tamanho da mensagem?
 | [docs/proposta.md](docs/proposta.md) | Critérios do software, GQM, 7 categorias, hipóteses, design, ameaças e plano de análise | Diogo |
 | [docs/metodo.md](docs/metodo.md), `planejar.py`, `experimento/`, `data/plano/` | 7 categorias, design 2×2 randomizado, poder a priori e ameaças (#197) | Diogo |
 | [docs/issues_s01.md](docs/issues_s01.md) | Divisão de tarefas e issues da S01 | Diogo |
-| `docs/protocolo_coleta.md`, `coletar.py`, `data/piloto/` | Ambiente, scripts e coleta piloto | Pedro |
+| `docs/protocolo_coleta.md`, `coletar.py`, `validar.py`, `data/piloto/` | Ambiente, piloto e coleta oficial validada | Pedro |
 | `analisar.py`, `docs/plano_analise.md`, `docs/impacto.md` | Descritiva, testes, efeito e impacto | Lorran |
 
 ## Divisão (papéis da seção 6 do enunciado)
